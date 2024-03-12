@@ -1,11 +1,11 @@
-# US006 - Create a Task 
+# US005 - Generate a team proposal automatically
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As an organization employee, I want to create a new task in order to be further published.
+As a HRM, I want to generate a team proposal automatically
 
 ### 1.2. Customer Specifications and Clarifications 
 
@@ -40,15 +40,15 @@ As an organization employee, I want to create a new task in order to be further 
 **Input Data:**
 
 * Typed data:
-    * a reference
-    * a designation 
-    * an informal description
-    * a technical description
-    * an estimated duration
-    * an estimated cost
-	
+  * a reference
+  * a designation
+  * an informal description
+  * a technical description
+  * an estimated duration
+  * an estimated cost
+
 * Selected data:
-    * a task category 
+  * a task category
 
 **Output Data:**
 
