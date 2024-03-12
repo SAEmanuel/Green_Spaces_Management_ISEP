@@ -4,16 +4,27 @@
 
 _(Complete according to the provided example)_
 
-| **_TEA_** (EN) | **_Description_** (EN)                                                                    |                                       
-|:---------------|:------------------------------------------------------------------------------------------|
-| **Clerk**      | Person responsible for carrying out various business supporting activities on the system. |
-| **CLK**        | Acronym for _Clerk_.                                                                      |
-| **...**        | ...                                                                                       |
-
-
-
-
-
-
-
+| **_TEA_** (EN)              | **_Description_** (EN)                                                                                                                                                                                                                             |                                       
+|:----------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Collaborator**            | A person who is an employee of the organization and carries out design, construction and/or maintenance tasks for green areas, depending on their skills.                                                                                          |
+| **Diary**                   | The diary is a crucial mechanism for planning the week’s work. Each entry in the diary defines a task (previously on the to-do list) that will be carried out by a team in a green space at a certain time interval on a specific date             |
+| **Equipment**               | The equipment can be greatly diverse, such as sprayers, lifting platforms, chainsaws, brush cutters, blowers, ladders, cisterns and the various elements that can be attached to tractors, such as disc harrows, weeders, aerators and scarifiers. |
+| **Fleet Manager**           | A person who manages the fleet park, the machines, equipment and vehicles, ensuring their good condition and assigning them to the tasks to be carried out                                                                                         |
+| **FM**                      | Acronym for Fleet Manager.                                                                                                                                                                                                                         |
+| **Garden**                  | Garden space with or without trees with little or no equipment.                                                                                                                                                                                    |
+| **Green Space**             | The green spaces for collective use managed by MS can significantly vary in size and installed equipment.                                                                                                                                          |
+| **Green Spaces Manager**    | the person responsible for managing the green spaces in charge of the organization                                                                                                                                                                 |
+| **GSM**                     | Acronym for Green Spaces Manager.                                                                                                                                                                                                                  |
+| **Green Spaces User**       | A person who uses the green spaces managed by the organization and who can through the Portal, make comments or report faults in parks and gardens on the Portal.                                                                                  |
+| **GSU**                     | Acronym for Green Spaces User.                                                                                                                                                                                                                     |
+| **Human Resources Manager** | A person who manages human resources and defines teams based on the needs of ongoing projects and the skills of the employees.                                                                                                                     |
+| **HRM**                     | Acronym for Human Resources Manager.                                                                                                                                                                                                               |
+| **Large-sized park**        | Multi-function space with diverse garden spaces, and woods, including varied equipment and services.                                                                                                                                               |
+| **Machine**                 | Device designed to perform tasks.                                                                                                                                                                                                                  |
+| **Medium-sized park**       | Green space with a few hundred or thousands of square meters with a wooded garden area, it includes some infrastructures such as toilets, drinking fountains, irrigation system, lighting, children’s playground.                                  |
+| **System User**             | Various users that use the system.                                                                                                                                                                                                                 |
+| **Task**                    | Instruction that is given to a collaborator to do.                                                                                                                                                                                                 |
+| **Team**                    | A group of collaborators that can do various things.                                                                                                                                                                                               |
+| **User Portal**             | The green spaces management aims, within the available budget, to design, build and maintain parks and gardens that meet the requirements of the people who want to be informed.                                                                   |
+| **Vehicle**                 | Machine that transports either people or equipment.                                                                                                                                                                                                |
 
