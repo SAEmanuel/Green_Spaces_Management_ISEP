@@ -11,9 +11,10 @@ be appointed to a collaborator
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. 
+> The system aims to facilitate the management of skills attributed to collaborators within the organization. The Human Resources Manager (HRM) is empowered to register various skills that may be assigned to employees. These skills encompass a wide range of tasks and responsibilities relevant to the management of green spaces, including but not limited to designing, estimating, gardening, electrical work, and masonry.
 
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
+> The system provides an interface dedicated to managing these skills efficiently. The HRM can utilize this interface to add new skills to the system, specifying unique identifiers, names, and descriptions for each skill. Additionally, the HRM can view a comprehensive list of existing skills along with their details, edit the details of existing skills, and delete obsolete skills as necessary.
+
 
 **From the client clarifications:**
 
