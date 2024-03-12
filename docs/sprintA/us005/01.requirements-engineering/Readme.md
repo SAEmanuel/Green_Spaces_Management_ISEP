@@ -47,20 +47,20 @@ As a HRM, I want to generate a team proposal automatically
 **Input Data:**
 
 * Typed data:
-  * a reference
-  * a designation
-  * an informal description
-  * a technical description
-  * an estimated duration
-  * an estimated cost
+  * name
+  * task details
+  * objectives
 
 * Selected data:
-  * a task category
+  * skills
+  * experience
+  * urgency
+  * vehicles, machines and equipment
 
 **Output Data:**
 
-* List of existing task categories
-* (In)Success of the operation
+* team proposal/s
+* Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
 
