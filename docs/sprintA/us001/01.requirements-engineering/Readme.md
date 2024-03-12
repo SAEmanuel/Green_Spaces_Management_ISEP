@@ -28,11 +28,11 @@ be appointed to a collaborator
 
 >  **Question:** When we trie to create and a skill that already exist, what the system should do?
 >
-> **Answer:**>  
+> **Answer:**  
 
 > **Question:**  As an HRM when i trie to login in the system, my username needs to have some especial format? and the password to?
 >
-> **Answer:**> 
+> **Answer:** 
 
 > **Question:**  As an HRM when i trie to login in the system, my username needs to have some especial format? and the password to?
 >
@@ -73,20 +73,24 @@ be appointed to a collaborator
 **Input Data:**
 
 * Typed data:
-    * a reference
-    * a designation 
-    * an informal description
-    * a technical description
-    * an estimated duration
-    * an estimated cost
+    * username and password of the HRM
+    * skill name 
+    * collaborator name
+    * a technical description of the skill
+    * specific identifier of the skill
 	
 * Selected data:
-    * a task category 
+    * skills from the list of skills
+    * collaborator from the list of collaborators
 
 **Output Data:**
 
-* List of existing task categories
-* (In)Success of the operation
+* List of existing skills and description
+* Specific skill and description
+* Specific collaborator by filtering skills
+* Error messages
+* Success of secundary opeations
+* Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
 
