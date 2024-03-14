@@ -7,34 +7,29 @@ title System Sequence Diagram (SSD) - Alternative One
 
 autonumber
 
-actor "Organization\nEmployee" as Employee
+actor "HRM" as Employee
 participant ":System" as System
+
 
 activate Employee
 
-    System -> Employee : asks to login (username/password)
-
+    Employee -> System : Access interface
     activate System
 
-        System --> Employee : requests data (i.e. reference, designation, informal\ndescription, technical description, duration, cost)
+        System --> Employee : Show interface
     deactivate System
 
-    Employee -> System : types requested data
+    Employee -> System : View/add/edit/delete/search skills
+
     activate System
 
-        System --> Employee : shows task category list and asks to select one
+        System --> Employee : Shows all data and requests confirmation
     deactivate System
 
-    Employee -> System : selects a task category
+    Employee -> System : Confirms data
     activate System
 
-        System --> Employee : shows all data and requests confirmation
-    deactivate System
-
-    Employee -> System : confirms data
-    activate System
-
-        System --> Employee : displays operation success
+        System --> Employee : Displays operation success
     deactivate System
 
 @enduml

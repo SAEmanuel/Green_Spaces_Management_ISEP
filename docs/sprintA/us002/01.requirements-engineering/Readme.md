@@ -11,9 +11,9 @@ As a Human Resources Manager I want to register a job.
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. 
+>	Each job is characterized by having a unique name. 
 
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
+>	There can not be duplicated professions.
 
 **From the client clarifications:**
 
@@ -29,11 +29,11 @@ As a Human Resources Manager I want to register a job.
 
 * **AC1:** If HRM does not have necessary permissions, the system should prompt a warning message.
 * **AC2:** If HRM puts an invalid username or password, the system should prompt an error message.
-* **AC3:** If the employee's job is already registered in the system, the system should notify the manager and suggest choosing another one or the existing one.
+* **AC3:** If the profession is already registered in the system, the system should notify the manager and suggest choosing another one or the existing one.
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US003 - Register an Employee" as there must be at least one employee resgistered to add/change his job.
+* No dependecies found.
 
 ### 1.5 Input and Output Data
 
@@ -44,7 +44,7 @@ As a Human Resources Manager I want to register a job.
     * a designation 
     * an informal description
     * a technical description
-    * an estimated base salary ???
+    * ??? an estimated base salary ???
 	
 * Selected data:
     * a jobs category
@@ -56,15 +56,10 @@ As a Human Resources Manager I want to register a job.
 
 ### 1.6. System Sequence Diagram (SSD)
 
-**_Other alternatives might exist._**
-
 #### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
+![System Sequence Diagram - Alternative One](svg/us002-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
 
-#### Alternative Two
-
-![System Sequence Diagram - Alternative Two](svg/us006-system-sequence-diagram-alternative-two.svg)
 
 ### 1.7 Other Relevant Remarks
 
