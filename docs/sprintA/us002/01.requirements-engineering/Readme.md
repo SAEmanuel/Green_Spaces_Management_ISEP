@@ -11,9 +11,9 @@ As a Human Resources Manager I want to register a job.
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. 
+>	Each job is characterized by having a unique name. 
 
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
+>	There can not be duplicated professions.
 
 **From the client clarifications:**
 
@@ -29,7 +29,7 @@ As a Human Resources Manager I want to register a job.
 
 * **AC1:** If HRM does not have necessary permissions, the system should prompt a warning message.
 * **AC2:** If HRM puts an invalid username or password, the system should prompt an error message.
-* **AC3:** If the employee's job is already registered in the system, the system should notify the manager and suggest choosing another one or the existing one.
+* **AC3:** If the profession is already registered in the system, the system should notify the manager and suggest choosing another one or the existing one.
 
 ### 1.4. Found out Dependencies
 
