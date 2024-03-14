@@ -12,7 +12,8 @@ participant ":System" as System
 
 activate Employee
 
-    Employee -> System : asks to create a new task
+    System -> Employee : asks to login (username/password)
+
     activate System
 
         System --> Employee : requests data (i.e. reference, designation, informal\ndescription, technical description, duration, cost)
