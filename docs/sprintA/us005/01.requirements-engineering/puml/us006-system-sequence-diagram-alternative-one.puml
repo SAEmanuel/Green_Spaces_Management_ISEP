@@ -7,18 +7,24 @@ title System Sequence Diagram (SSD) - Alternative One
 
 autonumber
 
-actor "Organization\nEmployee" as Employee
-participant ":System" as System
+actor "Human Resources Manager" as Employee
+participant "System" as System
 
 activate Employee
 
-    Employee -> System : asks to create a new task
+    System <- Employee : asks to generate a team proposal
     activate System
 
-        System --> Employee : requests data (i.e. reference, designation, informal\ndescription, technical description, duration, cost)
+        Employee <-- System : requests data (skills; experience; availability; vehicles, machines and equipment required)
     deactivate System
 
-    Employee -> System : types requested data
+    Employee -> System : selects a task category
+    activate System
+
+        Employee -> System : selects a task category
+    deactivate System
+
+    Employee -> System : shows multiple or a single team generation
     activate System
 
         System --> Employee : shows task category list and asks to select one
