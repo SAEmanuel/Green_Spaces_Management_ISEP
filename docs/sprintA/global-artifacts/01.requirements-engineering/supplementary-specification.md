@@ -6,7 +6,15 @@ _Specifies functionalities that:
 &nbsp; &nbsp; (i) are common across several US/UC;  
 &nbsp; &nbsp; (ii) are not related to US/UC, namely: Audit, Reporting and Security._
 
-(fill in here)
+- The system shall allow HR Managers to register skills that may be appointed to a collaborator (US01).
+- The system shall allow HR Managers to register a job (US02).
+- The system shall allow HR Managers to register a collaborator with a job and fundamental characteristics (US03).
+- The system shall allow HR Managers to assign one or more skills to a collaborator (US04).
+- The system shall automatically generate a team proposal based on the assigned skills of collaborators (US05).
+- The system shall allow Fleet Managers to register vehicles with specific details (US06).
+- The system shall allow Fleet Managers to register vehicle check-ups (US07).
+- The system shall provide a list of vehicles needing check-ups (US08).
+- The system shall support authentication with a password of seven alphanumeric characters for all users.
 
 ## Usability
 
@@ -14,19 +22,26 @@ _Evaluates the user interface. It has several subcategories,
 among them: error prevention; interface aesthetics and design; help and
 documentation; consistency and standards._
 
-(fill in here )
+- The user interface shall be developed in JavaFX 11 to ensure a modern and intuitive user experience.
+- All users shall be able to easily navigate through the system to perform their tasks.
+- Error messages shall be clear and concise, aiding users in understanding and resolving issues.
 
 ## Reliability
 
 _Refers to the integrity, compliance and interoperability of the software. The requirements to be considered are: frequency and severity of failure, possibility of recovery, possibility of prediction, accuracy, average time between failures._
 
-(fill in here )
+- The system shall ensure data integrity by accurately recording and updating information.
+- All modules shall be thoroughly tested to minimize the occurrence of software bugs.
+- The system shall have a backup mechanism to prevent data loss in case of system failure.
+
 
 ## Performance
 
 _Evaluates the performance requirements of the software, namely: response time, start-up time, recovery time, memory consumption, CPU usage, load capacity and application availability._
 
-(fill in here )
+- The system shall handle a large number of concurrent users efficiently without significant degradation in performance.
+- Response times for user interactions shall be minimal, ensuring a smooth user experience.
+- The system shall be capable of handling a large volume of data without performance bottlenecks.
 
 ## Supportability
 
@@ -34,7 +49,9 @@ _The supportability requirements gathers several characteristics, such as:
 testability, adaptability, maintainability, compatibility,
 configurability, installability, scalability and more._
 
-(fill in here )
+- The system shall provide comprehensive documentation for users, administrators, and developers.
+- Maintenance tasks, such as system updates and bug fixes, shall be easy to perform without disrupting system operation.
+- The system shall support internationalization, allowing for easy translation into different languages.
 
 ## +
 
@@ -42,7 +59,10 @@ configurability, installability, scalability and more._
 
 _Specifies or constraints the system design process. Examples may include: programming languages, software process, mandatory standards/patterns, use of development tools, class library, etc._
 
-(fill in here )
+- The system shall comply with recognized coding standards, ensuring readability and maintainability of the codebase.
+- Unit tests shall be implemented using the JUnit 5 framework to validate the correctness of system functionalities.
+- The system shall use object serialization for data persistence between runs.
+- All images/figures produced during the development process shall be recorded in SVG format for scalability and portability.
 
 ### Implementation Constraints
 

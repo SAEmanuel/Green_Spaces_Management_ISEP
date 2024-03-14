@@ -1,58 +1,54 @@
-# US006 - Create a Task 
+# US004 -  Assigning skills to a collaborator 
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As an organization employee, I want to create a new task in order to be further published.
+As an HRM, I want to assign one or more skills to a collaborator.
 
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. 
+>	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. #NOT OFFICIAL
 
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
+>	As long as it is not published, access to the task is exclusive to the employees of the respective organization. #NOT OFFICIAL
 
 **From the client clarifications:**
 
-> **Question:** Which is the unit of measurement used to estimate duration?
+> **Question:** Is there a minimum and maximum number of skills?
 >
-> **Answer:** Duration is estimated in days.
+> **Answer:** No.
 
-> **Question:** Monetary data is expressed in any particular currency?
+> **Question:** Is there any special characteristic that the employee needs to have in order for these skills to be added?
 >
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POT (virtual currency internal to the platform).
+> **Answer:** No.
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** All required fields must be filled in.
-* **AC2:** The task reference must have at least 5 alphanumeric characters.
-* **AC3:** When creating a task with an existing reference, the system must reject such operation and the user must be able to modify the typed reference.
+* **AC1:** The employee must be registered.
+* **AC2:** All required fields must be filled in.
+* **AC3:** The system prevents duplicate competency assignments.
+
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US003 - Create a task category" as there must be at least one task category to classify the task being created.
+* There is a dependency on "US001 - Registering Skills for Collaborators" as there must be at least one skill created.
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
 * Typed data:
-    * a reference
-    * a designation 
-    * an informal description
-    * a technical description
-    * an estimated duration
-    * an estimated cost
+    * none.
 	
 * Selected data:
-    * a task category 
+    * one or more skills.
 
 **Output Data:**
 
-* List of existing task categories
+* Display a message with all the information that will be changed.
 * (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
