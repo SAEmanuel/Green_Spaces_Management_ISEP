@@ -1,0 +1,39 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - Alternative One
+
+autonumber
+
+actor "Fleet\nManager" as FM
+participant ":System" as System
+
+activate FM
+
+    FM -> System : Fleet manager accesses the fleet management system.
+    activate System
+
+        System --> FM : The system gives the FM the option to insert the range of kilometers needed for overhauling and the option to set a number of kms to warn the user when current kilometers are close to limit value
+    deactivate System
+
+    System -> FM : The system provides an option to view vehicles that need inspection.
+    activate System
+
+        FM --> System : FM selects the vehicles for inspection.
+    deactivate System
+
+    System -> FM : The system displays selected vehicles’ details (kms, plate, brand…)
+    activate System
+
+        FM --> System : FM confirms (or not) the initialization of the overhaul process for selected vehicles.
+    deactivate System
+
+    System -> FM : confirms data
+    activate System
+
+        System --> FM : displays operation success
+    deactivate System
+
+@enduml

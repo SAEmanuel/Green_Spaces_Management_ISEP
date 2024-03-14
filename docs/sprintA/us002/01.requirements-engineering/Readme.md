@@ -40,17 +40,16 @@ As a Human Resources Manager I want to register a job.
 **Input Data:**
 
 * Typed data:
-    * a job
-    * a designation 
-    * an informal description
-    * a technical description
+    * a job name
+    * ?? a designation ??
+    * ?? an informal description ??
+    * ?? a technical description ??
     * ??? an estimated base salary ???
 	
 * Selected data:
     * a jobs category
 
 **Output Data:**
-
 * List of professions added to the system
 * (In)Success of the operation
 

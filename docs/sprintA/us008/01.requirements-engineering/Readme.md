@@ -1,11 +1,11 @@
-# US006 - Create a Task 
+# US008 - Overhauling of vehicles
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As an organization employee, I want to create a new task in order to be further published.
+As a Fleet Manager I intend to list the vehicles that need overhauling.
 
 ### 1.2. Customer Specifications and Clarifications 
 
@@ -17,42 +17,37 @@ As an organization employee, I want to create a new task in order to be further 
 
 **From the client clarifications:**
 
-> **Question:** Which is the unit of measurement used to estimate duration?
+> **Question:** 
 >
-> **Answer:** Duration is estimated in days.
+> **Answer:** 
 
-> **Question:** Monetary data is expressed in any particular currency?
+> **Question:** 
 >
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POT (virtual currency internal to the platform).
+> **Answer:** 
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** All required fields must be filled in.
-* **AC2:** The task reference must have at least 5 alphanumeric characters.
-* **AC3:** When creating a task with an existing reference, the system must reject such operation and the user must be able to modify the typed reference.
+* **AC1:** If FM does not have the necessary permissions, the system should prompt a warning message.
+* **AC2:** If there are no vehicles that need overhauling, the system notifies the FM.
+* **AC3:** -
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US003 - Create a task category" as there must be at least one task category to classify the task being created.
+* There is a dependency on "US006 - Machinery registration" as there must be at least one vehicle in the system so that it can check the need for overhauling.
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
 * Typed data:
-    * a reference
-    * a designation 
-    * an informal description
-    * a technical description
-    * an estimated duration
-    * an estimated cost
+    * selection of the option to see wich vehicles need overhauling
 	
 * Selected data:
-    * a task category 
+    * vehicles category 
 
 **Output Data:**
 
-* List of existing task categories
+* List of vehicles that need overhauling
 * (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
@@ -63,9 +58,7 @@ As an organization employee, I want to create a new task in order to be further 
 
 ![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
 
-#### Alternative Two
 
-![System Sequence Diagram - Alternative Two](svg/us006-system-sequence-diagram-alternative-two.svg)
 
 ### 1.7 Other Relevant Remarks
 
