@@ -11,9 +11,9 @@ As a Fleet Manager I intend to list the vehicles that need overhauling.
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. 
+>	The system should prompt all the vehicles that need overhauling and the user must choose the one(s) he wants to select. 
 
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
+>	It is possible that no vehicles need overhauling.
 
 **From the client clarifications:**
 
@@ -29,7 +29,7 @@ As a Fleet Manager I intend to list the vehicles that need overhauling.
 
 * **AC1:** If FM does not have the necessary permissions, the system should prompt a warning message.
 * **AC2:** If there are no vehicles that need overhauling, the system notifies the FM.
-* **AC3:** -
+
 
 ### 1.4. Found out Dependencies
 
@@ -52,13 +52,9 @@ As a Fleet Manager I intend to list the vehicles that need overhauling.
 
 ### 1.6. System Sequence Diagram (SSD)
 
-**_Other alternatives might exist._**
-
 #### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
-
-
+![System Sequence Diagram - Alternative One](svg/us008-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
 
 ### 1.7 Other Relevant Remarks
 
