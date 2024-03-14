@@ -17,13 +17,16 @@ As a Fleet Manager I intend to list the vehicles that need overhauling.
 
 **From the client clarifications:**
 
-> **Question:** 
+> **Question:** O sistema deve indicar automaticamente os veículos que necessitam de revisão?
 >
 > **Answer:** 
 
-> **Question:** 
+> **Question:** O user deve escoher que veículos que quer para revisão?
 >
 > **Answer:** 
+
+> **Question:** Qual é o critério para que o veículo fique elegível para revisão?
+
 
 ### 1.3. Acceptance Criteria
 
@@ -58,4 +61,4 @@ As a Fleet Manager I intend to list the vehicles that need overhauling.
 
 ### 1.7 Other Relevant Remarks
 
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
+* The selected vehicles stay in a "chosen" state in order to distinguish from "non chosen" ones.
