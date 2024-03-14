@@ -35,7 +35,8 @@ As an Human Resources Manager, I want to register a collaborator with a job and 
 * **AC4:** Admission date can only be chosen from the calendar given.
 * **AC5:** Address must be written, this includes: door number, street, postal code, city, country. If there is anything more needed to be specified, should be written in the "More" box.
 * **AC6:** Phone number can only have 9 numbers, and email address.
-* **AC7:** Identification document.
+* **AC7:** An photo of identification document should be loaded to the app.
+* **AC8:** The user will select a job from a list of jobs provided by the app.
 
 ### 1.4. Found out Dependencies
 
