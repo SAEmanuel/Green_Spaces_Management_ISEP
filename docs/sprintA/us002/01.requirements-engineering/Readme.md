@@ -33,7 +33,7 @@ As a Human Resources Manager I want to register a job.
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US003 - Register an Employee" as there must be at least one employee resgistered to add/change his job.
+* No dependecies found.
 
 ### 1.5 Input and Output Data
 
