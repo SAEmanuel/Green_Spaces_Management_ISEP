@@ -1,0 +1,33 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - Alternative One
+
+autonumber
+
+actor "Human Resources Manager" as Employee
+participant "System" as System
+
+activate Employee
+
+    System <- Employee : Initiates a team proposal generation
+    activate System
+
+        Employee <-- System :Requests data (skills; experience; availability; vehicles, machines and equipment required)
+    deactivate System
+
+    Employee -> System : Provides project details
+    activate System
+    Employee -> System : Specifies team requirements
+
+        System -> Employee : Generate and displays team proposal
+    deactivate System
+
+    Employee -> System : Confirm or edit the team generated
+    activate System
+
+        System --> Employee : Display operation successful
+    deactivate System
+@enduml
