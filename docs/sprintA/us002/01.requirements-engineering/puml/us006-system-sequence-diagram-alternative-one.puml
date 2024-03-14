@@ -7,33 +7,29 @@ title System Sequence Diagram (SSD) - Alternative One
 
 autonumber
 
-actor "Organization\nEmployee" as Employee
+actor "Human Resources\nManager" as HRM
 participant ":System" as System
 
-activate Employee
+activate HRM
 
-    Employee -> System : asks to create a new task
+    HRM -> System : HRM accesses the human resources management system.
     activate System
 
-        System --> Employee : requests data (i.e. reference, designation, informal\ndescription, technical description, duration, cost)
+        System --> HRM : The system displays the interface for entering all the possible employee’s jobs
     deactivate System
 
-    Employee -> System : types requested data
+     HRM -> System : HRM selects the option to add a new job to the job’s collection
     activate System
 
-        System --> Employee : shows task category list and asks to select one
+        HRM -> System : HRM provides the profession(s)
     deactivate System
 
-    Employee -> System : selects a task category
+    System --> HRM : The system stores all the data.
     activate System
 
-        System --> Employee : shows all data and requests confirmation
+        System --> HRM : The system confirms the success of the operation.
     deactivate System
 
-    Employee -> System : confirms data
-    activate System
 
-        System --> Employee : displays operation success
-    deactivate System
 
 @enduml
