@@ -1,11 +1,11 @@
-# US006 - Create a Task 
+# US003 - As an HRM, I want to register a collaborator with a job and fundamental characteristics
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As an organization employee, I want to create a new task in order to be further published.
+As an Human Resources Manager, I want to register a collaborator with a job and fundamental characteristics.
 
 ### 1.2. Customer Specifications and Clarifications 
 

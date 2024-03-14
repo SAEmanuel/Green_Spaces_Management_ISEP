@@ -1,11 +1,11 @@
-# US006 - Create a Task 
+# US005 - Generate a team proposal automatically
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As an organization employee, I want to create a new task in order to be further published.
+As a HRM, I want to generate a team proposal automatically
 
 ### 1.2. Customer Specifications and Clarifications 
 
@@ -27,33 +27,40 @@ As an organization employee, I want to create a new task in order to be further 
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** All required fields must be filled in.
-* **AC2:** The task reference must have at least 5 alphanumeric characters.
-* **AC3:** When creating a task with an existing reference, the system must reject such operation and the user must be able to modify the typed reference.
+* **AC1:** The system should allow the HRM to input project details such as project name, task details, objectives.
+* **AC2:** The HRM should be able to specify the number of team members needed for the project.
+* **AC3:** The system should provide options to select team members based on their skills, experience, and availability.
+* **AC4:** It should automatically generate a team proposal based on project relevant skills, experience and urgency, using collaborators availability.
+* **AC5:** The HRM should have the ability to review and edit the generated team proposal before finalizing it.
+* **AC6:** The generated team proposal should use a database to save past team history, as future reference.
+* **AC7:** The generator should consider the availability of vehicles, machines, and equipment required for the tasks when assigning team members to projects.
+* **AC8:** It should offer the capability to generate multiple team proposals simultaneously for better assistance.
+* **AC?:** The system should prioritize team member selection based on their proximity to the project location to minimize transportation time and costs.
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US003 - Create a task category" as there must be at least one task category to classify the task being created.
+* Must have existing collaborators in both the filter and registration to generate a team
+* Must have enough collaborators in both the filter and registration to generate a team with a certain number of members
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
 * Typed data:
-    * a reference
-    * a designation 
-    * an informal description
-    * a technical description
-    * an estimated duration
-    * an estimated cost
-	
+  * name
+  * task details
+  * objectives
+
 * Selected data:
-    * a task category 
+  * skills
+  * experience
+  * urgency
+  * vehicles, machines and equipment
 
 **Output Data:**
 
-* List of existing task categories
-* (In)Success of the operation
+* team proposal/s
+* Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
 
