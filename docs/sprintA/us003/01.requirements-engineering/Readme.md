@@ -13,7 +13,9 @@ As an Human Resources Manager, I want to register a collaborator with a job and 
 
 >	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. 
 
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. 
+>	As long as it is not published, access to the task is exclusive to the employees of the respective organization.
+
+>   The human resources manager will fill all the required fields: name, birthdate, admission date, address
 
 **From the client clarifications:**
 
@@ -28,8 +30,13 @@ As an Human Resources Manager, I want to register a collaborator with a job and 
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All required fields must be filled in.
-* **AC2:** The task reference must have at least 5 alphanumeric characters.
-* **AC3:** When creating a task with an existing reference, the system must reject such operation and the user must be able to modify the typed reference.
+* **AC2:** Name must be complete and should only have letters.
+* **AC3:** Birthdate can only be chosen from the calendar given.
+* **AC4:** Admission date can only be chosen from the calendar given.
+* **AC5:** Address must be written, this includes: door number, street, postal code, city, country. If there is anything more needed to be specified, should be written in the "More" box.
+* **AC6:** Phone number can only have 9 numbers, and email address.
+* **AC7:** An photo of identification document should be loaded to the app.
+* **AC8:** The user will select a job from a list of jobs provided by the app.
 
 ### 1.4. Found out Dependencies
 
