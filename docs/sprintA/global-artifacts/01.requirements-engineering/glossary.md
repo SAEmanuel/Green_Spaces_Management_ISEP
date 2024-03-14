@@ -29,3 +29,4 @@ _(Complete according to the provided example)_
 | **Vehicle**                 | Machine that transports either people or equipment.                                                                                                                                                                                                |
 
 
+
