@@ -44,7 +44,7 @@ As a Human Resources Manager I want to register a job.
     * a designation 
     * an informal description
     * a technical description
-    * an estimated base salary ???
+    * ??? an estimated base salary ???
 	
 * Selected data:
     * a jobs category
@@ -56,15 +56,10 @@ As a Human Resources Manager I want to register a job.
 
 ### 1.6. System Sequence Diagram (SSD)
 
-**_Other alternatives might exist._**
-
 #### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
+![System Sequence Diagram - Alternative One](svg/us002-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
 
-#### Alternative Two
-
-![System Sequence Diagram - Alternative Two](svg/us006-system-sequence-diagram-alternative-two.svg)
 
 ### 1.7 Other Relevant Remarks
 
