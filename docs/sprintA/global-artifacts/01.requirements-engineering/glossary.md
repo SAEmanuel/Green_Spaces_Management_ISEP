@@ -27,6 +27,3 @@ _(Complete according to the provided example)_
 | **Team**                    | A group of collaborators that can do various things.                                                                                                                                                                                               |
 | **User Portal**             | The green spaces management aims, within the available budget, to design, build and maintain parks and gardens that meet the requirements of the people who want to be informed.                                                                   |
 | **Vehicle**                 | Machine that transports either people or equipment.                                                                                                                                                                                                |
-
-
-
