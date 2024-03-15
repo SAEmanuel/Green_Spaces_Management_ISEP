@@ -17,9 +17,9 @@ As a Human Resources Manager I want to register a job.
 
 **From the client clarifications:**
 
-> **Question:** 
+> **Question:** What are the acceptance criteria? When creating a job that already exits, what does the system do?
 >
-> **Answer:** 
+> **Answer:** By definition a set can´t have duplicates. Assuring no duplicates is not a business rule is a tecnichal issue.
 
 > **Question:** 
 >
