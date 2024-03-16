@@ -20,32 +20,30 @@ be appointed to a collaborator
 
 > **Question:** Which are the criterias to create a skill?
 >
-> **Answer:** 
+> **Answer:** The name of the skill (pruner, heavy vehicle driver).
 
 > **Question:** What information a skill should have?
 >
-> **Answer:** 
+> **Answer:** ...
 
 >  **Question:** When we trie to create and a skill that already exist, what the system should do?
 >
-> **Answer:**  
+> **Answer:** By definition it is not possible to have duplicate values in a set. Duplicate verification is not a business regulation at a technological level.
 
-> **Question:**  As an HRM when i trie to login in the system, my username needs to have some especial format? and the password to?
->
-> **Answer:** 
 
-> **Question:**  As an HRM when i trie to login in the system, my username needs to have some especial format? and the password to?
->
-> **Answer:**
+
+
 
 ### 1.3. Acceptance Criteria
 
 * **AC01:** There cannot be two skills with the same name.
-* **AC02:** HRM needs to have the right permissions to enter into the skills manager interface.
+* **AC02:** The system should ensure that only authorized HR Managers have permission to register or edit skills.
 * **AC03:** When editing a skill, there must be confirmation warnings before the execution of actions.
 * **AC04:** There cannot be two skills with different names, but they booth have the same functionalities.
 * **AC05:** All required fields must be filled in.
 * **AC06:** The name of a skill cannot have any numbers and needs to have relevant information.
+* **AC07:** If the system encounters any errors during the skill registration process, it should provide informative error messages to the HR Manager, guiding them on how to resolve the issue.
+
 
 
 
