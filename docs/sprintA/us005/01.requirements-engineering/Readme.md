@@ -11,9 +11,9 @@ As a HRM, I want to generate a team proposal automatically
 
 **From the specifications document:**
 
->   The team proposal generated his focus on facilitating and speeding up the process of creating a team. The Human Resources Manager (HRM) has the possibility of generating a team based on a set of previously selected skills. Engage in the task of team building and come automate and recommend a team, having a great weight in managing and choosing the right team for a designated task.
+>   The team proposal generated his focus on facilitating and speeding up the process of creating a team. The Human Resources Manager (HRM) has the possibility of generating a team based on a set of previously selected skills and team size. Engage in the task of team building and come automate and recommend a team, having a great weight in managing and choosing the right team for a designated task.
 
->	The system provides a user interface to select a number of skills. When HRM uses this generation, it will add all the skills it wants the team to have for this task. Furthermore, HRM can view the list of selected competencies and confirm to start a team generation based on this data.
+>	The system provides a user interface to select various skills and team size. When HRM uses this generation, it will add all the skills you want the team to have for this task and the number of elements. Furthermore, HRM can view the list of selected information and confirm team generation based on this information.
 
 **From the client clarifications:**
 
@@ -56,22 +56,13 @@ As a HRM, I want to generate a team proposal automatically
 ### 1.5 Input and Output Data
 
 **Input Data:**
-
-* Typed data:
-  * name
-  * task details
-  * objectives
-
-* Selected data:
-  * skills
-  * experience
-  * urgency
-  * vehicles, machines and equipment
+  * Selected data:
+    * skills
+    * team size
 
 **Output Data:**
-
-* team proposal/s
-* Success of the operation
+  * team proposal/s
+  * Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
 
