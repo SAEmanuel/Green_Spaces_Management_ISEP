@@ -19,7 +19,7 @@ As a HRM, I want to generate a team proposal automatically
 
 > **Question:** What is the information necessary for a team proposal?
 >
-> **Answer:** .
+> **Answer:** The customer provide the max size of the team and a set of skills
 
 > **Question:** By having more team combinations for the same information. Should the system also generate them?
 >
@@ -27,7 +27,7 @@ As a HRM, I want to generate a team proposal automatically
 
 > **Question:** If it doesn't have enough collaborators, or they don't have the requests skills. Should the system send a message?
 >
-> **Answer:** .
+> **Answer:** Yes, the system should provide information why it can't generate a team.
 ### 1.3. Acceptance Criteria
 
 * **AC1:** Need to have at least two collaborators to generate a team
