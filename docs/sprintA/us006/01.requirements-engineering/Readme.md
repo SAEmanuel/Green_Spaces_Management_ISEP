@@ -17,13 +17,22 @@ As an FM, I wish to register a vehicle including Brand, Model, Type, Tare, Gross
 
 **From the client clarifications:**
 
-> **Question:** Which is the unit of measurement used to estimate duration?
+> **Question:** Should the application identify a registered vehicle by a serial number or other attribute?
 >
-> **Answer:** Duration is estimated in days.
+> **Answer:** By plate id;
 
-> **Question:** Monetary data is expressed in any particular currency?
+> **Question:** Should the application a group the vehicles by their brand, serial number or other attribute?
 >
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POT (virtual currency internal to the platform).
+> **Answer:** No requirements were set concerning groups of vehicles;
+
+> **Question:** If the FM inserts the same vehicle by mistake, should it inform their user of the mistake and give him the option to add another vehicle?
+>
+> **Answer:** No requirements were set concerning groups of vehicles;duplication of data is not a business rule is technical one, since by definition in a set you cant have duplicates;
+
+> **Question:** For the application to work does the FM need to fill all the attributes of the vehicle?
+>
+> **Answer:** yes, besides the vehicle plate that by mistake doesn't appear on the text;
+
 
 ### 1.3. Acceptance Criteria
 
