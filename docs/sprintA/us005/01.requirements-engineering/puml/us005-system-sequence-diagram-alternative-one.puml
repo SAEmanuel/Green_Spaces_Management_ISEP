@@ -15,12 +15,11 @@ activate Employee
     System <- Employee : Initiates a team proposal generation
     activate System
 
-        Employee <-- System :Requests data (skills; experience; availability; vehicles, machines and equipment required)
+        Employee <-- System :Requests data (skills; team size)
     deactivate System
 
-    Employee -> System : Provides project details
+    Employee -> System : Select team requirements
     activate System
-    Employee -> System : Specifies team requirements
 
         System -> Employee : Generate and displays team proposal
     deactivate System

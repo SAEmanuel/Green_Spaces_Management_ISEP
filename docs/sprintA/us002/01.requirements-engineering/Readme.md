@@ -21,9 +21,9 @@ As a Human Resources Manager I want to register a job.
 >
 > **Answer:** By definition a set can´t have duplicates. Assuring no duplicates is not a business rule is a tecnichal issue.
 
-> **Question:** 
+> **Question:** Which are the data for the creation of a profession?
 >
-> **Answer:** 
+> **Answer:** The name of it: Gardener, Driver, Cobbler, Electrician...
 
 ### 1.3. Acceptance Criteria
 
@@ -41,10 +41,7 @@ As a Human Resources Manager I want to register a job.
 
 * Typed data:
     * a job name
-    * ?? a designation ??
-    * ?? an informal description ??
-    * ?? a technical description ??
-    * ??? an estimated base salary ???
+    
 	
 * Selected data:
     * a jobs category
