@@ -27,7 +27,7 @@ As an FM, I wish to register a vehicle including Brand, Model, Type, Tare, Gross
 
 > **Question:** If the FM inserts the same vehicle by mistake, should it inform their user of the mistake and give him the option to add another vehicle?
 >
-> **Answer:** No requirements were set concerning groups of vehicles;duplication of data is not a business rule is technical one, since by definition in a set you cant have duplicates;
+> **Answer:** Duplication of data is not a business rule is technical one, since by definition in a set you cant have duplicates;
 
 > **Question:** For the application to work does the FM need to fill all the attributes of the vehicle?
 >
@@ -36,9 +36,15 @@ As an FM, I wish to register a vehicle including Brand, Model, Type, Tare, Gross
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** All required fields must be filled in.
-* **AC2:** The task reference must have at least 5 alphanumeric characters.
-* **AC3:** When creating a task with an existing reference, the system must reject such operation and the user must be able to modify the typed reference.
+* **AC01:** When registering a vehicle the identity of this should be the number plate.
+* **AC02:** There cannot be two cars with the same plate number.
+* **AC03:** The system should ensure that only authorized FM Managers have permission to register vehicles.
+* **AC04:** All required fields must be filled in (Brand, Model, Type...).
+* **AC05:** The Maintenance/Checkup Frequency must be field in Kms.
+* **AC06:** If the system encounters any errors during the skill registration process, it should provide informative error messages to the HR Manager, guiding them on how to resolve the issue.
+
+
+
 
 ### 1.4. Found out Dependencies
 
