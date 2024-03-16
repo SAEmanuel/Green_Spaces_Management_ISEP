@@ -56,20 +56,21 @@ As an FM, I wish to register a vehicle including Brand, Model, Type, Tare, Gross
 **Input Data:**
 
 * Typed data:
-    * a reference
-    * a designation 
-    * an informal description
-    * a technical description
-    * an estimated duration
-    * an estimated cost
-	
-* Selected data:
-    * a task category 
+    * a number plate
+    * the brand of the car
+    * the model of the car
+    * the type of the vehicle
+    * the tare
+    * a gross weight
+    * the current Km
+    * a register date
+    * the Acquisition Date of the car
+    * Maintenance/Checkup Frequency (in Kms)
 
 **Output Data:**
 
-* List of existing task categories
-* (In)Success of the operation
+* Success of the operation
+* Errors/warnings messages
 
 ### 1.6. System Sequence Diagram (SSD)
 
