@@ -15,24 +15,26 @@ As a Fleet Manager I intend to list the vehicles that need overhauling.
 
 >	It is possible that no vehicles need overhauling.
 
+>	The user must inform the system every few kilometers that he wants to have his vehicles checked.
+ 
+>	The user must inform the system of how many kilometers before reaching the limit for review he wants to be informed of.
+
 **From the client clarifications:**
 
 > **Question:** Can the vehicles get placed automatically on a list or the one listing has to be the FM?
 >
 > **Answer:**  The list of vehicles is automatically created but the creation is triggered by the FM.
 
-> **Question:** What information will appear on the final list regarding the vehicle,besides the needing for check-up?
+> **Question:** What information will appear on the final list regarding the vehicle, besides the needing for check-up?
 >
 > **Answer:** Data that allow to identify the vehicle like Plate, brand and modle, as well as, the data that allowed to select/insert te vehicle in the list, number of kms, frequecny of checkup and the last checkup.
 
-> **Question:** Qual é o critério para que o veículo fique elegível para revisão?
->
-> **Answer:** 
+
 
 ### 1.3. Acceptance Criteria 
 
 * **AC1:** If FM does not have the necessary permissions, the system should prompt a warning message.
-* **AC2:** If there are no vehicles that need overhauling, the system notifies the FM.
+* **AC2:** If there are no vehicles that need overhauling, the system notifies the FM. ???
 
 
 ### 1.4. Found out Dependencies
@@ -44,14 +46,15 @@ As a Fleet Manager I intend to list the vehicles that need overhauling.
 **Input Data:**
 
 * Typed data:
-    * selection of the option to see wich vehicles need overhauling
+    * range of km for overhauling
+    * number of km before reaching the limit for review that FM wants to be informed 
 	
 * Selected data:
     * vehicles category 
 
 **Output Data:**
 
-* List of vehicles that need overhauling
+* List of vehicles that need a check-up
 * (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
@@ -62,4 +65,4 @@ As a Fleet Manager I intend to list the vehicles that need overhauling.
 
 ### 1.7 Other Relevant Remarks
 
-* The selected vehicles stay in a "chosen" state in order to distinguish from "non chosen" ones.
+* ???

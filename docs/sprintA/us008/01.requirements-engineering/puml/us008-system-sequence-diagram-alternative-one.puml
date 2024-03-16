@@ -12,31 +12,19 @@ participant ":System" as System
 
 activate FM
 
-    FM -> System : Fleet manager accesses the fleet management system.
+    FM -> System : Accesses the fleet management system.
     activate System
 
-    System -> FM : The system gives the FM the option to insert the range of kilometers needed for overhauling.
+    System -> FM : Provides the FM the option to insert the range of kilometers needed for check-up.
         deactivate System
 
-        System --> FM : The system gives the option to set a number of kms to warn the user when current kilometers are close to limit value
+        System --> FM : Provides the option to set a number of kms the user wants to be informed before reaching the overhauling limit
     activate System
 
-    System -> FM : The system provides an option to view vehicles that need inspection.
+    System -> FM : Provides a list of vehicles (and all their info) that need check-up.
     deactivate System
 
-        FM --> System : FM selects the vehicles for inspection
-    activate System
-
-    System -> FM : The system displays selected vehicles’ details (kms, plate, brand…)
-    deactivate System
-
-        FM --> System : FM confirms (or not) the initialization of the overhaul process for selected vehicles.
-    activate System
-
-    System -> FM : confirms data
-    deactivate System
-
-        System --> FM : displays operation success
+        System --> FM : Displays operation success
     activate System
 
 @enduml
