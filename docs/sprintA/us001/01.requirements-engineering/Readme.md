@@ -79,13 +79,8 @@ be appointed to a collaborator
 
 ### 1.6. System Sequence Diagram (SSD)
 
-**_Other alternatives might exist._**
-
-#### Alternative One
-
 ![System Sequence Diagram - Alternative One](svg/us001-system-sequence-diagram-alternative-one.svg)
 
 
 ### 1.7 Other Relevant Remarks
 
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.

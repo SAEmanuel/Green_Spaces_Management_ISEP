@@ -7,33 +7,27 @@ title System Sequence Diagram (SSD) - Alternative One
 
 autonumber
 
-actor "Organization\nEmployee" as Employee
+actor "FM" as Employee
 participant ":System" as System
 
 activate Employee
 
-    Employee -> System : asks to create a new task
+    Employee -> System : Start a request to register a vehicle/machine/equipment
     activate System
 
-        System --> Employee : requests data (i.e. reference, designation, informal\ndescription, technical description, duration, cost)
+        System --> Employee : Request data (Brand,Model,Type...)
     deactivate System
 
-    Employee -> System : types requested data
+    Employee -> System : Types requested data
     activate System
 
-        System --> Employee : shows task category list and asks to select one
+        System --> Employee : Show all data registed and requests for confirmation
     deactivate System
 
-    Employee -> System : selects a task category
+    Employee -> System : Confirms data
     activate System
 
-        System --> Employee : shows all data and requests confirmation
-    deactivate System
-
-    Employee -> System : confirms data
-    activate System
-
-        System --> Employee : displays operation success
+        System --> Employee : Displays operation success
     deactivate System
 
 @enduml
