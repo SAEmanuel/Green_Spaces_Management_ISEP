@@ -16,19 +16,22 @@ activate HRM
     activate System
 
      HRM -> System : HRM selects the option to add a new job to the job’s collection
-    activate System
+    deactivate System
 
         System --> HRM : The system displays the interface for entering the job's name
-    deactivate System
+    activate System
 
         HRM -> System : HRM provides the profession(s)
     deactivate System
 
+    System --> HRM : The system verifies non duplicates.
+        activate System
+
     System --> HRM : The system stores all the data.
-    activate System
+    deactivate System
 
         System --> HRM : The system confirms the success of the operation.
-    deactivate System
+    activate System
 
 
 
