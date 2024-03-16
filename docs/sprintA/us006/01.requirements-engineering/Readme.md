@@ -48,7 +48,8 @@ As an FM, I wish to register a vehicle including Brand, Model, Type, Tare, Gross
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US003 - Create a task category" as there must be at least one task category to classify the task being created.
+* There is a dependency on "US06 - Registering a vehicle" may involve capturing details such as maintenance/check-up frequency, which would be relevant for scheduling vehicle check-ups (US07).
+* The need to list vehicles needing check-up "US08" arises from the registration of vehicles "US06 - Registering a vehicle", as it helps in tracking maintenance requirements.
 
 ### 1.5 Input and Output Data
 
