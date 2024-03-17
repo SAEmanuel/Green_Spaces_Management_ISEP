@@ -34,7 +34,7 @@ As an HRM, I want to assign one or more skills to a collaborator.
 
 * **AC1:** The employee must be registered.
 * **AC2:** All required fields must be filled in.
-* **AC3:** The system prevents duplicate competency assignments.
+
 
 
 ### 1.4. Found out Dependencies
