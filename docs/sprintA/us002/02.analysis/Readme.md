@@ -1,4 +1,4 @@
-# US006 - Create a Task 
+# US002 - Profession Registration
 
 ## 2. Analysis
 
