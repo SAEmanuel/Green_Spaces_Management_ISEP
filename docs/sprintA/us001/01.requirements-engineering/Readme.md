@@ -24,13 +24,35 @@ be appointed to a collaborator
 
 > **Question:** What information a skill should have?
 >
-> **Answer:** ...
+> **Answer:** Just the name.
 
 >  **Question:** When we trie to create and a skill that already exist, what the system should do?
 >
 > **Answer:** By definition it is not possible to have duplicate values in a set. Duplicate verification is not a business regulation at a technological level.
 
+>  **Question:** Do I need to add skills  by writing them or can I just give a file with all the skills?
+>
+> **Answer:** Both are acceptable since the business the same the crucial difference resides in the UX.
 
+>  **Question:** Does the HRM need to see the confirmation of the success of the operation and the skills added or just the sucess of the operation?
+>
+> **Answer:** It will depend on if you opt to insert one skill or a set of skills in a batch. Maybe some adaptation needed.
+
+>  **Question:** Is there any other possible outcome like if the HMR does not put the requested data, do I need to ask the user to register a different competence?
+>
+> **Answer:** This US is quite simple, atm a skill is simply a name.
+
+>  **Question:** Which information can be introduced to create a new skill?
+>
+> **Answer:** The skill name. 
+
+> **Question:** Which information is mandatory for creating a new skill?
+>
+> **Answer:** The skill name.
+
+> **Question:** Which are the skills accepted? Or should we enable the HRM to introduce anything as a skill?
+>
+> **Answer:** All, it's up to HRM to decide. (special characters or algarisms should not be allowed in the skill name)
 
 
 
@@ -41,7 +63,7 @@ be appointed to a collaborator
 * **AC03:** When editing a skill, there must be confirmation warnings before the execution of actions.
 * **AC04:** There cannot be two skills with different names, but they booth have the same functionalities.
 * **AC05:** All required fields must be filled in.
-* **AC06:** The name of a skill cannot have any numbers and needs to have relevant information.
+* **AC06:** The name of a skill cannot have special characters or algarisms.
 * **AC07:** If the system encounters any errors during the skill registration process, it should provide informative error messages to the HR Manager, guiding them on how to resolve the issue.
 
 
