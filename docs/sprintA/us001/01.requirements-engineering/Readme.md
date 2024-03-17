@@ -62,7 +62,7 @@ be appointed to a collaborator
 * **AC02:** The system should ensure that only authorized HR Managers have permission to register or edit skills.
 * **AC03:** When editing a skill, there must be confirmation warnings before the execution of actions.
 * **AC04:** There cannot be two skills with different names, but they booth have the same functionalities.
-* **AC05:** All required fields must be filled in.
+* **AC05:** All required fields must be filled in (the name is mandatory).
 * **AC06:** The name of a skill cannot have special characters or algarisms.
 * **AC07:** If the system encounters any errors during the skill registration process, it should provide informative error messages to the HR Manager, guiding them on how to resolve the issue.
 
@@ -82,19 +82,14 @@ be appointed to a collaborator
 * Typed data:
     * username and password of the HRM
     * skill name 
-    * collaborator name
-    * a technical description of the skill
     * specific identifier of the skill
 	
 * Selected data:
     * skills from the list of skills
-    * collaborator from the list of collaborators
 
 **Output Data:**
 
-* List of existing skills and description
-* Specific skill and description
-* Specific collaborator by filtering skills
+* List of existing skills
 * Error messages
 * Success of secundary opeations
 * Success of the operation
