@@ -11,9 +11,8 @@ As an HRM, I want to assign one or more skills to a collaborator.
 
 **From the specifications document:**
 
->	 #NOT OFFICIAL
-
->	 #NOT OFFICIAL
+>	 An employee has 
+a set of skills that enable him to perform/take on certain tasks/responsibilities.
 
 **From the client clarifications:**
 
