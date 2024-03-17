@@ -68,6 +68,6 @@ a set of skills that enable him to perform/take on certain tasks/responsibilitie
 
 ![System Sequence Diagram - Alternative Two](svg/us004-system-sequence-diagram-alternative-two.svg)
 
-### 1.7 Other Relevant Remarks
+  ### 1.7 Other Relevant Remarks
 
-* // Pensar em alguma coisa (Ver na minha pesquisa 😏).
+* Ensure that the skill assignment process is user-friendly and intuitive.
