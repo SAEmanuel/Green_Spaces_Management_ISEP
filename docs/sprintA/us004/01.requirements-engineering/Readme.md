@@ -32,7 +32,8 @@ a set of skills that enable him to perform/take on certain tasks/responsibilitie
 ### 1.3. Acceptance Criteria
 
 * **AC1:** The employee must be registered.
-* **AC2:** All required fields must be filled in.
+* **AC2:** The system should allow the HRM to select one or more skills from a predefined list.
+* **AC3:** The system should provide a way to update or remove assigned skills as needed.
 
 
 
