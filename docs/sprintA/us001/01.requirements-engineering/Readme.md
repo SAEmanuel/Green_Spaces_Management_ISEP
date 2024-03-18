@@ -11,9 +11,15 @@ be appointed to a collaborator
 
 **From the specifications document:**
 
-> The system aims to facilitate the management of skills attributed to collaborators within the organization. The Human Resources Manager (HRM) is empowered to register various skills that may be assigned to employees. These skills encompass a wide range of tasks and responsibilities relevant to the management of green spaces, including but not limited to designing, estimating, gardening, electrical work, and masonry.
+> The system aims is the management of skills. 
+ 
+> The Human Resources Manager (HRM) is empowered to register various skills. 
+ 
+> These skills encompass a wide range of tasks and responsibilities relevant to the management of green spaces, including but not limited to designing, estimating, gardening, electrical work, and masonry.
 
-> The system provides an interface dedicated to managing these skills efficiently. The HRM can utilize this interface to add new skills to the system, specifying unique identifiers, names, and descriptions for each skill. Additionally, the HRM can view a comprehensive list of existing skills along with their details, edit the details of existing skills, and delete obsolete skills as necessary.
+> The system provides an interface dedicated to managing these skills efficiently.
+ 
+> Additionally, the HRM can view a comprehensive list of existing skills along, edit the skills, and delete obsolete skills as necessary.
 
 
 **From the client clarifications:**
