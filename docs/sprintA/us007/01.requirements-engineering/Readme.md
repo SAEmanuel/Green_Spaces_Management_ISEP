@@ -25,13 +25,15 @@ As an FM, I wish to register a vehicle’s check-up
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** All required fields must be filled in.
-* **AC2:** The vehicle must be registered.
-* **AC3:** The system should consider kilometers as the unit of measurement for estimating the next check-up.
+* **AC01:** All required fields must be filled in (Plate number, Data and Current Mileage).
+* **AC02:** The vehicle must be registered.
+* **AC03:** The system should consider kilometers as the unit of measurement for estimating the next check-up.
+* **AC04:** The system should ensure that only authorized FM Managers have permission to register a vehicle's check-up.
+* **AC05:** If the system encounters any errors during the check-up registration process, it should provide informative error messages to the HR Manager, guiding them on how to resolve the issue.
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US003 - Create a task category" as there must be at least one task category to classify the task being created.
+* There is a dependency on "US006 - Registering Vehicles" as there must be at least one vehicle created.
 
 ### 1.5 Input and Output Data
 
