@@ -1,0 +1,36 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - Alternative One
+
+autonumber
+
+actor "Fleet\nManager" as FM
+participant ":System" as System
+
+activate FM
+
+    FM -> System : Accesses the fleet management system.
+    activate System
+
+    System -> FM : Provides the FM the option to register a vehicle's check-up.
+        deactivate System
+
+        System --> FM : Provides all the required data.
+    activate System
+
+    System --> FM : Displays all the data that will be registered.
+        deactivate System
+
+        FM --> System : Confirms the information.
+        activate System
+
+        System --> FM : Validates and stores it.
+
+
+        System --> FM : Confirms the success of the operation.
+        deactivate System
+
+@enduml
