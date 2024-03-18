@@ -26,8 +26,8 @@ As an FM, I wish to register a vehicle’s check-up
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All required fields must be filled in.
-* **AC2:** The task reference must have at least 5 alphanumeric characters.
-* **AC3:** When creating a task with an existing reference, the system must reject such operation and the user must be able to modify the typed reference.
+* **AC2:** The vehicle must be registered.
+* **AC3:** The system should consider kilometers as the unit of measurement for estimating the next check-up.
 
 ### 1.4. Found out Dependencies
 
