@@ -15,13 +15,13 @@ As an FM, I wish to register a vehicle’s check-up
 
 **From the client clarifications:**
 
-> **Question:** Which is the unit of measurement used to estimate duration?
+> **Question:** What information is needed when registering a vehicle after check up?
 >
-> **Answer:** Duration is estimated in days.
+> **Answer:** Plate number, data and current mileage.
 
-> **Question:** Monetary data is expressed in any particular currency?
+> **Question:** What is the unit of measurement used to estimate the check-up frequency (Kms, months, etc.)?
 >
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POT (virtual currency internal to the platform).
+> **Answer:** In real context all could be considered, in the scope of this project just kms will be considered.
 
 ### 1.3. Acceptance Criteria
 
