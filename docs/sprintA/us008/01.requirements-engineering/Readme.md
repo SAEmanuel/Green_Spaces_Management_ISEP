@@ -34,12 +34,12 @@ As a Fleet Manager I intend to list the vehicles that need overhauling.
 ### 1.3. Acceptance Criteria 
 
 * **AC1:** If FM does not have the necessary permissions, the system should prompt a warning message.
-* **AC2:** If there are no vehicles that need overhauling, the system notifies the FM. ???
+* **AC2:** If there are no vehicles that need overhauling, the system notifies the FM.
 
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US006 - Machinery registration" as there must be at least one vehicle in the system so that it can check the need for overhauling.
+* There is a dependency on "US006 - Machinery registration" as there must be at least one vehicle in the system so that it can check the need for a check-up.
 
 ### 1.5 Input and Output Data
 
@@ -63,6 +63,6 @@ As a Fleet Manager I intend to list the vehicles that need overhauling.
 
 ![System Sequence Diagram - Alternative One](svg/us008-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
 
-### 1.7 Other Relevant Remarks
+#### Alternative Two
 
-* ???
+![System Sequence Diagram - Alternative One](svg/us008-system-sequence-diagram-alternative-two-System_Sequence_Diagram__SSD____Alternative_Two.svg)
