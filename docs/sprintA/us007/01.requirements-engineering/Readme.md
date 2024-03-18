@@ -17,7 +17,7 @@ As an FM, I wish to register a vehicle’s check-up
 
 > **Question:** What information is needed when registering a vehicle after check up?
 >
-> **Answer:** Licence, data and current mileage.
+> **Answer:** Licence, date and current mileage.
 
 > **Question:** What is the unit of measurement used to estimate the check-up frequency (Kms, months, etc.)?
 >
@@ -40,7 +40,7 @@ As an FM, I wish to register a vehicle’s check-up
 **Input Data:**
 
 * Typed data:
-    * a data
+    * a date
     * a license plate
     * a mileage
 	
