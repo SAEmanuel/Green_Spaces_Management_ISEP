@@ -17,7 +17,7 @@ As an FM, I wish to register a vehicle’s check-up
 
 > **Question:** What information is needed when registering a vehicle after check up?
 >
-> **Answer:** Plate number, data and current mileage.
+> **Answer:** Licence, data and current mileage.
 
 > **Question:** What is the unit of measurement used to estimate the check-up frequency (Kms, months, etc.)?
 >
@@ -25,7 +25,7 @@ As an FM, I wish to register a vehicle’s check-up
 
 ### 1.3. Acceptance Criteria
 
-* **AC01:** All required fields must be filled in (Plate number, Data and Current Mileage).
+* **AC01:** All required fields must be filled in (Licence plate, Data and Current Mileage).
 * **AC02:** The vehicle must be registered.
 * **AC03:** The system should consider kilometers as the unit of measurement for estimating the next check-up.
 * **AC04:** The system should ensure that only authorized FM Managers have permission to register a vehicle's check-up.
@@ -40,15 +40,12 @@ As an FM, I wish to register a vehicle’s check-up
 **Input Data:**
 
 * Typed data:
-    * a reference
-    * a designation 
-    * an informal description
-    * a technical description
-    * an estimated duration
-    * an estimated cost
+    * a data
+    * a license plate
+    * a mileage
 	
 * Selected data:
-    * a task category 
+    * a vehicle
 
 **Output Data:**
 
