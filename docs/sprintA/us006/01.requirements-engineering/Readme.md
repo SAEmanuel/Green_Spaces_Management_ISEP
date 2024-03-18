@@ -11,7 +11,9 @@ As an FM, I wish to register a vehicle including Brand, Model, Type, Tare, Gross
 
 **From the specifications document:**
 
->	Register vehicles within the system to effectively manage the fleet utilized in maintaining green spaces. This registration process should capture crucial details including the brand, model, type, tare weight, gross weight, current kilometers, register date, acquisition date, and the maintenance/check-up frequency measured in kilometers.
+> Register vehicles within the system to effectively manage the fleet utilized in maintaining green spaces. 
+
+> This registration process should capture crucial details including the brand, model, type, tare weight, gross weight, current kilometers, register date, acquisition date, and the maintenance/check-up frequency measured in kilometers.
 
 > By having this functionality, fleet managers can ensure proper tracking, scheduling, and maintenance of vehicles, optimizing their utilization to support various tasks related to the management of green spaces.
 
