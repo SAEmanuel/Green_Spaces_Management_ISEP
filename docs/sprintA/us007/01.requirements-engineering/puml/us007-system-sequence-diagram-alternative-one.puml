@@ -24,7 +24,7 @@ activate FM
     System --> FM : Displays all the data that will be registered.
         deactivate System
 
-        FM --> System : Confirms the information.
+        FM --> System : Confirms data.
         activate System
 
         System --> FM : Validates and stores it.

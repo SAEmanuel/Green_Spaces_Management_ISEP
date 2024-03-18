@@ -3,36 +3,46 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) - Alternative Two
+title System Sequence Diagram (SSD) - Alternative One
 
 autonumber
 
-actor "Organization\nEmployee" as Employee
+actor "Fleet\nManager" as FM
 participant ":System" as System
 
-activate Employee
+activate FM
 
-    Employee -> System : asks to create a new task
+    FM -> System : Accesses the fleet management system.
     activate System
 
-        System --> Employee : shows task category list and asks to select one
-    deactivate System
+    System -> FM : Provides the FM the option to register a vehicle's check-up.
+        deactivate System
 
-    Employee -> System : selects a task category
+        System --> FM : Provides all the required data.
     activate System
 
-        System --> Employee : requests data (i.e. reference, designation, informal\ndescription, technical description, duration, cost)
-    deactivate System
+    System --> FM : Displays all the data that will be registered.
+        deactivate System
 
-    Employee -> System : types requested data
-    activate System
+        FM --> System : Confirms data.
+        activate System
 
-        System --> Employee : shows all data and requests confirmation
-    deactivate System
+        System --> FM : If the data provided is inconsistent, notify the FM and suggest to insert again.
+            deactivate System
 
-    Employee -> System : confirms data
-    activate System
+            FM --> System : Provides all the required data again.
+                activate System
 
-        System --> Employee : displays operation success
-    deactivate System
+        System --> FM : Displays all the data that will be registered.
+                deactivate System
+
+                FM --> System : Confirms data.
+                activate System
+
+        System --> FM : Validates and stores it.
+
+
+        System --> FM : Confirms the success of the operation.
+        deactivate System
+
 @enduml
