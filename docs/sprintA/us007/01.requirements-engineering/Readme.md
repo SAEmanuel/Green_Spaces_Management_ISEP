@@ -66,4 +66,4 @@ As an FM, I wish to register a vehicle’s check-up
 
 ### 1.7 Other Relevant Remarks
 
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
+* None.
