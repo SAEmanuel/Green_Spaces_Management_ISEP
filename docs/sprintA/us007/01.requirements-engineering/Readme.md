@@ -49,7 +49,7 @@ As an FM, I wish to register a vehicle’s check-up
 
 **Output Data:**
 
-* List of existing task categories
+* Display a message with all the information that will be registered.
 * (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
