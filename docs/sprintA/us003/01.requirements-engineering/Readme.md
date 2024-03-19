@@ -39,8 +39,8 @@ As an Human Resources Manager, I want to register a collaborator with a job and 
 * **AC7:** Email address can only have characters and numbers.
 * **AC8:** Taxpayer number can only have numbers.
 * **AC9:** The user will select a identification document type from a list.
-* **AC8:** An photo of identification document should be loaded to the app.
-* **AC9:** The user will select a job from a list of jobs provided by the app.
+* **AC10:** An photo of identification document should be loaded to the app.
+* **AC11:** The user will select a job from a list of jobs provided by the app.
 
 ### 1.4. Found out Dependencies
 
