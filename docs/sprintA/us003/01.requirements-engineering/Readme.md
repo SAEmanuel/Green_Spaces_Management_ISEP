@@ -15,17 +15,18 @@ As an Human Resources Manager, I want to register a collaborator with a job and 
 
 >	As long as it is not published, access to the task is exclusive to the employees of the respective organization.
 
->   The human resources manager will fill all the required fields: name, birthdate, admission date, address
+>   The human resources manager will fill all the required fields: name, birthdate, admission date, residence, phone number, email address, taxpayer number and Identification document type. Should also load an photo of an identification document. Then he can select a job from a list to register a collaborator.
 
 **From the client clarifications:**
 
-> **Question:** Which is the unit of measurement used to estimate duration?
+> **Question:** When creating a collaborator with an existing name ... What the system do?
 >
-> **Answer:** Duration is estimated in days.
+> **Answer:** It's not common and most improbable to have different individual with same name in the same context, however it’s ID documentation number should be unique for sure.
 
-> **Question:** Monetary data is expressed in any particular currency?
+> **Question:** Which information is mandatory to insert a collaborator in the program (fundamental characteristics)?
 >
-> **Answer:** Monetary data (e.g. estimated cost of a task) is indicated in POT (virtual currency internal to the platform).
+> **Answer:** - name, birthdate, admission date, address, contact info (mobile and email), taxpayer number, ID doc type and respective number 
+>             - displaying or not, It's a matter of UX, the dev team should decide about it, but the valid jobs are the ones created within the US02.
 
 ### 1.3. Acceptance Criteria
 
@@ -33,10 +34,13 @@ As an Human Resources Manager, I want to register a collaborator with a job and 
 * **AC2:** Name must be complete and should only have letters.
 * **AC3:** Birthdate can only be chosen from the calendar given.
 * **AC4:** Admission date can only be chosen from the calendar given.
-* **AC5:** Address must be written, this includes: door number, street, postal code, city, country. If there is anything more needed to be specified, should be written in the "More" box.
-* **AC6:** Phone number can only have 9 numbers, and email address.
-* **AC7:** An photo of identification document should be loaded to the app.
-* **AC8:** The user will select a job from a list of jobs provided by the app.
+* **AC5:** Residence must be written, this includes: door number, street, postal code, city, country. If there is anything more needed to be specified, should be written in the "More" box.
+* **AC6:** Phone number can only have 9 numbers.
+* **AC7:** Email address can only have characters and numbers.
+* **AC8:** Taxpayer number can only have numbers.
+* **AC9:** The user will select a identification document type from a list.
+* **AC8:** An photo of identification document should be loaded to the app.
+* **AC9:** The user will select a job from a list of jobs provided by the app.
 
 ### 1.4. Found out Dependencies
 
