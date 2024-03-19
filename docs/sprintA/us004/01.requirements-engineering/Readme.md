@@ -11,9 +11,8 @@ As an HRM, I want to assign one or more skills to a collaborator.
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. #NOT OFFICIAL
-
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization. #NOT OFFICIAL
+>	 An employee has 
+a set of skills that enable him to perform/take on certain tasks/responsibilities.
 
 **From the client clarifications:**
 
@@ -21,15 +20,23 @@ As an HRM, I want to assign one or more skills to a collaborator.
 >
 > **Answer:** No.
 
-> **Question:** Is there any special characteristic that the employee needs to have in order for these skills to be added?
+> **Question:** Can any skill be registered to any collaborator/job? Or should they be associated in categories in association with a specific job
+>
+> **Answer:** There is no association, it totally depends of the CV of the collaborator.
+
+> **Question:**  Is there any certification/proof needed to register a skill to a collaborator?
 >
 > **Answer:** No.
 
+
 ### 1.3. Acceptance Criteria
 
-* **AC1:** The employee must be registered.
-* **AC2:** All required fields must be filled in.
-* **AC3:** The system prevents duplicate competency assignments.
+* **AC01:** The employee must be registered.
+* **AC02:** The system should allow the HRM to select one or more skills from a predefined list.
+* **AC03:** The system should provide a way to update or remove assigned skills as needed.
+* **AC04:** The system should ensure that only authorized HR Managers have permission to assign skills.
+* **AC05:** If the system encounters any errors during the skill registration process, it should provide informative error messages to the HR Manager, guiding them on how to resolve the issue.
+
 
 
 ### 1.4. Found out Dependencies
@@ -57,12 +64,12 @@ As an HRM, I want to assign one or more skills to a collaborator.
 
 #### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us006-system-sequence-diagram-alternative-one.svg)
+![System Sequence Diagram - Alternative One](svg/us004-system-sequence-diagram-alternative-one.svg)
 
 #### Alternative Two
 
-![System Sequence Diagram - Alternative Two](svg/us006-system-sequence-diagram-alternative-two.svg)
+![System Sequence Diagram - Alternative Two](svg/us004-system-sequence-diagram-alternative-two.svg)
 
-### 1.7 Other Relevant Remarks
+  ### 1.7 Other Relevant Remarks
 
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
+* Ensure that the skill assignment process is user-friendly and intuitive.

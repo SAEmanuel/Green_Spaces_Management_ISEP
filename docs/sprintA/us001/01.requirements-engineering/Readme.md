@@ -11,9 +11,15 @@ be appointed to a collaborator
 
 **From the specifications document:**
 
-> The system aims to facilitate the management of skills attributed to collaborators within the organization. The Human Resources Manager (HRM) is empowered to register various skills that may be assigned to employees. These skills encompass a wide range of tasks and responsibilities relevant to the management of green spaces, including but not limited to designing, estimating, gardening, electrical work, and masonry.
+> The system aims is the management of skills. 
+ 
+> The Human Resources Manager (HRM) is empowered to register various skills. 
+ 
+> These skills encompass a wide range of tasks and responsibilities relevant to the management of green spaces, including but not limited to designing, estimating, gardening, electrical work, and masonry.
 
-> The system provides an interface dedicated to managing these skills efficiently. The HRM can utilize this interface to add new skills to the system, specifying unique identifiers, names, and descriptions for each skill. Additionally, the HRM can view a comprehensive list of existing skills along with their details, edit the details of existing skills, and delete obsolete skills as necessary.
+> The system provides an interface dedicated to managing these skills efficiently.
+ 
+> Additionally, the HRM can view a comprehensive list of existing skills along, edit the skills, and delete obsolete skills as necessary.
 
 
 **From the client clarifications:**
@@ -24,13 +30,35 @@ be appointed to a collaborator
 
 > **Question:** What information a skill should have?
 >
-> **Answer:** ...
+> **Answer:** Just the name.
 
 >  **Question:** When we trie to create and a skill that already exist, what the system should do?
 >
 > **Answer:** By definition it is not possible to have duplicate values in a set. Duplicate verification is not a business regulation at a technological level.
 
+>  **Question:** Do I need to add skills  by writing them or can I just give a file with all the skills?
+>
+> **Answer:** Both are acceptable since the business the same the crucial difference resides in the UX.
 
+>  **Question:** Does the HRM need to see the confirmation of the success of the operation and the skills added or just the sucess of the operation?
+>
+> **Answer:** It will depend on if you opt to insert one skill or a set of skills in a batch. Maybe some adaptation needed.
+
+>  **Question:** Is there any other possible outcome like if the HMR does not put the requested data, do I need to ask the user to register a different competence?
+>
+> **Answer:** This US is quite simple, atm a skill is simply a name.
+
+>  **Question:** Which information can be introduced to create a new skill?
+>
+> **Answer:** The skill name. 
+
+> **Question:** Which information is mandatory for creating a new skill?
+>
+> **Answer:** The skill name.
+
+> **Question:** Which are the skills accepted? Or should we enable the HRM to introduce anything as a skill?
+>
+> **Answer:** All, it's up to HRM to decide. (special characters or algarisms should not be allowed in the skill name)
 
 
 
@@ -40,8 +68,8 @@ be appointed to a collaborator
 * **AC02:** The system should ensure that only authorized HR Managers have permission to register or edit skills.
 * **AC03:** When editing a skill, there must be confirmation warnings before the execution of actions.
 * **AC04:** There cannot be two skills with different names, but they booth have the same functionalities.
-* **AC05:** All required fields must be filled in.
-* **AC06:** The name of a skill cannot have any numbers and needs to have relevant information.
+* **AC05:** All required fields must be filled in (the name is mandatory).
+* **AC06:** The name of a skill cannot have special characters or algarisms.
 * **AC07:** If the system encounters any errors during the skill registration process, it should provide informative error messages to the HR Manager, guiding them on how to resolve the issue.
 
 
@@ -60,19 +88,14 @@ be appointed to a collaborator
 * Typed data:
     * username and password of the HRM
     * skill name 
-    * collaborator name
-    * a technical description of the skill
     * specific identifier of the skill
 	
 * Selected data:
     * skills from the list of skills
-    * collaborator from the list of collaborators
 
 **Output Data:**
 
-* List of existing skills and description
-* Specific skill and description
-* Specific collaborator by filtering skills
+* List of existing skills
 * Error messages
 * Success of secundary opeations
 * Success of the operation

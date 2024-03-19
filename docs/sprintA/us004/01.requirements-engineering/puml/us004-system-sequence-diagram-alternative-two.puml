@@ -7,32 +7,50 @@ title System Sequence Diagram (SSD) - Alternative Two
 
 autonumber
 
-actor "Organization\nEmployee" as Employee
+actor "Human Resources\nManager" as HRM
 participant ":System" as System
 
-activate Employee
+activate HRM
 
-    Employee -> System : asks to create a new task
+    HRM -> System : Accesses the human resources management system.
     activate System
 
-        System --> Employee : shows task category list and asks to select one
+    System --> HRM : Displays the employee’s details, including their current skills (if any).
     deactivate System
 
-    Employee -> System : selects a task category
+     HRM -> System : Selects the option to edit the employee’s skills.
     activate System
 
-        System --> Employee : requests data (i.e. reference, designation, informal\ndescription, technical description, duration, cost)
+        System --> HRM : Presents a list of available skills.
     deactivate System
 
-    Employee -> System : types requested data
+        HRM -> System : Selects one or more skills from the list.
     activate System
 
-        System --> Employee : shows all data and requests confirmation
+    System --> HRM : Displays all the changes.
     deactivate System
 
-    Employee -> System : confirms data
+    HRM --> System : Confirms the selection.
     activate System
 
-        System --> Employee : displays operation success
+    System --> HRM : If the skill provided is already registered, notify the HRM and suggest choosing another.
     deactivate System
+
+    HRM --> System : Selects another skill.
+        activate System
+
+    System --> HRM : Displays all the changes.
+        deactivate System
+
+        HRM --> System : Confirms the selection.
+        activate System
+
+    System --> HRM : Validates and stores it.
+
+    System --> HRM : Confirms the success of the operation.
+    deactivate System
+
+
+
+
 @enduml

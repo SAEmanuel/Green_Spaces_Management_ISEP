@@ -25,11 +25,15 @@ As a Human Resources Manager I want to register a job.
 >
 > **Answer:** The name of it: Gardener, Driver, Cobbler, Electrician...
 
+> **Question:** Is it relevant to associate a specific area or sector with each Job? (For example, "Gardener" would be inserted in the "Maintenance" sector).
+>
+> **Answer:** Is not necessary as there is no US to suggest that it might be necessary.
+
 ### 1.3. Acceptance Criteria
 
 * **AC1:** If HRM does not have necessary permissions, the system should prompt a warning message.
 * **AC2:** If HRM puts an invalid username or password, the system should prompt an error message.
-* **AC3:** If the profession is already registered in the system, the system should notify the manager and suggest choosing another one or the existing one.
+* **AC3:** If the profession is already registered in the system, the system should notify the manager and suggest choosing another one.
 
 ### 1.4. Found out Dependencies
 
@@ -47,7 +51,7 @@ As a Human Resources Manager I want to register a job.
     * a jobs category
 
 **Output Data:**
-* List of professions added to the system
+* List of professions stored and added to the system
 * (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
@@ -56,6 +60,9 @@ As a Human Resources Manager I want to register a job.
 
 ![System Sequence Diagram - Alternative One](svg/us002-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
 
+#### Alternative Two
+
+![System Sequence Diagram - Alternative One](svg/us002-system-sequence-diagram-alternative-two-System_Sequence_Diagram__SSD____Alternative_Two.svg)
 
 ### 1.7 Other Relevant Remarks
 
