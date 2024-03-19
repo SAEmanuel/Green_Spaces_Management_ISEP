@@ -15,7 +15,7 @@ As an Human Resources Manager, I want to register a collaborator with a job and 
 
 >	As long as it is not published, access to the task is exclusive to the employees of the respective organization.
 
->   The human resources manager will fill all the required fields: name, birthdate, admission date, residence, phone number, email address, taxpayer number and Identification document type. Should also load an photo of an identification document. Then he can select a job from a list to register a collaborator.
+>   The human resources manager will fill all the required fields: name, birthdate, admission date, residence, phone number, email address, taxpayer number and Identification document type. Should also load a image of the identification document. Then he can select a job from a list to register a collaborator.
 
 **From the client clarifications:**
 
@@ -39,7 +39,7 @@ As an Human Resources Manager, I want to register a collaborator with a job and 
 * **AC7:** Email address can only have characters and numbers.
 * **AC8:** Taxpayer number can only have numbers.
 * **AC9:** The user will select a identification document type from a list.
-* **AC10:** An photo of identification document should be loaded to the app.
+* **AC10:** An image of identification document should be loaded to the app.
 * **AC11:** The user will select a job from a list of jobs provided by the app.
 
 ### 1.4. Found out Dependencies
