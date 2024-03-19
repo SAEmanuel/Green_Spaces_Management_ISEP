@@ -44,22 +44,24 @@ As an Human Resources Manager, I want to register a collaborator with a job and 
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US003 - Create a task category" as there must be at least one task category to classify the task being created.
+* There is a dependency on "US002 - Profession Registration" as there must be at least one job to give a collaborator when registered.
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
 * Typed data:
-    * a reference
-    * a designation 
-    * an informal description
-    * a technical description
-    * an estimated duration
-    * an estimated cost
+    * a name
+    * the residence 
+    * a phone number
+    * an email
+    * the taxpayer number
 	
 * Selected data:
-    * a task category 
+    * a calendar for birthdate
+    * a calendar for admission date
+    * a list to select identification document type
+    * a list to select a job
 
 **Output Data:**
 
