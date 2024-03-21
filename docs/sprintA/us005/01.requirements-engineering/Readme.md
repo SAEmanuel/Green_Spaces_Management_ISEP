@@ -34,24 +34,10 @@ As a HRM, I want to generate a team proposal automatically
 * **AC2:** Need to have as many collaborators with the desired skills as the number of them requested
 * **AC3:** Need to have as many collaborators requests of the skills selected
 * **AC4:** Need to have at least one skill registed to start a team generation 
-*
-*
-*
-*
-* **AC1:** The system should allow the HRM to input project details such as project name, task details, objectives.
-* **AC2:** The HRM should be able to specify the number of team members needed for the project.
-* **AC3:** The system should provide options to select team members based on their skills, experience, and availability.
-* **AC4:** It should automatically generate a team proposal based on project relevant skills, experience and urgency, using collaborators availability.
-* **AC5:** The HRM should have the ability to review and edit the generated team proposal before finalizing it.
-* **AC6:** The generated team proposal should use a database to save past team history, as future reference.
-* **AC7:** The generator should consider the availability of vehicles, machines, and equipment required for the tasks when assigning team members to projects.
-* **AC8:** It should offer the capability to generate multiple team proposals simultaneously for better assistance.
-* **AC?:** The system should prioritize team member selection based on their proximity to the project location to minimize transportation time and costs.
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US01 - Register skills that a collaborator may have"
-* There is a dependency on "US04 - Assign one or more skills to a collaborator"
+* No dependencies found.
 
 ### 1.5 Input and Output Data
 
