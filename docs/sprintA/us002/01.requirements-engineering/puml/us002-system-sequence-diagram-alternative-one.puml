@@ -22,11 +22,6 @@ activate HRM
         HRM -> System : HRM provides the profession(s)
     activate System
 
-    System --> HRM : The system verifies non duplicates.
-        deactivate System
-
-    System --> HRM : The system stores all the data.
-    activate System
 
         System --> HRM : The system confirms the success of the operation.
     deactivate System
