@@ -12,12 +12,6 @@ participant ":System" as System
 
 activate HRM
 
-    HRM -> System : Accesses the human resources management system.
-    activate System
-
-    System --> HRM : Displays the employee’s details, including their current skills (if any).
-    deactivate System
-
      HRM -> System : Selects the option to edit the employee’s skills.
     activate System
 
