@@ -23,7 +23,7 @@ among them: error prevention; interface aesthetics and design; help and
 documentation; consistency and standards._
 
 - The user interface shall be developed in JavaFX 11 to ensure a modern and intuitive user experience.
-- All users shall be able to easily navigate through the system to perform their tasks.
+
 - Error messages shall be clear and concise, aiding users in understanding and resolving issues.
 
 ## Reliability
@@ -32,7 +32,6 @@ _Refers to the integrity, compliance and interoperability of the software. The r
 
 - The system shall ensure data integrity by accurately recording and updating information.
 - All modules shall be thoroughly tested to minimize the occurrence of software bugs.
-- The system shall have a backup mechanism to prevent data loss in case of system failure.
 
 
 ## Performance
@@ -40,8 +39,6 @@ _Refers to the integrity, compliance and interoperability of the software. The r
 _Evaluates the performance requirements of the software, namely: response time, start-up time, recovery time, memory consumption, CPU usage, load capacity and application availability._
 
 - The system shall handle a large number of concurrent users efficiently without significant degradation in performance.
-- Response times for user interactions shall be minimal, ensuring a smooth user experience.
-- The system shall be capable of handling a large volume of data without performance bottlenecks.
 
 ## Supportability
 
@@ -51,7 +48,7 @@ configurability, installability, scalability and more._
 
 - The system shall provide comprehensive documentation for users, administrators, and developers.
 - Maintenance tasks, such as system updates and bug fixes, shall be easy to perform without disrupting system operation.
-- The system shall support internationalization, allowing for easy translation into different languages.
+- The system shall support English language.
 
 ## +
 
