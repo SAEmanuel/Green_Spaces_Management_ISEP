@@ -10,15 +10,16 @@ autonumber
 actor "Fleet\nManager" as FM
 participant ":System" as System
 
-        activate System
-        System --> System: Verifies which vehicles are elegible for check-up
 
-
-        System -> FM : Provides a list of vehicles that need check-up (and all their info) .
         activate FM
 
+        FM --> System: Asks to generate a list of vehicles needing check-up
+        activate System
+
+        System -> FM : Provides a list of vehicles that need check-up (and all their info) .
+
         System --> FM : Displays operation success
-        deactivate FM
         deactivate System
+        deactivate FM
 
 @enduml
