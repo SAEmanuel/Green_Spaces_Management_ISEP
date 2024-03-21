@@ -66,4 +66,4 @@ As a Human Resources Manager I want to register a job.
 
 ### 1.7 Other Relevant Remarks
 
-* Only new professions can be added, if an existing one is inserted by the manager the system issues a warning.
+* A person can have more than one profession
