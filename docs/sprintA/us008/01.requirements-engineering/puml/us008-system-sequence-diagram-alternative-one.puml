@@ -10,21 +10,15 @@ autonumber
 actor "Fleet\nManager" as FM
 participant ":System" as System
 
-activate FM
+        activate System
+        System --> System: Verifies which vehicles are elegible for check-up
 
-    FM -> System : Accesses the fleet management system.
-    activate System
 
-    System -> FM : Provides the FM the option to insert the range of kilometers needed for check-up.
-        deactivate System
-
-        System --> FM : Provides the option to set a number of kms the user wants to be informed before reaching the overhauling limit
-    activate System
-
-    System -> FM : Provides a list of vehicles (and all their info) that need check-up.
-    deactivate System
+        System -> FM : Provides a list of vehicles that need check-up (and all their info) .
+        activate FM
 
         System --> FM : Displays operation success
-    activate System
+        deactivate FM
+        deactivate System
 
 @enduml
