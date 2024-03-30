@@ -6,24 +6,25 @@ skinparam shadowing false
 
 title Domain Model - US001
 
+hide circles
+hide methods
+
 package "HR System" {
 
     class HRM {
-        + register()
     }
 
     class Skill {
-        - name: String
+        name
     }
 
     class ListSkills {
-        - skills: List<Skill>
-        + addSkill(skill: Skill): void
+        skills: List<Skill>
     }
 
     HRM "1" - "*" Skill : creates >
     HRM "1" - ListSkills : see >
-    Skill "*" -  ListSkills : registered >
+    Skill "*" ---  ListSkills : registered >
 }
 
 
