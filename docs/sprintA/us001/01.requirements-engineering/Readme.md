@@ -7,7 +7,7 @@
 
 As a Human Resources Manager (HRM), I want to register skills that may
 be appointed to a collaborator
-### 1.2. Customer Specifications and Clarifications 
+### 1.2. Customer Specifications and Clarifications
 
 **From the specifications document:**
 
@@ -59,6 +59,21 @@ be appointed to a collaborator
 > **Question:** Which are the skills accepted? Or should we enable the HRM to introduce anything as a skill?
 >
 > **Answer:** All, it's up to HRM to decide. (special characters or algarisms should not be allowed in the skill name)
+
+>  **Question:** Which is the difference between collaborator and employ? And employ could have skills? HRM, VFM, GSM and GSU are employers?
+>
+> **Answer:** Employee and collaborator are synonyms.
+
+>  **Question:** The indentificator of the skill will be the name, or the system will generate authomatically and Id when the manager insert the name?
+>
+> **Answer:** A skill is just a name, can be a composition os words like "Light Vehicle Driving Licence".
+
+>  **Question:** The indentificator of the skill will be the name, or the system will generate authomatically and Id when the manager insert the name?
+>
+> **Answer:** A skill is just a name, can be a composition os words like "Light Vehicle Driving Licence".
+
+
+
 
 
 
