@@ -12,7 +12,7 @@ be appointed to a collaborator
 **From the specifications document:**
 
 > The system aims is the management of skills. 
- 
+
 > The Human Resources Manager (HRM) is empowered to register various skills. 
  
 > These skills encompass a wide range of tasks and responsibilities relevant to the management of green spaces, including but not limited to designing, estimating, gardening, electrical work, and masonry.
@@ -103,7 +103,7 @@ be appointed to a collaborator
 * Typed data:
     * username and password of the HRM
     * skill name 
-    * specific identifier of the skill
+  
 	
 * Selected data:
     * skills from the list of skills
