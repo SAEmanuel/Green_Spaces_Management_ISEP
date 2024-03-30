@@ -7,24 +7,24 @@ title System Sequence Diagram (SSD) - Alternative One
 
 autonumber
 
-actor "Organization\nEmployee" as Employee
+actor "Human Resources\nManager" as Employee
 participant ":System" as System
 
 activate Employee
 
-    Employee -> System : asks to create a new task
+    Employee -> System : asks to register a new collaborator
     activate System
 
-        System --> Employee : requests data (i.e. reference, designation, informal\ndescription, technical description, duration, cost)
+        System --> Employee : requests data (i.e. name, birthdate,\n admission date, residence, phone number, email address,\n taxpayer number and Identification document type)
     deactivate System
 
     Employee -> System : types requested data
     activate System
 
-        System --> Employee : shows task category list and asks to select one
+        System --> Employee : shows a list of jobs and asks to select one
     deactivate System
 
-    Employee -> System : selects a task category
+    Employee -> System : selects a job
     activate System
 
         System --> Employee : shows all data and requests confirmation

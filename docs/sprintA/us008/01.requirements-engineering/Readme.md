@@ -17,7 +17,7 @@ As a Fleet Manager I intend to list the vehicles that need overhauling.
 
 >	The user must inform the system every few kilometers that he wants to have his vehicles checked.
  
->	The user must inform the system of how many kilometers before reaching the limit for review he wants to be informed of.
+>	When km are 5% close to reach the limit, user is also informed of the needing for a check-up
 
 **From the client clarifications:**
 
@@ -47,10 +47,10 @@ As a Fleet Manager I intend to list the vehicles that need overhauling.
 
 * Typed data:
     * range of km for overhauling
-    * number of km before reaching the limit for review that FM wants to be informed 
+    * 5% km close to the limit
 	
 * Selected data:
-    * vehicles category 
+    * vehicles from a list 
 
 **Output Data:**
 
