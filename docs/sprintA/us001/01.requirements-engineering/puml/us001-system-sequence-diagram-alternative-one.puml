@@ -19,7 +19,7 @@ activate Employee
         System --> Employee : Show interface
     deactivate System
 
-    Employee -> System : View/add/edit/delete/search skills
+    Employee -> System : View/add skills
 
     activate System
 

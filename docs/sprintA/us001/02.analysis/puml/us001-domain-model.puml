@@ -1,61 +1,32 @@
 @startuml
+
 skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-'left to right direction
+title Domain Model - US001
 
-skinparam classAttributeIconSize 0
+package "HR System" {
 
-hide circle
-hide methods
+    class HRM {
+        + register()
+    }
 
-'title Domain Model
+    class Skill {
+        - name: String
+    }
 
-'class Platform {
-'  -description
-'}
+    class ListSkills {
+        - skills: List<Skill>
+        + addSkill(skill: Skill): void
+    }
 
-class Organization {
-    name
-    vatNumber
-    website
-    phoneNumber
-    email
+    HRM "1" - "*" Skill : creates >
+    HRM "1" - ListSkills : see >
+    Skill "*" -  ListSkills : registered >
 }
 
-class Task {
-    reference
-    description
-    informalDesc
-    technicalDesc
-    duration
-    cost
-}
 
-class Category {
-    description
-}
 
-class Employee {
-    name
-    email
-    position
-    phone
-}
-
-'class User {
-'    name
-'    email
-'    password
-'}
-
-'Platform "1" -- "*" Organization : has registered >
-'Platform "1" -- "*" Category : defines >
-Organization "1" - "0..*" Employee : has >
-Organization "1" - "0..*" Task: owns >
-'Task "*" -- "1" Employee: created by >
-Employee "1" -- "*" Task : creates >
-'Employee "0..1" -- "1" User: acts as >
-Task "*" - "1" Category: cataloged as >
 @enduml
+
