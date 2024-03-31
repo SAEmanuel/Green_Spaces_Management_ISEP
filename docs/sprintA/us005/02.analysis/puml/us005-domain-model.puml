@@ -19,14 +19,11 @@ package "HRM Team Proposal System" {
         - teamSize: int
     }
 
-    class Collaborators {
-        - name: String
-        - skills: String[]
-        - workerID: int
-        - age: int
+    class ListCollaborator {
+        - collaborator: List<Collaborator>
     }
 
     HRM "1" -- "1 " TeamProposal : generates >
-    TeamProposal "0..* " -- "0..* " Collaborators : has >
+    TeamProposal "0..* " -- "0..* " ListCollaborator : has >
 }
 @enduml

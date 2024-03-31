@@ -3,40 +3,38 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-'left to right direction
-
 skinparam classAttributeIconSize 0
 
-hide circle
+hide circles
 hide methods
 
 title Domain Model - US006
 
+package "FM Vehicle Registration System" {
 
-class FM {
+    class FM {
+    }
+
+    class Vehicle {
+         - plateID: int
+         - brand: string
+         - model: string
+         - type: int
+         - tare: float
+         - grossWeight: float
+         - kms: float
+         - registerDate: string
+         - acquisitionDate: string
+         - maintenanceFrequency: int
+    }
+
+    class ListVehicle {
+        - vehicles: List<Vehicle>
+    }
+
+
+    FM "1" - "*" Vehicle : creates >
+    FM "1" - "1..*  " ListVehicle: see >
+    Vehicle "0..*  " -- "1" ListVehicle : register >
 }
-
-class Vehicle {
-     plateID
-     brand
-     model
-     type
-     tare
-     grossWeight
-     kms
-     registerDate
-     acquisitionDate
-     maintenanceFrequency
-}
-
-class ListVehicle {
-    vehicles: List<Vehicle>
-}
-
-
-FM "1" - "*" Vehicle : creates >
-FM "1" - ListVehicle: see >
-
-Vehicle "*" -- ListVehicle : register >
-
 @enduml
