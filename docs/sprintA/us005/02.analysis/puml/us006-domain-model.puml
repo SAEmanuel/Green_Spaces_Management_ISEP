@@ -3,59 +3,30 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-'left to right direction
+title Domain Model - US005
 
 skinparam classAttributeIconSize 0
 
-hide circle
+hide circles
 hide methods
 
-'title Domain Model
+package "HRM Team Proposal System" {
+    class HRM {
+    }
 
-'class Platform {
-'  -description
-'}
+    class TeamProposal {
+        - skills: string[]
+        - teamSize: int
+    }
 
-class Organization {
-    name
-    vatNumber
-    website
-    phoneNumber
-    email
+    class Collaborators {
+        - name: String
+        - skills: String[]
+        - workerID: int
+        - age: int
+    }
+
+    HRM "1" -- "1 " TeamProposal : generates >
+    TeamProposal "0..* " -- "0..* " Collaborators : has >
 }
-
-class Task {
-    reference
-    description
-    informalDesc
-    technicalDesc
-    duration
-    cost
-}
-
-class Category {
-    description
-}
-
-class Employee {
-    name
-    email
-    position
-    phone
-}
-
-'class User {
-'    name
-'    email
-'    password
-'}
-
-'Platform "1" -- "*" Organization : has registered >
-'Platform "1" -- "*" Category : defines >
-Organization "1" - "0..*" Employee : has >
-Organization "1" - "0..*" Task: owns >
-'Task "*" -- "1" Employee: created by >
-Employee "1" -- "*" Task : creates >
-'Employee "0..1" -- "1" User: acts as >
-Task "*" - "1" Category: cataloged as >
 @enduml
