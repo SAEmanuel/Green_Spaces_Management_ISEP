@@ -25,6 +25,36 @@ As a HRM, I want to generate a team proposal automatically
 >
 > **Answer:** .
 
+> **Question:** Are the skills(input) typed or selecte
+> Does the output show the team members with or without their skills?
+>
+> **Answer:** the ux/ui is up to the dev team.
+
+> **Question:** I would like to know which business rules apply for the input data to generate a team proposal.
+>
+> **Answer:** max and min team size, and a a list of skills needed.
+> For instance:
+> 
+> min: 3
+> 
+> max: 4
+
+> **Question:** I would like to ask if, in this US, there should be any more information in the team generated beyond the collaborators in which it consists?
+>
+> **Answer:** The information shouldd contain each of team members and the its skills.
+
+> **Question:** I would also like to know if a collaborator can be in more than one team at the same time?
+>
+> **Answer:** no
+
+> **Question:** How does it generate the team if there are not enough employees?
+>
+> **Answer:** The system should provide information why it can't generate a team.
+
+> **Question:** What should the output of the automation be? (should it just store the team proposal or show it to the customer?)  Will the team proposal be a document about all the instructions of each team member/worker?
+>
+> **Answer:** The systems provide team proposals and HRM can accept of refuse the proposals. In the future (not in this sprint) HRM may decide to edit the team.
+
 > **Question:** If it doesn't have enough collaborators, or they don't have the requests skills. Should the system send a message?
 >
 > **Answer:** Yes, the system should provide information why it can't generate a team.
