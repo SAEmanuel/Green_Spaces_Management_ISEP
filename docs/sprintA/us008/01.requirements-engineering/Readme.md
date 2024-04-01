@@ -45,12 +45,10 @@ As a Fleet Manager I intend to list the vehicles that need overhauling.
 
 **Input Data:**
 
-* Typed data:
-    * range of km for overhauling
-    * 5% km close to the limit
-	
 * Selected data:
     * vehicles from a list 
+    * range of km for overhauling 
+    * 5% km close to the limit
 
 **Output Data:**
 
@@ -63,6 +61,3 @@ As a Fleet Manager I intend to list the vehicles that need overhauling.
 
 ![System Sequence Diagram - Alternative One](svg/us008-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
 
-#### Alternative Two
-
-![System Sequence Diagram - Alternative One](svg/us008-system-sequence-diagram-alternative-two-System_Sequence_Diagram__SSD____Alternative_Two.svg)
