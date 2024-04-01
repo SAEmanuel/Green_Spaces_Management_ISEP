@@ -24,6 +24,6 @@ package "HRM Team Proposal System" {
     }
 
     HRM "1" -- "1 " TeamProposal : generates >
-    TeamProposal "0..* " -- "0..* " ListCollaborator : has >
+    TeamProposal "0,1 " -- "0..* " ListCollaborator : has >
 }
 @enduml
