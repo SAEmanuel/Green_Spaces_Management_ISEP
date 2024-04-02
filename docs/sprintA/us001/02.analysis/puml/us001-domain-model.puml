@@ -1,13 +1,33 @@
 @startuml
-class Skill {
-    - id: String
-    - name: String
-    - description: String
 
-    + getId(): String
-    + getName(): String
-    + getDescription(): String
-    + setName(name: String): void
-    + setDescription(description: String): void
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Domain Model - US001
+
+hide circles
+hide methods
+
+package "HR System" {
+
+    class HRM {
+    }
+
+    class Skill {
+        name
+    }
+
+    class ListSkills {
+        skills: List<Skill>
+    }
+
+    HRM "1" - "*" Skill : creates >
+    HRM "1" - ListSkills : see >
+    Skill "*" ---  ListSkills : registered >
 }
+
+
+
 @enduml
+

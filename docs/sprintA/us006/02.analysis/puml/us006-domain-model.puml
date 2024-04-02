@@ -1,15 +1,40 @@
 @startuml
-class Vehicle {
-    - plateID : int
-    - brand: String
-    - model: String
-    - type: String
-    - tareWeight: String
-    - grossWeight: String
-    - currentKm: String
-    - registerDate: String
-    - acquisitionDate: String
-    - maintenanceFrequency: String
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
 
+skinparam classAttributeIconSize 0
+
+hide circles
+hide methods
+
+title Domain Model - US006
+
+package "FM Vehicle Registration System" {
+
+    class FM {
+    }
+
+    class Vehicle {
+         - plateID: int
+         - brand: string
+         - model: string
+         - type: int
+         - tare: float
+         - grossWeight: float
+         - kms: float
+         - registerDate: string
+         - acquisitionDate: string
+         - maintenanceFrequency: int
+    }
+
+    class ListVehicle {
+        - vehicles: List<Vehicle>
+    }
+
+
+    FM "1" - "*" Vehicle : creates >
+    FM "1" - "1..*  " ListVehicle: see >
+    Vehicle "0..*  " -- "1" ListVehicle : register >
 }
 @enduml

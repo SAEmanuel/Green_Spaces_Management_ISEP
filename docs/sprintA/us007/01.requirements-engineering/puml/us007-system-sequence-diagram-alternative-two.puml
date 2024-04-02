@@ -12,13 +12,13 @@ participant ":System" as System
 
 activate FM
 
-    FM -> System : Accesses the fleet management system.
+    FM -> System : Asks to register a vehicle's check-up.
     activate System
 
     System -> FM : Provides the FM the option to register a vehicle's check-up.
         deactivate System
 
-        System --> FM : Provides all the required data.
+        FM --> System : Provides all the required data.
     activate System
 
     System --> FM : Displays all the data that will be registered.

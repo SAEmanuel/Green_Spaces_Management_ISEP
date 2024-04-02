@@ -1,0 +1,29 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Domain Model - US005
+
+skinparam classAttributeIconSize 0
+
+hide circles
+hide methods
+
+package "HRM Team Proposal System" {
+    class HRM {
+    }
+
+    class TeamProposal {
+        - skills: string[]
+        - teamSize: int
+    }
+
+    class ListCollaborator {
+        - collaborator: List<Collaborator>
+    }
+
+    HRM "1" -- "1 " TeamProposal : generates >
+    TeamProposal "0,1 " -- "0..* " ListCollaborator : has >
+}
+@enduml
