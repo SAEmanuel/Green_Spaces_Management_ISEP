@@ -11,18 +11,19 @@ hide circle
 hide methods
 package "FM System" {
 
-title User Story 002
-
-class FM {
-}
+title User Story 008
 
 class ListCheckUp {
     List<Vehicles>
 }
 
+class FM {
+}
 
-ListCheckUp "1" - FM: informs >
-FM "0*" - ListCheckUp: selects >
+
+
+ListCheckUp "1" - "1 " FM: informs >
+FM "1" - "1" ListCheckUp: selects >
 
 
 @enduml

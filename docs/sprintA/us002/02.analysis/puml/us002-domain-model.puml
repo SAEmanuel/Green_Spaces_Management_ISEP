@@ -27,8 +27,8 @@ class Job {
 
 
 
-HRM "1" - "0*" Job : creates >
-HRM "1" -  ListJobs: sees >
+HRM "1" - "1*" Job : creates >
+HRM "1 " -  ListJobs: sees >
 Job "1*" --- ListJobs : stores >
 
 
