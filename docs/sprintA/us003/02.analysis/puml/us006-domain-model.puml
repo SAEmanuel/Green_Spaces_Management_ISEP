@@ -16,21 +16,11 @@ hide methods
 '  -description
 '}
 
-class Organization {
-    name
-    vatNumber
-    website
-    phoneNumber
-    email
+class HRM {
 }
 
-class Task {
-    reference
-    description
-    informalDesc
-    technicalDesc
-    duration
-    cost
+class Collaborator {
+
 }
 
 class Category {
@@ -52,7 +42,7 @@ class Employee {
 
 'Platform "1" -- "*" Organization : has registered >
 'Platform "1" -- "*" Category : defines >
-Organization "1" - "0..*" Employee : has >
+HRM "1" - "0..*" Employee : has >
 Organization "1" - "0..*" Task: owns >
 'Task "*" -- "1" Employee: created by >
 Employee "1" -- "*" Task : creates >
