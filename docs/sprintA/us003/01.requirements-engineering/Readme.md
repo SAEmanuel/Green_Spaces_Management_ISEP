@@ -48,7 +48,7 @@ As an Human Resources Manager, I want to register a collaborator with a job and 
 > 
 > **Answer:** each doc type has specific formats like taxpayer number, Citizen Card ou passport.
 
-> **Question:** What is needed for the adress ?  Street, zipcode and a city?
+> **Question:** What is needed for the address?  Street, zipcode and a city?
 > 
 > **Answer:** That would be enough.
 
@@ -59,7 +59,7 @@ As an Human Resources Manager, I want to register a collaborator with a job and 
 * **AC2:** Name must be complete, should only have letters and have only at the maximum 9 words.
 * **AC3:** Birthdate can only be chosen from the calendar given and can only register collaborators with 18 years old or more.
 * **AC4:** Admission date can only be chosen from the calendar given.
-* **AC5:** Residence must be written, this includes: door number, street, postal code, city, country. If there is anything more needed to be specified, should be written in the "More" box.
+* **AC5:** Residence must be written, this includes: door number, street, ZIP code, city, country. If there is anything more needed to be specified, should be written in the "More" box.
 * **AC6:** Phone number can only have 9 numbers.
 * **AC7:** Email address can only have characters and numbers.
 * **AC8:** Taxpayer number can only have numbers.
