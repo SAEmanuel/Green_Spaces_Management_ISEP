@@ -28,13 +28,38 @@ As an Human Resources Manager, I want to register a collaborator with a job and 
 > **Answer:** - name, birthdate, admission date, address, contact info (mobile and email), taxpayer number, ID doc type and respective number 
 >             - displaying or not, It's a matter of UX, the dev team should decide about it, but the valid jobs are the ones created within the US02.
 
+> **Question:** Should the system able the HRM to insert multiple collaborators in one interaction before saving them.
+> 
+> **Answer:** It's not required to do so.
+
+> **Question:** Is there any limitation regarding the length of the name of the collaborator?
+> 
+> **Answer:** According to the Portuguese law a name should contain at maximum six words
+
+> **Question:** Should we consider valid only the birthdates in which the collaborator has more than 18 years?
+> 
+> **Answer:** Yes
+
+> **Question:** What should be the format for the phone number? 9 numbers?
+> 
+> **Answer:** validating 9 digits will be acceptable; validating with international format would be excelent.
+
+> **Question:** What is the format for the numbers from the id doc types?
+> 
+> **Answer:** each doc type has specific formats like taxpayer number, Citizen Card ou passport.
+
+> **Question:** What is needed for the address?  Street, zipcode and a city?
+> 
+> **Answer:** That would be enough.
+
+
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All required fields must be filled in.
-* **AC2:** Name must be complete and should only have letters.
-* **AC3:** Birthdate can only be chosen from the calendar given.
+* **AC2:** Name must be complete, should only have letters and have only at the maximum 9 words.
+* **AC3:** Birthdate can only be chosen from the calendar given and can only register collaborators with 18 years old or more.
 * **AC4:** Admission date can only be chosen from the calendar given.
-* **AC5:** Residence must be written, this includes: door number, street, postal code, city, country. If there is anything more needed to be specified, should be written in the "More" box.
+* **AC5:** Residence must be written, this includes: door number, street, ZIP code, city, country. If there is anything more needed to be specified, should be written in the "More" box.
 * **AC6:** Phone number can only have 9 numbers.
 * **AC7:** Email address can only have characters and numbers.
 * **AC8:** Taxpayer number can only have numbers.
