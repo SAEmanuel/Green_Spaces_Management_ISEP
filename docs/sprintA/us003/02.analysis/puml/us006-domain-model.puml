@@ -20,32 +20,14 @@ class HRM {
 }
 
 class Collaborator {
-
 }
 
-class Category {
+class CollaboratorList {
     description
 }
 
-class Employee {
-    name
-    email
-    position
-    phone
-}
+HRM "1" - "1..*" Collaborator : create >
+HRM "1" --- "1" CollaboratorList : sees >
+Collaborator "1..*" --- "1" CollaboratorList: register >
 
-'class User {
-'    name
-'    email
-'    password
-'}
-
-'Platform "1" -- "*" Organization : has registered >
-'Platform "1" -- "*" Category : defines >
-HRM "1" - "0..*" Employee : has >
-Organization "1" - "0..*" Task: owns >
-'Task "*" -- "1" Employee: created by >
-Employee "1" -- "*" Task : creates >
-'Employee "0..1" -- "1" User: acts as >
-Task "*" - "1" Category: cataloged as >
 @enduml
