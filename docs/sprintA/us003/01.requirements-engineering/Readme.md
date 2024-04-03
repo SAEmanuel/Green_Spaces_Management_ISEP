@@ -5,7 +5,7 @@
 
 ### 1.1. User Story Description
 
-As an Human Resources Manager, I want to register a collaborator with a job and fundamental characteristics.
+As a Human Resources Manager, I want to register a collaborator with a job and fundamental characteristics.
 
 ### 1.2. Customer Specifications and Clarifications 
 
@@ -15,7 +15,7 @@ As an Human Resources Manager, I want to register a collaborator with a job and 
 
 >	As long as it is not published, access to the task is exclusive to the employees of the respective organization.
 
->   The human resources manager will fill all the required fields: name, birthdate, admission date, residence, phone number, email address, taxpayer number and Identification document type. Should also load a image of the identification document. Then he can select a job from a list to register a collaborator.
+>   The human resources manager will fill all the required fields: name, birthdate, admission date, residence, phone number, email address, taxpayer number and Identification document type. Should also load an image of the identification document. Then he can select a job from a list to register a collaborator.
 
 **From the client clarifications:**
 
@@ -36,13 +36,13 @@ As an Human Resources Manager, I want to register a collaborator with a job and 
 > 
 > **Answer:** According to the Portuguese law a name should contain at maximum six words
 
-> **Question:** Should we consider valid only the birthdates in which the collaborator has more than 18 years?
+> **Question:** Should we consider valid only the birthdate in which the collaborator has more than 18 years?
 > 
 > **Answer:** Yes
 
 > **Question:** What should be the format for the phone number? 9 numbers?
 > 
-> **Answer:** validating 9 digits will be acceptable; validating with international format would be excelent.
+> **Answer:** validating 9 digits will be acceptable; validating with international format would be excellent.
 
 > **Question:** What is the format for the numbers from the id doc types?
 > 
@@ -63,7 +63,7 @@ As an Human Resources Manager, I want to register a collaborator with a job and 
 * **AC6:** Phone number can only have 9 numbers.
 * **AC7:** Email address can only have characters and numbers.
 * **AC8:** Taxpayer number can only have numbers.
-* **AC9:** The user will select a identification document type from a list.
+* **AC9:** The user will select an identification document type from a list.
 * **AC10:** An image of identification document should be loaded to the application.
 * **AC11:** The user will select a job from a list of jobs provided by the application.
 
