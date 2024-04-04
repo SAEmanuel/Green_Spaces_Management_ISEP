@@ -3,8 +3,6 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-'left to right direction
-
 skinparam classAttributeIconSize 0
 
 hide circle
@@ -12,25 +10,36 @@ hide methods
 
 title Domain Model - US003
 
-'class Platform {
-'  -description
-'}
-
 package "HRM" {
 
-    class HRM {
-
+    class Organization {
+        name
+        vatNumber
+        website
+        phoneNumber
+        email
     }
 
     class Collaborator {
-
+        name
+        birthdate
+        admissionDate
+        address
+        phoneNumber
+        email
+        taxpayerNumber
+        id_doc_type
+        id_doc_number
     }
 
-    HRM "1" - "1..*" Collaborator : create >
+    class HRM {
+        name
+    }
+
+    HRM "1" - "1..*" Collaborator : creates >
+    Organization "1" -- "1..*" Collaborator : has >
+
 
 }
-
-
-
 
 @enduml
