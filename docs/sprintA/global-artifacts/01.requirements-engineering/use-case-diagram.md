@@ -14,4 +14,4 @@
 | US005 | [Generate a team proposal automatically](../../us005/Readme.md)                             |
 | US006 | [Registering Vehicles](../../us006/Readme.md)                                               |
 | US007 | [Register the overhaul of a vehicle](../../us007/Readme.md)                                 |
-| us008 | [Overhauling of vehicles](../../us008/Readme.md)                                            |
+| US008 | [Overhauling of vehicles](../../us008/Readme.md)                                            |
