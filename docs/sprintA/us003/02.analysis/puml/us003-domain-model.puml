@@ -18,15 +18,33 @@ title Domain Model - US003
 
 package "HRM" {
 
-    class HRM {
-
+    class Organization {
+        name
+        vatNumber
+        website
+        phoneNumber
+        email
     }
 
     class Collaborator {
-
+        name
+        birthdate
+        admissionDate
+        address
+        phoneNumber
+        email
+        taxpayerNumber
+        id_doc_type
+        id_doc_number
     }
 
-    HRM "1" - "1..*" Collaborator : create >
+    class HRM {
+        name
+    }
+
+    HRM "1" - "1..*" Collaborator : creates >
+    Organization "1" -- "1..*" Collaborator : has >
+
 
 }
 
