@@ -3,7 +3,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-'left to right direction
+left to right direction
 
 skinparam classAttributeIconSize 0
 
@@ -16,8 +16,8 @@ title User Story 002
 class HRM {
 }
 
-class ListJobs {
-    List<Jobs>
+class Organization {
+
 }
 
 class Job {
@@ -27,9 +27,10 @@ class Job {
 
 
 
-HRM "1" - "1*" Job : creates >
-HRM "1 " -  ListJobs: sees >
-Job "1*" --- ListJobs : stores >
+
+HRM "1" -- "1..*" Job : creates >
+
+Job "1..*" -- "1"Organization : has <
 
 
 
