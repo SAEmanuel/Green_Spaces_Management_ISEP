@@ -10,7 +10,7 @@ hide methods
 
 title Domain Model - US003
 
-package "HRM" {
+package "HRM System" {
 
     class Organization {
         name
@@ -30,6 +30,7 @@ package "HRM" {
         taxpayerNumber
         id_doc_type
         id_doc_number
+        job
     }
 
     class HRM {
