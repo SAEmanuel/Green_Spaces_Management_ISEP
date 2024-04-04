@@ -1,0 +1,45 @@
+@startuml
+
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+'left to right direction
+
+title Domain Model - US004
+
+hide circles
+hide methods
+
+package "HRM System" {
+
+
+
+    class Skills {
+        name
+    }
+    class Collaborator {
+            name
+        }
+
+    class Organization {
+        name
+        vatNumber
+        website
+        phoneNumber
+        email
+    }
+
+    class HRM {
+       }
+
+    Organization "1" -- "*" Skills : has >
+    Organization "1 " - "1..*  " Collaborator : has >
+    HRM "1" - "1..*" Skills : selects >
+    Skills "1..*   " -- "1..*" Collaborator : assigned >
+}
+
+
+
+@enduml
+
