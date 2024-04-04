@@ -50,7 +50,7 @@ configurability, installability, scalability and more._
 - Maintenance tasks, such as system updates and bug fixes, shall be easy to perform without disrupting system operation.
 - The system shall support English language.
 
-## +
+## 
 
 ### Design Constraints
 
