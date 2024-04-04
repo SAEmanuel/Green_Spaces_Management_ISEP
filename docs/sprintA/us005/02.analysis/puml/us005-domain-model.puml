@@ -14,16 +14,20 @@ package "HRM Team Proposal System" {
     class HRM {
     }
 
-    class TeamProposal {
-        - skills: string[]
-        - teamSize: int
+    class Team {
+        skills
+        teamSize
     }
 
-    class ListCollaborator {
-        - collaborator: List<Collaborator>
+    class Organization {
+        name
+        vatNumber
+        website
+        phoneNumber
+        email
     }
 
-    HRM "1" -- "1 " TeamProposal : generates >
-    TeamProposal "0,1 " -- "0..* " ListCollaborator : has >
+    HRM "1  " -- "1 " Team : generates >
+    Organization "1 " --- "*" Team : has >
 }
 @enduml

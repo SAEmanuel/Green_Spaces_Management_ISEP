@@ -3,7 +3,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-left to right direction
+'left to right direction
 
 skinparam classAttributeIconSize 0
 
@@ -13,17 +13,52 @@ package "FM System" {
 
 title User Story 008
 
-class ListCheckUp {
-    List<Vehicles>
+class VehiclesForCheckUp {
+number plate
+brand
+model
+type
+tare
+gross weight
+current Km
+register date
+Acquisition Date
+Maintenance/Checkup Frequency (in Kms)
+
+
 }
 
 class FM {
 }
 
+class Vehicles {
+number plate
+brand
+model
+type
+tare
+gross weight
+current Km
+register date
+Acquisition Date
+Maintenance/Checkup Frequency (in Kms)
+}
+
+class Organization {
+name
+vatNumber
+website
+phoneNumber
+email
+}
 
 
-ListCheckUp "1" - "1 " FM: informs >
-FM "1" - "1" ListCheckUp: selects >
+
+Organization "1" - "*" Vehicles: has >
+Vehicles "*"- "*" VehiclesForCheckUp: contains >
+VehiclesForCheckUp "*" - "1" FM : informs >
+FM "1" -- "*" VehiclesForCheckUp: selects >
+
 
 
 @enduml

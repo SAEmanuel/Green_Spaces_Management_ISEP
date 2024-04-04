@@ -9,7 +9,7 @@ skinparam classAttributeIconSize 0
 
 hide circle
 hide methods
-package "HR System" {
+package "HRM System" {
 
 title User Story 002
 
@@ -17,7 +17,11 @@ class HRM {
 }
 
 class Organization {
-
+name
+vatNumber
+website
+phoneNumber
+email
 }
 
 class Job {
