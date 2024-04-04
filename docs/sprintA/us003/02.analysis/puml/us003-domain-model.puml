@@ -27,6 +27,7 @@ package "HRM" {
     }
 
     HRM "1" - "1..*" Collaborator : create >
+
 }
 
 
