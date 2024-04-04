@@ -16,16 +16,19 @@ title Domain Model - US003
 '  -description
 '}
 
-class HRM {
+package "HRM" {
+
+    class HRM {
+
+    }
+
+    class Collaborator {
+
+    }
+
+    HRM "1" - "1..*" Collaborator : create >
 }
 
-class Collaborator {
-}
-
-class CollaboratorList {
-}
-
-HRM "1" - "1..*" Collaborator : create >
 
 
 
