@@ -16,25 +16,29 @@ package "FM Vehicle Registration System" {
     }
 
     class Vehicle {
-         - plateID: int
-         - brand: string
-         - model: string
-         - type: int
-         - tare: float
-         - grossWeight: float
-         - kms: float
-         - registerDate: string
-         - acquisitionDate: string
-         - maintenanceFrequency: int
+         plateID
+         brand
+         model
+         type
+         tare
+         grossWeight
+         kms
+         registerDate
+         acquisitionDate
+         maintenanceFrequency
     }
 
-    class ListVehicle {
-        - vehicles: List<Vehicle>
-    }
+    class Organization {
+            name
+            vatNumber
+            website
+            phoneNumber
+            email
+        }
 
 
     FM "1" - "*" Vehicle : creates >
-    FM "1" - "1..*  " ListVehicle: see >
-    Vehicle "0..*  " -- "1" ListVehicle : register >
+    FM "1" - "1..*  " Organization: see >
+    Vehicle "*" -- "1" Organization : register >
 }
 @enduml
