@@ -4,6 +4,8 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
+'left to right direction
+
 title Domain Model - US001
 
 hide circles
@@ -14,17 +16,20 @@ package "HR System" {
     class HRM {
     }
 
-    class Skill {
+    class Skills {
         name
     }
 
-    class ListSkills {
-        skills: List<Skill>
+    class Organization {
+        name
+        vatNumber
+        website
+        phoneNumber
+        email
     }
 
-    HRM "1" - "*" Skill : creates >
-    HRM "1" - ListSkills : see >
-    Skill "*" ---  ListSkills : registered >
+    HRM "1  " -- "1..*" Skills : creates >
+    Organization "1" -- "                           *" Skills : has >
 }
 
 
