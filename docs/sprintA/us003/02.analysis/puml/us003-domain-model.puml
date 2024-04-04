@@ -23,6 +23,7 @@ package "HRM" {
     }
 
     class Collaborator {
+
     }
 
     HRM "1" - "1..*" Collaborator : create >
