@@ -3,12 +3,14 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 'skinparam linetype ortho
+
+
 left to right direction
 skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
-'title Domain Model
+title Domain Model
 
 package "System" {
 
@@ -69,32 +71,40 @@ class Organization {
         Vehicle
     }
 
+    class ChekUp {
+        licence
+        date
+        currentMileage
+    }
 
 
-    HRM "1  " --- "1..*" Skill : creates >
-    HRM "1" - "1..*" Job : creates >
-    HRM "1" - "1..*" Collaborator : creates >
-    HRM "1  " - "1 " Team : generates >
 
+    HRM "1  " -- "1..*" Skill : creates >
+    HRM "1" -- "1..*" Job : creates >
+    HRM "1" -- "1..*" Collaborator : creates >
+    HRM "1  " -- "1 " Team : generates >
 
     VFM "1" -- "*" Vehicle : creates >
-    VFM "1" -- "*" VehiclesForCheckUp: selects >
+    VFM "1  " -- "*" VehiclesForCheckUp: selects >
+    VFM "1" -- "1" ChekUp : register >
+    VFM "1" --  "*" VehiclesForCheckUp : informs <
 
     Skill "1..*   " -- "1..*" Collaborator : assigned >
 
-    Organization "1" ---- "*" Skill : has >
-    Organization "1" --- "1..*" Job : has >
+'    Organization "1" ---- "*" Skill : has >
+'    Organization "1" --- "1..*" Job : has >
     Organization "1" -- "1..*" Collaborator : has >
     Organization "1 " ---- "*" Team : has >
 
-    Collaborator "1" - "1..*" Job : has >
+    Collaborator "1" -- "1" Job : has >
 
-    Team "1 " -- "1..*" Collaborator : assigned <
+    Team "1 " --- "1..*" Collaborator : assigned <
 
     Vehicle "*" -- "1" Organization : has <
     Vehicle "*"-- "*" VehiclesForCheckUp: contains >
+    Vehicle "1" - "*" ChekUp : assigned <
 
-    VehiclesForCheckUp "*" -- "1" VFM : informs >
+    VehiclesForCheckUp "*" -- "1" ChekUp : do >
 
 
 }
