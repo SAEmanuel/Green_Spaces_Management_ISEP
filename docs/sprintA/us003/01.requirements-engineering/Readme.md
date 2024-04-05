@@ -52,6 +52,12 @@ As a Human Resources Manager, I want to register a collaborator with a job and f
 > 
 > **Answer:** That would be enough.
 
+> **Question:** What should be the accepted format for the emails? Should only specific email services be accepted?
+> 
+> **Answer:** A valid email address consists of an email prefix and an email domain, both in acceptable formats.
+  The prefix appears to the left of the @ symbol. The domain appears to the right of the @ symbol.
+  For example, in the address example@mail.com, "example" is the email prefix, and "mail.com" is the email domain.
+
 
 ### 1.3. Acceptance Criteria
 
@@ -61,8 +67,8 @@ As a Human Resources Manager, I want to register a collaborator with a job and f
 * **AC4:** Admission date can only be chosen from the calendar given.
 * **AC5:** Residence must be written, this includes: door number, street, ZIP code, city, country. If there is anything more needed to be specified, should be written in the "More" box.
 * **AC6:** Phone number can only have 9 numbers.
-* **AC7:** Email address can only have characters and numbers.
-* **AC8:** Taxpayer number can only have numbers.
+* **AC7:** Email address should have a prefix (before "@") and an email domain (after "@").
+* **AC8:** Taxpayer number can only have 9 numbers.
 * **AC9:** The user will select an identification document type from a list.
 * **AC10:** An image of identification document should be loaded to the application.
 * **AC11:** The user will select a job from a list of jobs provided by the application.
