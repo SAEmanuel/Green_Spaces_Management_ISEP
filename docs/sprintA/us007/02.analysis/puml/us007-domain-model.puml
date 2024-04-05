@@ -8,11 +8,17 @@ skinparam classAttributeIconSize 0
 hide circles
 hide methods
 
-title Domain Model - US006
+title Domain Model - US007
 
 package "VFM System" {
 
     class VFM {
+    }
+
+    class ChekUp {
+        licence
+        date
+        currentMileage
     }
 
     class Vehicle {
@@ -37,7 +43,9 @@ package "VFM System" {
         }
 
 
-    VFM "1" - "1..*" Vehicle : creates >
     Vehicle "*" -- "1" Organization : has <
+
+    VFM "1" -- "1" ChekUp : register >
+    Vehicle "1" - "*" ChekUp : assigned <
 }
 @enduml

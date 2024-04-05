@@ -11,7 +11,7 @@ hide circle
 hide methods
 package "VFM System" {
 
-title User Story 008
+title Domain Model - US008
 
 class VehicleForCheckUp {
     Vehicle
