@@ -71,7 +71,7 @@ class Organization {
         Vehicle
     }
 
-    class ChekUp {
+    class CheckUp {
         licence
         date
         currentMileage
@@ -86,7 +86,7 @@ class Organization {
 
     VFM "1" -- "*" Vehicle : creates >
     VFM "1  " -- "*" VehiclesForCheckUp: selects >
-    VFM "1" -- "1" ChekUp : register >
+    VFM "1" -- "1" CheckUp : register >
     VFM "1" --  "*" VehiclesForCheckUp : informs <
 
     Skill "1..*   " -- "1..*" Collaborator : assigned >
@@ -102,9 +102,9 @@ class Organization {
 
     Vehicle "*" -- "1" Organization : has <
     Vehicle "*"-- "*" VehiclesForCheckUp: contains >
-    Vehicle "1" - "*" ChekUp : assigned <
+    Vehicle "1" - "*" CheckUp : does >
 
-    VehiclesForCheckUp "*" -- "1" ChekUp : do >
+    VehiclesForCheckUp "*" -- "1" CheckUp : does >
 
 
 }
