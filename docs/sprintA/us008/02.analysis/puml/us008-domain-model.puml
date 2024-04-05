@@ -31,7 +31,7 @@ Maintenance/Checkup Frequency (in Kms)
 class FM {
 }
 
-class Vehicles {
+class Vehicle {
 number plate
 brand
 model
@@ -54,8 +54,8 @@ email
 
 
 
-Organization "1" - "*" Vehicles: has >
-Vehicles "*"- "*" VehiclesForCheckUp: contains >
+Organization "1" - "*" Vehicle: has >
+Vehicle "*"- "*" VehiclesForCheckUp: contains >
 VehiclesForCheckUp "*" -- "1" FM : informs >
 FM "1" -- "*" VehiclesForCheckUp: selects >
 
