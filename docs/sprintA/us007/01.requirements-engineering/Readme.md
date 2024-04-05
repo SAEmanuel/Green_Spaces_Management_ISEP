@@ -23,6 +23,30 @@ As an FM, I wish to register a vehicle’s check-up
 >
 > **Answer:** In real context all could be considered, in the scope of this project just kms will be considered.
 
+> **Question:** can a vehicle not have a check-up?
+>
+> **Answer:** Yes.
+
+> **Question:** Does a vehicle need to be registered in US06 before being able to go for a check-up in US07?
+>
+> **Answer:** Yes.
+
+> **Question:** After registering a vehicle, should the vehicle info appear or only the (in)success of the operation?
+>
+> **Answer:** The UX/UI is up to dev team.
+
+> **Question:** What are the validation requirements for the vehicle ID?
+>
+> **Answer:** After 2020: AA-00-AA
+              between 2005-2020 00-AA-00
+              between 1992-2005 00-00-XX
+
+> **Question:** Can a vehicle have more than one check-up?
+>
+> **Answer:** Yes.
+
+
+
 ### 1.3. Acceptance Criteria
 
 * **AC01:** All required fields must be filled in (Licence plate, Data and Current Mileage).

@@ -11,10 +11,6 @@ As a Human Resources Manager, I want to register a collaborator with a job and f
 
 **From the specifications document:**
 
->	Each task is characterized by having a unique reference per organization, a designation, an informal and a technical description, an estimated duration and cost, as well as a task category. 
-
->	As long as it is not published, access to the task is exclusive to the employees of the respective organization.
-
 >   The human resources manager will fill all the required fields: name, birthdate, admission date, residence, phone number, email address, taxpayer number and Identification document type. Should also load an image of the identification document. Then he can select a job from a list to register a collaborator.
 
 **From the client clarifications:**
@@ -109,4 +105,4 @@ As a Human Resources Manager, I want to register a collaborator with a job and f
 
 ### 1.7 Other Relevant Remarks
 
-* The created task stays in a "not published" state in order to distinguish from "published" tasks.
+* None.

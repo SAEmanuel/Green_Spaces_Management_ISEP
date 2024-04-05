@@ -9,39 +9,28 @@ skinparam classAttributeIconSize 0
 
 hide circle
 hide methods
-package "FM System" {
+package "VFM System" {
 
 title User Story 008
 
-class VehiclesForCheckUp {
-number plate
-brand
-model
-type
-tare
-gross weight
-current Km
-register date
-Acquisition Date
-Maintenance/Checkup Frequency (in Kms)
-
-
+class VehicleForCheckUp {
+    Vehicle
 }
 
-class FM {
+class VFM {
 }
 
 class Vehicle {
-number plate
-brand
-model
-type
-tare
-gross weight
-current Km
-register date
-Acquisition Date
-Maintenance/Checkup Frequency (in Kms)
+         plateID
+         brand
+         model
+         type
+         tare
+         grossWeight
+         millage
+         registerDate
+         acquisitionDate
+         maintenanceFrequency
 }
 
 class Organization {
@@ -55,9 +44,9 @@ email
 
 
 Organization "1" - "*" Vehicle: has >
-Vehicle "*"- "*" VehiclesForCheckUp: contains >
-VehiclesForCheckUp "*" -- "1" FM : informs >
-FM "1" -- "*" VehiclesForCheckUp: selects >
+Vehicle "*"- "*" VehicleForCheckUp: contains >
+VehicleForCheckUp "*" -- "1" VFM : informs >
+VFM "1" -- "*" VehicleForCheckUp: selects >
 
 
 

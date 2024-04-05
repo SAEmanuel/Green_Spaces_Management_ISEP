@@ -11,12 +11,12 @@ title Domain Model - US001
 hide circles
 hide methods
 
-package "HR System" {
+package "HRM System" {
 
     class HRM {
     }
 
-    class Skills {
+    class Skill {
         name
     }
 
@@ -28,8 +28,8 @@ package "HR System" {
         email
     }
 
-    HRM "1  " -- "1..*" Skills : creates >
-    Organization "1" -- "                           *" Skills : has >
+    HRM "1  " -- "1..*" Skill : creates >
+    Organization "1" -- "                           *" Skill : has >
 }
 
 

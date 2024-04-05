@@ -12,21 +12,22 @@ title Use Case Diagram
 left to right direction
 
 rectangle "System Actors                       " as actors {
-    actor "Fleet Manager" as FM
     actor "Human Resources Manager" as HRM
+    actor "Vehicles and Fleet Manager" as FM
+
 }
 
 
 
 rectangle "Use Cases" as usecases{
-    usecase "UC3 - Register a collaborator with a job and fundamental characteristics" as UC3
-    usecase "UC2 - Profession registration" as UC2
     usecase "UC1 - Registering skills for collaborators" as UC1
-    usecase "UC5 - Generate a team proposal automatically" as UC5
+    usecase "UC2 - Profession registration" as UC2
+    usecase "UC3 - Register a collaborator with a job and fundamental characteristics" as UC3
     usecase "UC4 - Assigning skills to a collaborator" as UC4
-    usecase "UC8 - Overhauling of vehicles " as UC8
-    usecase "UC7 - Register the overhaul of a vehicle" as UC7
+    usecase "UC5 - Generate a team proposal automatically" as UC5
     usecase "UC6 - Registering Vehicles" as UC6
+    usecase "UC7 - Register the overhaul of a vehicle" as UC7
+    usecase "UC8 - Overhauling of vehicles " as UC8
     HRM --> UC1
     HRM --> UC2
     HRM --> UC3

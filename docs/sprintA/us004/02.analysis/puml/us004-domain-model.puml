@@ -15,12 +15,21 @@ package "HRM System" {
 
 
 
-    class Skills {
+    class Skill {
         name
     }
+
     class Collaborator {
-            name
-        }
+        name
+        birthdate
+        admissionDate
+        address
+        phoneNumber
+        email
+        taxpayerNumber
+        id_doc_type
+        id_doc_number
+    }
 
     class Organization {
         name
@@ -33,10 +42,10 @@ package "HRM System" {
     class HRM {
        }
 
-    Organization "1" -- "*" Skills : has >
+    Organization "1" -- "*" Skill : has >
     Organization "1 " - "1..*  " Collaborator : has >
-    HRM "1" - "1..*" Skills : selects >
-    Skills "1..*   " -- "1..*" Collaborator : assigned >
+    HRM "1" - "1..*" Skill : selects >
+    Skill "1..*   " -- "1" Collaborator : assigned >
 }
 
 

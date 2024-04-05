@@ -30,7 +30,10 @@ package "HRM System" {
         taxpayerNumber
         id_doc_type
         id_doc_number
-        job
+    }
+
+    class Job {
+        name
     }
 
     class HRM {
@@ -38,7 +41,10 @@ package "HRM System" {
     }
 
     HRM "1" - "1..*" Collaborator : creates >
-    Organization "1" -- "1..*" Collaborator : has >
+    Organization "1  " -- "1..*" Collaborator : has >
+    HRM "1" - "1..*" Job : selects >
+    Job "1..*" - "1" Collaborator : assigned >
+    Job "1..*" - "1" Organization : has <
 
 
 }

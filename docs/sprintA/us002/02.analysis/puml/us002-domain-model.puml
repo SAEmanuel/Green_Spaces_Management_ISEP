@@ -11,7 +11,7 @@ hide circle
 hide methods
 package "HRM System" {
 
-title User Story 002
+title Domain Model - US002
 
 class HRM {
 }
