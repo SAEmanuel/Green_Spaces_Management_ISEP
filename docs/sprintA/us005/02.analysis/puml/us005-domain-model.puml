@@ -7,6 +7,8 @@ title Domain Model - US005
 
 skinparam classAttributeIconSize 0
 
+left to right direction
+
 hide circles
 hide methods
 
@@ -19,6 +21,20 @@ package "HRM Team Proposal System" {
         teamSize
     }
 
+    class Collaborator {
+            name
+            birthdate
+            admissionDate
+            address
+            phoneNumber
+            email
+            taxpayerNumber
+            id_doc_type
+            id_doc_number
+            job
+            skill
+        }
+
     class Organization {
         name
         vatNumber
@@ -28,6 +44,8 @@ package "HRM Team Proposal System" {
     }
 
     HRM "1  " -- "1 " Team : generates >
-    Organization "1 " --- "*" Team : has >
+    Organization "1 " -- "*" Team : has >
+    Organization "1 " -- "1..*" Collaborator : has >
+    Team "1 " -- "1..*" Collaborator : assigned <
 }
 @enduml

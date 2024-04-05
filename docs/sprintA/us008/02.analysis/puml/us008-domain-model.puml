@@ -56,7 +56,7 @@ email
 
 Organization "1" - "*" Vehicles: has >
 Vehicles "*"- "*" VehiclesForCheckUp: contains >
-VehiclesForCheckUp "*" - "1" FM : informs >
+VehiclesForCheckUp "*" -- "1" FM : informs >
 FM "1" -- "*" VehiclesForCheckUp: selects >
 
 

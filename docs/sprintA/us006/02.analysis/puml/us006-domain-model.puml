@@ -10,7 +10,7 @@ hide methods
 
 title Domain Model - US006
 
-package "FM Vehicle Registration System" {
+package "FM System" {
 
     class FM {
     }
@@ -38,7 +38,6 @@ package "FM Vehicle Registration System" {
 
 
     FM "1" - "*" Vehicle : creates >
-    FM "1" - "1..*  " Organization: see >
-    Vehicle "*" -- "1" Organization : register >
+    Vehicle "*" -- "1" Organization : has <
 }
 @enduml
