@@ -31,12 +31,10 @@ package "HRM System" {
             taxpayerNumber
             id_doc_type
             id_doc_number
-            job
-            skill
+
         }
 
-    class Organization {
-        name
+    class MusgoSublime {
         vatNumber
         website
         phoneNumber
@@ -53,8 +51,8 @@ package "HRM System" {
 
 
     HRM "1  " -- "1 " Team : generates >
-    Organization "1 " -- "*" Team : has >
-    Organization "1 " -- "1..*" Collaborator : has >
+    MusgoSublime "1 " -- "*" Team : has >
+    MusgoSublime "1 " -- "1..*" Collaborator : has >
     Team "1 " -- "1..*" Collaborator : assigned <
 
     Collaborator "1" -- "*" Skill : has >

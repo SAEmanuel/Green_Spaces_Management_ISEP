@@ -21,7 +21,6 @@ package "HRM System" {
     }
 
     class MusgoSublime {
-        name
         vatNumber
         website
         phoneNumber
