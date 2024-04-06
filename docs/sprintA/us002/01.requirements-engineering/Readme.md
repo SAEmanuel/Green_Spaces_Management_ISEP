@@ -9,13 +9,13 @@ As a Human Resources Manager I want to register a job.
 
 ### 1.2. Customer Specifications and Clarifications 
 
-**From the specifications document:**
+**From the specifications document and client meetings:**
 
 >	Each job is characterized by having a unique name. 
 
 >	There can not be duplicated professions.
 
-**From the client clarifications:**
+**From forum:**
 
 > **Question:** What are the acceptance criteria? When creating a job that already exits, what does the system do?
 >
@@ -29,11 +29,20 @@ As a Human Resources Manager I want to register a job.
 >
 > **Answer:** Is not necessary as there is no US to suggest that it might be necessary.
 
-### 1.3. Acceptance Criteria
+> **Question:** Can special characters and numbers be entered when registering a job?
+>
+> **Answer:** No.
 
-* **AC1:** If HRM does not have necessary permissions, the system should prompt a warning message.
-* **AC2:** If HRM puts an invalid username or password, the system should prompt an error message.
-* **AC3:** If the profession is already registered in the system, the system should notify the manager and suggest choosing another one.
+> **Question:** I guess a job can be asign to a collaborator if he has the skills require for this job. How do we manage this relation. Does he HRM do it manually, or should we have an atribute in job specifiying the skills needed?
+>
+> **Answer:** No; a collaborator is hired for a job and can have skills or not.
+
+
+### 1.3. Acceptance Criteria
+* **AC01:** The system should validate that the job name provided by the user is not empty.
+* **AC02:** The system should not allow special characters or numbers in the job name. If special characters or numbers are entered, the system should return an error message indicating that only alphabetic characters are allowed.
+* **AC03:** All required fields must be filled in (the name is this case).
+
 
 ### 1.4. Found out Dependencies
 
@@ -45,10 +54,6 @@ As a Human Resources Manager I want to register a job.
 
 * Typed data:
     * a job name
-    
-	
-* Selected data:
-    * a jobs category
 
 **Output Data:**
 * List of professions stored and added to the system
@@ -66,4 +71,4 @@ As a Human Resources Manager I want to register a job.
 
 ### 1.7 Other Relevant Remarks
 
-* A person can have more than one profession
+* None

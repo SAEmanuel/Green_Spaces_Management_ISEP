@@ -9,11 +9,12 @@ As an FM, I wish to register a vehicle’s check-up
 
 ### 1.2. Customer Specifications and Clarifications 
 
-**From the specifications document:**
+**From the specifications document and client meetings:**
 
->None. 
+> Information required for registering a vehicle check-up: License plate, date, and current mileage.
+> Unit of measurement for estimating check-up frequency: Kilometers.
 
-**From the client clarifications:**
+**From forum:**
 
 > **Question:** What information is needed when registering a vehicle after check up?
 >

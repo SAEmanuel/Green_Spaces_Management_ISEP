@@ -9,7 +9,7 @@ As a Human Resources Manager (HRM), I want to register skills that may
 be appointed to a collaborator
 ### 1.2. Customer Specifications and Clarifications
 
-**From the specifications document:**
+**From the specifications document and client meetings:**
 
 > The system aims is the management of skills. 
 
@@ -20,9 +20,9 @@ be appointed to a collaborator
 > The system provides an interface dedicated to managing these skills efficiently.
 
 
-**From the client clarifications:**
+**From forum:**
 
-> **Question:** Which are the criterias to create a skill?
+> **Question:** Which are the criterias to create a skill? 
 >
 > **Answer:** The name of the skill (pruner, heavy vehicle driver).
 

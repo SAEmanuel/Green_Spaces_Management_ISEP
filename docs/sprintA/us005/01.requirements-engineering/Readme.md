@@ -9,13 +9,13 @@ As a HRM, I want to generate a team proposal automatically
 
 ### 1.2. Customer Specifications and Clarifications 
 
-**From the specifications document:**
+**From the specifications document and client meetings:**
 
 >   The team proposal generated his focus on facilitating and speeding up the process of creating a team. The Human Resources Manager (HRM) has the possibility of generating a team based on a set of previously selected skills and team size. Engage in the task of team building and come automate and recommend a team, having a great weight in managing and choosing the right team for a designated task.
 
 >	The system provides a user interface to select various skills and team size. When HRM uses this generation, it will add all the skills you want the team to have for this task and the number of elements. Furthermore, HRM can view the list of selected information and confirm team generation based on this information.
 
-**From the client clarifications:**
+**From forum:**
 
 > **Question:** What is the information necessary for a team proposal?
 >

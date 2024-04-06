@@ -6,16 +6,16 @@
 
 ### 1.1. User Story Description
 
-As an   VFM, I wish to register a vehicle including Brand, Model, Type, Tare, Gross Weight, Current Km, Register Date, Acquisition Date, Maintenance/Checkup Frequency (in Kms).
+As an VFM, I wish to register a vehicle including Brand, Model, Type, Tare, Gross Weight, Current Km, Register Date, Acquisition Date, Maintenance/Checkup Frequency (in Kms).
 ### 1.2. Customer Specifications and Clarifications 
 
-**From the specifications document:**
+**From the specifications document and client meetings:**
 
 > Register vehicles within the system to effectively manage the fleet utilized in maintaining green spaces. 
 
 > This registration process should capture crucial details including the brand, model, type, tare weight, gross weight, current kilometers, register date, acquisition date, and the maintenance/check-up frequency measured in kilometers.
 
-**From the client clarifications:**
+**From forum:**
 
 > **Question:** Should the application identify a registered vehicle by a serial number or other attribute?
 >
