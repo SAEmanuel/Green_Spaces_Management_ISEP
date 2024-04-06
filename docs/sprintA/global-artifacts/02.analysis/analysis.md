@@ -122,12 +122,29 @@ An association is a relationship between instances of objects that indicates a r
 - **_A_** uses or manages or owns **_B_**
 - **_A_** is related with a transaction (item) of **_B_**
 - etc.
+    
 
+| Concept (A) 		 | Association   	  | Concept (B) |
+|---------------|:----------------:|------------:|
+| MusgoSublime  |  manage    		 	  |         GreenSpace |
+| GreenSpace  	 | is managed by		  |         GSM |
+| GreenSpace  	 | is used by    		 |         GSU |
+| GreenSpace  	 | managed    		 	  |         GSM |
+| GreenSpace  	 | managed    		 	  |         GSM |
+| GreenSpace  	 | managed    		 	  |         GSM |
+| GreenSpace  	 | managed    		 	  |         GSM |
+| GreenSpace  	 | managed    		 	  |         GSM |
+| GreenSpace  	 | managed    		 	  |         GSM |
+| GreenSpace  	 | managed    		 	  |         GSM |
+| GreenSpace  	 | managed    		 	  |         GSM |
+| GreenSpace  	 | managed    		 	  |         GSM |
+| GreenSpace  	 | managed    		 	  |         GSM |
+| GreenSpace  	 | managed    		 	  |         GSM |
+| GreenSpace  	 | managed    		 	  |         GSM |
+| GreenSpace  	 | managed    		 	  |         GSM |
+| GreenSpace  	 | managed    		 	  |         GSM |
+| GreenSpace  	 | managed    		 	  |         GSM |
 
-| Concept (A) 		|  Association   	|  Concept (B) |
-|----------	   		|:-------------:		|------:       |
-| C1  	| verb1    		 	| C2  |
-| ...  	| ...    		 	| ...  |
 
 
 

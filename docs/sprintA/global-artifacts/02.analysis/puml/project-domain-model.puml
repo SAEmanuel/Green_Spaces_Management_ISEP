@@ -117,7 +117,8 @@ title Domain Model
 
     class Team {
         skill
-        teamSize
+        minTeamSize
+        maxTeamSize
     }
 
     class Skill {
@@ -138,7 +139,7 @@ title Domain Model
 
     Collaborator "1" -- "*" Job : has >
 
-    Team "1..*" -- "1..*" Collaborator : has >
+    Team "1" -- "1..*" Collaborator : has >
 
 '  #########          ##########
 
@@ -154,38 +155,5 @@ title Domain Model
 
 
 '  #########          ##########
-
-
-
-
-'    HRM "1  " -- "1..*" Skill : creates >
-'    HRM "1" -- "1..*" Job : creates >
-'    HRM "1" -- "1..*" Collaborator : creates >
-'    HRM "1  " -- "1 " Team : generates >
-'
-'    VFM "1" -- "*" Vehicle : creates >
-'    VFM "1  " -- "*" VehiclesForCheckUp: selects >
-'    VFM "1" -- "1" CheckUp : register >
-'    VFM "1" --  "*" VehiclesForCheckUp : informs <
-'
-'    Skill "1..*   " -- "1..*" Collaborator : assigned >
-'
-''           Organization "1" ---- "*" Skill : has >
-''           Organization "1" --- "1..*" Job : has >
-'    Organization "1" -- "1..*" Collaborator : has >
-'    Organization "1 " ---- "*" Team : has >
-'
-'    Collaborator "1" -- "1" Job : has >
-'
-'    Team "1 " --- "1..*" Collaborator : assigned <
-'
-'    Vehicle "*" -- "1" Organization : has <
-'    Vehicle "*"-- "*" VehiclesForCheckUp: contains >
-'    Vehicle "1" - "*" CheckUp : does >
-'
-'    VehiclesForCheckUp "*" -- "1" CheckUp : does >
-
-
-'}
 
 @enduml
