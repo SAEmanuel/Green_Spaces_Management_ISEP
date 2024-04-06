@@ -34,13 +34,14 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Roles of People or Organizations**
 
-* 
+* GSU
+* GSM
 
 ---
 
 **Places**
 
-* 
+* GreenSpace
 
 ---
 
@@ -52,7 +53,9 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Physical Objects**
 
-* 
+* Vehicles
+* Machines
+* Equipment
 
 ---
 
@@ -82,7 +85,7 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Organizations**
 
-* 
+* MusgoSublime
 
 ---
 
@@ -149,9 +152,5 @@ An association is a relationship between instances of objects that indicates a r
 
 
 ## Domain Model
-
-**Do NOT forget to identify concept atributes too.**
-
-**Insert below the Domain Model Diagram in a SVG format**
 
 ![Domain Model](svg/project-domain-model.svg)
