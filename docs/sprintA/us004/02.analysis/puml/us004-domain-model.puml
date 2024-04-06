@@ -31,8 +31,7 @@ package "HRM System" {
         id_doc_number
     }
 
-    class Organization {
-        name
+    class MusgoSublime {
         vatNumber
         website
         phoneNumber
@@ -42,8 +41,7 @@ package "HRM System" {
     class HRM {
        }
 
-    Organization "1" -- "*" Skill : has >
-    Organization "1 " - "1..*  " Collaborator : has >
+    MusgoSublime "1 " -- "1..*  " Collaborator : has >
     HRM "1" - "1..*" Skill : selects >
     Skill "1..*   " -- "1" Collaborator : assigned >
 }

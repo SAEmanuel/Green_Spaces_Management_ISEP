@@ -1,4 +1,4 @@
-# US003 - Register a collaborator with a job and fundamental characteristics
+# US003 - Register a collaborator 
 
 
 ## 1. Requirements Engineering
@@ -9,11 +9,11 @@ As a Human Resources Manager, I want to register a collaborator with a job and f
 
 ### 1.2. Customer Specifications and Clarifications 
 
-**From the specifications document:**
+**From the specifications document and client meetings:**
 
 >   The human resources manager will fill all the required fields: name, birthdate, admission date, residence, phone number, email address, taxpayer number and Identification document type. Should also load an image of the identification document. Then he can select a job from a list to register a collaborator.
 
-**From the client clarifications:**
+**From forum:**
 
 > **Question:** When creating a collaborator with an existing name ... What the system do?
 >

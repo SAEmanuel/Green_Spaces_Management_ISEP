@@ -31,10 +31,10 @@ class Vehicle {
          registerDate
          acquisitionDate
          maintenanceFrequency
+         lastCheckUp
 }
 
-class Organization {
-name
+class MusgoSublime {
 vatNumber
 website
 phoneNumber
@@ -43,9 +43,10 @@ email
 
 
 
-Organization "1" - "*" Vehicle: has >
+MusgoSublime "1" - "*" Vehicle: has >
 Vehicle "*"- "*" VehicleForCheckUp: contains >
 VehicleForCheckUp "*" -- "1" VFM : informs >
+
 
 
 

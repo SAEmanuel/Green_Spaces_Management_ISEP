@@ -9,12 +9,11 @@ As an HRM, I want to assign one or more skills to a collaborator.
 
 ### 1.2. Customer Specifications and Clarifications 
 
-**From the specifications document:**
+**From the specifications document and client meetings:**
 
->	 An employee has 
-a set of skills that enable him to perform/take on certain tasks/responsibilities.
+> An employee has a set of skills that enable him to perform/take on certain tasks/responsibilities.
 
-**From the client clarifications:**
+**From forum:**
 
 > **Question:** Is there a minimum and maximum number of skills?
 >

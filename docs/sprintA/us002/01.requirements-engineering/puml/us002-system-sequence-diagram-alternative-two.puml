@@ -13,7 +13,7 @@ participant ":System" as System
 activate HRM
 
 
-     HRM -> System : Selects the option to add a new job to the job’s collection
+     HRM -> System : Selects the option to add a new job
     activate System
 
         System --> HRM : Displays the interface for entering the job's name

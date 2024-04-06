@@ -12,8 +12,7 @@ title Domain Model - US003
 
 package "HRM System" {
 
-    class Organization {
-        name
+    class MusgoSublime {
         vatNumber
         website
         phoneNumber
@@ -40,11 +39,11 @@ package "HRM System" {
         name
     }
 
-    HRM "1" - "1..*" Collaborator : creates >
-    Organization "1  " -- "1..*" Collaborator : has >
+    HRM "1" - "1..*" Collaborator : register >
+    MusgoSublime "1  " -- "1..*" Collaborator : has >
     HRM "1" - "1..*" Job : selects >
     Job "1..*" - "1" Collaborator : assigned >
-    Job "1..*" - "1" Organization : has <
+    Job "1..*" - "1" MusgoSublime : has <
 
 
 }
