@@ -138,26 +138,34 @@ An association is a relationship between instances of objects that indicates a r
 - etc.
     
 
-| Concept (A) 		 | Association   	  | Concept (B) |
-|---------------|:----------------:|------------:|
-| MusgoSublime  |  manage    		 	  |         GreenSpace |
-| GreenSpace  	 | is managed by		  |         GSM |
-| GreenSpace  	 | is used by    		 |         GSU |
-| GreenSpace  	 | managed    		 	  |         GSM |
-| GreenSpace  	 | managed    		 	  |         GSM |
-| GreenSpace  	 | managed    		 	  |         GSM |
-| GreenSpace  	 | managed    		 	  |         GSM |
-| GreenSpace  	 | managed    		 	  |         GSM |
-| GreenSpace  	 | managed    		 	  |         GSM |
-| GreenSpace  	 | managed    		 	  |         GSM |
-| GreenSpace  	 | managed    		 	  |         GSM |
-| GreenSpace  	 | managed    		 	  |         GSM |
-| GreenSpace  	 | managed    		 	  |         GSM |
-| GreenSpace  	 | managed    		 	  |         GSM |
-| GreenSpace  	 | managed    		 	  |         GSM |
-| GreenSpace  	 | managed    		 	  |         GSM |
-| GreenSpace  	 | managed    		 	  |         GSM |
-| GreenSpace  	 | managed    		 	  |         GSM |
+| Concept (A)        |   Association    |       Concept (B) |
+|--------------------|:----------------:|------------------:|
+| MusgoSublime       |      manage      |        GreenSpace |
+| MusgoSublime       |    possesses     |      Collaborator |
+| GreenSpace  	      |  is managed by   |               GSM |
+| GreenSpace  	      |    is used by    |               GSU |
+| GreenSpace  	      | has carried out  |              Task |
+| Task               |  is defined by   |            Agenda |
+| Task               |  is required by  |             Skill |
+| Task               |     requires     |             Skill |
+| Skill              |   assigned to    |      Collaborator |
+| Collaborator       |      Posses      |              Team |
+| Collaborator       |       has        |               Job |
+| HRM                |     register     |      Collaborator |
+| HRM                |     register     |               Job |
+| HRM                |     register     |             Skill |
+| HRM                |    generates     |              Team |
+| Team               |     possess      |            Agenda |
+| Team               |       uses       |           Vehicle |
+| Vehicle            |    transport     |         Equipment |
+| Vehicle            |    transport     |           Machine |
+| Vehicle            | is registered by |               VFM |
+| VFM                |     register     |           CheckUp |
+| VFM                |     register     |           Vehicle |
+| VFM                |     selects      | VehicleForCheckUp |
+| VehicleForCheckUp  |     informs      |               VFM |
+| VehicleForCheckUp  |       does       |           CheckUp |
+| VehicleForCheckUp  | is contained in  |           Vehicle |
 
 
 
