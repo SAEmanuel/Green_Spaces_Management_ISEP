@@ -18,7 +18,8 @@ package "HRM System" {
 
     class Team {
         skill
-        teamSize
+        minTeamSize
+        maxTeamSize
     }
 
     class Collaborator {
@@ -45,10 +46,6 @@ package "HRM System" {
         name
     }
 
-    class Job {
-        name
-    }
-
 
     HRM "1  " -- "1 " Team : generates >
     MusgoSublime "1 " -- "*" Team : has >
@@ -56,9 +53,7 @@ package "HRM System" {
     Team "1 " -- "1..*" Collaborator : assigned <
 
     Collaborator "1" -- "*" Skill : has >
-    Collaborator "1" -- "1..*" Job : has >
 
-'    Organization "1" -- "*" Skill : has >
-'    Organization "1" -- "1..*" Job : has >
+
 }
 @enduml
