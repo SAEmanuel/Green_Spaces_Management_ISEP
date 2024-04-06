@@ -12,44 +12,41 @@ hide methods
 
 title Domain Model
 
-package "System" {
 
-    class HRM {
+
+
+'  #########    General Information's      ##########
+    class GSM {
     }
 
-    class Skill {
-        name
+    class GSU {
     }
 
-class Organization {
-    name
-    vatNumber
-    website
-    phoneNumber
-    email
-}
-
-    class Job {
-        name
+    class GreenSpace {
     }
 
-    class Collaborator {
-        name
-        birthdate
-        admissionDate
-        address
-        phoneNumber
-        email
-        taxpayerNumber
-        id_doc_type
-        id_doc_number
-
+    class MusgoSublime {
     }
 
-    class Team {
-        skill
-        teamSize
+    class Task {
     }
+
+    class Agenda {
+    }
+
+    GreenSpace "*" -- "1" GSM : manages <
+    GreenSpace "*" -- "1" GSU : uses <
+    GreenSpace "*" -- "1..*" Task : carries out on <
+
+    MusgoSublime "1" -- "*" GreenSpace : manages >
+
+    Agenda "1" -- "*" Task : defines >
+
+'  #########          ##########
+
+
+
+'  #########    VFM      ##########
 
     class VFM {
     }
@@ -65,9 +62,16 @@ class Organization {
          registerDate
          acquisitionDate
          maintenanceFrequency
+         lastCheckUp
     }
 
-    class VehiclesForCheckUp {
+            class Machine{
+            }
+
+            class Equipment{
+            }
+
+    class VehicleForCheckUp {
         Vehicle
     }
 
@@ -78,35 +82,110 @@ class Organization {
     }
 
 
+    VFM "1" -- "*" Vehicle : register >
+    VFM "1  " -- "*" VehicleForCheckUp: selects >
+    VFM "1" ---- "*" CheckUp : register >
+    VFM "1" -- "*" VehicleForCheckUp : informs <
 
-    HRM "1  " -- "1..*" Skill : creates >
-    HRM "1" -- "1..*" Job : creates >
-    HRM "1" -- "1..*" Collaborator : creates >
-    HRM "1  " -- "1 " Team : generates >
+    Vehicle "*"-- "*" VehicleForCheckUp: contains >
+    Vehicle "1" -- "*" Equipment : transport >
+    Vehicle "1" - "*" Machine : transport >
 
-    VFM "1" -- "*" Vehicle : creates >
-    VFM "1  " -- "*" VehiclesForCheckUp: selects >
-    VFM "1" -- "1" CheckUp : register >
-    VFM "1" --  "*" VehiclesForCheckUp : informs <
-
-    Skill "1..*   " -- "1..*" Collaborator : assigned >
-
-'    Organization "1" ---- "*" Skill : has >
-'    Organization "1" --- "1..*" Job : has >
-    Organization "1" -- "1..*" Collaborator : has >
-    Organization "1 " ---- "*" Team : has >
-
-    Collaborator "1" -- "1" Job : has >
-
-    Team "1 " --- "1..*" Collaborator : assigned <
-
-    Vehicle "*" -- "1" Organization : has <
-    Vehicle "*"-- "*" VehiclesForCheckUp: contains >
-    Vehicle "1" - "*" CheckUp : does >
-
-    VehiclesForCheckUp "*" -- "1" CheckUp : does >
+    VehicleForCheckUp "*" -- "*" CheckUp : does >
 
 
-}
+'  #########          ##########
+
+
+
+'  #########    HRM      ##########
+
+    class HRM {
+    }
+
+    class Collaborator {
+        name
+        birthdate
+        admissionDate
+        address
+        phoneNumber
+        email
+        taxpayerNumber
+        id_doc_type
+        id_doc_number
+    }
+
+    class Team {
+        skill
+        teamSize
+    }
+
+    class Skill {
+        name
+    }
+
+    class Job {
+        name
+    }
+
+    HRM "1" -- "1..*" Skill : register >
+'    HRM "1" -- "*" Skill : assignes >
+    HRM "1" -- "1..*" Job : register >
+    HRM "1" - "1..*" Collaborator : register >
+    HRM "1" -- "1..*" Team : generates >
+
+    Skill "1.." -- "*" Collaborator : assigned to >
+
+    Collaborator "1" -- "*" Job : has >
+
+    Team "1..*" -- "1..*" Collaborator : has >
+
+'  #########          ##########
+
+'  #########    General Associations     ##########
+
+    Team "*" -- "*" Vehicle : uses >
+    Team "1..*" - "*" Agenda : has >
+
+    MusgoSublime "1" --- "*" Collaborator : has >
+
+    Task "*" -- "*" Skill : requires >
+    Task "*" - "1..*    " Job : requires >
+
+
+'  #########          ##########
+
+
+
+
+'    HRM "1  " -- "1..*" Skill : creates >
+'    HRM "1" -- "1..*" Job : creates >
+'    HRM "1" -- "1..*" Collaborator : creates >
+'    HRM "1  " -- "1 " Team : generates >
+'
+'    VFM "1" -- "*" Vehicle : creates >
+'    VFM "1  " -- "*" VehiclesForCheckUp: selects >
+'    VFM "1" -- "1" CheckUp : register >
+'    VFM "1" --  "*" VehiclesForCheckUp : informs <
+'
+'    Skill "1..*   " -- "1..*" Collaborator : assigned >
+'
+''           Organization "1" ---- "*" Skill : has >
+''           Organization "1" --- "1..*" Job : has >
+'    Organization "1" -- "1..*" Collaborator : has >
+'    Organization "1 " ---- "*" Team : has >
+'
+'    Collaborator "1" -- "1" Job : has >
+'
+'    Team "1 " --- "1..*" Collaborator : assigned <
+'
+'    Vehicle "*" -- "1" Organization : has <
+'    Vehicle "*"-- "*" VehiclesForCheckUp: contains >
+'    Vehicle "1" - "*" CheckUp : does >
+'
+'    VehiclesForCheckUp "*" -- "1" CheckUp : does >
+
+
+'}
 
 @enduml
