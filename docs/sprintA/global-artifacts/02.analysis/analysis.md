@@ -1,14 +1,14 @@
 # OO Analysis
 
 ## Rationale to identify domain conceptual classes
-To identify domain conceptual classes, start by making a list of candidate conceptual classes inspired by the list of categories suggested in the book "Applying UML and Patterns: An Introduction to Object-Oriented Analysis and Design and Iterative Development".
 
-
-### _Conceptual Class Category List_
+### _Conceptual Class Category List_ 
 
 **Business Transactions**
 
-* 
+* Vehicle Maintenance
+* Team Assignment
+
 
 ---
 
@@ -32,25 +32,34 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Roles of People or Organizations**
 
-* GSU : a person who uses the green spaces managed by the organization and who can through the Portal, make comments or report faults in parks and gardens on the Portal.
-* GSM : the person responsible for managing the green spaces in charge of the organization.
-* VFM : a person who manages the fleet park, the machines, equipment and vehicles, ensuring their good condition and assigning them to the tasks to be carried out.
-* HRM :  a person who manages human resources and defines teams based on the needs of ongoing projects and the skills of the employees.
-* Collaborator : a person who is an employee of the organization and carries out design, construction and/or maintenance tasks for green areas, depending on their skills.
+* GSM manages multiple GreenSpace.
+
+* GSU uses multiple GreenSpace.
+
+* VFM registers multiple Vehicle.
+* VFM selects multiple VehicleForCheckUp.
+* VFM registers multiple CheckUp.
+
+* HRM registers multiple Skill.
+* HRM registers multiple Job.
+* HRM registers multiple Collaborator.
+* HRM generates multiple Team.
+
+* Collaborator has multiple Job 
 
 ---
 
 **Places**
 
-* Garden
-* Medium-sized park
-* Larged-sizes park
+* GreenSpace contains Garden.
+* GreenSpace contains Medium-sized park.
+* GreenSpace contains Large-sized park.
 
 ---
 
 **Noteworthy Events**
 
-* MusgoSublime, which is used by GSU and managed by GSM, manages green spaces. This system has collaborator who have a job and skills assigned to them which are registered by HRM.
+* MusgoSublime manages green spaces, which are used by GSU and managed by GSM. This system has collaborators who have a job and skills assigned to them which are registered by HRM.
   HRM also generates teams composed by collaborators. These teams have an agenda to follow defined by tasks. They also use vehicles (registered by VFM) who can transport equipment and machines.
   These vehicles need a periodical check-up (defined by VFM), the system informs the VFM of what vehicles need check-up, he may select the ones he wants and registers the overhauling.
 
@@ -58,19 +67,17 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Physical Objects**
 
-* Vehicle : device used for transporting people or goods from one place to another.
-* Machine : device that uses energy to perform a specific task.
-* Equipment : set of tools, utensils, or devices designed for a specific purpose, facilitating or enhancing the execution of activities or processes.
-
+* Vehicle transports Equipment
+* Vehicle transports Machine
+* Vehicle is registered by VFM
 ---
 
 **Descriptions of Things**
 
-* Task : responsibilities carried out occasionally or in a regular basis in a green space.
-* Skill : has a unique name. They enable collaborators to perform certain tasks. They have to be registered so collaborators can be placed in a team.
-* Job : has a unique name. Is the main occupation of a collaborator. A collaborator has a unique job.
-* Agenda : is composed by tasks and is performed by a team.
-* CheckUp : when a vehicle check-up is performed the licence, date and current mileage are registered.
+* Agenda defines multiple Task
+* Skill is assigned to multiple Collaborator
+* Task requires multiple Skill
+* Task requires multiple Job
 
 ---
 
@@ -82,37 +89,39 @@ To identify domain conceptual classes, start by making a list of candidate conce
 
 **Containers**
 
-* 
+* Team
+* VehicleForCheckUp
 
 ---
 
 **Elements of Containers**
 
-* 
+* Team contains Collaborator
+* VehicleForCheckUp contains (some)Vehicle
 
 ---
 
 **Organizations**
 
 * MusgoSublime :  is an organization dedicated to the planning, construction and maintenance of green spaces for collective use in their multiple dimensions.
-
+* MusgoSublime manages multiple GreenSpace
 ---
 
 **Other External/Collaborating Systems**
 
-* 
+* No info
 
 ---
 
 **Records of finance, work, contracts, legal matters**
 
-* 
+* No info
 
 ---
 
 **Financial Instruments**
 
-* 
+* No info
 
 ---
 
@@ -138,14 +147,14 @@ An association is a relationship between instances of objects that indicates a r
 
 | Concept (A)        |   Association    |       Concept (B) |
 |--------------------|:----------------:|------------------:|
-| MusgoSublime       |      manage      |        GreenSpace |
+| MusgoSublime       |     manages      |        GreenSpace |
 | MusgoSublime       |    possesses     |      Collaborator |
 | GreenSpace  	      |  is managed by   |               GSM |
 | GreenSpace  	      |    is used by    |               GSU |
 | GreenSpace  	      | has carried out  |              Task |
 | Task               |  is defined by   |            Agenda |
-| Task               |  is required by  |             Skill |
 | Task               |     requires     |             Skill |
+| Task               |     requires     |               Job |
 | Skill              |   assigned to    |      Collaborator |
 | Collaborator       |      Posses      |              Team |
 | Collaborator       |       has        |               Job |
@@ -153,7 +162,7 @@ An association is a relationship between instances of objects that indicates a r
 | HRM                |     register     |               Job |
 | HRM                |     register     |             Skill |
 | HRM                |    generates     |              Team |
-| Team               |     possess      |            Agenda |
+| Team               |       has        |            Agenda |
 | Team               |       uses       |           Vehicle |
 | Vehicle            |    transport     |         Equipment |
 | Vehicle            |    transport     |           Machine |
