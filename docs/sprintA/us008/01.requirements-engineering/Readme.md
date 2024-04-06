@@ -11,13 +11,11 @@ As a Fleet Manager I intend to list the vehicles that need overhauling.
 
 **From the specifications document:**
 
->	The system should prompt all the vehicles that need overhauling and the user must choose the one(s) he wants to select. 
+>	The system should prompt all the vehicles that need check-up. 
 
 >	It is possible that no vehicles need overhauling.
 
->	The user must inform the system every few kilometers that he wants to have his vehicles checked.
- 
->	When km are 5% close to reach the limit, user is also informed of the needing for a check-up
+>   The system takes in cosideration the mantenance frequency (in kms) introduced by the HRM when the vehicle is registered and when the kms are 5% close to reach that limit it will be eligible for check-up.
 
 **From the client clarifications:**
 
@@ -28,7 +26,6 @@ As a Fleet Manager I intend to list the vehicles that need overhauling.
 > **Question:** What information will appear on the final list regarding the vehicle, besides the needing for check-up?
 >
 > **Answer:** Data that allow to identify the vehicle like Plate, brand and modle, as well as, the data that allowed to select/insert te vehicle in the list, number of kms, frequecny of checkup and the last checkup.
-
 
 
 ### 1.3. Acceptance Criteria 
@@ -46,8 +43,7 @@ As a Fleet Manager I intend to list the vehicles that need overhauling.
 **Input Data:**
 
 * Selected data:
-    * vehicles from a list 
-    * range of km for overhauling 
+    * maintenance frequency (in kms)
     * 5% km close to the limit
 
 **Output Data:**
