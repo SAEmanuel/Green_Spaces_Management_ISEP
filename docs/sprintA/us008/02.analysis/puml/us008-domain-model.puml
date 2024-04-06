@@ -31,6 +31,7 @@ class Vehicle {
          registerDate
          acquisitionDate
          maintenanceFrequency
+         lastCheckUp
 }
 
 class Organization {
