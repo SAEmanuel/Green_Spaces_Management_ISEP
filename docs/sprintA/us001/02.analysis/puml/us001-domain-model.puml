@@ -20,7 +20,7 @@ package "HRM System" {
         name
     }
 
-    class Organization {
+    class MusgoSublime {
         name
         vatNumber
         website
@@ -28,8 +28,8 @@ package "HRM System" {
         email
     }
 
-    HRM "1  " -- "1..*" Skill : creates >
-    Organization "1" -- "                           *" Skill : has >
+    HRM "1  " -- "1..*" Skill : register >
+    MusgoSublime "1" -- "                           *" Skill : has >
 }
 
 
