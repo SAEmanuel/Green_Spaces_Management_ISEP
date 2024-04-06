@@ -6,7 +6,7 @@
 
 ### 1.1. User Story Description
 
-As an FM, I wish to register a vehicle including Brand, Model, Type, Tare, Gross Weight, Current Km, Register Date, Acquisition Date, Maintenance/Checkup Frequency (in Kms).
+As an   VFM, I wish to register a vehicle including Brand, Model, Type, Tare, Gross Weight, Current Km, Register Date, Acquisition Date, Maintenance/Checkup Frequency (in Kms).
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document:**
@@ -41,15 +41,20 @@ As an FM, I wish to register a vehicle including Brand, Model, Type, Tare, Gross
 >
 > **Answer:** no; one can consider a list os brands and a list of models previously inserted in the system, no need to go through validations;
 
+> **Question:** What are the validation requirements for the vehicle ID?
+>
+> **Answer:** After 2020: AA-00-AA / between 2005-2020 00-AA-00 / between 1992-2005 00-00-XX
+
+
 
 
 ### 1.3. Acceptance Criteria
 
 * **AC01:** When registering a vehicle the identity of this should be the number plate.
 * **AC02:** There cannot be two cars with the same plate number.
-* **AC03:** The system should ensure that only authorized FM Managers have permission to register vehicles.
-* **AC04:** All required fields must be filled in (Brand, Model, Type...).
-* **AC05:** The Maintenance/Checkup Frequency must be field in Kms.
+* **AC03:** All required fields must be filled in (Plate, Brand, Model, Type...).
+* **AC04:** The Maintenance/Checkup Frequency must be field in Kms.
+* **AC05:** The Plate ID must follow the format of the corresponding year. 
 * **AC06:** If the system encounters any errors during the skill registration process, it should provide informative error messages to the HR Manager, guiding them on how to resolve the issue.
 
 
@@ -57,7 +62,7 @@ As an FM, I wish to register a vehicle including Brand, Model, Type, Tare, Gross
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US06 - Registering a vehicle" may involve capturing details such as maintenance/check-up frequency, which would be relevant for scheduling vehicle check-ups (US07).
+[//]: # (* There is a dependency with "US07 - Registering a vehicle" may involve capturing details such as maintenance/check-up frequency, which would be relevant for scheduling vehicle check-ups &#40;US07&#41;.)
 * The need to list vehicles needing check-up "US08" arises from the registration of vehicles "US06 - Registering a vehicle", as it helps in tracking maintenance requirements.
 
 ### 1.5 Input and Output Data

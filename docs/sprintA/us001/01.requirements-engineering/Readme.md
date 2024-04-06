@@ -18,8 +18,6 @@ be appointed to a collaborator
 > These skills encompass a wide range of tasks and responsibilities relevant to the management of green spaces, including but not limited to designing, estimating, gardening, electrical work, and masonry.
 
 > The system provides an interface dedicated to managing these skills efficiently.
- 
-> Additionally, the HRM can view a comprehensive list of existing skills along, edit the skills, and delete obsolete skills as necessary.
 
 
 **From the client clarifications:**
@@ -68,11 +66,6 @@ be appointed to a collaborator
 >
 > **Answer:** A skill is just a name, can be a composition os words like "Light Vehicle Driving Licence".
 
->  **Question:** The indentificator of the skill will be the name, or the system will generate authomatically and Id when the manager insert the name?
->
-> **Answer:** A skill is just a name, can be a composition os words like "Light Vehicle Driving Licence".
-
-
 
 
 
@@ -80,7 +73,7 @@ be appointed to a collaborator
 ### 1.3. Acceptance Criteria
 
 * **AC01:** There cannot be two skills with the same name.
-* **AC02:** The system should ensure that only authorized HR Managers have permission to register or edit skills.
+* **AC02:** The system should ensure that only authorized HR Managers have permission to register skills.
 * **AC03:** When editing a skill, there must be confirmation warnings before the execution of actions.
 * **AC04:** There cannot be two skills with different names, but they booth have the same functionalities.
 * **AC05:** All required fields must be filled in (the name is mandatory).
@@ -101,12 +94,7 @@ be appointed to a collaborator
 **Input Data:**
 
 * Typed data:
-    * username and password of the HRM
-    * skill name 
-  
-	
-* Selected data:
-    * skills from the list of skills
+    * skill name
 
 **Output Data:**
 
