@@ -25,9 +25,9 @@ As a Fleet Manager I intend to list the vehicles that need overhauling.
 
 > **Question:** What information will appear on the final list regarding the vehicle, besides the needing for check-up?
 >
-> **Answer:** Data that allow to identify the vehicle like Plate, brand and model, as well as, the data that allowed to select/insert te vehicle in the list, number of kms, frequecny of checkup and the last checkup.
+> **Answer:** Data that allow to identify the vehicle like Plate, brand and model, as well as, the data that allowed to select/insert te vehicle in the list, number of kms, frequency of checkup and the last checkup.
 
-> **Question:** I'm not sure if I understood everything about US08. In this US we should only list the vehicles that need a check up (surpass the check up frequency in KM) or that will shortly need a check up (5% to the check up frequency *already said in another post*), correct? If so, the information about the checkup frequency for each vehicle should be asked in US07?
+> **Question:** I'm not sure if I understood everything about US08. In this US we should only list the vehicles that need a check up (surpass the check-up frequency in KM) or that will shortly need a check-up (5% to the check-up frequency *already said in another post*), correct? If so, the information about the checkup frequency for each vehicle should be asked in US07?
 >
 > **Answer:** No; the Maintenance/Check-up Frequency (in km) is registered in US06.
 

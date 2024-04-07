@@ -25,14 +25,14 @@ As a HRM, I want to generate a team proposal automatically
 >
 > **Answer:** .
 
-> **Question:** Are the skills(input) typed or selecte
+> **Question:** Are the skills(input) typed or selected
 > Does the output show the team members with or without their skills?
 >
 > **Answer:** the ux/ui is up to the dev team.
 
 > **Question:** I would like to know which business rules apply for the input data to generate a team proposal.
 >
-> **Answer:** max and min team size, and a a list of skills needed.
+> **Answer:** max and min team size, and a list of skills needed.
 > For instance:
 > 
 > min: 3

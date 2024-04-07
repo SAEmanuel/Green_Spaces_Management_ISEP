@@ -21,7 +21,7 @@ As an HRM, I want to assign one or more skills to a collaborator.
 
 > **Question:** Can any skill be registered to any collaborator/job? Or should they be associated in categories in association with a specific job
 >
-> **Answer:** There is no association, it totally depends of the CV of the collaborator.
+> **Answer:** There is no association, it totally depends on the CV of the collaborator.
 
 > **Question:**  Is there any certification/proof needed to register a skill to a collaborator?
 >

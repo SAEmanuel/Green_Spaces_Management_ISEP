@@ -19,7 +19,7 @@ As a Human Resources Manager I want to register a job.
 
 > **Question:** What are the acceptance criteria? When creating a job that already exits, what does the system do?
 >
-> **Answer:** By definition a set can´t have duplicates. Assuring no duplicates is not a business rule is a tecnichal issue.
+> **Answer:** By definition a set can't have duplicates. Assuring no duplicates is not a business rule is a technical issue.
 
 > **Question:** Which are the data for the creation of a profession?
 >
@@ -33,7 +33,7 @@ As a Human Resources Manager I want to register a job.
 >
 > **Answer:** No.
 
-> **Question:** I guess a job can be asign to a collaborator if he has the skills require for this job. How do we manage this relation. Does he HRM do it manually, or should we have an atribute in job specifiying the skills needed?
+  > **Question:** I guess a job can be assigned to a collaborator if he has the skills require for this job. How do we manage this relation. Does he HRM do it manually, or should we have an attribute in job specifying the skills needed?
 >
 > **Answer:** No; a collaborator is hired for a job and can have skills or not.
 
@@ -46,7 +46,7 @@ As a Human Resources Manager I want to register a job.
 
 ### 1.4. Found out Dependencies
 
-* No dependecies found.
+* No dependencies found.
 
 ### 1.5 Input and Output Data
 

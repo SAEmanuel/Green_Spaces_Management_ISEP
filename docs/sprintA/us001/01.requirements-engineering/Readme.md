@@ -22,7 +22,7 @@ be appointed to a collaborator
 
 **From forum:**
 
-> **Question:** Which are the criterias to create a skill? 
+> **Question:** Which are the criteria to create a skill? 
 >
 > **Answer:** The name of the skill (pruner, heavy vehicle driver).
 
@@ -38,7 +38,7 @@ be appointed to a collaborator
 >
 > **Answer:** Both are acceptable since the business the same the crucial difference resides in the UX.
 
->  **Question:** Does the HRM need to see the confirmation of the success of the operation and the skills added or just the sucess of the operation?
+>  **Question:** Does the HRM need to see the confirmation of the success of the operation and the skills added or just the success of the operation?
 >
 > **Answer:** It will depend on if you opt to insert one skill or a set of skills in a batch. Maybe some adaptation needed.
 
@@ -56,13 +56,13 @@ be appointed to a collaborator
 
 > **Question:** Which are the skills accepted? Or should we enable the HRM to introduce anything as a skill?
 >
-> **Answer:** All, it's up to HRM to decide. (special characters or algarisms should not be allowed in the skill name)
+> **Answer:** All, it's up to HRM to decide. (special characters or numbers should not be allowed in the skill name)
 
 >  **Question:** Which is the difference between collaborator and employ? And employ could have skills? HRM, VFM, GSM and GSU are employers?
 >
 > **Answer:** Employee and collaborator are synonyms.
 
->  **Question:** The indentificator of the skill will be the name, or the system will generate authomatically and Id when the manager insert the name?
+>  **Question:** The identifier of the skill will be the name, or the system will generate automatically and ID when the manager insert the name?
 >
 > **Answer:** A skill is just a name, can be a composition os words like "Light Vehicle Driving Licence".
 
@@ -77,7 +77,7 @@ be appointed to a collaborator
 * **AC03:** When editing a skill, there must be confirmation warnings before the execution of actions.
 * **AC04:** There cannot be two skills with different names, but they booth have the same functionalities.
 * **AC05:** All required fields must be filled in (the name is mandatory).
-* **AC06:** The name of a skill cannot have special characters or algarisms.
+* **AC06:** The name of a skill cannot have special characters or numbers.
 * **AC07:** If the system encounters any errors during the skill registration process, it should provide informative error messages to the HR Manager, guiding them on how to resolve the issue.
 
 
@@ -100,7 +100,7 @@ be appointed to a collaborator
 
 * List of existing skills
 * Error messages
-* Success of secundary opeations
+* Success of secondary operations
 * Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)

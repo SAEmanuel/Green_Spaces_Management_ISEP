@@ -156,7 +156,7 @@ An association is a relationship between instances of objects that indicates a r
 | Task               |     requires     |             Skill |
 | Task               |     requires     |               Job |
 | Skill              |   assigned to    |      Collaborator |
-| Collaborator       |      Posses      |              Team |
+| Collaborator       |    possesses     |              Team |
 | Collaborator       |       has        |               Job |
 | HRM                |     register     |      Collaborator |
 | HRM                |     register     |               Job |
