@@ -1,4 +1,4 @@
-# OO Analysis
+**# OO Analysis
 
 ## Rationale to identify domain conceptual classes
 
@@ -45,7 +45,7 @@
 * HRM registers multiple Collaborator.
 * HRM generates multiple Team.
 
-* Collaborator has multiple Job 
+* Collaborator has one Job 
 
 ---
 
@@ -91,6 +91,8 @@
 
 * Team
 * VehicleForCheckUp
+* Collaborator
+
 
 ---
 
@@ -98,6 +100,7 @@
 
 * Team contains Collaborator
 * VehicleForCheckUp contains (some)Vehicle
+* Collaborator contains (some)Job and Skill
 
 ---
 
@@ -145,38 +148,37 @@ An association is a relationship between instances of objects that indicates a r
 - etc.
     
 
-| Concept (A)        |   Association    |       Concept (B) |
-|--------------------|:----------------:|------------------:|
-| MusgoSublime       |     manages      |        GreenSpace |
-| MusgoSublime       |    possesses     |      Collaborator |
-| GreenSpace  	      |  is managed by   |               GSM |
-| GreenSpace  	      |    is used by    |               GSU |
-| GreenSpace  	      | has carried out  |              Task |
-| Task               |  is defined by   |            Agenda |
-| Task               |     requires     |             Skill |
-| Task               |     requires     |               Job |
-| Skill              |   assigned to    |      Collaborator |
-| Collaborator       |    possesses     |              Team |
-| Collaborator       |       has        |               Job |
-| HRM                |     register     |      Collaborator |
-| HRM                |     register     |               Job |
-| HRM                |     register     |             Skill |
-| HRM                |    generates     |              Team |
-| Team               |       has        |            Agenda |
-| Team               |       uses       |           Vehicle |
-| Vehicle            |    transport     |         Equipment |
-| Vehicle            |    transport     |           Machine |
-| Vehicle            | is registered by |               VFM |
-| VFM                |     register     |           CheckUp |
-| VFM                |     register     |           Vehicle |
-| VFM                |     selects      | VehicleForCheckUp |
-| VehicleForCheckUp  |     informs      |               VFM |
-| VehicleForCheckUp  |       does       |           CheckUp |
-| VehicleForCheckUp  | is contained in  |           Vehicle |
+| Concept (A)       |    Association    |       Concept (B) |
+|-------------------|:-----------------:|------------------:|
+| MusgoSublime      |      manages      |        GreenSpace |
+| MusgoSublime      |    has            |      Collaborator |
+| GreenSpace  	     |   is managed by   |               GSM |
+| GreenSpace  	     |    is used by     |               GSU |
+| GreenSpace  	     |  has carried out  |              Task |
+| Task              |   is defined by   |            Agenda |
+| Task              |     requires      |             Skill |
+| Task              |     requires      |               Job |
+| Skill             |    assigned to    |      Collaborator |
+| Collaborator      |        has        |               Job |
+| HRM               |     register      |      Collaborator |
+| HRM               |     register      |               Job |
+| HRM               |     register      |             Skill |
+| HRM               |     generates     |              Team |
+| Team              |        has        |      Collaborator |
+| Team              |        has        |            Agenda |
+| Team              |       uses        |           Vehicle |
+| Vehicle           |     transport     |         Equipment |
+| Vehicle           |     transport     |           Machine |
+| VFM               |     register      |           CheckUp |
+| VFM               |     register      |           Vehicle |
+| VFM               |      selects      | VehicleForCheckUp |
+| VehicleForCheckUp |      informs      |               VFM |
+| VehicleForCheckUp |       does        |           CheckUp |
+| VehicleForCheckUp |  is contained in  |           Vehicle |
 
 
 
 
 ## Domain Model
 
-![Domain Model](svg/project-domain-model.svg)
+![Domain Model](svg/project-domain-model.svg)**
