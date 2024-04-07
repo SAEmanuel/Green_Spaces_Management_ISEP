@@ -24,7 +24,7 @@ As an FM, I wish to register a vehicle’s check-up
 >
 > **Answer:** In real context all could be considered, in the scope of this project just kms will be considered.
 
-> **Question:** can a vehicle not have a check-up?
+> **Question:** Can a vehicle not have a check-up?
 >
 > **Answer:** Yes.
 

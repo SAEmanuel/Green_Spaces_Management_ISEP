@@ -46,9 +46,6 @@ As an HRM, I want to assign one or more skills to a collaborator.
 
 **Input Data:**
 
-* Typed data:
-    * none.
-	
 * Selected data:
     * one or more skills.
 
