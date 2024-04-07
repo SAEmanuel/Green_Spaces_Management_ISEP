@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This manual serves as a comprehensive guide for users of the Green Space Management Application, a digital tool designed to facilitate the management and maintenance of green spaces.
+This manual serves as a comprehensive guide for users of MusgoSublime, a digital tool designed to facilitate the management and maintenance of green spaces.
 
 MusgoSublime is a digital software product developed to streamline the management and upkeep of green spaces. It offers a range of features and functionalities to assist users in efficiently organizing and maintaining green areas.
 
@@ -35,6 +35,6 @@ MusgoSublime is structured around a user-friendly interface that offers easy nav
 
 2. **User Portal**: The User Portal serves as an interface for end-users, such as park visitors or community members, to access information about green spaces, report issues, and provide feedback. It promotes transparency and engagement between stakeholders and green space managers.
 
-3. **Resource Management**: The Resource Management module provides tools for tracking and managing resources essential for green space maintenance, including vehicles, equipment, and personnel. It allows administrators to optimize resource allocation and scheduling to ensure efficient operations.
+3. **Resource Management**: The Resource Management module provides tools for tracking and managing resources essential for green space maintenance, including vehicles, equipment, machines and personnel. It allows administrators to optimize resource allocation and scheduling to ensure efficient operations.
 
 4. **Reporting and Analytics**: This module offers comprehensive reporting capabilities and data analytics functionalities. Users can generate custom reports, analyze trends, and gain valuable insights into the performance and condition of green spaces over time.
