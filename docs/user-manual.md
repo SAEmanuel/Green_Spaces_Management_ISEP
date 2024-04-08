@@ -4,27 +4,25 @@
 
 ## Purpose and Scope
 
-This manual serves as a comprehensive guide for green space managers and administrators utilizing MusgoSublime, a digital tool meticulously crafted to streamline the management and maintenance of green spaces.
+This manual serves as a comprehensive guide for green space managers and administrators utilizing MusgoSublime, a digital tool created to streamline the management and maintenance of green spaces.
 
-MusgoSublime is a digital software product developed to simplify the oversight and upkeep of green areas. It provides a diverse array of features and functionalities to assist users in efficiently organizing and maintaining green spaces.
+MusgoSublime is a digital software product developed to simplify upkeep of green areas. It provides a diverse variety of features and functionalities to assist users in organizing and maintaining green spaces.
 
-Within this manual, readers will discover detailed instructions on how to effectively utilize the various features and tools offered by the MusgoSublime application. From fundamental navigation to advanced functionalities, each aspect of the application is extensively explained to ensure users can harness its full potential.
+Within this manual, readers will discover detailed instructions on how to effectively utilize the various features and tools offered by the MusgoSublime application. From fundamental navigation to advanced functionalities, each aspect of the application is extensively explained to ensure users can understand its full potential.
 
 Intended for a wide audience involved in the management of green spaces, this manual caters to Human Resources Managers, Vehicle and Fleet Managers, Green Space Managers, and any other personnel responsible for overseeing and maintaining green areas.
-
-Whether you are a seasoned professional or a newcomer to green space management, this manual offers valuable insights and instructions to optimize your experience with the MusgoSublime application.
 
 # System Overview
 
 ## Product Description
 
-MusgoSublime is a sophisticated digital solution meticulously designed to simplify and enhance the management and maintenance of green spaces. Whether overseeing vast public parks, urban gardens, or recreational areas, MusgoSublime provides a comprehensive suite of tools to streamline various aspects of green space management.
+MusgoSublime is a digital solution designed to simplify and enhance the management and maintenance of green spaces. Whether overseeing vast public parks, urban gardens, or recreational areas, MusgoSublime provides a comprehensive suite of tools to streamline various aspects of green space management.
 
-With MusgoSublime, users can efficiently plan, organize, and execute maintenance tasks within green spaces, ensuring their optimal condition and usability. The application leverages modern technology and intuitive design principles to offer a seamless user experience for administrators and end-users alike.
+With MusgoSublime, users can efficiently plan, organize, and execute maintenance tasks within green spaces, ensuring their optimal condition and usability. The application leverages modern technology and intuitive design principles to offer a great user experience for administrators and end-users alike.
 
 ## Objectives
 
-The primary objective of MusgoSublime is to empower users with the tools they need to efficiently manage green spaces while enhancing sustainability and environmental stewardship. Specifically, the application aims to achieve the following objectives:
+The primary objective of MusgoSublime is to empower users with the tools they need to efficiently manage green spaces while enhancing sustainability and environmental practices. Specifically, the application aims to achieve the following objectives:
 
 - **Facilitate Green Space Management**: MusgoSublime streamlines the planning, organization, and execution of maintenance tasks within green spaces, making it easier for administrators to ensure the upkeep of these areas.
 
@@ -50,65 +48,82 @@ By combining these modules, MusgoSublime offers a holistic solution for effectiv
 
 # Features
 
-This section provides an overview of the key features of MusgoSublime, a digital tool designed to streamline the management and maintenance of green spaces. Each feature corresponds to a user story in software development terminology and is targeted at specific user roles within the application.
+This section provides an overview of the key features of MusgoSublime, a digital tool designed for the management and maintenance of green spaces. Each feature corresponds to a user story and is targeted at specific user roles within the application.
 
-## 1. Register Skills for Collaborators | Human Resources Manager
+## ## 1. Register Skills for Collaborators | Human Resources Manager
+
 - **Description**: This feature allows the Human Resources Manager to register the skills that a collaborator may have.
 - **Instructions**:
-    - Navigate to the Skills Registration section in the application.
-    - Enter the name of the skill and any other relevant details.
-    - Click on the "Save" button to register the skill.
+  - Access the application interface.
+  - View or add skills in the Skills Registration section.
+  - Confirm the entered data.
+  - Upon confirmation, the system displays a success message.
+
 
 ## 2. Register Job for Collaborators | Human Resources Manager
+
 - **Description**: This feature enables the Human Resources Manager to register a job that a collaborator needs to have.
 - **Instructions**:
-    - Access the Jobs Registration page within the application.
-    - Provide the details of the job, such as the name and any required qualifications.
-    - Save the job profile by clicking on the appropriate button.
+  - Activate the HRM role.
+  - Select the option to add a new job within the application interface.
+  - Provide the name.
+  - Confirm the entered data.
+  - Upon submission, the system confirms the successful addition of the job.
+
 
 ## 3. Register Collaborator with Job and Characteristics | Human Resources Manager
+
 - **Description**: This feature allows the Human Resources Manager to register a collaborator with essential details and assign them a specific job.
 - **Instructions**:
-    - Navigate to the Collaborator Registration section.
-    - Enter the collaborator's information, including name, birthdate, admission date, address, and contact information.
-    - Provide the collaborator's ID document type and number.
-    - Assign the collaborator to a job by selecting from the available options.
-    - Save the collaborator's profile.
+  - Request to register a new collaborator within the application.
+  - Provide the required information, including name, birthdate, admission date, residence, contact details, taxpayer number, and ID document type and number.
+  - Select the appropriate job for the collaborator from the provided list.
+  - Confirm the entered data and job selection.
+  - Upon confirmation, the system displays a success message indicating the completion of the operation.
+
 
 ## 4. Assign Skills to Collaborators | Human Resources Manager
+
 - **Description**: This feature enables the Human Resources Manager to assign one or more skills to a collaborator.
 - **Instructions**:
-    - Go to the Skills Assignment page.
-    - Select the collaborator to whom you want to assign skills.
-    - Choose the relevant skills from the list and save the assignment.
+  - Access the Skills Assignment page within the application.
+  - Select the collaborator for whom you want to assign skills.
+  - Choose the relevant skills from the provided list.
+  - Confirm the selection to save the assignment.
+
 
 ## 5. Generate Team Proposal Automatically | Human Resources Manager
+
 - **Description**: This feature allows the Human Resources Manager to automatically generate a proposal for a team based on specified criteria.
 - **Instructions**:
-    - Access the Team Proposal Generator tool.
-    - Provide the maximum team size and the required set of skills.
-    - Click on the "Generate Proposal" button to create a team proposal.
+  - Navigate to the Team Proposal Generator tool within the application.
+  - Specify the minimum and maximum team size and the required set of skills.
+  - Click on the "Generate Proposal" button to create a team proposal.
+
 
 ## 6. Register Vehicle Details | Fleet Manager
+
 - **Description**: This feature enables the Fleet Manager to register a new vehicle along with its details such as brand, model, type, weight, and maintenance information.
 - **Instructions**:
-    - Navigate to the Vehicle Registration section.
-    - Enter the required vehicle details, including brand, model, type, weight, and maintenance frequency.
-    - Save the vehicle information.
+  - Navigate to the Vehicle Registration section within the application.
+  - Enter the required vehicle details, including brand, model, type, weight, maintenance frequency and last check-up.
+  - Save the vehicle information.
+
 
 ## 7. Register Vehicle Check-up | Fleet Manager
+
 - **Description**: This feature allows the Fleet Manager to register a check-up for a vehicle.
 - **Instructions**:
-    - Go to the Vehicle Check-up Registration page.
-    - Select the vehicle for which you want to register a check-up.
-    - Enter the details of the check-up, such as the date and current mileage.
-    - Save the check-up record.
+  - Go to the Vehicle Check-up Registration page within the application.
+  - Select the vehicle for which you want to register a check-up.
+  - Enter the details of the check-up, such as the date and current mileage.
+  - Save the check-up record.
 
-## 8. List Vehicles Needing Check-up | Fleet Manager
+
+## 8. View List of Vehicles Needing Check-up | Fleet Manager
 - **Description**: This feature enables the Fleet Manager to view a list of vehicles that require a check-up.
 - **Instructions**:
-    - Access the Check-up Status page.
-    - View the list of vehicles due for a check-up, along with their details.
-    - Take appropriate action based on the provided information.
+  1. Navigate to the Check-up Status page within the application.
+  2. View the list of vehicles due for a check-up, along with their details.
 
-These features are essential for the efficient operation of the MusgoSublime application and are targeted at those responsible for managing green spaces. Each feature is accompanied by clear instructions on how to use it within the application.
+These features are essential for the efficient operation of the MusgoSublime application and are targeted at those responsible for managing green spaces. Each feature is now accompanied by clear instructions on how to use it within the application.
