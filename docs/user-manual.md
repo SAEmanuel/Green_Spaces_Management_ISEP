@@ -50,7 +50,7 @@ By combining these modules, MusgoSublime offers a holistic solution for effectiv
 
 This section provides an overview of the key features of MusgoSublime, a digital tool designed for the management and maintenance of green spaces. Each feature corresponds to a user story and is targeted at specific user roles within the application.
 
-## ## 1. Register Skills for Collaborators | Human Resources Manager
+## 1. Register Skills for Collaborators | Human Resources Manager
 
 - **Description**: This feature allows the Human Resources Manager to register the skills that a collaborator may have.
 - **Instructions**:
