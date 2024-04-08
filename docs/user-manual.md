@@ -46,6 +46,29 @@ MusgoSublime is structured around a modular architecture, with each module cater
 
 By combining these modules, MusgoSublime offers a solution for effective green space management, empowering users to maintain and enhance the quality of green areas for the benefit of communities and the environment.
 
+```plaintext
+  +-------------------------+
+  |      User Portal        |
+  +-------------------------+
+              |
+              v
+  +-------------------------+
+  |  Administrative Module  |
+  +-------------------------+
+              |
+              v
+  +-------------------------+
+  |   Resource Management   |
+  +-------------------------+
+              |
+              v
+  +-------------------------+
+  | Reporting and Analytics |
+  +-------------------------+
+
+```
+
+
 # Features
 
 This section provides an overview of the key features of MusgoSublime, a digital tool designed for the management and maintenance of green spaces. Each feature corresponds to a user story and is targeted at specific user roles within the application.
@@ -123,7 +146,7 @@ This section provides an overview of the key features of MusgoSublime, a digital
 ## 8. View List of Vehicles Needing Check-up | Fleet Manager
 - **Description**: This feature enables the Fleet Manager to view a list of vehicles that require a check-up.
 - **Instructions**:
-  1. Navigate to the Check-up Status page within the application.
-  2. View the list of vehicles due for a check-up, along with their details.
+  - Navigate to the Check-up Status page within the application.
+  - View the list of vehicles due for a check-up, along with their details.
 
 These features are essential for the efficient operation of the MusgoSublime application and are targeted at those responsible for managing green spaces. Each feature is now accompanied by clear instructions on how to use it within the application.
