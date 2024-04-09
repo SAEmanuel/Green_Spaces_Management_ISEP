@@ -1,11 +1,11 @@
-# US008 - Overhauling of vehicles
+# US010 - Equipment Preferences
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As a Fleet Manager I intend to list the vehicles that need overhauling.
+As a GSM, I want to know which piece(s) of equipment is/are used in each day so that I can understand the users’ preferences. Consider that the park has the following equipment: walking paths, children’s playground, picnic area, and exercise machines (gymnastics equipment). At the park exit there is an electronic device with a list of all used that day.
 
 ### 1.2. Customer Specifications and Clarifications 
 
@@ -50,7 +50,7 @@ The list must clearly identify the vehicles through: plate number, brand, model 
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US006 - Machinery registration" as there must be at least one vehicle in the system so that it can check the need for a check-up.
+* N/A
 
 ### 1.5 Input and Output Data
 
