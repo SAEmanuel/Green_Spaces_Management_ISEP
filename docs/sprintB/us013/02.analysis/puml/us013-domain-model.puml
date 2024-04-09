@@ -1,0 +1,44 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+left to right direction
+
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+package "GSM System" {
+
+title Domain Model - US013
+
+class GSM {
+}
+
+class WaterSystem {
+         pointX
+         pointY
+         distance
+         bestRoute
+         numberPipes
+}
+
+class MusgoSublime {
+vatNumber
+website
+phoneNumber
+email
+}
+
+
+
+MusgoSublime "1" -- "1" WaterSystem: has >
+WaterSystem "1"-- "1" GSM: informs >
+
+
+
+
+
+
+@enduml
