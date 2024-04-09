@@ -1,0 +1,59 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Domain Model - US005
+
+skinparam classAttributeIconSize 0
+
+left to right direction
+
+hide circles
+hide methods
+
+package "HRM System" {
+    class HRM {
+    }
+
+    class Team {
+        skill
+        minTeamSize
+        maxTeamSize
+    }
+
+    class Collaborator {
+            name
+            birthdate
+            admissionDate
+            address
+            phoneNumber
+            email
+            taxpayerNumber
+            id_doc_type
+            id_doc_number
+
+        }
+
+    class MusgoSublime {
+        vatNumber
+        website
+        phoneNumber
+        email
+    }
+
+    class Skill {
+        name
+    }
+
+
+    HRM "1  " -- "1 " Team : generates >
+    MusgoSublime "1 " -- "*" Team : has >
+    MusgoSublime "1 " -- "1..*" Collaborator : has >
+    Team "1 " -- "1..*" Collaborator : assigned <
+
+    Collaborator "1" -- "*" Skill : has >
+
+
+}
+@enduml

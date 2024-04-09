@@ -1,0 +1,42 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - Alternative Two
+
+autonumber
+
+actor "Human Resources\nManager" as HRM
+participant ":System" as System
+
+activate HRM
+
+
+     HRM -> System : Selects the option to add a new job
+    activate System
+
+        System --> HRM : Displays the interface for entering the job's name
+    deactivate System
+
+        HRM -> System : Provides the profession(s)
+    activate System
+
+    System --> HRM : Verifies the existing of a duplicate profession.
+        deactivate System
+
+    System --> HRM : Emites a warning message
+    activate System
+
+        HRM --> System : Changes his job to a valid alternative
+    deactivate System
+
+     System --> HRM : Validates and stores the data
+     activate System
+
+     System --> HRM : Confirms the success of the operation
+     deactivate System
+
+
+
+@enduml

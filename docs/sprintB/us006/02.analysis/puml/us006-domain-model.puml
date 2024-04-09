@@ -1,0 +1,44 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+skinparam classAttributeIconSize 0
+left to right direction
+
+hide circles
+hide methods
+
+title Domain Model - US006
+
+package "VFM System" {
+
+    class VFM {
+    }
+
+    class Vehicle {
+         plateID
+         brand
+         model
+         type
+         tare
+         grossWeight
+         millage
+         registerDate
+         acquisitionDate
+         maintenanceFrequency
+         lastCheckUp
+    }
+
+    class MusgoSublime {
+            vatNumber
+            website
+            phoneNumber
+            email
+        }
+
+
+    VFM "1" -- "1..*" Vehicle : register >
+    Vehicle "*" -- "1" MusgoSublime : has <
+}
+@enduml

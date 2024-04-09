@@ -1,0 +1,37 @@
+@startuml
+
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+'left to right direction
+
+title Domain Model - US001
+
+hide circles
+hide methods
+
+package "HRM System" {
+
+    class HRM {
+    }
+
+    class Skill {
+        name
+    }
+
+    class MusgoSublime {
+        vatNumber
+        website
+        phoneNumber
+        email
+    }
+
+    HRM "1  " -- "1..*" Skill : register >
+    MusgoSublime "1" -- "                           *" Skill : has >
+}
+
+
+
+@enduml
+

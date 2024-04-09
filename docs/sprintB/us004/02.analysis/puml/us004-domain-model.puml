@@ -1,0 +1,52 @@
+@startuml
+
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+'left to right direction
+
+title Domain Model - US004
+
+hide circles
+hide methods
+
+package "HRM System" {
+
+
+
+    class Skill {
+        name
+    }
+
+    class Collaborator {
+        name
+        birthdate
+        admissionDate
+        address
+        phoneNumber
+        email
+        taxpayerNumber
+        id_doc_type
+        id_doc_number
+    }
+
+    class MusgoSublime {
+        vatNumber
+        website
+        phoneNumber
+        email
+    }
+
+    class HRM {
+       }
+
+    MusgoSublime "1 " -- "1..*  " Collaborator : has >
+    HRM "1" - "1..*" Skill : selects >
+    Skill "1..*   " -- "1" Collaborator : assigned >
+}
+
+
+
+@enduml
+

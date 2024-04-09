@@ -1,0 +1,51 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+
+title Domain Model - US003
+
+package "HRM System" {
+
+    class MusgoSublime {
+        vatNumber
+        website
+        phoneNumber
+        email
+    }
+
+    class Collaborator {
+        name
+        birthdate
+        admissionDate
+        address
+        phoneNumber
+        email
+        taxpayerNumber
+        id_doc_type
+        id_doc_number
+    }
+
+    class Job {
+        name
+    }
+
+    class HRM {
+        name
+    }
+
+    HRM "1" - "1..*" Collaborator : register >
+    MusgoSublime "1  " -- "1..*" Collaborator : has >
+    HRM "1" - "1..*" Job : selects >
+    Job "1..*" - "1" Collaborator : assigned >
+    Job "1..*" - "1" MusgoSublime : has <
+
+
+}
+
+@enduml
