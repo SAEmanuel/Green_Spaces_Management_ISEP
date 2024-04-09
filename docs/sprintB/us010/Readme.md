@@ -1,4 +1,4 @@
-# US008 - Overhauling of vehicles
+# US010 - Equipment Preferences
 
 [Requirements Engineering](01.requirements-engineering/Readme.md)
 
