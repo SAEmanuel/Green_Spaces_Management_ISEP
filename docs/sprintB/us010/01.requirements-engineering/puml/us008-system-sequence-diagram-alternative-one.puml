@@ -1,0 +1,23 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - Alternative One
+
+autonumber
+
+actor "Fleet\nManager" as FM
+participant ":System" as System
+
+        activate FM
+
+        FM --> System: Asks to generate a list of vehicles needing check-up
+        activate System
+
+        System -> FM : Provides a list of vehicles that need check-up (and all their info)
+        System --> FM : Displays operation success
+
+        deactivate System
+        deactivate FM
+@enduml
