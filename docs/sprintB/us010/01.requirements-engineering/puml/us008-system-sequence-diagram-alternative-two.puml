@@ -22,9 +22,9 @@ User -> System : selects zero or more equipments used that day
 System --> User : asks if they want a file that has the recording of the last 1000 users choices of equipments or a pie chart that represents, in percentage, the use of each piece of equipment
     deactivate System
 
-User -> System : requests file
+User -> System : requests chart
     activate System
 
-System --> User : sends the file requested
+System --> User : shows the chart requested
     deactivate System
 @enduml

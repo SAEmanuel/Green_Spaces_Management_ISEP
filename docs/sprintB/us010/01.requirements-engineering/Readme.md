@@ -43,9 +43,7 @@ The list must clearly identify the vehicles through: plate number, brand, model 
 
 ### 1.3. Acceptance Criteria 
 
-* **AC1:** If there are no vehicles that need overhauling, the system notifies the FM.
-* **AC2:** The list of vehicles needing overhauling should contain all the vehicles' info.
-
+* **AC1:** The user will select zero or more options from a list.
 
 ### 1.4. Found out Dependencies
 
@@ -55,11 +53,13 @@ The list must clearly identify the vehicles through: plate number, brand, model 
 
 **Input Data:**
 
-* The system automatically retrieves the maintenance frequency of each vehicle and calculates the 5% threshold limit before reaching it without requiring any manual input.
+* Selected data:
+    * Equipment that was used by the user
 
 **Output Data:**
 
-* List of vehicles that need a check-up
+* File named "EquipmentUsed.csv" that records the equipment used by 1000 users
+* A pie chart representing, in percentage, the use of each piece of equipment
 * (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
