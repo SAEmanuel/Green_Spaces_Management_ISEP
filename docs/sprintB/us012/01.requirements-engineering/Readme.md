@@ -37,25 +37,20 @@ opened to lay pipes between each pair of water points, and their respective inst
 
 ### 1.3. Acceptance Criteria 
 
-* **AC1:** 
-* **AC2:** 
-* **AC2:** 
-
+* **AC1:** The system should ensure that the GSM must only import a .csv file containing the following columns: Water Point X, Water Point Y, and Distance
+* **AC2:** The system should ensure that only GS Managers have permission to import .csv files.
+* **AC3:** If the system encounters any errors during the importing process, it should provide informative error messages to the GS Manager, guiding them on how to resolve the issue.
 
 ### 1.4. Found out Dependencies
 
-* 
+* No dependency was found. 
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
-* 
+* a .csv file
 
-**Output Data:**
-
-* 
-* 
 
 ### 1.6. System Sequence Diagram (SSD)
 
