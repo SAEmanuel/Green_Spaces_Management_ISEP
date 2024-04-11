@@ -45,7 +45,6 @@ The list must clearly identify the vehicles through: plate number, brand, model 
 
 * **AC1:** If there are no vehicles that need overhauling, the system notifies the FM.
 * **AC2:** The list of vehicles needing overhauling should contain all the vehicles' info.
-* **AC2:** The list should include vehicles that have either exceeded the maintenance frequency limit or are within 5% of reaching it.
 
 
 ### 1.4. Found out Dependencies
