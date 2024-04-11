@@ -1,0 +1,23 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - Alternative One
+
+autonumber
+
+actor "Green Spaces\nManager" as GSM
+participant ":System" as System
+
+        activate GSM
+
+        GSM --> System: Asks about the routes and number of pipes with minimum accumulated cost
+        activate System
+
+        System -> GSM : Provides the info
+        System --> GSM : Displays operation success
+
+        deactivate System
+        deactivate GSM
+@enduml

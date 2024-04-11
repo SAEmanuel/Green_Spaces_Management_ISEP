@@ -15,3 +15,9 @@
 | US006 | [Registering Vehicles](../../us006/Readme.md)                                               |
 | US007 | [Register the overhaul of a vehicle](../../us007/Readme.md)                                 |
 | US008 | [Overhauling of vehicles](../../us008/Readme.md)                                            |
+| US009 | [PUT A TITLE HERE](../../us009/Readme.md)                                                   |
+| US010 | [PUT A TITLE HERE](../../us010/Readme.md)                                            |
+| US011 | [PUT A TITLE HERE](../../us011/Readme.md)                                            |
+| US012 | [PUT A TITLE HERE](../../us012/Readme.md)                                            |
+| US013 | [PUT A TITLE HERE](../../us013/Readme.md)                                            |
+| US014 | [PUT A TITLE HERE](../../us014/Readme.md)                                            |

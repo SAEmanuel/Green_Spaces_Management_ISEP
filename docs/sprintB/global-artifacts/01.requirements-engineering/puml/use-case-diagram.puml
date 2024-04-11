@@ -14,6 +14,10 @@ left to right direction
 rectangle "System Actors                       " as actors {
     actor "Human Resources Manager" as HRM
     actor "Vehicles and Fleet Manager" as FM
+    actor "Green Spaces Manager" as GSM
+    actor "Software Quality Assessment Team Manager" as QAM
+
+
 
 }
 
@@ -28,6 +32,13 @@ rectangle "Use Cases" as usecases{
     usecase "UC6 - Registering Vehicles" as UC6
     usecase "UC7 - Register the overhaul of a vehicle" as UC7
     usecase "UC8 - Overhauling of vehicles " as UC8
+    usecase "UC9 - PUT A TITLE HERE" as UC9
+    usecase "UC10 - PUT A TITLE HERE" as UC10
+    usecase "UC11 - PUT A TITLE HERE" as UC11
+    usecase "UC12 - PUT A TITLE HERE" as UC12
+    usecase "UC13 - PUT A TITLE HERE" as UC13
+    usecase "UC14 - PUT A TITLE HERE" as UC14
+
     HRM --> UC1
     HRM --> UC2
     HRM --> UC3
@@ -36,6 +47,12 @@ rectangle "Use Cases" as usecases{
     FM --> UC6
     FM --> UC7
     FM --> UC8
+    GSM --> UC9
+    GSM --> UC10
+    GSM --> UC11
+    GSM --> UC12
+    GSM --> UC13
+    QAM --> UC14
 }
 
 

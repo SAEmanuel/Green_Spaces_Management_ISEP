@@ -1,10 +1,10 @@
-# US008 - Overhauling of vehicles
+# US009 - [PUT A TITLE HERE]
 
 ## 2. Analysis
 
 ### 2.1. Relevant Domain Model Excerpt 
 
-![Domain Model](svg/us008-domain-model-Domain_Model___US008.svg)
+![Domain Model](svg/us009-domain-model-Domain_Model___US009.svg)
 
 ### 2.2. Other Remarks
 

@@ -50,7 +50,7 @@ The list must clearly identify the vehicles through: plate number, brand, model 
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US006 - Machinery registration" as there must be at least one vehicle in the system so that it can check the need for a check-up.
+* There is a dependency on "US006 - Registering Vehicles" as there must be at least one vehicle in the system so that it can check the need for a check-up.
 
 ### 1.5 Input and Output Data
 
