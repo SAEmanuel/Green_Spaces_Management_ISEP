@@ -1,21 +1,20 @@
-# US012 - [PUT A TITLE HERE]
+# US012 - Importing Water Point Routes and Installation Costs
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As a ...
+As a GSM, I want to import a .csv file containing lines with:
+(Water Point X, Water Point Y, Distance) into a unique data structure.
 
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document and client meetings:**
 
->	
-
->	
-
->   
+>	The set of imported lines describes all possible routes that can be
+opened to lay pipes between each pair of water points, and their respective installation costs 
+ (these could simply refer to the length, or to any other cost parameter).
 
 **From forum:**
 
