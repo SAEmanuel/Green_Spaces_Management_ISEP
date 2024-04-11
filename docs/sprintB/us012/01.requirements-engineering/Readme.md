@@ -58,3 +58,6 @@ opened to lay pipes between each pair of water points, and their respective inst
 
 ![System Sequence Diagram - Alternative One](svg/us012-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
 
+#### Alternative Two
+
+![System Sequence Diagram - Alternative Two](svg/us012-system-sequence-diagram-alternative-two-System_Sequence_Diagram__SSD____Alternative_Two.svg)
