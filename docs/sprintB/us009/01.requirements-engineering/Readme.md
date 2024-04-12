@@ -19,13 +19,13 @@ As a ...
 
 **From forum:**
 
-> **Question:** 
+> **Question:** The file ”WaterUsed.csv” should be given by the user?
 >
-> **Answer:**  
+> **Answer:** Yes.
 
-> **Question:** 
+> **Question:** When the user enters the park identification, should this be by name or through an ID?
 >
-> **Answer:**
+> **Answer:** Users will answer the survey but anonymously.
 
 > **Question:** 
 >
