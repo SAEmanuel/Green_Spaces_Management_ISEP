@@ -13,7 +13,7 @@ As a Green Spaces Manager I intend to now the routes to be opened and the pipes 
 
 >   Only primitive operations must be used during the making of the algorithm
 
->	?
+>	Text output format with ordered pair is acceptable to represent the routes
 
 >   ?
 
@@ -44,7 +44,7 @@ As a Green Spaces Manager I intend to now the routes to be opened and the pipes 
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US012 - Emanuel depois vê isso" as there must be enough info in the system (collected in US012) to complete this US013.
+* There is a dependency on "US012 - Importing Water Point Routes and Installation Costs" as there must be enough info in the system (collected in US012) for the algorithm to work.
 
 ### 1.5 Input and Output Data
 
@@ -54,7 +54,8 @@ As a Green Spaces Manager I intend to now the routes to be opened and the pipes 
 
 **Output Data:**
 
-* routes and pipes needed
+* routes
+* minimum cost
 * (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
