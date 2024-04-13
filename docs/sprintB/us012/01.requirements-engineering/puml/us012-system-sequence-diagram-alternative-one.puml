@@ -7,17 +7,17 @@ title System Sequence Diagram (SSD) - Alternative One
 
 autonumber
 
-actor "Fleet\nManager" as FM
+actor "Green Spaces\nManager" as GSM
 participant ":System" as System
 
-        activate FM
+        activate GSM
 
-        FM --> System: Asks to generate a list of vehicles needing check-up
+        GSM --> System: Imports a .csv file containing water points locations
         activate System
 
-        System -> FM : Provides a list of vehicles that need check-up (and all their info)
-        System --> FM : Displays operation success
+        System -> GSM : Reads and validates the .csv file
+        System --> GSM : Displays operation success
 
         deactivate System
-        deactivate FM
+        deactivate GSM
 @enduml

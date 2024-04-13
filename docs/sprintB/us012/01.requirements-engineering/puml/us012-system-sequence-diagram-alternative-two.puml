@@ -1,0 +1,28 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - Alternative Two
+
+autonumber
+
+actor "Green Spaces\nManager" as GSM
+participant ":System" as System
+
+        activate GSM
+
+        GSM --> System: Imports a .csv file containing water points locations
+        activate System
+
+        System -> GSM : Reads the .csv file
+        System --> GSM : Displays operation failed because the file was in the wrong format
+
+        GSM -> System: Imports another .csv file containing water points locations
+
+        System --> GSM : Reads and validates the .csv file
+        System -> GSM : Displays operation success
+
+        deactivate System
+        deactivate GSM
+@enduml
