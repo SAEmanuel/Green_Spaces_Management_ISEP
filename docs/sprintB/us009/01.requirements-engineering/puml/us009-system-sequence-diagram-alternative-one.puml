@@ -22,7 +22,7 @@ participant ":System" as System
         System -> System: Perform statistical analysis
         System -> System: Calculate average monthly costs
         System -> System: Identify parks with highest and lowest consumption
-
+        System --> gsm: costs referring to water consumption
         System --> gsm: Display barplot of monthly water consumption
         System --> gsm: Provide average monthly costs
         System --> gsm: Present statistical indicators for parks

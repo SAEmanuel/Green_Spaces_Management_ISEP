@@ -93,6 +93,7 @@ levels.
   * mean, median, standard deviation, and the coefficient of skewness
   * build relative and absolute frequency tables
   * Graphically represent data through histograms
+* Costs referring to water consumption.
 * Error messages
 * Success of secondary operations
 * Success of the operation
