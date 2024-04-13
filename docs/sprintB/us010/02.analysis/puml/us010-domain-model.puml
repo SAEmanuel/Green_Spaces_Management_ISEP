@@ -12,14 +12,20 @@ hide methods
 
 title Domain Model - US010
 
+class Organization {
+}
+
 class User {
 
 }
 
+class Equipment {
+
+}
+
+Organization "1" --- "*" Equipment: has >
+User "1"- "*" Equipment: selects >
 
 
-User "1" - "*" Vehicle: has >
-Vehicle "*"- "*" VehicleForCheckUp: contains >
-VehicleForCheckUp "*" -- "1" VFM : informs >
 
 @enduml
