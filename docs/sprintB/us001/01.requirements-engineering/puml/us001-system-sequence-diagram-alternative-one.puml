@@ -13,23 +13,23 @@ participant ":System" as System
 
 activate Employee
 
-    Employee -> System : Access interface
+    Employee -> System : ask to register a skill
     activate System
 
-        System --> Employee : Show interface
+        System --> Employee : request data (name)
     deactivate System
 
-    Employee -> System : View/add skills
+    Employee -> System : types requested data (name)
 
     activate System
 
-        System --> Employee : Shows all data and requests confirmation
+        System --> Employee : shows requested data
     deactivate System
 
-    Employee -> System : Confirms data
+    Employee -> System : submit data
     activate System
 
-        System --> Employee : Displays operation success
+        System --> Employee :shows operation success
     deactivate System
 
 @enduml
