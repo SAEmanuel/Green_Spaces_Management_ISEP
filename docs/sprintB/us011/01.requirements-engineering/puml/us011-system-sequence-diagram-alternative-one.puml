@@ -7,17 +7,27 @@ title System Sequence Diagram (SSD) - Alternative One
 
 autonumber
 
-actor "Fleet\nManager" as FM
+actor "User" as User
 participant ":System" as System
 
-        activate FM
+        activate User
 
-        FM --> System: Asks to generate a list of vehicles needing check-up
+        User --> System: Asks to respond the user park questionnaire
         activate System
 
-        System -> FM : Provides a list of vehicles that need check-up (and all their info)
-        System --> FM : Displays operation success
-
+        System -> User : Request data (Age, Recommendation, Visits Frequency)
         deactivate System
-        deactivate FM
+        User -> System : Types requested data (Age, Recommendation, Visits Frequency)
+
+        activate System
+
+        System --> User : Shows entered data and request confirmation
+        deactivate System
+
+        User -> System : Confirms submitted data
+        activate System
+
+        System --> User : Shows operation success
+        deactivate System
+        deactivate User
 @enduml
