@@ -73,12 +73,9 @@ be appointed to a collaborator
 ### 1.3. Acceptance Criteria
 
 * **AC01:** There cannot be two skills with the same name.
-* **AC02:** The system should ensure that only authorized HR Managers have permission to register skills.
-* **AC03:** When editing a skill, there must be confirmation warnings before the execution of actions.
-* **AC04:** There cannot be two skills with different names, but they booth have the same functionalities.
-* **AC05:** All required fields must be filled in (the name is mandatory).
-* **AC06:** The name of a skill cannot have special characters or numbers.
-* **AC07:** If the system encounters any errors during the skill registration process, it should provide informative error messages to the HR Manager, guiding them on how to resolve the issue.
+* **AC02:** There cannot be two skills with different names, but they booth have the same functionalities.
+* **AC03:** All required fields must be filled in (the name is mandatory).
+* **AC04:** The name of a skill cannot have special characters or numbers.
 
 
 
@@ -98,9 +95,6 @@ be appointed to a collaborator
 
 **Output Data:**
 
-* List of existing skills
-* Error messages
-* Success of secondary operations
 * Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
