@@ -7,27 +7,16 @@ title System Sequence Diagram (SSD) - Alternative One
 
 autonumber
 
-actor "User" as User
+actor "Green Spaces\nManager" as GSM
 participant ":System" as System
 
-        activate User
+        activate GSM
 
-        User --> System: Asks to respond the user park questionnaire
+        GSM --> System: Requests user portal collected data
         activate System
 
-        System -> User : Request data (Age, Recommendation, Visits Frequency)
+        System -> GSM : Shows requested data
+        System --> GSM : Shows operation success
         deactivate System
-        User -> System : Types requested data (Age, Recommendation, Visits Frequency)
-
-        activate System
-
-        System --> User : Shows entered data and request confirmation
-        deactivate System
-
-        User -> System : Confirms submitted data
-        activate System
-
-        System --> User : Shows operation success
-        deactivate System
-        deactivate User
+        deactivate GSM
 @enduml
