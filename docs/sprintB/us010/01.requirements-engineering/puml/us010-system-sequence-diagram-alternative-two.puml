@@ -7,7 +7,7 @@ title System Sequence Diagram (SSD) - Alternative Two
 
 autonumber
 
-actor "User" as User
+actor "GSM" as User
 participant ":System" as System
 
 User -> System : asks to record the equipments used
