@@ -17,7 +17,7 @@ participant "appSession\n:ApplicationSession" as APP
 participant "currentSession\n:UserSession" as SESSAO
 participant "organizationRepository:\nOrganizationRepository" as OrganizationRepository
 participant "organization\n:Organization" as ORG
-participant "job\n:Job" as TAREFA
+participant "job\n:Job" as EMPREGO
 
 activate HRM
 
@@ -153,7 +153,7 @@ activate HRM
             CTRL -> ORG: createTask(employee, reference, description,\ninformalDescription, technicalDescription,\nduration, cost, , taskCategory, employee)
             activate ORG
 
-                ORG -> TAREFA**: create(employee, reference, description,\ninformalDescription, technicalDescription,\nduration, cost, taskCategory, employee)
+                ORG -> EMPREGO**: create(employee, reference, description,\ninformalDescription, technicalDescription,\nduration, cost, taskCategory, employee)
                 ORG -> ORG: addTask (task)
 
 
