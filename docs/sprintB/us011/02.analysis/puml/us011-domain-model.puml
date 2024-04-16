@@ -13,25 +13,13 @@ package "VFM System" {
 
 title Domain Model - US008
 
-class VehicleForCheckUp {
-    Vehicle
+class GSM {
 }
 
-class VFM {
-}
-
-class Vehicle {
-         plateID
-         brand
-         model
-         type
-         tare
-         grossWeight
-         millage
-         registerDate
-         acquisitionDate
-         maintenanceFrequency
-         lastCheckUp
+class ParkCollectedData {
+age
+recommendation
+visitsFrequency
 }
 
 class MusgoSublime {
@@ -42,13 +30,7 @@ email
 }
 
 
-
-MusgoSublime "1" - "*" Vehicle: has >
-Vehicle "*"- "*" VehicleForCheckUp: contains >
-VehicleForCheckUp "*" -- "1" VFM : informs >
-
-
-
-
+MusgoSublime "1" - "1" ParkCollectedData: has >
+ParkCollectedData "1" - "1" GSM: search <
 
 @enduml

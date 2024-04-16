@@ -7,17 +7,26 @@ title System Sequence Diagram (SSD) - Alternative One
 
 autonumber
 
-actor "Fleet\nManager" as FM
+actor "Green Space\nManager" as gsm
 participant ":System" as System
 
-        activate FM
+        activate gsm
 
-        FM --> System: Asks to generate a list of vehicles needing check-up
+        gsm -> System: Introduce the file "WaterUsed.csv" with information.
         activate System
 
-        System -> FM : Provides a list of vehicles that need check-up (and all their info)
-        System --> FM : Displays operation success
+        System -> gsm: Ask for inputs (time period,park identification...)
+        gsm -> System : Introduce data
+        System -> System : confirms data
+        System -> System : Read and interpret data from "WaterUsed.csv"
+        System -> System: Perform statistical analysis
+        System -> System: Calculate average monthly costs
+        System -> System: Identify parks with highest and lowest consumption
+        System --> gsm: costs referring to water consumption
+        System --> gsm: Display barplot of monthly water consumption
+        System --> gsm: Provide average monthly costs
+        System --> gsm: Present statistical indicators for parks
 
         deactivate System
-        deactivate FM
+        deactivate gsm
 @enduml
