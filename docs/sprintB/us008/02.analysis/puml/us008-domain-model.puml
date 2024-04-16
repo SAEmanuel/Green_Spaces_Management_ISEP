@@ -34,7 +34,7 @@ class Vehicle {
          lastCheckUp
 }
 
-class MusgoSublime {
+class Organization {
 vatNumber
 website
 phoneNumber
@@ -43,7 +43,7 @@ email
 
 
 
-MusgoSublime "1" - "*" Vehicle: has >
+Organization "1" - "*" Vehicle: has >
 Vehicle "*"- "*" VehicleForCheckUp: contains >
 VehicleForCheckUp "*" -- "1" VFM : informs >
 

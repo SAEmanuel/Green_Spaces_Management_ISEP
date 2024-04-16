@@ -16,7 +16,7 @@ title Domain Model - US002
 class HRM {
 }
 
-class MusgoSublime {
+class Organization {
 vatNumber
 website
 phoneNumber
@@ -33,7 +33,7 @@ class Job {
 
 HRM "1" -- "1..*" Job : register >
 
-Job "1..*" -- "1"MusgoSublime : has <
+Job "1..*" -- "1"Organization : has <
 
 
 
