@@ -19,9 +19,11 @@ As a Green Spaces Manager I intend to now the routes to be opened and the pipes 
 
 **From forum:**
 
-> **Question:** .
+> **Question:** Do the vertices mentioned in the statement have coordinates? For example : (41.1496 , -8.6112) (Latitude, Longitude)
+If we're going to be correct, as in the case of the Porto city park example, we have to use coordinates to represent a specific point in the park!
 >
-> **Answer:**  .
+> **Answer:**  The csv files that we are going to make available for US13 do not provide the coordinates of the vertices, only the information mentioned in US12.
+If we want to accurately draw the map of the watering points, we do need the coordinates. As computer scientists/mathematicians, to solve the problem in question, this is unnecessary information/noise.
 
 > **Question:** .
 >
