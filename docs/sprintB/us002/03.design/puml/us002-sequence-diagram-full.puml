@@ -42,8 +42,8 @@ activate jobRepository
 jobRepository --> UI : Job added successfully
 deactivate jobRepository
 UI -> System : Provides job name
-activate "System"
 deactivate UI
+activate "System"
 
 System -> Job : CreateJob(name)
 activate Job
