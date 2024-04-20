@@ -30,15 +30,7 @@ package "VFM System" {
          lastCheckUp
     }
 
-    class MusgoSublime {
-            vatNumber
-            website
-            phoneNumber
-            email
-        }
-
 
     VFM "1" -- "1..*" Vehicle : register >
-    Vehicle "*" -- "1" MusgoSublime : has <
 }
 @enduml

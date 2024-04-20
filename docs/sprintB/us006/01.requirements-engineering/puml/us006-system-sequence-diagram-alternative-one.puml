@@ -12,22 +12,22 @@ participant ":System" as System
 
 activate Employee
 
-    Employee -> System : Start a request to register a vehicle/machine/equipment
+    Employee -> System : request to register a vehicle/machine/equipment
     activate System
 
-        System --> Employee : Request data (Brand,Model,Type...)
+        System --> Employee : request data (Brand,Model,Type...)
     deactivate System
 
-    Employee -> System : Types requested data
+    Employee -> System : types requested data
     activate System
 
-        System --> Employee : Show all data registed and requests for confirmation
+        System --> Employee : show all data registed and requests for confirmation
     deactivate System
 
-    Employee -> System : Confirms data
+    Employee -> System : confirms data
     activate System
 
-        System --> Employee : Displays operation success
+        System --> Employee : cisplays operation success
     deactivate System
 
 @enduml
