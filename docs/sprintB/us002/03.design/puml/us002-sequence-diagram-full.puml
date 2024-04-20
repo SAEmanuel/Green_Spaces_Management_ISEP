@@ -17,8 +17,8 @@ participant ":Job" as Job
 
 HRM -> System : Asks to add a new job
 activate System
-
 System -> UI : Asks for the interface
+deactivate "System"
 activate UI
 
 UI -> HRM : Displays the interface for entering the job's name
@@ -41,8 +41,8 @@ activate jobRepository
 
 jobRepository --> UI : Job added successfully
 deactivate jobRepository
-
 UI -> System : Provides job name
+activate "System"
 deactivate UI
 
 System -> Job : CreateJob(name)
