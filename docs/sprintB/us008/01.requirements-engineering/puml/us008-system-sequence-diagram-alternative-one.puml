@@ -16,7 +16,7 @@ participant ":System" as System
         activate System
 
         System -> FM : Provides a list of vehicles that need check-up (and all their info)
-        System --> FM : Displays operation success
+
 
         deactivate System
         deactivate FM

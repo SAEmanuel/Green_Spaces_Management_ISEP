@@ -7,7 +7,7 @@ title System Sequence Diagram (SSD) - Alternative One
 
 autonumber
 
-actor "User" as User
+actor "Green Space Manager" as User
 participant ":System" as System
 
 User -> System : asks to record the equipments used

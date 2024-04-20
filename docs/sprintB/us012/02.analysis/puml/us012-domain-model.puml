@@ -9,32 +9,18 @@ skinparam classAttributeIconSize 0
 
 hide circle
 hide methods
-package "VFM System" {
+package "GSM System" {
 
-title Domain Model - US008
+title Domain Model - US012
 
-class VehicleForCheckUp {
-    Vehicle
+class FileImporter {
+
 }
 
-class VFM {
+class GSM {
 }
 
-class Vehicle {
-         plateID
-         brand
-         model
-         type
-         tare
-         grossWeight
-         millage
-         registerDate
-         acquisitionDate
-         maintenanceFrequency
-         lastCheckUp
-}
-
-class MusgoSublime {
+class Organization {
 vatNumber
 website
 phoneNumber
@@ -43,9 +29,8 @@ email
 
 
 
-MusgoSublime "1" - "*" Vehicle: has >
-Vehicle "*"- "*" VehicleForCheckUp: contains >
-VehicleForCheckUp "*" -- "1" VFM : informs >
+Organization "1" - "1" FileImporter: has >
+FileImporter "1" - "1" GSM : informs >
 
 
 

@@ -3,7 +3,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-'left to right direction
+left to right direction
 
 skinparam classAttributeIconSize 0
 
@@ -13,9 +13,7 @@ package "VFM System" {
 
 title Domain Model - US008
 
-class VehicleForCheckUp {
-    Vehicle
-}
+
 
 class VFM {
 }
@@ -34,18 +32,11 @@ class Vehicle {
          lastCheckUp
 }
 
-class MusgoSublime {
-vatNumber
-website
-phoneNumber
-email
-}
 
 
 
-MusgoSublime "1" - "*" Vehicle: has >
-Vehicle "*"- "*" VehicleForCheckUp: contains >
-VehicleForCheckUp "*" -- "1" VFM : informs >
+
+VFM "1" -- "*" Vehicle : lists >
 
 
 

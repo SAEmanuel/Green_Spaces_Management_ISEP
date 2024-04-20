@@ -15,7 +15,7 @@ title Domain Model - US010
 class Organization {
 }
 
-class User {
+class GSM {
 
 }
 
@@ -24,7 +24,7 @@ class Equipment {
 }
 
 Organization "1" --- "*" Equipment: has >
-User "1"- "*" Equipment: selects >
+GSM "1"- "*" Equipment: selects >
 
 
 
