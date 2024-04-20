@@ -20,15 +20,8 @@ package "HRM System" {
         name
     }
 
-    class MusgoSublime {
-        vatNumber
-        website
-        phoneNumber
-        email
-    }
+    HRM "1  " - "1..*" Skill : register >
 
-    HRM "1  " -- "1..*" Skill : register >
-    MusgoSublime "1" -- "                           *" Skill : has >
 }
 
 
