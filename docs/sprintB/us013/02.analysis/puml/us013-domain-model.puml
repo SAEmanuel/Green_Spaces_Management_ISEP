@@ -24,20 +24,10 @@ class WaterSystem {
          numberPipes
 }
 
-class MusgoSublime {
-vatNumber
-website
-phoneNumber
-email
-}
 
 
 
-MusgoSublime "1" -- "1" WaterSystem: has >
-WaterSystem "1"-- "1" GSM: informs >
-
-
-
+GSM "1" -- "1" WaterSystem : asks >
 
 
 

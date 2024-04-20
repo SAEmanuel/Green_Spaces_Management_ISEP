@@ -15,7 +15,6 @@ As a Green Spaces Manager I intend to now the routes to be opened and the pipes 
 
 >	Text output format with ordered pair is acceptable to represent the routes
 
->   ?
 
 **From forum:**
 
@@ -25,23 +24,25 @@ If we're going to be correct, as in the case of the Porto city park example, we 
 > **Answer:**  The csv files that we are going to make available for US13 do not provide the coordinates of the vertices, only the information mentioned in US12.
 If we want to accurately draw the map of the watering points, we do need the coordinates. As computer scientists/mathematicians, to solve the problem in question, this is unnecessary information/noise.
 
-> **Question:** .
+> **Question:**
+Hello client,
+Will we be given the distance and/or costs between different water points?
+In US12 when we receive only the distance this value will be used as cost in the minimum accumulated cost algorithm developped in US13?
+Thank you
 >
-> **Answer:** .
+> **Answer:** You only have one value assigned between different water points, called the "cost", that could mean a distance or something else.
 
-> **Question:** .
+> **Question:** I would like to confirm if, in the csv file, "waterPointX" and "waterPointY" are always whole numbers or can they be letters?
+Thank you
 >
-> **Answer:** .
+> **Answer:** They can be letters or words (strings). They are any name that identifies the irrigation point.
 
-> **Question:** .
->
-> **Answer:** .
 
 ### 1.3. Acceptance Criteria 
 
-* **AC1:**  All implemented procedures must only use primitive operations, and not existing functions in JAVA libraries.
-* **AC2:** .
-* **AC2:** .
+* **AC1:** All implemented procedures must only use primitive operations, and not existing functions in JAVA libraries.
+* **AC2:** The "waterPointX" and "waterPointY" in the csv file can be letters, words (strings) or numbers, something that identifies the irrigation point.
+
 
 
 ### 1.4. Found out Dependencies
