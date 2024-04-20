@@ -1,0 +1,22 @@
+@startuml
+title Validating Job Name (CTRL)
+
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+
+
+participant ":CreateJobUI" as UI
+participant ":CreateJobController" as CTRL
+
+group Validating Job Name
+autonumber 5
+"UI" -> CTRL : CreateJob(name)
+activate CTRL
+
+CTRL -> UI : ValidateNameCriteria(name)
+deactivate CTRL
+end
+
+@enduml
