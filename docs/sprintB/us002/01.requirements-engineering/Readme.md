@@ -65,9 +65,6 @@ As a Human Resources Manager I want to register a job.
 
 ![System Sequence Diagram - Alternative One](svg/us002-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
 
-#### Alternative Two
-
-![System Sequence Diagram - Alternative One](svg/us002-system-sequence-diagram-alternative-two-System_Sequence_Diagram__SSD____Alternative_Two.svg)
 
 ### 1.7 Other Relevant Remarks
 
