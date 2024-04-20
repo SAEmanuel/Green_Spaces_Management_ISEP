@@ -81,6 +81,7 @@ levels.
 **Input Data:**
 
 * Information from file "WaterUsed.csv".
+* Year
 * Time period (StartMonth, EndMonth).
 * Park identification.
 * Number of parks to be analyzed.

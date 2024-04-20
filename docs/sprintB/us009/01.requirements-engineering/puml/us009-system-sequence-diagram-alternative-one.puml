@@ -14,11 +14,13 @@ participant ":System" as System
 
         gsm -> System: Introduce the file "WaterUsed.csv" with information.
         activate System
+        System -> System : Read and interpret data from "WaterUsed.csv"
+
+
 
         System -> gsm: Ask for inputs (time period,park identification...)
         gsm -> System : Introduce data
         System -> System : confirms data
-        System -> System : Read and interpret data from "WaterUsed.csv"
         System -> System: Perform statistical analysis
         System -> System: Calculate average monthly costs
         System -> System: Identify parks with highest and lowest consumption
