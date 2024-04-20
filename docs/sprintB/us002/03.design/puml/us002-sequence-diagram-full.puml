@@ -30,6 +30,12 @@ activate CTRL
 CTRL -> UI : ValidateNameCriteria(name)
 deactivate CTRL
 
+UI -> PLAT : GetJobRepository()
+activate PLAT
+
+PLAT --> UI : jobRepository
+deactivate PLAT
+
 UI -> jobRepository : AddJob(name)
 activate jobRepository
 
@@ -47,7 +53,5 @@ deactivate Job
 
 System --> HRM : Confirms the success of the operation.
 deactivate System
-
-
 
 @enduml
