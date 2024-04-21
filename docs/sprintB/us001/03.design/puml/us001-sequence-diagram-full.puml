@@ -11,7 +11,7 @@ participant ":RegisterSkillUI" as UI
 participant ":RegisterSkillController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "skillCategoryRepository\n:skillCategoryRepository" as skillRepository
+participant "skillListRepository\n:skillListRepository" as skillRepository
 participant ":ApplicationSession" as _APP
 participant "appSession\n:ApplicationSession" as APP
 participant "currentSession\n:UserSession" as SESSAO
@@ -27,7 +27,7 @@ activate HRM
 
             UI -> CTRL** : register
 
-            UI -> CTRL : getSkillCategories()
+            UI -> CTRL : getSkillList()
             activate CTRL
 
                 CTRL -> RepositorySingleton : getInstance()
@@ -36,28 +36,33 @@ activate HRM
                     RepositorySingleton --> CTRL: repositories
                 deactivate RepositorySingleton
 
-                CTRL -> PLAT : getSkillCategoryRepository()
+                CTRL -> PLAT : getSkillRepository()
                 activate PLAT
 
-                    PLAT --> CTRL: skillCategoryRepository
+                    PLAT --> CTRL: skillListRepository
                 deactivate PLAT
 
-                CTRL -> skillRepository : getSkillCategories()
+                CTRL -> skillRepository : getSkillList()
                 activate skillRepository
 
-                    skillRepository --> CTRL : skillCategoryList
+                    skillRepository --> CTRL : skillList
                 deactivate skillRepository
 
-                CTRL --> UI : skillCategoryList
+                CTRL --> UI : skillList
             deactivate CTRL
 
+
+
+
+            UI --> HRM : show skill list
             UI --> HRM : request data (name)
         deactivate UI
+
 
     HRM -> UI : types requested data (name)
     activate UI
 
-        UI --> HRM : shows selected category and requested data
+        UI --> HRM : shows requested data typed
         deactivate UI
 
         HRM -> UI : submits data
@@ -75,77 +80,40 @@ activate HRM
                         RepositorySingleton --> CTRL: repositories
                     deactivate RepositorySingleton
 
-                    CTRL -> PLAT : getJobCategoryRepository()
+                    CTRL -> PLAT : getSkillListRepository()
                     activate PLAT
 
-                        PLAT -> CTRL : jobCategoryRepository
+                        PLAT -> CTRL : SkillListRepository
                     deactivate PLAT
 
-                    CTRL -> skillRepository : getJobCategoryByDescription(jobCategoryDescription)
+                    CTRL -> skillRepository : getSkillList()
                     activate skillRepository
 
-                        skillRepository --> CTRL : jobCategory
+                        skillRepository --> CTRL : skillList
                     deactivate skillRepository
-                        CTRL --> CTRL : jobCategory
+                        CTRL --> CTRL : skillList
                 deactivate CTRL
 
                 |||
-                CTRL -> CTRL : getEmployeeFromSession()
-                activate CTRL
-
-                    CTRL -> _APP: getInstance()
-                    activate _APP
-                        _APP -> CTRL: appSession
-                    deactivate _APP
-
-
-                    CTRL -> APP: getCurrentSession()
-                    activate APP
-
-                        APP --> CTRL: currentSession
-                    deactivate APP
-
-                    CTRL -> SESSAO: email = getUserEmail()
-                    activate SESSAO
-
-                        SESSAO --> CTRL: email
-                    deactivate SESSAO
-
-
-                    CTRL -> PLAT: getOrganizationRepository(email)
-                    activate PLAT
-
-                        PLAT --> CTRL: organizationRepository
-                    deactivate PLAT
-
-
-                    CTRL -> OrganizationRepository: getOrganizationByEmployeeEmail(email)
-                    activate OrganizationRepository
-
-                        loop [for each employee
-                            OrganizationRepository -> ORG : anyEmployeeHasEmail(email)
-                            activate ORG
-
-                                 ORG --> OrganizationRepository : true/false
-                            deactivate ORG
-                        end
-                        OrganizationRepository --> CTRL : organization
-                    deactivate OrganizationRepository
-
-                    CTRL -> ORG: getEmployeeByEmail(email)
-                    activate ORG
-
-                        ORG --> CTRL : employee
-                    deactivate ORG
-
-                    CTRL --> CTRL : employee
-                deactivate CTRL
-
-                |||
-                CTRL -> ORG: registerSkill(employee, name)
+                CTRL -> ORG: registerSkill(name)
                 activate ORG
 
-                    ORG -> EMPREGO**: register(employee, name)
+                    ORG -> EMPREGO**: registerSkill(name)
+
+                    activate EMPREGO
+                        EMPREGO --> EMPREGO : validateNameSkill(skill)
+
+                        loop [for each skill name
+                          EMPREGO -> EMPREGO : validateNameSkill(skill)
+                            activate EMPREGO
+
+                                 EMPREGO --> EMPREGO : true/false
+                            deactivate EMPREGO
+                        end
+
+                        EMPREGO --> ORG : skill
+                    deactivate EMPREGO
+
 
                     ORG -> ORG: addSkill(skill)
 
