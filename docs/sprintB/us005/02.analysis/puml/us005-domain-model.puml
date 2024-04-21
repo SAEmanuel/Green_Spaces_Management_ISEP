@@ -17,29 +17,20 @@ package "HRM System" {
     }
 
     class Team {
-        skill
         minTeamSize
         maxTeamSize
     }
 
     class Collaborator {
-            name
-            birthdate
-            admissionDate
-            address
-            phoneNumber
-            email
-            taxpayerNumber
-            id_doc_type
-            id_doc_number
-
-        }
-
-    class MusgoSublime {
-        vatNumber
-        website
+        name
+        birthdate
+        admissionDate
+        address
         phoneNumber
         email
+        taxpayerNumber
+        id_doc_type
+        id_doc_number
     }
 
     class Skill {
@@ -48,12 +39,7 @@ package "HRM System" {
 
 
     HRM "1  " -- "1 " Team : generates >
-    MusgoSublime "1 " -- "*" Team : has >
-    MusgoSublime "1 " -- "1..*" Collaborator : has >
     Team "1 " -- "1..*" Collaborator : assigned <
-
     Collaborator "1" -- "*" Skill : has >
-
-
 }
 @enduml

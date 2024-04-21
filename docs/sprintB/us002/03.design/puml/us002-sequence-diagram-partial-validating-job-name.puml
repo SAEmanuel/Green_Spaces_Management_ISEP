@@ -1,22 +1,15 @@
 @startuml
-title Validating Job Name (CTRL)
+title Validating the Job Name (CTRL)
 
 skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-
-
-participant ":CreateJobUI" as UI
 participant ":CreateJobController" as CTRL
 
-group Validating Job Name
-autonumber 5
-"UI" -> CTRL : CreateJob(name)
+group Validating Job name
 activate CTRL
-
-CTRL -> UI : ValidateNameCriteria(name)
-deactivate CTRL
+CTRL -> CTRL : getJobList()
+CTRL -> CTRL : validateJobName(name)
 end
-
 @enduml

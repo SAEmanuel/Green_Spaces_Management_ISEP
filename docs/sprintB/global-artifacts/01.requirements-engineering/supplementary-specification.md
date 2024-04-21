@@ -52,6 +52,8 @@ configurability, installability, scalability and more._
 
 ## 
 
+# +
+
 ### Design Constraints
 
 _Specifies or constraints the system design process. Examples may include: programming languages, software process, mandatory standards/patterns, use of development tools, class library, etc._
