@@ -77,13 +77,11 @@ As a HRM, I want to generate a team proposal automatically
 
 **Input Data:**
   * Typed data:
-    * skills
     * min team size
     * max team size
 
 **Output Data:**
   * team proposal/s
-  * Error messages
   * Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
