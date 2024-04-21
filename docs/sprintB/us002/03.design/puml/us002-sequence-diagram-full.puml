@@ -83,29 +83,30 @@ JobCategoryRepository --> CTRL : jobList
 deactivate JobCategoryRepository
 
 deactivate CTRL
-CTRL --> CTRL : jobList
+CTRL --> PLAT : jobList
 
 
 
-CTRL -> ORG: createJob(name)
+CTRL -> OrganizationRepository: createJob(name)
 deactivate CTRL
+activate OrganizationRepository
+
+OrganizationRepository -> ORG: addJob (job)
 activate ORG
 
-ORG -> ORG: addJob (job)
-
-
-activate ORG
-    ORG -> ORG: validateJob(job)
-    activate ORG
-        ORG --> ORG
-    deactivate ORG
-
-    ORG --> ORG
+activate OrganizationRepository
+    ORG -> OrganizationRepository: validateJob(job)
 deactivate ORG
+    activate OrganizationRepository
+        OrganizationRepository --> OrganizationRepository
+    deactivate OrganizationRepository
 
-ORG --> CTRL : job
+    OrganizationRepository --> OrganizationRepository
+deactivate OrganizationRepository
 
-deactivate ORG
+OrganizationRepository --> CTRL : job
+
+deactivate OrganizationRepository
 
 activate CTRL
 CTRL --> UI: job

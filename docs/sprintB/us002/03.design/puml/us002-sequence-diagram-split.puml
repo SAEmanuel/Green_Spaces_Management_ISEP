@@ -7,43 +7,115 @@ autonumber
 
 'hide footbox
 actor "Human Resources Manager" as HRM
-participant "System" as System
 participant ":CreateJobUI" as UI
 participant ":CreateJobController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "jobRepository:\nJobRepository" as jobRepository
-participant ":Job" as Job
+participant "jobCategoryRepository:\nJobCategoryRepository" as JobCategoryRepository
+participant "organizationRepository:\nOrganizationRepository" as OrganizationRepository
+participant "organization\n:Organization" as ORG
 
-HRM -> System : Asks to add a new job
-activate System
 
+activate HRM
+
+
+HRM -> UI : asks to add a new job
 
 activate UI
-ref over System, UI : Displaying Job Interface (UI)
 
-HRM -> UI : Provides the job's name
+UI -> CTRL** : create
+activate CTRL
 
+UI -> CTRL : getJobList()
+activate CTRL
+
+CTRL -> RepositorySingleton : getInstance()
+activate RepositorySingleton
+
+RepositorySingleton --> CTRL: repositories
+deactivate RepositorySingleton
+
+CTRL -> PLAT : getJobListRepository()
+activate PLAT
+
+PLAT --> CTRL: jobCategoryRepository
+deactivate PLAT
+
+CTRL -> JobCategoryRepository : getJobList()
+activate JobCategoryRepository
+
+JobCategoryRepository --> CTRL : jobList
+deactivate JobCategoryRepository
+
+deactivate CTRL
+CTRL --> UI : jobList
+
+
+
+
+UI --> HRM : Displays the interface for entering the job's name
+deactivate UI
+
+HRM -> UI : Provides a job
+activate UI
+
+
+
+UI -> CTRL : createJob(reference,name)
+activate CTRL
+
+
+
+CTRL -> RepositorySingleton : getInstance()
+activate RepositorySingleton
+
+RepositorySingleton --> CTRL: repositories
+deactivate RepositorySingleton
+
+CTRL -> PLAT : getJobListRepository()
+activate PLAT
+
+PLAT -> CTRL : jobListRepository
+deactivate PLAT
+
+CTRL -> JobCategoryRepository : getTaskCategoryByDescription(taskCategoryDescription)
+activate JobCategoryRepository
+
+JobCategoryRepository --> CTRL : jobList
+deactivate JobCategoryRepository
+
+deactivate CTRL
+CTRL --> PLAT : jobList
+
+
+
+CTRL -> OrganizationRepository: createJob(name)
+deactivate CTRL
+
+activate OrganizationRepository
+
+ref over OrganizationRepository
+           Validating job name
+end
+
+
+
+
+
+    OrganizationRepository --> OrganizationRepository
+deactivate OrganizationRepository
+
+OrganizationRepository --> CTRL : job
+
+deactivate OrganizationRepository
+
+activate CTRL
+CTRL --> UI: job
+deactivate CTRL
+UI --> HRM: displays operation success
 deactivate UI
 
 
-ref over UI, CTRL : Validating job name
-ref over UI, PLAT, jobRepository :  Adding Job to Repository
-
-
-
-UI -> System : Provides job name
-activate UI
-deactivate UI
-activate "System"
-
-System -> Job : CreateJob(name)
-activate Job
-
-Job --> System : Job created successfully
-deactivate Job
-
-System --> HRM : Confirms the success of the operation.
-deactivate System
+deactivate HRM
 
 @enduml
