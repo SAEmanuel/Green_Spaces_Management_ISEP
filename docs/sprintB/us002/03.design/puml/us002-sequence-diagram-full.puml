@@ -14,7 +14,7 @@ participant "repositories\n:Repositories" as PLAT
 participant "jobCategoryRepository:\nJobCategoryRepository" as JobCategoryRepository
 participant "organizationRepository:\nOrganizationRepository" as OrganizationRepository
 participant "organization\n:Organization" as ORG
-participant "job\n:Job" as JOB
+
 
 activate HRM
 
@@ -45,8 +45,8 @@ activate JobCategoryRepository
 JobCategoryRepository --> CTRL : jobList
 deactivate JobCategoryRepository
 
-CTRL --> UI : jobList
 deactivate CTRL
+CTRL --> UI : jobList
 
 
 
