@@ -6,37 +6,37 @@ skinparam shadowing false
 participant ":CreateTaskController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "taskCategoryRepository:\nTaskCategoryRepository" as TaskCategoryRepository
+participant "skillListRepository:\nskillListRepository" as SkillListRepository
 
 autonumber 12
--> CTRL : getTaskCategoryByDescription(taskCategoryDescription)
+-> CTRL : register(name)
 
 autonumber 12.1
 
 activate CTRL
-    group Get Task Category
+    group Get Skill List
         CTRL -> RepositorySingleton : getInstance()
         activate RepositorySingleton
 
             RepositorySingleton --> CTRL: repositories
         deactivate RepositorySingleton
 
-        CTRL -> PLAT : getTaskCategoryRepository()
+        CTRL -> PLAT : getSkillListRepository()
         activate PLAT
 
-            PLAT -> CTRL : taskCategoryRepository
+            PLAT -> CTRL : SkillListRepository
         deactivate PLAT
 
-        CTRL -> TaskCategoryRepository : getTaskCategoryByDescription(taskCategoryDescription)
-        activate TaskCategoryRepository
+        CTRL -> SkillListRepository : getSkillList
+        activate SkillListRepository
 
-            TaskCategoryRepository --> CTRL : taskCategory
-        deactivate TaskCategoryRepository
+            SkillListRepository --> CTRL : SkillList
+        deactivate SkillListRepository
 
     end group
 
     autonumber 13
-    <-- CTRL : taskCategory
+    <-- CTRL : SkillList
 
 deactivate CTRL
 

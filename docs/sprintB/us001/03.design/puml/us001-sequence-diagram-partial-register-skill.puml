@@ -11,7 +11,7 @@ autonumber 16
 
 autonumber 16.1
 activate ORG
-    group Create Task
+    group Register skill
 
         ORG -> EMPREGO**:
             activate EMPREGO
