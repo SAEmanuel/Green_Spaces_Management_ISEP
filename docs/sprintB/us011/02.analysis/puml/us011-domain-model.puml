@@ -9,9 +9,9 @@ skinparam classAttributeIconSize 0
 
 hide circle
 hide methods
-package "VFM System" {
+package "GSM System" {
 
-title Domain Model - US008
+title Domain Model - US011
 
 class GSM {
 }
@@ -22,15 +22,7 @@ recommendation
 visitsFrequency
 }
 
-class MusgoSublime {
-vatNumber
-website
-phoneNumber
-email
-}
 
-
-MusgoSublime "1" - "1" ParkCollectedData: has >
 ParkCollectedData "1" - "1" GSM: search <
 
 @enduml
