@@ -76,15 +76,15 @@ class Repositories {
     + getOrganizationRepository()
 }
 
-class CreateTaskController {
-    + CreateTaskController(organizationRepository, taskCategoryRepository)
+class RegisterSkillController {
+    + RegisterSkillController(organizationRepository, taskCategoryRepository)
     + getTaskCategories()
     + createTask(userEmail, reference, description,\ninformalDescription, technicalDescription,\nduration, cost, categoryDescription)
     - getTaskCategoryByDescription(taskCategoryDescription)
     - getEmployeeFromSession()
 }
 
-note right of CreateTaskController
+note right of RegisterSkillController
     - userEmail is obtained
     from the user session
     - categoryDescription
@@ -102,24 +102,24 @@ class CreateTaskUI {
 Repositories -> Repositories : instance
 ApplicationSession -> ApplicationSession : instance
 
-CreateTaskUI .> CreateTaskController
+CreateTaskUI .> RegisterSkillController
 
-CreateTaskController .> Repositories : repositories
+RegisterSkillController .> Repositories : repositories
 
 Repositories -> "1" TaskCategoryRepository
 
-CreateTaskController ..> TaskCategory
-CreateTaskController ..> OrganizationRepository : organizationRepository
-CreateTaskController ..> TaskCategoryRepository : TaskCategoryRepository
+RegisterSkillController ..> TaskCategory
+RegisterSkillController ..> OrganizationRepository : organizationRepository
+RegisterSkillController ..> TaskCategoryRepository : TaskCategoryRepository
 
 Repositories --> "1" OrganizationRepository
 
 OrganizationRepository --> "*" Organization
 ApplicationSession --> "1" UserSession : userSession
 
-CreateTaskController ..> "1" Organization : organization
-CreateTaskController ..> ApplicationSession
-CreateTaskController ..> UserSession
+RegisterSkillController ..> "1" Organization : organization
+RegisterSkillController ..> ApplicationSession
+RegisterSkillController ..> UserSession
 Task "*" --> "1" TaskCategory : taskCategory
 TaskCategoryRepository "1" --> "*" TaskCategory : taskCategory
 Organization "1" --> "*" Task : tasks
