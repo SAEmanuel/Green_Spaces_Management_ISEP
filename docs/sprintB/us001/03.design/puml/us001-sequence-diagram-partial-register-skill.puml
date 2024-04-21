@@ -1,0 +1,48 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant "organization\n:Organization" as ORG
+participant "skill\n:Skill" as EMPREGO
+
+autonumber 16
+-> ORG: registerSkill(name)
+
+autonumber 16.1
+activate ORG
+    group Create Task
+
+        ORG -> EMPREGO**:
+            activate EMPREGO
+                EMPREGO --> EMPREGO : validateNameSkill(skill)
+
+                loop [for each skill name
+                    EMPREGO -> EMPREGO : validateNameSkill(skill)
+                    activate EMPREGO
+
+                    EMPREGO --> EMPREGO : true/false
+                    deactivate EMPREGO
+                end
+
+                EMPREGO --> ORG : skill
+            deactivate EMPREGO
+
+
+        ORG -> ORG: addSkill(skill)
+        activate ORG
+            ORG -> ORG: validateSkill(skill)
+            activate ORG
+                ORG --> ORG
+            deactivate ORG
+
+            ORG --> ORG
+        deactivate ORG
+    end
+
+    autonumber 17
+    <-- ORG : skill
+deactivate ORG
+
+
+@enduml

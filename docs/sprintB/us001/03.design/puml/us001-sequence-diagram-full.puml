@@ -69,7 +69,7 @@ activate HRM
             activate UI
 
 
-            UI -> CTRL : registerSkill(name)
+            UI -> CTRL : register(name)
             activate CTRL
 
                 activate CTRL
