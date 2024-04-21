@@ -1,0 +1,28 @@
+@startuml
+title Adding Job to Repository (JobRepository)
+
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+
+participant ":CreateJobUI" as UI
+participant "repositories\n:Repositories" as PLAT
+participant "jobRepository:\nJobRepository" as jobRepository
+
+group Adding Job to Repository
+autonumber 7
+"UI" -> PLAT : GetJobRepository()
+activate PLAT
+
+PLAT --> UI : jobRepository
+deactivate PLAT
+
+UI -> jobRepository : AddJob(name)
+activate jobRepository
+
+jobRepository --> UI : Job added successfully
+deactivate jobRepository
+end
+
+@enduml

@@ -1,4 +1,4 @@
-# US002 - Profession Registration
+# US002 - Job Registration
 
 
 ## 1. Requirements Engineering

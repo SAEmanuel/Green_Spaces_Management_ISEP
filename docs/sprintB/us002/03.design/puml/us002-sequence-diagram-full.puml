@@ -7,163 +7,51 @@ autonumber
 
 'hide footbox
 actor "Human Resources Manager" as HRM
+participant "System" as System
 participant ":CreateJobUI" as UI
 participant ":CreateJobController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "jobCategoryRepository:\njobCategoryRepository" as jobRepository
-participant ":ApplicationSession" as _APP
-participant "appSession\n:ApplicationSession" as APP
-participant "currentSession\n:UserSession" as SESSAO
-participant "organizationRepository:\nOrganizationRepository" as OrganizationRepository
-participant "organization\n:Organization" as ORG
-participant "job\n:Job" as EMPREGO
+participant "jobRepository:\nJobRepository" as jobRepository
+participant ":Job" as Job
 
-activate HRM
+HRM -> System : Asks to add a new job
+activate System
+System -> UI : Asks for the interface
+deactivate "System"
+activate UI
 
-        HRM -> UI : Asks to add a new job
+UI -> HRM : Displays the interface for entering the job's name
+HRM -> UI : Provides the job's name
 
-        activate UI
+UI -> CTRL : CreateJob(name)
+activate CTRL
 
-'            UI --> ADM : requests data (reference, description,  informal \n description, technical description, duration, cost)
-            'create CTRL
-            UI -> CTRL** : create
+CTRL -> UI : ValidateNameCriteria(name)
+deactivate CTRL
 
-            UI -> CTRL : getJobCategories()
-            activate CTRL
+UI -> PLAT : GetJobRepository()
+activate PLAT
 
-                CTRL -> RepositorySingleton : getInstance()
-                activate RepositorySingleton
+PLAT --> UI : jobRepository
+deactivate PLAT
 
-                    RepositorySingleton --> CTRL: repositories
-                deactivate RepositorySingleton
+UI -> jobRepository : AddJob(name)
+activate jobRepository
 
-                CTRL -> PLAT : getJobCategoryRepository()
-                activate PLAT
+jobRepository --> UI : Job added successfully
+deactivate jobRepository
+UI -> System : Provides job name
+deactivate UI
+activate "System"
 
-                    PLAT --> CTRL: jobCategoryRepository
-                deactivate PLAT
+System -> Job : CreateJob(name)
+activate Job
 
-                CTRL -> jobRepository : getJobCategories()
-                activate jobRepository
+Job --> System : Job created successfully
+deactivate Job
 
-                    jobRepository --> CTRL : jobCategoryList
-                deactivate jobRepository
-
-                CTRL --> UI : jobCategoryList
-            deactivate CTRL
-
-            UI --> HRM : Displays the interface for entering the job's name
-        deactivate UI
-
-    HRM -> UI : Provides a job
-    activate UI
-
-        UI -> CTRL : createJob(name)
-        activate CTRL
-
-            CTRL -> CTRL : getJobCategoryByDescription(jobCategoryDescription)
-            activate CTRL
-
-                CTRL -> RepositorySingleton : getInstance()
-                activate RepositorySingleton
-
-                    RepositorySingleton --> CTRL: repositories
-                deactivate RepositorySingleton
-
-                CTRL -> PLAT : getJobCategoryRepository()
-                activate PLAT
-
-                    PLAT -> CTRL : jobCategoryRepository
-                deactivate PLAT
-
-                CTRL -> jobRepository : getJobCategoryByDescription(jobCategoryDescription)
-                activate jobRepository
-
-                    jobRepository --> CTRL : jobCategory
-                deactivate jobRepository
-                    CTRL --> CTRL : jobCategory
-            deactivate CTRL
-
-            |||
-            CTRL -> CTRL : getEmployeeFromSession()
-            activate CTRL
-
-                CTRL -> _APP: getInstance()
-                activate _APP
-                    _APP -> CTRL: appSession
-                deactivate _APP
-
-
-                CTRL -> APP: getCurrentSession()
-                activate APP
-
-                    APP --> CTRL: currentSession
-                deactivate APP
-
-                CTRL -> SESSAO: email = getUserEmail()
-                activate SESSAO
-
-                    SESSAO --> CTRL: email
-                deactivate SESSAO
-
-
-                CTRL -> PLAT: getOrganizationRepository(email)
-                activate PLAT
-
-                    PLAT --> CTRL: organizationRepository
-                deactivate PLAT
-
-
-                CTRL -> OrganizationRepository: getOrganizationByEmployeeEmail(email)
-                activate OrganizationRepository
-
-                    loop [for each employee
-                        OrganizationRepository -> ORG : anyEmployeeHasEmail(email)
-                        activate ORG
-
-                             ORG --> OrganizationRepository : true/false
-                        deactivate ORG
-                    end
-                    OrganizationRepository --> CTRL : organization
-                deactivate OrganizationRepository
-
-                CTRL -> ORG: getEmployeeByEmail(email)
-                activate ORG
-
-                    ORG --> CTRL : employee
-                deactivate ORG
-
-                CTRL --> CTRL : employee
-            deactivate CTRL
-
-            |||
-            CTRL -> ORG: createJob(employee, name)
-            activate ORG
-
-                ORG -> EMPREGO**: create(employee, name)
-
-                ORG -> ORG: addJob (job)
-
-
-                activate ORG
-                    ORG -> ORG: validateJob(job)
-                    activate ORG
-                        ORG --> ORG
-                    deactivate ORG
-
-                    ORG --> ORG
-                deactivate ORG
-
-                ORG --> CTRL : job
-
-            deactivate ORG
-
-            CTRL --> UI: job
-            deactivate CTRL
-            UI --> HRM: Confirms the success of the operation.
-    deactivate UI
-
-deactivate HRM
+System --> HRM : Confirms the success of the operation.
+deactivate System
 
 @enduml
