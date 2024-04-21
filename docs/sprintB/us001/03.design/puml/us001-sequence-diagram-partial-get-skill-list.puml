@@ -3,13 +3,13 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-participant ":CreateTaskController" as CTRL
+participant ":RegisterSkillController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "skillListRepository:\nskillListRepository" as SkillListRepository
 
 autonumber 12
--> CTRL : register(name)
+-> CTRL : registerSkill(name)
 
 autonumber 12.1
 

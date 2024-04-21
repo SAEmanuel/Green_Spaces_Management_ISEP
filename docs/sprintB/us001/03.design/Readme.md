@@ -1,4 +1,4 @@
-# US006 - Create a Task 
+# US001 - Registering Skills for Collaborators
 
 ## 3. Design - User Story Realization 
 
@@ -29,12 +29,12 @@ _**Note that SSD - Alternative One is adopted.**_
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
 * Organization
-* Task
+* Skill
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
-* CreateTaskUI  
-* CreateTaskController
+* RegisterSkillUI  
+* RegisterSkillController
 
 
 ## 3.2. Sequence Diagram (SD)
@@ -55,21 +55,23 @@ It uses Interaction Occurrence (a.k.a. Interaction Use).
 
 ![Sequence Diagram - split](svg/us001-sequence-diagram-split.svg)
 
-**Get Task Category List Partial SD**
+**Get Skill List Partial SD**
 
-![Sequence Diagram - Partial - Get Task Category List](svg/us001-sequence-diagram-partial-get-task-category-list.svg)
+![Sequence Diagram - Partial - Get Task Category List](svg/us001-sequence-diagram-partial-get-skill-list.svg)
 
-**Get Task Category Object**
+[//]: # (**Get Task Category Object**)
 
-![Sequence Diagram - Partial - Get Task Category Object](svg/us001-sequence-diagram-partial-get-task-category.svg)
+[//]: # ()
+[//]: # (![Sequence Diagram - Partial - Get Task Category Object]&#40;svg/us001-sequence-diagram-partial-get-task-category.svg&#41;)
 
-**Get Employee**
+[//]: # (**Get Employee**)
 
-![Sequence Diagram - Partial - Get Employee](svg/us001-sequence-diagram-partial-get-employee.svg)
+[//]: # ()
+[//]: # (![Sequence Diagram - Partial - Get Employee]&#40;svg/us001-sequence-diagram-partial-get-employee.svg&#41;)
 
-**Create Task**
+**Register Skill**
 
-![Sequence Diagram - Partial - Create Task](svg/us001-sequence-diagram-partial-create-task.svg)
+![Sequence Diagram - Partial - Create Task](svg/us001-sequence-diagram-partial-register-skill.svg)
 
 ## 3.3. Class Diagram (CD)
 
