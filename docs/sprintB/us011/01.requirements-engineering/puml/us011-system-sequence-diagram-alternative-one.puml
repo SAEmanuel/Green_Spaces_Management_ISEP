@@ -16,7 +16,6 @@ participant ":System" as System
         activate System
 
         System -> GSM : Shows requested data
-        System --> GSM : Shows operation success
         deactivate System
         deactivate GSM
 @enduml

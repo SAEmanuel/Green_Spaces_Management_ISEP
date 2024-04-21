@@ -81,6 +81,7 @@ percentages must be 100%).
   * Visit Frequency (per month)
 
 **Output Data:**
+*
 
 ### 1.6. System Sequence Diagram (SSD)
 
