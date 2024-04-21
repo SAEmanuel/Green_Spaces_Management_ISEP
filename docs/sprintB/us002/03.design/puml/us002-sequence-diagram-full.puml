@@ -7,51 +7,112 @@ autonumber
 
 'hide footbox
 actor "Human Resources Manager" as HRM
-participant "System" as System
 participant ":CreateJobUI" as UI
 participant ":CreateJobController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "jobRepository:\nJobRepository" as jobRepository
-participant ":Job" as Job
+participant "jobCategoryRepository:\nJobCategoryRepository" as JobCategoryRepository
+participant "organizationRepository:\nOrganizationRepository" as OrganizationRepository
+participant "organization\n:Organization" as ORG
+participant "job\n:Job" as JOB
 
-HRM -> System : Asks to add a new job
-activate System
-System -> UI : Asks for the interface
-deactivate "System"
+activate HRM
+
+HRM -> UI : asks to add a new job
 activate UI
 
-UI -> HRM : Displays the interface for entering the job's name
-HRM -> UI : Provides the job's name
-
-UI -> CTRL : CreateJob(name)
+UI -> CTRL** : create
 activate CTRL
 
-CTRL -> UI : ValidateNameCriteria(name)
-deactivate CTRL
+UI -> CTRL : getJobList()
+activate CTRL
 
-UI -> PLAT : GetJobRepository()
+CTRL -> RepositorySingleton : getInstance()
+activate RepositorySingleton
+
+RepositorySingleton --> CTRL: repositories
+deactivate RepositorySingleton
+
+CTRL -> PLAT : getJobListRepository()
 activate PLAT
 
-PLAT --> UI : jobRepository
+PLAT --> CTRL: jobCategoryRepository
 deactivate PLAT
 
-UI -> jobRepository : AddJob(name)
-activate jobRepository
+CTRL -> JobCategoryRepository : getJobList()
+activate JobCategoryRepository
 
-jobRepository --> UI : Job added successfully
-deactivate jobRepository
-UI -> System : Provides job name
+JobCategoryRepository --> CTRL : jobList
+deactivate JobCategoryRepository
+
+CTRL --> UI : jobList
+deactivate CTRL
+
+
+
+
+UI --> HRM : Displays the interface for entering the job's name
 deactivate UI
-activate "System"
 
-System -> Job : CreateJob(name)
-activate Job
+HRM -> UI : Provides a job
+activate UI
 
-Job --> System : Job created successfully
-deactivate Job
 
-System --> HRM : Confirms the success of the operation.
-deactivate System
+
+UI -> CTRL : createJob(reference,name)
+activate CTRL
+
+
+
+CTRL -> RepositorySingleton : getInstance()
+activate RepositorySingleton
+
+RepositorySingleton --> CTRL: repositories
+deactivate RepositorySingleton
+
+CTRL -> PLAT : getJobListRepository()
+activate PLAT
+
+PLAT -> CTRL : jobListRepository
+deactivate PLAT
+
+CTRL -> JobCategoryRepository : getTaskCategoryByDescription(taskCategoryDescription)
+activate JobCategoryRepository
+
+JobCategoryRepository --> CTRL : jobList
+deactivate JobCategoryRepository
+
+deactivate CTRL
+CTRL --> CTRL : jobList
+
+
+
+CTRL -> ORG: createJob(name)
+deactivate CTRL
+activate ORG
+
+ORG -> ORG: addJob (job)
+
+
+activate ORG
+    ORG -> ORG: validateJob(job)
+    activate ORG
+        ORG --> ORG
+    deactivate ORG
+
+    ORG --> ORG
+deactivate ORG
+
+ORG --> CTRL : job
+
+deactivate ORG
+
+activate CTRL
+CTRL --> UI: job
+deactivate CTRL
+UI --> HRM: displays operation success
+deactivate UI
+
+deactivate HRM
 
 @enduml
