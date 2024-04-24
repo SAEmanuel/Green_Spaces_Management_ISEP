@@ -3,17 +3,15 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-participant "organization\n:Organization" as ORG
+participant "skillListRepository\n:skillListRepository" as ORG
 participant "skill\n:Skill" as EMPREGO
 
 autonumber 16
--> ORG: registerSkill(name)
 
 autonumber 16.1
-activate ORG
-    group Register skill
 
-        ORG -> EMPREGO**:
+        -> EMPREGO: registerSkill(name)
+            group Register skill
             activate EMPREGO
                 EMPREGO --> EMPREGO : validateNameSkill(skill)
 
@@ -25,8 +23,9 @@ activate ORG
                     deactivate EMPREGO
                 end
 
-                EMPREGO --> ORG : skill
+            EMPREGO --> ORG : skill
             deactivate EMPREGO
+            activate ORG
 
 
         ORG -> ORG: addSkill(skill)
