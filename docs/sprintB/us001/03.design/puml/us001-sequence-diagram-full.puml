@@ -11,7 +11,7 @@ participant ":RegisterSkillUI" as UI
 participant ":RegisterSkillController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "skillListRepository\n:skillListRepository" as skillRepository
+participant "skillRepository\n:skillRepository" as skillRepository
 participant "skill\n:Skill" as EMPREGO
 
 activate HRM
@@ -20,41 +20,38 @@ activate HRM
 
         activate UI
 
-            UI -> CTRL** : register
 
-            UI -> CTRL : getSkillList()
-            activate CTRL
+'            UI -> CTRL : getSkillList()
+'            activate CTRL
+'
+'                CTRL -> RepositorySingleton : getInstance()
+'                activate RepositorySingleton
+'
+'                    RepositorySingleton --> CTRL: repositories
+'                deactivate RepositorySingleton
+'
+'                CTRL -> PLAT : getSkillRepository()
+'                activate PLAT
+'
+'                    PLAT --> CTRL: skillListRepository
+'                deactivate PLAT
+'
+'                CTRL -> skillRepository : getSkillList()
+'                activate skillRepository
+'
+'                    skillRepository --> CTRL : skillList
+'                deactivate skillRepository
+'
+'                CTRL --> UI : skillList
+'            deactivate CTRL
 
-                CTRL -> RepositorySingleton : getInstance()
-                activate RepositorySingleton
-
-                    RepositorySingleton --> CTRL: repositories
-                deactivate RepositorySingleton
-
-                CTRL -> PLAT : getSkillRepository()
-                activate PLAT
-
-                    PLAT --> CTRL: skillListRepository
-                deactivate PLAT
-
-                CTRL -> skillRepository : getSkillList()
-                activate skillRepository
-
-                    skillRepository --> CTRL : skillList
-                deactivate skillRepository
-
-                CTRL --> UI : skillList
-            deactivate CTRL
-
-
-
-
-            UI --> HRM : show skill list
-            UI --> HRM : request data (name)
+'            UI --> HRM : show skill list
+loop for every skill
+            UI --> HRM : request data (skillName)
         deactivate UI
 
 
-    HRM -> UI : types requested data (name)
+    HRM -> UI : types requested data (skillName)
     activate UI
 
         UI --> HRM : shows requested data typed
@@ -63,54 +60,40 @@ activate HRM
         HRM -> UI : submits data
             activate UI
 
-
-            UI -> CTRL : registerSkill(name)
+            UI -> CTRL** : create
+            UI -> CTRL : registerSkill(skillName)
             activate CTRL
 
 
-                CTRL -> EMPREGO: registerSkill(name)
+                CTRL -> skillRepository: registerSkill(skillName)
                 deactivate CTRL
+                activate skillRepository
 
 
 
-
-                    activate EMPREGO
-                        EMPREGO --> EMPREGO : validateNameSkill(skill)
-
-                        loop [for each skill name
-                          EMPREGO -> EMPREGO : validateNameSkill(skill)
-                            activate EMPREGO
-
-                                 EMPREGO --> EMPREGO : true/false
-                            deactivate EMPREGO
-                        end
+                skillRepository -> EMPREGO**: register(skillName)
 
 
-                        EMPREGO --> skillRepository : skill
-                    deactivate EMPREGO
 
-                    activate skillRepository
+                                    skillRepository -> skillRepository: addSkill(skillName)
 
-                    skillRepository -> skillRepository: addSkill(skill)
+                                    activate skillRepository
+                                        skillRepository -> skillRepository: validateSkill(skillName)
+                                        activate skillRepository
+                                            skillRepository --> skillRepository
+                                        deactivate skillRepository
 
+                                        skillRepository --> skillRepository
+                                    deactivate skillRepository
 
-                    activate skillRepository
-                        skillRepository -> skillRepository: validateSkill(skill)
-                        activate skillRepository
-                            skillRepository --> skillRepository
-                        deactivate skillRepository
-
-                        skillRepository --> skillRepository
-                    deactivate skillRepository
-
-                    skillRepository --> CTRL : skill
-                     activate CTRL
-
-                deactivate skillRepository
+                                    skillRepository --> CTRL : skill
+                                    deactivate skillRepository
+                                    activate CTRL
 
                 CTRL --> UI: skill
                 deactivate CTRL
-                UI --> HRM: Confirms the (un)success of the operation.
+                UI --> HRM: displays the (un)success of the operation.
+end
         deactivate UI
     deactivate HRM
 

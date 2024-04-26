@@ -6,10 +6,10 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-actor "Organization Employee" as ADM
+actor "Human Resources Manager" as ADM
 participant ":CreateTaskUI" as UI
 participant ":RegisterSkillController" as CTRL
-participant "organization\n:Organization" as ORG
+participant "skillRepository\n:skillRepository" as skillRepository
 
 activate ADM
 
@@ -17,27 +17,16 @@ activate ADM
 
     activate UI
 
-        UI -> CTRL** : register
-        UI -> CTRL : getSkillList()
-        ref over CTRL
-            Get Skill List
 
-        end ref
 
-        activate CTRL
-
-            CTRL --> UI : skillList
-        deactivate CTRL
-
-        UI --> ADM : show skill list
-        UI --> ADM : request data (name)
+        UI --> ADM : request data (skillName)
 
     deactivate UI
 
 
     deactivate UI
 
-    ADM -> UI : types requested data (name)
+    ADM -> UI : types requested data (skillName)
     activate UI
 
         UI --> ADM : shows requested data typed
@@ -46,40 +35,28 @@ activate ADM
     ADM -> UI : submits data
     activate UI
 
-        UI -> CTRL : registerSkill(name)
+        UI -> CTRL** : create
+        UI -> CTRL : registerSkill(skillName)
         activate CTRL
 
 
 
-                ref over CTRL
-                    Get Skill List
-
-                end ref
-
-                CTRL --> CTRL : skillList
-            deactivate CTRL
+            CTRL -> skillRepository: registerSkill(skillName)
 
 
-            deactivate CTRL
+            activate skillRepository
 
-
-            CTRL -> ORG: register(name)
-
-            activate CTRL
-
-            activate ORG
-
-                ref over ORG
+                ref over skillRepository
                     Register Skill
 
                 end
 
-                ORG --> CTRL : Skill
-            deactivate ORG
+                skillRepository --> CTRL : Skill
+            deactivate skillRepository
 
             CTRL --> UI: skill
             deactivate CTRL
-            UI --> ADM: displays operation success
+            UI --> ADM: displays the (un)success of the operation.
     deactivate UI
 
 deactivate ADM
