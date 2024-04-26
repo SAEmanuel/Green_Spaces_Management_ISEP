@@ -82,6 +82,7 @@ activate HRM
 
         activate Team
 
+
                 Team -> RepositorySingleton : getInstance()
                 activate Team
 
@@ -112,14 +113,15 @@ activate HRM
                     deactivate Team
                     end
 
-                    Team --> CTRL : Team
+
+                    Team --> CTRL : Team Proposal
             deactivate Team
 
 
         activate CTRL
 
 
-            CTRL -> UI : Team
+            CTRL -> UI : Team Proposal
             deactivate CTRL
 
         activate UI
@@ -132,14 +134,14 @@ activate HRM
                 HRM -> UI : accept team
                 activate UI
 
-                UI -> CTRL : accept team
+                UI -> CTRL : acceptTeamCreation()
                 deactivate UI
                 activate CTRL
 
-                CTRL -> Team : Confirm team creation
+                CTRL -> Team : acceptTeamCreation()
                 activate Team
 
-                Team -> CTRL : team created
+                Team -> CTRL : teamCreationSuccessful
                 deactivate Team
                 CTRL -> UI : team creation successful
                 deactivate CTRL
@@ -151,17 +153,17 @@ activate HRM
                HRM -> UI : refuse team
                activate UI
 
-               UI -> CTRL : refuse team
+               UI -> CTRL : rejectTeamCreation()
                deactivate UI
 
                activate CTRL
 
-               CTRL -> Team : Delete team
+               CTRL -> Team : rejectTeamCreation()
                activate Team
 
                Team -> CTRL : team deleted
                deactivate Team
-               CTRL -> UI : team delete successful
+               CTRL -> UI : teamDeleteSuccessful
                deactivate CTRL
                activate UI
 
