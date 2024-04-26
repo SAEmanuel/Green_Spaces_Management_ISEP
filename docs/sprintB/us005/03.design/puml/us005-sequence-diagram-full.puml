@@ -73,12 +73,15 @@ activate HRM
     activate UI
 
         UI -> CTRL : createTeam(skills, minimumCollaborators, maximumCollaborators)
+        deactivate UI
+
         activate CTRL
 
             CTRL -> Team : teamCreation(skills, minimumCollaborators, maximumCollaborators)
         deactivate CTRL
 
         activate Team
+
 
                 Team -> RepositorySingleton : getInstance()
                 activate Team
@@ -110,42 +113,62 @@ activate HRM
                     deactivate Team
                     end
 
-                    Team --> CTRL : Team
+
+                    Team --> CTRL : Team Proposal
             deactivate Team
+
 
         activate CTRL
 
-            CTRL -> UI : Team
-        deactivate CTRL
+
+            CTRL -> UI : Team Proposal
+            deactivate CTRL
+
+        activate UI
 
             UI -> HRM: Show team and ask for confirmation
-
+            deactivate UI
             alt accept team proposal
+
+
                 HRM -> UI : accept team
-                UI -> CTRL : accept team
+                activate UI
+
+                UI -> CTRL : acceptTeamCreation()
+                deactivate UI
                 activate CTRL
 
-                CTRL -> Team : Confirm team creation
+                CTRL -> Team : acceptTeamCreation()
                 activate Team
 
-                Team -> CTRL : team created
+                Team -> CTRL : teamCreationSuccessful
                 deactivate Team
                 CTRL -> UI : team creation successful
                 deactivate CTRL
+                activate UI
+
                 UI -> HRM : team creation successful
+                deactivate UI
             else refuse team proposal
                HRM -> UI : refuse team
-               UI -> CTRL : refuse team
+               activate UI
+
+               UI -> CTRL : rejectTeamCreation()
+               deactivate UI
+
                activate CTRL
 
-               CTRL -> Team : Delete team
+               CTRL -> Team : rejectTeamCreation()
                activate Team
 
                Team -> CTRL : team deleted
                deactivate Team
-               CTRL -> UI : team delete successful
+               CTRL -> UI : teamDeleteSuccessful
                deactivate CTRL
+               activate UI
+
                UI -> HRM : team delete successful
+               deactivate UI
             end
     deactivate UI
 

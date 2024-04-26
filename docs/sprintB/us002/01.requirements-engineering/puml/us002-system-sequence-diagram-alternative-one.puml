@@ -13,18 +13,19 @@ participant ":System" as System
 activate HRM
 
 
-     HRM -> System : Asks to add a new job
+     HRM -> System : asks to register a new job
     activate System
 
-        System --> HRM : Displays the interface for entering the job's name
+    System --> HRM :  show jobs list
+    System --> HRM :  request data (name)
+    HRM -> System : types requested data (name) or asks to leave
+    System --> HRM : asks data confirmation
+    HRM -> System : confirms data
+    System --> HRM : Confirms the (un)success of the operation.
+
+
     deactivate System
-
-        HRM -> System : Provides a job
-    activate System
-
-        System --> HRM : Confirms the success of the operation.
-    deactivate System
-
+    deactivate HRM
 
 
 @enduml
