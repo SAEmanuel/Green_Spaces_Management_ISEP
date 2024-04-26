@@ -73,6 +73,8 @@ activate HRM
     activate UI
 
         UI -> CTRL : createTeam(skills, minimumCollaborators, maximumCollaborators)
+        deactivate UI
+
         activate CTRL
 
             CTRL -> Team : teamCreation(skills, minimumCollaborators, maximumCollaborators)
@@ -113,16 +115,25 @@ activate HRM
                     Team --> CTRL : Team
             deactivate Team
 
+
         activate CTRL
 
+
             CTRL -> UI : Team
-        deactivate CTRL
+            deactivate CTRL
+
+        activate UI
 
             UI -> HRM: Show team and ask for confirmation
-
+            deactivate UI
             alt accept team proposal
+
+
                 HRM -> UI : accept team
+                activate UI
+
                 UI -> CTRL : accept team
+                deactivate UI
                 activate CTRL
 
                 CTRL -> Team : Confirm team creation
@@ -132,10 +143,17 @@ activate HRM
                 deactivate Team
                 CTRL -> UI : team creation successful
                 deactivate CTRL
+                activate UI
+
                 UI -> HRM : team creation successful
+                deactivate UI
             else refuse team proposal
                HRM -> UI : refuse team
+               activate UI
+
                UI -> CTRL : refuse team
+               deactivate UI
+
                activate CTRL
 
                CTRL -> Team : Delete team
@@ -145,7 +163,10 @@ activate HRM
                deactivate Team
                CTRL -> UI : team delete successful
                deactivate CTRL
+               activate UI
+
                UI -> HRM : team delete successful
+               deactivate UI
             end
     deactivate UI
 
