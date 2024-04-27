@@ -72,10 +72,10 @@ activate HRM
     HRM -> UI : submits data
     activate UI
 
-        UI -> CTRL : createCollaborator(name, birthdate, admission date,\naddress, contact info (mobile and email), taxpayer number,\nID doc type and respective number)
+        UI -> CTRL : createCollaborator(name, birthdate, admission date,\naddress, contact info (mobile and email), taxpayer number,\nID doc type, respective number and job)
         activate CTRL
 
-            CTRL -> Collaborator : createCollaborator(name, birthdate, admission date,\naddress, contact info (mobile and email), taxpayer number,\nID doc type and respective number)
+            CTRL -> Collaborator : createCollaborator(name, birthdate, admission date,\naddress, contact info (mobile and email), taxpayer number,\nID doc type, respective number and job)
             activate Collaborator
 
             Collaborator --> CollaboratorsRepository : searchCollaborator(collaborator)
