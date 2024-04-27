@@ -79,19 +79,19 @@ activate HRM
             activate Collaborator
 
             Collaborator --> CollaboratorsRepository : searchCollaborator(collaborator)
+            deactivate Collaborator
             activate CollaboratorsRepository
 
             loop [for each collaborator in collaboratorList]
                 CollaboratorsRepository --> CollaboratorsRepository: searchCollaborator(collaborator)
                 activate CollaboratorsRepository
                     CollaboratorsRepository --> CollaboratorsRepository: true/false
-                deactivate CollaboratorsRepository
             end
 
-            CollaboratorsRepository -> Collaborator : addCollaborator()
+            CollaboratorsRepository -> CollaboratorsRepository : addCollaborator(collaborator)
                             deactivate CollaboratorsRepository
 
-        Collaborator --> CTRL : collaborator added successfully
+        CollaboratorsRepository --> CTRL : collaborator added successfully
         deactivate CollaboratorsRepository
         deactivate Collaborator
 
