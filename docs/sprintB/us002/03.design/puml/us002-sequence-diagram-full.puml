@@ -65,8 +65,8 @@ CTRL -> EMPREGO: registerJob(name)
 activate EMPREGO
 
 
-
 EMPREGO -> jobRepository: addJob(job)
+deactivate EMPREGO
 activate jobRepository
 
 loop [for each job in jobList]
