@@ -1,0 +1,107 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "Human Resources Manager" as HRM
+participant ":CreateCollaboratorUI" as UI
+participant ":CreateCollaboratorController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "CollaboratorsRepository:\nCollaboratorsRepository" as CollaboratorsRepository
+participant "JobsRepository:\nJobsRepository" as JobsRepository
+participant "collaborator\n:Collaborator" as Collaborator
+
+activate HRM
+
+        HRM -> UI : asks to create a new task
+
+        activate UI
+
+            UI -> CTRL** : create
+
+            UI -> CTRL : getCollaborators()
+            activate CTRL
+
+                CTRL -> RepositorySingleton : getInstance()
+                activate RepositorySingleton
+
+                    RepositorySingleton --> CTRL: repositories
+                deactivate RepositorySingleton
+
+                CTRL -> PLAT : getCollaboratorsRepository()
+                activate PLAT
+
+                    PLAT --> CTRL: CollaboratorsRepository
+                deactivate PLAT
+
+                CTRL -> CollaboratorsRepository : getCollaborators()
+                activate CollaboratorsRepository
+
+                    CollaboratorsRepository --> CTRL : collaboratorsList
+                deactivate CollaboratorsRepository
+
+                CTRL -> JobsRepository : getJobs()
+                activate JobsRepository
+
+                    JobsRepository --> CTRL : jobsList
+                deactivate JobsRepository
+
+                CTRL --> UI : collaboratorsList
+                CTRL --> UI : jobsList
+            deactivate CTRL
+
+            UI --> HRM : shows collaboratorsList and jobsList list\n and asks to select one job
+        deactivate UI
+
+    HRM -> UI : selects a job
+    activate UI
+
+        UI --> HRM : requests data
+    deactivate UI
+
+    HRM -> UI : types requested data (name, birthdate, admission date,\naddress, contact info (mobile and email), taxpayer number,\nID doc type and respective number)
+    activate UI
+
+        UI --> HRM : shows selected job and requested data
+    deactivate UI
+
+    HRM -> UI : submits data
+    activate UI
+
+        UI -> CTRL : createCollaborator(name, birthdate, admission date,\naddress, contact info (mobile and email), taxpayer number,\nID doc type and respective number)
+        activate CTRL
+
+            CTRL -> Collaborator : createCollaborator(name, birthdate, admission date,\naddress, contact info (mobile and email), taxpayer number,\nID doc type and respective number)
+            activate Collaborator
+
+            Collaborator --> CollaboratorsRepository : searchCollaborator(collaborator)
+            activate CollaboratorsRepository
+
+            loop [for each collaborator in collaboratorList]
+                CollaboratorsRepository --> CollaboratorsRepository: searchCollaborator(collaborator)
+                activate CollaboratorsRepository
+                    CollaboratorsRepository --> CollaboratorsRepository: true/false
+                deactivate CollaboratorsRepository
+            end
+
+            CollaboratorsRepository -> Collaborator : addCollaborator()
+                            deactivate CollaboratorsRepository
+
+        Collaborator --> CTRL : collaborator added successfully
+        deactivate CollaboratorsRepository
+        deactivate Collaborator
+
+        CTRL --> UI: collaborator added successfully
+        deactivate CTRL
+
+        UI --> HRM: Confirms the success of the operation.
+
+    deactivate UI
+
+deactivate HRM
+
+@enduml
