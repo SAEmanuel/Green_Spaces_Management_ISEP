@@ -50,40 +50,13 @@ UI --> HRM : shows job list
 UI --> HRM : types requested data (name)
 deactivate UI
 
-HRM -> UI : types requested data (name)
+HRM -> UI : asks to leave
 activate UI
 
 UI --> HRM : asks operation confirmation
-deactivate UI
+
 
 HRM -> UI : confirms operation
-activate UI
-
-UI -> CTRL : registerJob(name)
-activate CTRL
-
-CTRL -> EMPREGO: registerJob(name)
-activate EMPREGO
-
-
-
-EMPREGO -> jobRepository: addJob(job)
-activate jobRepository
-
-loop [for each job in jobList]
-    jobRepository --> jobRepository: validateJob(job)
-    activate jobRepository
-        jobRepository --> jobRepository: true/false
-    deactivate jobRepository
-end
-
-jobRepository --> CTRL : validated job
-deactivate jobRepository
-
-CTRL --> UI: validated job
-deactivate CTRL
-
-UI --> HRM: Confirms the (un)success of the operation.
 deactivate UI
 
 deactivate HRM
