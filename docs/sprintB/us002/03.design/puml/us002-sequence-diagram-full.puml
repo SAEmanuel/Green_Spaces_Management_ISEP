@@ -47,7 +47,6 @@ CTRL --> UI : jobList
 deactivate CTRL
 
 UI --> HRM : shows job list
-UI --> HRM : types requested data (name)
 deactivate UI
 
 HRM -> UI : types requested data (name)
@@ -83,7 +82,7 @@ deactivate jobRepository
 CTRL --> UI: validated job
 deactivate CTRL
 
-UI --> HRM: Confirms the (un)success of the operation.
+UI --> HRM: Confirms the success of the operation.
 deactivate UI
 
 deactivate HRM

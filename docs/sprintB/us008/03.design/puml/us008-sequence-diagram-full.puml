@@ -1,0 +1,75 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+actor "Fleet Manager" as FM
+
+participant ":CheckupListUI" as UI
+participant ":VehicleListController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "vehicleRepository\n:VehicleRepository" as vehicleRepository
+participant "vehicleCheckupList\n:Vehicle" as VEHICLE
+
+activate FM
+
+FM -> UI : Asks to generate a list of vehicles needing check-up
+activate UI
+
+UI -> CTRL** : generateCheckupList
+activate CTRL
+
+UI -> CTRL : getVehicleListNeedingCheckup()
+deactivate UI
+activate CTRL
+
+CTRL -> RepositorySingleton : getInstance()
+activate RepositorySingleton
+
+RepositorySingleton --> CTRL: repositories
+deactivate RepositorySingleton
+
+CTRL -> PLAT : getVehicleRepository()
+activate PLAT
+
+PLAT --> CTRL: vehicleRepository
+deactivate PLAT
+
+CTRL -> vehicleRepository : getVehiclesNeedingCheckup()
+activate vehicleRepository
+
+vehicleRepository --> CTRL : vehicleList
+
+
+activate CTRL
+
+loop for each vehicle in vehicleList
+    CTRL -> vehicleRepository : needsCheckup(vehicle)
+    activate vehicleRepository
+    vehicleRepository --> CTRL : true/false
+    deactivate vehicleRepository
+    activate VEHICLE
+    CTRL --> VEHICLE : if true, add vehicle to list
+deactivate vehicleRepository
+end
+
+
+activate vehicleRepository
+
+VEHICLE --> CTRL : vehiclesNeedingCheckup
+
+deactivate VEHICLE
+
+CTRL --> UI : vehiclesNeedingCheckup
+deactivate CTRL
+activate UI
+UI --> FM : Provides a list of vehicles that need check-up (and all their info)
+deactivate UI
+deactivate FM
+
+deactivate FM
+
+@enduml

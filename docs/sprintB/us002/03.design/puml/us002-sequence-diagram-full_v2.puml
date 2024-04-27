@@ -47,7 +47,6 @@ CTRL --> UI : jobList
 deactivate CTRL
 
 UI --> HRM : shows job list
-UI --> HRM : types requested data (name)
 deactivate UI
 
 HRM -> UI : asks to leave
