@@ -1,0 +1,78 @@
+@startuml
+'skinparam monochrome true
+'skinparam packageStyle rectangle
+'skinparam shadowing false
+'skinparam linetype polyline
+
+' Descriptions of Classes
+class Graph {
+    - ArrayList<Edge> edges : List of graph edges
+    + addEdge(edge: Edge) : void
+    + getVertices(): List<Vertex> : Returns all vertices in the graph
+    + getTotalCost(): double : Calculates the total cost of the graph
+    + treeBuilding() : Builds a tree from the graph
+    - orderEdgesByDistance() : Orders edges by distance
+    - removeCycles() : Removes cycles from the graph
+    - removeParallelEdges() : Removes parallel edges from the graph
+    - createAndFillContainers(containers: List) : Creates and fills containers in the graph
+}
+
+class Vertex{
+    - String name : Vertex name
+}
+
+class Edge{
+    - Vertex source : Source vertex of the edge
+    - Vertex target : Target vertex of the edge
+    - double distance : Distance between vertices
+}
+
+class FileHandler{
+    + readAndCreateGraphFromCsv(filePath: String, graph: Graph) : void
+    + writeToDotFile(tree: Graph) : void
+    + initializeGraphFromCsv() : Graph
+    + graphToDotFile(graph: Graph) : void
+    + consoleCommand() : void
+    + writeToCsvFile(tree: Graph) : void
+    + graphToCsvFile(graph: Graph) : void
+    + getInputFilePath() : String
+    - isValidString(word: String) : boolean
+    - isDouble(word: String) : boolean
+    - isValidValues(values: String) : boolean
+}
+
+class GraphRepository {
+    + getGraph() : Graph
+}
+
+class Repositories {
+    - static instance : Repositories
+    - GraphRepository graphRepository : Graph repository
+    - Repositories() : Private constructor
+    + getInstance() : Repositories
+    + getGraphRepository() : GraphRepository
+}
+
+class GraphController {
+    - graphRepository : GraphRepository
+    + GraphController(graphRepository: GraphRepository) : Constructor
+    + getGraph() : Graph
+    + createGraph() : Graph
+}
+
+class CreateGraphUI {
+    + open() : void
+}
+
+' Relationships
+Repositories -> Repositories : instance
+CreateGraphUI .> GraphController
+GraphController .> Repositories : repositories
+Repositories -> "1" GraphRepository
+GraphController ..> GraphRepository : graphRepository
+GraphController ..> "1" Graph
+Graph "1" --> "*" Edge: has
+Edge "1" --> "2" Vertex: contains
+FileHandler --> "*" Graph : creates
+
+@enduml
