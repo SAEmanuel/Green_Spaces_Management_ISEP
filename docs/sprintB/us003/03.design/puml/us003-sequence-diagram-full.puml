@@ -46,6 +46,8 @@ activate HRM
 
                 CTRL --> UI : collaboratorsList
 
+                UI --> HRM : shows collaboratorsList
+
                 UI -> CTRL : getJobs()
 
                 CTRL -> RepositorySingleton : getInstance()
@@ -69,7 +71,7 @@ activate HRM
                 CTRL --> UI : jobsList
             deactivate CTRL
 
-            UI --> HRM : shows collaboratorsList and jobsList list\n and asks to select one job
+            UI --> HRM : shows jobsList list\n and asks to select one job
         deactivate UI
 
     HRM -> UI : selects a job
