@@ -36,16 +36,16 @@ activate VFM
                 CTRL -> PLAT : getVehicleRepository()
                 activate PLAT
 
-                    PLAT --> CTRL: VehicleRepository
+                    PLAT --> CTRL: vehicleRepository
                 deactivate PLAT
 
                 CTRL -> vehicleRepository : getVehicleList()
                 activate vehicleRepository
 
-                    vehicleRepository --> CTRL : VehicleList
+                    vehicleRepository --> CTRL : vehicleList
                 deactivate vehicleRepository
 
-                CTRL --> UI : VehicleList
+                CTRL --> UI : vehicleList
             deactivate CTRL
 
 
