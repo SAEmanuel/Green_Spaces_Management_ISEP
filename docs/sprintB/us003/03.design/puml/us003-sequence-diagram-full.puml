@@ -25,7 +25,6 @@ activate HRM
 
             UI -> CTRL : getCollaborators()
             activate CTRL
-            UI -> CTRL : getJobs()
 
                 CTRL -> RepositorySingleton : getInstance()
                 activate RepositorySingleton
@@ -45,13 +44,28 @@ activate HRM
                     CollaboratorsRepository --> CTRL : collaboratorsList
                 deactivate CollaboratorsRepository
 
+                CTRL --> UI : collaboratorsList
+
+                UI -> CTRL : getJobs()
+
+                CTRL -> RepositorySingleton : getInstance()
+                                activate RepositorySingleton
+
+                                    RepositorySingleton --> CTRL: repositories
+                                deactivate RepositorySingleton
+
+                                CTRL -> PLAT : getJobsRepository()
+                                activate PLAT
+
+                                    PLAT --> CTRL: jobsRepository
+                                deactivate PLAT
+
                 CTRL -> JobsRepository : getJobs()
                 activate JobsRepository
 
                     JobsRepository --> CTRL : jobsList
                 deactivate JobsRepository
 
-                CTRL --> UI : collaboratorsList
                 CTRL --> UI : jobsList
             deactivate CTRL
 
