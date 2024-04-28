@@ -25,6 +25,7 @@ activate HRM
 
             UI -> CTRL : getCollaborators()
             activate CTRL
+            UI -> CTRL : getJobs()
 
                 CTRL -> RepositorySingleton : getInstance()
                 activate RepositorySingleton
