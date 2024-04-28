@@ -14,6 +14,7 @@ participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "CollaboratorRepository:\nCollaboratorRepository" as CollaboratorRepository
 participant "SkillRepository:\nSkillRepository" as SkillRepository
+participant "TeamRepository:\nTeamRepository" as TeamRepository
 
 
 activate HRM
@@ -139,8 +140,14 @@ activate HRM
                 activate CTRL
 
                 CTRL -> Team : acceptTeamCreation()
+
                 activate Team
 
+                    Team -> TeamRepository** : addTeam()
+                    activate TeamRepository
+
+                    TeamRepository -> Team : teamAdded
+                    deactivate TeamRepository
                 Team -> CTRL : teamCreationSuccessful
                 deactivate Team
                 CTRL -> UI : team creation successful
@@ -161,7 +168,7 @@ activate HRM
                CTRL -> Team : rejectTeamCreation()
                activate Team
 
-               Team -> CTRL : team deleted
+               Team -> CTRL : teamDeleteSuccessful
                deactivate Team
                CTRL -> UI : teamDeleteSuccessful
                deactivate CTRL
