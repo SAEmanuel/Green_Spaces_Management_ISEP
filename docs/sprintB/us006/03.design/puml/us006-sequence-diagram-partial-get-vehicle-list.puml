@@ -7,17 +7,17 @@ autonumber
 
 'hide footbox
 
-participant ":CreateTaskController" as CTRL
+participant ":RegisterVehicleController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "taskCategoryRepository:\nTaskCategoryRepository" as TaskCategoryRepository
+participant "vehicleRepository:\nVehicleRepository" as TaskCategoryRepository
 
 autonumber 3
 
- -> CTRL : getTaskCategories()
+ -> CTRL : getVehicle()
 autonumber 3.1
 activate CTRL
-    group Get Task Category List
+    group Get Vehicle List
 
 
             CTRL -> RepositorySingleton : getInstance()
@@ -26,22 +26,22 @@ activate CTRL
                 RepositorySingleton --> CTRL: repositories
             deactivate RepositorySingleton
 
-            CTRL -> PLAT : getTaskCategoryRepository()
+            CTRL -> PLAT : getVehicleRepository()
             activate PLAT
 
-                PLAT --> CTRL: taskCategoryRepository
+                PLAT --> CTRL: vehicleRepository
             deactivate PLAT
 
-            CTRL -> TaskCategoryRepository : getTaskCategories()
+            CTRL -> TaskCategoryRepository : getVehicleList()
             activate TaskCategoryRepository
 
-                TaskCategoryRepository --> CTRL : taskCategoryList
+                TaskCategoryRepository --> CTRL : vehicleList
             deactivate TaskCategoryRepository
 
 
     end
     autonumber 4
-    <-- CTRL  : taskCategoryList
+    <-- CTRL  : vehicleList
 deactivate CTRL
 
 

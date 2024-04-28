@@ -6,6 +6,144 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
+actor "Vehicle Fleet Manager" as VFM
+participant ":RegisterVehicleUI" as UI
+participant ":RegisterVehicleController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "vehicleRepository:\nVehicleRepository" as vehicleRepository
+
+activate VFM
+
+        VFM -> UI : asks to register a new vehicle
+
+        activate UI
+
+'            UI --> ADM : requests data (reference, description,  informal \n description, technical description, duration, cost)
+            'create CTRL
+            UI -> CTRL** : create
+
+            UI -> CTRL : getVehicle()
+            activate CTRL
+
+                ref over CTRL
+                    Get Vehicle List
+                end ref
+
+                CTRL --> UI : vehicleList
+            deactivate CTRL
+
+
+        UI --> VFM : show Vehicle List
+        |||
+        UI --> VFM : request vehicle plate ID
+            deactivate UI
+
+        VFM -> UI : types requested data
+        activate UI
+
+        UI --> VFM : request vehicle brand
+        deactivate UI
+
+        VFM -> UI : types requested data
+        activate UI
+
+        UI --> VFM : request vehicle model
+        deactivate UI
+
+        VFM -> UI : types requested data
+        activate UI
+
+        UI --> VFM : request vehicle type
+        deactivate UI
+
+        VFM -> UI : types requested data
+        activate UI
+
+        UI --> VFM : request vehicle Tare Weight
+        deactivate UI
+
+        VFM -> UI : types requested data
+        activate UI
+
+        UI --> VFM : request vehicle Gross Weight
+        deactivate UI
+
+        VFM -> UI : types requested data
+        activate UI
+
+        UI --> VFM : request vehicle millage
+        deactivate UI
+
+        VFM -> UI : types requested data
+        activate UI
+
+        UI --> VFM : request vehicle register date
+        deactivate UI
+
+        VFM -> UI : types requested data
+        activate UI
+
+        UI --> VFM : request vehicle acquisition date
+        deactivate UI
+
+        VFM -> UI : types requested data
+        activate UI
+
+        UI --> VFM : request vehicle maintenance frequency
+        deactivate UI
+
+        VFM -> UI : types requested data
+        activate UI
+
+        UI --> VFM : request vehicle last checkup
+        deactivate UI
+
+        VFM -> UI : types requested data
+        activate UI
+        |||
+
+        UI --> VFM : show all data registered  for confirmation
+        deactivate UI
+
+    VFM -> UI : data
+    activate UI
+
+        UI -> CTRL : registerVehicle(plate ID,brand, model, type, Tare Weight,\n Gross Weight, millage, Register date, acquisition date,\nmaintenance frequency, last checkup)
+        activate CTRL
+
+
+
+
+            CTRL -> vehicleRepository: registerVehicle(plate ID,brand, model, type, Tare Weight,\n Gross Weight, millage, Register date, acquisition date,\nmaintenance frequency, last checkup)
+            activate vehicleRepository
+
+            ref over vehicleRepository
+                Register Vehicle
+            end
+
+
+
+
+                vehicleRepository --> CTRL : vehicle
+
+            deactivate vehicleRepository
+
+            CTRL --> UI: vehicle
+            deactivate CTRL
+            UI --> VFM: displays operation success
+    deactivate UI
+
+deactivate VFM
+
+@enduml@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
 actor "Organization Employee" as ADM
 participant ":CreateTaskUI" as UI
 participant ":CreateTaskController" as CTRL

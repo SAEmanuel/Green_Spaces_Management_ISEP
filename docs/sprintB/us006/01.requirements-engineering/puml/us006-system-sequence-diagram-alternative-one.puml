@@ -1,4 +1,4 @@
-@startuml
+ººº@startuml
 skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
@@ -7,7 +7,7 @@ title System Sequence Diagram (SSD) - Alternative One
 
 autonumber
 
-actor "FM" as Employee
+actor "VFM" as Employee
 participant ":System" as System
 
 activate Employee
@@ -17,6 +17,13 @@ activate Employee
 
     |||
     group requested data
+
+    System --> Employee : request vehicle plate ID
+    deactivate System
+
+    Employee -> System : types requested data
+    activate System
+
     System --> Employee : request vehicle brand
     deactivate System
 
@@ -47,30 +54,36 @@ activate Employee
     Employee -> System : types requested data
     activate System
 
-    System --> Employee : request vehicle Current Km
+    System --> Employee : request vehicle millage
     deactivate System
 
     Employee -> System : types requested data
     activate System
 
-    System --> Employee : request vehicle Register Date
+    System --> Employee : request vehicle register date
     deactivate System
 
     Employee -> System : types requested data
     activate System
 
-    System --> Employee : request vehicle Aquisition Date
+    System --> Employee : request vehicle acquisition date
     deactivate System
 
     Employee -> System : types requested data
     activate System
 
-    System --> Employee : request vehicle Check-up Frequency
-
+    System --> Employee : request vehicle maintenance frequency
     deactivate System
 
     Employee -> System : types requested data
     activate System
+
+    System --> Employee : request vehicle last checkup
+    deactivate System
+
+    Employee -> System : types requested data
+    activate System
+
     end
     |||
 
@@ -78,7 +91,7 @@ activate Employee
         System --> Employee : show all data registered  for confirmation
     deactivate System
 
-    Employee -> System : confirms data
+    Employee -> System : submits data
     activate System
 
         System --> Employee : displays operation success
