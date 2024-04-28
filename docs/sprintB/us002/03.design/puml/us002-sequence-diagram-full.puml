@@ -47,6 +47,7 @@ CTRL --> UI : jobList
 deactivate CTRL
 
 UI --> HRM : shows job list
+UI --> HRM :  request data (name)
 deactivate UI
 
 HRM -> UI : types requested data (name)
