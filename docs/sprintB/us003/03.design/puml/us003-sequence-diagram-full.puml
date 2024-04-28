@@ -17,7 +17,7 @@ participant "collaborator\n:Collaborator" as Collaborator
 
 activate HRM
 
-        HRM -> UI : asks to create a new task
+        HRM -> UI : asks to create a new collaborator
 
         activate UI
 
