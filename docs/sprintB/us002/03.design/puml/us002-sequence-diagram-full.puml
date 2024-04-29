@@ -11,81 +11,73 @@ participant ":RegisterJobUI" as UI
 participant ":RegisterJobController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "jobListRepository\n:jobListRepository" as jobRepository
+participant "jobRepository\n:JobRepository" as jobRepository
 participant "job\n:Job" as EMPREGO
 
 activate HRM
 
-HRM -> UI : asks to register a new job
-activate UI
-
-UI -> CTRL** : register
-activate CTRL
-
-UI -> CTRL : getJobList()
-activate CTRL
-
-CTRL -> RepositorySingleton : getInstance()
-activate RepositorySingleton
-
-RepositorySingleton --> CTRL: repositories
-deactivate RepositorySingleton
-
-CTRL -> PLAT : getJobRepository()
-activate PLAT
-
-PLAT --> CTRL: jobListRepository
-deactivate PLAT
-
-CTRL -> jobRepository : getJobList()
-activate jobRepository
-
-jobRepository --> CTRL : jobList
-deactivate jobRepository
-
-CTRL --> UI : jobList
-deactivate CTRL
-
-UI --> HRM : shows job list
-UI --> HRM :  request data (name)
-deactivate UI
-
-HRM -> UI : types requested data (name)
-activate UI
-
-UI --> HRM : asks operation confirmation
-deactivate UI
-
-HRM -> UI : confirms operation
-activate UI
-
-UI -> CTRL : registerJob(name)
-activate CTRL
-
-CTRL -> EMPREGO: registerJob(name)
-activate EMPREGO
+        HRM -> UI : asks to register a new job
 
 
-EMPREGO -> jobRepository: addJob(job)
-deactivate EMPREGO
-activate jobRepository
+        activate UI
 
-loop [for each job in jobList]
-    jobRepository --> jobRepository: validateJob(job)
-    activate jobRepository
-        jobRepository --> jobRepository: true/false
-    deactivate jobRepository
+        UI -> CTRL** : create
+
+
+loop for every skill
+            UI --> HRM : request data (jobName)
+        deactivate UI
+
+
+    HRM -> UI : types requested data (jobName)
+    activate UI
+
+        UI --> HRM : show all data registered  for confirmation
+        deactivate UI
+
+        HRM -> UI : submits data
+            activate UI
+
+
+            UI -> CTRL : registerJob(jobName)
+            activate CTRL
+
+
+                CTRL -> jobRepository: registerJob(jobName)
+                deactivate CTRL
+                activate jobRepository
+
+
+
+                jobRepository -> EMPREGO**: register(jobName)
+
+                activate EMPREGO
+
+                    EMPREGO -> EMPREGO : validateJobName(jobName)
+                    activate EMPREGO
+                        EMPREGO --> EMPREGO
+                deactivate EMPREGO
+                                    jobRepository -> jobRepository: addJob(job)
+                deactivate EMPREGO
+                                    activate jobRepository
+                                        jobRepository -> jobRepository: validateJob(job)
+
+                                        activate jobRepository
+                                            jobRepository --> jobRepository
+                                        deactivate jobRepository
+
+                                        jobRepository --> jobRepository
+                                    deactivate jobRepository
+
+                                    jobRepository --> CTRL : job
+                                    deactivate jobRepository
+                                    activate CTRL
+
+                CTRL --> UI: job
+                deactivate CTRL
+                UI --> HRM: displays the success of the operation.
 end
-
-jobRepository --> CTRL : validated job
-deactivate jobRepository
-
-CTRL --> UI: validated job
-deactivate CTRL
-
-UI --> HRM: Confirms the success of the operation.
-deactivate UI
-
-deactivate HRM
+        deactivate UI
+    deactivate HRM
 
 @enduml

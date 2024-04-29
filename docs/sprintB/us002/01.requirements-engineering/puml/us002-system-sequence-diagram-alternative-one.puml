@@ -17,11 +17,11 @@ activate HRM
     activate System
 
     System --> HRM :  show jobs list
-    System --> HRM :  request data (name)
-    HRM -> System : types requested data (name) or asks to leave
-    System --> HRM : asks operation confirmation
-    HRM -> System : confirms operation
-    System --> HRM : Confirms the (un)success of the operation.
+    System --> HRM :  request data (jobName)
+    HRM -> System : types requested data (jobName)
+    System --> HRM : show all data registered for confirmation
+    HRM -> System : submits data
+    System --> HRM :displays the success of the operation
 
 
     deactivate System
