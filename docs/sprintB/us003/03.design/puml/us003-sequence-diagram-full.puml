@@ -23,32 +23,8 @@ activate HRM
 
             UI -> CTRL** : create
 
-            UI -> CTRL : getCollaborators()
-            activate CTRL
-
-                CTRL -> RepositorySingleton : getInstance()
-                activate RepositorySingleton
-
-                    RepositorySingleton --> CTRL: repositories
-                deactivate RepositorySingleton
-
-                CTRL -> PLAT : getCollaboratorsRepository()
-                activate PLAT
-
-                    PLAT --> CTRL: CollaboratorsRepository
-                deactivate PLAT
-
-                CTRL -> CollaboratorsRepository : getCollaborators()
-                activate CollaboratorsRepository
-
-                    CollaboratorsRepository --> CTRL : collaboratorsList
-                deactivate CollaboratorsRepository
-
-                CTRL --> UI : collaboratorsList
-
-                UI --> HRM : shows collaboratorsList
-
                 UI -> CTRL : getJobs()
+                activate CTRL
 
                 CTRL -> RepositorySingleton : getInstance()
                                 activate RepositorySingleton
@@ -89,13 +65,13 @@ activate HRM
     HRM -> UI : submits data
     activate UI
 
-        UI -> CTRL : createCollaborator(name, birthdate, admission date,\naddress, contact info (mobile and email), taxpayer number,\nID doc type, respective number and job)
+        UI -> CTRL : createCollaborator(name, birthdate, admission date,\naddress, contact info (mobile and email), taxpayer number,\nID doc type, respective number and jobID)
         activate CTRL
 
-            CTRL -> Collaborator : createCollaborator(name, birthdate, admission date,\naddress, contact info (mobile and email), taxpayer number,\nID doc type, respective number and job)
+            CTRL -> Collaborator : createCollaborator(name, birthdate, admission date,\naddress, contact info (mobile and email), taxpayer number,\nID doc type, respective number and jobID)
             activate Collaborator
 
-            Collaborator --> CollaboratorsRepository : searchCollaborator(collaborator)
+            Collaborator --> CollaboratorsRepository : addCollaborator(collaborator)
             deactivate Collaborator
             activate CollaboratorsRepository
 
