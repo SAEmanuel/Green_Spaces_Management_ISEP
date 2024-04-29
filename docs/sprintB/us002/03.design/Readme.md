@@ -1,47 +1,63 @@
 # US002 - Job Registration
 
-## 3. Design - User Story Realization 
+## 3. Design - User Story Realization
 
 ### 3.1. Rationale
 
-| Interaction ID | Question: Which class is responsible for... | Answer                | Justification (with patterns)                                                                                  |
-|:---------------|:------------------------------------------ |:----------------------|:---------------------------------------------------------------------------------------------------------------|
-| Step 1         | ... interacting with the actor?           | RegisterJobUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.  |
-|                | ... coordinating the use case?           | RegisterJobController | Controller                                                                                                     |
-|                | ... instantiating a new Job?              | Job                   | Creator (Rule 1): in the DM, Job is a distinct entity with its own attributes.                                  |
-| Step 2         | ... saving the inputted data?             | Job                   | IE: object created in step 1 has its own data.                                                                 |
-| Step 3         | ... saving the created job?               | JobListRepository     | IE: responsible for persisting job data.                                                                       |
-| Step 4         | ... validating all data (local validation)? | JobListRepository     | IE: owns its data.                                                                                             | 
-| Step 5         | ... informing operation success?          | RegisterJobUI         | IE: is responsible for user interactions.                                                                      | 
+| Interaction ID | Question: Which class is responsible for... | Answer               | Justification (with patterns)                                                                                 |
+|:---------------|:--------------------- |:---------------------|:--------------------------------------------------------------------------------------------------------------|
+| Step 1  	      |	... interacting with the actor? | CreateTaskUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+| 			  		        |	... coordinating the US? | CreateTaskController | Controller                                                                                                    |
+| 			  		        |	... instantiating a new Task? | Organization         | Creator (Rule 1): in the DM Organization has a Task.                                                          |
+| 			  		        | ... knowing the user using the system?  | UserSession          | IE: cf. A&A component documentation.                                                                          |
+| 			  		        |							 | Organization         | IE: knows/has its own Employees                                                                               |
+| 			  		        |							 | Employee             | IE: knows its own data (e.g. email)                                                                           |
+| Step 2  		     |							 |                      |                                                                                                               |
+| Step 3  		     |	...saving the inputted data? | Task                 | IE: object created in step 1 has its own data.                                                                |
+| Step 4  		     |	...knowing the task categories to show? | System               | IE: Task Categories are defined by the Administrators.                                                        |
+| Step 5  		     |	... saving the selected category? | Task                 | IE: object created in step 1 is classified in one Category.                                                   |
+| Step 6  		     |							 |                      |                                                                                                               |              
+| Step 7  		     |	... validating all data (local validation)? | Task                 | IE: owns its data.                                                                                            | 
+| 			  		        |	... validating all data (global validation)? | Organization         | IE: knows all its tasks.                                                                                      | 
+| 			  		        |	... saving the created task? | Organization         | IE: owns all its tasks.                                                                                       | 
+| Step 8  		     |	... informing operation success?| CreateTaskUI         | IE: is responsible for user interactions.                                                                     | 
 
-### Systematization
+### Systematization ##
 
-Based on the provided sequence diagram, the conceptual classes promoted to software classes are:
+According to the taken rationale, the conceptual classes promoted to software classes are:
 
-- **Job**
-- **JobListRepository**
+* Organization
+* Job
 
-Other software classes identified (i.e., Pure Fabrication):
+Other software classes (i.e. Pure Fabrication) identified:
 
-- **RegisterJobUI**
-- **RegisterJobController**
-
+* RegisterJobUI
+* RegisterJobController
 
 
 ## 3.2. Sequence Diagram (SD)
 
+_**Note that SSD - Alternative Two is adopted.**_
 
 ### Full Diagram
 
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-_**Version 1**_
-
 ![Sequence Diagram - Full](svg/us002-sequence-diagram-full.svg)
 
-_**Version 2**_
+### Split Diagrams
 
-![Sequence Diagram - Full](svg/us002-sequence-diagram-full_v2.svg)
+The following diagram shows the same sequence of interactions between the classes involved in the realization of this user story, but it is split in partial diagrams to better illustrate the interactions between the classes.
+
+It uses Interaction Occurrence (a.k.a. Interaction Use).
+
+![Sequence Diagram - split](svg/us002-sequence-diagram-split.svg)
+
+**Register Job Partial SD**
+
+![Sequence Diagram - Partial - Register Job](svg/us002-sequence-diagram-partial-register-job.svg)
+
+
 
 
 ## 3.3. Class Diagram (CD)

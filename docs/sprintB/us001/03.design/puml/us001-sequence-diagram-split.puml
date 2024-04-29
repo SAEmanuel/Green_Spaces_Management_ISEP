@@ -7,7 +7,7 @@ autonumber
 
 'hide footbox
 actor "Human Resources Manager" as ADM
-participant ":CreateTaskUI" as UI
+participant ":CreateSkillUI" as UI
 participant ":RegisterSkillController" as CTRL
 participant "skillRepository\n:skillRepository" as skillRepository
 
@@ -29,7 +29,7 @@ activate ADM
     ADM -> UI : types requested data (skillName)
     activate UI
 
-        UI --> ADM : shows requested data typed
+        UI --> ADM : show all data registered  for confirmation
     deactivate UI
 
     ADM -> UI : submits data

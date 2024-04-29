@@ -13,8 +13,8 @@ participant ":Team" as Team
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "CollaboratorRepository:\nCollaboratorRepository" as CollaboratorRepository
-participant "SkillRepository:\nSkillRepository" as SkillRepository
 participant "TeamRepository:\nTeamRepository" as TeamRepository
+participant "skillRepository\n:SkillRepository" as SkillRepository
 
 
 activate HRM
@@ -23,13 +23,14 @@ activate HRM
 
         activate UI
 
-            UI -> CTRL** : generate
+            UI -> CTRL** : create
 
             UI -> CTRL : getSkillList()
             activate CTRL
 
                 CTRL -> RepositorySingleton : getInstance()
                 activate RepositorySingleton
+
 
                     RepositorySingleton --> CTRL: repositories
                 deactivate RepositorySingleton
@@ -40,7 +41,7 @@ activate HRM
                     PLAT --> CTRL: SkillRepository
                 deactivate PLAT
 
-                CTRL -> SkillRepository : getSkills()
+                CTRL -> SkillRepository : getSkillList()
                 activate SkillRepository
 
                     SkillRepository --> CTRL : SkillList
@@ -55,37 +56,37 @@ activate HRM
     loop [for each skill
         HRM -> UI : selects a skill
         activate UI
+    end
 
-            UI --> HRM : requests data
+            UI --> HRM : requests data (minimumCollaborators, maximumCollaborators)
         deactivate UI
 
-        HRM -> UI : types requested data (minimumCollaborators, maximumCollaborators)
+        HRM -> UI : types requested data
         activate UI
 
             UI --> HRM : shows typed data
         deactivate UI
 
-    end
+
 
 
     HRM -> UI : confirms and submits data
     activate UI
 
-        UI -> CTRL : createTeam(skill, minimumCollaborators, maximumCollaborators)
+        UI -> CTRL : generateTeam(skill, minimumCollaborators, maximumCollaborators)
         deactivate UI
 
         activate CTRL
 
-            CTRL -> Team : createTeam(skill, minimumCollaborators, maximumCollaborators)
-        deactivate CTRL
+            CTRL -> Team : generateTeam(skill, minimumCollaborators, maximumCollaborators)
 
         activate Team
 
 
-                Team -> RepositorySingleton : getInstance()
-                activate Team
+                    Team -> RepositorySingleton : getInstance()
 
                     activate RepositorySingleton
+
 
                         RepositorySingleton --> Team: repositories
                     deactivate RepositorySingleton
@@ -93,31 +94,35 @@ activate HRM
                     Team -> PLAT : getCollaboratorRepository()
                     activate PLAT
 
-                        PLAT -> Team : CollaboratorRepository
+                        PLAT --> Team : CollaboratorRepository
                     deactivate PLAT
 
-                    loop for each Collaborator
+                    loop while minCollabo <= encontrados <= maxCollabo
                         Team -> CollaboratorRepository : getCollaboratorBySkill(skills)
+                        activate Team
                         activate CollaboratorRepository
 
-                            CollaboratorRepository -> SkillRepository : getSkillsOfCollaborator(skills)
-                            activate SkillRepository
+                        CollaboratorRepository -> CollaboratorRepository : findCollaborator(skills)
+                        activate CollaboratorRepository
+                        CollaboratorRepository --> CollaboratorRepository: collaborator
+                        deactivate CollaboratorRepository
 
-                                SkillRepository -> CollaboratorRepository : skills
-                            deactivate SkillRepository
+
 
                             CollaboratorRepository --> Team : collaborator
                         deactivate CollaboratorRepository
                         Team --> Team : addCollaborator(Collaborator)
-                    deactivate Team
+                        deactivate Team
+
                     end
 
 
+
                     Team --> CTRL : Team Proposal
+
             deactivate Team
 
 
-        activate CTRL
 
 
             CTRL -> UI : Team Proposal
@@ -141,13 +146,38 @@ activate HRM
 
                 activate Team
 
-                    Team -> TeamRepository** : addTeam()
+                     Team -> RepositorySingleton : getInstance()
+                     activate RepositorySingleton
+
+                        RepositorySingleton --> Team: repositories
+                     deactivate RepositorySingleton
+
+
+                    Team -> PLAT : getTeamRepository()
+                    activate PLAT
+
+                    PLAT --> Team : teamRepository
+                    deactivate PLAT
+
+
+                    Team -> TeamRepository : addTeam()
+                    activate Team
                     activate TeamRepository
+                    TeamRepository --> TeamRepository : addTeam()
+                    activate TeamRepository
+                    TeamRepository --> TeamRepository :
+                    deactivate TeamRepository
+
+
+
 
                     TeamRepository -> Team : teamAdded
                     deactivate TeamRepository
+                    Team --> Team
+                    deactivate Team
+
                 Team -> CTRL : teamCreationSuccessful
-                deactivate Team
+                    deactivate Team
                 CTRL -> UI : team creation successful
                 deactivate CTRL
                 activate UI
@@ -165,6 +195,11 @@ activate HRM
 
                CTRL -> Team : rejectTeamCreation()
                activate Team
+
+                Team -> Team : rejectTeamCreation()
+               activate Team
+               Team --> Team
+               deactivate Team
 
                Team -> CTRL : teamDeleteSuccessful
                deactivate Team
