@@ -81,19 +81,11 @@ loop for every skill
                     EMPREGO -> EMPREGO : validateSkillName(skillName)
                     activate EMPREGO
                         EMPREGO --> EMPREGO
-
-
-
-
-
-
-
-
                 deactivate EMPREGO
-                                    skillRepository -> skillRepository: addSkill(skillName)
+                                    skillRepository -> skillRepository: addSkill(skill)
                 deactivate EMPREGO
                                     activate skillRepository
-                                        skillRepository -> skillRepository: validateSkill(skillName)
+                                        skillRepository -> skillRepository: validateSkill(skill)
                                         activate skillRepository
                                             skillRepository --> skillRepository
                                         deactivate skillRepository
@@ -107,7 +99,7 @@ loop for every skill
 
                 CTRL --> UI: skill
                 deactivate CTRL
-                UI --> HRM: displays the (un)success of the operation.
+                UI --> HRM: displays the success of the operation.
 end
         deactivate UI
     deactivate HRM
