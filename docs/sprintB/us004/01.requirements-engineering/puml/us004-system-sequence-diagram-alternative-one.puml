@@ -25,7 +25,8 @@ activate HRM
         System --> HRM : Presents a list of available skills.
     deactivate System
 
-        HRM -> System : Selects one from the list.
+        loop skill selection
+        HRM -> System : Selects one skill from the list.
     activate System
 
     System --> HRM : Displays all the changes.
@@ -35,7 +36,7 @@ activate HRM
     activate System
 
     System --> HRM : Validates and stores it.
-
+     end
 
 
 @enduml
