@@ -3,8 +3,8 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-participant "skillRepository\n:skillRepository" as ORG
-participant "skill\n:Skill" as EMPREGO
+participant "jobRepository\n:jobRepository" as ORG
+participant "job\n:Job" as EMPREGO
 
 autonumber 16
 
