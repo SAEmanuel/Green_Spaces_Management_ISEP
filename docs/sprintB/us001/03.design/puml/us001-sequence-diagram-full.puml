@@ -57,7 +57,7 @@ loop for every skill
     HRM -> UI : types requested data (skillName)
     activate UI
 
-        UI --> HRM : shows requested data typed
+        UI --> HRM : show all data registered  for confirmation
         deactivate UI
 
         HRM -> UI : submits data
