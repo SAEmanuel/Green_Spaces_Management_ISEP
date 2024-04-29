@@ -3,7 +3,7 @@
 skinparam packageStyle rectangle
 skinparam shadowing false
 skinparam linetype polyline
-'(skinparam linetype orto
+'skinparam linetype orto
 
 skinparam classAttributeIconSize 0
 
