@@ -16,10 +16,16 @@ activate HRM
      HRM -> System : Selects the option to edit the employee’s skills.
     activate System
 
+    System --> HRM : Presents a list of collaborators.
+        deactivate System
+
+    HRM -> System : Selects one collaborator from the list.
+         activate System
+
         System --> HRM : Presents a list of available skills.
     deactivate System
 
-        HRM -> System : Selects one or more skills from the list.
+        HRM -> System : Selects one from the list.
     activate System
 
     System --> HRM : Displays all the changes.
@@ -29,11 +35,6 @@ activate HRM
     activate System
 
     System --> HRM : Validates and stores it.
-
-
-    System --> HRM : Confirms the success of the operation.
-    deactivate System
-
 
 
 
