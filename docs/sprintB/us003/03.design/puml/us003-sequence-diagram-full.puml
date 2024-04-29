@@ -68,21 +68,24 @@ activate HRM
         UI -> CTRL : createCollaborator(name, birthdate, admission date,\naddress, contact info (mobile and email), taxpayer number,\nID doc type, respective number and jobID)
         activate CTRL
 
-            CTRL -> Collaborator : createCollaborator(name, birthdate, admission date,\naddress, contact info (mobile and email), taxpayer number,\nID doc type, respective number and jobID)
-            activate Collaborator
+            CTRL -> CollaboratorsRepository : createCollaborator(name, birthdate, admission date,\naddress, contact info (mobile and email), taxpayer number,\nID doc type, respective number and jobID)
 
-            Collaborator --> CollaboratorsRepository : addCollaborator(collaborator)
-            deactivate Collaborator
             activate CollaboratorsRepository
 
-            loop [for each collaborator in collaboratorList]
-                CollaboratorsRepository --> CollaboratorsRepository: searchCollaborator(collaborator)
-                activate CollaboratorsRepository
-                    CollaboratorsRepository --> CollaboratorsRepository: true/false
-            end
+            CollaboratorsRepository -> Collaborator : createCollaborator(name, birthdate, admission date,\naddress, contact info (mobile and email), taxpayer number,\nID doc type, respective number and jobID)
+            activate Collaborator
 
-            CollaboratorsRepository -> CollaboratorsRepository : addCollaborator(collaborator)
-                            deactivate CollaboratorsRepository
+                Collaborator -> Collaborator : validateCollaborator(name, birthdate, admission date,\naddress, contact info (mobile and email), taxpayer number,\nID doc type, respective number and jobID)
+
+
+            Collaborator -> CollaboratorsRepository : addCollaborator(collaborator)
+            deactivate Collaborator
+
+            activate CollaboratorsRepository
+
+            CollaboratorsRepository -> CollaboratorsRepository: validateCollaboratorCollaborator(collaborator)
+
+            deactivate CollaboratorsRepository
 
         CollaboratorsRepository --> CTRL : collaborator added successfully
         deactivate CollaboratorsRepository
