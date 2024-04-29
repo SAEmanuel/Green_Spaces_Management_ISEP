@@ -77,15 +77,14 @@ activate HRM
         activate CTRL
 
             CTRL -> Team : createTeam(skill, minimumCollaborators, maximumCollaborators)
-        deactivate CTRL
 
         activate Team
 
 
                 Team -> RepositorySingleton : getInstance()
-                activate Team
 
                     activate RepositorySingleton
+
 
                         RepositorySingleton --> Team: repositories
                     deactivate RepositorySingleton
@@ -100,24 +99,24 @@ activate HRM
                         Team -> CollaboratorRepository : getCollaboratorBySkill(skills)
                         activate CollaboratorRepository
 
-                            CollaboratorRepository -> SkillRepository : getSkillsOfCollaborator(skills)
+                            CollaboratorRepository -> SkillRepository : checkIfHasSkills(skills)
                             activate SkillRepository
 
-                                SkillRepository -> CollaboratorRepository : skills
+                                SkillRepository -> CollaboratorRepository : true/false
                             deactivate SkillRepository
 
                             CollaboratorRepository --> Team : collaborator
                         deactivate CollaboratorRepository
                         Team --> Team : addCollaborator(Collaborator)
-                    deactivate Team
                     end
 
 
+
                     Team --> CTRL : Team Proposal
+
             deactivate Team
 
 
-        activate CTRL
 
 
             CTRL -> UI : Team Proposal
@@ -141,8 +140,9 @@ activate HRM
 
                 activate Team
 
-                    Team -> TeamRepository** : addTeam()
+                    Team -> TeamRepository** : getTeamRepository()
                     activate TeamRepository
+                    Team -> TeamRepository : addTeam()
 
                     TeamRepository -> Team : teamAdded
                     deactivate TeamRepository
