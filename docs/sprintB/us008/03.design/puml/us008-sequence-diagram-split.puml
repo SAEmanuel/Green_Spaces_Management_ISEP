@@ -25,56 +25,29 @@ UI -> CTRL : getVehicleListNeedingCheckup()
 deactivate UI
 
 activate CTRL
-CTRL -> RepositorySingleton : getInstance()
-activate RepositorySingleton
 
-RepositorySingleton --> CTRL: repositories
-deactivate RepositorySingleton
 
-CTRL -> PLAT : getVehicleRepository()
-activate PLAT
 
-PLAT --> CTRL: vehicleRepository
-deactivate PLAT
+
+ref over CTRL, RepositorySingleton, PLAT : Get Vehicle List
 
 CTRL -> vehicleRepository : getVehiclesNeedingCheckup()
 
-activate vehicleRepository
+ activate vehicleRepository
+    ref over vehicleRepository : Generate CheckUp List
 
 
 
-
-
-
-activate vehicleRepository
-
-loop for each vehicle in vehicleList
-    vehicleRepository -> vehicleRepository : needsCheckup(vehicle)
-    activate vehicleRepository
-    vehicleRepository --> vehicleRepository : true/false
-    deactivate vehicleRepository
-
-
-
-deactivate vehicleRepository
-end
-
-
-activate vehicleRepository
 
 
 vehicleRepository --> CTRL : vehiclesNeedingCheckup
 deactivate vehicleRepository
-
-
 
 CTRL --> UI : vehiclesNeedingCheckup
 deactivate CTRL
 activate UI
 UI --> FM : Provides a list of vehicles that need check-up (and all their info)
 deactivate UI
-deactivate FM
-
 deactivate FM
 
 @enduml
