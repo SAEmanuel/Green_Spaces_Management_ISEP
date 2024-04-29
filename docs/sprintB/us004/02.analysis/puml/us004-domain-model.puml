@@ -31,19 +31,11 @@ package "HRM System" {
         id_doc_number
     }
 
-    class MusgoSublime {
-        vatNumber
-        website
-        phoneNumber
-        email
-    }
-
     class HRM {
        }
 
-    MusgoSublime "1 " -- "1..*  " Collaborator : has >
-    HRM "1" - "1..*" Skill : selects >
-    Skill "1..*   " -- "1" Collaborator : assigned >
+    HRM "1" - "1..*" Skill : assigns >
+    Collaborator "1  " -- "1..*"  Skill  : has >
 }
 
 
