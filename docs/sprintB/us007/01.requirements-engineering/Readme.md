@@ -1,4 +1,4 @@
-# US007 - Register the overhaul of a vehicle
+# US007 - Register the check-up of a vehicle
 
 
 ## 1. Requirements Engineering
