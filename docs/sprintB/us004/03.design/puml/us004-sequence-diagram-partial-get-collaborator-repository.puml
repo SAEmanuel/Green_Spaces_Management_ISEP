@@ -7,17 +7,16 @@ autonumber
 
 'hide footbox
 
-participant ":CreateTaskController" as CTRL
+participant ":AssignSkillCollaboratoController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "taskCategoryRepository:\nTaskCategoryRepository" as TaskCategoryRepository
 
 autonumber 3
 
- -> CTRL : getTaskCategories()
+ -> CTRL : assignSkillCollaboratorById(collaboratorId,skill)
 autonumber 3.1
 activate CTRL
-    group Get Task Category List
+    group Get Collaborator Repository
 
 
             CTRL -> RepositorySingleton : getInstance()
@@ -26,22 +25,17 @@ activate CTRL
                 RepositorySingleton --> CTRL: repositories
             deactivate RepositorySingleton
 
-            CTRL -> PLAT : getTaskCategoryRepository()
+            CTRL -> PLAT : getCollaboratorRepository()
             activate PLAT
 
-                PLAT --> CTRL: taskCategoryRepository
+                PLAT --> CTRL: CollaboratorRepository
             deactivate PLAT
 
-            CTRL -> TaskCategoryRepository : getTaskCategories()
-            activate TaskCategoryRepository
 
-                TaskCategoryRepository --> CTRL : taskCategoryList
-            deactivate TaskCategoryRepository
 
 
     end
     autonumber 4
-    <-- CTRL  : taskCategoryList
 deactivate CTRL
 
 
