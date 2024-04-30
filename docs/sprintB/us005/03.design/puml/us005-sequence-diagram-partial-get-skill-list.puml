@@ -11,9 +11,9 @@ participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "SkillRepository:\nSkillRepository" as SkillRepository
 
-autonumber 14
+autonumber 3
 -> CTRL : getSkills()
-autonumber 14.1
+
 
     group Get Skill List
             activate CTRL
@@ -30,14 +30,13 @@ autonumber 14.1
                     PLAT --> CTRL: SkillRepository
                 deactivate PLAT
 
-                CTRL -> SkillRepository : getSkills()
+                CTRL -> SkillRepository : getSkillList()
                 activate SkillRepository
 
-                    SkillRepository --> CTRL : SkillRepositoryList
+                    SkillRepository --> CTRL : SkillList
                 deactivate SkillRepository
     end
-            autonumber 15
-                <-- CTRL : SkillRepositoryList
-            deactivate CTRL
+        <-- CTRL : SkillList
+    deactivate CTRL
 
 @enduml
