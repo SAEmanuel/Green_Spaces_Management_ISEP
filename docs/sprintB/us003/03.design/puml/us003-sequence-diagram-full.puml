@@ -56,7 +56,7 @@ activate HRM
         UI --> HRM : requests data
     deactivate UI
 
-    HRM -> UI : types requested data (name, birthdate, admission date,\naddress, contact info (mobile and email), taxpayer number,\nID doc type and respective number)
+    HRM -> UI : types requested data (name, birthDate, admissionDate,\naddress, phoneNumber, email, taxpayerNumber,\ndocType, docNumber)
     activate UI
 
         UI --> HRM : shows selected job and requested data
@@ -83,21 +83,21 @@ activate HRM
                     CTRL --> UI : collaboratorsRepository
                 deactivate CTRL
 
-        UI -> CTRL : createCollaborator(name, birthdate, admission date,\naddress, contact info (mobile and email), taxpayer number,\nID doc type, respective number and jobID)
+        UI -> CTRL : createCollaborator(name, birthDate, admissionDate,\naddress, phoneNumber, email, taxpayerNumber,\ndocType, docNumber and jobID)
         activate CTRL
 
-            CTRL -> CollaboratorsRepository : createCollaborator(name, birthdate, admission date,\naddress, contact info (mobile and email), taxpayer number,\nID doc type, respective number and jobID)
+            CTRL -> CollaboratorsRepository : createCollaborator(name, birthDate, admissionDate,\naddress, phoneNumber, email, taxpayerNumber,\ndocType, docNumber and jobID)
 
             activate CollaboratorsRepository
 
-            CollaboratorsRepository -> Collaborator : createCollaborator(name, birthdate, admission date,\naddress, contact info (mobile and email), taxpayer number,\nID doc type, respective number and jobID)
+            CollaboratorsRepository -> Collaborator : createCollaborator(name, birthDate, admissionDate,\naddress, phoneNumber, email, taxpayerNumber,\ndocType, docNumber and jobID)
 
             activate CollaboratorsRepository
             activate Collaborator
 
 
 
-                Collaborator -> Collaborator : validateCollaboratorInfo(name, birthdate, admission date,\naddress, contact info (mobile and email), taxpayer number,\nID doc type, respective number and jobID)
+                Collaborator -> Collaborator : validateCollaboratorInfo(name, birthDate, admissionDate,\naddress, phoneNumber, email, taxpayerNumber,\ndocType, docNumber and jobID)
                 activate Collaborator
                 Collaborator --> Collaborator :
                 deactivate Collaborator

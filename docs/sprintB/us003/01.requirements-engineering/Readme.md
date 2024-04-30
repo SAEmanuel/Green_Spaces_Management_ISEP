@@ -11,7 +11,7 @@ As a Human Resources Manager, I want to register a collaborator with a job and f
 
 **From the specifications document and client meetings:**
 
->   The human resources manager will fill all the required fields: name, birthdate, admission date, residence, phone number, email address, taxpayer number and Identification document type. Should also load an image of the identification document. Then he can select a job from a list to register a collaborator.
+>   The human resources manager will fill all the required fields: name, birthdate, admission date, address, phone number, email address, taxpayer number and Identification document type. Should also load an image of the identification document. Then he can select a job from a list to register a collaborator.
 
 **From forum:**
 
@@ -61,7 +61,7 @@ As a Human Resources Manager, I want to register a collaborator with a job and f
 * **AC2:** Name must be complete, should only have letters and have only at the maximum 9 words.
 * **AC3:** Birthdate can only be chosen from the calendar given and can only register collaborators with 18 years old or more.
 * **AC4:** Admission date can only be chosen from the calendar given.
-* **AC5:** Residence must be written, this includes: door number, street, ZIP code, city, country. If there is anything more needed to be specified, should be written in the "More" box.
+* **AC5:** Address must be written, this includes: door number, street, ZIP code, city, country. If there is anything more needed to be specified, should be written in the "More" box.
 * **AC6:** Phone number can only have 9 numbers.
 * **AC7:** Email address should have a prefix (before "@") and an email domain (after "@").
 * **AC8:** Taxpayer number can only have 9 numbers.
