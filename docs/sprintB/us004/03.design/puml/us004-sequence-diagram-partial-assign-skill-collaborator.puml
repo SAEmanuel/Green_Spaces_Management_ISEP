@@ -1,0 +1,38 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant "organization\n:Organization" as ORG
+participant "collaboratorRepository\n:CollaboratorRepository" as collaboratorRepository
+
+autonumber 16
+-> collaboratorRepository: assignSkillCollaboratorById(collaboratorId,skill)
+
+autonumber 16.1
+activate collaboratorRepository
+
+    group Assign Skill to Collaborator
+        collaboratorRepository -> collaboratorRepository : findCollaboratorById(collboratorId)
+        activate collaboratorRepository
+
+        collaboratorRepository -> collaboratorRepository: assignSkillCollaborator(skill)
+        activate collaboratorRepository
+        collaboratorRepository -> collaboratorRepository: validateIfHasSkill(skill)
+        activate collaboratorRepository
+
+        collaboratorRepository --> collaboratorRepository
+        deactivate collaboratorRepository
+        collaboratorRepository --> collaboratorRepository :
+        deactivate collaboratorRepository
+        collaboratorRepository --> collaboratorRepository :
+
+        deactivate collaboratorRepository
+    end
+
+    autonumber 17
+    <-- collaboratorRepository : true/false
+deactivate ORG
+
+
+@enduml
