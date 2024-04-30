@@ -1,4 +1,4 @@
-# US008 - Overhauling of vehicles
+# US008 - Check-up of vehicles
 
 
 ## 1. Requirements Engineering

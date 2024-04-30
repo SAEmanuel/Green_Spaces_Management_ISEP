@@ -12,14 +12,20 @@ participant ":System" as System
 
 activate FM
 
-    FM -> System : Asks to register a vehicle's check-up.
+    FM -> System : Selects the option to register a vehicle's check-up.
     activate System
 
-    System -> FM : Provides the FM the option to register a vehicle's check-up.
+    System -> FM : Asks a vehicle's license plate.
         deactivate System
 
-        FM -> System  : Provides all the required data.
+        FM -> System  : Enters a vehicle's license plate.
     activate System
+
+    System --> FM : Asks the check-up date and the current mileage of the vehicle.
+    deactivate System
+
+    FM -> System  : Enters the check-up date and current mileage.
+        activate System
 
     System --> FM : Displays all the data that will be registered.
         deactivate System
@@ -27,10 +33,6 @@ activate FM
         FM --> System : Confirms data.
         activate System
 
-        System --> FM : Validates and stores it.
-
-
-        System --> FM : Confirms the success of the operation.
-        deactivate System
+        System --> FM : Stores it.
 
 @enduml

@@ -15,7 +15,7 @@ package "VFM System" {
     class VFM {
     }
 
-    class ChekUp {
+    class CheckUp {
         licence
         date
         currentMileage
@@ -35,17 +35,7 @@ package "VFM System" {
          lastCheckUp
     }
 
-    class MusgoSublime {
-            vatNumber
-            website
-            phoneNumber
-            email
-        }
-
-
-    Vehicle "*" -- "1" MusgoSublime : has <
-
-    VFM "1" -- "1" ChekUp : register >
-    Vehicle "1" - "*" ChekUp : assigned <
+    VFM "1" -- "1" CheckUp : register >
+    Vehicle "1" - "*" CheckUp : assigned <
 }
 @enduml

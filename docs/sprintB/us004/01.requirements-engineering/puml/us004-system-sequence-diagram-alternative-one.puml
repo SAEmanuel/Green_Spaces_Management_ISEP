@@ -16,10 +16,10 @@ activate HRM
      HRM -> System : Selects the option to edit the employee’s skills.
     activate System
 
-    System --> HRM : Presents a list of collaborators.
+    System --> HRM : Asks a collaborator ID number.
         deactivate System
 
-    HRM -> System : Selects one collaborator from the list.
+    HRM -> System : Enters a valid collaborator ID number.
          activate System
 
         System --> HRM : Presents a list of available skills.

@@ -12,9 +12,9 @@ participant ":GenerateTeamController" as CTRL
 participant ":Team" as Team
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
+participant "skillRepository\n:SkillRepository" as SkillRepository
 participant "CollaboratorRepository:\nCollaboratorRepository" as CollaboratorRepository
 participant "TeamRepository:\nTeamRepository" as TeamRepository
-participant "skillRepository\n:SkillRepository" as SkillRepository
 
 
 activate HRM
@@ -50,12 +50,12 @@ activate HRM
                 CTRL --> UI : SkillList
             deactivate CTRL
 
-            UI --> HRM : shows skills list\n and asks to select one
-        deactivate UI
-
+            UI --> HRM : shows skills list
     loop [for each skill
+            UI --> HRM : request a skill
+
         HRM -> UI : selects a skill
-        activate UI
+
     end
 
             UI --> HRM : requests data (minimumCollaborators, maximumCollaborators)
@@ -73,12 +73,12 @@ activate HRM
     HRM -> UI : confirms and submits data
     activate UI
 
-        UI -> CTRL : generateTeam(skill, minimumCollaborators, maximumCollaborators)
+        UI -> CTRL : generateTeam(skills, minimumCollaborators, maximumCollaborators)
         deactivate UI
 
         activate CTRL
 
-            CTRL -> Team : generateTeam(skill, minimumCollaborators, maximumCollaborators)
+            CTRL -> Team : generateTeam(skills, minimumCollaborators, maximumCollaborators)
 
         activate Team
 
@@ -125,12 +125,12 @@ activate HRM
 
 
 
-            CTRL -> UI : Team Proposal
+            CTRL --> UI : Team Proposal
             deactivate CTRL
 
         activate UI
 
-            UI -> HRM: Show team and ask for confirmation
+            UI --> HRM: Show team and ask for confirmation
             deactivate UI
             alt accept team proposal
 
@@ -171,18 +171,18 @@ activate HRM
 
 
 
-                    TeamRepository -> Team : teamAdded
+                    TeamRepository --> Team : teamAdded
                     deactivate TeamRepository
                     Team --> Team
                     deactivate Team
 
-                Team -> CTRL : teamCreationSuccessful
+                Team --> CTRL : teamCreationSuccessful
                     deactivate Team
-                CTRL -> UI : team creation successful
+                CTRL --> UI : team creation successful
                 deactivate CTRL
                 activate UI
 
-                UI -> HRM : team creation successful
+                UI --> HRM : team creation successful
                 deactivate UI
             else refuse team proposal
                HRM -> UI : refuse team
@@ -201,13 +201,13 @@ activate HRM
                Team --> Team
                deactivate Team
 
-               Team -> CTRL : teamDeleteSuccessful
+               Team --> CTRL : teamDeleteSuccessful
                deactivate Team
-               CTRL -> UI : teamDeleteSuccessful
+               CTRL --> UI : teamDeleteSuccessful
                deactivate CTRL
                activate UI
 
-               UI -> HRM : team delete successful
+               UI --> HRM : team delete successful
                deactivate UI
             end
     deactivate UI

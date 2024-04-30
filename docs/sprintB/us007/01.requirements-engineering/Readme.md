@@ -1,4 +1,4 @@
-# US007 - Register the overhaul of a vehicle
+# US007 - Register the check-up of a vehicle
 
 
 ## 1. Requirements Engineering
@@ -68,14 +68,10 @@ As an FM, I wish to register a vehicle’s check-up
     * a date
     * a license plate
     * a mileage
-	
-* Selected data:
-    * a vehicle
 
 **Output Data:**
 
 * Display a message with all the information that will be registered.
-* (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
 
@@ -84,10 +80,6 @@ As an FM, I wish to register a vehicle’s check-up
 #### Alternative One
 
 ![System Sequence Diagram - Alternative One](svg/us007-system-sequence-diagram-alternative-one.svg)
-
-#### Alternative Two
-
-![System Sequence Diagram - Alternative Two](svg/us007-system-sequence-diagram-alternative-two.svg)
 
 ### 1.7 Other Relevant Remarks
 
