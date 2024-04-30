@@ -7,49 +7,58 @@ participant ":Team" as Team
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "CollaboratorRepository:\nCollaboratorRepository" as CollaboratorRepository
-participant "SkillRepository:\nSkillRepository" as SkillRepository
 
 
-autonumber 14
--> Team : teamCreation(skills, minimumCollaborators, maximumCollaborators)
-autonumber 14.1
+autonumber 19
+-> Team : generateTeam(skills, minimumCollaborators, maximumCollaborators)
 
         group Generate Team
 
         activate Team
 
-                Team -> RepositorySingleton : getInstance()
-                activate Team
 
-                    activate RepositorySingleton
+                            Team -> Team : validateData()
+                            activate Team
 
-                        RepositorySingleton --> Team: repositories
-                    deactivate RepositorySingleton
+                            Team --> Team :
+                            deactivate Team
 
-                    Team -> PLAT : getCollaboratorRepository()
-                    activate PLAT
+                            Team -> RepositorySingleton : getInstance()
 
-                        PLAT -> Team : CollaboratorRepository
-                    deactivate PLAT
+                            activate RepositorySingleton
 
-                    loop for each Collaborator
-                        Team -> CollaboratorRepository : getCollaboratorBySkill(skills)
-                        activate CollaboratorRepository
 
-                            CollaboratorRepository -> SkillRepository : getSkillsOfCollaborator(skills)
-                            activate SkillRepository
+                                RepositorySingleton --> Team: repositories
+                            deactivate RepositorySingleton
 
-                                SkillRepository -> CollaboratorRepository : true/false
-                            deactivate SkillRepository
+                            Team -> PLAT : getCollaboratorRepository()
+                            activate PLAT
 
-                            CollaboratorRepository --> Team : true/false
-                        deactivate CollaboratorRepository
-                        Team --> Team : addCollaborator(Collaborator)
-                    deactivate Team
-                    end
+                                PLAT --> Team : CollaboratorRepository
+                            deactivate PLAT
 
-                end
-            deactivate Team
+                            loop while minCollabo <= encontrados <= maxCollabo
+                                Team -> CollaboratorRepository : getCollaboratorBySkill(skills)
+                                activate Team
+                                activate CollaboratorRepository
+
+                                CollaboratorRepository -> CollaboratorRepository : findCollaborator(skills)
+                                activate CollaboratorRepository
+                                CollaboratorRepository --> CollaboratorRepository: collaborator
+                                deactivate CollaboratorRepository
+
+
+
+                                    CollaboratorRepository --> Team : collaborator
+                                deactivate CollaboratorRepository
+                                Team --> Team : addCollaborator(Collaborator)
+                                deactivate Team
+
+                            end
+
+           end
+                <-- Team : Team Proposal
+           deactivate Team
 
 
 

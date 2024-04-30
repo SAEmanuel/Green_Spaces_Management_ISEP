@@ -20,7 +20,11 @@ class Skill {
 
 class SkillRepository {
     - registerSkill(skill)
-    -validateSkill(skill)
+    - validateSkill(skill)
+}
+
+class CollaboratorRepository {
+
 }
 
 
