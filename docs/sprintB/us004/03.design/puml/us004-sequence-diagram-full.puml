@@ -13,7 +13,6 @@ participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "collaboratorRepository\n:CollaboratorRepository" as collaboratorRepository
 participant "skillRepository\n:SkillRepository" as skillRepository
-participant "skill\n:Skill" as EMPREGO
 
 activate HRM
 
@@ -22,9 +21,16 @@ activate HRM
 
         activate UI
 
+        UI --> HRM : request data (Collaborator ID Number)
+        deactivate UI
+
+
+        HRM -> UI : selects requested data
+        activate UI
+
         UI -> CTRL** : create
 
-        UI -> CTRL : getCollaboratorsList()
+        UI -> CTRL : getSkillList()
         activate CTRL
 
             CTRL -> RepositorySingleton : getInstance()
@@ -46,71 +52,87 @@ activate HRM
             deactivate skillRepository
 
             CTRL -> UI :  skillList
+        deactivate CTRL
             UI -> HRM : shows skillList
 
-        deactivate CTRL
 
 
 
-     UI --> HRM : request data (Collaborator ID Number)
-    deactivate UI
 
-
-    HRM -> UI : types requested data
-    activate UI
 
     loop selects skills
 
-        UI --> HRM : request data (skills)
+        UI --> HRM : request data (skill)
         deactivate UI
 
 
-        HRM -> UI : types requested data
+        HRM -> UI : selects  skill
         activate UI
 
-    end
 
         UI --> HRM : show all data registered  for confirmation
         deactivate UI
 
         HRM -> UI : submits data
             activate UI
+    end
 
 
-            UI -> CTRL : assignSkillCollaborator(collaboratorIdNumber, skills)
+
+
+
+
+
+            UI -> CTRL : assignSkillCollaboratorById(collaboratorId,skill)
             activate CTRL
 
 
-                CTRL -> skillRepository: assignSkillCollaborator(collaboratorIdNumber, skills)
-                deactivate CTRL
-                activate skillRepository
+            CTRL -> CTRL : assignSkillCollaboratorById(collaboratorId,skill)
+                    activate CTRL
+
+                        CTRL -> RepositorySingleton : getInstance()
+                        activate RepositorySingleton
+
+                        RepositorySingleton --> CTRL : repositories
+                        deactivate RepositorySingleton
+
+                        CTRL -> PLAT : getCollaboratorRepository()
+                        activate PLAT
+
+                        PLAT --> CTRL : collaboratorRepository
+                        deactivate PLAT
+
+
+                        CTRL -> collaboratorRepository : assignSkillCollaboratorById(collaboratorId,skill)
+                        activate collaboratorRepository
+
+                        collaboratorRepository -> collaboratorRepository : findCollaboratorById(collboratorId)
+                        activate collaboratorRepository
+
+                        collaboratorRepository -> collaboratorRepository: assignSkillCollaborator(skill)
+                        activate collaboratorRepository
+                        collaboratorRepository -> collaboratorRepository: validateIfHasSkill(skill)
+                                activate collaboratorRepository
+
+                                collaboratorRepository --> collaboratorRepository
+                                deactivate collaboratorRepository
+                        collaboratorRepository --> collaboratorRepository :
+                        deactivate collaboratorRepository
+                        collaboratorRepository --> collaboratorRepository :
+
+                        deactivate collaboratorRepository
+
+
+                        collaboratorRepository --> CTRL : true/false
+                        deactivate collaboratorRepository
+
+                        CTRL --> CTRL : true/false
+                        deactivate CTRL
 
 
 
-                skillRepository -> EMPREGO**: register(skillName)
 
-                activate EMPREGO
-
-                    EMPREGO -> EMPREGO : validateSkillName(skillName)
-                    activate EMPREGO
-                        EMPREGO --> EMPREGO
-                deactivate EMPREGO
-                                    skillRepository -> skillRepository: addSkill(skill)
-                deactivate EMPREGO
-                                    activate skillRepository
-                                        skillRepository -> skillRepository: validateSkill(skill)
-                                        activate skillRepository
-                                            skillRepository --> skillRepository
-                                        deactivate skillRepository
-
-                                        skillRepository --> skillRepository
-                                    deactivate skillRepository
-
-                                    skillRepository --> CTRL : skill
-                                    deactivate skillRepository
-                                    activate CTRL
-
-                CTRL --> UI: skill
+                CTRL --> UI: true/false
                 deactivate CTRL
                 UI --> HRM: displays the success of the operation.
 

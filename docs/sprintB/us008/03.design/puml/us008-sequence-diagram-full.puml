@@ -43,9 +43,6 @@ activate vehicleRepository
 
 
 
-
-
-
 activate vehicleRepository
 
 loop for each vehicle in vehicleList
