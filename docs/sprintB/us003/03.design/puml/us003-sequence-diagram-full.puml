@@ -38,7 +38,7 @@ activate HRM
                                     PLAT --> CTRL: jobsRepository
                                 deactivate PLAT
 
-                CTRL -> JobsRepository : getJobs()
+                CTRL -> JobsRepository : getJobsList()
                 activate JobsRepository
 
                     JobsRepository --> CTRL : jobsList
@@ -91,17 +91,21 @@ activate HRM
             activate CollaboratorsRepository
 
             CollaboratorsRepository -> Collaborator : createCollaborator(name, birthdate, admission date,\naddress, contact info (mobile and email), taxpayer number,\nID doc type, respective number and jobID)
+
+            activate CollaboratorsRepository
             activate Collaborator
 
-                Collaborator -> Collaborator : validateCollaborator(name, birthdate, admission date,\naddress, contact info (mobile and email), taxpayer number,\nID doc type, respective number and jobID)
 
+
+                Collaborator -> Collaborator : validateCollaboratorInfo(name, birthdate, admission date,\naddress, contact info (mobile and email), taxpayer number,\nID doc type, respective number and jobID)
+                activate Collaborator
+                Collaborator --> Collaborator :
+                deactivate Collaborator
 
             Collaborator -> CollaboratorsRepository : addCollaborator(collaborator)
             deactivate Collaborator
 
-            activate CollaboratorsRepository
-
-            CollaboratorsRepository -> CollaboratorsRepository: validateCollaboratorCollaborator(collaborator)
+            CollaboratorsRepository -> CollaboratorsRepository: validateCollaborator(collaborator)
 
             deactivate CollaboratorsRepository
 
