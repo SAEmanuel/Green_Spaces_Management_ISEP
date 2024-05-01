@@ -1,5 +1,7 @@
-# US001 - Registering Skills for Collaborators
+# US001 - Registering Skills 
 
-[Requirements Engineering](01.requirements-engineering/Readme.md)
+[ 1- Requirements Engineering](01.requirements-engineering/Readme.md)
 
-[Analysis](02.analysis/Readme.md)
+[ 2- Analysis](02.analysis/Readme.md)
+
+[ 3- Design](03.design/Readme.md)

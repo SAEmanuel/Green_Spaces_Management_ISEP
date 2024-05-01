@@ -17,6 +17,7 @@ activate ADM
 
     activate UI
 
+        UI -> CTRL** : create
 
 
         UI --> ADM : request data (skillName)
@@ -35,7 +36,7 @@ activate ADM
     ADM -> UI : submits data
     activate UI
 
-        UI -> CTRL** : create
+
         UI -> CTRL : registerSkill(skillName)
         activate CTRL
 
@@ -51,12 +52,12 @@ activate ADM
 
                 end
 
-                skillRepository --> CTRL : Skill
+                skillRepository --> CTRL : skill
             deactivate skillRepository
 
             CTRL --> UI: skill
             deactivate CTRL
-            UI --> ADM: displays the (un)success of the operation.
+            UI --> ADM: shows operation success.
     deactivate UI
 
 deactivate ADM

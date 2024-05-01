@@ -20,7 +20,7 @@ package "HRM System" {
         name
     }
 
-    HRM "1  " - "1..*" Skill : register >
+    HRM " " - " 1" Skill : register >
 
 }
 

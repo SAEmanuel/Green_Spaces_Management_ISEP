@@ -49,7 +49,7 @@ activate HRM
 '            deactivate CTRL
 
 '            UI --> HRM : show skill list
-loop for every skill
+loop
             UI --> HRM : request data (skillName)
         deactivate UI
 
@@ -62,7 +62,7 @@ loop for every skill
 
         HRM -> UI : submits data
             activate UI
-
+end
 
             UI -> CTRL : registerSkill(skillName)
             activate CTRL
@@ -99,8 +99,8 @@ loop for every skill
 
                 CTRL --> UI: skill
                 deactivate CTRL
-                UI --> HRM: displays the success of the operation.
-end
+                UI --> HRM: shows operation success.
+
         deactivate UI
     deactivate HRM
 
