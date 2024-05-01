@@ -80,6 +80,4 @@ public class RegisterJobUI {
         }
         return jobName;
     }
-
-
 }
