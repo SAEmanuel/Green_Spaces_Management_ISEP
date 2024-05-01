@@ -1,8 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
-import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.*;
-import pt.ipp.isep.dei.esoft.project.ui.console.RegisterJobUI;
 
 
 import java.util.Optional;
@@ -12,11 +10,11 @@ public class RegisterJobController {
     private JobRepository jobRepository;
 
     public RegisterJobController() {
-        getJobRepository();
+        this.jobRepository = getJobRepository();
     }
 
     public RegisterJobController(JobRepository jobRepository) {
-       this.jobRepository = jobRepository;
+        this.jobRepository = jobRepository;
     }
 
     private JobRepository getJobRepository() {
@@ -29,8 +27,30 @@ public class RegisterJobController {
     }
 
 
-    public Optional<Job> registerJob(Job job) {
-        boolean success = jobRepository.add(job);
-        return success ? Optional.of(job) : Optional.empty();
+    public Optional<String> registerJob(String jobName) {
+        if (!isValidJobName(jobName)) {
+            System.out.println("Invalid job name!");
+            return Optional.empty();
+        }
+
+        boolean success = jobRepository.addJobName(jobName);
+
+        return success ? Optional.of(jobName) : Optional.empty();
     }
+
+    private boolean isValidJobName(String jobName) {
+        if (jobName == null || jobName.isEmpty()) {
+            return false;
+        } else {
+            jobName = jobName.trim();
+            for (int i = 0; i < jobName.length(); i++) {
+                if (!Character.isLetter(jobName.charAt(i))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+
 }

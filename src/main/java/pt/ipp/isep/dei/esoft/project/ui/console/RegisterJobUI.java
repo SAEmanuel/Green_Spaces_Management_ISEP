@@ -34,7 +34,7 @@ public class RegisterJobUI {
     }
 
     private void submitData() {
-        Optional<Job> job = getController().registerJob(new Job(jobName));
+        Optional<String> job = getController().registerJob(jobName);
 
         if (job.isPresent()) {
             System.out.println("Job successfully registered!");
@@ -47,7 +47,8 @@ public class RegisterJobUI {
     private String requestJobName() {
         scanner = new Scanner(System.in);
         System.out.print("Enter job name: ");
-        return scanner.nextLine();
+        jobName = scanner.nextLine().toLowerCase();
+        return jobName;
     }
 
     private void displayTypedJob() {

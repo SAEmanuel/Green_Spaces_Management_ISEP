@@ -13,13 +13,24 @@ public class JobRepository {
         this.jobList = new ArrayList<>();
     }
 
-    public boolean add(Job job) {
-        if (jobList.contains(job)) {
-            System.out.println("Job already exists in the repository.");
+    public boolean addJobName(String jobName) {
+        if (!validateJobName(jobName)) {
             return false;
         }
-        jobList.add(job);
+        jobList.add(new Job(jobName));
+        return true;
+    }
+
+
+    private boolean validateJobName(String jobName) {
+        for (Job job : jobList) {
+            if (job.getJobName().equals(jobName)) {
+                System.out.println("Job already exists in the repository.");
+                return false;
+            }
+        }
         System.out.println("Job added to the repository.");
         return true;
     }
 }
+
