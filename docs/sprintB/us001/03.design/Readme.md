@@ -51,9 +51,9 @@ It uses Interaction Occurrence (a.k.a. Interaction Use).
 
 ![Sequence Diagram - split](svg/us001-sequence-diagram-split.svg)
 
-**Get Skill List Partial SD**
+[//]: # (**Get Skill List Partial SD**)
 
-![Sequence Diagram - Partial - Get Task Category List](svg/us001-sequence-diagram-partial-get-skill-list.svg)
+[//]: # (![Sequence Diagram - Partial - Get Task Category List]&#40;svg/us001-sequence-diagram-partial-get-skill-list.svg&#41;)
 
 [//]: # (**Get Task Category Object**)
 
