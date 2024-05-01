@@ -15,80 +15,13 @@ activate Employee
     Employee -> System : request to register a vehicle
     activate System
 
-    |||
-    group requested data
+        System --> Employee : request data
+            deactivate System
 
-    System --> Employee : request vehicle plate ID
-    deactivate System
-
-    Employee -> System : types requested data
+    Employee -> System : registerVehicle(plateID, brand, model...)
     activate System
 
-    System --> Employee : request vehicle brand
-    deactivate System
-
-    Employee -> System : types requested data
-    activate System
-
-    System --> Employee : request vehicle model
-    deactivate System
-
-    Employee -> System : types requested data
-    activate System
-
-    System --> Employee : request vehicle type
-    deactivate System
-
-    Employee -> System : types requested data
-    activate System
-
-    System --> Employee : request vehicle Tare Weight
-    deactivate System
-
-    Employee -> System : types requested data
-    activate System
-
-    System --> Employee : request vehicle Gross Weight
-    deactivate System
-
-    Employee -> System : types requested data
-    activate System
-
-    System --> Employee : request vehicle millage
-    deactivate System
-
-    Employee -> System : types requested data
-    activate System
-
-    System --> Employee : request vehicle register date
-    deactivate System
-
-    Employee -> System : types requested data
-    activate System
-
-    System --> Employee : request vehicle acquisition date
-    deactivate System
-
-    Employee -> System : types requested data
-    activate System
-
-    System --> Employee : request vehicle maintenance frequency
-    deactivate System
-
-    Employee -> System : types requested data
-    activate System
-
-    System --> Employee : request vehicle last checkup
-    deactivate System
-
-    Employee -> System : types requested data
-    activate System
-
-    end
-    |||
-
-
-        System --> Employee : show all data registered  for confirmation
+    System --> Employee : show all data registered  for confirmation
     deactivate System
 
     Employee -> System : submits data

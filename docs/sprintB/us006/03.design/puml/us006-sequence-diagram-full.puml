@@ -45,7 +45,6 @@ activate VFM
             activate vehicleRepository
 
             vehicleRepository -> VEICULO**: registerVehicle(plateID, brand, model...)
-            activate VEICULO
 
             VEICULO -> VEICULO : validatePlateID(plateID)
                 activate VEICULO
@@ -72,7 +71,7 @@ activate VFM
 
             CTRL --> UI: vehicle
             deactivate CTRL
-            UI --> VFM: displays operation success
+            UI --> VFM: shows operation success.
     deactivate UI
 
 deactivate VFM
