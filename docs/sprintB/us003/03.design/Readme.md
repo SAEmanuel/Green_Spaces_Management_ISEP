@@ -6,31 +6,33 @@
 
 _**Note that SSD - Alternative One is adopted.**_
 
-| Interaction ID                                                                                                                  | Question: Which class is responsible for...   | Answer                       | Justification (with patterns)                                                                                                   |
-|:--------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------|:-----------------------------|:--------------------------------------------------------------------------------------------------------------------------------|
-| Step 1 : asks to create a new collaborator		                                                                                    | 	... interacting with the actor?              | CreateCollaboratorUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.                   |
-| 			  		                                                                                                                         | 	... coordinating the US?                     | CreateCollaboratorController | Controller                                                                                                                      |
-| Step 2 : shows jobsList list and asks to select one job                                                                         | 	...displaying the jobsList						             | CreateCollaboratorUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.                   |
-| Step 3 : requests data (name, birthDate, admissionDate, address, phoneNumber, email, taxpayerNumber, docType, docNumber)	       | 	...displaying the resquested data            | CreateCollboratorUI          | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.                                                                                 |
-| Step 4 : types requested data (name, birthDate, admissionDate, address, phoneNumber, email, taxpayerNumber, docType, docNumber) | 	...temporarily keeping the input data        | CreateCollboratorUI          | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.                                                                         |
-| Step 5 : shows selected job and requested data		                                                                                | 	...display the typed data before submitting  | CreateCollaboratorUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.                                                                    |
-| Step 6 : 		                                                                                                                     | 							                                       |                              |                                                                                                                                 |              
-| Step 7  		                                                                                                                      | 	... validating all data (local validation)?  | Task                         | IE: owns its data.                                                                                                              | 
-| 			  		                                                                                                                         | 	... validating all data (global validation)? | Organization                 | IE: knows all its tasks.                                                                                                        | 
-| 			  		                                                                                                                         | 	... saving the created task?                 | Organization                 | IE: owns all its tasks.                                                                                                         | 
-| Step 8  		                                                                                                                      | 	... informing operation success?             | CreateTaskUI                 | IE: is responsible for user interactions.                                                                                       | 
+| Interaction ID                                                                                                                  | Question: Which class is responsible for...   | Answer                       | Justification (with patterns)                                                                                             |
+|:--------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------|:-----------------------------|:--------------------------------------------------------------------------------------------------------------------------|
+| Step 1 : asks to create a new collaborator		                                                                                    | 	... interacting with the actor?              | CreateCollaboratorUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.             |
+| 			  		                                                                                                                         | 	... coordinating the US?                     | CreateCollaboratorController | Controller                                                                                                                |
+| Step 2 : shows jobsList list and asks to select one job                                                                         | 	...displaying the jobs list?						           | CreateCollaboratorUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.             |
+| Step 3 : requests data (name, birthDate, admissionDate, address, phoneNumber, email, taxpayerNumber, docType, docNumber)	       | 	...displaying the requested data?            | CreateCollaboratorUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.             |
+| Step 4 : types requested data (name, birthDate, admissionDate, address, phoneNumber, email, taxpayerNumber, docType, docNumber) | 	...temporarily keeping the input data?       | CreateCollaboratorUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.             |
+| Step 5 : shows selected job and requested data		                                                                                | 	...display the typed data before submitting? | CreateCollaboratorUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model.             |
+| Step 6 : submits data		                                                                                                         | 	...creating the collaborator object?						   | CollaboratorsRepository      | Creator (Rule 1): in the DM CollaboratorsRepository has Collaborator                                                      |              
+|                                                                                                                                 | ...validating all data (global validation)?   | CollaboratorsRepository      | IE : knows all its collaborators                                                                                          |
+| 		                                                                                                                              | 	... validating all data (local validation)?  | Collaborator                 | IE: knows its data.                                                                                                       | 
+| 			  		                                                                                                                         | 	... saving the created collaborator?         | CollaboratorsRepository      | IE: knows all its collaborators.                                                                                          | 
+| Step 7 : confirms the success of the operation			  		                                                                           | 	...informing operation success?              | CreateCollaboratorUI         | is responsible for user interactions.                                                                                     |
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
-* Organization
-* Task
+* JobsRepository
+* Job
+* CollaboratorsRepository
+* Collaborators
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
-* CreateTaskUI  
-* CreateTaskController
+* CreateCollaboratorUI  
+* CreateCollaboratorController
 
 
 ## 3.2. Sequence Diagram (SD)
