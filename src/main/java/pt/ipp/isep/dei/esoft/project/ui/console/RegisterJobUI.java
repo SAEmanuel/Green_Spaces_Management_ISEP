@@ -34,7 +34,7 @@ public class RegisterJobUI {
     }
 
     private void submitData() {
-        Optional<Job> job = getController().registerJob(jobName);
+        Optional<Job> job = getController().registerJob(new Job(jobName));
 
         if (job.isPresent()) {
             System.out.println("Job successfully registered!");
