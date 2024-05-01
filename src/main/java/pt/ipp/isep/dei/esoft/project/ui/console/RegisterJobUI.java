@@ -34,7 +34,7 @@ public class RegisterJobUI {
     }
 
     private void submitData() {
-        Optional<Job> job = getController().registerJob(jobName);
+        Optional<Job> job = getController().registerJob(new Job(jobName));
 
         if (job.isPresent()) {
             System.out.println("Job successfully registered!");
@@ -55,21 +55,29 @@ public class RegisterJobUI {
 
     }
 
+    private void displayTypedJob(String typedJobName) {
+        typedJobName = requestJobName();
+        System.out.println(typedJobName);
+
+    }
+
     private String confirmationJobName() {
         scanner = new Scanner(System.in);
         int answer = -1;
+        String newAnswer;
         System.out.print("Entered job name: ");
         displayTypedJob();
 
-        while (answer != 0 && answer != 1) {
-            System.out.print("Do you wish to continue with the name chosen? (0 -> no / 1 -> yes?: ");
+        while (answer != 1) {
+            System.out.print("Do you wish to continue with the name chosen? (0 -> no / 1 -> yes?): ");
             answer = scanner.nextInt();
-        }
-        if (answer == 0) {
-            return requestJobName();
+            if (answer == 0) {
+                newAnswer = requestJobName();
+                displayTypedJob(newAnswer);
+            } else if (answer != 1) {
+                System.out.println("Invalid choice. Please enter 0 or 1.");
+            }
         }
         return jobName;
     }
-
-
 }

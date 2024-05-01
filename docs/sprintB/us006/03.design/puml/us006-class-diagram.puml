@@ -35,7 +35,8 @@ class Data {
 
 
 class VehicleRepository {
-    - registerVehicle(vehicle)
+    + registerVehicle(plateID,brand, model, type, tareWeight,\ngrossWeight, millage, registerDate, acquisitionDate,\nmaintenanceFrequency, lastCheckup)
+    - addVehicle(vehicle)
     - validateVehicle(vehicle)
 }
 
@@ -57,11 +58,11 @@ class RegisterVehicleUI {
 RegisterVehicleUI .> RegisterVehicleController
 
 RegisterVehicleController .> Repositories : repositories
-Repositories  ..> "1 " VehicleRepository
+Repositories  --> "1 " VehicleRepository
 Repositories -> Repositories : instance
 
 RegisterVehicleController ..>  VehicleRepository : vehicleRepository
 
-VehicleRepository  --> "1…* " Vehicle : register
+VehicleRepository  --> "1" Vehicle : register
 Data -o Vehicle
 @enduml

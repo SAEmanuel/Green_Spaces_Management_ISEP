@@ -4,17 +4,27 @@ skinparam packageStyle rectangle
 skinparam shadowing false
 
 participant "vehicleRepository:\nVehicleRepository" as ORG
-participant "vehicle\n:Vehicle" as TAREFA
+participant "vehicle\n:Vehicle" as VEICULO
 
 autonumber 16
--> ORG: registerVehicle(plate ID,brand, model, type, Tare Weight,\n Gross Weight, millage, Register date, acquisition date,\nmaintenance frequency, last checkup)
+-> ORG: registerVehicle(plateID, brand, model...)
 
 autonumber 16.1
 activate ORG
     group Register Vehicle
 
-        ORG -> TAREFA**: registerVehicle(plate ID,brand, model, type, Tare Weight,\n Gross Weight, millage, Register date, acquisition date,\nmaintenance frequency, last checkup)
+        ORG -> VEICULO**: registerVehicle(plateID, brand, model...)
+       activate VEICULO
+
+        VEICULO -> VEICULO : validatePlateID(plateID)
+        activate VEICULO
+
+        VEICULO --> VEICULO
+        deactivate VEICULO
+
+
         ORG -> ORG: addVehicle (Vehicle)
+        deactivate VEICULO
 
         activate ORG
             ORG -> ORG: validateVehicle(Vehicle)
