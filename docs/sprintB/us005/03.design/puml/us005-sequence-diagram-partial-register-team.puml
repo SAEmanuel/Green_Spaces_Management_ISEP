@@ -1,0 +1,50 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant ":Team" as Team
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "TeamRepository:\nTeamRepository" as TeamRepository
+
+autonumber 36
+    -> Team : acceptTeamCreation()
+
+    group Register Team
+                activate Team
+
+                     Team -> RepositorySingleton : getInstance()
+                     activate RepositorySingleton
+
+                        RepositorySingleton --> Team: repositories
+                     deactivate RepositorySingleton
+
+
+                    Team -> PLAT : getTeamRepository()
+                    activate PLAT
+
+                    PLAT --> Team : teamRepository
+                    deactivate PLAT
+
+
+                    Team -> TeamRepository : addTeam()
+                    activate Team
+                    activate TeamRepository
+                    TeamRepository --> TeamRepository : addTeam()
+                    activate TeamRepository
+                    TeamRepository --> TeamRepository :
+                    deactivate TeamRepository
+
+
+
+
+                    TeamRepository --> Team : teamAdded
+                    deactivate TeamRepository
+                    Team --> Team
+                    deactivate Team
+    end
+    <-- Team : teamCreationSuccessful
+deactivate Team
+
+@enduml

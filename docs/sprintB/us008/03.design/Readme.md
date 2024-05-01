@@ -1,42 +1,36 @@
-# US008 - Overhauling of vehicles
+# US008 - Check-up of vehicles
 
 ## 3. Design - User Story Realization
 
 ### 3.1. Rationale
 
-| Interaction ID | Question: Which class is responsible for... | Answer               | Justification (with patterns)                                                                                 |
-|:---------------|:--------------------- |:---------------------|:--------------------------------------------------------------------------------------------------------------|
-| Step 1  	      |	... interacting with the actor? | CreateTaskUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-| 			  		        |	... coordinating the US? | CreateTaskController | Controller                                                                                                    |
-| 			  		        |	... instantiating a new Task? | Organization         | Creator (Rule 1): in the DM Organization has a Task.                                                          |
-| 			  		        | ... knowing the user using the system?  | UserSession          | IE: cf. A&A component documentation.                                                                          |
-| 			  		        |							 | Organization         | IE: knows/has its own Employees                                                                               |
-| 			  		        |							 | Employee             | IE: knows its own data (e.g. email)                                                                           |
-| Step 2  		     |							 |                      |                                                                                                               |
-| Step 3  		     |	...saving the inputted data? | Task                 | IE: object created in step 1 has its own data.                                                                |
-| Step 4  		     |	...knowing the task categories to show? | System               | IE: Task Categories are defined by the Administrators.                                                        |
-| Step 5  		     |	... saving the selected category? | Task                 | IE: object created in step 1 is classified in one Category.                                                   |
-| Step 6  		     |							 |                      |                                                                                                               |              
-| Step 7  		     |	... validating all data (local validation)? | Task                 | IE: owns its data.                                                                                            | 
-| 			  		        |	... validating all data (global validation)? | Organization         | IE: knows all its tasks.                                                                                      | 
-| 			  		        |	... saving the created task? | Organization         | IE: owns all its tasks.                                                                                       | 
-| Step 8  		     |	... informing operation success?| CreateTaskUI         | IE: is responsible for user interactions.                                                                     | 
+| Interaction ID | Question: Which class is responsible for...    | Answer                | Justification (with patterns)                                                                                                             |
+|:---------------|:-----------------------------------------------|:----------------------|:------------------------------------------------------------------------------------------------------------------------------------------|
+| Step 1         | ... interacting with the actor?                | CheckupListUI         | Pure Fabrication: A UI component typically handles user interactions and acts as an interface between the user and the system.            |
+|                | ... coordinating the US?                       | VehicleListController | Controller: The controller orchestrates the use case by coordinating the interactions between the UI and the domain model.                |
+| Step 2         | ... coordinating with the repositories?        | VehicleListController | Controller: The controller interacts with repositories to retrieve necessary data and perform business logic.                             |
+|                | ... retrieving the vehicle repository?         | VehicleListController | Controller: The controller interacts with the repositories to retrieve the necessary data for the use case.                               |
+| Step 3         | ... getting the vehicles needing check-up?     | VehicleRepository     | Repository: The repository pattern encapsulates the logic for retrieving data, in this case, vehicles needing check-up.                   |
+| Step 4         | ... iterating over each vehicle?               | VehicleRepository     | Repository: The repository handles the retrieval and manipulation of data, iterating over vehicles needing check-up.                      |
+|                | ... determining if a vehicle needs check-up?   | VehicleRepository     | Repository: The repository pattern encapsulates the logic for data access and business logic, determining vehicle status.                 |
+| Step 5         | ... retrieving the vehicles needing check-up?  | VehicleRepository     | Repository: The repository pattern encapsulates the logic for data access, retrieving vehicles needing check-up.                          |
+| Step 6         | ... validating data?                           | VehicleRepository     | Repository: The repository pattern encapsulates the logic for data access and validation, ensuring data integrity.                        | 
+|                | ... saving the vehicles needing check-up?      | VehicleRepository     | Repository: The repository pattern encapsulates the logic for data access and manipulation, saving vehicles needing check-up.             | 
+| Step 7         | ... sending the list of vehicles to the actor? | CheckupListUI         | Pure Fabrication: The UI component is responsible for presenting information to the user and is a separate concern from the domain logic. |
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are:
 
-* Fill
-* Fill
+* None
 
 Other software classes (i.e. Pure Fabrication) identified:
 
-* Fill
-* Fill
-
+* VehicleListController
+* CheckupListUI
+* VehicleRepository
 
 ## 3.2. Sequence Diagram (SD)
-
 
 ### Full Diagram
 
@@ -46,7 +40,8 @@ This diagram shows the full sequence of interactions between the classes involve
 
 ### Split Diagrams
 
-The following diagram shows the same sequence of interactions between the classes involved in the realization of this user story, but it is split in partial diagrams to better illustrate the interactions between the classes.
+The following diagram shows the same sequence of interactions between the classes involved in the realization of this
+user story, but it is split in partial diagrams to better illustrate the interactions between the classes.
 
 It uses Interaction Occurrence (a.k.a. Interaction Use).
 
@@ -56,11 +51,9 @@ It uses Interaction Occurrence (a.k.a. Interaction Use).
 
 ![Sequence Diagram - Partial - Get Vehicle List](svg/us008-sequence-diagram-partial-get-vehicle-list.svg)
 
-
 **Generate CheckUp List Partial SD**
 
 ![Sequence Diagram - Partial - Generate CheckUp List](svg/us008-sequence-diagram-partial-generate-checkup-list.svg)
-
 
 ## 3.3. Class Diagram (CD)
 
