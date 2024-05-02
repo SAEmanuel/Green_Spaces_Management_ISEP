@@ -7,25 +7,30 @@ autonumber
 
 actor "Fleet Manager" as FM
 
-participant ":CheckupListUI" as UI
+participant ":CheckupRegisterUI" as UI
 participant ":VehicleListController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "vehicleRepository\n:VehicleRepository" as vehicleRepository
-participant "vehicleCheckupList\n:Vehicle" as VEHICLE
 
 activate FM
 
-FM -> UI : Asks to generate a list of vehicles needing check-up
+FM -> UI : Asks to register a vehicle's check-up
 activate UI
 
-UI -> CTRL** : generateCheckupList
-activate CTRL
-
-UI -> CTRL : getVehicleListNeedingCheckup()
+UI -> FM : Requests data (vehicleLicensePlate)
 deactivate UI
-activate CTRL
 
+FM -> UI : Provides requested data
+activate UI
+
+UI -> CTRL** : create
+
+UI -> CTRL : getVehicleByLicensePlate()
+
+deactivate UI
+
+activate CTRL
 CTRL -> RepositorySingleton : getInstance()
 activate RepositorySingleton
 
@@ -38,38 +43,37 @@ activate PLAT
 PLAT --> CTRL: vehicleRepository
 deactivate PLAT
 
-CTRL -> vehicleRepository : getVehiclesNeedingCheckup()
+CTRL -> vehicleRepository : getVehicleByLicensePlate()
+
 activate vehicleRepository
 
-vehicleRepository --> CTRL : vehicleList
-
-
-activate CTRL
-
-loop for each vehicle in vehicleList
-    CTRL -> vehicleRepository : needsCheckup(vehicle)
-    activate vehicleRepository
-    vehicleRepository --> CTRL : true/false
-    deactivate vehicleRepository
-    activate VEHICLE
-    CTRL --> VEHICLE : if true, add vehicle to list
+vehicleRepository -> CTRL : success
 deactivate vehicleRepository
-end
 
 
-activate vehicleRepository
-
-VEHICLE --> CTRL : vehiclesNeedingCheckup
-
-deactivate VEHICLE
-
-CTRL --> UI : vehiclesNeedingCheckup
+CTRL -> UI : success
 deactivate CTRL
-activate UI
-UI --> FM : Provides a list of vehicles that need check-up (and all their info)
-deactivate UI
-deactivate FM
 
-deactivate FM
+activate UI
+
+UI -> FM : Requests data (date, currentMileage)
+deactivate UI
+
+FM -> UI : Provides requested data
+activate UI
+
+UI -> CTRL : registerVehicleCheckUp()
+deactivate UI
+
+
+
+
+
+
+
+
+
+
+
 
 @enduml
