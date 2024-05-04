@@ -25,7 +25,7 @@ public class Collaborator {
     }
 
     public boolean isValidPhoneNumber(int phoneNumber) {
-        return (phoneNumber > 910000000 && phoneNumber < 939999999) || (phoneNumber > 960000000 && phoneNumber < 969999999);
+        return (phoneNumber >= 910000000 && phoneNumber <= 939999999) || (phoneNumber >= 960000000 && phoneNumber <= 969999999);
     }
 
     public boolean isValidName(String name) {
