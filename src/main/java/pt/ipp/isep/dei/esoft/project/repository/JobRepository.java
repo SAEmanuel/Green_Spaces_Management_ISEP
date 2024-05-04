@@ -28,7 +28,7 @@ public class JobRepository {
 
     private boolean addJob(Job job) {
         boolean success = false;
-        if (validate(job)) {
+        if (validateJob(job)) {
             // A clone of the task is added to the list of tasks, to avoid side effects and outside manipulation.
             success = jobList.add(job.clone());
         }
@@ -41,7 +41,7 @@ public class JobRepository {
         Optional<Job> newJob = Optional.empty();
         boolean operationSuccess = false;
 
-        if (validate(job)) {
+        if (validateJob(job)) {
             newJob = Optional.of(job.clone());
             operationSuccess = jobList.add(newJob.get());
         }
@@ -59,7 +59,7 @@ public class JobRepository {
      * @param job The task to be validated.
      * @return True if the task is valid.
      */
-    private boolean validate(Job job) {
+    private boolean validateJob(Job job) {
         return jobDoNotContain(job);
     }
 
