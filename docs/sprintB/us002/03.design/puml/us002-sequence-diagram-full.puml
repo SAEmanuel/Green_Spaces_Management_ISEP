@@ -42,6 +42,17 @@ loop for every skill
             UI -> CTRL : registerJob(jobName)
             activate CTRL
 
+            CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
+
+            RepositorySingleton --> CTRL: repositories
+            deactivate RepositorySingleton
+
+            CTRL -> PLAT : getJobRepository()
+            activate PLAT
+
+            PLAT --> CTRL: jobRepository
+            deactivate PLAT
 
                 CTRL -> jobRepository: registerJob(jobName)
                 deactivate CTRL
