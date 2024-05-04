@@ -36,7 +36,7 @@ class Vehicle {
 
 
 
-VFM "1" -- "*" Vehicle : lists >
+VFM "1" -- "*" Vehicle : lists check-up >
 
 
 
