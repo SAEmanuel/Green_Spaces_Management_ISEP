@@ -9,8 +9,9 @@ autonumber
 actor "Human Resources Manager" as HRM
 participant ":RegisterJobUI" as UI
 participant ":RegisterJobController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
 participant "jobRepository\n:JobRepository" as jobRepository
-
 activate HRM
 
     HRM -> UI : asks to register a new job
@@ -38,6 +39,18 @@ activate HRM
         UI -> CTRL** : create
         UI -> CTRL : registerJob(jobName)
         activate CTRL
+
+            CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
+
+            RepositorySingleton --> CTRL: repositories
+            deactivate RepositorySingleton
+
+            CTRL -> PLAT : getJobRepository()
+            activate PLAT
+
+            PLAT --> CTRL: jobRepository
+            deactivate PLAT
 
 
 
