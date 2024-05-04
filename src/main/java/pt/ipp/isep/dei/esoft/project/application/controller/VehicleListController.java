@@ -10,7 +10,7 @@ public class VehicleListController {
 
     private VehicleRepository vehicleRepository;
 
-    public VehicleListController(VehicleRepository vehicleRepository) {
+    public VehicleListController() {
         this.vehicleRepository = getVehicleRepository();
     }
 
