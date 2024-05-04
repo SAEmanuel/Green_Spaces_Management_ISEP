@@ -94,6 +94,8 @@ be appointed to a collaborator
 **Output Data:**
 
 * Success of the operation
+* Errors/warnings messages
+
 
 ### 1.6. System Sequence Diagram (SSD)
 

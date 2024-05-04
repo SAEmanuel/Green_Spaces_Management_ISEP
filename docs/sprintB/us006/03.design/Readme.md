@@ -50,9 +50,9 @@ It uses Interaction Occurrence (a.k.a. Interaction Use).
 ![Sequence Diagram - split](svg/us006-sequence-diagram-split.svg)
 
 
-**Get Vehicle List**
+**Get Vehicle Repository**
 
-![Sequence Diagram - Partial - Get Task Category Object](svg/us006-sequence-diagram-partial-get-vehicle-list.svg)
+![Sequence Diagram - Partial - Get Task Category Object](svg/us006-sequence-diagram-partial-get-vehicle-repository.svg)
 
 
 **Register Vehicle**
