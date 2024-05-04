@@ -29,45 +29,45 @@ public class JobRepository {
     private boolean addJob(Job job) {
         boolean success = false;
         if (validateJob(job)) {
-            // A clone of the task is added to the list of tasks, to avoid side effects and outside manipulation.
+            // A clone of the job is added to the list of jobs, to avoid side effects and outside manipulation.
             success = jobList.add(job.clone());
         }
         return success;
 
     }
 
-    public Optional<Job> add(Job job) {
-
-        Optional<Job> newJob = Optional.empty();
-        boolean operationSuccess = false;
-
-        if (validateJob(job)) {
-            newJob = Optional.of(job.clone());
-            operationSuccess = jobList.add(newJob.get());
-        }
-
-        if (!operationSuccess) {
-            newJob = Optional.empty();
-        }
-
-        return newJob;
-    }
+//    public Optional<Job> add(Job job) {
+//
+//        Optional<Job> newJob = Optional.empty();
+//        boolean operationSuccess = false;
+//
+//        if (validateJob(job)) {
+//            newJob = Optional.of(job.clone());
+//            operationSuccess = jobList.add(newJob.get());
+//        }
+//
+//        if (!operationSuccess) {
+//            newJob = Optional.empty();
+//        }
+//
+//        return newJob;
+//    }
 
     /**
-     * This method validates the task, checking for duplicates.
+     * This method validates the job, checking for duplicates.
      *
-     * @param job The task to be validated.
-     * @return True if the task is valid.
+     * @param job The job to be validated.
+     * @return True if the job is valid.
      */
     private boolean validateJob(Job job) {
         return jobDoNotContain(job);
     }
 
     /**
-     * This method checks if the task is already in the list of tasks.
+     * This method checks if the job is already in the list of jobs.
      *
-     * @param job The task to be checked.
-     * @return True if the task is not in the list of tasks.
+     * @param job The job to be checked.
+     * @return True if the job is not in the list of jobs.
      */
     private boolean jobDoNotContain(Job job) {
         return !jobList.contains(job);
