@@ -13,15 +13,9 @@ autonumber 16.1
         -> ORG: registerSkill(skillName)
             activate ORG
             group Register skill
-        ORG -> EMPREGO** : register(SkillName)
+        ORG -> EMPREGO** : create
 
-        activate EMPREGO
-            EMPREGO -> EMPREGO : validateSkillName(skillName)
-            activate EMPREGO
 
-                EMPREGO --> EMPREGO
-
-            deactivate EMPREGO
 
             ORG -> ORG: addSkill(skill)
         deactivate EMPREGO

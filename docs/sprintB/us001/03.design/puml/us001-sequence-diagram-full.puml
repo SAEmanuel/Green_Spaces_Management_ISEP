@@ -24,31 +24,6 @@ activate HRM
         UI -> CTRL** : create
 
 
-'            UI -> CTRL : getSkillList()
-'            activate CTRL
-'
-'                CTRL -> RepositorySingleton : getInstance()
-'                activate RepositorySingleton
-'
-'                    RepositorySingleton --> CTRL: repositories
-'                deactivate RepositorySingleton
-'
-'                CTRL -> PLAT : getSkillRepository()
-'                activate PLAT
-'
-'                    PLAT --> CTRL: skillListRepository
-'                deactivate PLAT
-'
-'                CTRL -> skillRepository : getSkillList()
-'                activate skillRepository
-'
-'                    skillRepository --> CTRL : skillList
-'                deactivate skillRepository
-'
-'                CTRL --> UI : skillList
-'            deactivate CTRL
-
-'            UI --> HRM : show skill list
 
             UI --> HRM : request data (skillName)
         deactivate UI
@@ -66,22 +41,35 @@ activate HRM
 
             UI -> CTRL : registerSkill(skillName)
             activate CTRL
+            CTRL -> CTRL : getSkillRepository()
+            activate CTRL
+
+                CTRL -> RepositorySingleton : getInstance()
+                activate RepositorySingleton
+
+                    RepositorySingleton --> CTRL: repositories
+                deactivate RepositorySingleton
+
+                CTRL -> PLAT : getSkillRepository()
+                activate PLAT
+
+                    PLAT --> CTRL: skillRepository
+                deactivate PLAT
+
+                CTRL --> CTRL : skillRepository
+            deactivate CTRL
+
+
 
 
                 CTRL -> skillRepository: registerSkill(skillName)
-                deactivate CTRL
                 activate skillRepository
 
 
 
-                skillRepository -> EMPREGO**: register(skillName)
+                skillRepository -> EMPREGO**: create
 
-                activate EMPREGO
 
-                    EMPREGO -> EMPREGO : validateSkillName(skillName)
-                    activate EMPREGO
-                        EMPREGO --> EMPREGO
-                deactivate EMPREGO
                                     skillRepository -> skillRepository: addSkill(skill)
                 deactivate EMPREGO
                                     activate skillRepository
@@ -95,7 +83,6 @@ activate HRM
 
                                     skillRepository --> CTRL : skill
                                     deactivate skillRepository
-                                    activate CTRL
 
                 CTRL --> UI: skill
                 deactivate CTRL

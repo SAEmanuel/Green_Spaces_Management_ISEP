@@ -73,9 +73,8 @@ be appointed to a collaborator
 ### 1.3. Acceptance Criteria
 
 * **AC01:** There cannot be two skills with the same name.
-* **AC02:** There cannot be two skills with different names, but they booth have the same functionalities.
-* **AC03:** All required fields must be filled in (the name is mandatory).
-* **AC04:** The name of a skill cannot have special characters or numbers.
+* **AC02:** All required fields must be filled in (the name is mandatory).
+* **AC03:** The name of a skill cannot have special characters or numbers.
 
 
 
@@ -83,8 +82,7 @@ be appointed to a collaborator
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US02 - Register a Job" before registering a job, it's essential to have a clear understanding of the skills required for that job.
-* There is a dependency on "US04 - Assign Skills to a Collaborator" Assigning skills to a collaborator (US04) requires the existence of predefined skills, which are registered as part of US01.
+* No dependencies found.
 
 ### 1.5 Input and Output Data
 

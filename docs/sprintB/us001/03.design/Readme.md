@@ -35,7 +35,6 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 ## 3.2. Sequence Diagram (SD)
 
-_**Note that SSD - Alternative Two is adopted.**_
 
 ### Full Diagram
 
@@ -51,23 +50,14 @@ It uses Interaction Occurrence (a.k.a. Interaction Use).
 
 ![Sequence Diagram - split](svg/us001-sequence-diagram-split.svg)
 
-[//]: # (**Get Skill List Partial SD**)
 
-[//]: # (![Sequence Diagram - Partial - Get Task Category List]&#40;svg/us001-sequence-diagram-partial-get-skill-list.svg&#41;)
+**Get Skill Repository**
 
-[//]: # (**Get Task Category Object**)
-
-[//]: # ()
-[//]: # (![Sequence Diagram - Partial - Get Task Category Object]&#40;svg/us001-sequence-diagram-partial-get-task-category.svg&#41;)
-
-[//]: # (**Get Employee**)
-
-[//]: # ()
-[//]: # (![Sequence Diagram - Partial - Get Employee]&#40;svg/us001-sequence-diagram-partial-get-employee.svg&#41;)
+![Sequence Diagram - Partial - Get Skill Repository](svg/us001-sequence-diagram-partial-get-skill-repository.svg)
 
 **Register Skill**
 
-![Sequence Diagram - Partial - Create Task](svg/us001-sequence-diagram-partial-register-skill.svg)
+![Sequence Diagram - Partial - Register Skill](svg/us001-sequence-diagram-partial-register-skill.svg)
 
 ## 3.3. Class Diagram (CD)
 

@@ -7,7 +7,7 @@ autonumber
 
 'hide footbox
 actor "Human Resources Manager" as ADM
-participant ":CreateSkillUI" as UI
+participant ":RegisterSkillUI" as UI
 participant ":RegisterSkillController" as CTRL
 participant "skillRepository\n:skillRepository" as skillRepository
 
@@ -39,6 +39,9 @@ activate ADM
 
         UI -> CTRL : registerSkill(skillName)
         activate CTRL
+        ref over CTRL
+            Get Skill Repository
+        end
 
 
 
