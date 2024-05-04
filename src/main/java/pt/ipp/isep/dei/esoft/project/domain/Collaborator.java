@@ -24,6 +24,10 @@ public class Collaborator {
         this.job = job;
     }
 
+    public boolean isValidTaxPayerNumber(int taxPayerNumber) {
+        return (taxPayerNumber >= 100000000 && taxPayerNumber <= 999999999);
+    }
+
     public boolean isValidEmailAddress(String emailAddress) {
         boolean found = false;
         if (emailAddress == null || emailAddress.isEmpty()) {
