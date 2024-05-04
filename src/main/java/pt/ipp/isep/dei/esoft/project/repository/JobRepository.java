@@ -41,7 +41,7 @@ public class JobRepository {
         Optional<Job> newJob = Optional.empty();
         boolean operationSuccess = false;
 
-        if (validateJob(job)) {
+        if (validate(job)) {
             newJob = Optional.of(job.clone());
             operationSuccess = jobList.add(newJob.get());
         }
@@ -52,12 +52,6 @@ public class JobRepository {
 
         return newJob;
     }
-
-    private boolean validateJob(Job job) {
-        boolean isValid = !jobList.contains(job);
-        return isValid;
-    }
-
 
     /**
      * This method validates the task, checking for duplicates.
