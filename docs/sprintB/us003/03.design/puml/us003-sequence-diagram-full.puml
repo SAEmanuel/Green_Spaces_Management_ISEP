@@ -97,8 +97,6 @@ activate HRM
 
             activate Collaborator
 
-
-
                 Collaborator -> Collaborator : validateCollaboratorInfo(name, birthDate, admissionDate,\naddress, phoneNumber, email, taxpayerNumber,\ndocType, docNumber and jobID)
                 activate Collaborator
                 Collaborator --> Collaborator :
