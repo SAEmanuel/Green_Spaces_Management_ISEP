@@ -3,7 +3,6 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 import pt.ipp.isep.dei.esoft.project.application.controller.RegisterJobController;
 import pt.ipp.isep.dei.esoft.project.domain.Job;
 
-
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -34,7 +33,7 @@ public class RegisterJobUI {
     }
 
     private void submitData() {
-        Optional<String> job = getController().registerJob(jobName);
+        Optional<Job> job = getController().registerJob(jobName);
 
         if (job.isPresent()) {
             System.out.println("Job successfully registered!");

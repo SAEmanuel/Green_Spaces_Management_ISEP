@@ -4,10 +4,11 @@ import java.util.Objects;
 
 public class Job {
 
-    private final String jobName;
+    private String jobName;
 
     public Job(String jobName) {
-        this.jobName = jobName;
+        if (isValidJobName(jobName))
+            this.jobName = jobName;
     }
 
     public String getJobName() {
@@ -33,6 +34,19 @@ public class Job {
         return new Job(this.jobName);
     }
 
+    private boolean isValidJobName(String jobName) {
+        if (jobName == null || jobName.isEmpty()) {
+            throw new IllegalArgumentException("Job name cannot be null or empty.");
+        } else {
+            jobName = jobName.trim();
+            for (int i = 0; i < jobName.length(); i++) {
+                if (!Character.isLetter(jobName.charAt(i))) {
+                    throw new IllegalArgumentException("Job name contains invalid characters.");
+                }
+            }
+        }
+        return true;
+    }
 
     public boolean hasName(String name) {
         return this.jobName.equals(name);
