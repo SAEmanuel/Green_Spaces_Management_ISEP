@@ -19,15 +19,6 @@ public class Skill {
         //This method verify the skill name.
         validateSkillName(name);
         //Calls the method set(), and it will associate the name of the skill for the instance.
-        setSkillName(name);
-    }
-
-    /**
-     * Modifies the skill name.
-     *
-     * @param skillName the new skill name.
-     */
-    public void setSkillName(String skillName) {
         this.skillName = skillName;
     }
 
