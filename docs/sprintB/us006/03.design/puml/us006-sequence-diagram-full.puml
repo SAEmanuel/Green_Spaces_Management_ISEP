@@ -41,16 +41,28 @@ activate VFM
         activate CTRL
 
 
+            CTRL -> CTRL : getVehicleRepository()
+                        activate CTRL
+
+                            CTRL -> RepositorySingleton : getInstance()
+                            activate RepositorySingleton
+
+                                RepositorySingleton --> CTRL: repositories
+                            deactivate RepositorySingleton
+
+                            CTRL -> PLAT : getVehicleRepository()
+                            activate PLAT
+
+                                PLAT --> CTRL: vehicleRepository
+                            deactivate PLAT
+
+                            CTRL --> CTRL : vehicleRepository
+                        deactivate CTRL
+
             CTRL -> vehicleRepository: registerVehicle(plateID, brand, model...)
             activate vehicleRepository
 
-            vehicleRepository -> VEICULO**: registerVehicle(plateID, brand, model...)
-
-            VEICULO -> VEICULO : validatePlateID(plateID)
-                activate VEICULO
-                    VEICULO --> VEICULO
-                deactivate VEICULO
-
+            vehicleRepository -> VEICULO**: create
 
 
                 vehicleRepository -> vehicleRepository: addVehicle(Vehicle)

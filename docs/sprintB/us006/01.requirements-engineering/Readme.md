@@ -55,15 +55,13 @@ As an VFM, I wish to register a vehicle including Brand, Model, Type, Tare, Gros
 * **AC03:** All required fields must be filled in (Plate, Brand, Model, Type...).
 * **AC04:** The Maintenance/Checkup Frequency must be field in Kms.
 * **AC05:** The Plate ID must follow the format of the corresponding year. 
-* **AC06:** If the system encounters any errors during the skill registration process, it should provide informative error messages to the HR Manager, guiding them on how to resolve the issue.
 
 
 
 
 ### 1.4. Found out Dependencies
 
-[//]: # (* There is a dependency with "US07 - Registering a vehicle" may involve capturing details such as maintenance/check-up frequency, which would be relevant for scheduling vehicle check-ups &#40;US07&#41;.)
-* The need to list vehicles needing check-up "US08" arises from the registration of vehicles "US06 - Registering a vehicle", as it helps in tracking maintenance requirements.
+* No dependencies found.
 
 ### 1.5 Input and Output Data
 

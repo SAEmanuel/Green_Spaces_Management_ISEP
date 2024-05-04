@@ -13,14 +13,8 @@ autonumber 16.1
 activate ORG
     group Register Vehicle
 
-        ORG -> VEICULO**: registerVehicle(plateID, brand, model...)
-       activate VEICULO
+        ORG -> VEICULO**: create
 
-        VEICULO -> VEICULO : validatePlateID(plateID)
-        activate VEICULO
-
-        VEICULO --> VEICULO
-        deactivate VEICULO
 
 
         ORG -> ORG: addVehicle (Vehicle)
