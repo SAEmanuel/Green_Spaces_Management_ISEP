@@ -8,7 +8,7 @@ autonumber
 'hide footbox
 actor "Human Resources Manager" as HRM
 participant ":AssignSkillCollaboratorUI" as UI
-participant ":AssignSkillCollaboratoController" as CTRL
+participant ":AssignSkillCollaboratorController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "collaboratorRepository\n:CollaboratorRepository" as collaboratorRepository
