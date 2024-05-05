@@ -6,22 +6,53 @@ public class Skill {
      * The skill name
      */
     private String skillName;
+    /**
+     * The skill Description
+     */
+    private String skillDescription;
+    /**
+     * The skill Description by default
+     */
+    private static final String DESCRIPTION = "none";
+
 
     /**
-     * Constructs an instance of Skill, by giving the skill name.
+     * Constructs an instance of Skill, by giving the skill name and description.
+     *
+     * @param skillName the skill name (string)
+     * @param skillDescription the skill description (string)
+     */
+    public Skill(String skillName, String skillDescription) {
+        //Use the trim() method to remove spaces before and after the Strings.
+        String name = skillName.trim();
+        String description = skillDescription.trim();
+
+        //This method verify the skill name.
+        validateSkillName(name);
+
+        this.skillName = name;
+        this.skillDescription = description;
+    }
+
+    /**
+     * Constructs an instance of Skill, by giving the skill name only.
      *
      * @param skillName the skill name (string)
      */
     public Skill(String skillName) {
-        //Use the trim() method to remove spaces before and after the skill name.
         String name = skillName.trim();
 
         //This method verify the skill name.
         validateSkillName(name);
-        //Calls the method set(), and it will associate the name of the skill for the instance.
-        this.skillName = skillName;
+
+        this.skillName = name;
+        //The skill Description of the instance is set as default.
+        this.skillDescription = DESCRIPTION;
     }
 
+    public void setSkillDescription(String skillDescription) {
+        this.skillDescription = skillDescription;
+    }
 
     /**
      * Validates a skill name to ensure it meets to establish criteria.
@@ -31,7 +62,7 @@ public class Skill {
      */
     private void validateSkillName(String skillName){
         // Check if skillName is null or empty
-        if ( skillName == null || skillName.isEmpty() ) {
+        if ( !validateString(skillName) ) {
             throw new IllegalArgumentException("Reference cannot be null or empty.");
         }
 
@@ -39,6 +70,17 @@ public class Skill {
         if ( !validateName(skillName) ) {
             throw new IllegalArgumentException("Skill name have special characters/numbers.");
         }
+    }
+
+    /**
+     * This method validates is a String is not empty or null.
+     * Return true if is not null and empty; otherwise false
+     *
+     * @param string the string that need to be validated
+     * @return the result of the operation (null and empty)
+     */
+    private boolean validateString(String string) {
+        return ( string != null && !string.isEmpty() );
     }
 
     /**
@@ -79,7 +121,7 @@ public class Skill {
         // Cast the other object to Skill
         Skill skill = (Skill) obj;
         // Compare the skill names ignoring case sensitivity
-        return (this.skillName.equalsIgnoreCase(skill.skillName));
+        return (this.skillName.equalsIgnoreCase(skill.skillName) && this.skillDescription.equalsIgnoreCase(skill.skillDescription));
     }
 
     /**
@@ -88,7 +130,7 @@ public class Skill {
      * @return A clone of the current instance.
      */
     public Skill clone() {
-        return new Skill(this.skillName);
+        return new Skill(this.skillName,this.skillDescription);
     }
 
     /**
@@ -98,6 +140,6 @@ public class Skill {
      */
     @Override
     public String toString() {
-        return String.format("Skill -> %s%n",skillName);
+        return String.format("Skill -> %s || Skill Description -> %s%n",skillName,skillDescription);
     }
 }
