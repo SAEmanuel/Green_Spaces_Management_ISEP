@@ -21,7 +21,8 @@ public class CheckUpListUI implements Runnable{
 
     public void run() {
         System.out.println("\n\n--- Request Vehicles check-up list ------------------------");
-        if (shouldContinueProcessing()) {
+        String answer = requestActivation();
+        if (shouldContinueProcessing(answer)) {
             submitData();
         } else {
             System.out.println("\n\n--- Vehicles' check-up list not generated ------------------------");
@@ -38,8 +39,7 @@ public class CheckUpListUI implements Runnable{
         }
     }
 
-    private boolean shouldContinueProcessing() {
-        String answer = requestActivation();
+    private boolean shouldContinueProcessing(String answer) {
         return answer.equals("y");
     }
 
