@@ -25,8 +25,8 @@ public class RegisterVehicleController {
         return vehicleRepository;
     }
 
-    public Optional<Vehicle> registerVehicle(String plateId, String brand, String model, String type, int tareWeight, int grossWeight, float currentKm, float checkUpFrequency, Data registerDate, Data acquisitionDate) {
-        Optional<Vehicle> newVehicle = Optional.empty();
+    public Optional<Vehicle> registerVehicle(String plateId, String brand, String model, String type, float tareWeight, float grossWeight, float currentKm, float checkUpFrequency, Data registerDate, Data acquisitionDate) {
+        Optional<Vehicle> newVehicle;
 
         newVehicle = vehicleRepository.registerVehicle(plateId, brand, model, type, tareWeight, grossWeight, currentKm, checkUpFrequency, registerDate, acquisitionDate);
 

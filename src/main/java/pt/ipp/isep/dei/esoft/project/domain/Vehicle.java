@@ -9,8 +9,8 @@ public class Vehicle {
     private String model;
     private String type;
 
-    private int tareWeight;
-    private int grossWeight;
+    private float tareWeight;
+    private float grossWeight;
     private float currentKm;
     private float checkUpFrequency;
 
@@ -24,7 +24,7 @@ public class Vehicle {
     private static final int MAX_CHARS_PLATE = 6;
 
 
-    public Vehicle(String plateId, String brand, String model, String type, int tareWeight, int grossWeight,
+    public Vehicle(String plateId, String brand, String model, String type, float tareWeight, float grossWeight,
                    float currentKm, float checkUpFrequency, Data registerDate, Data acquisitionDate) {
 
         plateId = plateId.trim();
@@ -32,8 +32,7 @@ public class Vehicle {
         model = model.trim();
         type = type.trim();
 
-        validateVehicle(plateId, brand, model, type, tareWeight, grossWeight, currentKm,
-                        checkUpFrequency, registerDate, acquisitionDate);
+        validateVehicle(plateId, brand, model, type, tareWeight, grossWeight, currentKm, checkUpFrequency, registerDate, acquisitionDate);
 
         this.plateId = plateId;
         this.brand = brand;
@@ -52,8 +51,7 @@ public class Vehicle {
 
 //---------------------------------------VALIDATIONS----------------------------------------------------------
 
-    private void validateVehicle(String plateId, String brand, String model, String type, int tareWeight, int grossWeight,
-                                 float currentKm, float checkUpFrequency, Data registerDate, Data acquisitionDate) {
+    private void validateVehicle(String plateId, String brand, String model, String type, float tareWeight, float grossWeight, float currentKm, float checkUpFrequency, Data registerDate, Data acquisitionDate) {
 
         //String validations and plate id format
         validatePlateId(plateId,registerDate);

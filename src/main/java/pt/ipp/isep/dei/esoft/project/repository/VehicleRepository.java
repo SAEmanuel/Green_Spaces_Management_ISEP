@@ -22,14 +22,14 @@ public class VehicleRepository {
     }
 
 
-    public Optional<Vehicle> registerVehicle(String plateId, String brand, String model, String type, int tareWeight, int grossWeight, float currentKm, float checkUpFrequency, Data registerDate, Data acquisitionDate) {
+    public Optional<Vehicle> registerVehicle(String plateId, String brand, String model, String type, float tareWeight, float grossWeight, float currentKm, float checkUpFrequency, Data registerDate, Data acquisitionDate) {
 
         Optional<Vehicle> optionalVehicle = Optional.empty();
 
         Vehicle vehicle = new Vehicle(plateId, brand, model, type, tareWeight, grossWeight, currentKm, checkUpFrequency, registerDate, acquisitionDate);
 
         if ( addVehicle(vehicle) ){
-            optionalVehicle = Optional.of(vehicle);
+            optionalVehicle = Optional.of(vehicle.clone());
         }
 
         return optionalVehicle;
@@ -45,6 +45,7 @@ public class VehicleRepository {
 
         return success;
     }
+
 
     private boolean validate(Vehicle vehicle) {
         return vehicleListDoNotContains(vehicle);

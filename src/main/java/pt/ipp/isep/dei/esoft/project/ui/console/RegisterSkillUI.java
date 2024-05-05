@@ -17,7 +17,7 @@ public class RegisterSkillUI {
          controller = new RegisterSkillController();
     }
 
-    public RegisterSkillController getController(){
+    private RegisterSkillController getController(){
         return controller;
     }
 
