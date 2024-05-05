@@ -2,10 +2,7 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import pt.ipp.isep.dei.esoft.project.repository.JobRepository;
 
-import java.util.List;
-
 public class Collaborator {
-
     private String name;
     private Data birthDate;
     private Data admissionDate;
@@ -17,27 +14,27 @@ public class Collaborator {
     private Job job;
 
     public Collaborator(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, String docType, int job) {
-        this.name = name;
-        this.birthDate = birthDate;
+        if (isValidName(name)) this.name = name;
+        if (isValidBirthDate(birthDate)) this.birthDate = birthDate;
         this.admissionDate = admissionDate;
         this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.emailAddress = emailAddress;
-        this.taxPayerNumber = taxPayerNumber;
+        if (isValidPhoneNumber(phoneNumber)) this.phoneNumber = phoneNumber;
+        if (isValidEmailAddress(emailAddress)) this.emailAddress = emailAddress;
+        if (isValidTaxPayerNumber(taxPayerNumber)) this.taxPayerNumber = taxPayerNumber;
         this.docType = docType;
         this.job = getJob(job);
     }
 
-    public Job getJob(int job) {
+    private Job getJob(int job) {
         JobRepository jobList = new JobRepository();
         return jobList.getJob(job);
     }
 
-    public boolean isValidTaxPayerNumber(int taxPayerNumber) {
+    private boolean isValidTaxPayerNumber(int taxPayerNumber) {
         return (taxPayerNumber >= 100000000 && taxPayerNumber <= 999999999);
     }
 
-    public boolean isValidEmailAddress(String emailAddress) {
+    private boolean isValidEmailAddress(String emailAddress) {
         boolean found = false;
         if (emailAddress == null || emailAddress.isEmpty()) {
             throw new IllegalArgumentException("Job name cannot be null or empty.");
@@ -50,15 +47,15 @@ public class Collaborator {
         return found;
     }
 
-    public boolean isValidPhoneNumber(int phoneNumber) {
+    private boolean isValidPhoneNumber(int phoneNumber) {
         return (phoneNumber >= 910000000 && phoneNumber <= 939999999) || (phoneNumber >= 960000000 && phoneNumber <= 969999999);
     }
 
-    public boolean isValidBirthDate(Data birthDate) {
+    private boolean isValidBirthDate(Data birthDate) {
         return birthDate.maior18();
     }
 
-    public boolean isValidName(String name) {
+    private boolean isValidName(String name) {
         if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("Job name cannot be null or empty.");
         } else {
@@ -77,7 +74,7 @@ public class Collaborator {
     }
 
     public void setName(String name) {
-        this.name = name;
+        if (isValidName(name)) this.name = name;
     }
 
     public Data getBirthDate() {
@@ -109,7 +106,7 @@ public class Collaborator {
     }
 
     public void setPhoneNumber(int phoneNumber) {
-        this.phoneNumber = phoneNumber;
+        if (isValidPhoneNumber(phoneNumber)) this.phoneNumber = phoneNumber;
     }
 
     public String getEmailAddress() {
@@ -117,7 +114,7 @@ public class Collaborator {
     }
 
     public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
+        if (isValidEmailAddress(emailAddress)) this.emailAddress = emailAddress;
     }
 
     public int getTaxPayerNumber() {
@@ -125,7 +122,7 @@ public class Collaborator {
     }
 
     public void setTaxPayerNumber(int taxPayerNumber) {
-        this.taxPayerNumber = taxPayerNumber;
+        if (isValidTaxPayerNumber(taxPayerNumber)) this.taxPayerNumber = taxPayerNumber;
     }
 
     public String getDocType() {
@@ -142,5 +139,18 @@ public class Collaborator {
 
     public void setJob(Job job) {
         this.job = job;
+    }
+
+    public boolean equals(Object otherCollaborator) {
+        if (this == otherCollaborator)
+            return true;
+        if (otherCollaborator == null || getClass() != otherCollaborator.getClass())
+            return false;
+        Collaborator collaborator = (Collaborator) otherCollaborator;
+        return  (getName().equals(collaborator.getName()) &&  getBirthDate().equals(collaborator.getBirthDate()) &&
+                getAdmissionDate().equals(collaborator.getAdmissionDate()) &&
+                getAddress().equals(collaborator.getAddress()) && getPhoneNumber() == collaborator.getPhoneNumber() &&
+                getEmailAddress().equals(collaborator.getAddress()) && getTaxPayerNumber() == collaborator.getTaxPayerNumber() &&
+                getDocType().equals(collaborator.getDocType()) && getJob().equals(collaborator.job));
     }
 }
