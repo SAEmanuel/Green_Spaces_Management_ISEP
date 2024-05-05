@@ -6,6 +6,8 @@ import pt.ipp.isep.dei.esoft.project.domain.Skill;
 import java.util.Optional;
 import java.util.Scanner;
 
+import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
+
 
 public class RegisterSkillUI implements Runnable{
 
@@ -44,6 +46,11 @@ public class RegisterSkillUI implements Runnable{
 
     }
 
+    /**
+     * Confirms the skill data entered by the user.
+     *
+     * @return 2 if the user chooses to exit, otherwise returns 1.
+     */
     private int confirmsData() {
         Scanner input = new Scanner(System.in);
         int option = -1;
@@ -57,21 +64,24 @@ public class RegisterSkillUI implements Runnable{
                 System.out.println();
                 requestSkillName();
             }else if (option == 1) {
-                option = 1;
                 System.out.println();
                 System.out.printf("Skill name chosen -> [%s]\n",skillName);
             } else if (option == 2) {
+                System.out.println(ANSI_BRIGHT_RED+"LEAVING..."+ANSI_RESET);
                 return option;
             } else {
-                System.out.println("Invalid choice. Please enter 0 or 1 or 2.");
+                System.out.println(ANSI_BRIGHT_RED+ "Invalid choice. Please enter 0 or 1 or 2."+ ANSI_RESET);
             }
         }
         return option;
     }
 
+    /**
+     * Displays the typed skill name and options for confirmation.
+     */
     private void display() {
 
-        System.out.printf("\nTyped name -> [%s]\n",skillName.trim());
+        System.out.printf("\nTyped name -> [%s%s%s]\n",ANSI_GREEN,skillName.trim(),ANSI_RESET);
         System.out.print("Options:\n 0 -> Change name\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
     }
 
@@ -84,9 +94,9 @@ public class RegisterSkillUI implements Runnable{
 
         // Verify
         if (skill.isPresent()) {
-            System.out.println("Skill successfully registered!");
+            System.out.println(ANSI_BRIGHT_GREEN+"Skill successfully registered!"+ ANSI_RESET);
         } else {
-            System.out.println("Skill not registered!");
+            System.out.println(ANSI_BRIGHT_RED +"Skill not registered - Already registered!"+ ANSI_RESET);
         }
     }
 
