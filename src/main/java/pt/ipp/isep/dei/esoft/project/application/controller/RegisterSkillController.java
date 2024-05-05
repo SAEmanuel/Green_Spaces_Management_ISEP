@@ -48,20 +48,4 @@ public class RegisterSkillController {
 
     }
 
-    /**
-     * Registers a new skill with the given name and description.
-     *
-     * @param skillName   The name of the skill to register.
-     * @param description The description of the skill.
-     * @return An Optional containing the registered Skill if successful, or empty otherwise.
-     */
-    public Optional<Skill> registerSkill(String skillName,String description) {
-
-        Optional<Skill> newSkill;
-
-        newSkill = skillRepository.registerSkill(skillName,description);
-
-        return newSkill;
-
-    }
 }

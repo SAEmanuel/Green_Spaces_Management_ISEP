@@ -38,25 +38,6 @@ public class SkillRepository {
         return optionalValue;
     }
 
-    /**
-     * Registers a new skill with the given name and description.
-     *
-     * @param skillName    The name of the skill to register.
-     * @param description  The description of the skill.
-     * @return An Optional containing the registered Skill if successful, or empty otherwise.
-     */
-    public Optional<Skill> registerSkill(String skillName, String description){
-        Optional<Skill> optionalValue = Optional.empty();
-
-        Skill skill = new Skill(skillName,description);
-
-        if (addSkill(skill)) {
-            // A clone of the skill is added to the optional value, to avoid side effects and outside manipulation.
-            optionalValue = Optional.of(skill.clone());
-        }
-        return optionalValue;
-    }
-
 
 
     /**
@@ -68,13 +49,14 @@ public class SkillRepository {
     private boolean addSkill(Skill skill) {
         boolean success = false;
 
-        if ( validate(skill) && skill.getSkillName() != null ) {
+        if ( (validate(skill)) && (skill.getSkillName() != null) ) {
             success = skillList.add(skill);
         }
 
         return success;
 
     }
+
 
     /**
      * Validates a skill by checking for duplicates.

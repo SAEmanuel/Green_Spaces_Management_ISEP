@@ -6,37 +6,9 @@ public class Skill {
      * The skill name
      */
     private String skillName;
-    /**
-     * The skill Description
-     */
-    private String skillDescription;
-    /**
-     * The skill Description by default
-     */
-    private static final String DESCRIPTION = "none";
-
-    /**
-     * Constructs an instance of Skill, by giving the skill name and description.
-     *
-     * @param skillName the skill name (string)
-     * @param skillDescription the skill description (string)
-     */
-    public Skill(String skillName, String skillDescription) {
-        //This method verify the skill name.
-        try {
-
-            validateSkillName(skillName);
-
-            this.skillName = skillName;
-            this.skillDescription = skillDescription;
 
 
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
 
-
-    }
 
     /**
      * Constructs an instance of Skill, by giving the skill name only.
@@ -44,7 +16,7 @@ public class Skill {
      * @param skillName the skill name (string)
      */
     public Skill(String skillName) {
-
+        skillName = skillName.trim();
         //This method verify the skill name.
         try {
             validateSkillName(skillName);
@@ -56,13 +28,11 @@ public class Skill {
         }
     }
 
-    public void setSkillDescription(String skillDescription) {
-        this.skillDescription = skillDescription;
-    }
 
     public String getSkillName() {
         return skillName;
     }
+
 
     /**
      * Validates a skill name to ensure it meets to establish criteria.
@@ -82,6 +52,7 @@ public class Skill {
         }
     }
 
+
     /**
      * This method validates is a String is not empty or null.
      * Return true if is not null and empty; otherwise false
@@ -92,6 +63,7 @@ public class Skill {
     private boolean validateString(String string) {
         return ( string != null && !string.isEmpty() );
     }
+
 
     /**
      * Validates if the skill name don´t have numbers or special characters.
@@ -111,6 +83,7 @@ public class Skill {
         return true;
     }
 
+
     /**
      * Indicates whether some other object is "equal to" this one.
      *
@@ -124,15 +97,17 @@ public class Skill {
             return true;
         }
         // Check if the other object is an instance of Skill
-        if (!(obj instanceof Skill) && skillName == null) {
+        if (!(obj instanceof Skill)) {
             return false;
         }
 
         // Cast the other object to Skill
         Skill skill = (Skill) obj;
         // Compare the skill names ignoring case sensitivity
-        return (this.skillName.equalsIgnoreCase(skill.skillName) && this.skillDescription.equalsIgnoreCase(skill.skillDescription));
+        return (this.skillName.equalsIgnoreCase(skill.skillName));
     }
+
+
 
     /**
      * Clone method.
@@ -140,8 +115,10 @@ public class Skill {
      * @return A clone of the current instance.
      */
     public Skill clone() {
-        return new Skill(this.skillName,this.skillDescription);
+        return new Skill(this.skillName);
     }
+
+
 
     /**
      * Returns a textual description of the Skill name.
@@ -150,6 +127,6 @@ public class Skill {
      */
     @Override
     public String toString() {
-        return String.format("Skill -> %s || Skill Description -> %s%n",skillName,skillDescription);
+        return String.format("Skill -> %s%n",skillName);
     }
 }
