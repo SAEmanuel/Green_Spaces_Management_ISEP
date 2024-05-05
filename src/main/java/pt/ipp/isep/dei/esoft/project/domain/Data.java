@@ -1,7 +1,5 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-
-
 import java.util.Calendar;
 
 /**
@@ -363,6 +361,10 @@ public class Data implements Comparable<Data> {
         totalDias += dia;
 
         return totalDias;
+    }
+
+    public boolean maior18() {
+        return (getAno() - dataAtual().getAno() >= 18 && getMes() - dataAtual().getMes() <= 0 && getDia() - dataAtual().getDia() <= 0);
     }
 }
 
