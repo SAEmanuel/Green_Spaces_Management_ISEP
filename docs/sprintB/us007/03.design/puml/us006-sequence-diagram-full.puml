@@ -8,10 +8,12 @@ autonumber
 actor "Fleet Manager" as FM
 
 participant ":CheckupRegisterUI" as UI
-participant ":VehicleListController" as CTRL
+participant ":CreateCheckUpController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "vehicleRepository\n:VehicleRepository" as vehicleRepository
+participant "vehicle\n:Vehicle" as VEHICLE
+participant "vehicleCheckUpRepository:\nVehicleCheckUpRepository" as VehicleCheckUpRepository
 
 activate FM
 
@@ -21,12 +23,12 @@ activate UI
 UI -> FM : Requests data (vehicleLicensePlate)
 deactivate UI
 
-FM -> UI : Provides requested data
+FM -> UI : Submits requested data
 activate UI
 
 UI -> CTRL** : create
 
-UI -> CTRL : getVehicleByLicensePlate()
+UI -> CTRL : getVehicleByLicensePlate(vehicleLicensePlate)
 
 deactivate UI
 
@@ -43,15 +45,15 @@ activate PLAT
 PLAT --> CTRL: vehicleRepository
 deactivate PLAT
 
-CTRL -> vehicleRepository : getVehicleByLicensePlate()
+CTRL -> vehicleRepository : getVehicleByLicensePlate(vehicleLicensePlate)
 
 activate vehicleRepository
 
-vehicleRepository -> CTRL : success
+vehicleRepository -> CTRL : vehicle
 deactivate vehicleRepository
 
 
-CTRL -> UI : success
+CTRL -> UI : vehicle
 deactivate CTRL
 
 activate UI
@@ -59,11 +61,37 @@ activate UI
 UI -> FM : Requests data (date, currentMileage)
 deactivate UI
 
-FM -> UI : Provides requested data
+FM -> UI : Submits requested data
 activate UI
 
-UI -> CTRL : registerVehicleCheckUp()
+UI -> CTRL : createVehicleCheckUp(vehicle, date, currentMileage)
 deactivate UI
+activate CTRL
+
+CTRL -> VehicleCheckUpRepository : createVehicleCheckUp(vehicle, date, currentMileage)
+deactivate CTRL
+activate VehicleCheckUpRepository
+
+
+VehicleCheckUpRepository -> VehicleCheckUpRepository : validateDate(date)
+VehicleCheckUpRepository -> VehicleCheckUpRepository : validateDate(currentMileage)
+VehicleCheckUpRepository -> VehicleCheckUpRepository : createCheckUp(vehicle, date, (currentMileage)
+
+VehicleCheckUpRepository -> CTRL : true/false
+
+deactivate VehicleCheckUpRepository
+
+
+activate CTRL
+
+CTRL -> UI : true/false
+deactivate CTRL
+activate UI
+
+
+UI -> FM : Displays operation success
+deactivate UI
+
 
 
 
