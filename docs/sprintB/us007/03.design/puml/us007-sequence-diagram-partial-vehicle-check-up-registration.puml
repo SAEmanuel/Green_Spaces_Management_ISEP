@@ -1,0 +1,43 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant ":CheckupRegisterUI" as UI
+participant ":CreateCheckUpController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "vehicleRepository\n:VehicleRepository" as vehicleRepository
+
+activate UI
+
+UI -> CTRL : getVehicleByLicensePlate(vehicleLicensePlate)
+ group Vehicle Retrieval
+
+activate CTRL
+CTRL -> RepositorySingleton : getInstance()
+activate RepositorySingleton
+
+RepositorySingleton --> CTRL: repositories
+deactivate RepositorySingleton
+
+CTRL -> PLAT : getVehicleRepository()
+activate PLAT
+
+PLAT --> CTRL: vehicleRepository
+deactivate PLAT
+
+CTRL -> vehicleRepository : getVehicleByLicensePlate(vehicleLicensePlate)
+
+activate vehicleRepository
+
+vehicleRepository -> CTRL : vehicle
+deactivate vehicleRepository
+
+end
+
+
+CTRL -> UI : vehicle
+deactivate CTRL
+
+@enduml
