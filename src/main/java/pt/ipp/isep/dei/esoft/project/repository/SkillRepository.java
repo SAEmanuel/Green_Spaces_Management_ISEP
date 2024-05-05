@@ -63,5 +63,11 @@ public class SkillRepository {
         return !skillList.contains(skill);
     }
 
+    public List<Skill> getSkillList() {
+        return clone();
+    }
 
+    public List<Skill> clone(){
+        return new ArrayList<>(this.skillList);
+    }
 }
