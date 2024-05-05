@@ -76,7 +76,7 @@ public class Skill {
         for (int i = 0; i < skillName.length() ; i++ ) {
             char ch = skillName.charAt(i);
             // Check if the character is not a letter
-            if (!Character.isLetter(ch)) {
+            if (!Character.isLetter(ch) && skillName.charAt(i) != ' ') {
                 return false;
             }
         }
