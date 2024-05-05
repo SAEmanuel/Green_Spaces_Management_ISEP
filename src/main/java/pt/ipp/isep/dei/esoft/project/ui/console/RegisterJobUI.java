@@ -7,7 +7,7 @@ import java.util.Optional;
 import java.util.Scanner;
 
 
-public class RegisterJobUI {
+public class RegisterJobUI implements Runnable {
 
     private final RegisterJobController controller;
     private String jobName;

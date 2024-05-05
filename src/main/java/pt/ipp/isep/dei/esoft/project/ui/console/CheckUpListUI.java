@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
-public class CheckUpListUI {
+public class CheckUpListUI implements Runnable{
 
     private final RegisterVehicleController controller;
 

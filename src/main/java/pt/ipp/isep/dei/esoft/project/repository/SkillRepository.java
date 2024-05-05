@@ -31,7 +31,7 @@ public class SkillRepository {
 
         Skill skill = new Skill(skillName);
 
-        if ( addSkill(skill) ) {
+        if (addSkill(skill)) {
             // A clone of the skill is added to the optional value, to avoid side effects and outside manipulation.
             optionalValue = Optional.of(skill.clone());
         }
@@ -50,7 +50,7 @@ public class SkillRepository {
 
         Skill skill = new Skill(skillName,description);
 
-        if ( addSkill(skill) ) {
+        if (addSkill(skill)) {
             // A clone of the skill is added to the optional value, to avoid side effects and outside manipulation.
             optionalValue = Optional.of(skill.clone());
         }
@@ -68,7 +68,7 @@ public class SkillRepository {
     private boolean addSkill(Skill skill) {
         boolean success = false;
 
-        if ( validate(skill) ) {
+        if ( validate(skill) && skill.getSkillName() != null ) {
             success = skillList.add(skill);
         }
 

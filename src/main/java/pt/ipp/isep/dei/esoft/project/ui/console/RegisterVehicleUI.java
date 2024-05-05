@@ -7,7 +7,7 @@ import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 import java.util.Optional;
 import java.util.Scanner;
 
-public class RegisterVehicleUI {
+public class RegisterVehicleUI implements Runnable{
 
     private final RegisterVehicleController controller;
 

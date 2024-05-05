@@ -15,7 +15,6 @@ public class Skill {
      */
     private static final String DESCRIPTION = "none";
 
-
     /**
      * Constructs an instance of Skill, by giving the skill name and description.
      *
@@ -23,15 +22,20 @@ public class Skill {
      * @param skillDescription the skill description (string)
      */
     public Skill(String skillName, String skillDescription) {
-        //Use the trim() method to remove spaces before and after the Strings.
-        String name = skillName.trim();
-        String description = skillDescription.trim();
-
         //This method verify the skill name.
-        validateSkillName(name);
+        try {
 
-        this.skillName = name;
-        this.skillDescription = description;
+            validateSkillName(skillName);
+
+            this.skillName = skillName;
+            this.skillDescription = skillDescription;
+
+
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+
+
     }
 
     /**
@@ -40,18 +44,24 @@ public class Skill {
      * @param skillName the skill name (string)
      */
     public Skill(String skillName) {
-        String name = skillName.trim();
 
         //This method verify the skill name.
-        validateSkillName(name);
+        try {
+            validateSkillName(skillName);
 
-        this.skillName = name;
-        //The skill Description of the instance is set as default.
-        this.skillDescription = DESCRIPTION;
+            this.skillName = skillName;
+
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void setSkillDescription(String skillDescription) {
         this.skillDescription = skillDescription;
+    }
+
+    public String getSkillName() {
+        return skillName;
     }
 
     /**
@@ -114,7 +124,7 @@ public class Skill {
             return true;
         }
         // Check if the other object is an instance of Skill
-        if (!(obj instanceof Skill)) {
+        if (!(obj instanceof Skill) && skillName == null) {
             return false;
         }
 
