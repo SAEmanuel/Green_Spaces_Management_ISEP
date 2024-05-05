@@ -25,7 +25,7 @@ public class Vehicle {
 
 
     public Vehicle(String plateId, String brand, String model, String type, float tareWeight, float grossWeight,
-                   float currentKm, float checkUpFrequency,float lastCheckUp, Data registerDate, Data acquisitionDate) {
+                   float currentKm, float checkUpFrequency, float lastCheckUp, Data registerDate, Data acquisitionDate) {
 
         plateId = plateId.trim();
         brand = brand.trim();
@@ -197,4 +197,14 @@ public class Vehicle {
     public Vehicle clone() {
         return new Vehicle(plateId, brand, model, type, tareWeight, grossWeight, currentKm, checkUpFrequency, lastCheckUp, registerDate, acquisitionDate);
     }
+
+    @Override
+    public String toString() {
+        return String.format("Vehicle[plateId='%s', brand='%s', model='%s', " +
+                        "type='%s', tareWeight=%.2f, grossWeight=%.2f, currentKm=%.2f, " +
+                        "checkUpFrequency=%.2f, lastCheckUp=%.2f, registerDate=%s, acquisitionDate=%s]",
+                plateId, brand, model, type, tareWeight, grossWeight,
+                currentKm, checkUpFrequency, lastCheckUp, registerDate, acquisitionDate);
+    }
+
 }
