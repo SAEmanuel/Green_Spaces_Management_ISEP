@@ -24,6 +24,23 @@ public class Collaborator {
         this.job = job;
     }
 
+    public boolean isValidTaxPayerNumber(int taxPayerNumber) {
+        return (taxPayerNumber >= 100000000 && taxPayerNumber <= 999999999);
+    }
+
+    public boolean isValidEmailAddress(String emailAddress) {
+        boolean found = false;
+        if (emailAddress == null || emailAddress.isEmpty()) {
+            throw new IllegalArgumentException("Job name cannot be null or empty.");
+        } else {
+            emailAddress = emailAddress.trim();
+            if (emailAddress.contains("@")) {
+                found = true;
+            }
+        }
+        return found;
+    }
+
     public boolean isValidPhoneNumber(int phoneNumber) {
         return (phoneNumber >= 910000000 && phoneNumber <= 939999999) || (phoneNumber >= 960000000 && phoneNumber <= 969999999);
     }
