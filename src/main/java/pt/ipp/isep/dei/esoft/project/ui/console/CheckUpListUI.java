@@ -1,6 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
-import pt.ipp.isep.dei.esoft.project.application.controller.VehicleController;
+import pt.ipp.isep.dei.esoft.project.application.controller.RegisterVehicleController;
 import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 
 import java.util.List;
@@ -9,13 +9,13 @@ import java.util.Scanner;
 
 public class CheckUpListUI {
 
-    private final VehicleController controller;
+    private final RegisterVehicleController controller;
 
     public CheckUpListUI() {
-        controller = new VehicleController();
+        controller = new RegisterVehicleController();
     }
 
-    public VehicleController getController() {
+    public RegisterVehicleController getController() {
         return controller;
     }
 
