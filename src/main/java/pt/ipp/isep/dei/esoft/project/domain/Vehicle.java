@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+
 public class Vehicle {
 
     private String plateId;
@@ -11,6 +12,7 @@ public class Vehicle {
     private float grossWeight;
     private float currentKm;
     private float checkUpFrequency;
+    private float lastCheckUp;
 
     private Data registerDate;
     private Data acquisitionDate;
@@ -23,14 +25,14 @@ public class Vehicle {
 
 
     public Vehicle(String plateId, String brand, String model, String type, float tareWeight, float grossWeight,
-                   float currentKm, float checkUpFrequency, Data registerDate, Data acquisitionDate) {
+                   float currentKm, float checkUpFrequency,float lastCheckUp, Data registerDate, Data acquisitionDate) {
 
         plateId = plateId.trim();
         brand = brand.trim();
         model = model.trim();
         type = type.trim();
 
-        validateVehicle(plateId, brand, model, type, tareWeight, grossWeight, currentKm, checkUpFrequency, registerDate, acquisitionDate);
+        validateVehicle(plateId, brand, model, type, tareWeight, grossWeight, currentKm, checkUpFrequency, lastCheckUp, registerDate, acquisitionDate);
 
         this.plateId = plateId;
         this.brand = brand;
@@ -42,13 +44,25 @@ public class Vehicle {
         this.checkUpFrequency = checkUpFrequency;
         this.registerDate = registerDate;
         this.acquisitionDate = acquisitionDate;
+        this.lastCheckUp = lastCheckUp;
 
     }
 
+    public float getCurrentKm() {
+        return currentKm;
+    }
+
+    public float getCheckUpFrequency() {
+        return checkUpFrequency;
+    }
+
+    public float getLastCheckUp() {
+        return lastCheckUp;
+    }
 
 //---------------------------------------VALIDATIONS----------------------------------------------------------
 
-    private void validateVehicle(String plateId, String brand, String model, String type, float tareWeight, float grossWeight, float currentKm, float checkUpFrequency, Data registerDate, Data acquisitionDate) {
+    private void validateVehicle(String plateId, String brand, String model, String type, float tareWeight, float grossWeight, float currentKm, float checkUpFrequency, float lastCheckUp, Data registerDate, Data acquisitionDate) {
 
         //String validations and plate id format
         validatePlateId(plateId, registerDate);
@@ -181,6 +195,6 @@ public class Vehicle {
      * @return A clone of the current instance.
      */
     public Vehicle clone() {
-        return new Vehicle(plateId, brand, model, type, tareWeight, grossWeight, currentKm, checkUpFrequency, registerDate, acquisitionDate);
+        return new Vehicle(plateId, brand, model, type, tareWeight, grossWeight, currentKm, checkUpFrequency, lastCheckUp, registerDate, acquisitionDate);
     }
 }
