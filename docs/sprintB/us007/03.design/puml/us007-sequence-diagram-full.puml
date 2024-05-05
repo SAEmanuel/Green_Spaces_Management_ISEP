@@ -33,6 +33,7 @@ UI -> CTRL : getVehicleByLicensePlate(vehicleLicensePlate)
 deactivate UI
 
 activate CTRL
+
 CTRL -> RepositorySingleton : getInstance()
 activate RepositorySingleton
 
@@ -71,7 +72,7 @@ activate CTRL
 CTRL -> VehicleCheckUpRepository : createVehicleCheckUp(vehicle, date, currentMileage)
 activate VehicleCheckUpRepository
 
-VehicleCheckUpRepository -> CHECKUP : create
+VehicleCheckUpRepository -> CHECKUP** : create
 VehicleCheckUpRepository -> VehicleCheckUpRepository : addCheckUp(checkUp)
 
 
