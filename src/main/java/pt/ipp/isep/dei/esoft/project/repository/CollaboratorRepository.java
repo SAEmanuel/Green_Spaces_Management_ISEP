@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.Data;
+import pt.ipp.isep.dei.esoft.project.domain.Job;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,18 @@ public class CollaboratorRepository {
         Optional<Collaborator> optionalValue = Optional.empty();
 
         Collaborator collaborator = new Collaborator(name, birthDate, admissionDate, address, phoneNumber, emailAddress, taxPayerNumber, docType, jobID);
+
+        if (addCollaborator(collaborator)) {
+            optionalValue = Optional.of(collaborator);
+        }
+        return optionalValue;
+    }
+
+    public Optional<Collaborator> registerCollaborator(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, String docType, Job job) {
+
+        Optional<Collaborator> optionalValue = Optional.empty();
+
+        Collaborator collaborator = new Collaborator(name, birthDate, admissionDate, address, phoneNumber, emailAddress, taxPayerNumber, docType, job);
 
         if (addCollaborator(collaborator)) {
             optionalValue = Optional.of(collaborator);
