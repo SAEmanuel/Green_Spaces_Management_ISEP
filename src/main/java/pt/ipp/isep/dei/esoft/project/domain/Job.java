@@ -22,7 +22,7 @@ public class Job {
         if (otherJob == null || getClass() != otherJob.getClass())
             return false;
         Job job = (Job) otherJob;
-        return jobName.equals(job.jobName);
+        return jobName.trim().equals(job.jobName.trim());
     }
 
     @Override
@@ -35,22 +35,24 @@ public class Job {
     }
 
     private boolean isValidJobName(String jobName) {
-        if (jobName == null || jobName.isEmpty()) {
-            throw new IllegalArgumentException("Job name cannot be null or empty.");
-        } else {
-            jobName = jobName.trim();
-            for (int i = 0; i < jobName.length(); i++) {
-                if (!Character.isLetter(jobName.charAt(i))) {
-                    throw new IllegalArgumentException("Job name contains invalid characters.");
-                }
+        if (jobName == null) {
+            throw new IllegalArgumentException("Job name cannot be null.");
+        }
+
+        if (jobName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Job name cannot be empty.");
+        }
+
+        for (int i = 0; i < jobName.length(); i++) {
+            if (!Character.isLetter(jobName.charAt(i)) && jobName.charAt(i) != ' ') {
+                throw new IllegalArgumentException("Job name contains invalid characters.");
             }
         }
+
         return true;
     }
 
-    public boolean hasName(String name) {
-        return this.jobName.equals(name);
-    }
+
 
     @Override
     public String toString() {

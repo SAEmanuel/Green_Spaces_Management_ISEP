@@ -26,7 +26,6 @@ public class RegisterJobUI implements Runnable {
     public void run() {
         System.out.println("\n\n--- Register Job ------------------------");
 
-        requestJobName();
         jobName = confirmationJobName();
         submitData();
 
@@ -42,7 +41,6 @@ public class RegisterJobUI implements Runnable {
         }
     }
 
-
     private String requestJobName() {
         scanner = new Scanner(System.in);
         System.out.print("Enter job name: ");
@@ -50,13 +48,7 @@ public class RegisterJobUI implements Runnable {
         return jobName;
     }
 
-    private void displayTypedJob() {
-        System.out.println(requestJobName());
-
-    }
-
     private void displayTypedJob(String typedJobName) {
-        typedJobName = requestJobName();
         System.out.println(typedJobName);
 
     }
@@ -65,8 +57,8 @@ public class RegisterJobUI implements Runnable {
         scanner = new Scanner(System.in);
         int answer = -1;
         String newAnswer;
-        System.out.print("Entered job name: ");
-        displayTypedJob();
+        String name = requestJobName();
+        displayTypedJob(name);
 
         while (answer != 1) {
             System.out.print("Do you wish to continue with the name chosen? (0 -> no / 1 -> yes?): ");
