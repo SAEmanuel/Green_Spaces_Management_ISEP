@@ -73,7 +73,9 @@ public class JobRepository {
         return !jobList.contains(job);
     }
 
-
+    public Job getJob(int position) {
+        return jobList.get(position);
+    }
 
 }
 

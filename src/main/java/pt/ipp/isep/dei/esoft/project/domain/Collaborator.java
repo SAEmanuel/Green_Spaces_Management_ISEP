@@ -1,5 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import pt.ipp.isep.dei.esoft.project.repository.JobRepository;
+
+import java.util.List;
+
 public class Collaborator {
 
     private String name;
@@ -12,7 +16,7 @@ public class Collaborator {
     private String docType;
     private Job job;
 
-    public Collaborator(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, String docType, Job job) {
+    public Collaborator(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, String docType, int job) {
         this.name = name;
         this.birthDate = birthDate;
         this.admissionDate = admissionDate;
@@ -21,7 +25,12 @@ public class Collaborator {
         this.emailAddress = emailAddress;
         this.taxPayerNumber = taxPayerNumber;
         this.docType = docType;
-        this.job = job;
+        this.job = getJob(job);
+    }
+
+    public Job getJob(int job) {
+        JobRepository jobList = new JobRepository();
+        return jobList.getJob(job);
     }
 
     public boolean isValidTaxPayerNumber(int taxPayerNumber) {
