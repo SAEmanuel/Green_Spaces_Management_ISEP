@@ -12,8 +12,8 @@ participant ":CreateCheckUpController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "vehicleRepository\n:VehicleRepository" as vehicleRepository
-participant "vehicle\n:Vehicle" as VEHICLE
 participant "vehicleCheckUpRepository:\nVehicleCheckUpRepository" as VehicleCheckUpRepository
+participant "checkUp\n:CheckUp" as CHECKUP
 
 activate FM
 
@@ -26,7 +26,7 @@ deactivate UI
 FM -> UI : Submits requested data
 activate UI
 
-UI -> CTRL** : create
+UI -> CTRL : create
 
 UI -> CTRL : getVehicleByLicensePlate(vehicleLicensePlate)
 
@@ -69,22 +69,23 @@ deactivate UI
 activate CTRL
 
 CTRL -> VehicleCheckUpRepository : createVehicleCheckUp(vehicle, date, currentMileage)
-deactivate CTRL
 activate VehicleCheckUpRepository
 
+VehicleCheckUpRepository -> CHECKUP : create
+VehicleCheckUpRepository -> VehicleCheckUpRepository : addCheckUp(checkUp)
 
-VehicleCheckUpRepository -> VehicleCheckUpRepository : validateDate(date)
-VehicleCheckUpRepository -> VehicleCheckUpRepository : validateDate(currentMileage)
-VehicleCheckUpRepository -> VehicleCheckUpRepository : createCheckUp(vehicle, date, (currentMileage)
 
-VehicleCheckUpRepository -> CTRL : true/false
+ VehicleCheckUpRepository -> VehicleCheckUpRepository : validateCheckUp(checkUp)
 
+VehicleCheckUpRepository -> CTRL : checkUp
 deactivate VehicleCheckUpRepository
 
 
-activate CTRL
+deactivate VehicleCheckUpRepository
 
-CTRL -> UI : true/false
+CTRL -> UI : checkUp
+
+
 deactivate CTRL
 activate UI
 
