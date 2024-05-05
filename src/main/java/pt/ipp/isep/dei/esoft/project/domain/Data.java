@@ -41,6 +41,13 @@ public class Data implements Comparable<Data> {
      */
     private static final int DIA_POR_OMISSAO = 1;
 
+
+    private static final int ANO_MIN_PERMITIDO = 1992;
+    private static final int MES_MIN_PERMITIDO = 1;
+    private static final int MES_MAX_PERMITIDO = 12;
+    private static final int DIA_MIN_PERMITIDO = 1;
+
+
     /**
      * Representa os dias da semana.
      */
@@ -198,8 +205,22 @@ public class Data implements Comparable<Data> {
      * @param dia o novo dia da data.
      */
     public final void setData(int ano, int mes, int dia) {
+        if (ano < ANO_MIN_PERMITIDO || ano > dataAtual().getAno()) {
+            throw new IllegalArgumentException("ANO invalido, certifique-se que esteja dentro do intervalo: [1800 - " + dataAtual().getAno()+ "]");
+        }
+
         this.ano = ano;
+
+        if ( mes < MES_MIN_PERMITIDO || mes > MES_MAX_PERMITIDO ) {
+            throw new IllegalArgumentException("MES invalido, certifique-se que esteja dentro do intervalo: [" + MES_MIN_PERMITIDO + "-" + MES_MAX_PERMITIDO + "]");
+        }
+
         this.mes = Mes.obterMes(mes);
+
+        if (dia < DIA_MIN_PERMITIDO || dia > this.mes.numeroDeDias) {
+            throw new IllegalArgumentException("DIA invalido, certifique-se que esteja dentro do intervalo: [" + DIA_MIN_PERMITIDO + "-" + this.mes.numeroDeDias + "]");
+
+        }
         this.dia = dia;
     }
 
@@ -282,6 +303,11 @@ public class Data implements Comparable<Data> {
         int totalDias1 = outraData.contaDias();
 
         return totalDias > totalDias1;
+    }
+
+    public int isMaiorByYear(int anoParam) {
+        int ano = this.ano;
+        return Integer.compare(ano, anoParam);
     }
 
     /**
