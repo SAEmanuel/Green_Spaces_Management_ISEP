@@ -8,66 +8,111 @@ import java.util.Optional;
 
 public class SkillRepository {
 
+    /**
+     * The skill List
+     */
     private final List<Skill> skillList;
 
+    /**
+     * Constructs a new SkillRepository with an empty list of skills.
+     */
     public SkillRepository() {
         this.skillList = new ArrayList<>();
     }
 
-
+    /**
+     * Registers a new skill with the given name.
+     *
+     * @param skillName The name of the skill to register.
+     * @return An Optional containing the registered Skill if successful, or empty otherwise.
+     */
     public Optional<Skill> registerSkill(String skillName){
         Optional<Skill> optionalValue = Optional.empty();
 
         Skill skill = new Skill(skillName);
 
         if ( addSkill(skill) ) {
-            optionalValue = Optional.of(skill);
+            // A clone of the skill is added to the optional value, to avoid side effects and outside manipulation.
+            optionalValue = Optional.of(skill.clone());
+        }
+        return optionalValue;
+    }
+
+    /**
+     * Registers a new skill with the given name and description.
+     *
+     * @param skillName    The name of the skill to register.
+     * @param description  The description of the skill.
+     * @return An Optional containing the registered Skill if successful, or empty otherwise.
+     */
+    public Optional<Skill> registerSkill(String skillName, String description){
+        Optional<Skill> optionalValue = Optional.empty();
+
+        Skill skill = new Skill(skillName,description);
+
+        if ( addSkill(skill) ) {
+            // A clone of the skill is added to the optional value, to avoid side effects and outside manipulation.
+            optionalValue = Optional.of(skill.clone());
         }
         return optionalValue;
     }
 
 
+
     /**
-     * This method adds a task to the list of tasks.
+     * Adds a skill to the list of skills if it is valid.
      *
-     * @param skill The task to be added.
-     * @return True if the task was added successfully.
+     * @param skill The skill to add.
+     * @return True if the skill was added successfully, false otherwise.
      */
     private boolean addSkill(Skill skill) {
         boolean success = false;
+
         if ( validate(skill) ) {
-            // A clone of the task is added to the list of tasks, to avoid side effects and outside manipulation.
-            success = skillList.add(skill.clone());
+            success = skillList.add(skill);
         }
+
         return success;
 
     }
 
     /**
-     * This method validates the task, checking for duplicates.
+     * Validates a skill by checking for duplicates.
      *
-     * @param skill The task to be validated.
-     * @return True if the task is valid.
+     * @param skill The skill to validate.
+     * @return True if the skill is valid (not a duplicate), false otherwise.
      */
     private boolean validate(Skill skill) {
         return skillListDoNotContain(skill);
     }
 
     /**
-     * This method checks if the task is already in the list of tasks.
+     * Checks if the list of skills does not contain the given skill.
      *
-     * @param skill The task to be checked.
-     * @return True if the skill is not in the list of skills.
+     * @param skill The skill to check.
+     * @return True if the list of skills does not contain the given skill, false otherwise.
      */
     private boolean skillListDoNotContain(Skill skill) {
         return !skillList.contains(skill);
     }
 
+    /**
+     * Returns a clone of the list of skills to avoid side effects and outside manipulation.
+     *
+     * @return A clone of the list of skills.
+     */
     public List<Skill> getSkillList() {
+        // A clone of the skill list return, to avoid side effects and outside manipulation.
         return clone();
     }
 
+    /**
+     * Creates a clone of the current list of skills.
+     *
+     * @return A clone of the list of skills.
+     */
     public List<Skill> clone(){
+        // Create a new reference skill list with the same content of the instance one.
         return new ArrayList<>(this.skillList);
     }
 }
