@@ -76,6 +76,5 @@ public class JobRepository {
     public Job getJob(int position) {
         return jobList.get(position);
     }
-
 }
 
