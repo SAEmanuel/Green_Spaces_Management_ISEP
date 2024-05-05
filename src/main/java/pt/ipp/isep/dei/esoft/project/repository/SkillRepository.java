@@ -1,8 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import pt.ipp.isep.dei.esoft.project.domain.Job;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
-import pt.ipp.isep.dei.esoft.project.domain.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +50,7 @@ public class SkillRepository {
      * @return True if the task is valid.
      */
     private boolean validate(Skill skill) {
-        return tasksDoNotContain(skill);
+        return skillListDoNotContain(skill);
     }
 
     /**
@@ -61,9 +59,15 @@ public class SkillRepository {
      * @param skill The task to be checked.
      * @return True if the skill is not in the list of skills.
      */
-    private boolean tasksDoNotContain(Skill skill) {
+    private boolean skillListDoNotContain(Skill skill) {
         return !skillList.contains(skill);
     }
 
+    public List<Skill> getSkillList() {
+        return clone();
+    }
 
+    public List<Skill> clone(){
+        return new ArrayList<>(this.skillList);
+    }
 }

@@ -27,7 +27,7 @@ public class RegisterSkillController {
 
     public Optional<Skill> registerSkill(String skillName) {
 
-        Optional<Skill> newSkill = Optional.empty();
+        Optional<Skill> newSkill;
 
         newSkill = skillRepository.registerSkill(skillName);
 
