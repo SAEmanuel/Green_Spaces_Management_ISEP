@@ -25,6 +25,18 @@ public class Collaborator {
         this.job = getJob(jobID);
     }
 
+    public Collaborator(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, String docType, Job job) {
+        if (isValidName(name)) this.name = name;
+        if (isValidBirthDate(birthDate)) this.birthDate = birthDate;
+        this.admissionDate = admissionDate;
+        this.address = address;
+        if (isValidPhoneNumber(phoneNumber)) this.phoneNumber = phoneNumber;
+        if (isValidEmailAddress(emailAddress)) this.emailAddress = emailAddress;
+        if (isValidTaxPayerNumber(taxPayerNumber)) this.taxPayerNumber = taxPayerNumber;
+        this.docType = docType;
+        this.job = job;
+    }
+
     private Job getJob(int jobID) {
         JobRepository jobList = new JobRepository();
         return jobList.getJob(jobID);
@@ -141,11 +153,9 @@ public class Collaborator {
         this.job = job;
     }
 
-    /*
     public Collaborator clone() {
-        return new Collaborator(getName(),getBirthDate(),getAdmissionDate(),getAddress(),getPhoneNumber(),getEmailAddress(),getTaxPayerNumber(),getDocType(),job);
+        return new Collaborator(getName(),getBirthDate(),getAdmissionDate(),getAddress(),getPhoneNumber(),getEmailAddress(),getTaxPayerNumber(),getDocType(),getJob());
     }
-    */
 
     public boolean equals(Object otherCollaborator) {
         if (this == otherCollaborator)

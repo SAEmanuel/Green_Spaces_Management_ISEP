@@ -2,7 +2,6 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.Data;
-import pt.ipp.isep.dei.esoft.project.domain.Job;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +31,7 @@ public class CollaboratorRepository {
         boolean success = false;
         if (validateCollaborator(collaborator)) {
             // A clone of the job is added to the list of jobs, to avoid side effects and outside manipulation.
-            success = collaboratorList.add(collaborator);
+            success = collaboratorList.add(collaborator.clone());
         }
         return success;
     }
