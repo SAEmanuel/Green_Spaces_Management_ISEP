@@ -7,19 +7,32 @@ public class Skill {
      */
     private String skillName;
 
+
     /**
-     * Constructs an instance of Skill, by giving the skill name.
+     * Constructs an instance of Skill, by giving the skill name only.
      *
      * @param skillName the skill name (string)
      */
     public Skill(String skillName) {
-        //Use the trim() method to remove spaces before and after the skill name.
-        String name = skillName.trim();
 
         //This method verify the skill name.
-        validateSkillName(name);
-        //Calls the method set(), and it will associate the name of the skill for the instance.
-        this.skillName = skillName;
+        try {
+            validateSkillName(skillName);
+            this.skillName = skillName.trim();
+
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            throw e;
+        }
+    }
+
+    /**
+     * Method that returns a skill name of instance with a different ref.
+     *
+     * @return a clone string of the skill name instance
+     */
+    public String getSkillName() {
+        return clone().skillName;
     }
 
 
@@ -31,15 +44,28 @@ public class Skill {
      */
     private void validateSkillName(String skillName){
         // Check if skillName is null or empty
-        if ( skillName == null || skillName.isEmpty() ) {
-            throw new IllegalArgumentException("Reference cannot be null or empty.");
+        if ( skillName == null || skillName.trim().isEmpty() ) {
+            throw new IllegalArgumentException("Skill name cannot be null or empty.");
         }
 
         // Check if skillName contains special characters/numbers
-        if ( !validateName(skillName) ) {
+        if ( !validateName(skillName.trim()) ) {
             throw new IllegalArgumentException("Skill name have special characters/numbers.");
         }
     }
+
+
+    /**
+     * This method validates is a String is not empty or null.
+     * Return true if is not null and empty; otherwise false
+     *
+     * @param string the string that need to be validated
+     * @return the result of the operation (null and empty)
+     */
+    private boolean validateString(String string) {
+        return ( string != null && !string.isEmpty() );
+    }
+
 
     /**
      * Validates if the skill name don´t have numbers or special characters.
@@ -52,12 +78,13 @@ public class Skill {
         for (int i = 0; i < skillName.length() ; i++ ) {
             char ch = skillName.charAt(i);
             // Check if the character is not a letter
-            if (!Character.isLetter(ch)) {
+            if (!Character.isLetter(ch) && skillName.charAt(i) != ' ') {
                 return false;
             }
         }
         return true;
     }
+
 
     /**
      * Indicates whether some other object is "equal to" this one.
@@ -82,6 +109,8 @@ public class Skill {
         return (this.skillName.equalsIgnoreCase(skill.skillName));
     }
 
+
+
     /**
      * Clone method.
      *
@@ -90,6 +119,8 @@ public class Skill {
     public Skill clone() {
         return new Skill(this.skillName);
     }
+
+
 
     /**
      * Returns a textual description of the Skill name.

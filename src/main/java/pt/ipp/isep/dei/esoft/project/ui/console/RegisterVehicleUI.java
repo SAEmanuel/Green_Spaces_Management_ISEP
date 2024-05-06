@@ -7,7 +7,7 @@ import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 import java.util.Optional;
 import java.util.Scanner;
 
-public class RegisterVehicleUI {
+public class RegisterVehicleUI implements Runnable{
 
     private final RegisterVehicleController controller;
 
@@ -20,6 +20,7 @@ public class RegisterVehicleUI {
     private float grossWeight;
     private float currentKm;
     private float checkUpFrequency;
+    private float lastCheckUp;
 
     private Data registerDate;
     private Data acquisitionDate;
@@ -42,7 +43,7 @@ public class RegisterVehicleUI {
     }
 
     private void submitData() {
-        Optional<Vehicle> vehicle = getController().registerVehicle(plateId, brand, model, type, tareWeight, grossWeight, currentKm, checkUpFrequency, registerDate, acquisitionDate);
+        Optional<Vehicle> vehicle = getController().registerVehicle(plateId, brand, model, type, tareWeight, grossWeight, currentKm, checkUpFrequency, lastCheckUp, registerDate, acquisitionDate);
 
         if (vehicle.isPresent()) {
             System.out.println("Vehicle successfully registered!");
@@ -70,10 +71,13 @@ public class RegisterVehicleUI {
 
         checkUpFrequency = requestCheckUpFrequency(input);
 
+        lastCheckUp = requestLastCheckUp(input);
+
         registerDate = requestRegisterDate(input);
 
         acquisitionDate = requestAcquisitionDate(input);
     }
+
 
 
     private String requestPlateID(Scanner input) {
@@ -116,6 +120,10 @@ public class RegisterVehicleUI {
         return input.nextFloat();
     }
 
+    private float requestLastCheckUp(Scanner input) {
+        System.out.print("Last Check up: ");
+        return input.nextFloat();
+    }
     private Data requestRegisterDate(Scanner input) {
         //TODO : TRYS E CATCHS FAZEMOS?
         System.out.print("-- Register date --");

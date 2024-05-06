@@ -11,11 +11,18 @@ public class RegisterSkillController {
 
     private SkillRepository skillRepository;
 
-    //Repository instance is obtained from the Repositories class
+    /**
+     * Constructs a new RegisterSkillController and obtains a SkillRepository instance from Repositories class.
+     */
     public RegisterSkillController() {
         this.skillRepository = getSkillRepository();
     }
 
+    /**
+     * Gets the SkillRepository instance from Repositories class.
+     *
+     * @return The SkillRepository instance.
+     */
     private SkillRepository getSkillRepository() {
         if (skillRepository == null) {
             Repositories repositories = Repositories.getInstance();
@@ -25,6 +32,12 @@ public class RegisterSkillController {
         return skillRepository;
     }
 
+    /**
+     * Registers a new skill with the given name.
+     *
+     * @param skillName The name of the skill to register.
+     * @return An Optional containing the registered Skill if successful, or empty otherwise.
+     */
     public Optional<Skill> registerSkill(String skillName) {
 
         Optional<Skill> newSkill;
@@ -34,4 +47,5 @@ public class RegisterSkillController {
         return newSkill;
 
     }
+
 }
