@@ -4,10 +4,14 @@ import pt.ipp.isep.dei.esoft.project.application.controller.VehicleController;
 import pt.ipp.isep.dei.esoft.project.domain.Data;
 import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 
+import java.util.InputMismatchException;
 import java.util.Optional;
 import java.util.Scanner;
 
-public class RegisterVehicleUI implements Runnable{
+import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_BRIGHT_RED;
+import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_RESET;
+
+public class RegisterVehicleUI implements Runnable {
 
     private final VehicleController controller;
 
@@ -26,11 +30,11 @@ public class RegisterVehicleUI implements Runnable{
     private Data acquisitionDate;
 
 
-    public RegisterVehicleUI(){
+    public RegisterVehicleUI() {
         controller = new VehicleController();
     }
 
-    private VehicleController getController(){
+    private VehicleController getController() {
         return controller;
     }
 
@@ -78,7 +82,6 @@ public class RegisterVehicleUI implements Runnable{
     }
 
 
-
     private String requestPlateID() {
         Scanner input = new Scanner(System.in);
         System.out.print("Plate ID: ");
@@ -104,33 +107,82 @@ public class RegisterVehicleUI implements Runnable{
     }
 
     private float requestTareWeight() {
+        float resposta;
         Scanner input = new Scanner(System.in);
+
         System.out.print("Tare Weight (KG): ");
-        return input.nextFloat();
+        while (true) {
+            try {
+                resposta = input.nextFloat();
+                return resposta;
+            } catch (InputMismatchException e) {
+                System.out.print(ANSI_BRIGHT_RED + "Invalid tare weight! Enter a new one: " + ANSI_RESET);
+                input.nextLine();
+            }
+        }
     }
 
     private float requestGrossWeight() {
+        float resposta;
         Scanner input = new Scanner(System.in);
+
         System.out.print("Gross Weight (KG): ");
-        return input.nextFloat();
+        while (true) {
+            try {
+                resposta = input.nextFloat();
+                return resposta;
+            } catch (InputMismatchException e) {
+                System.out.print(ANSI_BRIGHT_RED + "Invalid Gross Weight! Enter a new one: " + ANSI_RESET);
+                input.nextLine();
+            }
+        }
     }
 
     private float requestCurrentKm() {
+        float resposta;
         Scanner input = new Scanner(System.in);
+
         System.out.print("Current Kilometers (KM): ");
-        return input.nextFloat();
+        while (true) {
+            try {
+                resposta = input.nextFloat();
+                return resposta;
+            } catch (InputMismatchException e) {
+                System.out.print(ANSI_BRIGHT_RED + "Invalid Current Kilometers! Enter a new one: " + ANSI_RESET);
+                input.nextLine();
+            }
+        }
     }
 
     private float requestCheckUpFrequency() {
+        float resposta;
         Scanner input = new Scanner(System.in);
+
         System.out.print("Check up frequency (KM): ");
-        return input.nextFloat();
+        while (true) {
+            try {
+                resposta = input.nextFloat();
+                return resposta;
+            } catch (InputMismatchException e) {
+                System.out.print(ANSI_BRIGHT_RED + "Invalid Check up frequency! Enter a new one: " + ANSI_RESET);
+                input.nextLine();
+            }
+        }
     }
 
     private float requestLastCheckUp() {
+        float resposta;
         Scanner input = new Scanner(System.in);
         System.out.print("Last Check up (KM): ");
-        return input.nextFloat();
+        while (true) {
+            try {
+                resposta = input.nextFloat();
+                return resposta;
+            } catch (InputMismatchException e) {
+                System.out.print(ANSI_BRIGHT_RED + "Invalid Check up frequency! Enter a new one: " + ANSI_RESET);
+                input.nextLine();
+            }
+        }
     }
 
     private Data requestRegisterDate() {
@@ -144,32 +196,65 @@ public class RegisterVehicleUI implements Runnable{
     }
 
 
+    //------------------INPUTS DATAS-------------------------------
+    private Data getData() {
+        Data data;
+        while (true) {
+            int year = requestYear();
+            int month = requestMonth();
+            int day = requestDay();
+            try {
+                data = new Data(year, month, day);
+                return data;
+            } catch (IllegalArgumentException e) {
+                System.out.println(ANSI_BRIGHT_RED + e.getMessage() + ANSI_RESET);
+            }
+        }
+    }
 
-//------------------INPUTS DATAS-------------------------------
-private Data getData() {
-    Scanner input = new Scanner(System.in);
-    int year = requestYear();
-    int month = requestMonth();
-    int day = requestDay();
-    return new Data(year, month, day);
-}
-
-    private int requestDay( ) {
+    private int requestDay() {
+        int resposta;
         Scanner input = new Scanner(System.in);
         System.out.print("- Day: ");
-        return input.nextInt();
+        while (true) {
+            try {
+                resposta = input.nextInt();
+                return resposta;
+            } catch (InputMismatchException e) {
+                System.out.print(ANSI_BRIGHT_RED + "Invalid DAY! Enter a new one: " + ANSI_RESET);
+                input.nextLine();
+            }
+        }
     }
 
     private int requestMonth() {
+        int resposta;
         Scanner input = new Scanner(System.in);
         System.out.print("- Month: ");
-        return input.nextInt();
+        while (true) {
+            try {
+                resposta = input.nextInt();
+                return resposta;
+            } catch (InputMismatchException e) {
+                System.out.print(ANSI_BRIGHT_RED + "Invalid MONTH! Enter a new one: " + ANSI_RESET);
+                input.nextLine();
+            }
+        }
     }
 
     private int requestYear() {
+        int resposta;
         Scanner input = new Scanner(System.in);
         System.out.print("- Year: ");
-        return input.nextInt();
+        while (true) {
+            try {
+                resposta = input.nextInt();
+                return resposta;
+            } catch (InputMismatchException e) {
+                System.out.print(ANSI_BRIGHT_RED + "Invalid DAY! Enter a new one: " + ANSI_RESET);
+                input.nextLine();
+            }
+        }
     }
 
 
