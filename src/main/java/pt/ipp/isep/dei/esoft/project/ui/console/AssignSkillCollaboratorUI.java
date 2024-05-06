@@ -1,6 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.AssignSkillCollaboratorController;
+import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
+import pt.ipp.isep.dei.esoft.project.domain.Data;
+import pt.ipp.isep.dei.esoft.project.domain.Job;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
 
 import java.util.InputMismatchException;
@@ -13,6 +16,10 @@ public class AssignSkillCollaboratorUI implements Runnable {
 
     private int collaboratorTaxNumber;
     private String skillName;
+
+    //APENAS TESTES
+    Collaborator collaborator1 = new Collaborator("Emanuel Almeida", new Data(2004, 4, 20), new Data(2024, 4, 22), "Casa do Caralho", 911529355, "xico@viado.com", 123456789, "BI", new Job("Sugador de Xereca"));
+    Skill skill1 = new Skill("Programar em Java");
 
     private final AssignSkillCollaboratorController controller;
 

@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import pt.ipp.isep.dei.esoft.project.repository.JobRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Collaborator {
@@ -32,6 +33,7 @@ public class Collaborator {
         if (isValidTaxPayerNumber(taxPayerNumber)) this.taxPayerNumber = taxPayerNumber;
         this.docType = docType;
         this.job = getJob(jobID);
+        this.skills = new ArrayList<Skill>();
     }
 
     public Collaborator(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, String docType, Job job) {
@@ -44,6 +46,7 @@ public class Collaborator {
         if (isValidTaxPayerNumber(taxPayerNumber)) this.taxPayerNumber = taxPayerNumber;
         this.docType = docType;
         this.job = job;
+        this.skills = new ArrayList<Skill>();
     }
 
     private Job getJob(int jobID) {
