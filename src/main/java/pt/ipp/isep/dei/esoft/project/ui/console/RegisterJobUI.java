@@ -70,7 +70,7 @@ public class RegisterJobUI implements Runnable {
     private String requestJobName() {
         scanner = new Scanner(System.in);
         System.out.print("Enter name: ");
-        jobName = scanner.nextLine();
+        jobName = scanner.nextLine().trim();
         return jobName;
     }
 
