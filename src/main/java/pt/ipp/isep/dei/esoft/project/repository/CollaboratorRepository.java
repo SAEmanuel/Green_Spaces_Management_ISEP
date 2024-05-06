@@ -58,12 +58,10 @@ public class CollaboratorRepository {
     }
 
     public List<Collaborator> clone(){
-        // Create a new reference skill list with the same content of the instance one.
         return new ArrayList<>(this.collaboratorList);
     }
 
-    public List<Collaborator> getSkillList() {
-        // A clone of the skill list return, to avoid side effects and outside manipulation.
+    public List<Collaborator> getCollaboratorList() {
         return clone();
     }
 }
