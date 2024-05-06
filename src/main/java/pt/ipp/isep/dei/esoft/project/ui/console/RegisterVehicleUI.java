@@ -48,6 +48,34 @@ public class RegisterVehicleUI implements Runnable {
         }
 
     }
+    public void runException() {
+
+        if (repeatProcess()) {
+            requestVehicleInformation();
+            int continueApp = confirmsData();
+
+            if (continueApp != 2) {
+                submitData();
+            }
+        }
+
+    }
+
+    private boolean repeatProcess() {
+        System.out.print("\nDo you wish to register new info? (y/n): ");
+        Scanner scanner = new Scanner(System.in);
+        while(true){
+            String answer = scanner.nextLine();
+            if (answer.equalsIgnoreCase("y")) {
+                return true;
+            }
+            if (answer.equalsIgnoreCase("n")) {
+                System.out.println(ANSI_BRIGHT_RED+"LEAVING..."+ANSI_RESET);
+                return false;
+            }
+            System.out.println(ANSI_BRIGHT_RED+"WARNING - Enter a valid option..."+ANSI_RESET);
+        }
+    }
 
     /**
      * Confirms the skill data entered by the user.
@@ -82,7 +110,7 @@ public class RegisterVehicleUI implements Runnable {
      * Displays the typed skill name and options for confirmation.
      */
     private void display() {
-        StringBuilder stringBuilder = new StringBuilder(String.format("• Plate: %s | Brand: %s | Model: %s | Current Km: %.2f | Register Date: %s | Acquisition Date: %s", plateId, brand, model, currentKm, registerDate, acquisitionDate));
+        StringBuilder stringBuilder = new StringBuilder(String.format("Plate: %s | Brand: %s | Model: %s | Current Km: %.2f | Register Date: %s | Acquisition Date: %s", plateId, brand, model, currentKm, registerDate, acquisitionDate));
         System.out.printf("\nTyped data -> [%s%s%s]\n",ANSI_GREEN,stringBuilder,ANSI_RESET);
         System.out.print("Confirmation menu:\n 0 -> Change Vehicle Info\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
     }
@@ -90,13 +118,21 @@ public class RegisterVehicleUI implements Runnable {
 
 
     private void submitData() {
-        Optional<Vehicle> vehicle = getController().registerVehicle(plateId, brand, model, type, tareWeight, grossWeight, currentKm, checkUpFrequency, lastCheckUp, registerDate, acquisitionDate);
+        try{
 
-        if (vehicle.isPresent()) {
-            System.out.println(ANSI_BRIGHT_GREEN+"Vehicle successfully registered!"+ ANSI_RESET);
-        } else {
-            System.out.println(ANSI_BRIGHT_RED +"Vehicle not registered - Already registered!"+ ANSI_RESET);
+            Optional<Vehicle> vehicle = getController().registerVehicle(plateId, brand, model, type, tareWeight, grossWeight, currentKm, checkUpFrequency, lastCheckUp, registerDate, acquisitionDate);
+
+            if (vehicle.isPresent()) {
+                System.out.println(ANSI_BRIGHT_GREEN+"Vehicle successfully registered!"+ ANSI_RESET);
+            } else {
+                System.out.println(ANSI_BRIGHT_RED +"Vehicle not registered - Already registered!"+ ANSI_RESET);
+            }
+
+        }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            runException();
         }
+
     }
 
     private void requestVehicleInformation() {
