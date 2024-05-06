@@ -58,7 +58,7 @@ public class CollaboratorRepository {
         return !collaboratorList.contains(collaborator);
     }
 
-    public List<Collaborator> clone(){
+    public List<Collaborator> clone() {
         return new ArrayList<>(this.collaboratorList);
     }
 
@@ -79,7 +79,7 @@ public class CollaboratorRepository {
         return false;
     }
 
-    private Collaborator findCollaborator(int collaboratorTaxNumber) {
+    public Collaborator findCollaborator(int collaboratorTaxNumber) {
         for (Collaborator collaborator : collaboratorList) {
             if (collaborator.getTaxPayerNumber() == collaboratorTaxNumber) {
                 return collaborator;
@@ -88,17 +88,11 @@ public class CollaboratorRepository {
         return null;
     }
 
-    public void assignSkillCollaborator(int collaboratorTaxNumber, Skill skill) {
+    public boolean assignSkillCollaborator(int collaboratorTaxNumber, Skill skill) {
 
         Collaborator collaborator = findCollaborator(collaboratorTaxNumber);
 
-        if (collaborator != null) {
-            if (collaborator.addSkill(skill)) {
-                System.out.println("Skill succesfully assigned to collaborator");
-            } else {
-                System.out.println("Skill failed to assign to collaborator");
-            }
+        return collaborator.addSkill(skill);
 
-        }
     }
 }

@@ -62,11 +62,14 @@ public class AssignSkillCollaboratorController {
         return null;
     }
 
-    public void assignSkillCollaboratorByTaxNumber(int collaboratorTaxNumber, String skillName) {
+    public boolean assignSkillCollaboratorByTaxNumber(int collaboratorTaxNumber, String skillName) {
         Skill skill = getSkillByName(skillName);
 
-        collaboratorRepository.assignSkillCollaborator(collaboratorTaxNumber, skill);
+       return collaboratorRepository.assignSkillCollaborator(collaboratorTaxNumber, skill);
     }
 
 
+    public String getCollaboratorName(int collaboratorTaxNumber) {
+        return collaboratorRepository.findCollaborator(collaboratorTaxNumber).getName();
+    }
 }

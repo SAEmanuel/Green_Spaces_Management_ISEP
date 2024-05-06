@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 import pt.ipp.isep.dei.esoft.project.application.controller.AssignSkillCollaboratorController;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -32,22 +33,24 @@ public class AssignSkillCollaboratorUI implements Runnable {
         System.out.println("\n\n--- Register Skill to Collaborator ------------------------");
 
         requestCollaboratorTaxNumber();
+        confirmsCollaboratorTaxNumber();
 
-        confirmsData();
-
-        if (isCollaboratorIDValid()) {
-            //ficar bonito, colocar nome do colaborador
+        if (isCollaboratorIDValid() && confirmsCollaboratorTaxNumber() == 1) {
+            System.out.println("Collaborator Name: " + getCollaboratorName());
 
             //mostrar as skills se nao estiver vazio
 
             if (getSkillList()) {
+                boolean moreThanOneSkill = true;
 
-                if (requestSkillToCollaborator()) {
+                while (moreThanOneSkill) {
 
-                    assignSkillCollaboratorByTaxNumber(collaboratorTaxNumber, skillName);
+                    if (requestSkillToCollaborator()) {
 
+                        assignSkillCollaboratorByTaxNumber(collaboratorTaxNumber, skillName);
+
+                    }
                 }
-
 
             } else {
                 System.out.println("There is no skill created.");
@@ -60,10 +63,17 @@ public class AssignSkillCollaboratorUI implements Runnable {
     }
 
     private void assignSkillCollaboratorByTaxNumber(int collaboratorTaxNumber, String skillName) {
-        controller.assignSkillCollaboratorByTaxNumber(collaboratorTaxNumber, skillName);
+        boolean success = controller.assignSkillCollaboratorByTaxNumber(collaboratorTaxNumber, skillName);
+
+        if (success) {
+            System.out.println("Skill successfully assigned.");
+        } else {
+            System.err.println("Skill could not be assigned. Skill already assigned.");
+        }
+
     }
 
-    private int confirmsData() {
+    private int confirmsCollaboratorTaxNumber() {
         int option = -1;
         Scanner input = new Scanner(System.in);
 
@@ -124,13 +134,30 @@ public class AssignSkillCollaboratorUI implements Runnable {
         return controller.isCollaboratorIDValid(collaboratorTaxNumber);
     }
 
+    private boolean isSkillValid() {
+         return controller.isSkillNameValid(skillName);
+    }
+
+    private String getCollaboratorName() {
+        return controller.getCollaboratorName(collaboratorTaxNumber);
+    }
+
     private boolean requestSkillToCollaborator() {
+        boolean isValid;
         Scanner input = new Scanner(System.in);
         System.out.println("Please enter the skill name: ");
 
         skillName = input.nextLine().trim();
 
-        return isCollaboratorIDValid();
+        isValid = isSkillValid();
+
+        while (!isValid) {
+            System.out.print(ANSI_BRIGHT_RED + "Invalid skill name! Enter a new one: " + ANSI_RESET);
+             skillName = input.nextLine();
+             isValid = isSkillValid();
+        }
+
+        return isValid;
 
     }
 
