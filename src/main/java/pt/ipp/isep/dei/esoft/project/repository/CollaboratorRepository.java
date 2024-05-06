@@ -56,4 +56,14 @@ public class CollaboratorRepository {
     private boolean doNotContainCollaborator(Collaborator collaborator) {
         return !collaboratorList.contains(collaborator);
     }
+
+    public List<Collaborator> clone(){
+        // Create a new reference skill list with the same content of the instance one.
+        return new ArrayList<>(this.collaboratorList);
+    }
+
+    public List<Collaborator> getSkillList() {
+        // A clone of the skill list return, to avoid side effects and outside manipulation.
+        return clone();
+    }
 }
