@@ -2,6 +2,8 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import pt.ipp.isep.dei.esoft.project.repository.JobRepository;
 
+import java.util.List;
+
 public class Collaborator {
     private static final int TAX_PAYER_NUMBER_MIN = 100000000;
     private static final int TAX_PAYER_NUMBER_MAX = 999999999;
@@ -18,6 +20,7 @@ public class Collaborator {
     private int taxPayerNumber;
     private String docType;
     private Job job;
+    private List<Skill> skills;
 
     public Collaborator(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, String docType, int jobID) {
         if (isValidName(name)) this.name = name;
@@ -138,5 +141,13 @@ public class Collaborator {
                 getAddress().equals(collaborator.getAddress()) && getPhoneNumber() == collaborator.getPhoneNumber() &&
                 getEmailAddress().equals(collaborator.getAddress()) && getTaxPayerNumber() == collaborator.getTaxPayerNumber() &&
                 getDocType().equals(collaborator.getDocType()) && getJob().equals(collaborator.job));
+    }
+
+    public boolean addSkill(Skill skill) {
+        if (!skills.contains(skill)) {
+            skills.add(skill);
+            return true;
+        }
+        return false;
     }
 }

@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.repository;
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.Data;
 import pt.ipp.isep.dei.esoft.project.domain.Job;
+import pt.ipp.isep.dei.esoft.project.domain.Skill;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,5 +64,41 @@ public class CollaboratorRepository {
 
     public List<Collaborator> getCollaboratorList() {
         return clone();
+    }
+
+    public boolean findCollaboratorByTaxNumber(int collaboratorTaxNumber) {
+        return containsCollaboratorByTaxNumber(collaboratorTaxNumber);
+    }
+
+    private boolean containsCollaboratorByTaxNumber(int collaboratorTaxNumber) {
+        for (Collaborator collaborator : collaboratorList) {
+            if (collaborator.getTaxPayerNumber() == collaboratorTaxNumber) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private Collaborator findCollaborator(int collaboratorTaxNumber) {
+        for (Collaborator collaborator : collaboratorList) {
+            if (collaborator.getTaxPayerNumber() == collaboratorTaxNumber) {
+                return collaborator;
+            }
+        }
+        return null;
+    }
+
+    public void assignSkillCollaborator(int collaboratorTaxNumber, Skill skill) {
+
+        Collaborator collaborator = findCollaborator(collaboratorTaxNumber);
+
+        if (collaborator != null) {
+            if (collaborator.addSkill(skill)) {
+                System.out.println("Skill succesfully assigned to collaborator");
+            } else {
+                System.out.println("Skill failed to assign to collaborator");
+            }
+
+        }
     }
 }
