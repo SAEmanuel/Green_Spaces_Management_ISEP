@@ -38,6 +38,7 @@ public class Data implements Comparable<Data> {
      * O dia por omissão.
      */
     private static final int DIA_POR_OMISSAO = 1;
+    private static final int ANO_ATUAL = 2024;
 
 
     private static final int ANO_MIN_PERMITIDO = 1992;
@@ -54,13 +55,48 @@ public class Data implements Comparable<Data> {
         /**
          * Os dias da semana.
          */
-        DOMINGO { @Override public String toString() { return "Domingo"; } },
-        SEGUNDA { @Override public String toString() { return "Segunda-Feira"; } },
-        TERCA {   @Override public String toString() { return "Terça-Feira"; } },
-        QUARTA {  @Override public String toString() { return "Quarta-Feira"; } },
-        QUINTA {  @Override public String toString() { return "Quinta-Feira"; } },
-        SEXTA {   @Override public String toString() { return "Sexta-Feira"; } },
-        SABADO {  @Override public String toString() { return "Sábado"; } };
+        DOMINGO {
+            @Override
+            public String toString() {
+                return "Domingo";
+            }
+        },
+        SEGUNDA {
+            @Override
+            public String toString() {
+                return "Segunda-Feira";
+            }
+        },
+        TERCA {
+            @Override
+            public String toString() {
+                return "Terça-Feira";
+            }
+        },
+        QUARTA {
+            @Override
+            public String toString() {
+                return "Quarta-Feira";
+            }
+        },
+        QUINTA {
+            @Override
+            public String toString() {
+                return "Quinta-Feira";
+            }
+        },
+        SEXTA {
+            @Override
+            public String toString() {
+                return "Sexta-Feira";
+            }
+        },
+        SABADO {
+            @Override
+            public String toString() {
+                return "Sábado";
+            }
+        };
 
         /**
          * Devolve a designação do dia da semana cuja ordem é recebida por
@@ -84,18 +120,78 @@ public class Data implements Comparable<Data> {
         /**
          * Os meses do ano.
          */
-        JANEIRO(31) {   @Override public String toString() { return "Janeiro"; } },
-        FEVEREIRO(28) { @Override public String toString() { return "Fevereiro"; } },
-        MARCO(31) {     @Override public String toString() { return "Março"; } },
-        ABRIL(30) {     @Override public String toString() { return "Abril"; } },
-        MAIO(31) {      @Override public String toString() { return "Maio"; } },
-        JUNHO(30) {     @Override public String toString() { return "Junho"; } },
-        JULHO(31) {     @Override public String toString() { return "Julho"; } },
-        AGOSTO(31) {    @Override public String toString() { return "Agosto"; } },
-        SETEMBRO(30) {  @Override public String toString() { return "Setembro"; } },
-        OUTUBRO(31) {   @Override public String toString() { return "Outubro"; } },
-        NOVEMBRO(30) {  @Override public String toString() { return "Novembro"; } },
-        DEZEMBRO(31) {  @Override public String toString() { return "Dezembro"; } };
+        JANEIRO(31) {
+            @Override
+            public String toString() {
+                return "Janeiro";
+            }
+        },
+        FEVEREIRO(28) {
+            @Override
+            public String toString() {
+                return "Fevereiro";
+            }
+        },
+        MARCO(31) {
+            @Override
+            public String toString() {
+                return "Março";
+            }
+        },
+        ABRIL(30) {
+            @Override
+            public String toString() {
+                return "Abril";
+            }
+        },
+        MAIO(31) {
+            @Override
+            public String toString() {
+                return "Maio";
+            }
+        },
+        JUNHO(30) {
+            @Override
+            public String toString() {
+                return "Junho";
+            }
+        },
+        JULHO(31) {
+            @Override
+            public String toString() {
+                return "Julho";
+            }
+        },
+        AGOSTO(31) {
+            @Override
+            public String toString() {
+                return "Agosto";
+            }
+        },
+        SETEMBRO(30) {
+            @Override
+            public String toString() {
+                return "Setembro";
+            }
+        },
+        OUTUBRO(31) {
+            @Override
+            public String toString() {
+                return "Outubro";
+            }
+        },
+        NOVEMBRO(30) {
+            @Override
+            public String toString() {
+                return "Novembro";
+            }
+        },
+        DEZEMBRO(31) {
+            @Override
+            public String toString() {
+                return "Dezembro";
+            }
+        };
 
         /**
          * O número de dias de um mês.
@@ -183,7 +279,7 @@ public class Data implements Comparable<Data> {
      * @return mês da data.
      */
     public int getMes() {
-        return mes.ordinal()+1;
+        return mes.ordinal() + 1;
     }
 
     /**
@@ -203,22 +299,23 @@ public class Data implements Comparable<Data> {
      * @param dia o novo dia da data.
      */
     public final void setData(int ano, int mes, int dia) {
-        if (ano < ANO_MIN_PERMITIDO || ano > dataAtual().getAno()) {
-            throw new IllegalArgumentException("ANO invalido, certifique-se que esteja dentro do intervalo: [1800 - " + dataAtual().getAno()+ "]");
+        if (ano < ANO_MIN_PERMITIDO || ano > ANO_ATUAL) {
+            throw new IllegalArgumentException("ANO invalido, certifique-se que esteja dentro do intervalo: [" + ANO_MIN_PERMITIDO + "-" + ANO_ATUAL + "]");
         }
 
         this.ano = ano;
 
-        if ( mes < MES_MIN_PERMITIDO || mes > MES_MAX_PERMITIDO ) {
+        if (mes < MES_MIN_PERMITIDO || mes > MES_MAX_PERMITIDO) {
             throw new IllegalArgumentException("MES invalido, certifique-se que esteja dentro do intervalo: [" + MES_MIN_PERMITIDO + "-" + MES_MAX_PERMITIDO + "]");
         }
 
         this.mes = Mes.obterMes(mes);
 
-        if (dia < DIA_MIN_PERMITIDO || dia > this.mes.numeroDeDias) {
+        if ((dia < DIA_MIN_PERMITIDO) || (dia > this.mes.numeroDeDias)) {
             throw new IllegalArgumentException("DIA invalido, certifique-se que esteja dentro do intervalo: [" + DIA_MIN_PERMITIDO + "-" + this.mes.numeroDeDias + "]");
 
         }
+
         this.dia = dia;
     }
 
@@ -239,7 +336,7 @@ public class Data implements Comparable<Data> {
      * @return caraterísticas da data.
      */
     public String toAnoMesDiaString() {
-        return String.format("%04d/%02d/%02d", ano, mes.ordinal()+1, dia);
+        return String.format("%04d/%02d/%02d", ano, mes.ordinal() + 1, dia);
     }
 
     /**
@@ -247,7 +344,7 @@ public class Data implements Comparable<Data> {
      *
      * @param outroObjeto o objeto a comparar com a data.
      * @return true se o objeto recebido representar uma data equivalente à
-     *         data. Caso contrário, retorna false.
+     * data. Caso contrário, retorna false.
      */
     @Override
     public boolean equals(Object outroObjeto) {
@@ -267,8 +364,8 @@ public class Data implements Comparable<Data> {
      *
      * @param outraData a data a ser comparada.
      * @return o valor 0 se a outraData recebida é igual à data; o valor -1 se
-     *         a outraData for posterior à data; o valor 1 se a outraData for
-     *         anterior à data.
+     * a outraData for posterior à data; o valor 1 se a outraData for
+     * anterior à data.
      */
     @Override
     public int compareTo(Data outraData) {
@@ -294,7 +391,7 @@ public class Data implements Comparable<Data> {
      *
      * @param outraData a outra data com a qual se compara a data.
      * @return true se a data for maior do que a data recebida por parâmetro,
-     *         caso contrário devolve false.
+     * caso contrário devolve false.
      */
     public boolean isMaior(Data outraData) {
         int totalDias = contaDias();
@@ -315,7 +412,7 @@ public class Data implements Comparable<Data> {
      * @param outraData a outra data com a qual se compara a data para calcular
      *                  a diferença do número de dias.
      * @return diferença em número de dias entre a data e a data recebida por
-     *         parâmetro.
+     * parâmetro.
      */
     public int diferenca(Data outraData) {
         int totalDias = contaDias();
@@ -335,7 +432,7 @@ public class Data implements Comparable<Data> {
      * @param dia o dia da data com a qual se compara a data para calcular a
      *            diferença do número de dias.
      * @return diferença em número de dias entre a data e a data recebida por
-     *         parâmetro com ano, mês e dia.
+     * parâmetro com ano, mês e dia.
      */
     public int diferenca(int ano, int mes, int dia) {
         int totalDias = contaDias();
@@ -351,7 +448,7 @@ public class Data implements Comparable<Data> {
      *
      * @param ano o ano a validar.
      * @return true se o ano passado por parâmetro for bissexto, caso contrário
-     *         devolve false.
+     * devolve false.
      */
     public static boolean isAnoBissexto(int ano) {
         return ano % 4 == 0 && ano % 100 != 0 || ano % 400 == 0;
@@ -381,7 +478,7 @@ public class Data implements Comparable<Data> {
         for (int i = 1; i < ano; i++) {
             totalDias += isAnoBissexto(i) ? 366 : 365;
         }
-        for (int i = 1; i < mes.ordinal()+1; i++) {
+        for (int i = 1; i < mes.ordinal() + 1; i++) {
             totalDias += Mes.obterMes(i).numeroDeDias(ano);
         }
         totalDias += dia;

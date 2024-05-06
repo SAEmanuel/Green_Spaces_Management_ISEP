@@ -8,7 +8,7 @@ autonumber
 'hide footbox
 actor "Vehicle Fleet Manager" as VFM
 participant ":RegisterVehicleUI" as UI
-participant ":RegisterVehicleController" as CTRL
+participant ":VehicleController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "vehicleRepository:\nVehicleRepository" as vehicleRepository

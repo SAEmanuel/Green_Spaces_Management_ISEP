@@ -21,16 +21,11 @@ public class Vehicle {
     private static final int LOWEST_LIMIT = 1992;
     private static final int MIDDLE_LIMIT = 2005;
     private static final int HIGHEST_LIMIT = 2020;
-    private static final int MAX_CHARS_PLATE = 6;
+    private static final int MAX_CHARS_PLATE = 8;
 
 
     public Vehicle(String plateId, String brand, String model, String type, float tareWeight, float grossWeight,
                    float currentKm, float checkUpFrequency, float lastCheckUp, Data registerDate, Data acquisitionDate) {
-
-        plateId = plateId.trim();
-        brand = brand.trim();
-        model = model.trim();
-        type = type.trim();
 
         validateVehicle(plateId, brand, model, type, tareWeight, grossWeight, currentKm, checkUpFrequency, lastCheckUp, registerDate, acquisitionDate);
 
@@ -65,11 +60,16 @@ public class Vehicle {
     private void validateVehicle(String plateId, String brand, String model, String type, float tareWeight, float grossWeight, float currentKm, float checkUpFrequency, float lastCheckUp, Data registerDate, Data acquisitionDate) {
 
         //String validations and plate id format
+        validateRegisterDate();
         validatePlateId(plateId, registerDate);
         validateBrand(brand);
         validateModel(model);
         validateType(type);
 
+
+    }
+
+    private void validateRegisterDate() {
 
     }
 
@@ -103,7 +103,7 @@ public class Vehicle {
 
     //--------------------------------INTERNAL METHODS FOR VALIDATIONS--------------------------------
     private boolean validateString(String string) {
-        return (string != null && !string.isEmpty());
+        return (string != null && !string.trim().isEmpty());
     }
 
     private void validatePlate(String plateId, Data registerDate) {
@@ -160,7 +160,7 @@ public class Vehicle {
 
     private void verifySizeOfPlate(String plateId) {
         if (plateId.length() > MAX_CHARS_PLATE) {
-            throw new IllegalArgumentException("PlateId is too long");
+            throw new IllegalArgumentException("PlateId is too long... MAX LENGTH -> ["+MAX_CHARS_PLATE+"]");
         }
     }
 

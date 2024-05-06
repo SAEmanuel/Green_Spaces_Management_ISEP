@@ -8,14 +8,14 @@ import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
 import java.util.List;
 import java.util.Optional;
 
-public class RegisterVehicleController {
+public class VehicleController {
 
     private VehicleRepository vehicleRepository;
 
     /**
      * Constructor for the class.
      */
-    public RegisterVehicleController() {
+    public VehicleController() {
         this.vehicleRepository = getVehicleRepository();
     }
 
