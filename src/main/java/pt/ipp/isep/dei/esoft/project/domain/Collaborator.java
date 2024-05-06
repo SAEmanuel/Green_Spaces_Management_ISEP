@@ -3,9 +3,8 @@ package pt.ipp.isep.dei.esoft.project.domain;
 import pt.ipp.isep.dei.esoft.project.repository.JobRepository;
 
 public class Collaborator {
-
-    private static final int taxPayerNumberMin = 100000000;
-    private static final int taxPayerNumberMax = 999999999;
+    private static final int TAX_PAYER_NUMBER_MIN = 100000000;
+    private static final int TAX_PAYER_NUMBER_MAX = 999999999;
     private static final int phoneNumberMin = 910000000;
     private static final int phoneNumberMiddleLeft = 939999999;
     private static final int phoneNumberMiddleRight = 960000000;
@@ -50,7 +49,7 @@ public class Collaborator {
     }
 
     private boolean isValidTaxPayerNumber(int taxPayerNumber) {
-        return (taxPayerNumber >= taxPayerNumberMin && taxPayerNumber <= taxPayerNumberMax);
+        return (taxPayerNumber >= TAX_PAYER_NUMBER_MIN && taxPayerNumber <= TAX_PAYER_NUMBER_MAX);
     }
 
     private boolean isValidEmailAddress(String emailAddress) {
