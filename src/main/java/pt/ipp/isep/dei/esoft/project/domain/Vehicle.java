@@ -74,12 +74,19 @@ public class Vehicle {
         validateType(type);
         validateKm(currentKm, lastCheckUp);
         validateDates(registerDate, acquisitionDate);
+        validatesWeights(tareWeight,grossWeight);
 
 
     }
 
+    private void validatesWeights(float tareWeight, float grossWeight) {
+        if (tareWeight > grossWeight) {
+            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"'Tare Weight' -> [" + tareWeight + "] cannot be bigger than 'Gross Weight' -> [" + grossWeight + "]."+ANSI_RESET);
+        }
+    }
+
     private void validateDates(Data registerDate, Data acquisitionDate) {
-        if (acquisitionDate.isGreater(registerDate)) {
+        if (registerDate.isGreater(acquisitionDate)) {
             throw new IllegalArgumentException(ANSI_BRIGHT_RED+"'Acquisition Date' -> [" + acquisitionDate + "] cannot be latter than 'Register Date' -> [" + registerDate + "]."+ANSI_RESET);
         }
     }
@@ -107,13 +114,22 @@ public class Vehicle {
         if (haveSpecialCharacters(brand)) {
             throw new IllegalArgumentException(ANSI_BRIGHT_RED+"BRAND cannot contain special characters -> [" + brand + "]."+ANSI_RESET);
         }
+        if (haveNumbers(brand)) {
+            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"BRAND cannot contain numbers -> [" + brand + "]."+ANSI_RESET);
+        }
 
     }
+
+
 
 
     private void validateModel(String model) {
         if (!validateString(model)) {
             throw new IllegalArgumentException(ANSI_BRIGHT_RED+"Reference (MODEL) cannot be null or empty."+ANSI_RESET);
+        }
+        if (haveSpecialCharacters(model)) {
+            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"MODEL cannot contain special characters -> [" + model + "]."+ANSI_RESET);
+
         }
     }
 
@@ -124,8 +140,11 @@ public class Vehicle {
         if (haveSpecialCharacters(type)) {
             throw new IllegalArgumentException(ANSI_BRIGHT_RED+"TYPE cannot contain special characters -> [" + type + "]."+ANSI_RESET);
         }
-
+        if (haveNumbers(type)) {
+            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"TYPE cannot contain numbers -> [" + type + "]."+ANSI_RESET);
+        }
     }
+
 
 
     //--------------------------------INTERNAL METHODS FOR VALIDATIONS--------------------------------
@@ -143,6 +162,15 @@ public class Vehicle {
         return false;
     }
 
+    private boolean haveNumbers(String string) {
+        for (int i = 0; i < string.length(); i++) {
+            char c = string.charAt(i);
+            if (Character.isDigit(c) ) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     private void validatePlate(String plateId, Data registerDate) {
 
