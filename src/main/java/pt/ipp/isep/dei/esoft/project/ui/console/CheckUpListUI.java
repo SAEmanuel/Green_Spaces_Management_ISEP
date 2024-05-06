@@ -1,23 +1,23 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
-import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
-
-import pt.ipp.isep.dei.esoft.project.application.controller.RegisterVehicleController;
+import pt.ipp.isep.dei.esoft.project.application.controller.VehicleController;
 import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
+import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
+
 public class CheckUpListUI implements Runnable {
 
-    private final RegisterVehicleController controller;
+    private final VehicleController controller;
 
     /**
      * Constructor for the class.
      */
     public CheckUpListUI() {
-        controller = new RegisterVehicleController();
+        controller = new VehicleController();
     }
 
     /**
@@ -25,7 +25,7 @@ public class CheckUpListUI implements Runnable {
      *
      * @return The RegisterVehicleController object.
      */
-    public RegisterVehicleController getController() {
+    public VehicleController getController() {
         return controller;
     }
 
@@ -49,10 +49,10 @@ public class CheckUpListUI implements Runnable {
         }
 
         if (checkUp.isPresent()) {
-            System.out.println(ANSI_BRIGHT_GREEN + "Check-up list successfully generated!" + ANSI_RESET);
             printCheckUpList(checkUp.get());
+            System.out.println( ANSI_BRIGHT_GREEN + "Check-up list successfully generated!" + ANSI_RESET);
         } else {
-            System.out.println(ANSI_BRIGHT_RED + "Check-up list not generated!" + ANSI_RESET);
+            System.out.println( ANSI_BRIGHT_RED + "Check-up list not generated!" + ANSI_RESET);
         }
     }
 
@@ -90,7 +90,7 @@ public class CheckUpListUI implements Runnable {
      */
     private void printCheckUpList(List<Vehicle> checkUp) {
         for (Vehicle vehicle : checkUp) {
-            System.out.printf(ANSI_BRIGHT_YELLOW + "%s%n" + ANSI_RESET, vehicle.toString());
+            System.out.println(ANSI_BRIGHT_YELLOW + vehicle + ANSI_RESET);
         }
     }
 }

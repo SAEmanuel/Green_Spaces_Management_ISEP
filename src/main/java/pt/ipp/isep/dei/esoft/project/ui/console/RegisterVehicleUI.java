@@ -1,6 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
-import pt.ipp.isep.dei.esoft.project.application.controller.RegisterVehicleController;
+import pt.ipp.isep.dei.esoft.project.application.controller.VehicleController;
 import pt.ipp.isep.dei.esoft.project.domain.Data;
 import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 
@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class RegisterVehicleUI implements Runnable{
 
-    private final RegisterVehicleController controller;
+    private final VehicleController controller;
 
     private String plateId;
     private String brand;
@@ -27,10 +27,10 @@ public class RegisterVehicleUI implements Runnable{
 
 
     public RegisterVehicleUI(){
-        controller = new RegisterVehicleController();
+        controller = new VehicleController();
     }
 
-    private RegisterVehicleController getController(){
+    private VehicleController getController(){
         return controller;
     }
 
@@ -53,110 +53,122 @@ public class RegisterVehicleUI implements Runnable{
     }
 
     private void requestVehicleInformation() {
-        Scanner input = new Scanner(System.in);
 
-        plateId = requestPlateID(input);
+        plateId = requestPlateID();
 
-        brand = requestBrand(input);
+        brand = requestBrand();
 
-        model = requestModel(input);
+        model = requestModel();
 
-        type = requestType(input);
+        type = requestType();
 
-        tareWeight = requestTareWeight(input);
+        tareWeight = requestTareWeight();
 
-        grossWeight = requestGrossWeight(input);
+        grossWeight = requestGrossWeight();
 
-        currentKm = requestCurrentKm(input);
+        currentKm = requestCurrentKm();
 
-        checkUpFrequency = requestCheckUpFrequency(input);
+        checkUpFrequency = requestCheckUpFrequency();
 
-        lastCheckUp = requestLastCheckUp(input);
+        lastCheckUp = requestLastCheckUp();
 
-        registerDate = requestRegisterDate(input);
+        registerDate = requestRegisterDate();
 
-        acquisitionDate = requestAcquisitionDate(input);
+        acquisitionDate = requestAcquisitionDate();
     }
 
 
 
-    private String requestPlateID(Scanner input) {
+    private String requestPlateID() {
+        Scanner input = new Scanner(System.in);
         System.out.print("Plate ID: ");
         return input.next();
     }
 
-    private String requestBrand(Scanner input) {
+    private String requestBrand() {
+        Scanner input = new Scanner(System.in);
         System.out.print("Brand: ");
         return input.next();
     }
 
-    private String requestModel(Scanner input) {
+    private String requestModel() {
+        Scanner input = new Scanner(System.in);
         System.out.print("Model: ");
         return input.next();
     }
 
-    private String requestType(Scanner input) {
+    private String requestType() {
+        Scanner input = new Scanner(System.in);
         System.out.print("Type: ");
         return input.next();
     }
 
-    private float requestTareWeight(Scanner input) {
+    private float requestTareWeight() {
+        Scanner input = new Scanner(System.in);
         System.out.print("Tare Weight (KG): ");
         return input.nextFloat();
     }
 
-    private float requestGrossWeight(Scanner input) {
+    private float requestGrossWeight() {
+        Scanner input = new Scanner(System.in);
         System.out.print("Gross Weight (KG): ");
         return input.nextFloat();
     }
 
-    private float requestCurrentKm(Scanner input) {
+    private float requestCurrentKm() {
+        Scanner input = new Scanner(System.in);
         System.out.print("Current Kilometers (KM): ");
         return input.nextFloat();
     }
 
-    private float requestCheckUpFrequency(Scanner input) {
-        System.out.print("Check up frequency: ");
+    private float requestCheckUpFrequency() {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Check up frequency (KM): ");
         return input.nextFloat();
     }
 
-    private float requestLastCheckUp(Scanner input) {
-        System.out.print("Last Check up: ");
+    private float requestLastCheckUp() {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Last Check up (KM): ");
         return input.nextFloat();
     }
-    private Data requestRegisterDate(Scanner input) {
-        //TODO : TRYS E CATCHS FAZEMOS?
-        System.out.print("-- Register date --");
-        return getData(input);
+
+    private Data requestRegisterDate() {
+        System.out.print("\n-- Register date --\n");
+        return getData();
     }
 
-    private Data requestAcquisitionDate(Scanner input) {
-        System.out.print("-- Acquisition date --");
-        return getData(input);
+    private Data requestAcquisitionDate() {
+        System.out.print("-- Acquisition date --\n");
+        return getData();
     }
 
 
 
 //------------------INPUTS DATAS-------------------------------
-private Data getData(Scanner input) {
-    int year = requestYear(input);
-    int month = requestMonth(input);
-    int day = requestDay(input);
+private Data getData() {
+    Scanner input = new Scanner(System.in);
+    int year = requestYear();
+    int month = requestMonth();
+    int day = requestDay();
     return new Data(year, month, day);
 }
 
-    private int requestDay(Scanner input) {
-        System.out.print("\n- Day: ");
+    private int requestDay( ) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("- Day: ");
         return input.nextInt();
     }
 
-    private int requestMonth(Scanner input) {
-        System.out.print("\n- Month: ");
+    private int requestMonth() {
+        Scanner input = new Scanner(System.in);
+        System.out.print("- Month: ");
         return input.nextInt();
     }
 
-    private int requestYear(Scanner input) {
-        System.out.print("\n- Year: ");
+    private int requestYear() {
+        Scanner input = new Scanner(System.in);
+        System.out.print("- Year: ");
         return input.nextInt();
     }
 

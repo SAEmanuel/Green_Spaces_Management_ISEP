@@ -8,7 +8,7 @@ autonumber
 actor "Fleet Manager" as FM
 
 participant ":CheckupListUI" as UI
-participant ":VehicleListController" as CTRL
+participant ":VehicleController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "vehicleRepository\n:VehicleRepository" as vehicleRepository

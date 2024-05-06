@@ -47,21 +47,21 @@ class Repositories {
     + getVehicleRepository()
 }
 
-class RegisterVehicleController {
-    + RegisterVehicleController()
+class VehicleController {
+    + VehicleController()
     + registerVehicle(plateID,brand, model, type, tareWeight,\ngrossWeight, millage, registerDate, acquisitionDate,\nmaintenanceFrequency, lastCheckup)
 }
 
 class RegisterVehicleUI {
 }
 
-RegisterVehicleUI .> RegisterVehicleController
+RegisterVehicleUI .> VehicleController
 
-RegisterVehicleController .> Repositories : repositories
+VehicleController .> Repositories : repositories
 Repositories  --> "1 " VehicleRepository
 Repositories -> Repositories : instance
 
-RegisterVehicleController ..>  VehicleRepository : vehicleRepository
+VehicleController ..>  VehicleRepository : vehicleRepository
 
 VehicleRepository  --> "1" Vehicle : register
 Data -o Vehicle

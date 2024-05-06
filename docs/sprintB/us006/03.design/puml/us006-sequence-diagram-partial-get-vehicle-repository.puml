@@ -7,7 +7,7 @@ autonumber
 
 'hide footbox
 
-participant ":RegisterVehicleController" as CTRL
+participant ":VehicleController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 
