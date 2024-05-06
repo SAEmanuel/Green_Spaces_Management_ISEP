@@ -82,7 +82,7 @@ public class RegisterSkillUI implements Runnable{
     private void display() {
 
         System.out.printf("\nTyped name -> [%s%s%s]\n",ANSI_GREEN,skillName.trim(),ANSI_RESET);
-        System.out.print("Options:\n 0 -> Change name\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
+        System.out.print("Confirmation menu:\n 0 -> Change name\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
     }
 
 

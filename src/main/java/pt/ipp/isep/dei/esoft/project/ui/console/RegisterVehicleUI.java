@@ -8,8 +8,7 @@ import java.util.InputMismatchException;
 import java.util.Optional;
 import java.util.Scanner;
 
-import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_BRIGHT_RED;
-import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_RESET;
+import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
 
 public class RegisterVehicleUI implements Runnable {
 
@@ -42,17 +41,61 @@ public class RegisterVehicleUI implements Runnable {
         System.out.println("\n\n--- Register Vehicle ------------------------");
 
         requestVehicleInformation();
-        submitData();
+        int continueApp = confirmsData();
+
+        if (continueApp != 2) {
+            submitData();
+        }
 
     }
+
+    /**
+     * Confirms the skill data entered by the user.
+     *
+     * @return 2 if the user chooses to exit, otherwise returns 1.
+     */
+    private int confirmsData() {
+        Scanner input = new Scanner(System.in);
+        int option = -1;
+
+
+        while(option != 1){
+            display();
+            option = input.nextInt();
+
+            if (option == 0) {
+                System.out.println();
+                requestVehicleInformation();
+            }else if (option == 1) {
+                System.out.println();
+            } else if (option == 2) {
+                System.out.println(ANSI_BRIGHT_RED+"LEAVING..."+ANSI_RESET);
+                return option;
+            } else {
+                System.out.println(ANSI_BRIGHT_RED+ "Invalid choice. Please enter 0 or 1 or 2."+ ANSI_RESET);
+            }
+        }
+        return option;
+    }
+
+    /**
+     * Displays the typed skill name and options for confirmation.
+     */
+    private void display() {
+        StringBuilder stringBuilder = new StringBuilder(String.format("• Plate: %s | Brand: %s | Model: %s | Current Km: %.2f | Register Date: %s | Acquisition Date: %s", plateId, brand, model, currentKm, registerDate, acquisitionDate));
+        System.out.printf("\nTyped data -> [%s%s%s]\n",ANSI_GREEN,stringBuilder,ANSI_RESET);
+        System.out.print("Confirmation menu:\n 0 -> Change Vehicle Info\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
+    }
+
+
 
     private void submitData() {
         Optional<Vehicle> vehicle = getController().registerVehicle(plateId, brand, model, type, tareWeight, grossWeight, currentKm, checkUpFrequency, lastCheckUp, registerDate, acquisitionDate);
 
         if (vehicle.isPresent()) {
-            System.out.println("Vehicle successfully registered!");
+            System.out.println(ANSI_BRIGHT_GREEN+"Vehicle successfully registered!"+ ANSI_RESET);
         } else {
-            System.out.println("Vehicle not registered!");
+            System.out.println(ANSI_BRIGHT_RED +"Vehicle not registered - Already registered!"+ ANSI_RESET);
         }
     }
 
