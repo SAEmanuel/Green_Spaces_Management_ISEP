@@ -200,11 +200,8 @@ public class Vehicle {
 
     @Override
     public String toString() {
-        return String.format("Vehicle[plateId='%s', brand='%s', model='%s', " +
-                        "type='%s', tareWeight=%.2f, grossWeight=%.2f, currentKm=%.2f, " +
-                        "checkUpFrequency=%.2f, lastCheckUp=%.2f, registerDate=%s, acquisitionDate=%s]",
-                plateId, brand, model, type, tareWeight, grossWeight,
-                currentKm, checkUpFrequency, lastCheckUp, registerDate, acquisitionDate);
+        return String.format("• Plate: %s | Brand: %s | Model: %s | Current Km: %.2f%n" +
+                "    Register Date: %s%n    Acquisition Date: %s", plateId, brand, model, currentKm, registerDate, acquisitionDate);
     }
 
 }

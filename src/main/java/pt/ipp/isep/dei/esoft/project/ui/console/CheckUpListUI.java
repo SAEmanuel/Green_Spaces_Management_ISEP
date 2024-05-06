@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
+import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
+
 public class CheckUpListUI implements Runnable {
 
     private final VehicleController controller;
@@ -43,14 +45,14 @@ public class CheckUpListUI implements Runnable {
         Optional<List<Vehicle>> checkUp = Optional.empty();
 
         if (continueProcess()) {
-            checkUp = getController().requestList("y");
+            checkUp = getController().requestList();
         }
 
         if (checkUp.isPresent()) {
-            System.out.println("Check-up list successfully generated!");
             printCheckUpList(checkUp.get());
+            System.out.println( ANSI_BRIGHT_GREEN + "Check-up list successfully generated!" + ANSI_RESET);
         } else {
-            System.out.println("Check-up list not generated!");
+            System.out.println( ANSI_BRIGHT_RED + "Check-up list not generated!" + ANSI_RESET);
         }
     }
 
@@ -88,7 +90,7 @@ public class CheckUpListUI implements Runnable {
      */
     private void printCheckUpList(List<Vehicle> checkUp) {
         for (Vehicle vehicle : checkUp) {
-            System.out.println(vehicle);
+            System.out.println(ANSI_BRIGHT_YELLOW + vehicle + ANSI_RESET);
         }
     }
 }

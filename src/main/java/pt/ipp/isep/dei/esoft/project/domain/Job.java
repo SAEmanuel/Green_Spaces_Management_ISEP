@@ -95,7 +95,6 @@ public class Job {
         return true;
     }
 
-
     /**
      * Returns a string representation of the job.
      *
