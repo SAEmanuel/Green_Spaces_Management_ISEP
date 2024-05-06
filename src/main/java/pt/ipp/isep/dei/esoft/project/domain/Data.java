@@ -3,492 +3,469 @@ package pt.ipp.isep.dei.esoft.project.domain;
 import java.util.Calendar;
 
 /**
- * Representa uma data através do dia, mês e ano.
+ * Represents a date through the day, month, and year.
  *
  * @author Make IT Simple
  */
 public class Data implements Comparable<Data> {
 
     /**
-     * O ano da data.
+     * The year of the date.
      */
-    private int ano;
+    private int year;
 
     /**
-     * O mês da data.
+     * The month of the date.
      */
-    private Mes mes;
+    private Month month;
 
     /**
-     * O dia da data.
+     * The day of the date.
      */
-    private int dia;
+    private int day;
 
     /**
-     * O ano por omissão.
+     * The default year.
      */
-    private static final int ANO_POR_OMISSAO = 1;
+    private static final int DEFAULT_YEAR = 1;
 
     /**
-     * O mês por omissão.
+     * The default month.
      */
-    private static final Mes MES_POR_OMISSAO = Mes.JANEIRO;
+    private static final Month DEFAULT_MONTH = Month.JANUARY;
 
     /**
-     * O dia por omissão.
+     * The default day.
      */
-    private static final int DIA_POR_OMISSAO = 1;
-    private static final int ANO_ATUAL = 2024;
+    private static final int DEFAULT_DAY = 1;
+    private static final int CURRENT_YEAR = 2024;
 
 
-    private static final int ANO_MIN_PERMITIDO = 1992;
-    private static final int MES_MIN_PERMITIDO = 1;
-    private static final int MES_MAX_PERMITIDO = 12;
-    private static final int DIA_MIN_PERMITIDO = 1;
+    private static final int MIN_ALLOWED_YEAR = 1992;
+    private static final int MIN_ALLOWED_MONTH = 1;
+    private static final int MAX_ALLOWED_MONTH = 12;
+    private static final int MIN_ALLOWED_DAY = 1;
 
 
     /**
-     * Representa os dias da semana.
+     * Represents the days of the week.
      */
-    private static enum DiaDaSemana {
+    private static enum DayOfWeek {
 
         /**
-         * Os dias da semana.
+         * The days of the week.
          */
-        DOMINGO {
+        SUNDAY {
             @Override
             public String toString() {
-                return "Domingo";
+                return "Sunday";
             }
         },
-        SEGUNDA {
+        MONDAY {
             @Override
             public String toString() {
-                return "Segunda-Feira";
+                return "Monday";
             }
         },
-        TERCA {
+        TUESDAY {
             @Override
             public String toString() {
-                return "Terça-Feira";
+                return "Tuesday";
             }
         },
-        QUARTA {
+        WEDNESDAY {
             @Override
             public String toString() {
-                return "Quarta-Feira";
+                return "Wednesday";
             }
         },
-        QUINTA {
+        THURSDAY {
             @Override
             public String toString() {
-                return "Quinta-Feira";
+                return "Thursday";
             }
         },
-        SEXTA {
+        FRIDAY {
             @Override
             public String toString() {
-                return "Sexta-Feira";
+                return "Friday";
             }
         },
-        SABADO {
+        SATURDAY {
             @Override
             public String toString() {
-                return "Sábado";
+                return "Saturday";
             }
         };
 
         /**
-         * Devolve a designação do dia da semana cuja ordem é recebida por
-         * parâmetro.
+         * Returns the designation of the day of the week whose order is received as a parameter.
          *
-         * @param ordemDiaDaSemana a ordem do dia da semana entre zero e seis,
-         *                         inclusivé. A menor ordem corresponde ao
-         *                         Domingo.
-         * @return a designação do dia da semana.
+         * @param dayOfWeekOrder the order of the day of the week between zero and six, inclusive. The lowest order corresponds to Sunday.
+         * @return the designation of the day of the week.
          */
-        public static String designacaoDiaDaSemana(int ordemDiaDaSemana) {
-            return DiaDaSemana.values()[ordemDiaDaSemana].toString();
+        public static String getDayOfWeekDesignation(int dayOfWeekOrder) {
+            return DayOfWeek.values()[dayOfWeekOrder].toString();
         }
     }
 
     /**
-     * Representa os meses do ano.
+     * Represents the months of the year.
      */
-    private static enum Mes {
+    private static enum Month {
 
         /**
-         * Os meses do ano.
+         * The months of the year.
          */
-        JANEIRO(31) {
+        JANUARY(31) {
             @Override
             public String toString() {
-                return "Janeiro";
+                return "January";
             }
         },
-        FEVEREIRO(28) {
+        FEBRUARY(28) {
             @Override
             public String toString() {
-                return "Fevereiro";
+                return "February";
             }
         },
-        MARCO(31) {
+        MARCH(31) {
             @Override
             public String toString() {
-                return "Março";
+                return "March";
             }
         },
-        ABRIL(30) {
+        APRIL(30) {
             @Override
             public String toString() {
-                return "Abril";
+                return "April";
             }
         },
-        MAIO(31) {
+        MAY(31) {
             @Override
             public String toString() {
-                return "Maio";
+                return "May";
             }
         },
-        JUNHO(30) {
+        JUNE(30) {
             @Override
             public String toString() {
-                return "Junho";
+                return "June";
             }
         },
-        JULHO(31) {
+        JULY(31) {
             @Override
             public String toString() {
-                return "Julho";
+                return "July";
             }
         },
-        AGOSTO(31) {
+        AUGUST(31) {
             @Override
             public String toString() {
-                return "Agosto";
+                return "August";
             }
         },
-        SETEMBRO(30) {
+        SEPTEMBER(30) {
             @Override
             public String toString() {
-                return "Setembro";
+                return "September";
             }
         },
-        OUTUBRO(31) {
+        OCTOBER(31) {
             @Override
             public String toString() {
-                return "Outubro";
+                return "October";
             }
         },
-        NOVEMBRO(30) {
+        NOVEMBER(30) {
             @Override
             public String toString() {
-                return "Novembro";
+                return "November";
             }
         },
-        DEZEMBRO(31) {
+        DECEMBER(31) {
             @Override
             public String toString() {
-                return "Dezembro";
+                return "December";
             }
         };
 
         /**
-         * O número de dias de um mês.
+         * The number of days in a month.
          */
-        private int numeroDeDias;
+        private int numberOfDays;
 
         /**
-         * Constrói um mês com o número de dias recebido por parâmetro.
+         * Constructs a month with the number of days received as a parameter.
          *
-         * @param numeroDeDias o número de dias do mês.
+         * @param numberOfDays the number of days in the month.
          */
-        private Mes(int numeroDeDias) {
-            this.numeroDeDias = numeroDeDias;
+        private Month(int numberOfDays) {
+            this.numberOfDays = numberOfDays;
         }
 
         /**
-         * Devolve o número de dias do mês do ano recebido por parâmetro.
+         * Returns the number of days of the month of the year received as a parameter.
          *
-         * @param ano o ano do mês.
-         * @return o número de dias do mês do ano.
+         * @param year the year of the month.
+         * @return the number of days of the month of the year.
          */
-        public int numeroDeDias(int ano) {
-            if (ordinal() == 1 && Data.isAnoBissexto(ano)) {
-                return numeroDeDias + 1;
+        public int numberOfDays(int year) {
+            if (ordinal() == 1 && Data.isLeapYear(year)) {
+                return numberOfDays + 1;
             }
-            return numeroDeDias;
+            return numberOfDays;
         }
 
         /**
-         * Devolve o mês cuja ordem é recebida por parâmetro.
+         * Returns the month whose order is received as a parameter.
          *
-         * @param ordemDoMes a ordem do mês.
-         * @return o mês cuja ordem é recebida por parâmetro.
+         * @param monthOrder the order of the month.
+         * @return the month whose order is received as a parameter.
          */
-        public static Mes obterMes(int ordemDoMes) {
-            return Mes.values()[ordemDoMes - 1];
+        public static Month getMonth(int monthOrder) {
+            return Month.values()[monthOrder - 1];
         }
 
     }
 
     /**
-     * Constrói uma instância de Data recebendo o ano, o mês e o dia, chamando o metodo @method setData.
+     * Constructs an instance of Data by receiving the year, month, and day, calling the @method setData.
      *
-     * @param ano o ano da data.
-     * @param mes o mês da data.
-     * @param dia o dia da data.
+     * @param year the year of the date.
+     * @param month the month of the date.
+     * @param day the day of the date.
      */
-    public Data(int ano, int mes, int dia) {
-        setData(ano, mes, dia);
+    public Data(int year, int month, int day) {
+        setData(year, month, day);
     }
 
     /**
-     * Constrói uma instância de Data com a data por omissão.
+     * Constructs an instance of Data with the default date.
      */
     public Data() {
-        ano = ANO_POR_OMISSAO;
-        mes = MES_POR_OMISSAO;
-        dia = DIA_POR_OMISSAO;
+        year = DEFAULT_YEAR;
+        month = DEFAULT_MONTH;
+        day = DEFAULT_DAY;
     }
 
     /**
-     * Constrói uma instância de Data com as mesmas caraterísticas da data
-     * recebida por parâmetro.
+     * Constructs an instance of Data with the same characteristics as the date received by parameter.
      *
-     * @param outraData a data com as características a copiar.
+     * @param otherDate the date with the characteristics to copy.
      */
-    public Data(Data outraData) {
-        ano = outraData.ano;
-        mes = outraData.mes;
-        dia = outraData.dia;
+    public Data(Data otherDate) {
+        year = otherDate.year;
+        month = otherDate.month;
+        day = otherDate.day;
     }
 
     /**
-     * Devolve o ano da data.
+     * Returns the year of the date.
      *
-     * @return ano da data
+     * @return year of the date.
      */
-    public int getAno() {
-        return ano;
+    public int getYear() {
+        return year;
     }
 
     /**
-     * Devolve o mês da data.
+     * Returns the month of the date.
      *
-     * @return mês da data.
+     * @return month of the date.
      */
-    public int getMes() {
-        return mes.ordinal() + 1;
+    public int getMonth() {
+        return month.ordinal() + 1;
     }
 
     /**
-     * Devolve o dia da data.
+     * Returns the day of the date.
      *
-     * @return dia da data.
+     * @return day of the date.
      */
-    public int getDia() {
-        return dia;
+    public int getDay() {
+        return day;
     }
 
     /**
-     * Modifica o ano, o mês e o dia da data.
+     * Modifies the year, month, and day of the date.
      *
-     * @param ano o novo ano da data.
-     * @param mes o novo mês da data.
-     * @param dia o novo dia da data.
+     * @param year the new year of the date.
+     * @param month the new month of the date.
+     * @param day the new day of the date.
      */
-    public final void setData(int ano, int mes, int dia) {
-        if (ano < ANO_MIN_PERMITIDO || ano > ANO_ATUAL) {
-            throw new IllegalArgumentException("ANO invalido, certifique-se que esteja dentro do intervalo: [" + ANO_MIN_PERMITIDO + "-" + ANO_ATUAL + "]");
+    public final void setData(int year, int month, int day) {
+        if (year < MIN_ALLOWED_YEAR || year > CURRENT_YEAR) {
+            throw new IllegalArgumentException("INVALID YEAR, verify that is in the interval: [" + MIN_ALLOWED_YEAR + "-" + CURRENT_YEAR + "]");
         }
 
-        this.ano = ano;
+        this.year = year;
 
-        if (mes < MES_MIN_PERMITIDO || mes > MES_MAX_PERMITIDO) {
-            throw new IllegalArgumentException("MES invalido, certifique-se que esteja dentro do intervalo: [" + MES_MIN_PERMITIDO + "-" + MES_MAX_PERMITIDO + "]");
+        if (month < MIN_ALLOWED_MONTH || month > MAX_ALLOWED_MONTH) {
+            throw new IllegalArgumentException("INVALID MONTH, verify that is in the interval: [" + MIN_ALLOWED_MONTH + "-" + MAX_ALLOWED_MONTH + "]");
         }
 
-        this.mes = Mes.obterMes(mes);
+        this.month = Month.getMonth(month);
 
-        if ((dia < DIA_MIN_PERMITIDO) || (dia > this.mes.numeroDeDias)) {
-            throw new IllegalArgumentException("DIA invalido, certifique-se que esteja dentro do intervalo: [" + DIA_MIN_PERMITIDO + "-" + this.mes.numeroDeDias + "]");
-
+        if ((day < MIN_ALLOWED_DAY) || (day > this.month.numberOfDays)) {
+            throw new IllegalArgumentException("INVALID DAY, verify that is in the interval: [" + MIN_ALLOWED_DAY + "-" + this.month.numberOfDays + "]");
         }
 
-        this.dia = dia;
+        this.day = day;
     }
 
     /**
-     * Devolve a descrição textual da data no formato: diaDaSemana, dia de mês
-     * de ano.
+     * Returns the textual description of the date in the format: dayOfWeek, day of month of year.
      *
-     * @return caraterísticas da data.
+     * @return characteristics of the date.
      */
     @Override
     public String toString() {
-        return String.format("%s, %d de %s de %d", diaDaSemana(), dia, mes, ano);
+        return String.format("%s, %d of %s of %d", dayOfWeek(), day, month, year);
     }
 
     /**
-     * Devolve a data no formato:%04d/%02d/%02d.
+     * Returns the date in the format: %04d/%02d/%02d.
      *
-     * @return caraterísticas da data.
+     * @return characteristics of the date.
      */
-    public String toAnoMesDiaString() {
-        return String.format("%04d/%02d/%02d", ano, mes.ordinal() + 1, dia);
+    public String toYearMonthDayString() {
+        return String.format("%04d/%02d/%02d", year, month.ordinal() + 1, day);
     }
 
     /**
-     * Compara a data com o objeto recebido.
+     * Compares the date with the object received.
      *
-     * @param outroObjeto o objeto a comparar com a data.
-     * @return true se o objeto recebido representar uma data equivalente à
-     * data. Caso contrário, retorna false.
+     * @param otherObject the object to compare with the date.
+     * @return true if the received object represents a date equivalent to the date. Otherwise, returns false.
      */
     @Override
-    public boolean equals(Object outroObjeto) {
-        if (this == outroObjeto) {
+    public boolean equals(Object otherObject) {
+        if (this == otherObject) {
             return true;
         }
-        if (outroObjeto == null || getClass() != outroObjeto.getClass()) {
+        if (otherObject == null || getClass() != otherObject.getClass()) {
             return false;
         }
-        Data outraData = (Data) outroObjeto;
-        return ano == outraData.ano && mes.equals(outraData.mes)
-                && dia == outraData.dia;
+        Data otherDate = (Data) otherObject;
+        return year == otherDate.year && month.equals(otherDate.month)
+                && day == otherDate.day;
     }
 
     /**
-     * Compara a data com a outra data recebida por parâmetro.
+     * Compares the date with the other date received by parameter.
      *
-     * @param outraData a data a ser comparada.
-     * @return o valor 0 se a outraData recebida é igual à data; o valor -1 se
-     * a outraData for posterior à data; o valor 1 se a outraData for
-     * anterior à data.
+     * @param otherDate the date to be compared.
+     * @return the value 0 if the otherDate received is equal to the date; the value -1 if the otherDate is after the date; the value 1 if the otherDate is before the date.
      */
     @Override
-    public int compareTo(Data outraData) {
-        return (outraData.isMaior(this)) ? -1 : (isMaior(outraData)) ? 1 : 0;
+    public int compareTo(Data otherDate) {
+        return (otherDate.isGreater(this)) ? -1 : (isGreater(otherDate)) ? 1 : 0;
     }
 
     /**
-     * Devolve o dia da semana da data.
+     * Returns the day of the week of the date.
      *
-     * @return dia da semana da data.
+     * @return day of the week of the date.
      */
-    public String diaDaSemana() {
-        int totalDias = contaDias();
-        totalDias = totalDias % 7;
+    public String dayOfWeek() {
+        int totalDays = countDays();
+        totalDays = totalDays % 7;
 
-        return DiaDaSemana.designacaoDiaDaSemana(totalDias);
+        return DayOfWeek.getDayOfWeekDesignation(totalDays);
     }
 
 
     /**
-     * Devolve true se a data for maior do que a data recebida por parâmetro. Se
-     * a data for menor ou igual à data recebida por parâmetro, devolve false.
+     * Returns true if the date is greater than the date received by parameter. If the date is less than or equal to the date received by parameter, returns false.
      *
-     * @param outraData a outra data com a qual se compara a data.
-     * @return true se a data for maior do que a data recebida por parâmetro,
-     * caso contrário devolve false.
+     * @param otherDate the other date with which the date is compared.
+     * @return true if the date is greater than the date received by parameter, otherwise returns false.
      */
-    public boolean isMaior(Data outraData) {
-        int totalDias = contaDias();
-        int totalDias1 = outraData.contaDias();
+    public boolean isGreater(Data otherDate) {
+        int totalDays = countDays();
+        int totalDays1 = otherDate.countDays();
 
-        return totalDias > totalDias1;
+        return totalDays > totalDays1;
     }
 
-    public int isMaiorByYear(int anoParam) {
-        int ano = this.ano;
-        return Integer.compare(ano, anoParam);
-    }
-
-    /**
-     * Devolve a diferença em número de dias entre a data e a data recebida por
-     * parâmetro.
-     *
-     * @param outraData a outra data com a qual se compara a data para calcular
-     *                  a diferença do número de dias.
-     * @return diferença em número de dias entre a data e a data recebida por
-     * parâmetro.
-     */
-    public int diferenca(Data outraData) {
-        int totalDias = contaDias();
-        int totalDias1 = outraData.contaDias();
-
-        return Math.abs(totalDias - totalDias1);
+    public int isGreaterByYear(int yearParam) {
+        int year = this.year;
+        return Integer.compare(year, yearParam);
     }
 
     /**
-     * Devolve a diferença em número de dias entre a data e a data recebida por
-     * parâmetro com ano, mês e dia.
+     * Returns the difference in number of days between the date and the date received by parameter.
      *
-     * @param ano o ano da data com a qual se compara a data para calcular a
-     *            diferença do número de dias.
-     * @param mes o mês da data com a qual se compara a data para calcular a
-     *            diferença do número de dias.
-     * @param dia o dia da data com a qual se compara a data para calcular a
-     *            diferença do número de dias.
-     * @return diferença em número de dias entre a data e a data recebida por
-     * parâmetro com ano, mês e dia.
+     * @param otherDate the other date with which the date is compared to calculate the difference in number of days.
+     * @return difference in number of days between the date and the date received by parameter.
      */
-    public int diferenca(int ano, int mes, int dia) {
-        int totalDias = contaDias();
-        Data outraData = new Data(ano, mes, dia);
-        int totalDias1 = outraData.contaDias();
+    public int difference(Data otherDate) {
+        int totalDays = countDays();
+        int totalDays1 = otherDate.countDays();
 
-        return Math.abs(totalDias - totalDias1);
+        return Math.abs(totalDays - totalDays1);
     }
 
     /**
-     * Devolve true se o ano passado por parâmetro for bissexto. Se o ano
-     * passado por parâmetro não for bissexto, devolve false.
+     * Returns the difference in number of days between the date and the date received by parameter with year, month, and day.
      *
-     * @param ano o ano a validar.
-     * @return true se o ano passado por parâmetro for bissexto, caso contrário
-     * devolve false.
+     * @param year the year of the date with which the date is compared to calculate the difference in number of days.
+     * @param month the month of the date with which the date is compared to calculate the difference in number of days.
+     * @param day the day of the date with which the date is compared to calculate the difference in number of days.
+     * @return difference in number of days between the date and the date received by parameter with year, month, and day.
      */
-    public static boolean isAnoBissexto(int ano) {
-        return ano % 4 == 0 && ano % 100 != 0 || ano % 400 == 0;
+    public int difference(int year, int month, int day) {
+        int totalDays = countDays();
+        Data otherDate = new Data(year, month, day);
+        int totalDays1 = otherDate.countDays();
+
+        return Math.abs(totalDays - totalDays1);
     }
 
     /**
-     * Devolve a data atual do sistema.
+     * Returns true if the year passed by parameter is a leap year. If the year passed by parameter is not a leap year, returns false.
      *
-     * @return a data atual do sistema.
+     * @param year the year to validate.
+     * @return true if the year passed by parameter is a leap year, otherwise returns false.
      */
-    public static Data dataAtual() {
-        Calendar hoje = Calendar.getInstance();
-        int ano = hoje.get(Calendar.YEAR);
-        int mes = hoje.get(Calendar.MONTH) + 1;    // janeiro é representado por 0.
-        int dia = hoje.get(Calendar.DAY_OF_MONTH);
-        return new Data(ano, mes, dia);
+    public static boolean isLeapYear(int year) {
+        return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
     }
 
     /**
-     * Devolve o número de dias desde o dia 1/1/1 até à data.
+     * Returns the current date of the system.
      *
-     * @return número de dias desde o dia 1/1/1 até à data.
+     * @return the current date of the system.
      */
-    private int contaDias() {
-        int totalDias = 0;
+    public static Data currentDate() {
+        Calendar today = Calendar.getInstance();
+        int year = today.get(Calendar.YEAR);
+        int month = today.get(Calendar.MONTH) + 1;    // January is represented by 0.
+        int day = today.get(Calendar.DAY_OF_MONTH);
+        return new Data(year, month, day);
+    }
 
-        for (int i = 1; i < ano; i++) {
-            totalDias += isAnoBissexto(i) ? 366 : 365;
+    /**
+     * Returns the number of days from day 1/1/1 to the date.
+     *
+     * @return number of days from day 1/1/1 to the date.
+     */
+    private int countDays() {
+        int totalDays = 0;
+
+        for (int i = 1; i < year; i++) {
+            totalDays += isLeapYear(i) ? 366 : 365;
         }
-        for (int i = 1; i < mes.ordinal() + 1; i++) {
-            totalDias += Mes.obterMes(i).numeroDeDias(ano);
+        for (int i = 1; i < month.ordinal() + 1; i++) {
+            totalDays += Month.getMonth(i).numberOfDays(year);
         }
-        totalDias += dia;
+        totalDays += day;
 
-        return totalDias;
+        return totalDays;
     }
 
-    public boolean maior18() {
-        return (getAno() - dataAtual().getAno() >= 18 && getMes() - dataAtual().getMes() <= 0 && getDia() - dataAtual().getDia() <= 0);
+    public boolean over18() {
+        return (getYear() - currentDate().getYear() >= 18 && getMonth() - currentDate().getMonth() <= 0 && getDay() - currentDate().getDay() <= 0);
     }
 }
-
-

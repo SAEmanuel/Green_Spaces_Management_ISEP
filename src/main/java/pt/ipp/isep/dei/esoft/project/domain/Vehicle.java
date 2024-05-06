@@ -79,7 +79,7 @@ public class Vehicle {
     }
 
     private void validateDates(Data registerDate, Data acquisitionDate) {
-        if (acquisitionDate.isMaior(registerDate)) {
+        if (acquisitionDate.isGreater(registerDate)) {
             throw new IllegalArgumentException(ANSI_BRIGHT_RED+"'Acquisition Date' -> [" + acquisitionDate + "] cannot be latter than 'Register Date' -> [" + registerDate + "]."+ANSI_RESET);
         }
     }
@@ -154,15 +154,15 @@ public class Vehicle {
             second = plateByParts[1];
             third = plateByParts[2];
 
-            if (registerDate.getAno() > HIGHEST_LIMIT) {
+            if (registerDate.getYear() > HIGHEST_LIMIT) {
 
                 validatePlateAfterHighest(first, second, third);
 
-            } else if (registerDate.getAno() > MIDDLE_LIMIT) {
+            } else if (registerDate.getYear() > MIDDLE_LIMIT) {
 
                 validatePlateAfterMiddle(first, second, third);
 
-            } else if (registerDate.getAno() > LOWEST_LIMIT) {
+            } else if (registerDate.getYear() > LOWEST_LIMIT) {
 
                 validatePlateAfterLowest(first, second, third);
 

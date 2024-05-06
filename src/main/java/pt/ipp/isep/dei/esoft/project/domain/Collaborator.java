@@ -70,7 +70,7 @@ public class Collaborator {
     }
 
     private boolean isValidBirthDate(Data birthDate) {
-        return birthDate.maior18();
+        return birthDate.over18();
     }
 
     private boolean isValidName(String name) {
