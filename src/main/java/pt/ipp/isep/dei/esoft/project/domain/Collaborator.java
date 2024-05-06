@@ -3,6 +3,12 @@ package pt.ipp.isep.dei.esoft.project.domain;
 import pt.ipp.isep.dei.esoft.project.repository.JobRepository;
 
 public class Collaborator {
+    private static final int TAX_PAYER_NUMBER_MIN = 100000000;
+    private static final int TAX_PAYER_NUMBER_MAX = 999999999;
+    private static final int phoneNumberMin = 910000000;
+    private static final int phoneNumberMiddleLeft = 939999999;
+    private static final int phoneNumberMiddleRight = 960000000;
+    private static final int phoneNumberMax = 969999999;
     private String name;
     private Data birthDate;
     private Data admissionDate;
@@ -43,7 +49,7 @@ public class Collaborator {
     }
 
     private boolean isValidTaxPayerNumber(int taxPayerNumber) {
-        return (taxPayerNumber >= 100000000 && taxPayerNumber <= 999999999);
+        return (taxPayerNumber >= TAX_PAYER_NUMBER_MIN && taxPayerNumber <= TAX_PAYER_NUMBER_MAX);
     }
 
     private boolean isValidEmailAddress(String emailAddress) {
@@ -60,7 +66,7 @@ public class Collaborator {
     }
 
     private boolean isValidPhoneNumber(int phoneNumber) {
-        return (phoneNumber >= 910000000 && phoneNumber <= 939999999) || (phoneNumber >= 960000000 && phoneNumber <= 969999999);
+        return (phoneNumber >= phoneNumberMin && phoneNumber <= phoneNumberMiddleLeft) || (phoneNumber >= phoneNumberMiddleRight && phoneNumber <= phoneNumberMax);
     }
 
     private boolean isValidBirthDate(Data birthDate) {
@@ -85,72 +91,36 @@ public class Collaborator {
         return name;
     }
 
-    public void setName(String name) {
-        if (isValidName(name)) this.name = name;
-    }
-
     public Data getBirthDate() {
         return birthDate;
-    }
-
-    public void setBirthDate(Data birthDate) {
-        this.birthDate = birthDate;
     }
 
     public Data getAdmissionDate() {
         return admissionDate;
     }
 
-    public void setAdmissionDate(Data admissionDate) {
-        this.admissionDate = admissionDate;
-    }
-
     public String getAddress() {
         return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public int getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
-        if (isValidPhoneNumber(phoneNumber)) this.phoneNumber = phoneNumber;
-    }
-
     public String getEmailAddress() {
         return emailAddress;
-    }
-
-    public void setEmailAddress(String emailAddress) {
-        if (isValidEmailAddress(emailAddress)) this.emailAddress = emailAddress;
     }
 
     public int getTaxPayerNumber() {
         return taxPayerNumber;
     }
 
-    public void setTaxPayerNumber(int taxPayerNumber) {
-        if (isValidTaxPayerNumber(taxPayerNumber)) this.taxPayerNumber = taxPayerNumber;
-    }
-
     public String getDocType() {
         return docType;
     }
 
-    public void setDocType(String docType) {
-        this.docType = docType;
-    }
-
     public Job getJob() {
         return job;
-    }
-
-    public void setJob(Job job) {
-        this.job = job;
     }
 
     public Collaborator clone() {

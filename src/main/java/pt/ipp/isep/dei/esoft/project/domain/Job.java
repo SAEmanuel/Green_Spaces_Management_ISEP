@@ -16,8 +16,15 @@ public class Job {
      */
     public Job(String jobName) {
         // Checks if the job name is valid before assigning it.
-        if (isValidJobName(jobName))
+        try {
+            isValidJobName(jobName);
             this.jobName = jobName;
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid job name: " + jobName);
+            throw e;
+        }
+
+
     }
 
     /**
@@ -43,7 +50,7 @@ public class Job {
             return false;
         Job job = (Job) otherJob;
         // Compares job names ignoring case and leading/trailing whitespace.
-        return jobName.trim().equalsIgnoreCase(job.jobName.trim());
+        return jobName.equalsIgnoreCase(job.jobName);
     }
 
     /**
@@ -73,17 +80,15 @@ public class Job {
      * @return true if the job name is valid, false otherwise
      */
     private boolean isValidJobName(String jobName) {
-        if (jobName != null) {
-            // Validates the job name.
-            if (jobName.trim().isEmpty()) {
-                throw new IllegalArgumentException("Job name cannot be empty.");
-            }
 
-            for (int i = 0; i < jobName.length(); i++) {
-                // Checks if the job name contains only letters or spaces.
-                if (!Character.isLetter(jobName.charAt(i)) && jobName.charAt(i) != ' ') {
-                    throw new IllegalArgumentException("Job name contains invalid characters.");
-                }
+        if (jobName == null || jobName.trim().isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+
+        for (int i = 0; i < jobName.length(); i++) {
+            char ch = jobName.charAt(i);
+            if (!Character.isLetter(ch) && ch != ' ') {
+                throw new IllegalArgumentException();
             }
         }
 

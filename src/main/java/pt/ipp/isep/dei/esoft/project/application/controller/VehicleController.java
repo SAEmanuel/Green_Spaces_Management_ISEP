@@ -59,13 +59,12 @@ public class VehicleController {
     /**
      * Method to request a list of vehicles.
      *
-     * @param activation The activation signal for the request.
      * @return An Optional containing the list of requested vehicles if successful, otherwise empty.
      */
-    public Optional<List<Vehicle>> requestList(String activation) {
+    public Optional<List<Vehicle>> requestList() {
         Optional<List<Vehicle>> request;
 
-        request = vehicleRepository.requestList(activation);
+        request = vehicleRepository.requestList();
         return request;
     }
 }
