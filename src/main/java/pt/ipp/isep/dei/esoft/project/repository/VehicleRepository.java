@@ -23,13 +23,13 @@ public class VehicleRepository {
     /**
      * Method to register a new vehicle.
      *
-     * @param plateId        The plate ID of the vehicle.
-     * @param brand          The brand of the vehicle.
-     * @param model          The model of the vehicle.
-     * @param type           The type of the vehicle.
-     * @param tareWeight     The tare weight of the vehicle.
-     * @param grossWeight    The gross weight of the vehicle.
-     * @param currentKm      The current kilometers of the vehicle.
+Ve     * @param plateId          The plate ID of the vehicle.
+     * @param brand            The brand of the vehicle.
+     * @param model            The model of the vehicle.
+     * @param type             The type of the vehicle.
+     * @param tareWeight       The tare weight of the vehicle.
+     * @param grossWeight      The gross weight of the vehicle.
+     * @param currentKm        The current kilometers of the vehicle.
      * @param checkUpFrequency The check-up frequency of the vehicle.
      * @param lastCheckUp      The date of the last check-up of the vehicle.
      * @param registerDate     The registration date of the vehicle.
@@ -133,4 +133,5 @@ public class VehicleRepository {
         }
         return vehiclesForCheckUp;
     }
+
 }
