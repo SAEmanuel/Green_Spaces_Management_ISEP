@@ -8,29 +8,31 @@ public class Skill {
     private String skillName;
 
 
-
-
     /**
      * Constructs an instance of Skill, by giving the skill name only.
      *
      * @param skillName the skill name (string)
      */
     public Skill(String skillName) {
-        skillName = skillName.trim();
+
         //This method verify the skill name.
         try {
             validateSkillName(skillName);
-
-            this.skillName = skillName;
+            this.skillName = skillName.trim();
 
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
+            throw e;
         }
     }
 
-
+    /**
+     * Method that returns a skill name of instance with a different ref.
+     *
+     * @return a clone string of the skill name instance
+     */
     public String getSkillName() {
-        return skillName;
+        return clone().skillName;
     }
 
 
@@ -42,12 +44,12 @@ public class Skill {
      */
     private void validateSkillName(String skillName){
         // Check if skillName is null or empty
-        if ( !validateString(skillName) ) {
-            throw new IllegalArgumentException("Reference cannot be null or empty.");
+        if ( skillName == null || skillName.trim().isEmpty() ) {
+            throw new IllegalArgumentException("Skill name cannot be null or empty.");
         }
 
         // Check if skillName contains special characters/numbers
-        if ( !validateName(skillName) ) {
+        if ( !validateName(skillName.trim()) ) {
             throw new IllegalArgumentException("Skill name have special characters/numbers.");
         }
     }
