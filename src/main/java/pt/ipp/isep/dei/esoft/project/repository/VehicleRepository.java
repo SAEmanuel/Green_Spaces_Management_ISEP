@@ -73,17 +73,22 @@ public class VehicleRepository {
      * @return True if the vehicle is valid, otherwise false.
      */
     private boolean validate(Vehicle vehicle) {
-        return vehicleListDoNotContains(vehicle);
+        return vehicleListDoNotContainsByPlate(vehicle);
     }
 
     /**
-     * Method to check if the vehicle list does not contain a specific vehicle.
+     * Method to check if the vehicle list does not contain a specific vehicle by plate ID.
      *
      * @param vehicle The vehicle to be checked.
      * @return True if the vehicle list does not contain the vehicle, otherwise false.
      */
-    private boolean vehicleListDoNotContains(Vehicle vehicle) {
-        return !vehicleList.contains(vehicle);
+    private boolean vehicleListDoNotContainsByPlate(Vehicle vehicle) {
+        for (Vehicle v : vehicleList) {
+            if (v.getPlateId().equals(vehicle.getPlateId())) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**

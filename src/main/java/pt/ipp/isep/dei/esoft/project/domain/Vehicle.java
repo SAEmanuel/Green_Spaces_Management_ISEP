@@ -55,7 +55,15 @@ public class Vehicle {
         return lastCheckUp;
     }
 
-//---------------------------------------VALIDATIONS----------------------------------------------------------
+    public String getPlateId() {
+        return plateId;
+    }
+
+    public void setPlateId(String plateId) {
+        this.plateId = plateId;
+    }
+
+    //---------------------------------------VALIDATIONS----------------------------------------------------------
 
     private void validateVehicle(String plateId, String brand, String model, String type, float tareWeight, float grossWeight, float currentKm, float checkUpFrequency, float lastCheckUp, Data registerDate, Data acquisitionDate) {
 
