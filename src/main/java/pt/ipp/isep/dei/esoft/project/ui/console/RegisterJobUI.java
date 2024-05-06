@@ -6,53 +6,84 @@ import pt.ipp.isep.dei.esoft.project.domain.Job;
 import java.util.Optional;
 import java.util.Scanner;
 
+import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
 
+/**
+ * UI class for registering jobs.
+ */
 public class RegisterJobUI implements Runnable {
 
     private final RegisterJobController controller;
     private String jobName;
     private Scanner scanner;
 
-
+    /**
+     * Constructs a RegisterJobUI.
+     */
     public RegisterJobUI() {
         controller = new RegisterJobController();
     }
 
+    /**
+     * Retrieves the register job controller.
+     *
+     * @return the register job controller
+     */
     public RegisterJobController getController() {
         return controller;
     }
 
-
+    /**
+     * Runs the register job UI.
+     */
     public void run() {
         System.out.println("\n\n--- Register Job ------------------------");
 
         jobName = confirmationJobName();
         submitData();
-
     }
 
+    /**
+     * Submits the job registration data to the controller.
+     */
     private void submitData() {
         Optional<Job> job = getController().registerJob(jobName);
 
-        if (job.isPresent()) {
-            System.out.println("Job successfully registered!");
-        } else {
-            System.out.println("Job not registered!");
+        if (jobName != null) {
+            if (job.isPresent()) {
+                System.out.println(ANSI_BRIGHT_GREEN + "Job successfully registered!" + ANSI_RESET);
+            } else {
+                System.out.println(ANSI_BRIGHT_RED + "Job not registered!" + ANSI_RESET);
+            }
         }
     }
 
+    /**
+     * Requests the job name from the user.
+     *
+     * @return the job name entered by the user
+     */
     private String requestJobName() {
         scanner = new Scanner(System.in);
-        System.out.print("Enter job name: ");
-        jobName = scanner.nextLine().toLowerCase();
+        System.out.print("Enter name: ");
+        jobName = scanner.nextLine();
         return jobName;
     }
 
+    /**
+     * Displays the typed job name.
+     *
+     * @param typedJobName the typed job name
+     */
     private void displayTypedJob(String typedJobName) {
-        System.out.println(typedJobName);
-
+        System.out.printf(ANSI_GREEN + "%nName chosen: %s%n" + ANSI_RESET, typedJobName);
     }
 
+    /**
+     * Prompts the user for job name confirmation.
+     *
+     * @return the confirmed job name
+     */
     private String confirmationJobName() {
         scanner = new Scanner(System.in);
         int answer = -1;
@@ -61,13 +92,16 @@ public class RegisterJobUI implements Runnable {
         displayTypedJob(name);
 
         while (answer != 1) {
-            System.out.print("Do you wish to continue with the name chosen? (0 -> no / 1 -> yes?): ");
+            System.out.print("Options:\n 0 -> Change name\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
             answer = scanner.nextInt();
             if (answer == 0) {
                 newAnswer = requestJobName();
                 displayTypedJob(newAnswer);
-            } else if (answer != 1) {
-                System.out.println("Invalid choice. Please enter 0 or 1.");
+            } else if (answer == 2) {
+                System.out.println(ANSI_BRIGHT_RED + "No changes made!" + ANSI_RESET);
+                return null;
+            } else {
+                System.out.println(ANSI_BRIGHT_RED + "Invalid choice. Please enter 0 or 1." + ANSI_RESET);
             }
         }
         return jobName;

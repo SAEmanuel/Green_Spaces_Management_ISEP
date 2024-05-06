@@ -7,42 +7,58 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
-public class CheckUpListUI implements Runnable{
+public class CheckUpListUI implements Runnable {
 
     private final RegisterVehicleController controller;
 
+    /**
+     * Constructor for the class.
+     */
     public CheckUpListUI() {
         controller = new RegisterVehicleController();
     }
 
+    /**
+     * Method to get the controller.
+     *
+     * @return The RegisterVehicleController object.
+     */
     public RegisterVehicleController getController() {
         return controller;
     }
 
+    /**
+     * Main method to run the interface.
+     */
     public void run() {
         System.out.println("\n\n--- Request Vehicles check-up list ------------------------");
-        if (shouldContinueProcessing()) {
-            submitData();
-        } else {
-            System.out.println("\n\n--- Vehicles' check-up list not generated ------------------------");
-        }
+
+        submitData();
     }
 
+    /**
+     * Method to submit the data.
+     */
     private void submitData() {
-        Optional<List<Vehicle>> checkUp = getController().requestList("y");
+        Optional<List<Vehicle>> checkUp = Optional.empty();
+
+        if (continueProcess()) {
+            checkUp = getController().requestList("y");
+        }
 
         if (checkUp.isPresent()) {
             System.out.println("Check-up list successfully generated!");
+            printCheckUpList(checkUp.get());
         } else {
             System.out.println("Check-up list not generated!");
         }
     }
 
-    private boolean shouldContinueProcessing() {
-        String answer = requestActivation();
-        return answer.equals("y");
-    }
-
+    /**
+     * Method to request activation from the user.
+     *
+     * @return The user's activation input.
+     */
     private String requestActivation() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Do you want to generate the Vehicle's Check-up list? (y/n): ");
@@ -54,5 +70,25 @@ public class CheckUpListUI implements Runnable{
         }
 
         return activation;
+    }
+
+    /**
+     * Method to check if the process should continue.
+     *
+     * @return True if the process should continue, false otherwise.
+     */
+    private boolean continueProcess() {
+        return requestActivation().equals("y");
+    }
+
+    /**
+     * Method to print the check-up vehicle list.
+     *
+     * @param checkUp The list of check-up vehicles to print.
+     */
+    private void printCheckUpList(List<Vehicle> checkUp) {
+        for (Vehicle vehicle : checkUp) {
+            System.out.println(vehicle);
+        }
     }
 }
