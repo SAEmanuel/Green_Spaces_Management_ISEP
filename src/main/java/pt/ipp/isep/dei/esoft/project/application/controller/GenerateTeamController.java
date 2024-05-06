@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.application.controller;
 
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
 import pt.ipp.isep.dei.esoft.project.domain.SkillList;
+import pt.ipp.isep.dei.esoft.project.domain.Team;
 import pt.ipp.isep.dei.esoft.project.repository.CollaboratorRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.SkillRepository;
@@ -51,10 +52,10 @@ public class GenerateTeamController {
         skillList.addSkill(skill);
     }
 
-    public Optional<TeamRepository> generateTeam(int minCollaborators, int maxCollaborators) {
-        getTeamRepository();
-        List<Skill> skills = skillList.getSkillList();
-
-        return generateTeam(skills, collaboratorRepository, minCollaborators, maxCollaborators);
-    }
+//    public Optional<Team> generateTeam(int minCollaborators, int maxCollaborators) {
+//        getTeamRepository();
+//        List<Skill> skills = skillList.getSkillList();
+//
+//        return teamRepository.generateTeam(skills, collaboratorRepository.getCollaboratorList(), minCollaborators, maxCollaborators);
+//    }
 }

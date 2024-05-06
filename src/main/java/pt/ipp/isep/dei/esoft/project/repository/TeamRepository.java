@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
+import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
 import pt.ipp.isep.dei.esoft.project.domain.Team;
 
@@ -17,24 +18,36 @@ public class TeamRepository {
         this.teamList = new ArrayList<>();
     }
 
-    /**
-     * Registers a new skill with the given name.
-     *
-     * @param teamId The name of the skill to register.
-     * @return An Optional containing the registered Skill if successful, or empty otherwise.
-     */
-    public Optional<Skill> registerTeam(int teamId){
-        Optional<Skill> optionalValue = Optional.empty();
+//    /**
+//     * Registers a new skill with the given name.
+//     *
+//     * @param skills
+//     * @param collaboratorList
+//     * @param minCollaborators
+//     * @param maxCollaborators
+//     * @return An Optional containing the registered Skill if successful, or empty otherwise.
+//     */
+//    public Optional<Team> generateTeam(List<Skill> skills, List<Collaborator> collaboratorList, int minCollaborators, int maxCollaborators){
+//        Optional<Skill> optionalValue = Optional.empty();
+//
+//        Team team = new Team(teamList.size());
+//        int encontrados = 0;
+//
+//        for (int i = 0; i < maxCollaborators; i++) {
+//            for (Collaborator c : collaboratorList){
+//                if(checkIfHasSkills(c, skills))
+//            }
+//        }
+//        if (addCollaborator(team)) {
+//            // A clone of the skill is added to the optional value, to avoid side effects and outside manipulation.
+//            optionalValue = Optional.of(team.clone());
+//        }
+//        return optionalValue;
+//    }
 
-        Team team = new Team(teamId);
-
-        if (addCollaborator(team)) {
-            // A clone of the skill is added to the optional value, to avoid side effects and outside manipulation.
-            optionalValue = Optional.of(team.clone());
-        }
-        return optionalValue;
-    }
-
+//    private boolean checkIfHasSkills(Collaborator c, List<Skill> skills) {
+//        for(Skill s : c)
+//    }
 
 
     /**
@@ -43,16 +56,16 @@ public class TeamRepository {
      * @param team The skill to add.
      * @return True if the skill was added successfully, false otherwise.
      */
-    private boolean addCollaborator(Team team) {
-        boolean success = false;
-
-        if ( (validate(team)) && (team.getSkillName() != null) ) {
-            success = teamList.add(team);
-        }
-
-        return success;
-
-    }
+//    private boolean addCollaborator(Team team) {
+//        boolean success = false;
+//
+//        if ( (validate(team)) && (team.getSkillName() != null) ) {
+//            success = teamList.add(team);
+//        }
+//
+//        return success;
+//
+//    }
 
     /**
      * Validates a skill by checking for duplicates.

@@ -32,13 +32,13 @@ public class GenerateTeamUI {
     }
 
     private void submitData() {
-        Optional<TeamRepository> team = getController().generateTeam(minCollaborators, maxCollaborators);
-
-        if (team.isPresent()) {
-            System.out.println("\nTask successfully created!");
-        } else {
-            System.out.println("\nTask not created!");
-        }
+//        Optional<TeamRepository> team = getController().generateTeam(minCollaborators, maxCollaborators);
+//
+//        if (team.isPresent()) {
+//            System.out.println("\nTask successfully created!");
+//        } else {
+//            System.out.println("\nTask not created!");
+//        }
     }
 
     private void requestData() {
