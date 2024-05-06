@@ -47,15 +47,19 @@ public class RegisterJobUI implements Runnable {
      * Submits the job registration data to the controller.
      */
     private void submitData() {
-        Optional<Job> job = getController().registerJob(jobName);
+        try {
+            Optional<Job> job = getController().registerJob(jobName);
 
-        if (jobName != null) {
             if (job.isPresent()) {
                 System.out.println(ANSI_BRIGHT_GREEN + "Job successfully registered!" + ANSI_RESET);
             } else {
-                System.out.println(ANSI_BRIGHT_RED + "Job not registered!" + ANSI_RESET);
+                System.out.println(ANSI_BRIGHT_RED + "Duplicated name!" + ANSI_RESET);
             }
+
+        } catch (IllegalArgumentException e) {
+            System.out.println(ANSI_BRIGHT_RED + "Job not registered!" + ANSI_RESET);
         }
+
     }
 
     /**
@@ -100,8 +104,8 @@ public class RegisterJobUI implements Runnable {
             } else if (answer == 2) {
                 System.out.println(ANSI_BRIGHT_RED + "No changes made!" + ANSI_RESET);
                 return null;
-            } else {
-                System.out.println(ANSI_BRIGHT_RED + "Invalid choice. Please enter 0 or 1." + ANSI_RESET);
+            } else if (answer != 1) {
+                System.out.println(ANSI_BRIGHT_RED + "Invalid choice. Please enter 0, 1 or 2." + ANSI_RESET);
             }
         }
         return jobName;

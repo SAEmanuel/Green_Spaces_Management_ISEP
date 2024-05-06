@@ -89,10 +89,9 @@ public class VehicleRepository {
     /**
      * Method to request a list of vehicles needing check-up.
      *
-     * @param activation The activation signal for the request.
      * @return An Optional containing the list of requested vehicles if successful, otherwise empty.
      */
-    public Optional<List<Vehicle>> requestList(String activation) {
+    public Optional<List<Vehicle>> requestList() {
 
         Optional<List<Vehicle>> optionalValue = Optional.empty();
 

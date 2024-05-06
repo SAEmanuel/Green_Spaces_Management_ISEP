@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.Job;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -80,5 +81,15 @@ public class JobRepository {
      */
     public Job getJob(int position) {
         return jobList.get(position);
+    }
+
+    /**
+     * Creates a clone of the current list of jobs.
+     *
+     * @return A clone of the list of jobs.
+     */
+    public List<Job> clone(){
+        // Create a new reference job list with the same content of the instance one.
+        return new ArrayList<>(jobList);
     }
 }
