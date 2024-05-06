@@ -56,4 +56,12 @@ public class CollaboratorRepository {
     private boolean doNotContainCollaborator(Collaborator collaborator) {
         return !collaboratorList.contains(collaborator);
     }
+
+    public List<Collaborator> clone(){
+        return new ArrayList<>(this.collaboratorList);
+    }
+
+    public List<Collaborator> getCollaboratorList() {
+        return clone();
+    }
 }
