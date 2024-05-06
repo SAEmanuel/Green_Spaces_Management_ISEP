@@ -46,8 +46,9 @@ public class Bootstrap implements Runnable {
         //TODO: add Authentication users here: should be created for each user in the organization
         AuthenticationRepository authenticationRepository = Repositories.getInstance().getAuthenticationRepository();
         authenticationRepository.addUserRole(AuthenticationController.ROLE_ADMIN, AuthenticationController.ROLE_ADMIN);
-        authenticationRepository.addUserRole(AuthenticationController.ROLE_EMPLOYEE,
-                AuthenticationController.ROLE_EMPLOYEE);
+        authenticationRepository.addUserRole(AuthenticationController.ROLE_EMPLOYEE, AuthenticationController.ROLE_EMPLOYEE);
+        authenticationRepository.addUserRole(AuthenticationController.ROLE_HRM, AuthenticationController.ROLE_HRM);
+        authenticationRepository.addUserRole(AuthenticationController.ROLE_VFM, AuthenticationController.ROLE_VFM);
 
         authenticationRepository.addUserWithRole("Main Administrator", "admin@this.app", "admin",
                 AuthenticationController.ROLE_ADMIN);
@@ -55,8 +56,10 @@ public class Bootstrap implements Runnable {
         authenticationRepository.addUserWithRole("Employee", "employee@this.app", "pwd",
                 AuthenticationController.ROLE_EMPLOYEE);
 
-        //APENAS PARA TESTE
-        authenticationRepository.addUserWithRole("1", "1@1.qq", "1",
-                AuthenticationController.ROLE_ADMIN);
+        authenticationRepository.addUserWithRole("Human Resource Manager", "hrm@this.app", "hrm",
+                AuthenticationController.ROLE_HRM);
+
+        authenticationRepository.addUserWithRole("VEHICLE FLEET MANAGER", "vfm@this.app", "vfm",
+                AuthenticationController.ROLE_VFM);
     }
 }
