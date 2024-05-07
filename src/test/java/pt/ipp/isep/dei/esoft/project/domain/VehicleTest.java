@@ -31,12 +31,16 @@ public class VehicleTest {
 
     @Test
     void ensureValidatePlateAfterMiddle() {
+        Data registerDate1 = new Data(2018, 5, 1);
+        Data acquisitionDate1 = new Data(2018, 5, 12);
         // Act and Assert
-        assertThrows(IllegalArgumentException.class, () -> new Vehicle("AA-00-00", "Toyota", "Yaris", "Car", 1000f, 1200f, 2000f, 5000f, 0f, registerDate, acquisitionDate));
+        assertThrows(IllegalArgumentException.class, () -> new Vehicle("AA-00-00", "Toyota", "Yaris", "Car", 1000f, 1200f, 2000f, 5000f, 0f, registerDate1, acquisitionDate1));
     }
 
     @Test
     void ensureValidatePlateAfterLowest() {
+        Data registerDate2 = new Data(2008, 5, 1);
+        Data acquisitionDate2 = new Data(2008, 5, 12);
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> new Vehicle("AA-00-00", "Toyota", "Yaris", "Car", 1000f, 1200f, 2000f, 5000f, 0f, registerDate, acquisitionDate));
     }
@@ -213,7 +217,7 @@ public class VehicleTest {
 
     // Validations Method Clone
     @Test
-    void diferentRefForSkill() {
+    void differentRefForSkill() {
         Vehicle vehicle1 = new Vehicle("AB-00-AC", "Toyota", "Yaris", "Car", 1000f, 1200f, 2000f, 5000f, 1000f, registerDate, acquisitionDate);
         Vehicle vehicle2 = vehicle1.clone();
         boolean sameRef = vehicle1 == vehicle2;
