@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 import pt.ipp.isep.dei.esoft.project.application.controller.AssignSkillCollaboratorController;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -72,7 +73,6 @@ public class AssignSkillCollaboratorUI implements Runnable {
         }
 
 
-
     }
 
     private void assignSkillCollaboratorByTaxNumber(int collaboratorTaxNumber, String skillName) {
@@ -91,24 +91,24 @@ public class AssignSkillCollaboratorUI implements Runnable {
         Scanner input = new Scanner(System.in);
 
         while (option != 1) {
-                display();
-                option = input.nextInt();
+            display();
+            option = input.nextInt();
 
-                switch (option) {
-                    case 0:
-                        System.out.println();
-                        requestCollaboratorTaxNumber();
-                        break;
-                    case 1:
-                        System.out.println();
-                        System.out.printf("Collaborator Tax Number chosen -> [%s]\n", collaboratorTaxNumber);
-                        break;
-                    case 2:
-                        System.out.println(ANSI_BRIGHT_RED + "LEAVING..." + ANSI_RESET);
-                        return -1;
-                    default:
-                        System.out.println(ANSI_BRIGHT_RED + "Invalid choice. Please enter 0 or 1 or 2." + ANSI_RESET);
-                }
+            switch (option) {
+                case 0:
+                    System.out.println();
+                    requestCollaboratorTaxNumber();
+                    break;
+                case 1:
+                    System.out.println();
+                    System.out.printf("Collaborator Tax Number chosen -> [%s]\n", collaboratorTaxNumber);
+                    break;
+                case 2:
+                    System.out.println(ANSI_BRIGHT_RED + "LEAVING..." + ANSI_RESET);
+                    return -1;
+                default:
+                    System.out.println(ANSI_BRIGHT_RED + "Invalid choice. Please enter 0 or 1 or 2." + ANSI_RESET);
+            }
         }
         return option;
     }
@@ -157,12 +157,23 @@ public class AssignSkillCollaboratorUI implements Runnable {
     }
 
     private void requestCollaboratorTaxNumber() {
-        //TODO: TRY CATCH NO SCANNER
+        boolean success = false;
         Scanner input = new Scanner(System.in);
-        System.out.print("Please enter the collaborator Tax Number: ");
-        collaboratorTaxNumber = input.nextInt();
 
-        System.out.println();
+        System.out.print("Please enter the collaborator Tax Number: ");
+
+        while (!success)
+            try {
+                collaboratorTaxNumber = input.nextInt();
+                System.out.println();
+                success = true;
+
+            } catch (InputMismatchException e) {
+                System.out.println(ANSI_BRIGHT_RED + "Error - Only numbers are accepted" + ANSI_RESET);
+                input.next();
+                System.out.println();
+                System.out.print("Please enter a valid collaborator Tax Number: ");
+            }
     }
 
     private boolean isCollaboratorTaxNumberValid() {
