@@ -1,11 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
 
-import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_BRIGHT_RED;
-import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_RESET;
-
 public class Vehicle {
 
+    // Attributes
     private String plateId;
     private String brand;
     private String model;
@@ -20,13 +18,30 @@ public class Vehicle {
     private Data registerDate;
     private Data acquisitionDate;
 
-
+    // Constants
     private static final int LOWEST_LIMIT = 1992;
     private static final int MIDDLE_LIMIT = 2005;
     private static final int HIGHEST_LIMIT = 2020;
     private static final int MAX_CHARS_PLATE = 8;
 
 
+
+    /**
+     * Constructs a Vehicle object with the given parameters.
+     *
+     * @param plateId          The plate ID of the vehicle.
+     * @param brand            The brand of the vehicle.
+     * @param model            The model of the vehicle.
+     * @param type             The type of the vehicle.
+     * @param tareWeight       The tare weight of the vehicle.
+     * @param grossWeight      The gross weight of the vehicle.
+     * @param currentKm        The current kilometers of the vehicle.
+     * @param checkUpFrequency The frequency of check-up for the vehicle.
+     * @param lastCheckUp      The last check-up kilometers of the vehicle.
+     * @param registerDate     The registration date of the vehicle.
+     * @param acquisitionDate  The acquisition date of the vehicle.
+     * @throws IllegalArgumentException if any parameter validation fails.
+     */
     public Vehicle(String plateId, String brand, String model, String type, float tareWeight, float grossWeight,
                    float currentKm, float checkUpFrequency, float lastCheckUp, Data registerDate, Data acquisitionDate) {
 
@@ -46,18 +61,39 @@ public class Vehicle {
 
     }
 
+
+    /**
+     * Returns the current kilometers of the vehicle.
+     *
+     * @return The current kilometers of the vehicle.
+     */
     public float getCurrentKm() {
         return currentKm;
     }
 
+    /**
+     * Returns the check-up frequency of the vehicle.
+     *
+     * @return The check-up frequency of the vehicle.
+     */
     public float getCheckUpFrequency() {
         return checkUpFrequency;
     }
 
+    /**
+     * Returns the last check-up kilometers of the vehicle.
+     *
+     * @return The last check-up kilometers of the vehicle.
+     */
     public float getLastCheckUp() {
         return lastCheckUp;
     }
 
+    /**
+     * Returns the plate ID of the vehicle.
+     *
+     * @return The plate ID of the vehicle.
+     */
     public String getPlateId() {
         return plateId;
     }
@@ -65,6 +101,24 @@ public class Vehicle {
 
     //---------------------------------------VALIDATIONS----------------------------------------------------------
 
+
+
+    /**
+     * Validates the parameters passed to the Vehicle constructor.
+     *
+     * @param plateId          The plate ID of the vehicle.
+     * @param brand            The brand of the vehicle.
+     * @param model            The model of the vehicle.
+     * @param type             The type of the vehicle.
+     * @param tareWeight       The tare weight of the vehicle.
+     * @param grossWeight      The gross weight of the vehicle.
+     * @param currentKm        The current kilometers of the vehicle.
+     * @param checkUpFrequency The frequency of check-up for the vehicle.
+     * @param lastCheckUp      The last check-up kilometers of the vehicle.
+     * @param registerDate     The registration date of the vehicle.
+     * @param acquisitionDate  The acquisition date of the vehicle.
+     * @throws IllegalArgumentException if any parameter validation fails.
+     */
     private void validateVehicle(String plateId, String brand, String model, String type, float tareWeight, float grossWeight, float currentKm, float checkUpFrequency, float lastCheckUp, Data registerDate, Data acquisitionDate) {
 
         //String validations and plate id format
@@ -75,83 +129,171 @@ public class Vehicle {
         validateKm(currentKm, lastCheckUp);
         validateDates(registerDate, acquisitionDate);
         validatesWeights(tareWeight,grossWeight);
+        validatesNegatives(tareWeight,grossWeight,lastCheckUp,currentKm,checkUpFrequency);
 
 
     }
 
+    /**
+     * Validates if any of the given floats are negative.
+     *
+     * @param tareWeight       The tare weight of the vehicle.
+     * @param grossWeight      The gross weight of the vehicle.
+     * @param lastCheckUp      The last check-up kilometers of the vehicle.
+     * @param currentKm        The current kilometers of the vehicle.
+     * @param checkUpFrequency The frequency of check-up for the vehicle.
+     * @throws IllegalArgumentException if any of the given floats are negative.
+     */
+    private void validatesNegatives(float tareWeight, float grossWeight, float lastCheckUp, float currentKm, float checkUpFrequency) {
+        if (isNegative(tareWeight)) {
+            throw new IllegalArgumentException("Tare Weight cannot be negative!");
+        }
+        if (isNegative(grossWeight)) {
+            throw new IllegalArgumentException("Gross Weight cannot be negative!");
+        }
+        if (isNegative(lastCheckUp)) {
+            throw new IllegalArgumentException("Last Check Up cannot be negative!");
+        }
+        if (isNegative(currentKm)) {
+            throw new IllegalArgumentException("Current Km cannot be negative!");
+        }
+        if (isNegative(checkUpFrequency)) {
+            throw new IllegalArgumentException("Check Up Frequency cannot be negative!");
+        }
+    }
+
+
+    /**
+     * Validates if the tare weight is not greater than the gross weight.
+     *
+     * @param tareWeight  The tare weight of the vehicle.
+     * @param grossWeight The gross weight of the vehicle.
+     * @throws IllegalArgumentException if the tare weight is greater than the gross weight.
+     */
     private void validatesWeights(float tareWeight, float grossWeight) {
         if (tareWeight > grossWeight) {
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"'Tare Weight' -> [" + tareWeight + "] cannot be bigger than 'Gross Weight' -> [" + grossWeight + "]."+ANSI_RESET);
+            throw new IllegalArgumentException("'Tare Weight' -> [" + tareWeight + "] cannot be bigger than 'Gross Weight' -> [" + grossWeight + "].");
         }
     }
 
+
+    /**
+     * Validates if the registration date is not later than the acquisition date.
+     *
+     * @param registerDate    The registration date of the vehicle.
+     * @param acquisitionDate The acquisition date of the vehicle.
+     * @throws IllegalArgumentException if the registration date is later than the acquisition date.
+     */
     private void validateDates(Data registerDate, Data acquisitionDate) {
         if (registerDate.isGreater(acquisitionDate)) {
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"'Acquisition Date' -> [" + acquisitionDate + "] cannot be latter than 'Register Date' -> [" + registerDate + "]."+ANSI_RESET);
+            throw new IllegalArgumentException("'Acquisition Date' -> [" + acquisitionDate + "] cannot be latter than 'Register Date' -> [" + registerDate + "].");
         }
     }
 
+
+    /**
+     * Validates if the current kilometers are not less than the last check-up kilometers.
+     *
+     * @param currentKm  The current kilometers of the vehicle.
+     * @param lastCheckUp The last check-up kilometers of the vehicle.
+     * @throws IllegalArgumentException if the current kilometers are less than the last check-up kilometers.
+     */
     private void validateKm(float currentKm, float lastCheckUp) {
         if (currentKm < lastCheckUp) {
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"'Last Checkup' -> [" + lastCheckUp + "] cannot be bigger than 'Current Km' -> [" + currentKm + "]."+ANSI_RESET);
+            throw new IllegalArgumentException("'Last Checkup' -> [" + lastCheckUp + "] cannot be bigger than 'Current Km' -> [" + currentKm + "].");
         }
 
     }
 
-
+    /**
+     * Validates the plate ID format and structure.
+     *
+     * @param plateId      The plate ID of the vehicle.
+     * @param registerDate The registration date of the vehicle.
+     * @throws IllegalArgumentException if the plate ID format or structure is invalid.
+     */
     private void validatePlateId(String plateId, Data registerDate) {
         if (!validateString(plateId)) {
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"PLATE ID cannot be null or empty -> [" + plateId + "]."+ANSI_RESET);
+            throw new IllegalArgumentException("PLATE ID cannot be null or empty -> [" + plateId + "].");
         }
         validatePlate(plateId, registerDate);
     }
 
 
+    /**
+     * Validates the brand of the vehicle.
+     *
+     * @param brand The brand of the vehicle.
+     * @throws IllegalArgumentException if the brand is null, empty, contains special characters, or numbers.
+     */
     private void validateBrand(String brand) {
         if (!validateString(brand)) {
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"BRAND cannot be null or empty -> [" + brand + "]."+ANSI_RESET);
+            throw new IllegalArgumentException("BRAND cannot be null or empty -> [" + brand + "].");
         }
         if (haveSpecialCharacters(brand)) {
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"BRAND cannot contain special characters -> [" + brand + "]."+ANSI_RESET);
+            throw new IllegalArgumentException("BRAND cannot contain special characters -> [" + brand + "].");
         }
         if (haveNumbers(brand)) {
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"BRAND cannot contain numbers -> [" + brand + "]."+ANSI_RESET);
+            throw new IllegalArgumentException("BRAND cannot contain numbers -> [" + brand + "].");
         }
 
     }
 
 
-
-
+    /**
+     * Validates the model of the vehicle.
+     *
+     * @param model The model of the vehicle.
+     * @throws IllegalArgumentException if the model is null, empty, or contains special characters.
+     */
     private void validateModel(String model) {
         if (!validateString(model)) {
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"Reference (MODEL) cannot be null or empty."+ANSI_RESET);
+            throw new IllegalArgumentException("Reference (MODEL) cannot be null or empty.");
         }
         if (haveSpecialCharacters(model)) {
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"MODEL cannot contain special characters -> [" + model + "]."+ANSI_RESET);
+            throw new IllegalArgumentException("MODEL cannot contain special characters -> [" + model + "].");
 
         }
     }
 
+    /**
+     * Validates the type of the vehicle.
+     *
+     * @param type The type of the vehicle.
+     * @throws IllegalArgumentException if the type is null, empty, contains special characters, or numbers.
+     */
     private void validateType(String type) {
         if (!validateString(type)) {
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"TYPE cannot be null or empty -> [" + type + "]."+ANSI_RESET);
+            throw new IllegalArgumentException("TYPE cannot be null or empty -> [" + type + "].");
         }
         if (haveSpecialCharacters(type)) {
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"TYPE cannot contain special characters -> [" + type + "]."+ANSI_RESET);
+            throw new IllegalArgumentException("TYPE cannot contain special characters -> [" + type + "].");
         }
         if (haveNumbers(type)) {
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"TYPE cannot contain numbers -> [" + type + "]."+ANSI_RESET);
+            throw new IllegalArgumentException("TYPE cannot contain numbers -> [" + type + "].");
         }
     }
 
 
 
     //--------------------------------INTERNAL METHODS FOR VALIDATIONS--------------------------------
+    /**
+     * Validates if a string is not null or empty.
+     *
+     * @param string The string to be validated.
+     * @return true if the string is not null or empty, false otherwise.
+     */
     private boolean validateString(String string) {
         return (string != null && !string.trim().isEmpty());
     }
 
+
+    /**
+     * Validates if a string contains special characters.
+     *
+     * @param string The string to be validated.
+     * @return true if the string contains special characters, false otherwise.
+     */
     private boolean haveSpecialCharacters(String string) {
         for (int i = 0; i < string.length(); i++) {
             char c = string.charAt(i);
@@ -162,6 +304,24 @@ public class Vehicle {
         return false;
     }
 
+
+    /**
+     * Checks if a given float is negative.
+     *
+     * @param weight The float to be checked.
+     * @return true if the float is negative, false otherwise.
+     */
+    private boolean isNegative(float weight) {
+        return weight < 0;
+    }
+
+
+    /**
+     * Validates if a string contains numbers.
+     *
+     * @param string The string to be validated.
+     * @return true if the string contains numbers, false otherwise.
+     */
     private boolean haveNumbers(String string) {
         for (int i = 0; i < string.length(); i++) {
             char c = string.charAt(i);
@@ -172,6 +332,14 @@ public class Vehicle {
         return false;
     }
 
+
+    /**
+     * Validates the format of the plate ID based on the registration date.
+     *
+     * @param plateId The plate ID of the vehicle.
+     * @param registerDate The registration date of the vehicle.
+     * @throws IllegalArgumentException if the plate ID format is invalid.
+     */
     private void validatePlate(String plateId, Data registerDate) {
 
         verifySizeOfPlate(plateId);
@@ -195,44 +363,77 @@ public class Vehicle {
                 validatePlateAfterLowest(first, second, third);
 
             } else {
-                throw new IllegalArgumentException(ANSI_BRIGHT_RED+"Plate format does not correspond to a valid plate id between: [" + LOWEST_LIMIT + "-" + HIGHEST_LIMIT + "]."+ANSI_RESET);
+                throw new IllegalArgumentException("Plate format does not correspond to a valid plate id between: [" + LOWEST_LIMIT + "-" + HIGHEST_LIMIT + "].");
 
             }
         } catch (ArrayIndexOutOfBoundsException e) {
 
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"Plate ID -> [" + plateId + "] is malformed, make sure is in the format: __-__-__"+ANSI_RESET);
+            throw new IllegalArgumentException("Plate ID -> [" + plateId + "] is malformed, make sure is in the format: __-__-__");
         }
 
     }
 
+
+    /**
+     * Validates the plate format for vehicles registered after the highest limit.
+     *
+     * @param first  The first part of the plate ID.
+     * @param second The second part of the plate ID.
+     * @param third  The third part of the plate ID.
+     * @throws IllegalArgumentException if the plate format is invalid for vehicles registered after the highest limit.
+     */
     private void validatePlateAfterHighest(String first, String second, String third) {
         if (first.matches("[A-Z]{2}") && second.matches("\\d{2}") && third.matches("[A-Z]{2}")) {
             // Plate matches "After 2020: AA-00-AA"
         } else {
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"Invalid plate format for vehicle after year: [" + HIGHEST_LIMIT + "] \"AA-00-AA\""+ANSI_RESET);
+            throw new IllegalArgumentException("Invalid plate format for vehicle after year: [" + HIGHEST_LIMIT + "] \"AA-00-AA\"");
         }
     }
 
+
+    /**
+     * Validates the plate format for vehicles registered between the middle and highest limit.
+     *
+     * @param first  The first part of the plate ID.
+     * @param second The second part of the plate ID.
+     * @param third  The third part of the plate ID.
+     * @throws IllegalArgumentException if the plate format is invalid for vehicles registered between the middle and highest limit.
+     */
     private void validatePlateAfterMiddle(String first, String second, String third) {
         if (first.matches("\\d{2}") && second.matches("[A-Z]{2}") && third.matches("\\d{2}")) {
             // Plate matches "Between 2005-2020: 00-AA-00"
         } else {
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"Invalid plate format for vehicle between years: [" + MIDDLE_LIMIT + "-" + HIGHEST_LIMIT + "] \"00-AA-00\""+ANSI_RESET);
+            throw new IllegalArgumentException("Invalid plate format for vehicle between years: [" + MIDDLE_LIMIT + "-" + HIGHEST_LIMIT + "] \"00-AA-00\"");
         }
     }
 
 
+    /**
+     * Validates the plate format for vehicles registered between the lowest and middle limit.
+     *
+     * @param first  The first part of the plate ID.
+     * @param second The second part of the plate ID.
+     * @param third  The third part of the plate ID.
+     * @throws IllegalArgumentException if the plate format is invalid for vehicles registered between the lowest and middle limit.
+     */
     private void validatePlateAfterLowest(String first, String second, String third) {
         if (first.matches("\\d{2}") && second.matches("\\d{2}") && third.matches("[A-Z]{2}")) {
             // Plate matches "Between 1992-2005: 00-00-XX"
         } else {
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"Invalid plate format for vehicle between years: [" + LOWEST_LIMIT + "-" + MIDDLE_LIMIT + "] \"00-00-XX\""+ANSI_RESET);
+            throw new IllegalArgumentException("Invalid plate format for vehicle between years: [" + LOWEST_LIMIT + "-" + MIDDLE_LIMIT + "] \"00-00-XX\"");
         }
     }
 
+
+    /**
+     * Verifies the size of the plate ID.
+     *
+     * @param plateId The plate ID of the vehicle.
+     * @throws IllegalArgumentException if the plate ID size exceeds the maximum allowed length.
+     */
     private void verifySizeOfPlate(String plateId) {
         if (plateId.length() > MAX_CHARS_PLATE) {
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"PlateId is too long... MAX LENGTH -> [" + MAX_CHARS_PLATE + "]"+ANSI_RESET);
+            throw new IllegalArgumentException("PlateId is too long... MAX LENGTH -> [" + MAX_CHARS_PLATE + "]");
         }
     }
 
@@ -262,7 +463,7 @@ public class Vehicle {
     }
 
     /**
-     * Clone method.
+     * Clones the current instance of Vehicle.
      *
      * @return A clone of the current instance.
      */
@@ -270,6 +471,12 @@ public class Vehicle {
         return new Vehicle(plateId, brand, model, type, tareWeight, grossWeight, currentKm, checkUpFrequency, lastCheckUp, registerDate, acquisitionDate);
     }
 
+
+    /**
+     * Returns a string representation of the Vehicle object.
+     *
+     * @return A string representation of the object.
+     */
     @Override
     public String toString() {
         return String.format("• Plate: %s | Brand: %s | Model: %s | Current Km: %.2f%n" +

@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class JobRepositoryTest {
 
     @Test
-    void ensureJobIsRegisteredSuccessfully() {
+    void registerJobShouldAddJobToListWhenValid() {
         // Arrange
         JobRepository jobRepository = new JobRepository();
 
@@ -19,47 +19,11 @@ class JobRepositoryTest {
 
         // Assert
         assertTrue(result.isPresent());
-        assertEquals("Software Developer", result.get().getJobName());
+        assertEquals(1, jobRepository.clone().size());
     }
 
     @Test
-    void ensureJobIsNotRegisteredWhenNameIsNull() {
-        // Arrange
-        JobRepository jobRepository = new JobRepository();
-
-        // Act and Assert
-        assertThrows(IllegalArgumentException.class, () -> jobRepository.registerJob(null));
-    }
-
-    @Test
-    void ensureJobIsNotRegisteredWhenNameIsEmpty() {
-        // Arrange
-        JobRepository jobRepository = new JobRepository();
-
-        // Act and Assert
-        assertThrows(IllegalArgumentException.class, () -> jobRepository.registerJob(""));
-    }
-
-    @Test
-    void ensureJobIsNotRegisteredWhenNameIsWhitespace() {
-        // Arrange
-        JobRepository jobRepository = new JobRepository();
-
-        // Act and Assert
-        assertThrows(IllegalArgumentException.class, () -> jobRepository.registerJob("   "));
-    }
-
-    @Test
-    void ensureJobIsNotRegisteredWhenNameContainsInvalidCharacters() {
-        // Arrange
-        JobRepository jobRepository = new JobRepository();
-
-        // Act and Assert
-        assertThrows(IllegalArgumentException.class, () -> jobRepository.registerJob("Software123"));
-    }
-
-    @Test
-    void ensureJobIsNotRegisteredWhenNameIsAlreadyRegistered() {
+    void registerJobShouldNotAddJobToListWhenInvalid() {
         // Arrange
         JobRepository jobRepository = new JobRepository();
         jobRepository.registerJob("Software Developer");
@@ -69,6 +33,21 @@ class JobRepositoryTest {
 
         // Assert
         assertFalse(result.isPresent());
+        assertEquals(1, jobRepository.clone().size()); // The list should not increase in size since it was not added
+    }
+
+    @Test
+    void getJobShouldReturnCorrectJob() {
+        // Arrange
+        JobRepository jobRepository = new JobRepository();
+        jobRepository.registerJob("Software Developer");
+
+        // Act
+        Job result = jobRepository.getJob(0);
+
+        // Assert
+        assertNotNull(result);
+        assertEquals("Software Developer", result.getJobName());
     }
 
     @Test

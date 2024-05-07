@@ -19,8 +19,9 @@ public class VehicleController {
         this.vehicleRepository = getVehicleRepository();
     }
 
+
     /**
-     * Method to get the vehicle repository.
+     * Retrieves the vehicle repository.
      *
      * @return The VehicleRepository object.
      */
@@ -33,7 +34,7 @@ public class VehicleController {
     }
 
     /**
-     * Method to register a new vehicle.
+     * Registers a new vehicle.
      *
      * @param plateId        The plate ID of the vehicle.
      * @param brand          The brand of the vehicle.
@@ -57,7 +58,7 @@ public class VehicleController {
     }
 
     /**
-     * Method to request a list of vehicles.
+     * Requests a list of vehicles.
      *
      * @return An Optional containing the list of requested vehicles if successful, otherwise empty.
      */

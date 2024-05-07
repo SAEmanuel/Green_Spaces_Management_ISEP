@@ -20,14 +20,21 @@ public class VehicleRepository {
         this.vehicleList = new ArrayList<>();
     }
 
+    /**
+     * Retrieves the list of vehicles in the repository.
+     *
+     * @return The list of vehicles.
+     */
     public List<Vehicle> getVehicleList() {
         return vehicleList;
     }
 
+
+
     /**
-     * Method to register a new vehicle.
+     * Registers a new vehicle in the repository.
      *
-Ve     * @param plateId          The plate ID of the vehicle.
+     * @param plateId          The plate ID of the vehicle.
      * @param brand            The brand of the vehicle.
      * @param model            The model of the vehicle.
      * @param type             The type of the vehicle.
@@ -53,8 +60,9 @@ Ve     * @param plateId          The plate ID of the vehicle.
         return optionalVehicle;
     }
 
+
     /**
-     * Method to add a vehicle to the repository.
+     * Adds a vehicle to the repository.
      *
      * @param vehicle The vehicle to be added.
      * @return True if the vehicle was successfully added, otherwise false.
@@ -70,8 +78,9 @@ Ve     * @param plateId          The plate ID of the vehicle.
         return success;
     }
 
+
     /**
-     * Method to validate a vehicle before adding it to the repository.
+     * Validates a vehicle before adding it to the repository.
      *
      * @param vehicle The vehicle to be validated.
      * @return True if the vehicle is valid, otherwise false.
@@ -80,8 +89,10 @@ Ve     * @param plateId          The plate ID of the vehicle.
         return vehicleListDoNotContainsByPlate(vehicle);
     }
 
+
+
     /**
-     * Method to check if the vehicle list does not contain a specific vehicle by plate ID.
+     * Checks if the vehicle list does not contain a specific vehicle by plate ID.
      *
      * @param vehicle The vehicle to be checked.
      * @return True if the vehicle list does not contain the vehicle, otherwise false.
@@ -95,8 +106,10 @@ Ve     * @param plateId          The plate ID of the vehicle.
         return true;
     }
 
+
+
     /**
-     * Method to request a list of vehicles needing check-up.
+     * Requests a list of vehicles needing check-up.
      *
      * @return An Optional containing the list of requested vehicles if successful, otherwise empty.
      */
@@ -112,8 +125,10 @@ Ve     * @param plateId          The plate ID of the vehicle.
         return optionalValue;
     }
 
+
+
     /**
-     * Method to check if the check-up list was created.
+     * Checks if the check-up list was created.
      *
      * @return True if the check-up list was created, otherwise false.
      */
@@ -122,8 +137,9 @@ Ve     * @param plateId          The plate ID of the vehicle.
         return !vehiclesForCheckUp.isEmpty();
     }
 
+
     /**
-     * Method to get a list of vehicles needing check-up.
+     * Retrieves a list of vehicles needing check-up.
      *
      * @return The list of vehicles needing check-up.
      */
