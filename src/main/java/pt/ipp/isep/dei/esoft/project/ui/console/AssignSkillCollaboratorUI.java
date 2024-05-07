@@ -1,12 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.AssignSkillCollaboratorController;
-import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
-import pt.ipp.isep.dei.esoft.project.domain.Data;
-import pt.ipp.isep.dei.esoft.project.domain.Job;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
 
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -18,8 +14,8 @@ public class AssignSkillCollaboratorUI implements Runnable {
     private String skillName;
 
     //APENAS TESTES
-    Collaborator collaborator1 = new Collaborator("Emanuel Almeida", new Data(2004, 4, 20), new Data(2024, 4, 22), "Casa do Caralho", 911529355, "xico@viado.com", 123456789, "BI", new Job("Sugador de Xereca"));
-    Skill skill1 = new Skill("Programar em Java");
+    //Collaborator collaborator1 = new Collaborator("Emanuel Almeida", new Data(2004, 4, 20), new Data(2024, 4, 22), "Casa do Caralho", 911529355, "xico@viado.com", 123456789, "BI", new Job("Sugador de Xereca"));
+    //Skill skill1 = new Skill("Programar em Java");
 
     private final AssignSkillCollaboratorController controller;
 
@@ -39,32 +35,42 @@ public class AssignSkillCollaboratorUI implements Runnable {
     public void run() {
         System.out.println("\n\n--- Register Skill to Collaborator ------------------------");
 
-        requestCollaboratorTaxNumber();
-        confirmsCollaboratorTaxNumber();
+        int collaboratorMenuOption;
+        do {
+            requestCollaboratorTaxNumber();
+            collaboratorMenuOption = confirmsCollaboratorTaxNumber();
 
-        if (isCollaboratorIDValid() && confirmsCollaboratorTaxNumber() == 1) {
+            if (collaboratorMenuOption == 1) {
+                isCollaboratorTaxNumberValid();
+            }
+
+            if (!isCollaboratorTaxNumberValid() && collaboratorMenuOption != -1) {
+                System.out.println(ANSI_BRIGHT_RED + "Collaborator Tax Number not found." + ANSI_RESET);
+                System.out.println();
+            }
+
+        } while (!isCollaboratorTaxNumberValid() && collaboratorMenuOption != -1);
+
+        //só entra no loop se for valido (mesmo se escolher a opcao leaving no menu)
+        if (isCollaboratorTaxNumberValid()) {
             System.out.println("Collaborator Name: " + getCollaboratorName());
-
-            //mostrar as skills se nao estiver vazio
-
             if (getSkillList()) {
                 boolean moreThanOneSkill = true;
 
                 while (moreThanOneSkill) {
 
                     if (requestSkillToCollaborator()) {
-
                         assignSkillCollaboratorByTaxNumber(collaboratorTaxNumber, skillName);
 
+                        moreThanOneSkill = confirmsMoreThanOneSkill();
                     }
                 }
 
             } else {
                 System.out.println("There is no skill created.");
             }
-        } else {
-            System.out.println("No collaborator was found.");
         }
+
 
 
     }
@@ -85,24 +91,24 @@ public class AssignSkillCollaboratorUI implements Runnable {
         Scanner input = new Scanner(System.in);
 
         while (option != 1) {
-            display();
-            option = input.nextInt();
+                display();
+                option = input.nextInt();
 
-            switch (option) {
-                case 0:
-                    System.out.println();
-                    requestCollaboratorTaxNumber();
-                    break;
-                case 1:
-                    System.out.println();
-                    System.out.printf("Collaborator Tax Number chosen -> [%s]\n", collaboratorTaxNumber);
-                    break;
-                case 2:
-                    System.out.println(ANSI_BRIGHT_RED + "LEAVING..." + ANSI_RESET);
-                    return option;
-                default:
-                    System.out.println(ANSI_BRIGHT_RED + "Invalid choice. Please enter 0 or 1 or 2." + ANSI_RESET);
-            }
+                switch (option) {
+                    case 0:
+                        System.out.println();
+                        requestCollaboratorTaxNumber();
+                        break;
+                    case 1:
+                        System.out.println();
+                        System.out.printf("Collaborator Tax Number chosen -> [%s]\n", collaboratorTaxNumber);
+                        break;
+                    case 2:
+                        System.out.println(ANSI_BRIGHT_RED + "LEAVING..." + ANSI_RESET);
+                        return -1;
+                    default:
+                        System.out.println(ANSI_BRIGHT_RED + "Invalid choice. Please enter 0 or 1 or 2." + ANSI_RESET);
+                }
         }
         return option;
     }
@@ -128,8 +134,30 @@ public class AssignSkillCollaboratorUI implements Runnable {
         }
     }
 
+    private boolean confirmsMoreThanOneSkill() {
+        Scanner input = new Scanner(System.in);
+        String option;
+
+        System.out.print("\nDo you wish to register new info? (y/n): ");
+
+        while (true) {
+
+            option = input.nextLine();
+
+            if (option.equalsIgnoreCase("y")) {
+                return true;
+            }
+            if (option.equalsIgnoreCase("n")) {
+                System.out.println(ANSI_BRIGHT_RED + "LEAVING..." + ANSI_RESET);
+                return false;
+            }
+            System.out.println(ANSI_BRIGHT_RED + "WARNING - Enter a valid option..." + ANSI_RESET);
+        }
+
+    }
 
     private void requestCollaboratorTaxNumber() {
+        //TODO: TRY CATCH NO SCANNER
         Scanner input = new Scanner(System.in);
         System.out.print("Please enter the collaborator Tax Number: ");
         collaboratorTaxNumber = input.nextInt();
@@ -137,12 +165,12 @@ public class AssignSkillCollaboratorUI implements Runnable {
         System.out.println();
     }
 
-    private boolean isCollaboratorIDValid() {
+    private boolean isCollaboratorTaxNumberValid() {
         return controller.isCollaboratorIDValid(collaboratorTaxNumber);
     }
 
     private boolean isSkillValid() {
-         return controller.isSkillNameValid(skillName);
+        return controller.isSkillNameValid(skillName);
     }
 
     private String getCollaboratorName() {
@@ -160,8 +188,8 @@ public class AssignSkillCollaboratorUI implements Runnable {
 
         while (!isValid) {
             System.out.print(ANSI_BRIGHT_RED + "Invalid skill name! Enter a new one: " + ANSI_RESET);
-             skillName = input.nextLine();
-             isValid = isSkillValid();
+            skillName = input.nextLine();
+            isValid = isSkillValid();
         }
 
         return isValid;
