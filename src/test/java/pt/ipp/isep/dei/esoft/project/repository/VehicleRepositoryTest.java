@@ -11,13 +11,15 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 class VehicleRepositoryTest {
+    private static final Data registerDate = new Data(2023, 5, 1);
+    private static final Data acquisitionDate = new Data(2023, 5, 15);
 
+
+    // Test Vehicle List
     @Test
     void registerVehicleShouldAddVehicleToListWhenValid() {
         // Arrange
         VehicleRepository vehicleRepository = new VehicleRepository();
-        Data registerDate = new Data(2023, 5, 1);
-        Data acquisitionDate = new Data(2023, 5, 15);
 
         // Act
         Optional<Vehicle> result = vehicleRepository.registerVehicle("AB-00-AC", "Toyota", "Yaris", "Car", 1000f, 1200f, 2000f, 500f, 100f, registerDate, acquisitionDate);
@@ -31,8 +33,6 @@ class VehicleRepositoryTest {
     void registerVehicleShouldNotAddVehicleToListWhenInvalid() {
         // Arrange
         VehicleRepository vehicleRepository = new VehicleRepository();
-        Data registerDate = new Data(2023, 5, 1);
-        Data acquisitionDate = new Data(2023, 5, 15);
 
         //Adds a valid vehicle to the list
         vehicleRepository.registerVehicle("AB-00-AC", "Toyota", "Yaris", "Car", 1000f, 1200f, 2000f, 500f, 100f, registerDate, acquisitionDate);
@@ -45,12 +45,12 @@ class VehicleRepositoryTest {
         assertEquals(1, vehicleRepository.getVehicleList().size()); // The list should not increase in size since it was not added
     }
 
+    // Test CheckUp List
+
     @Test
     void checkUpListCreatedShouldReturnTrueWhenNotEmpty() {
         // Arrange
         VehicleRepository vehicleRepository = new VehicleRepository();
-        Data registerDate = new Data(2023, 5, 1);
-        Data acquisitionDate = new Data(2023, 5, 15);
         vehicleRepository.registerVehicle("AB-00-AC", "Toyota", "Yaris", "Car", 1000f, 1200f, 2000f, 500f, 100f, registerDate, acquisitionDate);
 
         // Act

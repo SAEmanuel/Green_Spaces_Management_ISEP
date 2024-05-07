@@ -144,7 +144,7 @@ public class VehicleTest {
     @Test
     void ensureVehicleIsNotRegisteredWhenGrossWeightIsNegative() {
         // Act and Assert
-        assertThrows(IllegalArgumentException.class, () -> new Vehicle("AB-00-AC", "Toyota", "Yaris", "Car", 1000f, -1200f, 2000f, 5000f, 0f, registerDate, acquisitionDate));
+        assertThrows(IllegalArgumentException.class, () -> new Vehicle("AB-00-AC", "Toyota", "Yaris", "Car", -10000f, -1200f, 2000f, 5000f, 0f, registerDate, acquisitionDate));
     }
 
     // Vehicle mileage registration related tests
@@ -157,7 +157,7 @@ public class VehicleTest {
     @Test
     void ensureVehicleIsNotRegisteredWhenCurrentKmIsNegative() {
         // Act and Assert
-        assertThrows(IllegalArgumentException.class, () -> new Vehicle("AB-00-AC", "Toyota", "Yaris", "Car", 1000f, 1200f, -2000f, 5000f, 0f, registerDate, acquisitionDate));
+        assertThrows(IllegalArgumentException.class, () -> new Vehicle("AB-00-AC", "Toyota", "Yaris", "Car", 1000f, 1200f, -2000f, 5000f, -3000f, registerDate, acquisitionDate));
     }
 
     // Maintenance frequency related tests
@@ -218,5 +218,12 @@ public class VehicleTest {
         Vehicle vehicle2 = vehicle1.clone();
         boolean sameRef = vehicle1 == vehicle2;
         assertFalse(sameRef);
+    }
+
+    // Date validation
+    @Test
+    void ensureRegisterDateBiggerAcquisitionDate() {
+        // Act and Assert
+        assertThrows(IllegalArgumentException.class, () -> new Vehicle("AB-00-AC", "Toyota", "Yaris", "Car", 1000f, 1200f, 2000f, 5000f, 0f, acquisitionDate, registerDate));
     }
 }
