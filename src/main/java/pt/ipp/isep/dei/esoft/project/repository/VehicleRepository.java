@@ -20,6 +20,10 @@ public class VehicleRepository {
         this.vehicleList = new ArrayList<>();
     }
 
+    public List<Vehicle> getVehicleList() {
+        return vehicleList;
+    }
+
     /**
      * Method to register a new vehicle.
      *
@@ -113,7 +117,7 @@ Ve     * @param plateId          The plate ID of the vehicle.
      *
      * @return True if the check-up list was created, otherwise false.
      */
-    private boolean checkUpListCreated() {
+    public boolean checkUpListCreated() {
         List<Vehicle> vehiclesForCheckUp = getVehiclesNeedingCheckUp();
         return !vehiclesForCheckUp.isEmpty();
     }
@@ -123,7 +127,7 @@ Ve     * @param plateId          The plate ID of the vehicle.
      *
      * @return The list of vehicles needing check-up.
      */
-    private List<Vehicle> getVehiclesNeedingCheckUp() {
+    public List<Vehicle> getVehiclesNeedingCheckUp() {
         List<Vehicle> vehiclesForCheckUp = new ArrayList<>();
         for (Vehicle vehicle : vehicleList) {
             if ((vehicle.getCurrentKm() - vehicle.getLastCheckUp()) * (1 - PERCENTAGE_OF_KM) >= vehicle.getCheckUpFrequency()) {
