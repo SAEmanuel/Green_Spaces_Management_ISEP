@@ -2,88 +2,59 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import org.junit.jupiter.api.Test;
 
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class VehicleTest {
+
+    private static final Data registerDate = new Data(2023, 5, 1);
+    private static final Data acquisitionDate = new Data(2023, 5, 15);
 
     // Plate ID related tests
     @Test
     void ensureVehicleIsNotRegisteredWhenPlateIdIsNull() {
-        // Arrange
-        Data registerDate = new Data(2023, 5, 1);
-        Data acquisitionDate = new Data(2023, 5, 15);
-
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> new Vehicle(null, "Toyota", "Yaris", "Car", 1000f, 1200f, 0f, 5000f, 0f, registerDate, acquisitionDate));
     }
 
     @Test
     void ensureVehicleIsNotRegisteredWhenPlateIdIsEmpty() {
-        // Arrange
-        Data registerDate = new Data(2023, 5, 15);
-        Data acquisitionDate = new Data(2023, 5, 1);
-
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> new Vehicle("", "Toyota", "Yaris", "Car", 1000f, 1200f, 0f, 5000f, 0f, registerDate, acquisitionDate));
     }
 
     @Test
     void ensureValidatePlateAfterHighest() {
-        // Arrange
-        Data registerDate = new Data(2023, 5, 1);
-        Data acquisitionDate = new Data(2023, 5, 15);
-
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> new Vehicle("00-00-AA", "Toyota", "Yaris", "Car", 1000f, 1200f, 2000f, 5000f, 0f, registerDate, acquisitionDate));
     }
 
     @Test
     void ensureValidatePlateAfterMiddle() {
-        // Arrange
-        Data registerDate = new Data(2015, 5, 1);
-        Data acquisitionDate = new Data(2023, 5, 15);
-
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> new Vehicle("AA-00-00", "Toyota", "Yaris", "Car", 1000f, 1200f, 2000f, 5000f, 0f, registerDate, acquisitionDate));
     }
 
     @Test
     void ensureValidatePlateAfterLowest() {
-        // Arrange
-        Data registerDate = new Data(1999, 5, 1);
-        Data acquisitionDate = new Data(2023, 5, 15);
-
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> new Vehicle("AA-00-00", "Toyota", "Yaris", "Car", 1000f, 1200f, 2000f, 5000f, 0f, registerDate, acquisitionDate));
     }
 
     @Test
     void ensureValidatePlateWithMalformedId() {
-        // Arrange
-        Data registerDate = new Data(2023, 5, 1);
-        Data acquisitionDate = new Data(2023, 5, 15);
-
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> new Vehicle("00-00", "Toyota", "Yaris", "Car", 1000f, 1200f, 2000f, 5000f, 0f, registerDate, acquisitionDate));
     }
 
     @Test
     void ensureVehicleIsNotRegisteredWhenPlateIdExceedsMaxLength() {
-        // Arrange
-        Data registerDate = new Data(2023, 5, 15);
-        Data acquisitionDate = new Data(2023, 5, 1);
-
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> new Vehicle("ABCD123456", "Toyota", "Yaris", "Car", 1000f, 1200f, 2000f, 5000f, 0f, registerDate, acquisitionDate));
     }
 
     @Test
     void ensureVehicleIsNotRegisteredWhenPlateIdHasInvalidFormat() {
-        // Arrange
-        Data registerDate = new Data(2023, 5, 15);
-        Data acquisitionDate = new Data(2023, 5, 1);
-
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> new Vehicle("AB_00_AC", "Toyota", "Yaris", "Car", 1000f, 1200f, 2000f, 5000f, 0f, registerDate, acquisitionDate));
     }
@@ -91,40 +62,24 @@ public class VehicleTest {
     // Vehicle brand related tests
     @Test
     void ensureVehicleIsNotRegisteredWhenBrandIsNull() {
-        // Arrange
-        Data registerDate = new Data(2023, 5, 15);
-        Data acquisitionDate = new Data(2023, 5, 1);
-
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> new Vehicle("AB-00-AC", null, "Yaris", "Car", 1000f, 1200f, 2000f, 5000f, 0f, registerDate, acquisitionDate));
     }
 
     @Test
     void ensureVehicleIsNotRegisteredWhenBrandContainsSpecialCharacters() {
-        // Arrange
-        Data registerDate = new Data(2023, 5, 15);
-        Data acquisitionDate = new Data(2023, 5, 1);
-
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> new Vehicle("AB-00-AC", "Toy@ta", "Yaris", "Car", 1000f, 1200f, 2000f, 5000f, 0f, registerDate, acquisitionDate));
     }
 
     @Test
     void ensureVehicleIsNotRegisteredWhenBrandContainsNumbers() {
-        // Arrange
-        Data registerDate = new Data(2023, 5, 15);
-        Data acquisitionDate = new Data(2023, 5, 1);
-
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> new Vehicle("AB-00-AC", "Toy0ta", "Yaris", "Car", 1000f, 1200f, 2000f, 5000f, 0f, registerDate, acquisitionDate));
     }
 
     @Test
     void ensureVehicleIsNotRegisteredWhenBrandIsEmpty() {
-        // Arrange
-        Data registerDate = new Data(2023, 5, 15);
-        Data acquisitionDate = new Data(2023, 5, 1);
-
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> new Vehicle("AB-00-AC", "", "Yaris", "Car", 1000f, 1200f, 2000f, 5000f, 0f, registerDate, acquisitionDate));
     }
@@ -132,30 +87,18 @@ public class VehicleTest {
     // Vehicle model related tests
     @Test
     void ensureVehicleIsNotRegisteredWhenModelIsNull() {
-        // Arrange
-        Data registerDate = new Data(2023, 5, 15);
-        Data acquisitionDate = new Data(2023, 5, 1);
-
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> new Vehicle("AB-00-AC", "Toyota", null, "Car", 1000f, 1200f, 2000f, 5000f, 0f, registerDate, acquisitionDate));
     }
 
     @Test
     void ensureVehicleIsNotRegisteredWhenModelContainsSpecialCharacters() {
-        // Arrange
-        Data registerDate = new Data(2023, 5, 15);
-        Data acquisitionDate = new Data(2023, 5, 1);
-
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> new Vehicle("AB-00-AC", "Toyota", "Y@ris", "Car", 1000f, 1200f, 2000f, 5000f, 0f, registerDate, acquisitionDate));
     }
 
     @Test
     void ensureVehicleIsNotRegisteredWhenModelIsEmpty() {
-        // Arrange
-        Data registerDate = new Data(2023, 5, 15);
-        Data acquisitionDate = new Data(2023, 5, 1);
-
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> new Vehicle("AB-00-AC", "Toyota", "", "Car", 1000f, 1200f, 2000f, 5000f, 0f, registerDate, acquisitionDate));
     }
@@ -163,40 +106,24 @@ public class VehicleTest {
     // Vehicle type related tests
     @Test
     void ensureVehicleIsNotRegisteredWhenTypeIsNull() {
-        // Arrange
-        Data registerDate = new Data(2023, 5, 15);
-        Data acquisitionDate = new Data(2023, 5, 1);
-
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> new Vehicle("AB-00-AC", "Toyota", "Yaris", null, 1000f, 1200f, 2000f, 5000f, 0f, registerDate, acquisitionDate));
     }
 
     @Test
     void ensureVehicleIsNotRegisteredWhenTypeContainsSpecialCharacters() {
-        // Arrange
-        Data registerDate = new Data(2023, 5, 15);
-        Data acquisitionDate = new Data(2023, 5, 1);
-
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> new Vehicle("AB-00-AC", "Toyota", "Yaris", "C@r", 1000f, 1200f, 2000f, 5000f, 0f, registerDate, acquisitionDate));
     }
 
     @Test
     void ensureVehicleIsNotRegisteredWhenTypeContainsNumbers() {
-        // Arrange
-        Data registerDate = new Data(2023, 5, 15);
-        Data acquisitionDate = new Data(2023, 5, 1);
-
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> new Vehicle("AB-00-AC", "Toyota", "Yaris", "Car2", 1000f, 1200f, 2000f, 5000f, 0f, registerDate, acquisitionDate));
     }
 
     @Test
     void ensureVehicleIsNotRegisteredWhenTypeIsEmpty() {
-        // Arrange
-        Data registerDate = new Data(2023, 5, 15);
-        Data acquisitionDate = new Data(2023, 5, 1);
-
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> new Vehicle("AB-00-AC", "Toyota", "Yaris", "", 1000f, 1200f, 2000f, 5000f, 0f, registerDate, acquisitionDate));
     }
@@ -204,30 +131,18 @@ public class VehicleTest {
     // Vehicle weight related tests
     @Test
     void ensureVehicleIsNotRegisteredWhenTareWeightIsGreaterThanGrossWeight() {
-        // Arrange
-        Data registerDate = new Data(2023, 5, 15);
-        Data acquisitionDate = new Data(2023, 5, 1);
-
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> new Vehicle("AB-00-AC", "Toyota", "Yaris", "Car", 1200f, 1000f, 2000f, 5000f, 0f, registerDate, acquisitionDate));
     }
 
     @Test
     void ensureVehicleIsNotRegisteredWhenTareWeightIsNegative() {
-        // Arrange
-        Data registerDate = new Data(2023, 5, 15);
-        Data acquisitionDate = new Data(2023, 5, 1);
-
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> new Vehicle("AB-00-AC", "Toyota", "Yaris", "Car", -1000f, 1200f, 2000f, 5000f, 0f, registerDate, acquisitionDate));
     }
 
     @Test
     void ensureVehicleIsNotRegisteredWhenGrossWeightIsNegative() {
-        // Arrange
-        Data registerDate = new Data(2023, 5, 15);
-        Data acquisitionDate = new Data(2023, 5, 1);
-
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> new Vehicle("AB-00-AC", "Toyota", "Yaris", "Car", 1000f, -1200f, 2000f, 5000f, 0f, registerDate, acquisitionDate));
     }
@@ -235,20 +150,12 @@ public class VehicleTest {
     // Vehicle mileage registration related tests
     @Test
     void ensureVehicleIsNotRegisteredWhenCurrentKmIsLessThanLastCheckUp() {
-        // Arrange
-        Data registerDate = new Data(2023, 5, 15);
-        Data acquisitionDate = new Data(2023, 5, 1);
-
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> new Vehicle("AB-00-AC", "Toyota", "Yaris", "Car", 1000f, 1200f, 2000f, 5000f, 3000f, registerDate, acquisitionDate));
     }
 
     @Test
     void ensureVehicleIsNotRegisteredWhenCurrentKmIsNegative() {
-        // Arrange
-        Data registerDate = new Data(2023, 5, 15);
-        Data acquisitionDate = new Data(2023, 5, 1);
-
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> new Vehicle("AB-00-AC", "Toyota", "Yaris", "Car", 1000f, 1200f, -2000f, 5000f, 0f, registerDate, acquisitionDate));
     }
@@ -256,10 +163,6 @@ public class VehicleTest {
     // Maintenance frequency related tests
     @Test
     void ensureVehicleIsNotRegisteredWhenCheckUpFrequencyIsNegative() {
-        // Arrange
-        Data registerDate = new Data(2023, 5, 15);
-        Data acquisitionDate = new Data(2023, 5, 1);
-
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> new Vehicle("AB-00-AC", "Toyota", "Yaris", "Car", 1000f, 1200f, 2000f, -5000f, 0f, registerDate, acquisitionDate));
     }
@@ -267,11 +170,53 @@ public class VehicleTest {
     // Last check-up related tests
     @Test
     void ensureVehicleIsNotRegisteredWhenLastCheckUpIsNegative() {
-        // Arrange
-        Data registerDate = new Data(2023, 5, 15);
-        Data acquisitionDate = new Data(2023, 5, 1);
-
         // Act and Assert
         assertThrows(IllegalArgumentException.class, () -> new Vehicle("AB-00-AC", "Toyota", "Yaris", "Car", 1000f, 1200f, 2000f, 5000f, -1000f, registerDate, acquisitionDate));
+    }
+
+    // Validations for Method Equals
+    @Test
+    void comparingVehiclesSameRef() {
+        Vehicle vehicle1 = new Vehicle("AB-00-AC", "Toyota", "Yaris", "Car", 1000f, 1200f, 2000f, 5000f, 1000f, registerDate, acquisitionDate);
+        Vehicle vehicle2 = vehicle1;
+        assertTrue(vehicle1.equals(vehicle2));
+    }
+
+    @Test
+    void comparingVehicleWithDifferentObjectInstance_1() {
+        Vehicle vehicle1 = new Vehicle("AB-00-AC", "Toyota", "Yaris", "Car", 1000f, 1200f, 2000f, 5000f, 1000f, registerDate, acquisitionDate);
+        Object object = new Object();
+        assertFalse(vehicle1.equals(object));
+    }
+
+    @Test
+    void comparingVehicleWithDifferentObjectInstance_2() {
+        Vehicle vehicle1 = new Vehicle("AB-00-AC", "Toyota", "Yaris", "Car", 1000f, 1200f, 2000f, 5000f, 1000f, registerDate, acquisitionDate);
+        Job job = new Job("Gardener");
+        assertFalse(vehicle1.equals(job));
+    }
+
+
+    @Test
+    void comparingVehicles_sameVehicles() {
+        Vehicle vehicle1 = new Vehicle("AB-00-AC", "Toyota", "Yaris", "Car", 1000f, 1200f, 2000f, 5000f, 1000f, registerDate, acquisitionDate);
+        Vehicle vehicle2 = new Vehicle("AB-00-AC", "Toyota", "Yaris", "Car", 1000f, 1200f, 2000f, 5000f, 1000f, registerDate, acquisitionDate);
+        assertTrue(vehicle1.equals(vehicle2));
+    }
+
+    @Test
+    void comparingVehicles_differentVehicles() {
+        Vehicle vehicle1 = new Vehicle("AB-00-AC", "Toyota", "Yaris", "Car", 1000f, 1200f, 2000f, 5000f, 1000f, registerDate, acquisitionDate);
+        Vehicle vehicle2 = new Vehicle("AA-11-BB", "Mercedes", "GLE", "Car", 1000f, 1200f, 2000f, 5000f, 1000f, registerDate, acquisitionDate);
+        assertFalse(vehicle1.equals(vehicle2));
+    }
+
+    // Validations Method Clone
+    @Test
+    void diferentRefForSkill() {
+        Vehicle vehicle1 = new Vehicle("AB-00-AC", "Toyota", "Yaris", "Car", 1000f, 1200f, 2000f, 5000f, 1000f, registerDate, acquisitionDate);
+        Vehicle vehicle2 = vehicle1.clone();
+        boolean sameRef = vehicle1 == vehicle2;
+        assertFalse(sameRef);
     }
 }
