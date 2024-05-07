@@ -4,9 +4,21 @@ import java.util.List;
 
 public class Team {
     private int teamId;
-
     private List<Collaborator> collaborators;
+
     public Team(int teamId) {
         this.teamId = teamId;
+    }
+
+    public int getTeamId() {
+        return teamId;
+    }
+
+    public List<Collaborator> getCollaboratorList(){
+        return collaborators;
+    }
+
+    public void addCollaborator(Collaborator c) {
+        collaborators.add(c);
     }
 }

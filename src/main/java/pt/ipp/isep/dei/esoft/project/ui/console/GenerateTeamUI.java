@@ -1,10 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.GenerateTeamController;
-import pt.ipp.isep.dei.esoft.project.domain.Skill;
-import pt.ipp.isep.dei.esoft.project.domain.SkillList;
-import pt.ipp.isep.dei.esoft.project.domain.Task;
-import pt.ipp.isep.dei.esoft.project.domain.TaskCategory;
+import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.TeamRepository;
 
 import java.sql.SQLOutput;
@@ -27,26 +24,32 @@ public class GenerateTeamUI implements Runnable {
     public void run() {
         System.out.println("\n\n--- Generate Team ------------------------");
 
-        requestData();
-        submitData();
+        if(requestData()){
+            submitData();
+        }
     }
 
     private void submitData() {
-//        Optional<TeamRepository> team = getController().generateTeam(minCollaborators, maxCollaborators);
-//
-//        if (team.isPresent()) {
-//            System.out.println("\nTask successfully created!");
-//        } else {
-//            System.out.println("\nTask not created!");
-//        }
+        Optional<Team> team = getController().generateTeam(minCollaborators, maxCollaborators);
+
+        if (team == null)
+            return;
+
+        if (team.isPresent()) {
+            System.out.println("\nTask successfully created!");
+        } else {
+            System.out.println("\nTask not created!");
+        }
     }
 
-    private void requestData() {
+    private boolean requestData() {
 
-        displayAndSelectSkills();
+        if(!displayAndSelectSkills())
+            return false;
 
         minCollaborators = inputMinCollab();
         maxCollaborators = inputMaxCollab();
+        return true;
     }
 
     private int inputMinCollab(){
@@ -63,9 +66,12 @@ public class GenerateTeamUI implements Runnable {
         return input.nextInt();
     }
 
-    private void displayAndSelectSkills() {
+    private boolean displayAndSelectSkills() {
         //Display the list of task categories
         List<Skill> skillList = controller.getSkillList();
+
+        if(skillList.isEmpty())
+            return false;
 
         int listSize = skillList.size();
         int answerList = -1;
@@ -83,11 +89,16 @@ public class GenerateTeamUI implements Runnable {
 
             controller.addSkill(new Skill(skillList.get(answerList - 1).getSkillName()));
 
-            while(answerAdd != 1 || answerAdd != 0){
+            while(answerAdd != 1 && answerAdd != 0){
                 System.out.print("Wanna add more skills? [Y -> 1]  [N -> 0]");
                 answerAdd = input.nextInt();
             }
+            if(answerAdd == 0) {
+                addSkills = false;
+            }
+            System.out.println("out of loop");
         }
+        return true;
     }
 
     private void displaySkillListOptions(List<Skill> skillList) {

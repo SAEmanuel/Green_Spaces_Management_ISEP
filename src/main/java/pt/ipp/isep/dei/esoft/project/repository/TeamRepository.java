@@ -11,97 +11,78 @@ import java.util.Optional;
 public class TeamRepository {
     private final List<Team> teamList;
 
-    /**
-     * Constructs a new SkillRepository with an empty list of skills.
-     */
     public TeamRepository() {
         this.teamList = new ArrayList<>();
     }
 
-//    /**
-//     * Registers a new skill with the given name.
-//     *
-//     * @param skills
-//     * @param collaboratorList
-//     * @param minCollaborators
-//     * @param maxCollaborators
-//     * @return An Optional containing the registered Skill if successful, or empty otherwise.
-//     */
-//    public Optional<Team> generateTeam(List<Skill> skills, List<Collaborator> collaboratorList, int minCollaborators, int maxCollaborators){
-//        Optional<Skill> optionalValue = Optional.empty();
-//
-//        Team team = new Team(teamList.size());
-//        int encontrados = 0;
-//
-//        for (int i = 0; i < maxCollaborators; i++) {
-//            for (Collaborator c : collaboratorList){
-//                if(checkIfHasSkills(c, skills))
-//            }
-//        }
-//        if (addCollaborator(team)) {
-//            // A clone of the skill is added to the optional value, to avoid side effects and outside manipulation.
-//            optionalValue = Optional.of(team.clone());
-//        }
-//        return optionalValue;
-//    }
+    public Optional<Team> generateTeam(List<Skill> skills, List<Collaborator> collaboratorList, int minCollaborators, int maxCollaborators){
+        Optional<Team> optionalValue = Optional.empty();
 
-//    private boolean checkIfHasSkills(Collaborator c, List<Skill> skills) {
-//        for(Skill s : c)
-//    }
+        Team team = new Team(teamList.size()+1);
 
+        int encontrados = 0;
+        List<Skill> skillsClone = skills;
+        boolean lastCollab = false;
 
-    /**
-     * Adds a skill to the list of skills if it is valid.
-     *
-     * @param team The skill to add.
-     * @return True if the skill was added successfully, false otherwise.
-     */
-//    private boolean addCollaborator(Team team) {
-//        boolean success = false;
-//
-//        if ( (validate(team)) && (team.getSkillName() != null) ) {
-//            success = teamList.add(team);
-//        }
-//
-//        return success;
-//
-//    }
+        while(encontrados < maxCollaborators) {
+            for (Collaborator c : collaboratorList){
+                if(skills.isEmpty())
+                    break;
 
-    /**
-     * Validates a skill by checking for duplicates.
-     *
-     * @param team The skill to validate.
-     * @return True if the skill is valid (not a duplicate), false otherwise.
-     */
-    private boolean validate(Team team) {
-        return skillListDoNotContain(team);
+                if(checkIfHasSkills(c, skills)){
+                    if(!collaboratorHasTeam(c) && team.getCollaboratorList().contains(c)) {
+                        team.addCollaborator(c);
+                        encontrados++;
+                    }
+                }
+
+                if (lastCollab)
+                    break;
+            }
+
+            if(encontrados >= minCollaborators && skills.isEmpty() || lastCollab)
+                encontrados = maxCollaborators;
+            else
+                if(encontrados < minCollaborators && skills.isEmpty())
+                    skills = skillsClone;
+        }
+
+        if (team == null) {
+            optionalValue = Optional.empty();
+        }
+
+        return optionalValue;
     }
 
-    /**
-     * Checks if the list of skills does not contain the given skill.
-     *
-     * @param team The skill to check.
-     * @return True if the list of skills does not contain the given skill, false otherwise.
-     */
+    private boolean collaboratorHasTeam(Collaborator c) {
+        for (Team team: teamList ){
+            if(team.getCollaboratorList().contains(c)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checkIfHasSkills(Collaborator c, List<Skill> skills) {
+        boolean hasSkills = false;
+//        for(Skill s : c.skills){
+//            if(skills.contains(s)){
+//                skills.remove(s);
+//                hasSkills= true;
+//            }
+//        }
+        return hasSkills;
+    }
+
     private boolean skillListDoNotContain(Team team) {
         return !teamList.contains(team);
     }
 
-    /**
-     * Returns a clone of the list of skills to avoid side effects and outside manipulation.
-     *
-     * @return A clone of the list of skills.
-     */
     public List<Team> getTeamList() {
         // A clone of the skill list return, to avoid side effects and outside manipulation.
         return clone();
     }
 
-    /**
-     * Creates a clone of the current list of skills.
-     *
-     * @return A clone of the list of skills.
-     */
     public List<Team> clone(){
         // Create a new reference skill list with the same content of the instance one.
         return new ArrayList<>(this.teamList);
