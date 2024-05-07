@@ -92,4 +92,16 @@ public class JobRepository {
         // Create a new reference job list with the same content of the instance one.
         return new ArrayList<>(jobList);
     }
+
+    public void showJobs() {
+        if (jobList.isEmpty()) {
+            System.out.println("No jobs found in the repository.");
+        } else {
+            System.out.println("List of Jobs:");
+            for (int i = 0; i < jobList.size(); i++) {
+                Job job = jobList.get(i);
+                System.out.println("Job: " + job.getJobName() + "\nOption " + i);
+            }
+        }
+    }
 }

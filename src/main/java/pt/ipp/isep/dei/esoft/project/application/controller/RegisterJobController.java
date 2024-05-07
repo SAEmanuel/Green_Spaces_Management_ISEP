@@ -26,7 +26,7 @@ public class RegisterJobController {
      *
      * @return the job repository
      */
-    private JobRepository getJobRepository() {
+    public JobRepository getJobRepository() {
         if (jobRepository == null) {
             // Retrieves the repositories instance.
             Repositories repositories = Repositories.getInstance();
