@@ -136,4 +136,5 @@ public class Collaborator {
     public Collaborator(List<Skill> skills) {
         this.skills = cloneList();
     }
+
 }

@@ -81,7 +81,6 @@ public class JobRepository {
      * @return The job object at the specified position.
      */
     public Job getJob(int position) {
-        System.out.println(jobList.size());
         return jobList.get(position);
     }
 

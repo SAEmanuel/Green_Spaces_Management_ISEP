@@ -40,9 +40,11 @@ public class AssignSkillCollaboratorUI implements Runnable {
         do {
             requestCollaboratorTaxNumber();
             collaboratorMenuOption = confirmsCollaboratorTaxNumber();
+            System.out.println(collaboratorMenuOption);
 
             if (collaboratorMenuOption == 1) {
-                isCollaboratorTaxNumberValid();
+               isCollaboratorTaxNumberValid();
+
             }
 
             if (!isCollaboratorTaxNumberValid() && collaboratorMenuOption != -1) {
