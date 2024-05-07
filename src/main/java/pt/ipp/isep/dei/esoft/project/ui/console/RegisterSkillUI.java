@@ -62,13 +62,13 @@ public class RegisterSkillUI implements Runnable{
 
             if (option == 0) {
                 System.out.println();
-                requestSkillName();
+                requestSkillName(); // Request to change the skill name
             }else if (option == 1) {
                 System.out.println();
                 System.out.printf("Skill name chosen -> [%s]\n",skillName);
             } else if (option == 2) {
                 System.out.println(ANSI_BRIGHT_RED+"LEAVING..."+ANSI_RESET);
-                return option;
+                return option; // Exit the registration process
             } else {
                 System.out.println(ANSI_BRIGHT_RED+ "Invalid choice. Please enter 0 or 1 or 2."+ ANSI_RESET);
             }
@@ -87,16 +87,20 @@ public class RegisterSkillUI implements Runnable{
 
 
     /**
-     * Submits the skill data without description to the controller and displays a success or failure message.
+     * Submits the skill data to the controller and displays a success or failure message.
      */
     private void submitData() {
-        Optional<Skill> skill = getController().registerSkill(skillName);
+        try {
+            Optional<Skill> skill = getController().registerSkill(skillName);
 
-        // Verify
-        if (skill.isPresent()) {
-            System.out.println(ANSI_BRIGHT_GREEN+"Skill successfully registered!"+ ANSI_RESET);
-        } else {
-            System.out.println(ANSI_BRIGHT_RED +"Skill not registered - Already registered!"+ ANSI_RESET);
+            // Verify
+            if (skill.isPresent()) {
+                System.out.println(ANSI_BRIGHT_GREEN+"Skill successfully registered!"+ ANSI_RESET);
+            } else {
+                System.out.println(ANSI_BRIGHT_RED +"Skill not registered - Already registered!"+ ANSI_RESET);
+            }
+        }catch (IllegalArgumentException e) {
+            System.out.println(ANSI_BRIGHT_RED+"No changes made! -> "+e.getMessage()+ANSI_RESET);
         }
     }
 

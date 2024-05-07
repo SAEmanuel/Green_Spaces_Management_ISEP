@@ -9,7 +9,7 @@ import java.util.Optional;
 public class SkillRepository {
 
     /**
-     * The skill List
+     * The list of skills.
      */
     private final List<Skill> skillList;
 

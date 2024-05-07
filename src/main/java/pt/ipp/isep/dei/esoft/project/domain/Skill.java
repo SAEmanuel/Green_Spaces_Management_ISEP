@@ -3,33 +3,28 @@ package pt.ipp.isep.dei.esoft.project.domain;
 public class Skill {
 
     /**
-     * The skill name
+     * The name of the skill.
      */
     private String skillName;
 
 
     /**
-     * Constructs an instance of Skill, by giving the skill name only.
+     * Constructs an instance of Skill with the given skill name.
      *
-     * @param skillName the skill name (string)
+     * @param skillName The name of the skill.
+     * @throws IllegalArgumentException If the skillName is null, empty, or contains special characters/numbers.
      */
     public Skill(String skillName) {
 
-        //This method verify the skill name.
-        try {
-            validateSkillName(skillName);
-            this.skillName = skillName.trim();
+        validateSkillName(skillName);
+        this.skillName = skillName.trim();
 
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            throw e;
-        }
     }
 
     /**
-     * Method that returns a skill name of instance with a different ref.
+     * Retrieves the name of the skill.
      *
-     * @return a clone string of the skill name instance
+     * @return A clone of the skill name.
      */
     public String getSkillName() {
         return clone().skillName;
@@ -37,45 +32,44 @@ public class Skill {
 
 
     /**
-     * Validates a skill name to ensure it meets to establish criteria.
+     * Validates a skill name to ensure it meets established criteria.
      *
-     * @param skillName The skill name to be validated.
-     * @throws IllegalArgumentException If the skillName is null or empty, or if it contains special characters/numbers.
+     * @param skillName The skill name to validate.
+     * @throws IllegalArgumentException If the skillName is null, empty, or contains special characters/numbers.
      */
-    private void validateSkillName(String skillName){
+    private void validateSkillName(String skillName) {
         // Check if skillName is null or empty
-        if ( skillName == null || skillName.trim().isEmpty() ) {
+        if (skillName == null || skillName.trim().isEmpty()) {
             throw new IllegalArgumentException("Skill name cannot be null or empty.");
         }
 
         // Check if skillName contains special characters/numbers
-        if ( !validateName(skillName.trim()) ) {
+        if (!validateName(skillName.trim())) {
             throw new IllegalArgumentException("Skill name have special characters/numbers.");
         }
     }
 
 
     /**
-     * This method validates is a String is not empty or null.
-     * Return true if is not null and empty; otherwise false
+     * Validates if a string is not empty or not null.
      *
-     * @param string the string that need to be validated
-     * @return the result of the operation (null and empty)
+     * @param string The string to validate.
+     * @return True if the string is not null and not empty; otherwise, false.
      */
     private boolean validateString(String string) {
-        return ( string != null && !string.isEmpty() );
+        return (string != null && !string.isEmpty());
     }
 
 
     /**
-     * Validates if the skill name don´t have numbers or special characters.
+     * Validates if the skill name contains only letters and spaces.
      *
-     * @param skillName
-     * @return false if the skill name have numbers or special characters.
+     * @param skillName The skill name to validate.
+     * @return True if the skill name contains only letters and spaces; otherwise, false.
      */
     private boolean validateName(String skillName) {
         //This loop iterate through each character in the string
-        for (int i = 0; i < skillName.length() ; i++ ) {
+        for (int i = 0; i < skillName.length(); i++) {
             char ch = skillName.charAt(i);
             // Check if the character is not a letter
             if (!Character.isLetter(ch) && skillName.charAt(i) != ' ') {
@@ -89,8 +83,8 @@ public class Skill {
     /**
      * Indicates whether some other object is "equal to" this one.
      *
-     * @param obj The reference object with which to compare.
-     * @return true if this object is the same as the obj argument; false otherwise.
+     * @param obj The object to compare with.
+     * @return True if the object is equal to this one (ignoring case); otherwise, false.
      */
     @Override
     public boolean equals(Object obj) {
@@ -110,16 +104,14 @@ public class Skill {
     }
 
 
-
     /**
-     * Clone method.
+     * Creates and returns a clone of the current instance.
      *
      * @return A clone of the current instance.
      */
     public Skill clone() {
         return new Skill(this.skillName);
     }
-
 
 
     /**
@@ -129,6 +121,6 @@ public class Skill {
      */
     @Override
     public String toString() {
-        return String.format("Skill -> %s%n",skillName);
+        return String.format("Skill -> %s%n", skillName);
     }
 }
