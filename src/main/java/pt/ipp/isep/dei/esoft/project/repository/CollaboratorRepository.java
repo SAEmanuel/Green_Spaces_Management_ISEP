@@ -17,24 +17,11 @@ public class CollaboratorRepository {
         this.collaboratorList = new ArrayList<>();
     }
 
-    public Optional<Collaborator> registerCollaborator(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, String docType, int jobID) {
-
-        Optional<Collaborator> optionalValue = Optional.empty();
-
-        Collaborator collaborator = new Collaborator(name, birthDate, admissionDate, address, phoneNumber, emailAddress, taxPayerNumber, docType, jobID);
-
-        if (addCollaborator(collaborator)) {
-            optionalValue = Optional.of(collaborator);
-        }
-        return optionalValue;
-    }
-
     public Optional<Collaborator> registerCollaborator(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, String docType, Job job) {
 
         Optional<Collaborator> optionalValue = Optional.empty();
 
         Collaborator collaborator = new Collaborator(name, birthDate, admissionDate, address, phoneNumber, emailAddress, taxPayerNumber, docType, job);
-
         if (addCollaborator(collaborator)) {
             optionalValue = Optional.of(collaborator);
         }

@@ -102,6 +102,6 @@ public class Job {
      */
     @Override
     public String toString() {
-        return String.format("Job: %s", jobName);
+        return String.format("%s", jobName);
     }
 }

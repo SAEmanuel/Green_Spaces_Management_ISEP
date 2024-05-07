@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.Job;
 
+import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,6 +81,7 @@ public class JobRepository {
      * @return The job object at the specified position.
      */
     public Job getJob(int position) {
+        System.out.println(jobList.size());
         return jobList.get(position);
     }
 
@@ -88,20 +90,21 @@ public class JobRepository {
      *
      * @return A clone of the list of jobs.
      */
-    public List<Job> clone(){
+    public List<Job> clone() {
         // Create a new reference job list with the same content of the instance one.
         return new ArrayList<>(jobList);
     }
 
     public void showJobs() {
         if (jobList.isEmpty()) {
-            System.out.println("No jobs found in the repository.");
+            System.out.println(ANSI_BRIGHT_RED + "No jobs found in the repository." + ANSI_RESET);
         } else {
-            System.out.println("List of Jobs:");
+            System.out.println("\n--List of Jobs--");
             for (int i = 0; i < jobList.size(); i++) {
                 Job job = jobList.get(i);
-                System.out.println("Job: " + job.getJobName() + "\nOption " + i);
+                System.out.println("• Job: " + job.getJobName() + "\n   Option -> [" + i + "]");
             }
+            System.out.println("----------------");
         }
     }
 }

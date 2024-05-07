@@ -406,6 +406,11 @@ public class Data implements Comparable<Data> {
 
         return Math.abs(totalDays - totalDays1);
     }
+    public boolean over18(){
+        Data dataAtual = currentDate();
+        int result = difference(dataAtual);
+        return (result / 365) >= 18;
+    }
 
     /**
      * Returns the difference in number of days between the date and the date received by parameter with year, month, and day.
@@ -465,7 +470,4 @@ public class Data implements Comparable<Data> {
         return totalDays;
     }
 
-    public boolean over18() {
-        return (getYear() - currentDate().getYear() >= 18 && getMonth() - currentDate().getMonth() <= 0 && getDay() - currentDate().getDay() <= 0);
-    }
 }

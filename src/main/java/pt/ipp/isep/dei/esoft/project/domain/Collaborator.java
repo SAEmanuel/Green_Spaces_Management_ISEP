@@ -6,12 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Collaborator {
-    private static final int TAX_PAYER_NUMBER_MIN = 100000000;
-    private static final int TAX_PAYER_NUMBER_MAX = 999999999;
-    private static final int phoneNumberMin = 910000000;
-    private static final int phoneNumberMiddleLeft = 939999999;
-    private static final int phoneNumberMiddleRight = 960000000;
-    private static final int phoneNumberMax = 969999999;
     private String name;
     private Data birthDate;
     private Data admissionDate;
@@ -23,114 +17,92 @@ public class Collaborator {
     private Job job;
     private List<Skill> skills;
 
-    public Collaborator(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, String docType, int jobID) {
-        if (isValidName(name)) this.name = name;
-        if (isValidBirthDate(birthDate)) this.birthDate = birthDate;
-        this.admissionDate = admissionDate;
-        this.address = address;
-        if (isValidPhoneNumber(phoneNumber)) this.phoneNumber = phoneNumber;
-        if (isValidEmailAddress(emailAddress)) this.emailAddress = emailAddress;
-        if (isValidTaxPayerNumber(taxPayerNumber)) this.taxPayerNumber = taxPayerNumber;
-        this.docType = docType;
-        this.job = getJob(jobID);
-        this.skills = new ArrayList<Skill>();
-    }
+    private static final int TAX_PAYER_NUMBER_MIN = 100000000;
+    private static final int TAX_PAYER_NUMBER_MAX = 999999999;
+    private static final int phoneNumberMin = 910000000;
+    private static final int phoneNumberMiddleLeft = 939999999;
+    private static final int phoneNumberMiddleRight = 960000000;
+    private static final int phoneNumberMax = 969999999;
+
 
     public Collaborator(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, String docType, Job job) {
-        if (isValidName(name)) this.name = name;
-        if (isValidBirthDate(birthDate)) this.birthDate = birthDate;
+        validateData(name, birthDate, admissionDate, address, phoneNumber, emailAddress, taxPayerNumber, docType, job);
+        this.name = name.trim();
+        this.birthDate = birthDate;
         this.admissionDate = admissionDate;
-        this.address = address;
-        if (isValidPhoneNumber(phoneNumber)) this.phoneNumber = phoneNumber;
-        if (isValidEmailAddress(emailAddress)) this.emailAddress = emailAddress;
-        if (isValidTaxPayerNumber(taxPayerNumber)) this.taxPayerNumber = taxPayerNumber;
-        this.docType = docType;
+        this.address = address.trim();
+        this.phoneNumber = phoneNumber;
+        this.emailAddress = emailAddress.trim();
+        this.taxPayerNumber = taxPayerNumber;
+        this.docType = docType.trim();
         this.job = job;
+
         this.skills = new ArrayList<Skill>();
     }
 
-    private Job getJob(int jobID) {
-        JobRepository jobList = new JobRepository();
-        return jobList.getJob(jobID);
+    private void validateData(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, String docType, Job job) {
+        isValidName(name);
+        isValidBirthDate(birthDate);
+        isValidPhoneNumber(phoneNumber);
+        isValidEmailAddress(emailAddress);
+        isValidTaxPayerNumber(taxPayerNumber);
+
+
     }
 
-    private boolean isValidTaxPayerNumber(int taxPayerNumber) {
-        return (taxPayerNumber >= TAX_PAYER_NUMBER_MIN && taxPayerNumber <= TAX_PAYER_NUMBER_MAX);
+
+    private void isValidTaxPayerNumber(int taxPayerNumber) {
+        if (taxPayerNumber < TAX_PAYER_NUMBER_MIN || taxPayerNumber > TAX_PAYER_NUMBER_MAX) {
+            throw new IllegalArgumentException("Tax payer number is invalid");
+        }
     }
 
-    private boolean isValidEmailAddress(String emailAddress) {
-        boolean found = false;
+    private void isValidEmailAddress(String emailAddress) {
         if (emailAddress == null || emailAddress.isEmpty()) {
-            throw new IllegalArgumentException("Job name cannot be null or empty.");
-        } else {
-            emailAddress = emailAddress.trim();
-            if (emailAddress.contains("@")) {
-                found = true;
+            throw new IllegalArgumentException("Name cannot be null or empty.");
+        }
+
+        emailAddress = emailAddress.trim();
+        if (!emailAddress.contains("@")) {
+            throw new IllegalArgumentException("Email address is not a valid email address.");
+        }
+
+    }
+
+    private void isValidPhoneNumber(int phoneNumber) {
+        if (phoneNumber < phoneNumberMin || phoneNumber > phoneNumberMiddleLeft && phoneNumber < phoneNumberMiddleRight || phoneNumber > phoneNumberMax) {
+            throw new IllegalArgumentException("Phone number is invalid");
+        }
+
+    }
+
+    private void isValidBirthDate(Data birthDate) {
+        if (!birthDate.over18()) {
+            throw new IllegalArgumentException("Collaborator is less than 18 years old");
+        }
+    }
+
+    private void isValidName(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Name cannot be null or empty.");
+        }
+        name = name.trim();
+        for (int i = 0; i < name.length(); i++) {
+            if (!Character.isLetter(name.charAt(i)) && name.charAt(i) != ' '){
+                throw new IllegalArgumentException("Name contains invalid characters.");
             }
         }
-        return found;
+
     }
 
-    private boolean isValidPhoneNumber(int phoneNumber) {
-        return (phoneNumber >= phoneNumberMin && phoneNumber <= phoneNumberMiddleLeft) || (phoneNumber >= phoneNumberMiddleRight && phoneNumber <= phoneNumberMax);
-    }
 
-    private boolean isValidBirthDate(Data birthDate) {
-        return birthDate.over18();
-    }
-
-    private boolean isValidName(String name) {
-        if (name == null || name.isEmpty()) {
-            throw new IllegalArgumentException("Job name cannot be null or empty.");
-        } else {
-            name = name.trim();
-            for (int i = 0; i < name.length(); i++) {
-                if (!Character.isLetter(name.charAt(i))) {
-                    throw new IllegalArgumentException("Job name contains invalid characters.");
-                }
-            }
-        }
-        return true;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Data getBirthDate() {
-        return birthDate;
-    }
-
-    public Data getAdmissionDate() {
-        return admissionDate;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public int getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
-    public int getTaxPayerNumber() {
-        return taxPayerNumber;
-    }
-
-    public String getDocType() {
-        return docType;
-    }
-
-    public Job getJob() {
-        return job;
-    }
 
     public Collaborator clone() {
-        return new Collaborator(getName(),getBirthDate(),getAdmissionDate(),getAddress(),getPhoneNumber(),getEmailAddress(),getTaxPayerNumber(),getDocType(),getJob());
+        return new Collaborator(this.name,this.birthDate,this.admissionDate,this.address,this.phoneNumber,this.emailAddress,this.taxPayerNumber,this.docType,this.job);
+    }
+
+    public List<Skill> cloneList() {
+        return this.skills;
     }
 
     public boolean equals(Object otherCollaborator) {
@@ -139,11 +111,10 @@ public class Collaborator {
         if (otherCollaborator == null || getClass() != otherCollaborator.getClass())
             return false;
         Collaborator collaborator = (Collaborator) otherCollaborator;
-        return  (getName().equals(collaborator.getName()) &&  getBirthDate().equals(collaborator.getBirthDate()) &&
-                getAdmissionDate().equals(collaborator.getAdmissionDate()) &&
-                getAddress().equals(collaborator.getAddress()) && getPhoneNumber() == collaborator.getPhoneNumber() &&
-                getEmailAddress().equals(collaborator.getAddress()) && getTaxPayerNumber() == collaborator.getTaxPayerNumber() &&
-                getDocType().equals(collaborator.getDocType()) && getJob().equals(collaborator.job));
+        return (name.equalsIgnoreCase(collaborator.name) && birthDate.equals(collaborator.birthDate)
+                && admissionDate.equals(collaborator.admissionDate) && address.equalsIgnoreCase(collaborator.address)
+                && phoneNumber == collaborator.phoneNumber && emailAddress.equalsIgnoreCase(collaborator.emailAddress)
+                && taxPayerNumber == collaborator.taxPayerNumber && docType.equalsIgnoreCase(collaborator.docType) && job.equals(collaborator.job));
     }
 
     public boolean addSkill(Skill skill) {
@@ -152,5 +123,17 @@ public class Collaborator {
             return true;
         }
         return false;
+    }
+
+    public int getTaxPayerNumber() {
+        return taxPayerNumber;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Collaborator(List<Skill> skills) {
+        this.skills = cloneList();
     }
 }

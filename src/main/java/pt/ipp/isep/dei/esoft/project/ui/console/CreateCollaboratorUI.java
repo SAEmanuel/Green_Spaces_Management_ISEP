@@ -4,32 +4,36 @@ import pt.ipp.isep.dei.esoft.project.application.controller.CreateCollaboratorCo
 import pt.ipp.isep.dei.esoft.project.application.controller.RegisterJobController;
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.Data;
+import pt.ipp.isep.dei.esoft.project.domain.Job;
 
+import java.util.InputMismatchException;
 import java.util.Optional;
 import java.util.Scanner;
 
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_RESET;
 
-public class CreateCollaboratorUI  implements Runnable {
+public class CreateCollaboratorUI implements Runnable {
 
-    private Scanner scan = new Scanner(System.in);
+
     private final CreateCollaboratorController collaboratorController;
     private final RegisterJobController jobController;
+
     private String name;
+    private String address;
+    private String emailAddress;
+    private String docType;
     private Data birthDate;
     private Data admissionDate;
-    private String address;
     private int phoneNumber;
-    private String emailAddress;
     private int taxPayerNumber;
-    private String docType;
-    private int job;
+    private Job job;
 
-    public CreateCollaboratorUI()  {
+    public CreateCollaboratorUI() {
         this.collaboratorController = new CreateCollaboratorController();
         this.jobController = new RegisterJobController();
     }
+
     public RegisterJobController getJobController() {
         return jobController;
     }
@@ -40,292 +44,259 @@ public class CreateCollaboratorUI  implements Runnable {
 
     public void run() {
         System.out.println("\n\n--- Create Collaborator ------------------------");
+        requestCollaboratorData();
 
-        this.job = confirmationCollaboratorJob();
-        this.name = confirmationCollaboratorName();
-        this.birthDate = confirmationCollaboratorBirthDate();
-        this.admissionDate = confirmationCollaboratorAdmissionDate();
-        this.address = confirmationCollaboratorAddress();
-        this.phoneNumber = confirmationCollaboratorPhoneNumber();
-        this.emailAddress = confirmationCollaboratorEmailAddress();
-        this.taxPayerNumber = confirmationCollaboratorTaxPayNumber();
-        this.docType = confirmationCollaboratorDocType();
-        submitData();
-    }
-
-    // resquest---------------------------------------------------------------
-    private int requestCollaboratorJob() {
-        getJobController().getJobRepository().showJobs();
-        job = scan.nextInt();
-        return job;
-    }
-    private String requestCollaboratorDocType() {
-        System.out.println("Enter document type: ");
-        docType = scan.nextLine().trim();
-        return docType;
-    }
-    private int requestCollaboratorTaxPayerNumber() {
-        System.out.println("Enter tax payer number: ");
-        taxPayerNumber = scan.nextInt();
-        return taxPayerNumber;
-    }
-    private String requestCollaboratorEmailAddress() {
-        System.out.println("Enter email address: ");
-        emailAddress = scan.nextLine().trim();
-        return emailAddress;
-    }
-    private int requestCollaboratorPhoneNumber() {
-        System.out.println("Enter phone number: ");
-        phoneNumber = scan.nextInt();
-        return phoneNumber;
-    }
-    private String requestCollaboratorAddress() {
-        System.out.println("Enter address: ");
-        address = scan.nextLine().trim();
-        return address;
-    }
-    private Data requestCollaboratorDate() {
-        int day, month, year;
-        System.out.print("Enter day: ");
-        day = scan.nextInt();
-        System.out.print("Enter month: ");
-        month = scan.nextInt();
-        System.out.print("Enter year: ");
-        year = scan.nextInt();
-        return new Data(year, month, day);
-    }
-    private String requestCollaboratorName() {
-        System.out.print("Enter name: ");
-        name = scan.nextLine().trim();
-        return name;
-    }
-
-    //display------------------------------------------------------------------
-    private void displayTypedCollaboratorJob(int typedCollaboratorJob) {
-        System.out.printf(ANSI_GREEN + "%nJob selected: %s%n" + ANSI_RESET, getJobController().getJobRepository().getJob(typedCollaboratorJob));
-    }
-    private void displayTypedCollaboratorDocType(String typedCollaboratorDocType) {
-        System.out.printf(ANSI_GREEN + "%nDocument type written: %s%n" + ANSI_RESET, typedCollaboratorDocType);
-    }
-    private void displayTypedCollaboratorTaxPayerNumber(int typedCollaboratorTaxPayerNumber) {
-        System.out.printf(ANSI_GREEN + "%nTax payer number written: %s%n" + ANSI_RESET, typedCollaboratorTaxPayerNumber);
-    }
-    private void displayTypedCollaboratorEmailAddress(String typedCollaboratorEmailAddress) {
-        System.out.printf(ANSI_GREEN + "%nEmail address written: %s%n" + ANSI_RESET, typedCollaboratorEmailAddress);
-    }
-    private void displayTypedCollaboratorPhoneNumber(int typedCollaboratorPhoneNumber) {
-        System.out.printf(ANSI_GREEN + "%nPhone number written: %s%n" + ANSI_RESET, typedCollaboratorPhoneNumber);
-    }
-    private void displayTypedCollaboratorAddress(String typedCollaboratorAddress) {
-        System.out.printf(ANSI_GREEN + "%nAddress written: %s%n" + ANSI_RESET, typedCollaboratorAddress);
-    }
-    private void displayTypedCollaboratorDate(Data typedCollaboratorBirthDate) {
-        System.out.printf(ANSI_GREEN + "%nDate written: %s%n" + ANSI_RESET, typedCollaboratorBirthDate);
-    }
-
-    private void displayTypedCollaboratorName(String typedCollaboratorName) {
-        System.out.printf(ANSI_GREEN + "%nName written: %s%n" + ANSI_RESET, typedCollaboratorName);
-    }
-
-    //confirmation--------------------------------------------------------------------
-    private int confirmationCollaboratorJob() {
-        int answer = -1;
-        int job = requestCollaboratorJob();
-        displayTypedCollaboratorJob(job);
-
-        while (answer != 1) {
-            System.out.print("Options:\n 0 -> Change name\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
-            answer = scan.nextInt();
-            if (answer == 0) {
-                job = requestCollaboratorJob();
-                displayTypedCollaboratorJob(job);
-            } else if (answer == 2) {
-                System.out.println(ANSI_BRIGHT_RED + "No changes made!" + ANSI_RESET);
-                return 0;
-            } else if (answer != 1) {
-                System.out.println(ANSI_BRIGHT_RED + "Invalid choice. Please enter 0, 1 or 2." + ANSI_RESET);
-            }
+        int continueApp = confirmsData();
+        if (continueApp != 2) {
+            submitData();
         }
-        return job;
-    }
-    private String confirmationCollaboratorDocType() {
-        int answer = -1;
-        String docType = requestCollaboratorDocType();
-        displayTypedCollaboratorDocType(docType);
 
-        while (answer != 1) {
-            System.out.print("Options:\n 0 -> Change name\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
-            answer = scan.nextInt();
-            if (answer == 0) {
-                docType = requestCollaboratorDocType();
-                displayTypedCollaboratorDocType(docType);
-            } else if (answer == 2) {
-                System.out.println(ANSI_BRIGHT_RED + "No changes made!" + ANSI_RESET);
-                return null;
-            } else if (answer != 1) {
-                System.out.println(ANSI_BRIGHT_RED + "Invalid choice. Please enter 0, 1 or 2." + ANSI_RESET);
-            }
-        }
-        return docType;
-    }
-    private int confirmationCollaboratorTaxPayNumber() {
-        int answer = -1;
-        int taxPayerNumber = requestCollaboratorTaxPayerNumber();
-        displayTypedCollaboratorTaxPayerNumber(taxPayerNumber);
-
-        while (answer != 1) {
-            System.out.print("Options:\n 0 -> Change name\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
-            answer = scan.nextInt();
-            if (answer == 0) {
-                taxPayerNumber = requestCollaboratorTaxPayerNumber();
-                displayTypedCollaboratorTaxPayerNumber(taxPayerNumber);
-            } else if (answer == 2) {
-                System.out.println(ANSI_BRIGHT_RED + "No changes made!" + ANSI_RESET);
-                return 0;
-            } else if (answer != 1) {
-                System.out.println(ANSI_BRIGHT_RED + "Invalid choice. Please enter 0, 1 or 2." + ANSI_RESET);
-            }
-        }
-        return taxPayerNumber;
-    }
-    private String confirmationCollaboratorEmailAddress() {
-        int answer = -1;
-        String emailAddress = requestCollaboratorEmailAddress();
-        displayTypedCollaboratorEmailAddress(emailAddress);
-
-        while (answer != 1) {
-            System.out.print("Options:\n 0 -> Change name\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
-            answer = scan.nextInt();
-            if (answer == 0) {
-                emailAddress = requestCollaboratorEmailAddress();
-                displayTypedCollaboratorEmailAddress(emailAddress);
-            } else if (answer == 2) {
-                System.out.println(ANSI_BRIGHT_RED + "No changes made!" + ANSI_RESET);
-                return null;
-            } else if (answer != 1) {
-                System.out.println(ANSI_BRIGHT_RED + "Invalid choice. Please enter 0, 1 or 2." + ANSI_RESET);
-            }
-        }
-        return emailAddress;
-    }
-    private int confirmationCollaboratorPhoneNumber() {
-        int answer = -1;
-        int phoneNumber = requestCollaboratorPhoneNumber();
-        displayTypedCollaboratorPhoneNumber(phoneNumber);
-
-        while (answer != 1) {
-            System.out.print("Options:\n 0 -> Change name\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
-            answer = scan.nextInt();
-            if (answer == 0) {
-                phoneNumber = requestCollaboratorPhoneNumber();
-                displayTypedCollaboratorPhoneNumber(phoneNumber);
-            } else if (answer == 2) {
-                System.out.println(ANSI_BRIGHT_RED + "No changes made!" + ANSI_RESET);
-                return 0;
-            } else if (answer != 1) {
-                System.out.println(ANSI_BRIGHT_RED + "Invalid choice. Please enter 0, 1 or 2." + ANSI_RESET);
-            }
-        }
-        return phoneNumber;
-    }
-    private String confirmationCollaboratorAddress() {
-        int answer = -1;
-        String address = requestCollaboratorAddress();
-        displayTypedCollaboratorAddress(address);
-
-        while (answer != 1) {
-            System.out.print("Options:\n 0 -> Change name\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
-            answer = scan.nextInt();
-            if (answer == 0) {
-                address = requestCollaboratorAddress();
-                displayTypedCollaboratorAddress(address);
-            } else if (answer == 2) {
-                System.out.println(ANSI_BRIGHT_RED + "No changes made!" + ANSI_RESET);
-                return null;
-            } else if (answer != 1) {
-                System.out.println(ANSI_BRIGHT_RED + "Invalid choice. Please enter 0, 1 or 2." + ANSI_RESET);
-            }
-        }
-        return address;
-    }
-    private Data confirmationCollaboratorAdmissionDate() {
-        int answer = -1;
-        Data admissionDate = requestCollaboratorDate();
-        displayTypedCollaboratorDate(admissionDate);
-
-        while (answer != 1) {
-            System.out.print("Options:\n 0 -> Change name\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
-            answer = scan.nextInt();
-            if (answer == 0) {
-                admissionDate = requestCollaboratorDate();
-                displayTypedCollaboratorDate(admissionDate);
-            } else if (answer == 2) {
-                System.out.println(ANSI_BRIGHT_RED + "No changes made!" + ANSI_RESET);
-                return null;
-            } else if (answer != 1) {
-                System.out.println(ANSI_BRIGHT_RED + "Invalid choice. Please enter 0, 1 or 2." + ANSI_RESET);
-            }
-        }
-        return admissionDate;
     }
 
-    private Data confirmationCollaboratorBirthDate() {
-        int answer = -1;
-        Data birthDate = requestCollaboratorDate();
-        displayTypedCollaboratorDate(birthDate);
-
-        while (answer != 1) {
-            System.out.print("Options:\n 0 -> Change name\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
-            answer = scan.nextInt();
-            if (answer == 0) {
-                birthDate = requestCollaboratorDate();
-                displayTypedCollaboratorDate(birthDate);
-            } else if (answer == 2) {
-                System.out.println(ANSI_BRIGHT_RED + "No changes made!" + ANSI_RESET);
-                return null;
-            } else if (answer != 1) {
-                System.out.println(ANSI_BRIGHT_RED + "Invalid choice. Please enter 0, 1 or 2." + ANSI_RESET);
-            }
-        }
-        return birthDate;
+    private CreateCollaboratorController getController() {
+        return collaboratorController;
     }
 
-    private String confirmationCollaboratorName() {
-        int answer = -1;
-        String name = requestCollaboratorName();
-        displayTypedCollaboratorName(name);
-
-        while (answer != 1) {
-            System.out.print("Options:\n 0 -> Change name\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
-            answer = scan.nextInt();
-            if (answer == 0) {
-                name = requestCollaboratorName();
-                displayTypedCollaboratorName(name);
-            } else if (answer == 2) {
-                System.out.println(ANSI_BRIGHT_RED + "No changes made!" + ANSI_RESET);
-                return null;
-            } else if (answer != 1) {
-                System.out.println(ANSI_BRIGHT_RED + "Invalid choice. Please enter 0, 1 or 2." + ANSI_RESET);
-            }
-        }
-        return name;
-    }
 
     private void submitData() {
+        // Attempt to register the vehicle using the provided data
         try {
-            Optional<Collaborator> collaborator = getCollaboratorController().registerCollaborator(name,birthDate,admissionDate,address,phoneNumber,emailAddress,taxPayerNumber,docType,job);
+            Optional<Collaborator> collaborator = getController().registerCollaborator(name, birthDate, admissionDate, address, phoneNumber, emailAddress, taxPayerNumber, docType, job);
 
+            // Check if the registration was successful
             if (collaborator.isPresent()) {
-                System.out.println(ANSI_BRIGHT_GREEN + "Collaborator successfully registered!" + ANSI_RESET);
+                System.out.println(ANSI_BRIGHT_GREEN + "Collaborator successfully created!" + ANSI_RESET);
             } else {
-                System.out.println(ANSI_BRIGHT_RED + "Error creating collaborator!" + ANSI_RESET);
+                // Print error message if vehicle is already registered
+                System.out.println(ANSI_BRIGHT_RED + "Collaborator not created - Already created!" + ANSI_RESET);
             }
 
         } catch (IllegalArgumentException e) {
-            System.out.println(ANSI_BRIGHT_RED + "Collaborator not created!" + ANSI_RESET);
+            // Catch IllegalArgumentException indicating invalid data
+            System.out.println(ANSI_BRIGHT_RED + e.getMessage() + ANSI_RESET);
+            // Prompt user to repeat registration process
+            runException();
+        }
+    }
+
+    public void runException() {
+
+        if (repeatProcess()) {
+            requestCollaboratorData();
+            int continueApp = confirmsData();
+
+            if (continueApp != 2) {
+                submitData();
+            }
         }
 
     }
 
-    //implementar runnable
+    private boolean repeatProcess() {
+        System.out.print("\nDo you wish to register new info? (y/n): ");
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            String answer = scanner.nextLine();
+            if (answer.equalsIgnoreCase("y")) {
+                return true;
+            }
+            if (answer.equalsIgnoreCase("n")) {
+                System.out.println(ANSI_BRIGHT_RED + "LEAVING..." + ANSI_RESET);
+                return false;
+            }
+            System.out.println(ANSI_BRIGHT_RED + "WARNING - Enter a valid option..." + ANSI_RESET);
+        }
+    }
+
+
+    private int confirmsData() {
+        Scanner input = new Scanner(System.in);
+        int option = -1;
+
+
+        while (option != 1) {
+            display();
+            option = input.nextInt();
+
+            if (option == 0) {
+                System.out.println();
+                requestCollaboratorData();
+            } else if (option == 1) {
+                System.out.println();
+            } else if (option == 2) {
+                System.out.println(ANSI_BRIGHT_RED + "LEAVING..." + ANSI_RESET);
+                return option;
+            } else {
+                System.out.println(ANSI_BRIGHT_RED + "Invalid choice. Please enter 0 or 1 or 2." + ANSI_RESET);
+            }
+        }
+        return option;
+    }
+
+    private void display() {
+        StringBuilder stringBuilder = new StringBuilder(String.format("Name: %s | Address: %s | Email: %s | Doc Type: %s | Birth Date: %s | Admission Date: %s | Phone Number: %d | Tax Payer Number: %d | Job: %s",
+                name, address, emailAddress, docType, birthDate, admissionDate, phoneNumber, taxPayerNumber, job));
+        System.out.printf("\nTyped data -> [%s%s%s]\n", ANSI_GREEN, stringBuilder, ANSI_RESET);
+        System.out.print("Confirmation menu:\n 0 -> Change Collaborator Info\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
+    }
+
+    // resquest---------------------------------------------------------------
+    private void requestCollaboratorData() {
+        job = requestCollaboratorJob();
+        name = requestCollaboratorName();
+        address = requestCollaboratorAddress();
+        phoneNumber = requestCollaboratorPhoneNumber();
+        emailAddress = requestCollaboratorEmailAddress();
+        taxPayerNumber = requestCollaboratorTaxPayerNumber();
+        docType = requestCollaboratorDocType();
+        birthDate = requestBirthDate();
+        admissionDate = requestAdmissionDate();
+    }
+
+
+    private Data requestAdmissionDate() {
+        System.out.print("\n-- Admission date --\n");
+        return getData();
+    }
+
+
+    private Data requestBirthDate() {
+        System.out.print("\n-- Birth date --\n");
+        return getData();
+    }
+
+    private Data getData() {
+        Data data;
+        while (true) {
+            int year = requestYear();
+            int month = requestMonth();
+            int day = requestDay();
+            try {
+                data = new Data(year, month, day);
+                return data;
+            } catch (IllegalArgumentException e) {
+                System.out.println(ANSI_BRIGHT_RED + e.getMessage() + ANSI_RESET);
+            }
+        }
+    }
+
+    private int requestYear() {
+        int resposta;
+        Scanner input = new Scanner(System.in);
+        System.out.print("- Year: ");
+        while (true) {
+            try {
+                resposta = input.nextInt();
+                return resposta;
+            } catch (InputMismatchException e) {
+                System.out.print(ANSI_BRIGHT_RED + "Invalid DAY! Enter a new one: " + ANSI_RESET);
+                input.nextLine();
+            }
+        }
+    }
+
+    private int requestMonth() {
+        int resposta;
+        Scanner input = new Scanner(System.in);
+        System.out.print("- Month: ");
+        while (true) {
+            try {
+                resposta = input.nextInt();
+                return resposta;
+            } catch (InputMismatchException e) {
+                System.out.print(ANSI_BRIGHT_RED + "Invalid MONTH! Enter a new one: " + ANSI_RESET);
+                input.nextLine();
+            }
+        }
+    }
+
+    private int requestDay() {
+        int resposta;
+        Scanner input = new Scanner(System.in);
+        System.out.print("- Day: ");
+        while (true) {
+            try {
+                resposta = input.nextInt();
+                return resposta;
+            } catch (InputMismatchException e) {
+                System.out.print(ANSI_BRIGHT_RED + "Invalid DAY! Enter a new one: " + ANSI_RESET);
+                input.nextLine();
+            }
+        }
+    }
+
+
+    private String requestCollaboratorName() {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Name: ");
+        return input.next();
+    }
+
+    private String requestCollaboratorAddress() {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Address: ");
+        return input.next();
+    }
+
+    private String requestCollaboratorEmailAddress() {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Email Address: ");
+        return input.next();
+    }
+
+    private String requestCollaboratorDocType() {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Doc Type: ");
+        return input.next();
+    }
+
+    private int requestCollaboratorPhoneNumber() {
+        int resposta;
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("Phone Number: ");
+        while (true) {
+            try {
+                resposta = input.nextInt();
+                return resposta;
+            } catch (InputMismatchException e) {
+                System.out.print(ANSI_BRIGHT_RED + "Invalid phone number! Enter a new one: " + ANSI_RESET);
+                input.nextLine();
+            }
+        }
+    }
+
+    private int requestCollaboratorTaxPayerNumber() {
+        int resposta;
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("Tax Payer Number: ");
+        while (true) {
+            try {
+                resposta = input.nextInt();
+                return resposta;
+            } catch (InputMismatchException e) {
+                System.out.print(ANSI_BRIGHT_RED + "Invalid tax payer number! Enter a new one: " + ANSI_RESET);
+                input.nextLine();
+            }
+        }
+    }
+
+    private Job requestCollaboratorJob() {
+        int resposta;
+        Scanner input = new Scanner(System.in);
+        jobController.getJobRepository().showJobs();
+        System.out.print("Job ID: ");
+        while (true) {
+            try {
+                resposta = input.nextInt();
+                Job job = jobController.getJobRepository().getJob(resposta);
+                return job;
+            } catch (InputMismatchException e) {
+                System.out.print(ANSI_BRIGHT_RED + "Invalid jobID number! Enter a new one: " + ANSI_RESET);
+                input.nextLine();
+            }
+        }
+    }
+
 }

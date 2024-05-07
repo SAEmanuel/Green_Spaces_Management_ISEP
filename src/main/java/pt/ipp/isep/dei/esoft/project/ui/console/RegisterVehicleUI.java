@@ -11,7 +11,6 @@ import java.util.Scanner;
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
 
 
-
 public class RegisterVehicleUI implements Runnable {
 
     private final VehicleController controller;
@@ -90,16 +89,16 @@ public class RegisterVehicleUI implements Runnable {
     private boolean repeatProcess() {
         System.out.print("\nDo you wish to register new info? (y/n): ");
         Scanner scanner = new Scanner(System.in);
-        while(true){
+        while (true) {
             String answer = scanner.nextLine();
             if (answer.equalsIgnoreCase("y")) {
                 return true;
             }
             if (answer.equalsIgnoreCase("n")) {
-                System.out.println(ANSI_BRIGHT_RED+"LEAVING..."+ANSI_RESET);
+                System.out.println(ANSI_BRIGHT_RED + "LEAVING..." + ANSI_RESET);
                 return false;
             }
-            System.out.println(ANSI_BRIGHT_RED+"WARNING - Enter a valid option..."+ANSI_RESET);
+            System.out.println(ANSI_BRIGHT_RED + "WARNING - Enter a valid option..." + ANSI_RESET);
         }
     }
 
@@ -114,20 +113,20 @@ public class RegisterVehicleUI implements Runnable {
         int option = -1;
 
 
-        while(option != 1){
+        while (option != 1) {
             display();
             option = input.nextInt();
 
             if (option == 0) {
                 System.out.println();
                 requestVehicleInformation();
-            }else if (option == 1) {
+            } else if (option == 1) {
                 System.out.println();
             } else if (option == 2) {
-                System.out.println(ANSI_BRIGHT_RED+"LEAVING..."+ANSI_RESET);
+                System.out.println(ANSI_BRIGHT_RED + "LEAVING..." + ANSI_RESET);
                 return option;
             } else {
-                System.out.println(ANSI_BRIGHT_RED+ "Invalid choice. Please enter 0 or 1 or 2."+ ANSI_RESET);
+                System.out.println(ANSI_BRIGHT_RED + "Invalid choice. Please enter 0 or 1 or 2." + ANSI_RESET);
             }
         }
         return option;
@@ -139,43 +138,43 @@ public class RegisterVehicleUI implements Runnable {
      */
     private void display() {
         StringBuilder stringBuilder = new StringBuilder(String.format("Plate: %s | Brand: %s | Model: %s | Current Km: %.2f | Register Date: %s | Acquisition Date: %s", plateId, brand, model, currentKm, registerDate, acquisitionDate));
-        System.out.printf("\nTyped data -> [%s%s%s]\n",ANSI_GREEN,stringBuilder,ANSI_RESET);
+        System.out.printf("\nTyped data -> [%s%s%s]\n", ANSI_GREEN, stringBuilder, ANSI_RESET);
         System.out.print("Confirmation menu:\n 0 -> Change Vehicle Info\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
     }
 
 
     /**
      * Submits the entered vehicle data for registration.
-     *
-     *
+     * <p>
+     * <p>
      * This method invokes the registration process for the vehicle using the
      * provided data. It calls the corresponding method in the VehicleController
      * to register the vehicle in the repository. If the registration is successful,
      * it prints a success message. If the registration fails due to duplicate
      * registration (i.e., the vehicle is already registered), it prints an error
      * message.
-     *
+     * <p>
      * If an IllegalArgumentException occurs during the registration process,
      * indicating invalid data, it catches the exception, prints the error message,
      * and prompts the user to repeat the registration process.
      */
     private void submitData() {
         // Attempt to register the vehicle using the provided data
-        try{
+        try {
 
             Optional<Vehicle> vehicle = getController().registerVehicle(plateId, brand, model, type, tareWeight, grossWeight, currentKm, checkUpFrequency, lastCheckUp, registerDate, acquisitionDate);
 
             // Check if the registration was successful
             if (vehicle.isPresent()) {
-                System.out.println(ANSI_BRIGHT_GREEN+"Vehicle successfully registered!"+ ANSI_RESET);
+                System.out.println(ANSI_BRIGHT_GREEN + "Vehicle successfully registered!" + ANSI_RESET);
             } else {
                 // Print error message if vehicle is already registered
-                System.out.println(ANSI_BRIGHT_RED +"Vehicle not registered - Already registered!"+ ANSI_RESET);
+                System.out.println(ANSI_BRIGHT_RED + "Vehicle not registered - Already registered!" + ANSI_RESET);
             }
 
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             // Catch IllegalArgumentException indicating invalid data
-            System.out.println(ANSI_BRIGHT_RED +e.getMessage()+ANSI_RESET);
+            System.out.println(ANSI_BRIGHT_RED + e.getMessage() + ANSI_RESET);
             // Prompt user to repeat registration process
             runException();
         }
@@ -401,6 +400,7 @@ public class RegisterVehicleUI implements Runnable {
 
 
     //------------------INPUTS DATAS-------------------------------
+
     /**
      * Prompts the user to input a date (year, month, and day).
      * This method prompts the user to input a date by asking for
