@@ -11,8 +11,8 @@ public class CreateCollaboratorController {
 
     private CollaboratorRepository collaboratorRepository;
 
-    public CreateCollaboratorController(CollaboratorRepository collaboratorRepository) {
-        this.collaboratorRepository = collaboratorRepository;
+    public CreateCollaboratorController() {
+        this.collaboratorRepository = new CollaboratorRepository();
     }
 
     private CollaboratorRepository getCollaboratorRepository() {
