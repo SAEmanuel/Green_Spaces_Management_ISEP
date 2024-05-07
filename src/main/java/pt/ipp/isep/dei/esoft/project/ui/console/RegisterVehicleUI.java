@@ -129,7 +129,7 @@ public class RegisterVehicleUI implements Runnable {
             }
 
         }catch (IllegalArgumentException e){
-            System.out.println(e.getMessage());
+            System.out.println(ANSI_BRIGHT_RED +e.getMessage()+ANSI_RESET);
             runException();
         }
 

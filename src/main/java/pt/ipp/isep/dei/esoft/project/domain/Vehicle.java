@@ -81,19 +81,27 @@ public class Vehicle {
 
     private void validatesWeights(float tareWeight, float grossWeight) {
         if (tareWeight > grossWeight) {
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"'Tare Weight' -> [" + tareWeight + "] cannot be bigger than 'Gross Weight' -> [" + grossWeight + "]."+ANSI_RESET);
+            throw new IllegalArgumentException("'Tare Weight' -> [" + tareWeight + "] cannot be bigger than 'Gross Weight' -> [" + grossWeight + "].");
+        }
+        if (negativeWeight(tareWeight)) {
+            throw new IllegalArgumentException("Tare Weight cannot be negative!");
+        }
+        if (negativeWeight(grossWeight)) {
+            throw new IllegalArgumentException("Gross Weight cannot be negative!");
         }
     }
 
+
+
     private void validateDates(Data registerDate, Data acquisitionDate) {
         if (registerDate.isGreater(acquisitionDate)) {
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"'Acquisition Date' -> [" + acquisitionDate + "] cannot be latter than 'Register Date' -> [" + registerDate + "]."+ANSI_RESET);
+            throw new IllegalArgumentException("'Acquisition Date' -> [" + acquisitionDate + "] cannot be latter than 'Register Date' -> [" + registerDate + "].");
         }
     }
 
     private void validateKm(float currentKm, float lastCheckUp) {
         if (currentKm < lastCheckUp) {
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"'Last Checkup' -> [" + lastCheckUp + "] cannot be bigger than 'Current Km' -> [" + currentKm + "]."+ANSI_RESET);
+            throw new IllegalArgumentException("'Last Checkup' -> [" + lastCheckUp + "] cannot be bigger than 'Current Km' -> [" + currentKm + "].");
         }
 
     }
@@ -101,7 +109,7 @@ public class Vehicle {
 
     private void validatePlateId(String plateId, Data registerDate) {
         if (!validateString(plateId)) {
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"PLATE ID cannot be null or empty -> [" + plateId + "]."+ANSI_RESET);
+            throw new IllegalArgumentException("PLATE ID cannot be null or empty -> [" + plateId + "].");
         }
         validatePlate(plateId, registerDate);
     }
@@ -109,39 +117,36 @@ public class Vehicle {
 
     private void validateBrand(String brand) {
         if (!validateString(brand)) {
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"BRAND cannot be null or empty -> [" + brand + "]."+ANSI_RESET);
+            throw new IllegalArgumentException("BRAND cannot be null or empty -> [" + brand + "].");
         }
         if (haveSpecialCharacters(brand)) {
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"BRAND cannot contain special characters -> [" + brand + "]."+ANSI_RESET);
+            throw new IllegalArgumentException("BRAND cannot contain special characters -> [" + brand + "].");
         }
         if (haveNumbers(brand)) {
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"BRAND cannot contain numbers -> [" + brand + "]."+ANSI_RESET);
+            throw new IllegalArgumentException("BRAND cannot contain numbers -> [" + brand + "].");
         }
 
     }
 
-
-
-
     private void validateModel(String model) {
         if (!validateString(model)) {
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"Reference (MODEL) cannot be null or empty."+ANSI_RESET);
+            throw new IllegalArgumentException("Reference (MODEL) cannot be null or empty.");
         }
         if (haveSpecialCharacters(model)) {
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"MODEL cannot contain special characters -> [" + model + "]."+ANSI_RESET);
+            throw new IllegalArgumentException("MODEL cannot contain special characters -> [" + model + "].");
 
         }
     }
 
     private void validateType(String type) {
         if (!validateString(type)) {
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"TYPE cannot be null or empty -> [" + type + "]."+ANSI_RESET);
+            throw new IllegalArgumentException("TYPE cannot be null or empty -> [" + type + "].");
         }
         if (haveSpecialCharacters(type)) {
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"TYPE cannot contain special characters -> [" + type + "]."+ANSI_RESET);
+            throw new IllegalArgumentException("TYPE cannot contain special characters -> [" + type + "].");
         }
         if (haveNumbers(type)) {
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"TYPE cannot contain numbers -> [" + type + "]."+ANSI_RESET);
+            throw new IllegalArgumentException("TYPE cannot contain numbers -> [" + type + "].");
         }
     }
 
@@ -160,6 +165,10 @@ public class Vehicle {
             }
         }
         return false;
+    }
+
+    private boolean negativeWeight(float weight) {
+        return weight < 0;
     }
 
     private boolean haveNumbers(String string) {
@@ -195,12 +204,12 @@ public class Vehicle {
                 validatePlateAfterLowest(first, second, third);
 
             } else {
-                throw new IllegalArgumentException(ANSI_BRIGHT_RED+"Plate format does not correspond to a valid plate id between: [" + LOWEST_LIMIT + "-" + HIGHEST_LIMIT + "]."+ANSI_RESET);
+                throw new IllegalArgumentException("Plate format does not correspond to a valid plate id between: [" + LOWEST_LIMIT + "-" + HIGHEST_LIMIT + "].");
 
             }
         } catch (ArrayIndexOutOfBoundsException e) {
 
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"Plate ID -> [" + plateId + "] is malformed, make sure is in the format: __-__-__"+ANSI_RESET);
+            throw new IllegalArgumentException("Plate ID -> [" + plateId + "] is malformed, make sure is in the format: __-__-__");
         }
 
     }
@@ -209,7 +218,7 @@ public class Vehicle {
         if (first.matches("[A-Z]{2}") && second.matches("\\d{2}") && third.matches("[A-Z]{2}")) {
             // Plate matches "After 2020: AA-00-AA"
         } else {
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"Invalid plate format for vehicle after year: [" + HIGHEST_LIMIT + "] \"AA-00-AA\""+ANSI_RESET);
+            throw new IllegalArgumentException("Invalid plate format for vehicle after year: [" + HIGHEST_LIMIT + "] \"AA-00-AA\"");
         }
     }
 
@@ -217,7 +226,7 @@ public class Vehicle {
         if (first.matches("\\d{2}") && second.matches("[A-Z]{2}") && third.matches("\\d{2}")) {
             // Plate matches "Between 2005-2020: 00-AA-00"
         } else {
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"Invalid plate format for vehicle between years: [" + MIDDLE_LIMIT + "-" + HIGHEST_LIMIT + "] \"00-AA-00\""+ANSI_RESET);
+            throw new IllegalArgumentException("Invalid plate format for vehicle between years: [" + MIDDLE_LIMIT + "-" + HIGHEST_LIMIT + "] \"00-AA-00\"");
         }
     }
 
@@ -226,13 +235,13 @@ public class Vehicle {
         if (first.matches("\\d{2}") && second.matches("\\d{2}") && third.matches("[A-Z]{2}")) {
             // Plate matches "Between 1992-2005: 00-00-XX"
         } else {
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"Invalid plate format for vehicle between years: [" + LOWEST_LIMIT + "-" + MIDDLE_LIMIT + "] \"00-00-XX\""+ANSI_RESET);
+            throw new IllegalArgumentException("Invalid plate format for vehicle between years: [" + LOWEST_LIMIT + "-" + MIDDLE_LIMIT + "] \"00-00-XX\"");
         }
     }
 
     private void verifySizeOfPlate(String plateId) {
         if (plateId.length() > MAX_CHARS_PLATE) {
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED+"PlateId is too long... MAX LENGTH -> [" + MAX_CHARS_PLATE + "]"+ANSI_RESET);
+            throw new IllegalArgumentException("PlateId is too long... MAX LENGTH -> [" + MAX_CHARS_PLATE + "]");
         }
     }
 
