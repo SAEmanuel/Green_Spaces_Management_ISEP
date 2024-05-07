@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
-public class GenerateTeamUI {
+public class GenerateTeamUI implements Runnable {
 
     private final GenerateTeamController controller;
     private int minCollaborators;
