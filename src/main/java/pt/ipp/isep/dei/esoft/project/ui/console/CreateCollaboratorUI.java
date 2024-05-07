@@ -11,7 +11,8 @@ import java.util.Scanner;
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_RESET;
 
-public class CreateCollaboratorUI {
+public class CreateCollaboratorUI  implements Runnable {
+
     private Scanner scan = new Scanner(System.in);
     private final CreateCollaboratorController collaboratorController;
     private final RegisterJobController jobController;
@@ -25,7 +26,7 @@ public class CreateCollaboratorUI {
     private String docType;
     private int job;
 
-    public CreateCollaboratorUI() {
+    public CreateCollaboratorUI()  {
         this.collaboratorController = new CreateCollaboratorController();
         this.jobController = new RegisterJobController();
     }
