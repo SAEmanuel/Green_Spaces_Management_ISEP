@@ -11,7 +11,7 @@ participant ":CreateCollaboratorUI" as UI
 participant ":CreateCollaboratorController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "CollaboratorsRepository:\nCollaboratorsRepository" as CollaboratorsRepository
+participant "CollaboratorRepository:\nCollaboratorRepository" as CollaboratorRepository
 participant "JobsRepository:\nJobsRepository" as JobsRepository
 participant "collaborator\n:Collaborator" as Collaborator
 
@@ -78,7 +78,7 @@ activate HRM
                                         RepositorySingleton --> CTRL: repositories
                                     deactivate RepositorySingleton
 
-                                    CTRL -> PLAT : getCollaboratorsRepository()
+                                    CTRL -> PLAT : getCollaboratorRepository()
                                     activate PLAT
 
                                      PLAT --> CTRL: collaboratorsRepository
@@ -89,11 +89,11 @@ activate HRM
 
 
 
-            CTRL -> CollaboratorsRepository : createCollaborator(name, birthDate, admissionDate,\naddress, phoneNumber, email, taxpayerNumber,\ndocType, docNumber and jobID)
+            CTRL -> CollaboratorRepository : createCollaborator(name, birthDate, admissionDate,\naddress, phoneNumber, email, taxpayerNumber,\ndocType, docNumber and jobID)
 
-            activate CollaboratorsRepository
+            activate CollaboratorRepository
 
-            CollaboratorsRepository -> Collaborator** : createCollaborator(name, birthDate, admissionDate,\naddress, phoneNumber, email, taxpayerNumber,\ndocType, docNumber and jobID)
+            CollaboratorRepository -> Collaborator** : createCollaborator(name, birthDate, admissionDate,\naddress, phoneNumber, email, taxpayerNumber,\ndocType, docNumber and jobID)
 
             activate Collaborator
 
@@ -102,21 +102,21 @@ activate HRM
                 Collaborator --> Collaborator :
                 deactivate Collaborator
 
-            CollaboratorsRepository -> CollaboratorsRepository : addCollaborator(collaborator)
+            CollaboratorRepository -> CollaboratorRepository : addCollaborator(collaborator)
             deactivate Collaborator
-                        activate CollaboratorsRepository
+                        activate CollaboratorRepository
 
 
-            CollaboratorsRepository -> CollaboratorsRepository: validateCollaborator(collaborator)
-             activate CollaboratorsRepository
-             CollaboratorsRepository --> CollaboratorsRepository
-            deactivate CollaboratorsRepository
+            CollaboratorRepository -> CollaboratorRepository: validateCollaborator(collaborator)
+             activate CollaboratorRepository
+             CollaboratorRepository --> CollaboratorRepository
+            deactivate CollaboratorRepository
 
-            CollaboratorsRepository --> CollaboratorsRepository
-            deactivate CollaboratorsRepository
+            CollaboratorRepository --> CollaboratorRepository
+            deactivate CollaboratorRepository
 
-        CollaboratorsRepository --> CTRL : collaborator
-        deactivate CollaboratorsRepository
+        CollaboratorRepository --> CTRL : collaborator
+        deactivate CollaboratorRepository
         deactivate Collaborator
 
         CTRL --> UI: collaborator
