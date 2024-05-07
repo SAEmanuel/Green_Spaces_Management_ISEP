@@ -311,6 +311,7 @@ public class CreateCollaboratorUI {
         return name;
     }
 
+    /*
     private void submitData() {
         try {
             Optional<Collaborator> collaborator = getCollaboratorController(jobName);
@@ -326,5 +327,7 @@ public class CreateCollaboratorUI {
         }
 
     }
+
+     */
     //implementar runnable
 }
