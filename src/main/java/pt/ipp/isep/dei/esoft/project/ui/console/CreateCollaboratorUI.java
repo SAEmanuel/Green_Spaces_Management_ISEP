@@ -4,7 +4,6 @@ import pt.ipp.isep.dei.esoft.project.application.controller.CreateCollaboratorCo
 import pt.ipp.isep.dei.esoft.project.application.controller.RegisterJobController;
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.Data;
-import pt.ipp.isep.dei.esoft.project.domain.Job;
 
 import java.util.Optional;
 import java.util.Scanner;
@@ -311,23 +310,21 @@ public class CreateCollaboratorUI {
         return name;
     }
 
-    /*
     private void submitData() {
         try {
-            Optional<Collaborator> collaborator = getCollaboratorController(jobName);
+            Optional<Collaborator> collaborator = getCollaboratorController().registerCollaborator(name,birthDate,admissionDate,address,phoneNumber,emailAddress,taxPayerNumber,docType,job);
 
-            if (job.isPresent()) {
-                System.out.println(ANSI_BRIGHT_GREEN + "Job successfully registered!" + ANSI_RESET);
+            if (collaborator.isPresent()) {
+                System.out.println(ANSI_BRIGHT_GREEN + "Collaborator successfully registered!" + ANSI_RESET);
             } else {
-                System.out.println(ANSI_BRIGHT_RED + "Duplicated name!" + ANSI_RESET);
+                System.out.println(ANSI_BRIGHT_RED + "Error creating collaborator!" + ANSI_RESET);
             }
 
         } catch (IllegalArgumentException e) {
-            System.out.println(ANSI_BRIGHT_RED + "Job not registered!" + ANSI_RESET);
+            System.out.println(ANSI_BRIGHT_RED + "Collaborator not created!" + ANSI_RESET);
         }
 
     }
 
-     */
     //implementar runnable
 }
