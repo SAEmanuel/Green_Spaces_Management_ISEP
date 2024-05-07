@@ -1,9 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
 
-import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_BRIGHT_RED;
-import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_RESET;
-
 public class Vehicle {
 
     private String plateId;
@@ -75,19 +72,32 @@ public class Vehicle {
         validateKm(currentKm, lastCheckUp);
         validateDates(registerDate, acquisitionDate);
         validatesWeights(tareWeight,grossWeight);
+        validatesNegatives(tareWeight,grossWeight,lastCheckUp,currentKm,checkUpFrequency);
 
 
+    }
+
+    private void validatesNegatives(float tareWeight, float grossWeight, float lastCheckUp, float currentKm, float checkUpFrequency) {
+        if (isNegative(tareWeight)) {
+            throw new IllegalArgumentException("Tare Weight cannot be negative!");
+        }
+        if (isNegative(grossWeight)) {
+            throw new IllegalArgumentException("Gross Weight cannot be negative!");
+        }
+        if (isNegative(lastCheckUp)) {
+            throw new IllegalArgumentException("Last Check Up cannot be negative!");
+        }
+        if (isNegative(currentKm)) {
+            throw new IllegalArgumentException("Current Km cannot be negative!");
+        }
+        if (isNegative(checkUpFrequency)) {
+            throw new IllegalArgumentException("Check Up Frequency cannot be negative!");
+        }
     }
 
     private void validatesWeights(float tareWeight, float grossWeight) {
         if (tareWeight > grossWeight) {
             throw new IllegalArgumentException("'Tare Weight' -> [" + tareWeight + "] cannot be bigger than 'Gross Weight' -> [" + grossWeight + "].");
-        }
-        if (negativeWeight(tareWeight)) {
-            throw new IllegalArgumentException("Tare Weight cannot be negative!");
-        }
-        if (negativeWeight(grossWeight)) {
-            throw new IllegalArgumentException("Gross Weight cannot be negative!");
         }
     }
 
@@ -167,7 +177,7 @@ public class Vehicle {
         return false;
     }
 
-    private boolean negativeWeight(float weight) {
+    private boolean isNegative(float weight) {
         return weight < 0;
     }
 
