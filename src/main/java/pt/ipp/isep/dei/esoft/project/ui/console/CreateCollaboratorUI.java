@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.CreateCollaboratorController;
 import pt.ipp.isep.dei.esoft.project.application.controller.RegisterJobController;
+import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.Data;
 import pt.ipp.isep.dei.esoft.project.domain.Job;
 
@@ -140,7 +141,7 @@ public class CreateCollaboratorUI {
                 displayTypedCollaboratorJob(job);
             } else if (answer == 2) {
                 System.out.println(ANSI_BRIGHT_RED + "No changes made!" + ANSI_RESET);
-                return null;
+                return 0;
             } else if (answer != 1) {
                 System.out.println(ANSI_BRIGHT_RED + "Invalid choice. Please enter 0, 1 or 2." + ANSI_RESET);
             }
@@ -312,7 +313,7 @@ public class CreateCollaboratorUI {
 
     private void submitData() {
         try {
-            Optional<Job> job = getController().registerJob(jobName);
+            Optional<Collaborator> collaborator = getCollaboratorController(jobName);
 
             if (job.isPresent()) {
                 System.out.println(ANSI_BRIGHT_GREEN + "Job successfully registered!" + ANSI_RESET);
