@@ -9,9 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_BRIGHT_RED;
+import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_RESET;
+
 public class CollaboratorRepository {
 
-    private final List<Collaborator> collaboratorList;
+    public final List<Collaborator> collaboratorList;
 
     public CollaboratorRepository() {
         this.collaboratorList = new ArrayList<>();
@@ -45,26 +48,35 @@ public class CollaboratorRepository {
         return !collaboratorList.contains(collaborator);
     }
 
-    public List<Collaborator> clone() {
-        return new ArrayList<>(this.collaboratorList);
-    }
+//    public List<Collaborator> clone() {
+//        return new List<>(this.collaboratorList);
+//    }
 
     public List<Collaborator> getCollaboratorList() {
-        return clone();
+        return collaboratorList;
     }
 
-    public boolean findCollaboratorByTaxNumber(int collaboratorTaxNumber) {
-        return containsCollaboratorByTaxNumber(collaboratorTaxNumber);
-    }
+//    public boolean findCollaboratorByTaxNumber(int collaboratorTaxNumber) {
+//        return containsCollaboratorByTaxNumber(collaboratorTaxNumber);
+//    }
 
-    private boolean containsCollaboratorByTaxNumber(int collaboratorTaxNumber) {
-        for (Collaborator collaborator : collaboratorList) {
-            if (collaborator.getTaxPayerNumber() == collaboratorTaxNumber) {
-                return true;
-            }
-        }
-        return false;
-    }
+//    private boolean containsCollaboratorByTaxNumber(int collaboratorTaxNumber) {
+//        System.out.println("Size of collaboratorList: " + collaboratorList.size());
+//
+//        if (!collaboratorList.isEmpty()) {
+//            for (Collaborator collaborator : collaboratorList) {
+//                if (collaborator.getTaxPayerNumber() == collaboratorTaxNumber) {
+//                    return true;
+//                }
+//            }
+//        } else {
+//            System.out.println(ANSI_BRIGHT_RED + "Collaborator List is Empty." + ANSI_RESET);
+//            System.out.println();
+//            return false;
+//        }
+//
+//        return false;
+//    }
 
     public Collaborator findCollaborator(int collaboratorTaxNumber) {
         for (Collaborator collaborator : collaboratorList) {

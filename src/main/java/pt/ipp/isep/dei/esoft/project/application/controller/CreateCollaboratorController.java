@@ -35,6 +35,10 @@ public class CreateCollaboratorController {
         return collaboratorRepository;
     }
 
+    public CollaboratorRepository getCollaboratorRepository2() {
+        return collaboratorRepository;
+    }
+
     public Optional<Collaborator> registerCollaborator(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, String docType, Job job) {
         Optional<Collaborator> newCollaborator = Optional.empty();
 

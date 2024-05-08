@@ -1,7 +1,10 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.AssignSkillCollaboratorController;
+import pt.ipp.isep.dei.esoft.project.application.controller.CreateCollaboratorController;
+import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
+
 
 import java.util.InputMismatchException;
 import java.util.List;
@@ -19,60 +22,74 @@ public class AssignSkillCollaboratorUI implements Runnable {
     //Skill skill1 = new Skill("Programar em Java");
 
     private final AssignSkillCollaboratorController controller;
+    private final CreateCollaboratorController controllerCollaborator;
 
     /**
      * Default constructor that initializes the AssignSkillCollaboratorUI.
      */
     public AssignSkillCollaboratorUI() {
         controller = new AssignSkillCollaboratorController();
+        controllerCollaborator = new CreateCollaboratorController();
     }
 
     private AssignSkillCollaboratorController getController() {
         return controller;
     }
 
+    private CreateCollaboratorController getControllerCollaborator() {
+        return controllerCollaborator;
+    }
+
 
     @Override
     public void run() {
         System.out.println("\n\n--- Register Skill to Collaborator ------------------------");
-
+        boolean isValidTaxNumber = false;
         int collaboratorMenuOption;
-        do {
-            requestCollaboratorTaxNumber();
-            collaboratorMenuOption = confirmsCollaboratorTaxNumber();
-            System.out.println(collaboratorMenuOption);
 
-            if (collaboratorMenuOption == 1) {
-               isCollaboratorTaxNumberValid();
+        System.out.println(controller.getCollaboratorList().size());
 
-            }
+        if(!isCollaboratorListEmpty()) {
+            do {
+                requestCollaboratorTaxNumber();
+                collaboratorMenuOption = confirmsCollaboratorTaxNumber();
 
-            if (!isCollaboratorTaxNumberValid() && collaboratorMenuOption != -1) {
-                System.out.println(ANSI_BRIGHT_RED + "Collaborator Tax Number not found." + ANSI_RESET);
-                System.out.println();
-            }
+                if (collaboratorMenuOption == 1) {
+                    isValidTaxNumber = containsCollaboratorByTaxNumber();
 
-        } while (!isCollaboratorTaxNumberValid() && collaboratorMenuOption != -1);
-
-        //só entra no loop se for valido (mesmo se escolher a opcao leaving no menu)
-        if (isCollaboratorTaxNumberValid()) {
-            System.out.println("Collaborator Name: " + getCollaboratorName());
-            if (getSkillList()) {
-                boolean moreThanOneSkill = true;
-
-                while (moreThanOneSkill) {
-
-                    if (requestSkillToCollaborator()) {
-                        assignSkillCollaboratorByTaxNumber(collaboratorTaxNumber, skillName);
-
-                        moreThanOneSkill = confirmsMoreThanOneSkill();
-                    }
                 }
 
-            } else {
-                System.out.println("There is no skill created.");
+                if (!isValidTaxNumber && collaboratorMenuOption != -1) {
+                    System.out.println(ANSI_BRIGHT_RED + "Collaborator Tax Number not found." + ANSI_RESET);
+                    System.out.println();
+                }
+
+            } while (!isValidTaxNumber && collaboratorMenuOption != -1);
+
+            //só entra no loop se for valido (mesmo se escolher a opcao leaving no menu)
+            if (containsCollaboratorByTaxNumber()) {
+                System.out.println("Collaborator Name: " + getCollaboratorName());
+                if (getSkillList()) {
+                    boolean moreThanOneSkill = true;
+
+                    while (moreThanOneSkill) {
+
+                        if (requestSkillToCollaborator()) {
+                            assignSkillCollaboratorByTaxNumber(collaboratorTaxNumber, skillName);
+
+                            moreThanOneSkill = confirmsMoreThanOneSkill();
+                        }
+                    }
+
+                } else {
+                    System.out.println("There is no skill created.");
+                }
             }
+        } else {
+            System.out.println(ANSI_BRIGHT_RED + "Error - There is no collaborator created." + ANSI_RESET);
         }
+
+
 
 
     }
@@ -178,12 +195,37 @@ public class AssignSkillCollaboratorUI implements Runnable {
             }
     }
 
-    private boolean isCollaboratorTaxNumberValid() {
-        return controller.isCollaboratorIDValid(collaboratorTaxNumber);
+//    private boolean isCollaboratorTaxNumberValid() {
+//        return controller.isCollaboratorIDValid(collaboratorTaxNumber);
+//    }
+
+    private boolean containsCollaboratorByTaxNumber() {
+        List <Collaborator> collaboratorList = controllerCollaborator.getCollaboratorRepository2().getCollaboratorList();
+
+        System.out.println("Size of collaboratorList: " + collaboratorList.size());
+
+        if (!collaboratorList.isEmpty()) {
+            for (Collaborator collaborator : collaboratorList) {
+                if (collaborator.getTaxPayerNumber() == collaboratorTaxNumber) {
+                    return true;
+                }
+            }
+        } else {
+            System.out.println(ANSI_BRIGHT_RED + "Collaborator List is Empty." + ANSI_RESET);
+            System.out.println();
+            return false;
+        }
+
+        return false;
     }
+
 
     private boolean isSkillValid() {
         return controller.isSkillNameValid(skillName);
+    }
+
+    private boolean isCollaboratorListEmpty(){
+        return controller.isCollaboratorListEmpty();
     }
 
     private String getCollaboratorName() {
