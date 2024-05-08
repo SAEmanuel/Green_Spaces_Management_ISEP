@@ -7,8 +7,8 @@ import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.VehicleCheckUpRepository;
 import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
 
-import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 
 public class CreateCheckUpController {
 
@@ -51,17 +51,20 @@ public class CreateCheckUpController {
         return vehicleRepository.getVehicleList();
     }
 
-
-    public Data validateDate() {
-        return CheckUp.validateDate();
+    public Vehicle getVehicleByPlateID(String plateID) {
+        return vehicleRepository.vehicleListContainsByPlate(plateID);
     }
 
-    public int validateKms(Vehicle vehicle) {
-        int lastCheckUpKms = 2;
-        int currentKms = 3;
 
-        return CheckUp.validateKms(lastCheckUpKms, currentKms);
+    public Optional<CheckUp> registerCheckUp(Vehicle vehicleByPlateID, float checkUpKms, Data checkUpDate) {
+        Optional<CheckUp> newCheckUp;
+
+        newCheckUp = vehicleCheckUpRepository.registerCheckUp(vehicleByPlateID, checkUpKms, checkUpDate);
+
+        return newCheckUp;
     }
+
+
 
 
 }

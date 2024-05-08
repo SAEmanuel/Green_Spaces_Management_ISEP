@@ -4,55 +4,75 @@ import java.util.Scanner;
 
 public class CheckUp {
     private Data checkUpDate;
-    private int checkUpKms;
+    private float checkUpKms;
     private Vehicle vehicle;
 
 
-    public CheckUp(Vehicle vehicle, Data checkUpDate, int checkUpKms) {
+    public CheckUp(Vehicle vehicle, float checkUpKms, Data checkUpDate) {
+
+        validateCheckUp(vehicle, checkUpKms, checkUpDate);
+
         this.vehicle = vehicle;
-        this.checkUpDate = checkUpDate;
         this.checkUpKms = checkUpKms;
+        this.checkUpDate = checkUpDate;
     }
 
     public CheckUp clone() {
-        return new CheckUp(this.vehicle, this.checkUpDate, this.checkUpKms);
-    }
-
-    public Data getCheckUpDate() {
-        return checkUpDate;
-    }
-
-    public int getCheckUpKms() {
-        return checkUpKms;
-    }
-
-    public Vehicle getCheckUpVehicle() {
-        return vehicle;
-    }
-
-    public static Data validateDate() {
-        Scanner input = new Scanner(System.in);
-
-        System.out.print("Check Up Date (dd/mm/yyyy): ");
-        String date = input.nextLine();
-        String[] splitDate = date.split("/");
-
-        // continuar
-        return null;
+        return new CheckUp(this.vehicle, this.checkUpKms, this.checkUpDate);
     }
 
 
-    public static int validateKms(int lastCheckUpKms, int currentKms) {
-        Scanner input = new Scanner(System.in);
-        System.out.print("Kms at Check Up: ");
+    private void validateCheckUp(Vehicle vehicle, float checkUpKms, Data checkUpDate) {
 
-        if (input.nextInt() > lastCheckUpKms && input.nextInt() > currentKms) {
-            return input.nextInt();
-        } else {
-            System.out.println("\nKms smaller than at last check up or at the current time.\n");
-            return validateKms(lastCheckUpKms, currentKms);
+        validateDate(checkUpDate);
+        validatesNegatives(checkUpKms);
+        validateCheckUpKms(vehicle, checkUpKms);
+    }
+
+
+    private void validateDate(Data checkUpDate) {
+        Data actualDate = Data.currentDate();
+
+        if (checkUpDate.isGreater(actualDate)) {
+            throw new IllegalArgumentException("'Check-Up Date' -> [" + checkUpDate + "] cannot be greater than 'Actual Date' -> [" + actualDate + "].");
         }
+
+
     }
 
+
+    public static void validateCheckUpKms(Vehicle vehicle, float checkUpKms) {
+        float vehicleLastCheckUp = vehicle.getLastCheckUp();
+
+        if(checkUpKms < vehicleLastCheckUp) {
+            throw new IllegalArgumentException("'Last Checkup' -> [" + vehicle + "] cannot be bigger than 'Current Check-Up Kms' -> [" + checkUpKms + "].");
+        }
+
+
+    }
+
+    private void validatesNegatives(float checkUpKms) {
+        if (isNegative(checkUpKms)) {
+            throw new IllegalArgumentException("Check-Up kilometers cannot be negative!");
+        }
+
+    }
+
+    private boolean isNegative(float checkUpKms) {
+        return checkUpKms < 0;
+    }
+
+    public boolean equals(Object otherObject) {
+        if (this == otherObject)
+            return true;
+
+        if (otherObject == null || getClass() != otherObject.getClass())
+            return false;
+
+        CheckUp otherCheckUp = (CheckUp) otherObject;
+        return vehicle.equals(otherCheckUp.vehicle)
+                && checkUpKms == otherCheckUp.checkUpKms
+                && checkUpDate.equals(otherCheckUp.checkUpDate);
+    }
 
 }

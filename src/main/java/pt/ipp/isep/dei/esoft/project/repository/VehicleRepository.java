@@ -106,6 +106,15 @@ public class VehicleRepository {
         return true;
     }
 
+    public Vehicle vehicleListContainsByPlate(String plateID) {
+        for (Vehicle v : vehicleList) {
+            if (v.getPlateId().equals(plateID)) {
+                return v;
+            }
+        }
+        return null;
+    }
+
 
 
     /**
