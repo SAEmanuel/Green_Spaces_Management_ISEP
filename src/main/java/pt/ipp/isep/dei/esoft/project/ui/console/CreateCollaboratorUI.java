@@ -249,7 +249,7 @@ public class CreateCollaboratorUI implements Runnable {
     private String requestCollaboratorEmailAddress() {
         Scanner input = new Scanner(System.in);
         System.out.print("Email: ");
-        return input.next();
+        return input.next().toLowerCase();
     }
 
     private String requestCollaboratorDocType() {

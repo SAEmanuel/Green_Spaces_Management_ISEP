@@ -1,7 +1,5 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-import pt.ipp.isep.dei.esoft.project.repository.JobRepository;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +40,7 @@ public class Collaborator {
 
     private void validateData(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, String docType, Job job) {
         isValidName(name);
-        isValidBirthDate(birthDate,admissionDate);
+        isValidBirthDate(birthDate, admissionDate);
         isValidPhoneNumber(phoneNumber);
         isValidEmailAddress(emailAddress);
         isValidTaxPayerNumber(taxPayerNumber);
@@ -63,28 +61,35 @@ public class Collaborator {
         }
 
         emailAddress = emailAddress.trim();
-        if (verifyEmailOfGorets(emailAddress)) {
-            throw new IllegalArgumentException("Email address does not contain @ or \".\".");
+        if (!verifyEmail(emailAddress)) {
+            throw new IllegalArgumentException("Invalid email address: must follow name@domain.xxx where \"xxx\" can't contain numbers");
         }
 
     }
 
-    private boolean verifyEmailOfGorets(String emailAddress) {
+    private boolean verifyEmail(String emailAddress) {
         String[] splittedEmailAddress = emailAddress.split("@");
-        if (splittedEmailAddress.length != 2 || !splittedEmailAddress[1].contains(".") ||
-                splittedEmailAddress[0].contains(" ") || splittedEmailAddress[1].contains(" ")){
-
+        if (splittedEmailAddress.length != 2 && !splittedEmailAddress[1].contains(".") &&
+                splittedEmailAddress[0].contains(" ") && splittedEmailAddress[1].contains(" ")) {
             return false;
         }
-        for (int i = 1; i < splittedEmailAddress[1]; i++) {
 
-        }
         String[] secondSplit = splittedEmailAddress[1].split("\\.");
-        if (secondSplit.length != 2) {
+
+        if ((secondSplit.length != 2) || hasNoDigits(secondSplit)) {
             return false;
+        }
+
+        return true;
+    }
+
+    private boolean hasNoDigits(String[] secondSplit) {
+        for (int i = 1; i < secondSplit[1].length(); i++) {
+            if (!Character.isDigit(secondSplit[1].charAt(i))) {
+                return false;
+            }
         }
         return true;
-
     }
 
     private void isValidPhoneNumber(int phoneNumber) {
@@ -106,7 +111,7 @@ public class Collaborator {
         }
         name = name.trim();
         for (int i = 0; i < name.length(); i++) {
-            if (!Character.isLetter(name.charAt(i)) && name.charAt(i) != ' '){
+            if (!Character.isLetter(name.charAt(i)) && name.charAt(i) != ' ') {
                 throw new IllegalArgumentException("Name contains invalid characters.");
             }
         }
@@ -114,9 +119,8 @@ public class Collaborator {
     }
 
 
-
     public Collaborator clone() {
-        return new Collaborator(this.name,this.birthDate,this.admissionDate,this.address,this.phoneNumber,this.emailAddress,this.taxPayerNumber,this.docType,this.job);
+        return new Collaborator(this.name, this.birthDate, this.admissionDate, this.address, this.phoneNumber, this.emailAddress, this.taxPayerNumber, this.docType, this.job);
     }
 
     public List<Skill> cloneList() {
