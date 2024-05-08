@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
+import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
 import pt.ipp.isep.dei.esoft.project.repository.CollaboratorRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
@@ -36,12 +37,20 @@ public class AssignSkillCollaboratorController {
         return Repositories.getInstance();
     }
 
-    public boolean isCollaboratorIDValid(int collaboratorTaxNumber) {
-        return collaboratorRepository.findCollaboratorByTaxNumber(collaboratorTaxNumber);
+//    public boolean isCollaboratorIDValid(int collaboratorTaxNumber) {
+//        return collaboratorRepository.findCollaboratorByTaxNumber(collaboratorTaxNumber);
+//    }
+
+    public boolean isCollaboratorListEmpty(){
+        return collaboratorRepository.getCollaboratorList().isEmpty();
     }
 
     public List<Skill> getSkillList() {
         return skillRepository.getSkillList();
+    }
+
+    public List<Collaborator> getCollaboratorList() {
+        return collaboratorRepository.getCollaboratorList();
     }
 
     public boolean isSkillNameValid(String skillName) {
