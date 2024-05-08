@@ -46,9 +46,13 @@ public class CreateCollaboratorUI implements Runnable {
         System.out.println("\n\n--- Create Collaborator ------------------------");
         requestCollaboratorData();
 
-        int continueApp = confirmsData();
-        if (continueApp != 2) {
-            submitData();
+        if (job != null) {
+            int continueApp = confirmsData();
+            if (continueApp != 2) {
+                submitData();
+            }
+        } else {
+            System.out.println(ANSI_BRIGHT_RED+"Register a Job first!"+ANSI_RESET);
         }
 
     }
@@ -143,14 +147,16 @@ public class CreateCollaboratorUI implements Runnable {
     // resquest---------------------------------------------------------------
     private void requestCollaboratorData() {
         job = requestCollaboratorJob();
-        name = requestCollaboratorName();
-        address = requestCollaboratorAddress();
-        phoneNumber = requestCollaboratorPhoneNumber();
-        emailAddress = requestCollaboratorEmailAddress();
-        taxPayerNumber = requestCollaboratorTaxPayerNumber();
-        docType = requestCollaboratorDocType();
-        birthDate = requestBirthDate();
-        admissionDate = requestAdmissionDate();
+        if (job != null) {
+            name = requestCollaboratorName();
+            address = requestCollaboratorAddress();
+            phoneNumber = requestCollaboratorPhoneNumber();
+            emailAddress = requestCollaboratorEmailAddress();
+            taxPayerNumber = requestCollaboratorTaxPayerNumber();
+            docType = requestCollaboratorDocType();
+            birthDate = requestBirthDate();
+            admissionDate = requestAdmissionDate();
+        }
     }
 
 
@@ -235,12 +241,12 @@ public class CreateCollaboratorUI implements Runnable {
     private String requestCollaboratorAddress() {
         Scanner input = new Scanner(System.in);
         System.out.print("Address: ");
-        return input.next();
+        return input.nextLine();
     }
 
     private String requestCollaboratorEmailAddress() {
         Scanner input = new Scanner(System.in);
-        System.out.print("Email Address: ");
+        System.out.print("Email: ");
         return input.next();
     }
 
@@ -283,20 +289,29 @@ public class CreateCollaboratorUI implements Runnable {
     }
 
     private Job requestCollaboratorJob() {
-        int resposta;
         Scanner input = new Scanner(System.in);
+        int answer;
+        int n = jobController.getJobRepository().numberCollaborators();
         jobController.getJobRepository().showJobs();
-        System.out.print("Job ID: ");
-        while (true) {
-            try {
-                resposta = input.nextInt();
-                Job job = jobController.getJobRepository().getJob(resposta);
-                return job;
-            } catch (InputMismatchException e) {
-                System.out.print(ANSI_BRIGHT_RED + "Invalid jobID number! Enter a new one: " + ANSI_RESET);
-                input.nextLine();
+
+        if (n != 0) {
+            System.out.print("Job ID: ");
+            while (true) {
+                try {
+                    answer = input.nextInt();
+                    if (answer <= n - 1 && answer >= 0) {
+                        Job job = jobController.getJobRepository().getJob(answer);
+                        return job;
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.print(ANSI_BRIGHT_RED + "Invalid jobID number! Enter a new one: " + ANSI_RESET +"\n");
+                    input.nextLine();
+                }
+                System.out.print(ANSI_BRIGHT_YELLOW+"Invalid Job ID, enter a new one: "+ANSI_RESET);
+
             }
         }
+        return null;
     }
 
 }

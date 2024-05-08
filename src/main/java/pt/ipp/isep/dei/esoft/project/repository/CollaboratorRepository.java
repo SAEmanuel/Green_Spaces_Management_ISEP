@@ -1,9 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
-import pt.ipp.isep.dei.esoft.project.domain.Data;
-import pt.ipp.isep.dei.esoft.project.domain.Job;
-import pt.ipp.isep.dei.esoft.project.domain.Skill;
+import pt.ipp.isep.dei.esoft.project.domain.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,11 +35,16 @@ public class CollaboratorRepository {
     }
 
     private boolean validateCollaborator(Collaborator collaborator) {
-        return doNotContainCollaborator(collaborator);
+        return collaboratorListDoNotContainsByTaxNum(collaborator);
     }
 
-    private boolean doNotContainCollaborator(Collaborator collaborator) {
-        return !collaboratorList.contains(collaborator);
+    private boolean collaboratorListDoNotContainsByTaxNum(Collaborator collaborator) {
+        for (Collaborator v : collaboratorList) {
+            if (v.getTaxPayerNumber() == collaborator.getTaxPayerNumber()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public List<Collaborator> clone() {

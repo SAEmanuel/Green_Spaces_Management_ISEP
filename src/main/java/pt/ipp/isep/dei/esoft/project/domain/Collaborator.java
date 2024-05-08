@@ -42,7 +42,7 @@ public class Collaborator {
 
     private void validateData(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, String docType, Job job) {
         isValidName(name);
-        isValidBirthDate(birthDate);
+        isValidBirthDate(birthDate,admissionDate);
         isValidPhoneNumber(phoneNumber);
         isValidEmailAddress(emailAddress);
         isValidTaxPayerNumber(taxPayerNumber);
@@ -58,14 +58,32 @@ public class Collaborator {
     }
 
     private void isValidEmailAddress(String emailAddress) {
-        if (emailAddress == null || emailAddress.isEmpty()) {
+        if (emailAddress == null || emailAddress.trim().isEmpty()) {
             throw new IllegalArgumentException("Name cannot be null or empty.");
         }
 
         emailAddress = emailAddress.trim();
-        if (!emailAddress.contains("@")) {
-            throw new IllegalArgumentException("Email address is not a valid email address.");
+        if (verifyEmailOfGorets(emailAddress)) {
+            throw new IllegalArgumentException("Email address does not contain @ or \".\".");
         }
+
+    }
+
+    private boolean verifyEmailOfGorets(String emailAddress) {
+        String[] splittedEmailAddress = emailAddress.split("@");
+        if (splittedEmailAddress.length != 2 || !splittedEmailAddress[1].contains(".") ||
+                splittedEmailAddress[0].contains(" ") || splittedEmailAddress[1].contains(" ")){
+
+            return false;
+        }
+        for (int i = 1; i < splittedEmailAddress[1]; i++) {
+
+        }
+        String[] secondSplit = splittedEmailAddress[1].split("\\.");
+        if (secondSplit.length != 2) {
+            return false;
+        }
+        return true;
 
     }
 
@@ -76,8 +94,8 @@ public class Collaborator {
 
     }
 
-    private void isValidBirthDate(Data birthDate) {
-        if (!birthDate.over18()) {
+    private void isValidBirthDate(Data birthDate, Data admissionDate) {
+        if (!birthDate.over18(admissionDate)) {
             throw new IllegalArgumentException("Collaborator is less than 18 years old");
         }
     }

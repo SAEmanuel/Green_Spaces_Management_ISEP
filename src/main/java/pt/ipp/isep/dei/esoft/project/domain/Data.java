@@ -406,9 +406,8 @@ public class Data implements Comparable<Data> {
 
         return Math.abs(totalDays - totalDays1);
     }
-    public boolean over18(){
-        Data dataAtual = currentDate();
-        int result = difference(dataAtual);
+    public boolean over18(Data data){
+        int result = difference(data);
         return (result / 365) >= 18;
     }
 
