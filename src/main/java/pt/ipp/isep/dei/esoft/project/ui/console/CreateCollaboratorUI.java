@@ -14,11 +14,8 @@ import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_RESET;
 
 public class CreateCollaboratorUI implements Runnable {
-
-
     private final CreateCollaboratorController collaboratorController;
     private final RegisterJobController jobController;
-
     private String name;
     private String address;
     private String emailAddress;
@@ -54,33 +51,26 @@ public class CreateCollaboratorUI implements Runnable {
         } else {
             System.out.println(ANSI_BRIGHT_RED+"Register a Job first!"+ANSI_RESET);
         }
-
     }
 
     private CreateCollaboratorController getController() {
         return collaboratorController;
     }
 
-
     private void submitData() {
-        // Attempt to register the vehicle using the provided data
         try {
             Optional<Collaborator> collaborator = getController().registerCollaborator(name, birthDate, admissionDate, address, phoneNumber, emailAddress, taxPayerNumber, docType, job);
 
-            // Check if the registration was successful
             if (collaborator.isPresent()) {
                 System.out.println(ANSI_BRIGHT_GREEN + "Collaborator successfully created!" + ANSI_RESET);
             } else {
-                // Print error message if vehicle is already registered
                 System.out.println(ANSI_BRIGHT_RED + "Collaborator not created - Already created!" + ANSI_RESET);
             }
 
             System.out.println(collaboratorController.getCollaboratorRepository2().collaboratorList.size());
 
         } catch (IllegalArgumentException e) {
-            // Catch IllegalArgumentException indicating invalid data
             System.out.println(ANSI_BRIGHT_RED + e.getMessage() + ANSI_RESET);
-            // Prompt user to repeat registration process
             runException();
         }
     }
@@ -95,7 +85,6 @@ public class CreateCollaboratorUI implements Runnable {
                 submitData();
             }
         }
-
     }
 
     private boolean repeatProcess() {
@@ -113,7 +102,6 @@ public class CreateCollaboratorUI implements Runnable {
             System.out.println(ANSI_BRIGHT_RED + "WARNING - Enter a valid option..." + ANSI_RESET);
         }
     }
-
 
     private int confirmsData() {
         Scanner input = new Scanner(System.in);
@@ -146,7 +134,6 @@ public class CreateCollaboratorUI implements Runnable {
         System.out.print("Confirmation menu:\n 0 -> Change Collaborator Info\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
     }
 
-    // resquest---------------------------------------------------------------
     private void requestCollaboratorData() {
         job = requestCollaboratorJob();
         if (job != null) {
@@ -161,12 +148,10 @@ public class CreateCollaboratorUI implements Runnable {
         }
     }
 
-
     private Data requestAdmissionDate() {
         System.out.print("\n-- Admission date --\n");
         return getData();
     }
-
 
     private Data requestBirthDate() {
         System.out.print("\n-- Birth date --\n");
@@ -315,5 +300,4 @@ public class CreateCollaboratorUI implements Runnable {
         }
         return null;
     }
-
 }

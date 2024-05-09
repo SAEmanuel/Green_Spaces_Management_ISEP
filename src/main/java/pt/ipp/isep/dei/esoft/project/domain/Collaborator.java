@@ -34,7 +34,6 @@ public class Collaborator {
         this.taxPayerNumber = taxPayerNumber;
         this.docType = docType.trim();
         this.job = job;
-
         this.skills = new ArrayList<Skill>();
     }
 
@@ -44,8 +43,6 @@ public class Collaborator {
         isValidPhoneNumber(phoneNumber);
         isValidEmailAddress(emailAddress);
         isValidTaxPayerNumber(taxPayerNumber);
-
-
     }
 
 
@@ -64,7 +61,6 @@ public class Collaborator {
         if (!verifyEmail(emailAddress)) {
             throw new IllegalArgumentException("Invalid email address: must follow name@domain.xxx where \"xxx\" can't contain numbers");
         }
-
     }
 
     private boolean verifyEmail(String emailAddress) {
@@ -79,7 +75,6 @@ public class Collaborator {
         if ((secondSplit.length != 2) || hasNoDigits(secondSplit)) {
             return false;
         }
-
         return true;
     }
 
@@ -96,7 +91,6 @@ public class Collaborator {
         if (phoneNumber < phoneNumberMin || phoneNumber > phoneNumberMiddleLeft && phoneNumber < phoneNumberMiddleRight || phoneNumber > phoneNumberMax) {
             throw new IllegalArgumentException("Phone number is invalid");
         }
-
     }
 
     private void isValidBirthDate(Data birthDate, Data admissionDate) {

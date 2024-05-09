@@ -31,7 +31,6 @@ public class CollaboratorRepository {
     private boolean addCollaborator(Collaborator collaborator) {
         boolean success = false;
         if (validateCollaborator(collaborator)) {
-            // A clone of the job is added to the list of jobs, to avoid side effects and outside manipulation.
             success = collaboratorList.add(collaborator.clone());
         }
         return success;
@@ -90,10 +89,7 @@ public class CollaboratorRepository {
     }
 
     public boolean assignSkillCollaborator(int collaboratorTaxNumber, Skill skill) {
-
         Collaborator collaborator = findCollaborator(collaboratorTaxNumber);
-
         return collaborator.addSkill(skill);
-
     }
 }
