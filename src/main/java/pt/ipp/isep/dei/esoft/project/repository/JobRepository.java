@@ -12,6 +12,9 @@ public class JobRepository {
 
     private final List<Job> jobList;
 
+    /**
+     * Default constructor that initializes the JobRepository
+     */
     public JobRepository() {
         // Initializes the list of jobs.
         this.jobList = new ArrayList<>();
@@ -94,6 +97,9 @@ public class JobRepository {
         return new ArrayList<>(jobList);
     }
 
+    /**
+     * Shows all the jobs in the list
+     */
     public void showJobs() {
         if (jobList.isEmpty()) {
             System.out.println(ANSI_BRIGHT_RED + "No jobs found in the repository." + ANSI_RESET);
@@ -106,6 +112,11 @@ public class JobRepository {
             System.out.println("----------------");
         }
     }
+
+    /**
+     * Gets the size of the jobList
+     * @return size of the jobList
+     */
     public int numberCollaborators(){
         return jobList.size();
     }
