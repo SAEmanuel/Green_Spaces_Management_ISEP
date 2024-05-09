@@ -65,7 +65,7 @@ activate HRM
     HRM -> UI : submits data
     activate UI
 
-            UI -> CTRL : createCollaborator(name, birthDate, admissionDate,\naddress, phoneNumber, email, taxpayerNumber,\ndocType, docNumber and jobID)
+            UI -> CTRL : submitData()
     activate CTRL
     CTRL -> CTRL : getCollaborators()
 
@@ -88,16 +88,15 @@ activate HRM
                 deactivate CTRL
 
 
-
-            CTRL -> CollaboratorRepository : createCollaborator(name, birthDate, admissionDate,\naddress, phoneNumber, email, taxpayerNumber,\ndocType, docNumber and jobID)
+            CTRL -> CollaboratorRepository : registerCollaborator(name, birthDate, admissionDate,\naddress, phoneNumber, email, taxpayerNumber,\ndocType, docNumber and job)
 
             activate CollaboratorRepository
 
-            CollaboratorRepository -> Collaborator** : createCollaborator(name, birthDate, admissionDate,\naddress, phoneNumber, email, taxpayerNumber,\ndocType, docNumber and jobID)
+            CollaboratorRepository -> Collaborator** : registerCollaborator(name, birthDate, admissionDate,\naddress, phoneNumber, email, taxpayerNumber,\ndocType, docNumber and job)
 
             activate Collaborator
 
-                Collaborator -> Collaborator : validateCollaboratorInfo(name, birthDate, admissionDate,\naddress, phoneNumber, email, taxpayerNumber,\ndocType, docNumber and jobID)
+                Collaborator -> Collaborator : validateData(name, birthDate, admissionDate,\naddress, phoneNumber, email, taxpayerNumber,\ndocType, docNumber and job)
                 activate Collaborator
                 Collaborator --> Collaborator :
                 deactivate Collaborator
