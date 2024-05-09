@@ -406,6 +406,12 @@ public class Data implements Comparable<Data> {
 
         return Math.abs(totalDays - totalDays1);
     }
+
+    /**
+     * Verifies if the difference between two dates exceeds 18 years
+     * @param data to be compared
+     * @return true if exceeds 18 years, false otherwise
+     */
     public boolean over18(Data data){
         int result = difference(data);
         return (result / 365) >= 18;
