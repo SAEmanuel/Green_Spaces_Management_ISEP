@@ -26,19 +26,35 @@ public class CreateCollaboratorUI implements Runnable {
     private int taxPayerNumber;
     private Job job;
 
+    /**
+     * Default constructor that initializes the CreateCollaboratorController and RegisterJobController
+     */
     public CreateCollaboratorUI() {
         this.collaboratorController = new CreateCollaboratorController();
         this.jobController = new RegisterJobController();
     }
 
+    /**
+     * Gets the RegisterJobController instance.
+     *
+     * @return The RegisterJobController instance.
+     */
     public RegisterJobController getJobController() {
         return jobController;
     }
 
-    public CreateCollaboratorController getCollaboratorController() {
+    /**
+     * Gets the CreateCollaboratorController instance.
+     *
+     * @return The CreateCollaboratorController instance.
+     */
+    private CreateCollaboratorController getController() {
         return collaboratorController;
     }
 
+    /**
+     * Main method that executes the collaborator creation interface.
+     */
     public void run() {
         System.out.println("\n\n--- Create Collaborator ------------------------");
         requestCollaboratorData();
@@ -53,10 +69,9 @@ public class CreateCollaboratorUI implements Runnable {
         }
     }
 
-    private CreateCollaboratorController getController() {
-        return collaboratorController;
-    }
-
+    /**
+     * Submits the data to the controller and displays a success or failure message.
+     */
     private void submitData() {
         try {
             Optional<Collaborator> collaborator = getController().registerCollaborator(name, birthDate, admissionDate, address, phoneNumber, emailAddress, taxPayerNumber, docType, job);
@@ -75,8 +90,10 @@ public class CreateCollaboratorUI implements Runnable {
         }
     }
 
+    /**
+     * Asks for confirmation of the data to register and requests the data
+     */
     public void runException() {
-
         if (repeatProcess()) {
             requestCollaboratorData();
             int continueApp = confirmsData();
@@ -87,8 +104,12 @@ public class CreateCollaboratorUI implements Runnable {
         }
     }
 
+    /**
+     * Asks for the confirmation for the register of the new information
+     * @return true if yes and false otherwise
+     */
     private boolean repeatProcess() {
-        System.out.print("\nDo you wish to register new info? (y/n): ");
+        System.out.print("\nDo you wish to register new information? (y/n): ");
         Scanner scanner = new Scanner(System.in);
         while (true) {
             String answer = scanner.nextLine();
@@ -103,6 +124,11 @@ public class CreateCollaboratorUI implements Runnable {
         }
     }
 
+    /**
+     * Confirms the data entered by the user.
+     *
+     * @return 2 if the user chooses to exit, otherwise returns 1.
+     */
     private int confirmsData() {
         Scanner input = new Scanner(System.in);
         int option = -1;
@@ -127,6 +153,10 @@ public class CreateCollaboratorUI implements Runnable {
         return option;
     }
 
+    /**
+     * Displays the typed name, address, email, docType, birthdate, admission date,
+     * phone number, taxpayer number, job and options for confirmation.
+     */
     private void display() {
         StringBuilder stringBuilder = new StringBuilder(String.format("Name: %s | Address: %s | Email: %s | Doc Type: %s | Birth Date: %s | Admission Date: %s | Phone Number: %d | Tax Payer Number: %d | Job: %s",
                 name, address, emailAddress, docType, birthDate, admissionDate, phoneNumber, taxPayerNumber, job));
@@ -134,6 +164,9 @@ public class CreateCollaboratorUI implements Runnable {
         System.out.print("Confirmation menu:\n 0 -> Change Collaborator Info\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
     }
 
+    /**
+     * Requests all the data needed for creation of collaborator
+     */
     private void requestCollaboratorData() {
         job = requestCollaboratorJob();
         if (job != null) {
@@ -148,16 +181,28 @@ public class CreateCollaboratorUI implements Runnable {
         }
     }
 
+    /**
+     * Requests admission date
+     * @return admission date
+     */
     private Data requestAdmissionDate() {
         System.out.print("\n-- Admission date --\n");
         return getData();
     }
 
+    /**
+     * Requests birthdate
+     * @return birthdate
+     */
     private Data requestBirthDate() {
         System.out.print("\n-- Birth date --\n");
         return getData();
     }
 
+    /**
+     * Requests data
+     * @return data
+     */
     private Data getData() {
         Data data;
         while (true) {
@@ -173,6 +218,10 @@ public class CreateCollaboratorUI implements Runnable {
         }
     }
 
+    /**
+     * Requests year
+     * @return year
+     */
     private int requestYear() {
         int resposta;
         Scanner input = new Scanner(System.in);
@@ -188,6 +237,10 @@ public class CreateCollaboratorUI implements Runnable {
         }
     }
 
+    /**
+     * Requests month
+     * @return month
+     */
     private int requestMonth() {
         int resposta;
         Scanner input = new Scanner(System.in);
@@ -203,6 +256,10 @@ public class CreateCollaboratorUI implements Runnable {
         }
     }
 
+    /**
+     * Requests day
+     * @return day
+     */
     private int requestDay() {
         int resposta;
         Scanner input = new Scanner(System.in);
@@ -218,31 +275,50 @@ public class CreateCollaboratorUI implements Runnable {
         }
     }
 
-
+    /**
+     * Requests name
+     * @return name
+     */
     private String requestCollaboratorName() {
         Scanner input = new Scanner(System.in);
         System.out.print("Name: ");
         return input.next();
     }
 
+    /**
+     * Requests address
+     * @return address
+     */
     private String requestCollaboratorAddress() {
         Scanner input = new Scanner(System.in);
         System.out.print("Address: ");
         return input.nextLine();
     }
 
+    /**
+     * Requests email address
+     * @return email address
+     */
     private String requestCollaboratorEmailAddress() {
         Scanner input = new Scanner(System.in);
         System.out.print("Email: ");
         return input.next().toLowerCase();
     }
 
+    /**
+     * Requests document type
+     * @return document type
+     */
     private String requestCollaboratorDocType() {
         Scanner input = new Scanner(System.in);
         System.out.print("Doc Type: ");
         return input.next();
     }
 
+    /**
+     * Requests phone number
+     * @return phone number
+     */
     private int requestCollaboratorPhoneNumber() {
         int resposta;
         Scanner input = new Scanner(System.in);
@@ -259,6 +335,10 @@ public class CreateCollaboratorUI implements Runnable {
         }
     }
 
+    /**
+     * Requests taxpayer number
+     * @return taxpayer number
+     */
     private int requestCollaboratorTaxPayerNumber() {
         int resposta;
         Scanner input = new Scanner(System.in);
@@ -275,6 +355,10 @@ public class CreateCollaboratorUI implements Runnable {
         }
     }
 
+    /**
+     * Requests job
+     * @return job
+     */
     private Job requestCollaboratorJob() {
         Scanner input = new Scanner(System.in);
         int answer;
