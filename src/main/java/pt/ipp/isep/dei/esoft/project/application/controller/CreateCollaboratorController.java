@@ -10,15 +10,21 @@ import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import java.util.Optional;
 
 public class CreateCollaboratorController {
-
     private CollaboratorRepository collaboratorRepository;
     private JobRepository jobRepository;
 
+    /**
+     * Default constructor that initializes the CreateCollaboratorController and RegisterJobController
+     */
     public CreateCollaboratorController() {
         this.collaboratorRepository = new CollaboratorRepository();
         this.jobRepository = new JobRepository();
     }
 
+    /**
+     * Gets the JobRepository instance
+     * @return JobRepository instance
+     */
     private JobRepository getJobRepository() {
         if (this.jobRepository == null){
             Repositories repositories = Repositories.getInstance();
@@ -27,6 +33,10 @@ public class CreateCollaboratorController {
         return jobRepository;
     }
 
+    /**
+     * Gets the CollaboratorRepository instance
+     * @return CollaboratorRepository instance
+     */
     private CollaboratorRepository getCollaboratorRepository() {
         if (collaboratorRepository == null) {
             Repositories repositories = Repositories.getInstance();
@@ -35,10 +45,27 @@ public class CreateCollaboratorController {
         return collaboratorRepository;
     }
 
+    /**
+     * Gets the CollaboratorRepository instance
+     * @return CollaboratorRepository instance
+     */
     public CollaboratorRepository getCollaboratorRepository2() {
         return collaboratorRepository;
     }
 
+    /**
+     * Register a collaborator with the given parameters
+     * @param name of the collaborator
+     * @param birthDate of the collaborator
+     * @param admissionDate of the collaborator
+     * @param address of the collaborator
+     * @param phoneNumber of the collaborator
+     * @param emailAddress of the collaborator
+     * @param taxPayerNumber of the collaborator
+     * @param docType of the collaborator
+     * @param job of the collaborator
+     * @return an optional containing the registered collaborator, or empty if registration failed
+     */
     public Optional<Collaborator> registerCollaborator(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, String docType, Job job) {
         Optional<Collaborator> newCollaborator = Optional.empty();
 
