@@ -17,8 +17,8 @@ public class CreateCollaboratorController {
      * Default constructor that initializes the CreateCollaboratorController and RegisterJobController
      */
     public CreateCollaboratorController() {
-        this.collaboratorRepository = new CollaboratorRepository();
-        this.jobRepository = new JobRepository();
+        this.collaboratorRepository = getCollaboratorRepository();
+        this.jobRepository = getJobRepository();
     }
 
     /**
