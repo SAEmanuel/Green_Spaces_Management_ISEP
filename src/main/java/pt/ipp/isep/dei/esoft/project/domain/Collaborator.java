@@ -236,4 +236,31 @@ public class Collaborator {
         this.skills = cloneList();
     }
 
+    public Data getBirthDate() {
+        return birthDate;
+    }
+
+    public Data getAdmissionDate() {
+        return admissionDate;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public int getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public String getDocType() {
+        return docType;
+    }
+
+    public Job getJob() {
+        return job;
+    }
 }
