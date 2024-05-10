@@ -37,7 +37,7 @@ public class CreateCollaboratorController {
      * Gets the CollaboratorRepository instance
      * @return CollaboratorRepository instance
      */
-    private CollaboratorRepository getCollaboratorRepository() {
+    public CollaboratorRepository getCollaboratorRepository() {
         if (collaboratorRepository == null) {
             Repositories repositories = Repositories.getInstance();
             collaboratorRepository = repositories.getCollaboratorRepository();
