@@ -82,8 +82,6 @@ public class CreateCollaboratorUI implements Runnable {
                 System.out.println(ANSI_BRIGHT_RED + "Collaborator not created - Already created!" + ANSI_RESET);
             }
 
-            System.out.println(collaboratorController.getCollaboratorRepository2().collaboratorList.size());
-
         } catch (IllegalArgumentException e) {
             System.out.println(ANSI_BRIGHT_RED + e.getMessage() + ANSI_RESET);
             runException();

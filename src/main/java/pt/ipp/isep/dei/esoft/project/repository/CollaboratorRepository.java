@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public class CollaboratorRepository {
 
-    public final List<Collaborator> collaboratorList;
+    private final List<Collaborator> collaboratorList;
 
     /**
      * Default constructor that initializes the CollaboratorRepository
