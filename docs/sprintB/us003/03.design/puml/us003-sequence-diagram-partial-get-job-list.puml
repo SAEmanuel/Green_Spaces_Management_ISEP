@@ -8,9 +8,9 @@ participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "JobsRepository:\nJobsRepository" as JobsRepository
 
-autonumber 12
+autonumber 2
 -> CTRL** : create
-autonumber 12.1
+autonumber 3
 
 activate CTRL
     group Get Jobs
@@ -39,7 +39,7 @@ activate CTRL
 
     end group
 
-    autonumber 13
+    autonumber 10
     <-- CTRL : jobsList
 
 deactivate CTRL
