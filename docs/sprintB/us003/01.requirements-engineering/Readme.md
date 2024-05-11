@@ -58,16 +58,12 @@ As a Human Resources Manager, I want to register a collaborator with a job and f
 ### 1.3. Acceptance Criteria
 
 * **AC1:** All required fields must be filled in.
-* **AC2:** Name must be complete, should only have letters and have only at the maximum 9 words.
-* **AC3:** Birthdate can only be chosen from the calendar given and can only register collaborators with 18 years old or more.
-* **AC4:** Admission date can only be chosen from the calendar given.
-* **AC5:** Address must be written, this includes: door number, street, ZIP code, city, country. If there is anything more needed to be specified, should be written in the "More" box.
-* **AC6:** Phone number can only have 9 numbers.
-* **AC7:** Email address should have a prefix (before "@") and an email domain (after "@").
-* **AC8:** Taxpayer number can only have 9 numbers.
-* **AC9:** The user will select an identification document type from a list.
-* **AC10:** An image of identification document should be loaded to the application.
-* **AC11:** The user will select a job from a list of jobs provided by the application.
+* **AC2:** Name should only have letters.
+* **AC3:** Admission date can only be valid if the collaborator is over 18 years old.
+* **AC4:** Phone number can only have 9 numbers.
+* **AC5:** Email address should have a prefix (before "@") and an email domain (after "@").
+* **AC6:** Taxpayer number can only have 9 numbers.
+* **AC7:** The user will select a job from a list of jobs provided by the application.
 
 ### 1.4. Found out Dependencies
 
@@ -83,16 +79,16 @@ As a Human Resources Manager, I want to register a collaborator with a job and f
     * a phone number
     * an email
     * the taxpayer number
-	
-* Selected data:
     * a calendar for birthdate
     * a calendar for admission date
     * a list to select identification document type
+
+* Selected data:
     * a list to select a job
 
 **Output Data:**
 
-* List of existing task categories
+* List of existing jobs
 * (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
