@@ -9,8 +9,6 @@ autonumber
 actor "Human Resources Manager" as HRM
 participant ":CreateCollaboratorUI" as UI
 participant ":CreateCollaboratorController" as CTRL
-participant ":Repositories" as RepositorySingleton
-participant "repositories\n:Repositories" as PLAT
 participant "CollaboratorRepository:\nCollaboratorRepository" as CollaboratorRepository
 
 activate HRM
