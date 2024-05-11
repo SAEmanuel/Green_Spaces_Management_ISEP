@@ -1,0 +1,72 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+class Collaborator {
+    - String name
+    - Data birthDate
+    - Data admissionDate
+    - String address
+    - Integer phoneNumber
+    - String email
+    - Integer taxpayerNumber
+    - String docType
+    - Integer docNumber
+    - Job job
+
+    + validateData(name, birthDate, admissionDate, address, \nphone, email, taxpayerNumber, docNumber, docNumber, job)
+}
+
+class JobRepository {
+    - List<Job> job
+
+    + getJob(position)
+}
+
+class CollaboratorRepository {
+    - List<Collaborator> collaborator
+
+    + registerCollaborator(name, birthDate, admissionDate, address, \nphone, email, taxpayerNumber, docNumber, docNumber, job)
+    + addCollaborator(collaborator)
+    + validateCollaborator(collaborator))
+}
+
+class Repositories {
+    - Repositories()
+    + getInstance() : Repositories
+    + getJobRepository()
+    + getCollaboratorRepository()
+}
+
+class CreateCollaboratorController {
+    - CollaboratorRepository collaboratorRepository
+    - JobRepository jobRepository
+
+}
+
+class CreateCollaboratorUI {
+}
+
+Repositories --> Repositories : instance
+
+CreateCollaboratorUI .> CreateCollaboratorController
+
+CreateCollaboratorController .> Repositories : repositories
+
+Repositories --> "1" CollaboratorRepository
+Repositories --> "1" JobRepository
+CollaboratorRepository -> "1" Collaborator : registerCollaborator
+
+
+CreateCollaboratorController ..> CollaboratorRepository
+CreateCollaboratorController ..> JobRepository
+
+
+@enduml
