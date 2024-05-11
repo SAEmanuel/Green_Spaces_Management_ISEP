@@ -17,6 +17,9 @@ public class CollaboratorRepositoryTest {
         collaboratorRepository = new CollaboratorRepository();
     }
 
+    /**
+     * Tests if collaborator is registered successfully
+     */
     @Test
     public void testRegisterCollaborator() {
         Data birthDate = new Data(2000, 7, 26);
@@ -27,6 +30,9 @@ public class CollaboratorRepositoryTest {
         assertTrue(result.isPresent());
     }
 
+    /**
+     * Tests if collaborator registered is not duplicated
+     */
     @Test
     public void testRegisterDuplicateCollaborator() {
         Data birthDate = new Data(2000, 7, 26);
@@ -38,6 +44,9 @@ public class CollaboratorRepositoryTest {
         assertFalse(result.isPresent());
     }
 
+    /**
+     * Tests if collaborator is found
+     */
     @Test
     public void testFindCollaborator() {
         Data birthDate = new Data(2000, 7, 26);
@@ -49,6 +58,9 @@ public class CollaboratorRepositoryTest {
         assertNotNull(result);
     }
 
+    /**
+     * Tests if skill is assigned to a collaborator
+     */
     @Test
     public void testAssignSkillCollaborator() {
         Data birthDate = new Data(2000, 7, 26);

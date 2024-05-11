@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CollaboratorTest {
 
+    /**
+     * Tests if collaborator is created successfully
+     */
     @Test
     public void testValidCollaboratorCreation() {
         Data birthDate = new Data(2000, 7, 26);
@@ -15,6 +18,9 @@ class CollaboratorTest {
         assertNotNull(collaborator);
     }
 
+    /**
+     * Tests if name is valid
+     */
     @Test
     public void testIsValidName() {
         assertThrows(IllegalArgumentException.class, () -> {
@@ -25,6 +31,9 @@ class CollaboratorTest {
         });
     }
 
+    /**
+     * Tests if phone number is valid
+     */
     @Test
     public void testIsValidPhoneNumber() {
         assertThrows(IllegalArgumentException.class, () -> {
@@ -35,6 +44,9 @@ class CollaboratorTest {
         });
     }
 
+    /**
+     * Tests if email address is valid
+     */
     @Test
     public void testIsValidEmailAddress() {
         assertThrows(IllegalArgumentException.class, () -> {
@@ -45,6 +57,9 @@ class CollaboratorTest {
         });
     }
 
+    /**
+     * Tests if taxpayer number is valid
+     */
     @Test
     public void testIsValidTaxPayerNumber() {
         assertThrows(IllegalArgumentException.class, () -> {
@@ -55,6 +70,9 @@ class CollaboratorTest {
         });
     }
 
+    /**
+     * Tests if skill is added to collaborator
+     */
     @Test
     public void testAddSkill() {
         Skill javaSkill = new Skill("drive");
@@ -62,6 +80,9 @@ class CollaboratorTest {
         assertTrue(collaborator.addSkill(javaSkill));
     }
 
+    /**
+     * Tests if collaborator is cloned successfully
+     */
     @Test
     public void testClone() {
         Collaborator original = new Collaborator("Romeu", new Data(2000, 7, 26), new Data(2019, 6, 15), "Rua da fonte", 912345678, "Romeu@.pt", 123456789, "Passport", new Job("Student"));
