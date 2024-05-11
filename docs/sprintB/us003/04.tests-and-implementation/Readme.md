@@ -151,40 +151,31 @@ _It is also recommended to organize this content by subsections._
 
 ## 5. Construction (Implementation)
 
-### Class CreateTaskController 
+### Class CreateCollaboratorController 
 
 ```java
-public Task createTask(String reference, String description, String informalDescription, String technicalDescription,
-                       Integer duration, Double cost, String taskCategoryDescription) {
+public Optional<Collaborator> registerCollaborator(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, String docType, Job job) {
+        Optional<Collaborator> newCollaborator = Optional.empty();
 
-	TaskCategory taskCategory = getTaskCategoryByDescription(taskCategoryDescription);
-
-	Employee employee = getEmployeeFromSession();
-	Organization organization = getOrganizationRepository().getOrganizationByEmployee(employee);
-
-	newTask = organization.createTask(reference, description, informalDescription, technicalDescription, duration,
-                                      cost,taskCategory, employee);
-    
-	return newTask;
-}
+        newCollaborator = collaboratorRepository.registerCollaborator(name, birthDate, admissionDate, address, phoneNumber, emailAddress, taxPayerNumber, docType, job);
+        return newCollaborator;
+        }
 ```
 
-### Class Organization
+### Class CollaboratorRepository
 
 ```java
-public Optional<Task> createTask(String reference, String description, String informalDescription,
-                                 String technicalDescription, Integer duration, Double cost, TaskCategory taskCategory,
-                                 Employee employee) {
-    
-    Task task = new Task(reference, description, informalDescription, technicalDescription, duration, cost,
-                         taskCategory, employee);
+public Optional<Collaborator> registerCollaborator(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, String docType, Job job) {
 
-    addTask(task);
-        
-    return task;
-}
+        Optional<Collaborator> optionalValue = Optional.empty();
+
+        Collaborator collaborator = new Collaborator(name, birthDate, admissionDate, address, phoneNumber, emailAddress, taxPayerNumber, docType, job);
+        if (addCollaborator(collaborator)) {
+            optionalValue = Optional.of(collaborator);
+        }
+        return optionalValue;
+    }
 ```
-
 
 ## 6. Integration and Demo 
 
