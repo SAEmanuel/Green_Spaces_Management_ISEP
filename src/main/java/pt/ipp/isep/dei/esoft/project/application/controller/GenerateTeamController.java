@@ -18,8 +18,9 @@ public class GenerateTeamController {
     private CollaboratorRepository collaboratorRepository;
     private SkillList skillList;
 
-    public GenerateTeamController(){this.teamRepository = new TeamRepository();
-    collaboratorRepository = getCollaboratorRepository();
+    public GenerateTeamController(){
+        teamRepository = getTeamRepository();
+        collaboratorRepository = getCollaboratorRepository();
     }
 
     public List<Skill> getSkillList() {

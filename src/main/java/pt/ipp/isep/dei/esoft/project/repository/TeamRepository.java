@@ -33,24 +33,16 @@ public class TeamRepository {
                     if(!collaboratorHasTeam(c) && !team.getCollaboratorList().contains(c)) {
                         removeSkills(c,skills);
                         team.addCollaborator(c);
-                        System.out.println(c.getName());
-                        System.out.println("added");
                         encontrados++;
                         if (lastCollab) {
-                            System.out.println("break");
                             break;
                         }
                     }
                 }
             }
 
-            System.out.println(encontrados);
-            System.out.println(minCollaborators);
-            System.out.println(skills.getSkillList().isEmpty());
-            System.out.println(lastCollab);
             if(encontrados >= minCollaborators && skills.getSkillList().isEmpty() || lastCollab){
                 encontrados = maxCollaborators;
-                System.out.println("defineMax");
             }
             else
                 if(encontrados < minCollaborators && skills.getSkillList().isEmpty()){
@@ -62,6 +54,7 @@ public class TeamRepository {
 
         optionalValue = Optional.of(team);
 
+        System.out.println("Team: ");
         for (Collaborator c : team.getCollaboratorList()){
             System.out.println(c.getName());
         }
@@ -75,6 +68,9 @@ public class TeamRepository {
 
     private boolean collaboratorHasTeam(Collaborator c) {
         for (Team team: teamList){
+            for (Collaborator collab : team.getCollaboratorList()){
+                System.out.println(collab.getName());
+            }
             if(team.getCollaboratorList().contains(c)){
                 return true;
             }

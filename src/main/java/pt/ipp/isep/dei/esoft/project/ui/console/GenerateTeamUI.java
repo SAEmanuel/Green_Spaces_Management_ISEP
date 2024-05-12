@@ -96,6 +96,8 @@ public class GenerateTeamUI implements Runnable {
             if(answerAdd == 0) {
                 addSkills = false;
             }
+            answerList= -1;
+            answerAdd = -1;
             System.out.println("out of loop");
         }
         return true;
