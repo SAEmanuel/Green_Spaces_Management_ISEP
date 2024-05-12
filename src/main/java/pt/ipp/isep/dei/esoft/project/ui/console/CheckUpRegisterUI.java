@@ -192,6 +192,38 @@ public class CheckUpRegisterUI implements Runnable {
         }
     }
 
+    private int confirmsPlateID() {
+        int option = -1;
+        Scanner input = new Scanner(System.in);
+
+        while (option != 1) {
+            display();
+            option = input.nextInt();
+
+            switch (option) {
+                case 0:
+                    System.out.println();
+                    requestVehiclePlateID();
+                    break;
+                case 1:
+                    System.out.println();
+                    System.out.printf("Vehicle License Plate -> [%s]\n", plateID);
+                    break;
+                case 2:
+                    System.out.println(ANSI_BRIGHT_RED + "LEAVING..." + ANSI_RESET);
+                    return -1;
+                default:
+                    System.out.println(ANSI_BRIGHT_RED + "Invalid choice. Please enter 0 or 1 or 2." + ANSI_RESET);
+            }
+        }
+        return option;
+    }
+
+    private void display() {
+
+        System.out.printf("\nTyped License Plate -> [%s%s%s]\n",ANSI_GREEN,plateID,ANSI_RESET);
+        System.out.print("Confirmation menu:\n 0 -> Change license plate\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
+    }
 
 
 

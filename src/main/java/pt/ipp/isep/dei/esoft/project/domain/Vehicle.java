@@ -98,6 +98,9 @@ public class Vehicle {
         return plateId;
     }
 
+    public void setLastCheckUp(float lastCheckUp) {
+        this.lastCheckUp = lastCheckUp;
+    }
 
     //---------------------------------------VALIDATIONS----------------------------------------------------------
 

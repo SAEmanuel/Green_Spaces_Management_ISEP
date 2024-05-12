@@ -1,14 +1,12 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-import java.util.Scanner;
-
 public class CheckUp {
     private Data checkUpDate;
     private float checkUpKms;
     private Vehicle vehicle;
 
 
-    public CheckUp(Vehicle vehicle, float checkUpKms, Data checkUpDate) {
+    public CheckUp(Vehicle vehicle, Float checkUpKms, Data checkUpDate) {
 
         validateCheckUp(vehicle, checkUpKms, checkUpDate);
 

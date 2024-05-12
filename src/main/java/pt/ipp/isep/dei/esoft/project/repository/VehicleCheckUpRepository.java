@@ -32,6 +32,8 @@ public class VehicleCheckUpRepository {
 
         if (addCheckUp(checkUp)) {
             optionalCheckUp = Optional.of(checkUp.clone());
+
+            setLastKmsCheckUp(vehicleByPlateID, checkUpKms);
         }
 
         return optionalCheckUp;
@@ -54,6 +56,10 @@ public class VehicleCheckUpRepository {
 
     private boolean CheckListDoNotContainsCheckUp(CheckUp checkUp) {
         return !vehicleCheckUpsList.contains(checkUp);
+    }
+
+    private void setLastKmsCheckUp(Vehicle vehicleByPlateID, float checkUpKms) {
+        vehicleByPlateID.setLastCheckUp(checkUpKms);
     }
 
 
