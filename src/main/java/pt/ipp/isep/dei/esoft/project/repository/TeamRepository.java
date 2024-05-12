@@ -128,4 +128,11 @@ public class TeamRepository {
         // Create a new reference skill list with the same content of the instance one.
         return new ArrayList<>(this.teamList);
     }
+
+    public void removeTeam(int teamId) {
+        for (Team t : teamList)
+            if(t.getTeamId() == teamId)
+                teamList.remove(t);
+    }
+
 }
