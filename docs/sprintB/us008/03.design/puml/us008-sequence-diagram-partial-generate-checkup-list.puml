@@ -12,13 +12,13 @@ participant "vehicleRepository\n:VehicleRepository" as vehicleRepository
 
 autonumber 8
 
- -> vehicleRepository : getVehiclesNeedingCheckup()
+ -> vehicleRepository : requestList()
 autonumber 3.1
 activate vehicleRepository
     group Generate CheckUp List
 
             loop for each vehicle in vehicleList
-                vehicleRepository -> vehicleRepository : needsCheckup(vehicle)
+                vehicleRepository -> vehicleRepository : getVehiclesNeedingCheckUp()
                 activate vehicleRepository
                 vehicleRepository --> vehicleRepository : true/false
                 deactivate vehicleRepository

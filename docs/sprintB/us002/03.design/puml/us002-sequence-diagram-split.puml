@@ -40,17 +40,11 @@ activate HRM
         UI -> CTRL : registerJob(jobName)
         activate CTRL
 
-            CTRL -> RepositorySingleton : getInstance()
-            activate RepositorySingleton
+          ref over CTRL
 
-            RepositorySingleton --> CTRL: repositories
-            deactivate RepositorySingleton
+          Get Job Repository
 
-            CTRL -> PLAT : getJobRepository()
-            activate PLAT
-
-            PLAT --> CTRL: jobRepository
-            deactivate PLAT
+          end
 
 
 

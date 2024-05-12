@@ -20,7 +20,7 @@ activate UI
 
 UI -> CTRL** : create
 
-UI -> CTRL : getVehicleListNeedingCheckup()
+UI -> CTRL : requestActivation()
 
 deactivate UI
 
@@ -37,7 +37,7 @@ activate PLAT
 PLAT --> CTRL: vehicleRepository
 deactivate PLAT
 
-CTRL -> vehicleRepository : getVehiclesNeedingCheckup()
+CTRL -> vehicleRepository : requestList()
 
 activate vehicleRepository
 
@@ -46,7 +46,7 @@ activate vehicleRepository
 activate vehicleRepository
 
 loop for each vehicle in vehicleList
-    vehicleRepository -> vehicleRepository : needsCheckup(vehicle)
+    vehicleRepository -> vehicleRepository : getVehiclesNeedingCheckUp()
     activate vehicleRepository
     vehicleRepository --> vehicleRepository : true/false
     deactivate vehicleRepository
