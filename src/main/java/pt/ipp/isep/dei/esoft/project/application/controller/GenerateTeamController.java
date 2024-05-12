@@ -55,14 +55,14 @@ public class GenerateTeamController {
 
     public Optional<Team> generateTeam(int minCollaborators, int maxCollaborators) {
         getTeamRepository();
-        List<Skill> skills = skillList.getSkillList();
-
+        SkillList skills = new SkillList();
+        skills.setSkills(skillList.getSkillList());
         if(collaboratorRepository == null)
             System.out.println(0);
         if(collaboratorRepository == null || skills == null)
             return null;
         System.out.println(1);
-        if(!skills.isEmpty() && !collaboratorRepository.getCollaboratorList().isEmpty() && minCollaborators != 0 && maxCollaborators != 0){
+        if(!skills.getSkillList().isEmpty() && !collaboratorRepository.getCollaboratorList().isEmpty() && minCollaborators != 0 && maxCollaborators != 0){
             System.out.println(2);
             return teamRepository.generateTeam(skills, collaboratorRepository.getCollaboratorList(), minCollaborators, maxCollaborators);
         }

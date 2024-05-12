@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
+import pt.ipp.isep.dei.esoft.project.domain.SkillList;
 import pt.ipp.isep.dei.esoft.project.domain.Team;
 
 import java.util.ArrayList;
@@ -14,46 +15,63 @@ public class TeamRepository {
     public TeamRepository() {
         this.teamList = new ArrayList<>();
     }
-    public Optional<Team> generateTeam(List<Skill> skills, List<Collaborator> collaboratorList, int minCollaborators, int maxCollaborators){
+    public Optional<Team> generateTeam(SkillList skills, List<Collaborator> collaboratorList, int minCollaborators, int maxCollaborators){
         Optional<Team> optionalValue = Optional.empty();
 
         Team team = new Team(teamList.size()+1);
 
         int encontrados = 0;
-        List<Skill> skillsClone = skills;
+        SkillList skillsClone = new SkillList();
+        skillsClone.setSkills(skills.getSkillList());
         boolean lastCollab = false;
 
         while(encontrados < maxCollaborators) {
             for (Collaborator c : collaboratorList){
-                if(skills.isEmpty())
+                if(skills.getSkillList().isEmpty())
                     break;
-                System.out.println(checkIfHasSkills(c, skills));
                 if(checkIfHasSkills(c, skills)){
-                    System.out.println(!collaboratorHasTeam(c));
                     if(!collaboratorHasTeam(c) && !team.getCollaboratorList().contains(c)) {
+                        removeSkills(c,skills);
                         team.addCollaborator(c);
+                        System.out.println(c.getName());
                         System.out.println("added");
                         encontrados++;
+                        if (lastCollab) {
+                            System.out.println("break");
+                            break;
+                        }
                     }
                 }
-
-                if (lastCollab)
-                    break;
             }
 
-            if(encontrados >= minCollaborators && skills.isEmpty() || lastCollab)
+            System.out.println(encontrados);
+            System.out.println(minCollaborators);
+            System.out.println(skills.getSkillList().isEmpty());
+            System.out.println(lastCollab);
+            if(encontrados >= minCollaborators && skills.getSkillList().isEmpty() || lastCollab){
                 encontrados = maxCollaborators;
+                System.out.println("defineMax");
+            }
             else
-                if(encontrados < minCollaborators && skills.isEmpty())
-                    skills = skillsClone;
+                if(encontrados < minCollaborators && skills.getSkillList().isEmpty()){
+                    skills.setSkills(skillsClone.getSkillList());
+                    if(encontrados == minCollaborators-1)
+                        lastCollab = true;
+                }
         }
 
-        if (team == null) {
-            optionalValue = Optional.empty();
+        optionalValue = Optional.of(team);
+
+        for (Collaborator c : team.getCollaboratorList()){
+            System.out.println(c.getName());
         }
-        System.out.println(team.getCollaboratorList());
+        if(team.getCollaboratorList().isEmpty())
+            teamList.add(team);
+
         return optionalValue;
     }
+
+
 
     private boolean collaboratorHasTeam(Collaborator c) {
         for (Team team: teamList){
@@ -64,15 +82,23 @@ public class TeamRepository {
         return false;
     }
 
-    private boolean checkIfHasSkills(Collaborator c, List<Skill> skills) {
+    private boolean checkIfHasSkills(Collaborator c, SkillList skills) {
         boolean hasSkills = false;
         for(Skill s : c.cloneList()){
-            if(skills.contains(s)){
-                skills.remove(s);
+            if(skills.getSkillList().contains(s)){
                 hasSkills= true;
+                break;
             }
         }
         return hasSkills;
+    }
+
+    private void removeSkills(Collaborator c, SkillList skills) {
+        for(Skill s : c.cloneList()){
+            if(skills.getSkillList().contains(s)){
+                skills.removeSkill(s);
+            }
+        }
     }
 
     private boolean skillListDoNotContain(Team team) {
