@@ -51,25 +51,33 @@ public class GenerateTeamController {
         if(skillList == null)
             skillList = new SkillList();
 
-        skillList.addSkill(skill);
+        if(!skillList.getSkillList().contains(skill))
+            skillList.addSkill(skill);
+        else
+            System.out.println("Skill Already Added!");
     }
 
     public Optional<Team> generateTeam(int minCollaborators, int maxCollaborators) {
-        getTeamRepository();
+        Optional<Team> optionalValue = Optional.empty();
+
         SkillList skills = new SkillList();
         skills.setSkills(skillList.getSkillList());
-        if(collaboratorRepository == null)
-            System.out.println(0);
+
         if(collaboratorRepository == null || skills == null)
-            return null;
-        System.out.println(1);
+            return optionalValue;
+
         if(!skills.getSkillList().isEmpty() && !collaboratorRepository.getCollaboratorList().isEmpty() && minCollaborators != 0 && maxCollaborators != 0){
-            System.out.println(2);
             return teamRepository.generateTeam(skills, collaboratorRepository.getCollaboratorList(), minCollaborators, maxCollaborators);
         }
         else{
-        System.out.println(3);
-            return null;
+            return optionalValue;
         }
+    }
+
+    public void cleanSkillList(){
+        if(skillList == null)
+            skillList = new SkillList();
+
+        skillList.cleanSkillList();
     }
 }

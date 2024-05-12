@@ -18,6 +18,9 @@ public class TeamRepository {
     public Optional<Team> generateTeam(SkillList skills, List<Collaborator> collaboratorList, int minCollaborators, int maxCollaborators){
         Optional<Team> optionalValue = Optional.empty();
 
+        if(verifyIfExistingCollab(skills,collaboratorList, minCollaborators))
+            return optionalValue;
+
         Team team = new Team(teamList.size()+1);
 
         int encontrados = 0;
@@ -54,23 +57,38 @@ public class TeamRepository {
 
         optionalValue = Optional.of(team);
 
-        System.out.println("Team: ");
-        for (Collaborator c : team.getCollaboratorList()){
-            System.out.println(c.getName());
-        }
-        if(team.getCollaboratorList().isEmpty())
+        if(!team.getCollaboratorList().isEmpty()) {
             teamList.add(team);
+        }
 
         return optionalValue;
     }
 
+    private boolean verifyIfExistingCollab(SkillList skills, List<Collaborator> collaboratorList, int minCollaborators) {
+        int count=0;
+
+        SkillList skillsCloneVerify = new SkillList();
+        skillsCloneVerify.setSkills(skills.getSkillList());
+
+        for (Collaborator c : collaboratorList){
+            if(checkIfHasSkills(c, skillsCloneVerify)){
+                if(!collaboratorHasTeam(c)){
+                    removeSkills(c, skillsCloneVerify);
+                    count++;
+                }
+            }
+            if(skillsCloneVerify.getSkillList().isEmpty())
+                skillsCloneVerify.setSkills(skills.getSkillList());
+        }
+
+        if(count < minCollaborators)
+            return true;
+        return false;
+    }
 
 
     private boolean collaboratorHasTeam(Collaborator c) {
         for (Team team: teamList){
-            for (Collaborator collab : team.getCollaboratorList()){
-                System.out.println(collab.getName());
-            }
             if(team.getCollaboratorList().contains(c)){
                 return true;
             }

@@ -31,4 +31,8 @@ public class SkillList {
         // Create a new reference skill list with the same content of the instance one.
         return new ArrayList<>(this.skills);
     }
+
+    public void cleanSkillList(){
+        this.skills.clear();
+    }
 }

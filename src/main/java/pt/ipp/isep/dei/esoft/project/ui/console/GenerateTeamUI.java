@@ -5,6 +5,7 @@ import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.TeamRepository;
 
 import java.sql.SQLOutput;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -32,14 +33,18 @@ public class GenerateTeamUI implements Runnable {
     private void submitData() {
         Optional<Team> team = getController().generateTeam(minCollaborators, maxCollaborators);
 
-        if (team == null)
-            return;
-
         if (team.isPresent()) {
+            System.out.println("Team");
+            for (Collaborator collaborator : team.get().getCollaborators()) {
+                System.out.println(collaborator.getName());
+            }
+
             System.out.println("\nTask successfully created!");
         } else {
             System.out.println("\nTask not created!");
         }
+
+        getController().cleanSkillList();
     }
 
     private boolean requestData() {
@@ -74,31 +79,37 @@ public class GenerateTeamUI implements Runnable {
             return false;
 
         int listSize = skillList.size();
-        int answerList = -1;
-        int answerAdd = -1;
+        int answerList = -2;
+        String answerAdd = "";
         boolean addSkills = true;
 
         Scanner input = new Scanner(System.in);
 
         while(addSkills) {
-            while (answerList < 1 || answerList > listSize) {
+            while (answerList < 0 || answerList > listSize) {
                 displaySkillListOptions(skillList);
                 System.out.print("Select a skill: ");
                 answerList = input.nextInt();
             }
 
-            controller.addSkill(new Skill(skillList.get(answerList - 1).getSkillName()));
+            if(answerList != -1)
+                controller.addSkill(new Skill(skillList.get(answerList - 1).getSkillName()));
 
-            while(answerAdd != 1 && answerAdd != 0){
-                System.out.print("Wanna add more skills? [Y -> 1]  [N -> 0]");
-                answerAdd = input.nextInt();
+            input.nextLine();
+
+            while(!answerAdd.equalsIgnoreCase("y") && !answerAdd.equalsIgnoreCase("n") ){
+                System.out.print("Wanna add more skills? [y / n]");
+                answerAdd = input.nextLine();
+
+                if(!answerAdd.equalsIgnoreCase("y") && !answerAdd.equalsIgnoreCase("n"))
+                    System.out.println("Wrong answer, try again!");
             }
-            if(answerAdd == 0) {
+            if(answerAdd.equalsIgnoreCase("n")) {
                 addSkills = false;
             }
-            answerList= -1;
-            answerAdd = -1;
-            System.out.println("out of loop");
+
+            answerList= -2;
+            answerAdd = "";
         }
         return true;
     }
@@ -110,5 +121,6 @@ public class GenerateTeamUI implements Runnable {
             System.out.println("  " + i + " - " + s.getSkillName());
             i++;
         }
+        System.out.println("  " + 0 + " - Exit");
     }
 }
