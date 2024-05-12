@@ -18,7 +18,9 @@ public class GenerateTeamController {
     private CollaboratorRepository collaboratorRepository;
     private SkillList skillList;
 
-    public GenerateTeamController(){this.teamRepository = new TeamRepository();}
+    public GenerateTeamController(){this.teamRepository = new TeamRepository();
+    collaboratorRepository = getCollaboratorRepository();
+    }
 
     public List<Skill> getSkillList() {
         if (skillRepository == null) {
@@ -55,12 +57,18 @@ public class GenerateTeamController {
         getTeamRepository();
         List<Skill> skills = skillList.getSkillList();
 
+        if(collaboratorRepository == null)
+            System.out.println(0);
         if(collaboratorRepository == null || skills == null)
             return null;
-
-        if(!skills.isEmpty() && !collaboratorRepository.getCollaboratorList().isEmpty() && minCollaborators != 0 && maxCollaborators != 0)
+        System.out.println(1);
+        if(!skills.isEmpty() && !collaboratorRepository.getCollaboratorList().isEmpty() && minCollaborators != 0 && maxCollaborators != 0){
+            System.out.println(2);
             return teamRepository.generateTeam(skills, collaboratorRepository.getCollaboratorList(), minCollaborators, maxCollaborators);
-        else
+        }
+        else{
+        System.out.println(3);
             return null;
+        }
     }
 }

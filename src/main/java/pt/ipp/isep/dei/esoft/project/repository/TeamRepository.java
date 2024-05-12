@@ -14,7 +14,6 @@ public class TeamRepository {
     public TeamRepository() {
         this.teamList = new ArrayList<>();
     }
-
     public Optional<Team> generateTeam(List<Skill> skills, List<Collaborator> collaboratorList, int minCollaborators, int maxCollaborators){
         Optional<Team> optionalValue = Optional.empty();
 
@@ -28,10 +27,12 @@ public class TeamRepository {
             for (Collaborator c : collaboratorList){
                 if(skills.isEmpty())
                     break;
-
+                System.out.println(checkIfHasSkills(c, skills));
                 if(checkIfHasSkills(c, skills)){
-                    if(!collaboratorHasTeam(c) && team.getCollaboratorList().contains(c)) {
+                    System.out.println(!collaboratorHasTeam(c));
+                    if(!collaboratorHasTeam(c) && !team.getCollaboratorList().contains(c)) {
                         team.addCollaborator(c);
+                        System.out.println("added");
                         encontrados++;
                     }
                 }
@@ -50,12 +51,12 @@ public class TeamRepository {
         if (team == null) {
             optionalValue = Optional.empty();
         }
-
+        System.out.println(team.getCollaboratorList());
         return optionalValue;
     }
 
     private boolean collaboratorHasTeam(Collaborator c) {
-        for (Team team: teamList ){
+        for (Team team: teamList){
             if(team.getCollaboratorList().contains(c)){
                 return true;
             }
@@ -65,12 +66,12 @@ public class TeamRepository {
 
     private boolean checkIfHasSkills(Collaborator c, List<Skill> skills) {
         boolean hasSkills = false;
-//        for(Skill s : c.skills){
-//            if(skills.contains(s)){
-//                skills.remove(s);
-//                hasSkills= true;
-//            }
-//        }
+        for(Skill s : c.cloneList()){
+            if(skills.contains(s)){
+                skills.remove(s);
+                hasSkills= true;
+            }
+        }
         return hasSkills;
     }
 

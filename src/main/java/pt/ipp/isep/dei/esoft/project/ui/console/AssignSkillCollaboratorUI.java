@@ -202,8 +202,6 @@ public class AssignSkillCollaboratorUI implements Runnable {
     private boolean containsCollaboratorByTaxNumber() {
         List <Collaborator> collaboratorList = controllerCollaborator.getCollaboratorRepository2().getCollaboratorList();
 
-        System.out.println("Size of collaboratorList: " + collaboratorList.size());
-
         if (!collaboratorList.isEmpty()) {
             for (Collaborator collaborator : collaboratorList) {
                 if (collaborator.getTaxPayerNumber() == collaboratorTaxNumber) {
