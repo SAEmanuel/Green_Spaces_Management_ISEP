@@ -12,15 +12,17 @@ import java.util.Scanner;
 
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
 
+
+/**
+ * The AssignSkillCollaboratorUI class represents a console-based user interface
+ * for assigning skills to collaborators in a project management system.
+ * It implements the Runnable interface to enable concurrent execution.
+ */
 public class AssignSkillCollaboratorUI implements Runnable {
 
+    // Attributes
     private int collaboratorTaxNumber;
     private String skillName;
-
-    //APENAS TESTES
-    //Collaborator collaborator1 = new Collaborator("Emanuel Almeida", new Data(2004, 4, 20), new Data(2024, 4, 22), "Casa do Caralho", 911529355, "xico@viado.com", 123456789, "BI", new Job("Sugador de Xereca"));
-    //Skill skill1 = new Skill("Programar em Java");
-
     private final AssignSkillCollaboratorController controller;
     private final CreateCollaboratorController controllerCollaborator;
 
@@ -32,15 +34,10 @@ public class AssignSkillCollaboratorUI implements Runnable {
         controllerCollaborator = new CreateCollaboratorController();
     }
 
-    private AssignSkillCollaboratorController getController() {
-        return controller;
-    }
-
-    private CreateCollaboratorController getControllerCollaborator() {
-        return controllerCollaborator;
-    }
-
-
+    /**
+     * Executes the user interface logic for assigning skills to collaborators.
+     * This method is invoked when an instance of AssignSkillCollaboratorUI is run.
+     */
     @Override
     public void run() {
         System.out.println("\n\n--- Register Skill to Collaborator ------------------------");
@@ -56,7 +53,6 @@ public class AssignSkillCollaboratorUI implements Runnable {
 
                 if (collaboratorMenuOption == 1) {
                     isValidTaxNumber = containsCollaboratorByTaxNumber();
-
                 }
 
                 if (!isValidTaxNumber && collaboratorMenuOption != -1) {
@@ -66,7 +62,7 @@ public class AssignSkillCollaboratorUI implements Runnable {
 
             } while (!isValidTaxNumber && collaboratorMenuOption != -1);
 
-            //só entra no loop se for valido (mesmo se escolher a opcao leaving no menu)
+            // Only enters the loop if valid (even if choosing the leaving option in the menu)
             if (containsCollaboratorByTaxNumber()) {
                 System.out.println("Collaborator Name: " + getCollaboratorName());
                 if (getSkillList()) {
@@ -88,12 +84,14 @@ public class AssignSkillCollaboratorUI implements Runnable {
         } else {
             System.out.println(ANSI_BRIGHT_RED + "Error - There is no collaborator created." + ANSI_RESET);
         }
-
-
-
-
     }
 
+    /**
+     * Assigns a skill to a collaborator based on tax number and skill name.
+     *
+     * @param collaboratorTaxNumber The tax number of the collaborator.
+     * @param skillName             The name of the skill to assign.
+     */
     private void assignSkillCollaboratorByTaxNumber(int collaboratorTaxNumber, String skillName) {
         boolean success = controller.assignSkillCollaboratorByTaxNumber(collaboratorTaxNumber, skillName);
 
@@ -105,6 +103,11 @@ public class AssignSkillCollaboratorUI implements Runnable {
 
     }
 
+    /**
+     * Prompts the user to confirm the collaborator's tax number.
+     *
+     * @return The user's choice.
+     */
     private int confirmsCollaboratorTaxNumber() {
         int option = -1;
         Scanner input = new Scanner(System.in);
@@ -132,12 +135,20 @@ public class AssignSkillCollaboratorUI implements Runnable {
         return option;
     }
 
+    /**
+     * Displays the options for changing the collaborator tax number.
+     */
     private void display() {
 
         System.out.printf("\nTyped Collaborator Tax Number -> [%s%s%s]\n", ANSI_GREEN, collaboratorTaxNumber, ANSI_RESET);
         System.out.print("Options:\n 0 -> Change collaborator tax number\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
     }
 
+    /**
+     * Retrieves and displays the list of available skills.
+     *
+     * @return True if the skill list is not empty, false otherwise.
+     */
     private boolean getSkillList() {
         List<Skill> skillList;
 
@@ -153,6 +164,11 @@ public class AssignSkillCollaboratorUI implements Runnable {
         }
     }
 
+    /**
+     * Asks the user if they want to register more skills.
+     *
+     * @return True if the user wants to register more skills, false otherwise.
+     */
     private boolean confirmsMoreThanOneSkill() {
         Scanner input = new Scanner(System.in);
         String option;
@@ -175,6 +191,9 @@ public class AssignSkillCollaboratorUI implements Runnable {
 
     }
 
+    /**
+     * Prompts the user to enter the collaborator's tax number.
+     */
     private void requestCollaboratorTaxNumber() {
         boolean success = false;
         Scanner input = new Scanner(System.in);
@@ -195,10 +214,15 @@ public class AssignSkillCollaboratorUI implements Runnable {
             }
     }
 
-//    private boolean isCollaboratorTaxNumberValid() {
+    //    private boolean isCollaboratorTaxNumberValid() {
 //        return controller.isCollaboratorIDValid(collaboratorTaxNumber);
 //    }
 
+    /**
+     * Checks if the collaborator list contains a collaborator with the given tax number.
+     *
+     * @return True if the collaborator list contains the tax number, false otherwise.
+     */
     private boolean containsCollaboratorByTaxNumber() {
         List <Collaborator> collaboratorList = controllerCollaborator.getCollaboratorRepository2().getCollaboratorList();
 
@@ -217,19 +241,38 @@ public class AssignSkillCollaboratorUI implements Runnable {
         return false;
     }
 
-
+    /**
+     * Checks if the entered skill name is valid.
+     *
+     * @return True if the skill name is valid, false otherwise.
+     */
     private boolean isSkillValid() {
         return controller.isSkillNameValid(skillName);
     }
 
+    /**
+     * Checks if the collaborator list is empty.
+     *
+     * @return True if the collaborator list is empty, false otherwise.
+     */
     private boolean isCollaboratorListEmpty(){
         return controller.isCollaboratorListEmpty();
     }
 
+    /**
+     * Retrieves the name of the collaborator with the given tax number.
+     *
+     * @return The name of the collaborator.
+     */
     private String getCollaboratorName() {
         return controller.getCollaboratorName(collaboratorTaxNumber);
     }
 
+    /**
+     * Prompts the user to enter the skill name.
+     *
+     * @return True if the skill name is valid, false otherwise.
+     */
     private boolean requestSkillToCollaborator() {
         boolean isValid;
         Scanner input = new Scanner(System.in);
@@ -248,6 +291,5 @@ public class AssignSkillCollaboratorUI implements Runnable {
         return isValid;
 
     }
-
 }
 

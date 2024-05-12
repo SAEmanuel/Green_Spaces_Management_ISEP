@@ -8,24 +8,41 @@ import pt.ipp.isep.dei.esoft.project.repository.SkillRepository;
 
 import java.util.List;
 
+/**
+ * The AssignSkillCollaboratorController class manages the assignment of skills to collaborators
+ * in the project management system.
+ */
 public class AssignSkillCollaboratorController {
 
+    // Attributes
     private SkillRepository skillRepository;
     private CollaboratorRepository collaboratorRepository;
 
+    /**
+     * Default constructor that initializes the AssignSkillCollaboratorController.
+     */
     public AssignSkillCollaboratorController() {
         this.skillRepository = getSkillRepository();
         this.collaboratorRepository = getCollaboratorRepository();
     }
 
+    /**
+     * Retrieves the SkillRepository instance.
+     *
+     * @return The SkillRepository instance.
+     */
     private SkillRepository getSkillRepository() {
         if (skillRepository == null) {
-
             skillRepository = getRepositories().getSkillRepository();
         }
         return skillRepository;
     }
 
+    /**
+     * Retrieves the CollaboratorRepository instance.
+     *
+     * @return The CollaboratorRepository instance.
+     */
     private CollaboratorRepository getCollaboratorRepository() {
         if (collaboratorRepository == null) {
             collaboratorRepository = getRepositories().getCollaboratorRepository();
@@ -33,26 +50,48 @@ public class AssignSkillCollaboratorController {
         return collaboratorRepository;
     }
 
+    /**
+     * Retrieves the Repositories singleton instance.
+     *
+     * @return The Repositories instance.
+     */
     private Repositories getRepositories() {
         return Repositories.getInstance();
     }
 
-//    public boolean isCollaboratorIDValid(int collaboratorTaxNumber) {
-//        return collaboratorRepository.findCollaboratorByTaxNumber(collaboratorTaxNumber);
-//    }
-
+    /**
+     * Checks if the collaborator list is empty.
+     *
+     * @return True if the collaborator list is empty, false otherwise.
+     */
     public boolean isCollaboratorListEmpty(){
         return collaboratorRepository.getCollaboratorList().isEmpty();
     }
 
+    /**
+     * Retrieves the list of skills.
+     *
+     * @return The list of skills.
+     */
     public List<Skill> getSkillList() {
         return skillRepository.getSkillList();
     }
 
+    /**
+     * Retrieves the list of collaborators.
+     *
+     * @return The list of collaborators.
+     */
     public List<Collaborator> getCollaboratorList() {
         return collaboratorRepository.getCollaboratorList();
     }
 
+    /**
+     * Checks if a skill with the given name exists.
+     *
+     * @param skillName The name of the skill to check.
+     * @return True if the skill exists, false otherwise.
+     */
     public boolean isSkillNameValid(String skillName) {
         for (Skill skill : getSkillList()) {
             if (skill.getSkillName().equalsIgnoreCase(skillName)) {
@@ -62,6 +101,12 @@ public class AssignSkillCollaboratorController {
         return false;
     }
 
+    /**
+     * Retrieves a skill by its name.
+     *
+     * @param name The name of the skill.
+     * @return The skill with the given name, or null if not found.
+     */
     private Skill getSkillByName(String name) {
         for (Skill skill : getSkillList()) {
             if (skill.getSkillName().equalsIgnoreCase(name)) {
@@ -71,14 +116,26 @@ public class AssignSkillCollaboratorController {
         return null;
     }
 
+    /**
+     * Assigns a skill to a collaborator based on tax number and skill name.
+     *
+     * @param collaboratorTaxNumber The tax number of the collaborator.
+     * @param skillName             The name of the skill to assign.
+     * @return True if the skill was successfully assigned, false otherwise.
+     */
     public boolean assignSkillCollaboratorByTaxNumber(int collaboratorTaxNumber, String skillName) {
         Skill skill = getSkillByName(skillName);
-
-       return collaboratorRepository.assignSkillCollaborator(collaboratorTaxNumber, skill);
+        return collaboratorRepository.assignSkillCollaborator(collaboratorTaxNumber, skill);
     }
 
-
+    /**
+     * Retrieves the name of the collaborator with the given tax number.
+     *
+     * @param collaboratorTaxNumber The tax number of the collaborator.
+     * @return The name of the collaborator, or null if not found.
+     */
     public String getCollaboratorName(int collaboratorTaxNumber) {
         return collaboratorRepository.findCollaborator(collaboratorTaxNumber).getName();
     }
 }
+
