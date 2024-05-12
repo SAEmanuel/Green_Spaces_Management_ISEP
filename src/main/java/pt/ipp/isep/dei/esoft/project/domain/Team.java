@@ -23,4 +23,8 @@ public class Team {
     public void addCollaborator(Collaborator c) {
         collaborators.add(c);
     }
+
+    public List<Collaborator> getCollaborators() {
+        return collaborators;
+    }
 }

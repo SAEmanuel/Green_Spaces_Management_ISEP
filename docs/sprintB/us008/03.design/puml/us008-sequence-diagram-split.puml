@@ -20,7 +20,7 @@ activate UI
 
 UI -> CTRL** : create
 
-UI -> CTRL : getVehicleListNeedingCheckup()
+UI -> CTRL : requestActivation()
 
 deactivate UI
 

@@ -11,96 +11,139 @@ import java.util.Scanner;
 
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
 
+/**
+ * This class represents the user interface for registering vehicle check-ups.
+ * It prompts the user for necessary information such as vehicle plate ID, check-up date, and kilometers.
+ * The data is then used to register the check-up using a controller.
+ */
+
 public class CheckUpRegisterUI implements Runnable {
 
-    private Data checkUpDate;
-    private float checkUpKms;
-    private String plateID;
-    private Vehicle vehicleByPlateID;
+    // Attributes
+    private Data checkUpDate; // Stores the date of the check-up.
+    private float checkUpKms; // Stores the kilometers of the check-up.
+    private String plateID; // Stores the plate ID of the vehicle.
+    private Vehicle vehicleByPlateID; // Stores the vehicle object corresponding to the plate ID.
 
-    private final CreateCheckUpController controller;
+    private final CreateCheckUpController controller; // Controller for creating check-ups.
 
+    // Constructor
     public CheckUpRegisterUI() {
         controller = new CreateCheckUpController();
     }
 
+    // Methods
+
+    /**
+     * Retrieves the CreateCheckUpController instance.
+     *
+     * @return The CreateCheckUpController instance.
+     */
     private CreateCheckUpController getController() {
         return controller;
     }
 
-
+    /**
+     * Runs the user interface for registering a vehicle check-up.
+     * It prompts the user for the vehicle plate ID, checks if the vehicle exists,
+     * requests check-up date and kilometers, and finally submits the data.
+     */
     public void run() {
         System.out.println("\n\n--- Register Vehicle Check Up ------------------------");
 
-        requestVehiclePlateID();
-        vehicleByPlateID = getVehicleByPlateID(plateID);
+        requestVehiclePlateID(); // Requests the plate ID of the vehicle.
+        vehicleByPlateID = getVehicleByPlateID(plateID); // Retrieves the vehicle object using the plate ID.
 
         if (vehicleByPlateID != null) {
             System.out.println("Vehicle PlateID: " + plateID);
-            requestData();
-
-            submitData();
-
+            requestData(); // Requests the check-up date and kilometers.
+            submitData(); // Submits the collected data for registering the check-up.
         } else {
             System.out.println("No vehicle was found for plateID: " + plateID);
         }
-
-
     }
 
+    /**
+     * Requests the user to input the vehicle plate ID.
+     */
     private void requestVehiclePlateID() {
         Scanner input = new Scanner(System.in);
         System.out.print("Plate ID in the format: __-__-__: ");
-
         plateID = input.nextLine();
-
     }
 
+    /**
+     * Retrieves the vehicle with the provided plate ID.
+     *
+     * @param plateID The plate ID of the vehicle.
+     * @return The vehicle with the specified plate ID, or null if not found.
+     */
     private Vehicle getVehicleByPlateID(String plateID) {
         return controller.getVehicleByPlateID(plateID);
     }
 
 
+    /**
+     * Requests the check-up date and kilometers from the user.
+     * It prompts the user to input the check-up date and kilometers and stores them.
+     */
     private void requestData() {
-        checkUpDate = requestCheckUpDate();
-
-        checkUpKms = requestCheckUpKms();
+        checkUpDate = requestCheckUpDate(); // Requests the check-up date.
+        checkUpKms = requestCheckUpKms(); // Requests the kilometers.
     }
 
+    /**
+     * Requests the user to input the check-up date.
+     *
+     * @return The check-up date input by the user.
+     */
     private Data requestCheckUpDate() {
         System.out.print("\n-- Check-Up date --\n");
-        return getData();
+        return getData(); // Retrieves the check-up date from the user.
     }
 
+    /**
+     * Retrieves the check-up date input by the user.
+     * It prompts the user to input the year, month, and day of the check-up date,
+     * and constructs a Data object with the provided values.
+     *
+     * @return The check-up date object.
+     */
     private Data getData() {
         Data data;
         while (true) {
-            int year = requestYear();
-            int month = requestMonth();
-            int day = requestDay();
+            int year = requestYear(); // Requests the year.
+            int month = requestMonth(); // Requests the month.
+            int day = requestDay(); // Requests the day.
             try {
-                data = new Data(year, month, day);
+                data = new Data(year, month, day); // Constructs the Data object.
                 return data;
             } catch (IllegalArgumentException e) {
-                System.out.println(ANSI_BRIGHT_RED + e.getMessage() + ANSI_RESET);
+                System.out.println(ANSI_BRIGHT_RED + e.getMessage() + ANSI_RESET); // Prints error message for invalid date.
             }
         }
     }
 
+    /**
+     * Requests the user to input the day of the check-up date.
+     *
+     * @return The day input by the user.
+     */
     private int requestDay() {
         int resposta;
         Scanner input = new Scanner(System.in);
         System.out.print("- Day: ");
         while (true) {
             try {
-                resposta = input.nextInt();
+                resposta = input.nextInt(); // Retrieves user input for the day.
                 return resposta;
             } catch (InputMismatchException e) {
-                System.out.print(ANSI_BRIGHT_RED + "Invalid DAY! Enter a new one: " + ANSI_RESET);
+                System.out.print(ANSI_BRIGHT_RED + "Invalid DAY! Enter a new one: " + ANSI_RESET); // Prints error message for invalid input.
                 input.nextLine();
             }
         }
     }
+
 
 
     /**
@@ -152,6 +195,11 @@ public class CheckUpRegisterUI implements Runnable {
     }
 
 
+    /**
+     * Requests the user to input the kilometers of the check-up.
+     *
+     * @return The kilometers input by the user.
+     */
     private float requestCheckUpKms() {
         float resposta;
         Scanner input = new Scanner(System.in);
@@ -159,44 +207,81 @@ public class CheckUpRegisterUI implements Runnable {
         System.out.print("Check-Up Kilometers (KM): ");
         while (true) {
             try {
-                resposta = input.nextFloat();
+                resposta = input.nextFloat(); // Retrieves user input for kilometers.
                 return resposta;
             } catch (InputMismatchException e) {
                 // Clear the invalid input
-                System.out.print(ANSI_BRIGHT_RED + "Invalid Current Kilometers! Enter a new one: " + ANSI_RESET);
+                System.out.print(ANSI_BRIGHT_RED + "Invalid Current Kilometers! Enter a new one: " + ANSI_RESET); // Prints error message for invalid input.
                 // Prompt the user again for a valid input
                 input.nextLine();
             }
         }
     }
 
+    /**
+     * Submits the collected data for registering the check-up.
+     * It attempts to register the check-up using the provided data.
+     * Prints a success message if the registration is successful, or an error message if not.
+     */
     private void submitData() {
-        // Attempt to register the vehicle using the provided data
         try {
-
-            Optional<CheckUp> checkUp = getController().registerCheckUp(vehicleByPlateID, checkUpKms, checkUpDate);
+            Optional<CheckUp> checkUp = getController().registerCheckUp(vehicleByPlateID, checkUpKms, checkUpDate); // Attempt to register the check-up.
 
             // Check if the registration was successful
             if (checkUp.isPresent()) {
-                System.out.println(ANSI_BRIGHT_GREEN + "Check-Up successfully registered!" + ANSI_RESET);
+                System.out.println(ANSI_BRIGHT_GREEN + "Check-Up successfully registered!" + ANSI_RESET); // Prints success message.
             } else {
                 // Print error message if vehicle is already registered
-                System.out.println(ANSI_BRIGHT_RED + "Check-Up not registered - Already registered!" + ANSI_RESET);
+                System.out.println(ANSI_BRIGHT_RED + "Check-Up not registered - Already registered!" + ANSI_RESET); // Prints error message.
             }
-
         } catch (IllegalArgumentException e) {
             // Catch IllegalArgumentException indicating invalid data
-            System.out.println(ANSI_BRIGHT_RED + e.getMessage() + ANSI_RESET);
+            System.out.println(ANSI_BRIGHT_RED + e.getMessage() + ANSI_RESET); // Prints error message.
             // Prompt user to repeat registration process
             //runException();
         }
     }
 
+    /**
+     * Prompts the user to confirm the plate ID.
+     * It displays a confirmation menu and prompts the user to choose an option.
+     * Returns the chosen option.
+     *
+     * @return The chosen option.
+     */
+    private int confirmsPlateID() {
+        int option = -1;
+        Scanner input = new Scanner(System.in);
 
+        while (option != 1) {
+            display(); // Displays the confirmation menu.
+            option = input.nextInt(); // Retrieves user input for option.
 
+            switch (option) {
+                case 0:
+                    System.out.println();
+                    requestVehiclePlateID(); // Requests to change the vehicle plate ID.
+                    break;
+                case 1:
+                    System.out.println();
+                    System.out.printf("Vehicle License Plate -> [%s]\n", plateID); // Prints the confirmed plate ID.
+                    break;
+                case 2:
+                    System.out.println(ANSI_BRIGHT_RED + "LEAVING..." + ANSI_RESET); // Prints leaving message.
+                    return -1;
+                default:
+                    System.out.println(ANSI_BRIGHT_RED + "Invalid choice. Please enter 0 or 1 or 2." + ANSI_RESET); // Prints error message for invalid input.
+            }
+        }
+        return option;
+    }
 
-
-
-
+    /**
+     * Displays the confirmation menu to the user.
+     */
+    private void display() {
+        System.out.printf("\nTyped License Plate -> [%s%s%s]\n",ANSI_GREEN,plateID,ANSI_RESET); // Prints the typed license plate.
+        System.out.print("Confirmation menu:\n 0 -> Change license plate\n 1 -> Continue\n 2 -> Exit\nSelected option: "); // Prints the confirmation menu options.
+    }
 
 }

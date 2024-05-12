@@ -14,6 +14,14 @@ public class SkillList {
         skills.add(skill);
     }
 
+    public void setSkills(List<Skill> skills) {
+        this.skills = skills;
+    }
+
+    public void removeSkill(Skill skill){
+        skills.remove(skill);
+    }
+
     public List<Skill> getSkillList() {
         // A clone of the skill list return, to avoid side effects and outside manipulation.
         return clone();
@@ -22,5 +30,9 @@ public class SkillList {
     public List<Skill> clone(){
         // Create a new reference skill list with the same content of the instance one.
         return new ArrayList<>(this.skills);
+    }
+
+    public void cleanSkillList(){
+        this.skills.clear();
     }
 }

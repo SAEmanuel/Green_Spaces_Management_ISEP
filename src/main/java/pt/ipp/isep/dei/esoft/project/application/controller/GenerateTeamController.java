@@ -8,7 +8,6 @@ import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.SkillRepository;
 import pt.ipp.isep.dei.esoft.project.repository.TeamRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,8 +17,9 @@ public class GenerateTeamController {
     private CollaboratorRepository collaboratorRepository;
     private SkillList skillList;
 
-    public GenerateTeamController(){this.teamRepository = new TeamRepository();
-    collaboratorRepository = getCollaboratorRepository();
+    public GenerateTeamController(){
+        teamRepository = getTeamRepository();
+        collaboratorRepository = getCollaboratorRepository();
     }
 
     public List<Skill> getSkillList() {
@@ -50,25 +50,37 @@ public class GenerateTeamController {
         if(skillList == null)
             skillList = new SkillList();
 
-        skillList.addSkill(skill);
+        if(!skillList.getSkillList().contains(skill))
+            skillList.addSkill(skill);
+        else
+            System.out.println("Skill Already Added!");
     }
 
     public Optional<Team> generateTeam(int minCollaborators, int maxCollaborators) {
-        getTeamRepository();
-        List<Skill> skills = skillList.getSkillList();
+        Optional<Team> optionalValue = Optional.empty();
 
-        if(collaboratorRepository == null)
-            System.out.println(0);
+        SkillList skills = new SkillList();
+        skills.setSkills(skillList.getSkillList());
+
         if(collaboratorRepository == null || skills == null)
-            return null;
-        System.out.println(1);
-        if(!skills.isEmpty() && !collaboratorRepository.getCollaboratorList().isEmpty() && minCollaborators != 0 && maxCollaborators != 0){
-            System.out.println(2);
+            return optionalValue;
+
+        if(!skills.getSkillList().isEmpty() && !collaboratorRepository.getCollaboratorList().isEmpty() && minCollaborators != 0 && maxCollaborators != 0){
             return teamRepository.generateTeam(skills, collaboratorRepository.getCollaboratorList(), minCollaborators, maxCollaborators);
         }
         else{
-        System.out.println(3);
-            return null;
+            return optionalValue;
         }
+    }
+
+    public void removeTeam(int teamId){
+        teamRepository.removeTeam(teamId);
+    }
+
+    public void cleanSkillList(){
+        if(skillList == null)
+            skillList = new SkillList();
+
+        skillList.cleanSkillList();
     }
 }

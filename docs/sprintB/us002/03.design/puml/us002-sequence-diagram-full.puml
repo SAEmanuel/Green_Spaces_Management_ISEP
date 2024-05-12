@@ -24,7 +24,7 @@ activate HRM
         UI -> CTRL** : create
 
 
-loop for every skill
+
             UI --> HRM : request data (jobName)
         deactivate UI
 
@@ -87,7 +87,7 @@ loop for every skill
                 CTRL --> UI: job
                 deactivate CTRL
                 UI --> HRM: displays the success of the operation.
-end
+
         deactivate UI
     deactivate HRM
 
