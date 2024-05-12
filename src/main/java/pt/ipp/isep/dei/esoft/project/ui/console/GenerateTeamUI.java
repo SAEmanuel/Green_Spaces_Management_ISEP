@@ -25,12 +25,19 @@ public class GenerateTeamUI implements Runnable {
     public void run() {
         System.out.println("\n\n--- Generate Team ------------------------");
 
+        int teamId = 0;
+
         if(requestData()){
-            submitData();
+            teamId = submitData();
         }
+
+        if(!teamConfirmation())
+            getController().removeTeam(teamId);
+        else
+            System.out.println("Team Accepted");
     }
 
-    private void submitData() {
+    private int submitData() {
         Optional<Team> team = getController().generateTeam(minCollaborators, maxCollaborators);
 
         if (team.isPresent()) {
@@ -45,6 +52,22 @@ public class GenerateTeamUI implements Runnable {
         }
 
         getController().cleanSkillList();
+        return team.get().getTeamId();
+    }
+
+    private boolean teamConfirmation(){
+        Scanner input = new Scanner(System.in);
+        String answerAdd = "";
+
+        while(!answerAdd.equalsIgnoreCase("y") && !answerAdd.equalsIgnoreCase("n") ){
+            System.out.print("Do you want to accept the team ? [y / n]");
+            answerAdd = input.nextLine();
+
+            if(!answerAdd.equalsIgnoreCase("y") && !answerAdd.equalsIgnoreCase("n"))
+                System.out.println("Wrong answer, try again!");
+        }
+
+        return answerAdd.equalsIgnoreCase("y");
     }
 
     private boolean requestData() {

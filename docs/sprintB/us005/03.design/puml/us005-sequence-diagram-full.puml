@@ -87,11 +87,6 @@ activate HRM
 
         activate CTRL
 
-            CTRL -> CTRL : validateData()
-            activate CTRL
-                CTRL --> CTRL :
-            deactivate CTRL
-
             CTRL -> RepositorySingleton : getInstance()
                 activate RepositorySingleton
 
@@ -121,23 +116,22 @@ activate HRM
             CTRL -> TeamRepository : generateTeam(SkillList, collaboratorList, minimumCollaborators, maximumCollaborators)
         activate TeamRepository
 
+                TeamRepository -> TeamRepository : validateData()
+                    activate TeamRepository
+                        TeamRepository --> TeamRepository :
+                    deactivate TeamRepository
+
             TeamRepository -> T** : create
 
             loop while minCollabo <= encontrados <= maxCollab
 
                 loop for each collaborator in collaboratorList
 
-                    TeamRepository -> SkillList : checkIfHasSkills()
-                    activate SkillList
+                    TeamRepository -> TeamRepository : checkIfHasSkills()
+                                        activate TeamRepository
+                                            TeamRepository --> TeamRepository : true/false
+                                        deactivate TeamRepository
 
-                        SkillList -> SkillList : checkIfHasSkills()
-                    activate SkillList
-
-                        SkillList --> SkillList :
-                    deactivate SkillList
-
-                        SkillList --> TeamRepository : true/false
-                    deactivate SkillList
                 end
 
                 opt if hasSkills
