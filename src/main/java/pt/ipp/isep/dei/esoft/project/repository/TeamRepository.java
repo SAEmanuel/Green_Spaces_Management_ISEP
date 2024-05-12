@@ -33,7 +33,7 @@ public class TeamRepository {
                 if(skills.getSkillList().isEmpty())
                     break;
                 if(checkIfHasSkills(c, skills)){
-                    if(!collaboratorHasTeam(c) && !team.getCollaboratorList().contains(c)) {
+                    if(!collaboratorHasTeam(c) && !team.getCollaborators().contains(c)) {
                         removeSkills(c,skills);
                         team.addCollaborator(c);
                         encontrados++;
@@ -57,7 +57,7 @@ public class TeamRepository {
 
         optionalValue = Optional.of(team);
 
-        if(!team.getCollaboratorList().isEmpty()) {
+        if(!team.getCollaborators().isEmpty()) {
             teamList.add(team);
         }
 
@@ -89,7 +89,7 @@ public class TeamRepository {
 
     private boolean collaboratorHasTeam(Collaborator c) {
         for (Team team: teamList){
-            if(team.getCollaboratorList().contains(c)){
+            if(team.getCollaborators().contains(c)){
                 return true;
             }
         }
