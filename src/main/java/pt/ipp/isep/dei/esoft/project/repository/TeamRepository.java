@@ -14,7 +14,6 @@ public class TeamRepository {
     public TeamRepository() {
         this.teamList = new ArrayList<>();
     }
-
     public Optional<Team> generateTeam(List<Skill> skills, List<Collaborator> collaboratorList, int minCollaborators, int maxCollaborators){
         Optional<Team> optionalValue = Optional.empty();
 
