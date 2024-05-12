@@ -11,10 +11,21 @@ import java.util.Optional;
 
 public class TeamRepository {
     private final List<Team> teamList;
-
+    /**
+     * Constructs a new TeamRepository with an empty list of teams.
+     */
     public TeamRepository() {
         this.teamList = new ArrayList<>();
     }
+    /**
+     * Attempts to generate a team based on the provided skills, collaborator list, and constraints.
+     * @param skills The required skills for the team.
+     * @param collaboratorList The list of available collaborators.
+     * @param minCollaborators The minimum number of collaborators required for the team.
+     * @param maxCollaborators The maximum number of collaborators allowed for the team.
+     * @return An Optional containing the generated team if successful, otherwise an empty Optional.
+     */
+
     public Optional<Team> generateTeam(SkillList skills, List<Collaborator> collaboratorList, int minCollaborators, int maxCollaborators){
         Optional<Team> optionalValue = Optional.empty();
 
@@ -63,7 +74,13 @@ public class TeamRepository {
 
         return optionalValue;
     }
-
+    /**
+     * Checks if there are enough collaborators with the required skills available.
+     * @param skills The required skills for the team.
+     * @param collaboratorList The list of available collaborators.
+     * @param minCollaborators The minimum number of collaborators required for the team.
+     * @return True if there are not enough collaborators with the required skills, otherwise false.
+     */
     private boolean verifyIfExistingCollab(SkillList skills, List<Collaborator> collaboratorList, int minCollaborators) {
         int count=0;
 
@@ -86,7 +103,11 @@ public class TeamRepository {
         return false;
     }
 
-
+    /**
+     * Checks if a given collaborator is already assigned to a team.
+     * @param c The collaborator to check.
+     * @return True if the collaborator is already in a team, otherwise false.
+     */
     private boolean collaboratorHasTeam(Collaborator c) {
         for (Team team: teamList){
             if(team.getCollaborators().contains(c)){
@@ -95,7 +116,12 @@ public class TeamRepository {
         }
         return false;
     }
-
+    /**
+     * Checks if a collaborator possesses the required skills.
+     * @param c The collaborator to check.
+     * @param skills The required skills.
+     * @return True if the collaborator possesses at least one of the required skills, otherwise false.
+     */
     private boolean checkIfHasSkills(Collaborator c, SkillList skills) {
         boolean hasSkills = false;
         for(Skill s : c.cloneList()){
@@ -106,7 +132,11 @@ public class TeamRepository {
         }
         return hasSkills;
     }
-
+    /**
+     * Removes the skills possessed by a collaborator from a given skill list.
+     * @param c The collaborator whose skills are to be removed.
+     * @param skills The skill list to remove skills from.
+     */
     private void removeSkills(Collaborator c, SkillList skills) {
         for(Skill s : c.cloneList()){
             if(skills.getSkillList().contains(s)){
@@ -114,21 +144,26 @@ public class TeamRepository {
             }
         }
     }
-
-    private boolean skillListDoNotContain(Team team) {
-        return !teamList.contains(team);
-    }
-
+    /**
+     * Returns a clone of the list of teams.
+     * @return A cloned list of teams to avoid side effects and outside manipulation.
+     */
     public List<Team> getTeamList() {
         // A clone of the skill list return, to avoid side effects and outside manipulation.
         return clone();
     }
-
+    /**
+     * Clones the list of teams.
+     * @return A new list of teams with the same content as the original one.
+     */
     public List<Team> clone(){
         // Create a new reference skill list with the same content of the instance one.
         return new ArrayList<>(this.teamList);
     }
-
+    /**
+     * Removes a team from the repository based on its ID.
+     * @param teamId The ID of the team to be removed.
+     */
     public void removeTeam(int teamId) {
         for (Team t : teamList)
             if(t.getTeamId() == teamId)
