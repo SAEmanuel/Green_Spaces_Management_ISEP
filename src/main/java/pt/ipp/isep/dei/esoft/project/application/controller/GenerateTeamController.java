@@ -21,7 +21,7 @@ public class GenerateTeamController {
         teamRepository = getTeamRepository();
         collaboratorRepository = getCollaboratorRepository();
     }
-
+    // Returns the list of skills
     public List<Skill> getSkillList() {
         if (skillRepository == null) {
             Repositories repositories = Repositories.getInstance();
@@ -29,7 +29,7 @@ public class GenerateTeamController {
         }
         return skillRepository.getSkillList();
     }
-
+    // Gets the TeamRepository instance
     public TeamRepository getTeamRepository() {
         if(teamRepository == null){
             Repositories repositories = Repositories.getInstance();
@@ -37,7 +37,7 @@ public class GenerateTeamController {
         }
         return teamRepository;
     }
-
+    // Gets the CollaboratorRepository instance
     private CollaboratorRepository getCollaboratorRepository() {
         if (collaboratorRepository == null) {
             Repositories repositories = Repositories.getInstance();
@@ -45,7 +45,7 @@ public class GenerateTeamController {
         }
         return collaboratorRepository;
     }
-
+    // Adds a skill to the skill list
     public void addSkill(Skill skill){
         if(skillList == null)
             skillList = new SkillList();
@@ -55,7 +55,7 @@ public class GenerateTeamController {
         else
             System.out.println("Skill Already Added!");
     }
-
+    // Generates a team based on given criteria
     public Optional<Team> generateTeam(int minCollaborators, int maxCollaborators) {
         Optional<Team> optionalValue = Optional.empty();
 
@@ -72,11 +72,11 @@ public class GenerateTeamController {
             return optionalValue;
         }
     }
-
+    // Removes a team with the given teamId
     public void removeTeam(int teamId){
         teamRepository.removeTeam(teamId);
     }
-
+    // Cleans the skill list
     public void cleanSkillList(){
         if(skillList == null)
             skillList = new SkillList();
