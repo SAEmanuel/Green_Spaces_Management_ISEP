@@ -32,9 +32,8 @@ As an HRM, I want to assign one or more skills to a collaborator.
 
 * **AC01:** The employee must be registered.
 * **AC02:** The system should allow the HRM to select one or more skills from a predefined list.
-* **AC03:** The system should provide a way to update or remove assigned skills as needed.
-* **AC04:** The system should ensure that only authorized HR Managers have permission to assign skills.
-* **AC05:** If the system encounters any errors during the skill registration process, it should provide informative error messages to the HR Manager, guiding them on how to resolve the issue.
+* **AC03:** The system should ensure that only authorized HR Managers have permission to assign skills.
+* **AC04:** If the system encounters any errors during the skill registration process, it should provide informative error messages to the HR Manager, guiding them on how to resolve the issue.
 
 
 

@@ -1,76 +1,61 @@
-# US006 - Create a Task 
+# US007 - Register the check-up of a vehicle
 
-## 3. Design - User Story Realization 
+## 3. Design - User Story Realization
 
 ### 3.1. Rationale
 
-_**Note that SSD - Alternative One is adopted.**_
-
-| Interaction ID | Question: Which class is responsible for... | Answer               | Justification (with patterns)                                                                                 |
-|:-------------  |:--------------------- |:---------------------|:--------------------------------------------------------------------------------------------------------------|
-| Step 1  		 |	... interacting with the actor? | CreateTaskUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
-| 			  		 |	... coordinating the US? | CreateTaskController | Controller                                                                                                    |
-| 			  		 |	... instantiating a new Task? | Organization         | Creator (Rule 1): in the DM Organization has a Task.                                                          |
-| 			  		 | ... knowing the user using the system?  | UserSession          | IE: cf. A&A component documentation.                                                                          |
-| 			  		 |							 | Organization         | IE: knows/has its own Employees                                                                               |
-| 			  		 |							 | Employee             | IE: knows its own data (e.g. email)                                                                           |
-| Step 2  		 |							 |                      |                                                                                                               |
-| Step 3  		 |	...saving the inputted data? | Task                 | IE: object created in step 1 has its own data.                                                                |
-| Step 4  		 |	...knowing the task categories to show? | System               | IE: Task Categories are defined by the Administrators.                                                        |
-| Step 5  		 |	... saving the selected category? | Task                 | IE: object created in step 1 is classified in one Category.                                                   |
-| Step 6  		 |							 |                      |                                                                                                               |              
-| Step 7  		 |	... validating all data (local validation)? | Task                 | IE: owns its data.                                                                                            | 
-| 			  		 |	... validating all data (global validation)? | Organization         | IE: knows all its tasks.                                                                                      | 
-| 			  		 |	... saving the created task? | Organization         | IE: owns all its tasks.                                                                                       | 
-| Step 8  		 |	... informing operation success?| CreateTaskUI         | IE: is responsible for user interactions.                                                                     | 
+| Interaction ID                                       | Question: Which class is responsible for...           | Answer                   | Justification (with patterns)                                                                                 |
+|:-----------------------------------------------------|:------------------------------------------------------|:-------------------------|:--------------------------------------------------------------------------------------------------------------|
+| Step 1 : ask to register a vehicle´s check-up   	    | 	... interacting with the actor?                      | CheckupRegisterUI        | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+| Step 2 : request data (plateID)		                    | 	... displaying the form for the actor to input data? | CheckupRegisterUI        | Pure Fabrication                                                                                              |
+| Step 3 : types requested data (plateID)		            | 	... temporarily keeping the input data?              | CheckupRegisterUI        | Pure Fabrication.                                                                                             |
+| 			  		                                              | 	... coordinating the US?                             | CreateCheckUpController  | Controller                                                                                                    |
+| Step 4 : request data (CheckUpDate, checkUpKms)		    | 	... displaying the form for the actor to input data? | CheckupRegisterUI        | Pure Fabrication                                                                                              |
+| Step 5 : types requested data (CheckUpDate, checkUpKms)		            | 	... temporarily keeping the input data?              | CheckupRegisterUI        | Pure Fabrication.                                                                                             |
+| Step 6 : show all data registered for confirmation		 | 	... display all the information before submitting?   | CheckupRegisterUI        | Pure Fabrication.                                                                                             |
+| Step 7 : submits data		                              | 	... creating the vehicle´s check-up?						           | VehicleCheckUpRepository | Creator (Rule 1): in the DM VehicleCheckUpRepository has a Check-Up.                                          |              
+| 			  		                                              | 	... validating all data (global validation)?         | VehicleCheckUpRepository | IE: knows all its check-ups.                                                                                  |
+| 	                                                    | 	... validating all data (local validation)?          | Check-Up                 | IE: kowns its data.                                                                                           | 
+| 			  		                                              | 	... saving the vehicle´s check-up?                       | VehicleCheckUpRepository | IE: owns all its check-ups.                                                                                   |
+| Step 8 : shows operation success		                   | 	... informing operation success?                     | CheckupRegisterUI        | IE: is responsible for user interactions.                                                                     | 
 
 ### Systematization ##
 
-According to the taken rationale, the conceptual classes promoted to software classes are: 
+According to the taken rationale, the conceptual classes promoted to software classes are:
 
-* Organization
-* Task
+* Check-Up
 
-Other software classes (i.e. Pure Fabrication) identified: 
+Other software classes (i.e. Pure Fabrication) identified:
 
-* CreateTaskUI  
-* CreateTaskController
-
+* CreateCheckUpController
+* CheckupRegisterUI
+* VehicleCheckUpRepository
 
 ## 3.2. Sequence Diagram (SD)
-
-_**Note that SSD - Alternative Two is adopted.**_
 
 ### Full Diagram
 
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![Sequence Diagram - Full](svg/us006-sequence-diagram-full.svg)
+![Sequence Diagram - Full](svg/us007-sequence-diagram-full.svg)
 
 ### Split Diagrams
 
-The following diagram shows the same sequence of interactions between the classes involved in the realization of this user story, but it is split in partial diagrams to better illustrate the interactions between the classes.
+The following diagram shows the same sequence of interactions between the classes involved in the realization of this
+user story, but it is split in partial diagrams to better illustrate the interactions between the classes.
 
 It uses Interaction Occurrence (a.k.a. Interaction Use).
 
-![Sequence Diagram - split](svg/us006-sequence-diagram-split.svg)
+![Sequence Diagram - split](svg/us007-sequence-diagram-split.svg)
 
-**Get Task Category List Partial SD**
+**Vehicle Check-up Registration**
 
-![Sequence Diagram - Partial - Get Task Category List](svg/us006-sequence-diagram-partial-get-task-category-list.svg)
+![Sequence Diagram - Partial - Vehicle Check-up Registration](svg/us007-sequence-diagram-partial-vehicle-check-up-registration.svg)
 
-**Get Task Category Object**
+**Vehicle Retrieval**
 
-![Sequence Diagram - Partial - Get Task Category Object](svg/us006-sequence-diagram-partial-get-task-category.svg)
-
-**Get Employee**
-
-![Sequence Diagram - Partial - Get Employee](svg/us006-sequence-diagram-partial-get-employee.svg)
-
-**Create Task**
-
-![Sequence Diagram - Partial - Create Task](svg/us006-sequence-diagram-partial-create-task.svg)
+![Sequence Diagram - Partial - Vehicle Retrieval](svg/us007-sequence-diagram-partial-vehicle-retrieval.svg)
 
 ## 3.3. Class Diagram (CD)
 
-![Class Diagram](svg/us006-class-diagram.svg)
+![Class Diagram](svg/us007-class-diagram.svg)

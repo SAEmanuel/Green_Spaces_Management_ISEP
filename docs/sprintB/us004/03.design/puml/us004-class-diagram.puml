@@ -16,9 +16,10 @@ class SkillRepository {
 }
 
 class CollaboratorRepository {
-    + findCollaboratorById(collboratorId)
-    + assignSkillCollaborator(skill)
-    + validateIfHasSkill(skill)
+    + findCollaborator(collaboratorTaxNumber)
+    + assignSkillCollaborator(collaboratorTaxNumber, skill)
+    + addSkill(skill)
+
 
 }
 
@@ -33,7 +34,8 @@ class Repositories {
 class AssignSkillCollaboratoController {
     + AssignSkillCollaboratoController(skillRepository,collaboratorRepository)
     + getSkillList()
-    + assignSkillCollaboratorById(collaboratorId,skill)
+    + assignSkillCollaboratorByTaxNumber(collaboratorTaxNumber, skillName)
+    + isCollaboratorIDValid(collaboratorTaxNumber)
 
 }
 

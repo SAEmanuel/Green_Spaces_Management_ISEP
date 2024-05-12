@@ -6,34 +6,38 @@ skinparam shadowing false
 participant ":CheckupRegisterUI" as UI
 participant ":CreateCheckUpController" as CTRL
 participant ":Repositories" as RepositorySingleton
-participant "vehicleCheckUpRepository:\nVehicleCheckUpRepository" as VehicleCheckUpRepository
-participant "checkUp\n:CheckUp" as CHECKUP
+participant "repositories\n:Repositories" as PLAT
+participant "vehicleRepository\n:VehicleRepository" as vehicleRepository
 
 activate UI
 
-UI -> CTRL : createVehicleCheckUp(vehicle, date, currentMileage)
+UI -> CTRL : getVehicleByPlateID(plateID)
+ group Vehicle Retrieval
+
 activate CTRL
-group Vehicle Check-up Registration
+CTRL -> RepositorySingleton : getInstance()
+activate RepositorySingleton
 
-CTRL -> VehicleCheckUpRepository : createVehicleCheckUp(vehicle, date, currentMileage)
-activate VehicleCheckUpRepository
+RepositorySingleton --> CTRL: repositories
+deactivate RepositorySingleton
 
-VehicleCheckUpRepository -> CHECKUP** : create
-VehicleCheckUpRepository -> VehicleCheckUpRepository : addCheckUp(checkUp)
+CTRL -> PLAT : getVehicleRepository()
+activate PLAT
 
+PLAT --> CTRL: vehicleRepository
+deactivate PLAT
 
- VehicleCheckUpRepository -> VehicleCheckUpRepository : validateCheckUp(checkUp)
+CTRL -> vehicleRepository : vehicleListContainsByPlate(plateID)
 
-VehicleCheckUpRepository -> CTRL : checkUp
-deactivate VehicleCheckUpRepository
+activate vehicleRepository
+
+vehicleRepository -> CTRL : vehicle
+deactivate vehicleRepository
+
 end
 
-deactivate VehicleCheckUpRepository
 
-CTRL -> UI : checkUp
-
-
+CTRL -> UI : vehicle
 deactivate CTRL
-activate UI
 
 @enduml

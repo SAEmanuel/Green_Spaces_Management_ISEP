@@ -21,17 +21,45 @@ activate HRM
 
         activate UI
 
-        UI --> HRM : request data (Collaborator ID Number)
+        UI --> HRM : request data (collaboratorTaxNumber)
         deactivate UI
 
 
-        HRM -> UI : selects requested data
+        HRM -> UI : confirms requested data
         activate UI
 
         UI -> CTRL** : create
+         UI -> CTRL : containsCollaboratorByTaxNumber(collaboratorTaxNumber)
+             activate CTRL
+        CTRL -> RepositorySingleton : getInstance()
 
-        UI -> CTRL : getSkillList()
-        activate CTRL
+
+
+
+                                activate RepositorySingleton
+
+                                RepositorySingleton --> CTRL : repositories
+                                deactivate RepositorySingleton
+
+                                CTRL -> PLAT : getCollaboratorRepository()
+                                activate PLAT
+
+                                PLAT --> CTRL : collaboratorRepository
+                                deactivate PLAT
+
+                                CTRL -> collaboratorRepository : isCollaboratorIDValid(collaboratorTaxNumber)
+                                activate collaboratorRepository
+
+                                collaboratorRepository -> CTRL : true/false
+                                deactivate collaboratorRepository
+
+                                CTRL -> UI : true/false
+                                deactivate CTRL
+
+                                UI -> HRM : displays that Tax Number is valid
+
+                                UI -> CTRL : getSkillList()
+            activate CTRL
 
             CTRL -> RepositorySingleton : getInstance()
             activate RepositorySingleton
@@ -51,9 +79,12 @@ activate HRM
             skillRepository --> CTRL : skillList
             deactivate skillRepository
 
+
             CTRL -> UI :  skillList
+
         deactivate CTRL
             UI -> HRM : shows skillList
+            deactivate UI
 
 
 
@@ -83,56 +114,38 @@ activate HRM
 
 
 
-            UI -> CTRL : assignSkillCollaboratorById(collaboratorId,skill)
+            UI -> CTRL :assignSkillCollaboratorByTaxNumber(collaboratorTaxNumber, skillName)
             activate CTRL
 
 
-            CTRL -> CTRL : assignSkillCollaboratorById(collaboratorId,skill)
-                    activate CTRL
-
-                        CTRL -> RepositorySingleton : getInstance()
-                        activate RepositorySingleton
-
-                        RepositorySingleton --> CTRL : repositories
-                        deactivate RepositorySingleton
-
-                        CTRL -> PLAT : getCollaboratorRepository()
-                        activate PLAT
-
-                        PLAT --> CTRL : collaboratorRepository
-                        deactivate PLAT
-
-
-                        CTRL -> collaboratorRepository : assignSkillCollaboratorById(collaboratorId,skill)
+                        CTRL -> collaboratorRepository :assignSkillCollaborator(collaboratorTaxNumber, skill)
                         activate collaboratorRepository
 
-                        collaboratorRepository -> collaboratorRepository : findCollaboratorById(collboratorId)
-                        activate collaboratorRepository
+                        collaboratorRepository -> collaboratorRepository : findCollaborator(collaboratorTaxNumber);
 
-                        collaboratorRepository -> collaboratorRepository: assignSkillCollaborator(skill)
-                        activate collaboratorRepository
-                        collaboratorRepository -> collaboratorRepository: validateIfHasSkill(skill)
-                                activate collaboratorRepository
 
-                                collaboratorRepository --> collaboratorRepository
-                                deactivate collaboratorRepository
-                        collaboratorRepository --> collaboratorRepository :
-                        deactivate collaboratorRepository
-                        collaboratorRepository --> collaboratorRepository :
+                        collaboratorRepository -> collaboratorRepository: addSkill(skill)
 
-                        deactivate collaboratorRepository
+
+
+
+
+
+
+
 
 
                         collaboratorRepository --> CTRL : true/false
                         deactivate collaboratorRepository
 
-                        CTRL --> CTRL : true/false
-                        deactivate CTRL
+
+
 
 
 
 
                 CTRL --> UI: true/false
+
                 deactivate CTRL
                 UI --> HRM: displays the success of the operation.
 

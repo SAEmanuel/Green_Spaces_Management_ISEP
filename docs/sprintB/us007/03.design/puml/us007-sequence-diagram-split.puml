@@ -34,24 +34,9 @@ deactivate UI
 
 activate CTRL
 
-CTRL -> RepositorySingleton : getInstance()
-activate RepositorySingleton
-
-RepositorySingleton --> CTRL: repositories
-deactivate RepositorySingleton
-
-CTRL -> PLAT : getVehicleRepository()
-activate PLAT
-
-PLAT --> CTRL: vehicleRepository
-deactivate PLAT
-
-CTRL -> vehicleRepository : vehicleListContainsByPlate(plateID)
-
-activate vehicleRepository
-
-vehicleRepository -> CTRL : vehicle
-deactivate vehicleRepository
+ref over CTRL
+Vehicle Retrieval
+end
 
 
 CTRL -> UI : vehicle
@@ -69,25 +54,11 @@ UI -> CTRL : createVehicleCheckUp(vehicle, checkUpDate, checkUpKms)
 deactivate UI
 activate CTRL
 
-CTRL -> VehicleCheckUpRepository : registerCheckUp(vehicle, checkUpDate, checkUpKms)
-activate VehicleCheckUpRepository
-
-VehicleCheckUpRepository -> CHECKUP** : create
-VehicleCheckUpRepository -> VehicleCheckUpRepository : addCheckUp(checkUp)
-
-
- VehicleCheckUpRepository -> VehicleCheckUpRepository : validateCheckUp(checkUp)
-
- VehicleCheckUpRepository -> VehicleCheckUpRepository : setLastKmsCheckUp(vehicle, checkUpKms)
-
-VehicleCheckUpRepository -> CTRL : checkUp
-deactivate VehicleCheckUpRepository
-
-
-deactivate VehicleCheckUpRepository
+ref over CTRL
+Vehicle Check-up Registration
+end
 
 CTRL -> UI : checkUp
-
 
 deactivate CTRL
 activate UI

@@ -6,38 +6,36 @@ skinparam shadowing false
 participant ":CheckupRegisterUI" as UI
 participant ":CreateCheckUpController" as CTRL
 participant ":Repositories" as RepositorySingleton
-participant "repositories\n:Repositories" as PLAT
-participant "vehicleRepository\n:VehicleRepository" as vehicleRepository
+participant "vehicleCheckUpRepository:\nVehicleCheckUpRepository" as VehicleCheckUpRepository
+participant "checkUp\n:CheckUp" as CHECKUP
 
 activate UI
 
-UI -> CTRL : getVehicleByLicensePlate(vehicleLicensePlate)
- group Vehicle Retrieval
-
+UI -> CTRL : createVehicleCheckUp(vehicle, checkUpDate, checkUpKms)
 activate CTRL
-CTRL -> RepositorySingleton : getInstance()
-activate RepositorySingleton
+group Vehicle Check-up Registration
 
-RepositorySingleton --> CTRL: repositories
-deactivate RepositorySingleton
+CTRL -> VehicleCheckUpRepository : registerCheckUp(vehicle, checkUpDate, checkUpKms)
+activate VehicleCheckUpRepository
 
-CTRL -> PLAT : getVehicleRepository()
-activate PLAT
+VehicleCheckUpRepository -> CHECKUP** : create
+VehicleCheckUpRepository -> VehicleCheckUpRepository : addCheckUp(checkUp)
 
-PLAT --> CTRL: vehicleRepository
-deactivate PLAT
 
-CTRL -> vehicleRepository : getVehicleByLicensePlate(vehicleLicensePlate)
+ VehicleCheckUpRepository -> VehicleCheckUpRepository : validateCheckUp(checkUp)
 
-activate vehicleRepository
+ VehicleCheckUpRepository -> VehicleCheckUpRepository : setLastKmsCheckUp(vehicle, checkUpKms)
 
-vehicleRepository -> CTRL : vehicle
-deactivate vehicleRepository
-
+VehicleCheckUpRepository -> CTRL : checkUp
+deactivate VehicleCheckUpRepository
 end
 
+deactivate VehicleCheckUpRepository
 
-CTRL -> UI : vehicle
+CTRL -> UI : checkUp
+
+
 deactivate CTRL
+activate UI
 
 @enduml

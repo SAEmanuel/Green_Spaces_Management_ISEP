@@ -8,7 +8,7 @@ autonumber
 'hide footbox
 actor "Human Resources Manager" as HRM
 participant ":AssignSkillCollaboratorUI" as UI
-participant ":AssignSkillCollaboratoController" as CTRL
+participant ":AssignSkillCollaboratorController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "collaboratorRepository\n:CollaboratorRepository" as collaboratorRepository
@@ -21,26 +21,43 @@ activate HRM
 
         activate UI
 
-        UI --> HRM : request data (Collaborator ID Number)
+        UI --> HRM : request data (collaboratorTaxNumber)
         deactivate UI
 
 
-        HRM -> UI : selects requested data
+        HRM -> UI : confirms requested data
         activate UI
 
         UI -> CTRL** : create
+         UI -> CTRL : containsCollaboratorByTaxNumber(collaboratorTaxNumber)
+             activate CTRL
 
-        UI -> CTRL : getSkillList()
-        activate CTRL
+                ref over CTRL
+                Collaborator Searching
+                end
+
+                CTRL -> UI : true/ false
+                deactivate CTRL
 
 
-        ref over CTRL
-            Get Skill List
-        end
+
+
+
+                                UI -> HRM : displays that Tax Number is valid
+deactivate CTRL
+                                UI -> CTRL : getSkillList()
+            activate CTRL
+
+            ref over CTRL
+                            Get Skill List
+                            end
+
 
             CTRL -> UI :  skillList
-            deactivate CTRL
+
+        deactivate CTRL
             UI -> HRM : shows skillList
+            deactivate UI
 
 
 
@@ -70,37 +87,36 @@ activate HRM
 
 
 
-            UI -> CTRL : assignSkillCollaboratorById(collaboratorId,skill)
+            UI -> CTRL :assignSkillCollaboratorByTaxNumber(collaboratorTaxNumber, skillName)
             activate CTRL
 
 
-            CTRL -> CTRL : assignSkillCollaboratorById(collaboratorId,skill)
-                    activate CTRL
-
-                        ref over CTRL
-                            Get Collaborator Repository
-                        end
-
-
-                        CTRL -> collaboratorRepository : assignSkillCollaboratorById(collaboratorId,skill)
+                        CTRL -> collaboratorRepository :assignSkillCollaborator(collaboratorTaxNumber, skill)
                         activate collaboratorRepository
 
-
-
                         ref over collaboratorRepository
-                            Assign Skill to Collaborator
+                                Assigning Skill to Collaborator
                         end
+
+
+
+
+
+
+
+
 
                         collaboratorRepository --> CTRL : true/false
                         deactivate collaboratorRepository
 
-                        CTRL --> CTRL : true/false
-                        deactivate CTRL
+
+
 
 
 
 
                 CTRL --> UI: true/false
+
                 deactivate CTRL
                 UI --> HRM: displays the success of the operation.
 

@@ -10,39 +10,34 @@ autonumber
 participant ":AssignSkillCollaboratoController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "skillRepository\n:SkillRepository" as TaskCategoryRepository
 
 autonumber 3
 
- -> CTRL : getSkillList()
-autonumber 3.1
-activate CTRL
-    group Get Skill List
+ -> CTRL :getSkillList()
 
+activate CTRL
+group Get Skill List
 
             CTRL -> RepositorySingleton : getInstance()
             activate RepositorySingleton
 
-                RepositorySingleton --> CTRL: repositories
+            RepositorySingleton --> CTRL : repositories
             deactivate RepositorySingleton
 
             CTRL -> PLAT : getSkillRepository()
             activate PLAT
 
-                PLAT --> CTRL: skillRepository
+            PLAT --> CTRL : skillRepository
             deactivate PLAT
 
-            CTRL -> TaskCategoryRepository : getSkillList()
-            activate TaskCategoryRepository
+            CTRL -> skillRepository : getSkillList()
+            activate skillRepository
 
-                TaskCategoryRepository --> CTRL : skillList
-            deactivate TaskCategoryRepository
+            skillRepository --> CTRL : skillList
+            deactivate skillRepository
 
-
-    end
-    autonumber 4
-    <-- CTRL  : skillList
-deactivate CTRL
+end
+             <- CTRL  :  skillList
 
 
 @enduml

@@ -41,9 +41,11 @@ public class CheckUp {
      * @param checkUpDate The date of the check-up.
      */
     private void validateCheckUp(Vehicle vehicle, float checkUpKms, Data checkUpDate) {
-        validateDate(checkUpDate);
-        validatesNegatives(checkUpKms);
-        validateCheckUpKms(vehicle, checkUpKms);
+
+            validateDate(checkUpDate);
+            validatesNegatives(checkUpKms);
+            validateCheckUpKms(vehicle, checkUpKms);
+
     }
 
     /**
@@ -70,7 +72,7 @@ public class CheckUp {
         float vehicleLastCheckUp = vehicle.getLastCheckUp();
 
         if (checkUpKms < vehicleLastCheckUp) {
-            throw new IllegalArgumentException("'Last Checkup' -> [" + vehicle +
+            throw new IllegalArgumentException("'Last Checkup' -> [" + vehicle.getLastCheckUp() +
                     "] cannot be bigger than 'Current Check-Up Kms' -> [" + checkUpKms + "].");
         }
     }
