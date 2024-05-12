@@ -16,10 +16,6 @@ public class Team {
         return teamId;
     }
 
-    public List<Collaborator> getCollaboratorList(){
-        return collaborators;
-    }
-
     public void addCollaborator(Collaborator c) {
         collaborators.add(c);
     }
