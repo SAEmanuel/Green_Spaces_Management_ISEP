@@ -1,71 +1,138 @@
 # US002 - Job Registration 
 
 ## 4. Tests 
+### Validations for Job Name
+**Test 1:** Ensure that the job name is valid 
 
-**Test 1:** Check that it is not possible to create an instance of the Task class with null values. 
-
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Task instance = new Task(null, null, null, null, null, null, null);
-	}
+	@Test
+    void ensureJobNameIsValid_1() {
+        Job job = new Job("Gardener");
+    }
 	
 
-**Test 2:** Check that it is not possible to create an instance of the Task class with a reference containing less than five chars - AC2. 
+**Test 2:** Ensure that the job name is valid 
 
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureReferenceMeetsAC2() {
-		Category cat = new Category(10, "Category 10");
-		
-		Task instance = new Task("Ab1", "Task Description", "Informal Data", "Technical Data", 3, 3780, cat);
-	}
+	@Test
+    void ensureJobNameIsValid_2() {
+        Job job = new Job("Painter of walls");
+    }
 
-_It is also recommended to organize this content by subsections._ 
+**Test 3:** Ensure that the job name is not null
+
+	@Test
+    void ensureJobNameIsNotNull() {
+    assertThrows(IllegalArgumentException.class, () -> new Job(null));
+    }
+
+**Test 4:** Ensure that the job name is not empty
+
+	 @Test
+    void ensureJobNameIsNotEmpty_1() {
+        assertThrows(IllegalArgumentException.class, () -> new Job(""));
+    }
+
+**Test 5:** Ensure that the job name is not empty
+
+	 @Test
+    void ensureJobNameIsNotEmpty_2() {
+        assertThrows(IllegalArgumentException.class, () -> new Job("  "));
+    }
+
+**Test 6:** Ensure that the job name is invalid
+
+	  @Test
+    void ensureJobNameIsInvalid_1() {
+        assertThrows(IllegalArgumentException.class, () -> new Job("Engineer1"));
+    }
+
+**Test 7:** Ensure that the job name is invalid
+
+	 @Test
+    void ensureJobNameIsInvalid_2() {
+        assertThrows(IllegalArgumentException.class, () -> new Job("Mechanic?"));
+    }
+
+### Validations when getting Job Name
+
+**Test 8:** Ensure Job Name Returns with Different Reference
+
+	 @Test
+    void shouldReturnJobNameWithDifferentRef() {
+        String name = "Mechanic";
+        Job job = new Job("name");
+        boolean sameRef = job.getJobName() == name;
+        assertFalse(sameRef);
+    }
+
+**Test 9:** Ensure Correct Job Name is Returned
+
+	@Test
+    void shouldReturnJobName() {
+        Job job = new Job("Java Developer");
+        assertEquals("Java Developer", job.getJobName());
+    }
+
+
+### Validations for Method Equals
+**Test 10:** Comparing Jobs with Same Reference
+
+	 @Test
+    void comparingJobsSameRef() {
+        Job job1 = new Job("Java Developer");
+        Job job2 = job1;
+        assertTrue(job1.equals(job2));
+    }
+
+
+**Test 11:** Comparing Job with Different Object Instance
+
+	 @Test
+    void comparingJobWithDifferentObjectInstance_2() {
+        Job job1 = new Job("Java Developer");
+        Skill skill = new Skill("Java Developer");
+        assertFalse(job1.equals(skill));
+    }
+
+**Test 12:** Comparing Jobs with Same Job Name
+
+	 @Test
+    void comparingJobs_sameJobName() {
+        Job job1 = new Job("Java Developer");
+        Job job2 = new Job("Java Developer");
+        assertTrue(job1.equals(job2));
+    }
+
+**Test 13:** Comparing Jobs with Different Job Name
+
+	 @Test
+    void comparingJobs_differentJobName() {
+        Job job1 = new Job("Java Developer");
+        Job job2 = new Job("Python Developer");
+        assertFalse(job1.equals(job2));
+    }
+
+### Validations Method Clone
+**Test 14:** Ensure Cloned Job has Different Reference
+
+	   @Test
+    void differentRefForJob() {
+        Job job1 = new Job("Java Developer");
+        Job job2 = job1.clone();
+        boolean sameRef = job1 == job2;
+        assertFalse(sameRef);
+    }
 
 
 ## 5. Construction (Implementation)
 
-### Class CreateTaskController 
+### Class RegisterJobController
 
 ```java
-public Task createTask(String reference, String description, String informalDescription, String technicalDescription,
-                       Integer duration, Double cost, String taskCategoryDescription) {
 
-	TaskCategory taskCategory = getTaskCategoryByDescription(taskCategoryDescription);
-
-	Employee employee = getEmployeeFromSession();
-	Organization organization = getOrganizationRepository().getOrganizationByEmployee(employee);
-
-	newTask = organization.createTask(reference, description, informalDescription, technicalDescription, duration,
-                                      cost,taskCategory, employee);
+public Optional<Job> registerJob(String jobName) {
+    Optional<Job> newJob;
     
-	return newTask;
+    newJob = jobRepository.registerJob(jobName);
+    return newJob;
 }
 ```
-
-### Class Organization
-
-```java
-public Optional<Task> createTask(String reference, String description, String informalDescription,
-                                 String technicalDescription, Integer duration, Double cost, TaskCategory taskCategory,
-                                 Employee employee) {
-    
-    Task task = new Task(reference, description, informalDescription, technicalDescription, duration, cost,
-                         taskCategory, employee);
-
-    addTask(task);
-        
-    return task;
-}
-```
-
-
-## 6. Integration and Demo 
-
-* A new option on the Employee menu options was added.
-
-* For demo purposes some tasks are bootstrapped while system starts.
-
-
-## 7. Observations
-
-n/a
