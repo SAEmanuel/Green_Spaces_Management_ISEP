@@ -1,0 +1,59 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+class Team {
+    - int teamId
+    - List<Collaborator> collaborators
+}
+
+class SkillRepository {
+    - List<Skill> skill
+    + getSkillList()
+}
+
+class CollaboratorRepository {
+    - List<Collaborator> collaborator
+    + getCollaboratorList()
+}
+
+class TeamRepository {
+    - List<Team> teamList
+}
+
+class Repositories {
+    - Repositories()
+    + getInstance() : Repositories
+    + getSKillRepository()
+    + getCollaboratorRepository()
+}
+
+class GenerateTeamController {
+    - getSKillRepository()
+    - getCollaboratorRepository()
+}
+
+class GenerateTeamUI {
+}
+
+Repositories -> Repositories : instance
+
+GenerateTeamUI .> GenerateTeamController
+
+GenerateTeamController .> Repositories : repositories
+
+Repositories -> "1" SkillRepository
+Repositories -> "1" CollaboratorRepository
+Repositories -> "1" TeamRepository
+
+GenerateTeamController ..> SkillRepository : skillRepository
+GenerateTeamController ..> CollaboratorRepository : collaboratorRepository
+GenerateTeamController ..> TeamRepository : teamRepository
+
+TeamRepository -> "1" Team : generateTeam
+@enduml

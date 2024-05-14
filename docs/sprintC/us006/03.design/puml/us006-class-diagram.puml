@@ -1,0 +1,68 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+skinparam classAttributeIconSize 0
+'left to right direction
+
+
+
+class Vehicle {
+    - String plateID
+    - String brand
+    - String model
+    - String type
+    - float tareWeight
+    - float grossWeight
+    - float millage
+    - int maintenanceFrequency
+    - Data registerDate
+    - Data acquisitionDate
+    - Data lastCheckup
+    + Vehicle(plateID,brand, model, type, tareWeight,\ngrossWeight, millage, registerDate, acquisitionDate,\nmaintenanceFrequency, lastCheckup)
+    - validatePlate(plateID)
+}
+
+
+class Data {
+    - int ano
+    - Mes mes
+    - int dia
+
+}
+
+
+class VehicleRepository {
+    + registerVehicle(plateID,brand, model, type, tareWeight,\ngrossWeight, millage, registerDate, acquisitionDate,\nmaintenanceFrequency, lastCheckup)
+    - addVehicle(vehicle)
+    - validateVehicle(vehicle)
+}
+
+
+class Repositories {
+    - Repositories()
+    + getInstance() : Repositories
+    + getVehicleRepository()
+}
+
+class VehicleController {
+    + VehicleController()
+    + registerVehicle(plateID,brand, model, type, tareWeight,\ngrossWeight, millage, registerDate, acquisitionDate,\nmaintenanceFrequency, lastCheckup)
+}
+
+class RegisterVehicleUI {
+}
+
+RegisterVehicleUI .> VehicleController
+
+VehicleController .> Repositories : repositories
+Repositories  --> "1 " VehicleRepository
+Repositories -> Repositories : instance
+
+VehicleController ..>  VehicleRepository : vehicleRepository
+
+VehicleRepository  --> "1" Vehicle : register
+Data -o Vehicle
+@enduml

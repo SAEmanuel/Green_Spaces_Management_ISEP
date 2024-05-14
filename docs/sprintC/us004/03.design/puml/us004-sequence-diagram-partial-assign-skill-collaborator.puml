@@ -1,0 +1,36 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+
+participant ":AssignSkillCollaboratoController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "skillRepository\n:SkillRepository" as TaskCategoryRepository
+
+-> CTRL :assignSkillCollaboratorByTaxNumber(collaboratorTaxNumber, skillName)
+            activate CTRL
+
+               group Assigning Skill to Collaborator
+                        CTRL -> collaboratorRepository :assignSkillCollaborator(collaboratorTaxNumber, skill)
+                        activate collaboratorRepository
+
+                        collaboratorRepository -> collaboratorRepository : findCollaborator(collaboratorTaxNumber);
+
+
+                        collaboratorRepository -> collaboratorRepository: addSkill(skill)
+
+                        collaboratorRepository --> CTRL : true/false
+
+                        deactivate collaboratorRepository
+
+                        end
+
+                <- CTRL : true/false
+
+
+@enduml

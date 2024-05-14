@@ -1,0 +1,94 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "Human Resources Manager" as HRM
+participant ":RegisterSkillUI" as UI
+participant ":RegisterSkillController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "skillRepository\n:SkillRepository" as skillRepository
+participant "skill\n:Skill" as EMPREGO
+
+activate HRM
+
+        HRM -> UI : asks to register a new skill
+
+
+        activate UI
+
+        UI -> CTRL** : create
+
+
+
+            UI --> HRM : request data (skillName)
+        deactivate UI
+
+
+    HRM -> UI : types requested data (skillName)
+    activate UI
+
+        UI --> HRM : show all data registered  for confirmation
+        deactivate UI
+
+        HRM -> UI : submits data
+            activate UI
+
+
+            UI -> CTRL : registerSkill(skillName)
+            activate CTRL
+            CTRL -> CTRL : getSkillRepository()
+            activate CTRL
+
+                CTRL -> RepositorySingleton : getInstance()
+                activate RepositorySingleton
+
+                    RepositorySingleton --> CTRL: repositories
+                deactivate RepositorySingleton
+
+                CTRL -> PLAT : getSkillRepository()
+                activate PLAT
+
+                    PLAT --> CTRL: skillRepository
+                deactivate PLAT
+
+                CTRL --> CTRL : skillRepository
+            deactivate CTRL
+
+
+
+
+                CTRL -> skillRepository: registerSkill(skillName)
+                activate skillRepository
+
+
+
+                skillRepository -> EMPREGO**: create
+
+
+                                    skillRepository -> skillRepository: addSkill(skill)
+                deactivate EMPREGO
+                                    activate skillRepository
+                                        skillRepository -> skillRepository: validateSkill(skill)
+                                        activate skillRepository
+                                            skillRepository --> skillRepository
+                                        deactivate skillRepository
+
+                                        skillRepository --> skillRepository
+                                    deactivate skillRepository
+
+                                    skillRepository --> CTRL : skill
+                                    deactivate skillRepository
+
+                CTRL --> UI: skill
+                deactivate CTRL
+                UI --> HRM: shows operation success.
+
+        deactivate UI
+    deactivate HRM
+
+@enduml

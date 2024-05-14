@@ -1,0 +1,202 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "Human Resources Manager" as HRM
+participant ":GenerateTeamUI" as UI
+participant ":GenerateTeamController" as CTRL
+participant "TeamRepository:\nTeamRepository" as TeamRepository
+participant "T:Team" as T
+participant ":SkillList" as SkillList
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "skillRepository\n:SkillRepository" as SkillRepository
+participant "CollaboratorRepository:\nCollaboratorRepository" as CollaboratorRepository
+
+
+activate HRM
+
+        HRM -> UI : asks to generate a new team
+
+        activate UI
+
+            UI -> CTRL** : create
+
+            UI -> CTRL : getSkillList()
+            activate CTRL
+
+                CTRL -> RepositorySingleton : getInstance()
+                activate RepositorySingleton
+
+
+                    RepositorySingleton --> CTRL: repositories
+                deactivate RepositorySingleton
+
+                CTRL -> PLAT : getSkillsRepository()
+                activate PLAT
+
+                    PLAT --> CTRL: SkillRepository
+                deactivate PLAT
+
+                CTRL -> SkillRepository : getSkillList()
+                activate SkillRepository
+
+                    SkillRepository --> CTRL : SkillList
+                deactivate SkillRepository
+
+                CTRL --> UI : SkillList
+            deactivate CTRL
+
+            UI --> HRM : show skill list
+    loop [for each skill
+            UI --> HRM : request a skill
+
+        HRM -> UI : selects a skill
+        UI -> CTRL : addSkill()
+        activate CTRL
+
+        CTRL -> SkillList** : create
+
+        CTRL -> SkillList : addSkill()
+        deactivate CTRL
+        activate SkillList
+    end
+
+            UI --> HRM : requests data (minimumCollaborators, maximumCollaborators)
+        deactivate UI
+
+        HRM -> UI : types requested data
+        activate UI
+
+            UI --> HRM : shows typed data
+        deactivate UI
+
+
+
+
+    HRM -> UI : confirms and submits data
+    activate UI
+
+        UI -> CTRL : generateTeam(minimumCollaborators, maximumCollaborators)
+        deactivate UI
+
+
+        activate CTRL
+
+            CTRL -> RepositorySingleton : getInstance()
+                activate RepositorySingleton
+
+                    RepositorySingleton --> CTRL: repositories
+                deactivate RepositorySingleton
+
+                CTRL -> PLAT : getCollaboratorRepository()
+            activate PLAT
+
+                PLAT --> CTRL : CollaboratorRepository
+            deactivate PLAT
+
+                CTRL -> CollaboratorRepository : getCollaboratorList()
+
+            activate CollaboratorRepository
+
+                CollaboratorRepository --> CTRL : collaboratorList
+
+            deactivate CollaboratorRepository
+
+
+            |||
+            CTRL -> SkillList : getSkillList()
+            SkillList --> CTRL : skillList
+            deactivate SkillList
+
+            CTRL -> TeamRepository : generateTeam(SkillList, collaboratorList, minimumCollaborators, maximumCollaborators)
+        activate TeamRepository
+
+                TeamRepository -> TeamRepository : validateData()
+                    activate TeamRepository
+                        TeamRepository --> TeamRepository :
+                    deactivate TeamRepository
+
+            TeamRepository -> T** : create
+
+            loop while minCollabo <= encontrados <= maxCollab
+
+                loop for each collaborator in collaboratorList
+
+                    TeamRepository -> TeamRepository : checkIfHasSkills()
+                                        activate TeamRepository
+                                            TeamRepository --> TeamRepository : true/false
+                                        deactivate TeamRepository
+
+                end
+
+                opt if hasSkills
+                    TeamRepository -> T : addCollaborator(Collaborator)
+                end
+            end
+
+                    TeamRepository --> CTRL : Team Proposal
+        deactivate TeamRepository
+
+
+
+
+
+
+            CTRL --> UI : Team Proposal
+            deactivate CTRL
+
+        activate UI
+
+            UI --> HRM: Show team and ask for confirmation
+            deactivate UI
+            alt accept team proposal
+
+
+                HRM -> UI : accept team
+                activate UI
+
+                    UI --> HRM : team accepted
+                deactivate UI
+            else refuse team proposal
+               HRM -> UI : refuse team
+               activate UI
+
+               UI -> CTRL : rejectTeamCreation()
+               activate CTRL
+
+               CTRL -> TeamRepository : rejectTeamCreation()
+
+
+                activate TeamRepository
+
+               TeamRepository -> T : rejectTeamCreation()
+
+               activate T
+                     T -> T: rejectTeamCreation()
+               activate T
+                     T --> T :
+               deactivate T
+
+               T --> TeamRepository : teamDeleteSuccessful
+               deactivate T
+
+
+               TeamRepository --> CTRL : teamDeleteSuccessful
+               deactivate TeamRepository
+
+               CTRL --> UI : teamDeleteSuccessful
+
+               deactivate CTRL
+               UI --> HRM : team delete successful
+               deactivate UI
+            end
+    deactivate UI
+
+deactivate HRM
+
+@enduml

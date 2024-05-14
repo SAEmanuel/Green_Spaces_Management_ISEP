@@ -1,0 +1,35 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+'left to right direction
+
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+package "HRM System" {
+
+title Domain Model - US002
+
+class HRM {
+}
+
+
+
+class Job {
+    name
+}
+
+
+
+
+
+HRM "1" -- "1..*" Job : register >
+
+
+
+
+
+@enduml

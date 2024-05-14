@@ -1,0 +1,60 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+skinparam classAttributeIconSize 0
+'left to right direction
+
+class VehicleRepository {
+    - List<Vehicle> vehicleList
+    + requestList()
+    + vehicleListContainsByPlate (PlateID)
+
+}
+
+class Repositories {
+    - Repositories()
+    + getInstance() : Repositories
+    + getVehicleRepository()
+}
+
+
+class CheckUp {
+    - Vehicle : vehicle
+    - Float : checkUpKms
+    - Data : checkUpDate
+    + CheckUp (vehicle,checkUpKms,checkUpDate)
+    - validateCheckUp(vehicle,checkUpKms,checkUpDate)
+}
+
+class CreateCheckUpController {
+    + CreateCheckUpController()
+    + getVehicleByPlateID(PlateID)
+    + registerCheckUp(vehicle,checkUpKms,checkUpDate)
+}
+
+class VehicleCheckUpRepository {
+    - checkUpList: List<CheckUp>
+    + registerCheckUp(vehicle,checkUpKms,checkUpDate):
+    - addCheckUp(CheckUp)
+    - validateCheckUpDate(CheckUp)
+    - setLastKmsCheckUp(vehicle, CheckUpKms)
+}
+
+class RegisterCheckUpUI {
+
+}
+
+RegisterCheckUpUI .> CreateCheckUpController
+
+CreateCheckUpController .> Repositories : repositories
+Repositories  --> "1 " VehicleRepository
+Repositories -> Repositories : instance
+VehicleRepository ..>  CreateCheckUpController : vehicle
+CreateCheckUpController -> VehicleRepository : getVehicleCheckUpList()
+CreateCheckUpController --> VehicleCheckUpRepository : registerCheckUp()
+VehicleCheckUpRepository --> "  1" CheckUp : addCheckUp()
+
+@enduml

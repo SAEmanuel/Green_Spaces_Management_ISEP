@@ -1,0 +1,38 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant "vehicleRepository:\nVehicleRepository" as ORG
+participant "vehicle\n:Vehicle" as VEICULO
+
+autonumber 16
+-> ORG: registerVehicle(plateID, brand, model...)
+
+autonumber 16.1
+activate ORG
+    group Register Vehicle
+
+        ORG -> VEICULO**: create
+
+
+
+        ORG -> ORG: addVehicle (Vehicle)
+        deactivate VEICULO
+
+        activate ORG
+            ORG -> ORG: validateVehicle(Vehicle)
+            activate ORG
+                ORG --> ORG
+            deactivate ORG
+
+            ORG --> ORG
+        deactivate ORG
+    end
+
+    autonumber 17
+    <-- ORG : vehicle
+deactivate ORG
+
+
+@enduml

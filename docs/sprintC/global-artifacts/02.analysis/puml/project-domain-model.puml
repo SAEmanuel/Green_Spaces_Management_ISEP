@@ -1,0 +1,159 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+'skinparam linetype ortho
+
+
+left to right direction
+skinparam classAttributeIconSize 0
+hide circle
+hide methods
+
+title Domain Model
+
+
+
+
+'  #########    General Information's      ##########
+    class GSM {
+    }
+
+    class GSU {
+    }
+
+    class GreenSpace {
+    }
+
+    class MusgoSublime {
+    }
+
+    class Task {
+    }
+
+    class Agenda {
+    }
+
+    GreenSpace "*" -- "1" GSM : manages <
+    GreenSpace "*" -- "1" GSU : uses <
+    GreenSpace "*" -- "1..*" Task : carries out on <
+
+    MusgoSublime "1" -- "*" GreenSpace : manages >
+
+    Agenda "1" -- "*" Task : defines >
+
+'  #########          ##########
+
+
+
+'  #########    VFM      ##########
+
+    class VFM {
+    }
+
+    class Vehicle {
+         plateID
+         brand
+         model
+         type
+         tare
+         grossWeight
+         millage
+         registerDate
+         acquisitionDate
+         maintenanceFrequency
+         lastCheckUp
+    }
+
+            class Machine{
+            }
+
+            class Equipment{
+            }
+
+    class VehicleForCheckUp {
+        Vehicle
+    }
+
+    class CheckUp {
+        licence
+        date
+        currentMileage
+    }
+
+
+    VFM "1" -- "*" Vehicle : register >
+    VFM "1  " -- "*" VehicleForCheckUp: selects >
+    VFM "1" ---- "*" CheckUp : register >
+    VFM "1" -- "*" VehicleForCheckUp : informs <
+
+    Vehicle "*"-- "*" VehicleForCheckUp: contains >
+    Vehicle "1" -- "*" Equipment : transport >
+    Vehicle "1" - "*" Machine : transport >
+
+    VehicleForCheckUp "*" -- "*" CheckUp : does >
+
+
+'  #########          ##########
+
+
+
+'  #########    HRM      ##########
+
+    class HRM {
+    }
+
+    class Collaborator {
+        name
+        birthdate
+        admissionDate
+        address
+        phoneNumber
+        email
+        taxpayerNumber
+        id_doc_type
+        id_doc_number
+    }
+
+    class Team {
+        skill
+        minTeamSize
+        maxTeamSize
+    }
+
+    class Skill {
+        name
+    }
+
+    class Job {
+        name
+    }
+
+    HRM "1" -- "1..*" Skill : register >
+'    HRM "1" -- "*" Skill : assignes >
+    HRM "1" -- "1..*" Job : register >
+    HRM "1" - "1..*" Collaborator : register >
+    HRM "1" -- "1..*" Team : generates >
+
+    Skill "1.." -- "*" Collaborator : assigned to >
+
+    Collaborator "1" -- "*" Job : has >
+
+    Team "1" -- "1..*" Collaborator : has >
+
+'  #########          ##########
+
+'  #########    General Associations     ##########
+
+    Team "*" -- "*" Vehicle : uses >
+    Team "1..*" - "*" Agenda : has >
+
+    MusgoSublime "1" --- "*" Collaborator : has >
+
+    Task "*" -- "*" Skill : requires >
+    Task "*" - "1..*    " Job : requires >
+
+
+'  #########          ##########
+
+@enduml

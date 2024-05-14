@@ -1,0 +1,45 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+left to right direction
+
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+package "VFM System" {
+
+title Domain Model - US008
+
+
+
+class VFM {
+}
+
+class Vehicle {
+         plateID
+         brand
+         model
+         type
+         tare
+         grossWeight
+         millage
+         registerDate
+         acquisitionDate
+         maintenanceFrequency
+         lastCheckUp
+}
+
+
+
+
+
+VFM "1" -- "*" Vehicle : lists check-up >
+
+
+
+
+
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+'left to right direction
+
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+package "GSM System" {
+
+title Domain Model - US011
+
+class GSM {
+}
+
+class ParkCollectedData {
+age
+recommendation
+visitsFrequency
+}
+
+
+ParkCollectedData "1" - "1" GSM: search <
+
+@enduml

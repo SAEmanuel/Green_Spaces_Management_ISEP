@@ -1,0 +1,42 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+
+title Domain Model - US003
+
+package "HRM System" {
+
+    class Collaborator {
+        name
+        birthdate
+        admissionDate
+        address
+        phoneNumber
+        email
+        taxpayerNumber
+        id_doc_type
+        id_doc_number
+    }
+
+    class Job {
+        name
+    }
+
+    class HRM {
+        name
+    }
+
+    HRM "1" - "1..*" Collaborator : register >
+    HRM "1" - "1" Job : selects >
+    Job "1..*" -- "1" Collaborator : has <
+
+
+}
+
+@enduml

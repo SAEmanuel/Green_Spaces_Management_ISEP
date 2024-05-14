@@ -1,0 +1,38 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - Alternative One
+
+autonumber
+
+actor "Fleet\nManager" as FM
+participant ":System" as System
+
+activate FM
+
+    FM -> System : Selects the option to register a vehicle's check-up.
+    activate System
+
+    System -> FM : Asks a vehicle's license plate.
+        deactivate System
+
+        FM -> System  : Enters a vehicle's license plate.
+    activate System
+
+    System --> FM : Asks the check-up date and the current mileage of the vehicle.
+    deactivate System
+
+    FM -> System  : Enters the check-up date and current mileage.
+        activate System
+
+    System --> FM : Displays all the data that will be registered.
+        deactivate System
+
+        FM --> System : Confirms data.
+        activate System
+
+        System --> FM : Stores it.
+
+@enduml

@@ -1,0 +1,66 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant ":Team" as Team
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "CollaboratorRepository:\nCollaboratorRepository" as CollaboratorRepository
+
+
+autonumber 19
+-> Team : generateTeam(skills, minimumCollaborators, maximumCollaborators)
+
+        group Generate Team
+
+        activate Team
+
+
+                            Team -> Team : validateData()
+                            activate Team
+
+                            Team --> Team :
+                            deactivate Team
+
+                            Team -> RepositorySingleton : getInstance()
+
+                            activate RepositorySingleton
+
+
+                                RepositorySingleton --> Team: repositories
+                            deactivate RepositorySingleton
+
+                            Team -> PLAT : getCollaboratorRepository()
+                            activate PLAT
+
+                                PLAT --> Team : CollaboratorRepository
+                            deactivate PLAT
+
+                            loop while minCollabo <= encontrados <= maxCollabo
+                                Team -> CollaboratorRepository : getCollaboratorBySkill(skills)
+                                activate Team
+                                activate CollaboratorRepository
+
+                                CollaboratorRepository -> CollaboratorRepository : findCollaborator(skills)
+                                activate CollaboratorRepository
+                                CollaboratorRepository --> CollaboratorRepository: collaborator
+                                deactivate CollaboratorRepository
+
+
+
+                                    CollaboratorRepository --> Team : collaborator
+                                deactivate CollaboratorRepository
+                                Team --> Team : addCollaborator(Collaborator)
+                                deactivate Team
+
+                            end
+
+           end
+                <-- Team : Team Proposal
+           deactivate Team
+
+
+
+
+@enduml

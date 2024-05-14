@@ -1,0 +1,41 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant ":CheckupRegisterUI" as UI
+participant ":CreateCheckUpController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "vehicleCheckUpRepository:\nVehicleCheckUpRepository" as VehicleCheckUpRepository
+participant "checkUp\n:CheckUp" as CHECKUP
+
+activate UI
+
+UI -> CTRL : createVehicleCheckUp(vehicle, checkUpDate, checkUpKms)
+activate CTRL
+group Vehicle Check-up Registration
+
+CTRL -> VehicleCheckUpRepository : registerCheckUp(vehicle, checkUpDate, checkUpKms)
+activate VehicleCheckUpRepository
+
+VehicleCheckUpRepository -> CHECKUP** : create
+VehicleCheckUpRepository -> VehicleCheckUpRepository : addCheckUp(checkUp)
+
+
+ VehicleCheckUpRepository -> VehicleCheckUpRepository : validateCheckUp(checkUp)
+
+ VehicleCheckUpRepository -> VehicleCheckUpRepository : setLastKmsCheckUp(vehicle, checkUpKms)
+
+VehicleCheckUpRepository -> CTRL : checkUp
+deactivate VehicleCheckUpRepository
+end
+
+deactivate VehicleCheckUpRepository
+
+CTRL -> UI : checkUp
+
+
+deactivate CTRL
+activate UI
+
+@enduml

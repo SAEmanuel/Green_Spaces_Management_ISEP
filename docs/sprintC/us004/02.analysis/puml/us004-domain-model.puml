@@ -1,0 +1,44 @@
+@startuml
+
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+'left to right direction
+
+title Domain Model - US004
+
+hide circles
+hide methods
+
+package "HRM System" {
+
+
+
+    class Skill {
+        name
+    }
+
+    class Collaborator {
+        name
+        birthdate
+        admissionDate
+        address
+        phoneNumber
+        email
+        taxpayerNumber
+        id_doc_type
+        id_doc_number
+    }
+
+    class HRM {
+       }
+
+    HRM "1" - "1..*" Skill : assigns >
+    Collaborator "1  " -- "1..*"  Skill  : has >
+}
+
+
+
+@enduml
+

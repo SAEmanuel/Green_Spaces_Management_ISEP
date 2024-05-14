@@ -1,0 +1,47 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+
+participant ":AssignSkillCollaboratorController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "collaboratorRepository\n:CollaboratorRepository" as collaboratorRepository
+participant "skillRepository\n:SkillRepository" as skillRepository
+
+-> CTRL : containsCollaboratorByTaxNumber(collaboratorTaxNumber)
+             activate CTRL
+
+             group Collaborator Searching
+        CTRL -> RepositorySingleton : getInstance()
+
+
+
+
+                                activate RepositorySingleton
+
+                                RepositorySingleton --> CTRL : repositories
+                                deactivate RepositorySingleton
+
+                                CTRL -> PLAT : getCollaboratorRepository()
+                                activate PLAT
+
+                                PLAT --> CTRL : collaboratorRepository
+                                deactivate PLAT
+
+                                CTRL -> collaboratorRepository : isCollaboratorIDValid(collaboratorTaxNumber)
+                                activate collaboratorRepository
+
+                                collaboratorRepository -> CTRL : true/false
+                                deactivate collaboratorRepository
+
+                                end
+
+                                 <- CTRL : true/false
+
+
+
+@enduml

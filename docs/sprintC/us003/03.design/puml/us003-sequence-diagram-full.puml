@@ -1,0 +1,130 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "Human Resources Manager" as HRM
+participant ":CreateCollaboratorUI" as UI
+participant ":CreateCollaboratorController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "CollaboratorRepository:\nCollaboratorRepository" as CollaboratorRepository
+participant "JobsRepository:\nJobsRepository" as JobsRepository
+participant "collaborator\n:Collaborator" as Collaborator
+
+activate HRM
+
+        HRM -> UI : asks to create a new collaborator
+
+        activate UI
+
+            UI -> CTRL** : create
+
+                UI -> CTRL : getJobs()
+                activate CTRL
+
+                CTRL -> RepositorySingleton : getInstance()
+                                activate RepositorySingleton
+
+                                    RepositorySingleton --> CTRL: repositories
+                                deactivate RepositorySingleton
+
+                                CTRL -> PLAT : getJobsRepository()
+                                activate PLAT
+
+                                    PLAT --> CTRL: jobsRepository
+                                deactivate PLAT
+
+                CTRL -> JobsRepository : getJobsList()
+                activate JobsRepository
+
+                    JobsRepository --> CTRL : jobsList
+                deactivate JobsRepository
+
+                CTRL --> UI : jobsList
+            deactivate CTRL
+
+            UI --> HRM : shows jobsList list\n and asks to select one job
+        deactivate UI
+
+    HRM -> UI : selects a job
+    activate UI
+
+        UI --> HRM : requests data
+    deactivate UI
+
+    HRM -> UI : types requested data (name, birthDate, admissionDate,\naddress, phoneNumber, email, taxpayerNumber,\ndocType, docNumber)
+    activate UI
+
+        UI --> HRM : shows selected job and requested data
+    deactivate UI
+
+    HRM -> UI : submits data
+    activate UI
+
+            UI -> CTRL : submitData()
+    activate CTRL
+    CTRL -> CTRL : getCollaborators()
+
+    activate CTRL
+
+
+    CTRL -> RepositorySingleton : getInstance()
+                                    activate RepositorySingleton
+
+                                        RepositorySingleton --> CTRL: repositories
+                                    deactivate RepositorySingleton
+
+                                    CTRL -> PLAT : getCollaboratorRepository()
+                                    activate PLAT
+
+                                     PLAT --> CTRL: collaboratorsRepository
+                                    deactivate PLAT
+                                     CTRL --> CTRL
+
+                deactivate CTRL
+
+
+            CTRL -> CollaboratorRepository : registerCollaborator(name, birthDate, admissionDate,\naddress, phoneNumber, email, taxpayerNumber,\ndocType, docNumber and job)
+
+            activate CollaboratorRepository
+
+            CollaboratorRepository -> Collaborator** : registerCollaborator(name, birthDate, admissionDate,\naddress, phoneNumber, email, taxpayerNumber,\ndocType, docNumber and job)
+
+            activate Collaborator
+
+                Collaborator -> Collaborator : validateData(name, birthDate, admissionDate,\naddress, phoneNumber, email, taxpayerNumber,\ndocType, docNumber and job)
+                activate Collaborator
+                Collaborator --> Collaborator :
+                deactivate Collaborator
+
+            CollaboratorRepository -> CollaboratorRepository : addCollaborator(collaborator)
+            deactivate Collaborator
+                        activate CollaboratorRepository
+
+
+            CollaboratorRepository -> CollaboratorRepository: validateCollaborator(collaborator)
+             activate CollaboratorRepository
+             CollaboratorRepository --> CollaboratorRepository
+            deactivate CollaboratorRepository
+
+            CollaboratorRepository --> CollaboratorRepository
+            deactivate CollaboratorRepository
+
+        CollaboratorRepository --> CTRL : collaborator
+        deactivate CollaboratorRepository
+        deactivate Collaborator
+
+        CTRL --> UI: collaborator
+        deactivate CTRL
+
+        UI --> HRM: Confirms the success of the operation.
+
+    deactivate UI
+
+deactivate HRM
+
+@enduml

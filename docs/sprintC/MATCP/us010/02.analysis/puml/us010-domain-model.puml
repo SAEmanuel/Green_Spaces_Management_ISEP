@@ -1,0 +1,31 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+'left to right direction
+
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+
+title Domain Model - US010
+
+class Organization {
+}
+
+class GSM {
+
+}
+
+class Equipment {
+
+}
+
+Organization "1" --- "*" Equipment: has >
+GSM "1"- "*" Equipment: selects >
+
+
+
+@enduml

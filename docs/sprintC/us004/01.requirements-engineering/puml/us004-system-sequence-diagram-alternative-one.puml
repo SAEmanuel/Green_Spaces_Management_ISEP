@@ -1,0 +1,42 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - Alternative One
+
+autonumber
+
+actor "Human Resources\nManager" as HRM
+participant ":System" as System
+
+activate HRM
+
+
+     HRM -> System : Selects the option to edit the employee’s skills.
+    activate System
+
+    System --> HRM : Asks a collaborator ID number.
+        deactivate System
+
+    HRM -> System : Enters a valid collaborator ID number.
+         activate System
+
+        System --> HRM : Presents a list of available skills.
+    deactivate System
+
+        loop skill selection
+        HRM -> System : Selects one skill from the list.
+    activate System
+
+    System --> HRM : Displays all the changes.
+    deactivate System
+
+    HRM --> System : Confirms the selection.
+    activate System
+
+    System --> HRM : Validates and stores it.
+     end
+
+
+@enduml

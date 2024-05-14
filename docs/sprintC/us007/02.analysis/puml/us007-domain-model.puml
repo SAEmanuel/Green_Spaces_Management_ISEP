@@ -1,0 +1,41 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+skinparam classAttributeIconSize 0
+
+hide circles
+hide methods
+
+title Domain Model - US007
+
+package "VFM System" {
+
+    class VFM {
+    }
+
+    class CheckUp {
+        licence
+        date
+        currentMileage
+    }
+
+    class Vehicle {
+         plateID
+         brand
+         model
+         type
+         tare
+         grossWeight
+         millage
+         registerDate
+         acquisitionDate
+         maintenanceFrequency
+         lastCheckUp
+    }
+
+    VFM "1" -- "1" CheckUp : register >
+    Vehicle "1" - "*" CheckUp : assigned <
+}
+@enduml

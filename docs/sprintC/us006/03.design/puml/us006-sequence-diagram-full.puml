@@ -1,0 +1,91 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "Vehicle Fleet Manager" as VFM
+participant ":RegisterVehicleUI" as UI
+participant ":VehicleController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "vehicleRepository:\nVehicleRepository" as vehicleRepository
+participant "vehicle\n:Vehicle" as VEICULO
+
+activate VFM
+
+        VFM -> UI : asks to register a new vehicle
+
+        activate UI
+
+'            UI --> ADM : requests data (reference, description,  informal \n description, technical description, duration, cost)
+            'create CTRL
+            UI -> CTRL** : create
+
+        UI --> VFM : request data (plateID, brand, model...)
+            deactivate UI
+
+        VFM -> UI : types requested data
+        activate UI
+
+
+        UI --> VFM : show all data registered  for confirmation
+        deactivate UI
+
+    VFM -> UI : submits data
+    activate UI
+
+        UI -> CTRL : registerVehicle(plateID, brand, model...)
+        activate CTRL
+
+
+            CTRL -> CTRL : getVehicleRepository()
+                        activate CTRL
+
+                            CTRL -> RepositorySingleton : getInstance()
+                            activate RepositorySingleton
+
+                                RepositorySingleton --> CTRL: repositories
+                            deactivate RepositorySingleton
+
+                            CTRL -> PLAT : getVehicleRepository()
+                            activate PLAT
+
+                                PLAT --> CTRL: vehicleRepository
+                            deactivate PLAT
+
+                            CTRL --> CTRL : vehicleRepository
+                        deactivate CTRL
+
+            CTRL -> vehicleRepository: registerVehicle(plateID, brand, model...)
+            activate vehicleRepository
+
+            vehicleRepository -> VEICULO**: create
+
+
+                vehicleRepository -> vehicleRepository: addVehicle(Vehicle)
+            deactivate VEICULO
+
+                activate vehicleRepository
+                    vehicleRepository -> vehicleRepository: validateVehicle(Vehicle)
+                    activate vehicleRepository
+                        vehicleRepository --> vehicleRepository
+                    deactivate vehicleRepository
+
+                    vehicleRepository --> vehicleRepository
+                deactivate vehicleRepository
+
+                vehicleRepository --> CTRL : vehicle
+
+            deactivate vehicleRepository
+
+            CTRL --> UI: vehicle
+            deactivate CTRL
+            UI --> VFM: shows operation success.
+    deactivate UI
+
+deactivate VFM
+
+@enduml

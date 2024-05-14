@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.esoft.project.domain.Data;
 import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -85,13 +85,19 @@ class VehicleRepositoryTest {
         Vehicle vehicle2 = new Vehicle("CD-00-AB", "Honda", "Civic", "Car", 2000f, 2300f, 2500f, 6000f, 200f, registerDate2, acquisitionDate2);
         vehicleRepository.registerVehicle("CD-00-AB", "Honda", "Civic", "Car", 2000f, 2300f, 2500f, 6000f, 200f, registerDate2, acquisitionDate2);
 
+        Data registerDate3 = new Data(2023, 6, 2);
+        Data acquisitionDate3 = new Data(2023, 7, 16);
+        Vehicle vehicle3 = new Vehicle("DD-00-AB", "Honda", "Civic", "Car", 2000f, 2300f, 10000f, 2000f, 8005f, registerDate3, acquisitionDate3);
+        vehicleRepository.registerVehicle("DD-00-AB", "Honda", "Civic", "Car", 2000f, 2300f, 10000f, 2000f, 8005f, registerDate3, acquisitionDate3);
         // Act
         List<Vehicle> result = vehicleRepository.getVehiclesNeedingCheckUp();
 
         // Assert
-        assertEquals(1, result.size());
+        assertEquals(2, result.size());
         assertTrue(result.contains(vehicle1));
         assertFalse(result.contains(vehicle2));
+        assertTrue(result.contains(vehicle3));
+
     }
 
 }

@@ -1,0 +1,56 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+'skinparam classAttributeIconSize 0
+'left to right direction
+
+
+
+
+class SkillRepository {
++ getSkillList()
+
+}
+
+class CollaboratorRepository {
+    + findCollaborator(collaboratorTaxNumber)
+    + assignSkillCollaborator(collaboratorTaxNumber, skill)
+    + addSkill(skill)
+
+
+}
+
+
+class Repositories {
+    - Repositories()
+    + getInstance() : Repositories
+    + getSkillRepository()
+    + getCollaboratorRepository()
+}
+
+class AssignSkillCollaboratoController {
+    + AssignSkillCollaboratoController(skillRepository,collaboratorRepository)
+    + getSkillList()
+    + assignSkillCollaboratorByTaxNumber(collaboratorTaxNumber, skillName)
+    + isCollaboratorIDValid(collaboratorTaxNumber)
+
+}
+
+class AssignSkillCollaboratorUI {
+}
+
+AssignSkillCollaboratorUI .> AssignSkillCollaboratoController
+
+AssignSkillCollaboratoController .> Repositories : repositories
+Repositories  ..> "1 " SkillRepository
+Repositories  ..> "1 " CollaboratorRepository
+Repositories -> Repositories : instance
+
+AssignSkillCollaboratoController ..>  SkillRepository : skillRepository
+AssignSkillCollaboratoController .>  CollaboratorRepository : collaboratorRepository
+
+
+@enduml

@@ -1,0 +1,44 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant "jobRepository\n:jobRepository" as ORG
+participant "job\n:Job" as EMPREGO
+
+autonumber 16
+
+autonumber 16.1
+
+        -> ORG: registerJob(jobName)
+            activate ORG
+            group Register job
+        ORG -> EMPREGO** : register(JobName)
+
+        activate EMPREGO
+            EMPREGO -> EMPREGO : validateJobName(jobName)
+            activate EMPREGO
+
+                EMPREGO --> EMPREGO
+
+            deactivate EMPREGO
+
+            ORG -> ORG: addJob(job)
+        deactivate EMPREGO
+
+        activate ORG
+            ORG -> ORG: validateJob(job)
+            activate ORG
+                ORG --> ORG
+            deactivate ORG
+
+            ORG --> ORG
+        deactivate ORG
+    end
+
+    autonumber 17
+    <-- ORG : job
+deactivate ORG
+
+
+@enduml

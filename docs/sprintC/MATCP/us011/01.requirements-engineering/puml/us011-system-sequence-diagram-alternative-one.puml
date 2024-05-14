@@ -1,0 +1,21 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - Alternative One
+
+autonumber
+
+actor "Green Spaces\nManager" as GSM
+participant ":System" as System
+
+        activate GSM
+
+        GSM --> System: Requests user portal collected data
+        activate System
+
+        System -> GSM : Shows requested data
+        deactivate System
+        deactivate GSM
+@enduml

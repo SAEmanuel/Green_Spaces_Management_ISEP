@@ -1,0 +1,47 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+
+participant ":CreateTaskController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+
+autonumber 17
+
+ -> CTRL : submitData()
+autonumber 18
+activate CTRL
+    group Get Collaborator List
+
+            CTRL -> CTRL : getCollaborators()
+
+                activate CTRL
+
+
+                CTRL -> RepositorySingleton : getInstance()
+                                                activate RepositorySingleton
+
+                                                    RepositorySingleton --> CTRL: repositories
+                                                deactivate RepositorySingleton
+
+                                                CTRL -> PLAT : getCollaboratorRepository()
+                                                activate PLAT
+
+                                                 PLAT --> CTRL: collaboratorsRepository
+                                                deactivate PLAT
+                                                 CTRL --> CTRL
+
+                            deactivate CTRL
+
+    end
+    autonumber 22
+
+deactivate CTRL
+
+
+@enduml
