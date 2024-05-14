@@ -65,7 +65,8 @@ As a Human Resources Manager, I want to register a collaborator with a job and f
 * **AC6:** Email address should have a prefix (before "@") and "." after "@".
 * **AC7:** Taxpayer number can only have 9 numbers.
 * **AC8:** The user will select a job from a list of jobs provided by the application.
-* **AC9:** An collaborator can only be added if it was not in the list previously.
+* **AC9:** An collaborator can only be added if it was not in the list previously (global validation).
+* **AC10:** Every acceptance criteria must be met, in order for the collaborator to be created successfully (local validation).
 
 ### 1.4. Found out Dependencies
 
