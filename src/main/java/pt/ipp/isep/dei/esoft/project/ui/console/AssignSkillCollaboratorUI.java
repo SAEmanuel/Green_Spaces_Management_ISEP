@@ -44,8 +44,6 @@ public class AssignSkillCollaboratorUI implements Runnable {
         boolean isValidTaxNumber = false;
         int collaboratorMenuOption;
 
-        System.out.println(controller.getCollaboratorList().size());
-
         if(!isCollaboratorListEmpty()) {
             do {
                 requestCollaboratorTaxNumber();
@@ -96,9 +94,9 @@ public class AssignSkillCollaboratorUI implements Runnable {
         boolean success = controller.assignSkillCollaboratorByTaxNumber(collaboratorTaxNumber, skillName);
 
         if (success) {
-            System.out.println("Skill successfully assigned.");
+            System.out.println(ANSI_BRIGHT_GREEN + "Skill successfully assigned." + ANSI_RESET);
         } else {
-            System.err.println("Skill could not be assigned. Skill already assigned.");
+            System.out.println(ANSI_BRIGHT_RED + "Skill could not be assigned. Skill already assigned." + ANSI_RESET);
         }
 
     }
@@ -155,6 +153,7 @@ public class AssignSkillCollaboratorUI implements Runnable {
         skillList = controller.getSkillList();
 
         if (!skillList.isEmpty()) {
+            System.out.println("-- Available skills --");
             for (Skill skill : skillList) {
                 System.out.println(skill);
             }
@@ -276,7 +275,7 @@ public class AssignSkillCollaboratorUI implements Runnable {
     private boolean requestSkillToCollaborator() {
         boolean isValid;
         Scanner input = new Scanner(System.in);
-        System.out.println("Please enter the skill name: ");
+        System.out.print("Please enter the skill name: ");
 
         skillName = input.nextLine().trim();
 
