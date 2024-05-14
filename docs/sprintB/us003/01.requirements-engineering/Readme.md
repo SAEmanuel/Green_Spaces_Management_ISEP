@@ -61,9 +61,11 @@ As a Human Resources Manager, I want to register a collaborator with a job and f
 * **AC2:** Name should only have letters.
 * **AC3:** Admission date can only be valid if the collaborator is over 18 years old.
 * **AC4:** Phone number can only have 9 numbers.
-* **AC5:** Email address should have a prefix (before "@") and an email domain (after "@").
-* **AC6:** Taxpayer number can only have 9 numbers.
-* **AC7:** The user will select a job from a list of jobs provided by the application.
+* **AC5:** Phone number can only be from the specified domains for phone numbers
+* **AC6:** Email address should have a prefix (before "@") and "." after "@".
+* **AC7:** Taxpayer number can only have 9 numbers.
+* **AC8:** The user will select a job from a list of jobs provided by the application.
+* **AC9:** An collaborator can only be added if it was not in the list previously.
 
 ### 1.4. Found out Dependencies
 
