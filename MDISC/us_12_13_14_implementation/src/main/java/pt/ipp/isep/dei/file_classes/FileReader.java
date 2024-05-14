@@ -51,9 +51,9 @@ public class FileReader {
 
         if (singleFile) {
             System.out.print("Write the name of the file: ");
-            fileName = "src/main/java/pt/ipp/isep/dei/graph_input/" + ler.nextLine();
+            fileName = "MDISC/us_12_13_14_implementation/src/main/java/pt/ipp/isep/dei/graph_input/" + ler.nextLine();
         } else {
-            fileName = "src/main/java/pt/ipp/isep/dei/test_input/" + fileNamePerGraph;
+            fileName = "MDISC/us_12_13_14_implementation/src/main/java/pt/ipp/isep/dei/test_input/" + fileNamePerGraph;
         }
 
         try {

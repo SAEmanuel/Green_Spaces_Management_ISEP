@@ -7,9 +7,9 @@ import main.java.pt.ipp.isep.dei.graph_classes.Graph;
 public class Main_12_13 {
 
 
-    static final String OUTPUT_MM_TREE_FILE = "src/main/java/pt/ipp/isep/dei/output_13/minimum_spanning_tree.csv";
-    static final String OUTPUT_INPUT_GRAPH = "src/main/java/pt/ipp/isep/dei/output_13/input_graph.csv";
-    static final String OUTPUT_GRAPH_FILE = "src/main/java/pt/ipp/isep/dei/output_13/graph.puml";
+    static final String OUTPUT_MM_TREE_FILE = "MDISC/us_12_13_14_implementation/src/main/java/pt/ipp/isep/dei/output_13/minimum_spanning_tree.csv";
+    static final String OUTPUT_INPUT_GRAPH = "MDISC/us_12_13_14_implementation/src/main/java/pt/ipp/isep/dei/output_13/input_graph.csv";
+    static final String OUTPUT_GRAPH_FILE = "MDISC/us_12_13_14_implementation/src/main/java/pt/ipp/isep/dei/output_13/graph.puml";
 
 
     public static void main(String[] args) {
