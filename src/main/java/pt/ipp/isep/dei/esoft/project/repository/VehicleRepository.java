@@ -155,7 +155,7 @@ public class VehicleRepository {
     public List<Vehicle> getVehiclesNeedingCheckUp() {
         List<Vehicle> vehiclesForCheckUp = new ArrayList<>();
         for (Vehicle vehicle : vehicleList) {
-            if ((vehicle.getCurrentKm() - vehicle.getLastCheckUp()) * (1 - PERCENTAGE_OF_KM) >= vehicle.getCheckUpFrequency()) {
+            if ((vehicle.getCurrentKm() - vehicle.getLastCheckUp()) >= vehicle.getCheckUpFrequency() * (1 - PERCENTAGE_OF_KM)) {
                 vehiclesForCheckUp.add(vehicle);
             }
 

@@ -1,4 +1,4 @@
-package pt.ipp.isep.dei.graph_classes;
+package main.java.pt.ipp.isep.dei.graph_classes;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtils;

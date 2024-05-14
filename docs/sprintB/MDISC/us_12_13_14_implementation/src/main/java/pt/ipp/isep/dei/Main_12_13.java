@@ -1,8 +1,8 @@
-package pt.ipp.isep.dei;
+package main.java.pt.ipp.isep.dei;
 
-import pt.ipp.isep.dei.file_classes.FileReader;
-import pt.ipp.isep.dei.file_classes.FileWriter;
-import pt.ipp.isep.dei.graph_classes.Graph;
+import main.java.pt.ipp.isep.dei.file_classes.FileReader;
+import main.java.pt.ipp.isep.dei.file_classes.FileWriter;
+import main.java.pt.ipp.isep.dei.graph_classes.Graph;
 
 public class Main_12_13 {
 

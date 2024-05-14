@@ -1,7 +1,7 @@
-package pt.ipp.isep.dei.file_classes;
+package main.java.pt.ipp.isep.dei.file_classes;
 
 
-import pt.ipp.isep.dei.graph_classes.Graph;
+import main.java.pt.ipp.isep.dei.graph_classes.Graph;
 
 import java.io.File;
 import java.util.ArrayList;

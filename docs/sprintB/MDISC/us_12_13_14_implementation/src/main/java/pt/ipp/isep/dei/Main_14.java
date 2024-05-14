@@ -1,10 +1,11 @@
-package pt.ipp.isep.dei;
+package main.java.pt.ipp.isep.dei;
 
-import pt.ipp.isep.dei.file_classes.FileScanner;
-import pt.ipp.isep.dei.file_classes.FileWriter;
+import main.java.pt.ipp.isep.dei.file_classes.FileScanner;
+import main.java.pt.ipp.isep.dei.file_classes.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import static pt.ipp.isep.dei.graph_classes.GraphicCreator.createScatterPlot;
+
+import static main.java.pt.ipp.isep.dei.graph_classes.GraphicCreator.createScatterPlot;
 
 public class Main_14 {
 

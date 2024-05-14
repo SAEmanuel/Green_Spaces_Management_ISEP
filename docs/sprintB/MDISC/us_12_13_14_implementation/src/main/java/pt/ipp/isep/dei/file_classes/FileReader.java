@@ -1,9 +1,10 @@
-package pt.ipp.isep.dei.file_classes;
+package main.java.pt.ipp.isep.dei.file_classes;
 
-import pt.ipp.isep.dei.graph_classes.Edge;
-import pt.ipp.isep.dei.graph_classes.Graph;
+import main.java.pt.ipp.isep.dei.graph_classes.Edge;
+import main.java.pt.ipp.isep.dei.graph_classes.Graph;
+import main.java.pt.ipp.isep.dei.graph_classes.Vertice;
 import pt.ipp.isep.dei.InvalidFileFormatException;
-import pt.ipp.isep.dei.graph_classes.Vertice;
+
 
 import java.io.File;
 import java.io.FileNotFoundException;
