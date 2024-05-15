@@ -1,0 +1,10 @@
+Minimum Spanning Tree:
+B;F;1
+A;C;2
+C;B;3
+H;G;4
+C;E;6
+F;H;7
+C;D;11
+--------------------
+Minimum cost: 34,00
