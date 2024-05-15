@@ -234,7 +234,7 @@ public class Vehicle {
      */
     private void validateDates(Data registerDate, Data acquisitionDate) {
         if (registerDate.isGreater(acquisitionDate)) {
-            throw new IllegalArgumentException("'Acquisition Date' -> [" + acquisitionDate + "] cannot be latter than 'Register Date' -> [" + registerDate + "].");
+            throw new IllegalArgumentException("'Acquisition Date' -> [" + acquisitionDate + "] must be latter than 'Register Date' -> [" + registerDate + "].");
         }
     }
 

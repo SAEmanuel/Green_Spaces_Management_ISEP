@@ -1,0 +1,48 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+
+participant ":RegisterGreenSpaceController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+
+autonumber 3
+
+
+ -> CTRL :registerGreenSpace(name,size,area)
+autonumber 3.1
+activate CTRL
+    group Get GreenSpace Repository
+
+CTRL -> CTRL : getGreenSpaceRepository()
+    activate CTRL
+
+
+        CTRL -> RepositorySingleton : getInstance()
+        activate RepositorySingleton
+
+        RepositorySingleton --> CTRL: repositories
+        deactivate RepositorySingleton
+
+        CTRL -> PLAT : getGreenSpaceRepository()
+        activate PLAT
+
+        PLAT --> CTRL: greenSpaceRepository
+        deactivate PLAT
+
+        CTRL --> CTRL : greenSpaceRepository
+
+    deactivate CTRL
+
+
+    end
+    autonumber 4
+deactivate CTRL
+
+
+@enduml

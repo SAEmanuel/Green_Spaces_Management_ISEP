@@ -51,11 +51,18 @@ activate VFM
                             CTRL --> CTRL : vehicleRepository
                         deactivate CTRL
 
-        CTRL -> vehicleRepository : showTypes()
+        CTRL -> vehicleRepository : showypes()
         activate vehicleRepository
 
+        vehicleRepository -> VEICULO : showTypes()
+        activate VEICULO
 
-        vehicleRepository --> CTRL : Types
+        VEICULO --> vehicleRepository : types
+
+        deactivate VEICULO
+
+
+        vehicleRepository --> CTRL : types
         deactivate vehicleRepository
 
         CTRL --> UI : types
@@ -87,7 +94,7 @@ activate VFM
             CTRL -> vehicleRepository: registerVehicle(plateID, brand, model...)
             activate vehicleRepository
 
-            vehicleRepository -> VEICULO**: create
+            vehicleRepository -> VEICULO: create
 
 
                 vehicleRepository -> vehicleRepository: addVehicle(Vehicle)
