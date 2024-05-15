@@ -285,14 +285,7 @@ public class Collaborator {
         return name;
     }
 
-    /**
-     * Constructor that initializes the Collaborator
-     *
-     * @param skills of the collaborator
-     */
-    public Collaborator(List<Skill> skills) {
-        this.skills = cloneList();
-    }
+
 
     /**
      * Gets the birthdate of the collaborator.

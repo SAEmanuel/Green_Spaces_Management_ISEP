@@ -97,4 +97,9 @@ public class SkillRepository {
         // Create a new reference skill list with the same content of the instance one.
         return new ArrayList<>(this.skillList);
     }
+
+    public void add(Skill skill) {
+        skillList.add(skill);
+    }
+
 }
