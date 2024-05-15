@@ -31,10 +31,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
             Data birthDate = new Data(2000, 7, 26);
             Data admissionDate = new Data(2019, 6, 15);
             Job job = new Job("Student");
-            collaboratorRepository.registerCollaborator("Romeu", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456789, "Passport", job);
-            collaboratorRepository.registerCollaborator("Paulo", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456788, "Passport", job);
-            collaboratorRepository.registerCollaborator("Jorge", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456787, "Passport", job);
-            collaboratorRepository.registerCollaborator("Emanuel", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456786, "Passport", job);
+            collaboratorRepository.registerCollaborator("Romeu", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456789, 1, job);
+            collaboratorRepository.registerCollaborator("Paulo", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456788, 1, job);
+            collaboratorRepository.registerCollaborator("Jorge", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456787, 1, job);
+            collaboratorRepository.registerCollaborator("Emanuel", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456786, 1, job);
 
             collaboratorRepository.findCollaborator(123456789).addSkill(skill1);
             collaboratorRepository.findCollaborator(123456788).addSkill(skill2);

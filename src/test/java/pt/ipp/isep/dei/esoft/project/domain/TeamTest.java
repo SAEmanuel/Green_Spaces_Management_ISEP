@@ -16,8 +16,8 @@ public class TeamTest {
     Data admissionDate = new Data(2019, 6, 15);
     Job job = new Job("Student");
 
-    Collaborator collaborator1 = new Collaborator("Romeu", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456789, "Passport", job);
-    Collaborator collaborator2 = new Collaborator("Paulo", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456788, "Passport", job);
+    Collaborator collaborator1 = new Collaborator("Romeu", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456789, 1, job);
+    Collaborator collaborator2 = new Collaborator("Paulo", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456788, 1, job);
     @BeforeEach
     public void setUp() {
         team = new Team(1);
