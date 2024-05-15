@@ -42,7 +42,7 @@ public class Bootstrap implements Runnable {
         collaboratorRepository.add(new Collaborator("Xu",new Data(2000,4,20),new Data(2023,6,12),"Rua do restaurante asiatico",912809666,"xu@gmail.com",123456777,1,job4));
         collaboratorRepository.add(new Collaborator("Jorge",new Data(2004,5,31),new Data(2023,6,12),"Rua enganhairo do isep",912809555,"jorge@gmail.com",123456788,1,job5));
         collaboratorRepository.add(new Collaborator("Mariana Silva",new Data(2001,5,31),new Data(2023,6,12),"Rua da igreja",912809551,"mari@gmail.com",123456799,1,job6));
-        collaboratorRepository.add(new Collaborator("Gorete",new Data(1993,5,31),new Data(2023,6,12),"Rua de Fanzeres",912809552,"mari@gmail.com",123456999,1,job7));
+        collaboratorRepository.add(new Collaborator("Gorete",new Data(1993,5,31),new Data(2023,6,12),"Rua de Fanzeres",912809552,"gori@gmail.com",123456999,1,job7));
 
     }
 

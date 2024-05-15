@@ -1,7 +1,5 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-import org.w3c.dom.DocumentType;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -360,22 +358,22 @@ public class Collaborator {
     }
 
     public enum DocType {
-        PASSPORT {
-            @Override
-            public String toString() {
-                return "Passport";
-            }
-        },
         CITIZEN_CARD {
             @Override
             public String toString() {
                 return "Citizen Card";
             }
         },
-        DRIVER_LICENSE {
+        PASSPORT {
             @Override
             public String toString() {
-                return "Driver License";
+                return "Passport";
+            }
+        },
+        RESIDENCE_PERMIT {
+            @Override
+            public String toString() {
+                return "Residence Permit";
             }
         },
         OTHER {

@@ -253,7 +253,7 @@ public class CreateCollaboratorUI implements Runnable {
 
         int answer;
         do {
-            System.out.print("Enter the number corresponding to the document type: ");
+            System.out.printf("Enter the number corresponding to the document type (between 1 and %d): ", values.length - 1);
             answer = input.nextInt();
         } while (answer < 1 || answer > values.length - 1);
 
@@ -395,7 +395,7 @@ public class CreateCollaboratorUI implements Runnable {
                 try {
                     answer = input.nextInt();
                     if (answer <= n - 1 && answer >= 0) {
-                        Job job = jobController.getJobRepository().getJob(answer);
+                        Job job = jobController.getJobRepository().getJob(answer - 1);
                         return job;
                     }
                 } catch (InputMismatchException e) {

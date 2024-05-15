@@ -107,7 +107,7 @@ public class JobRepository {
             System.out.println("\n--List of Jobs--");
             for (int i = 0; i < jobList.size(); i++) {
                 Job job = jobList.get(i);
-                System.out.println("• Job: " + job.getJobName() + "\n"+ANSI_PURPLE+"   Option -> [" + i + "]"+ ANSI_RESET);
+                System.out.println("• Job: " + job.getJobName() + "\n"+ANSI_PURPLE+"   Option -> [" + (i + 1) + "]"+ ANSI_RESET);
             }
             System.out.println("----------------");
         }
