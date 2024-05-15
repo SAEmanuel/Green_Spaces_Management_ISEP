@@ -13,7 +13,7 @@ class Vehicle {
     - String plateID
     - String brand
     - String model
-    - String type
+    - Type type
     - float tareWeight
     - float grossWeight
     - float millage
@@ -21,6 +21,7 @@ class Vehicle {
     - Data registerDate
     - Data acquisitionDate
     - Data lastCheckup
+    + ShowTypes()
     + Vehicle(plateID,brand, model, type, tareWeight,\ngrossWeight, millage, registerDate, acquisitionDate,\nmaintenanceFrequency, lastCheckup)
     - validatePlate(plateID)
 }
@@ -36,6 +37,7 @@ class Data {
 
 class VehicleRepository {
     + registerVehicle(plateID,brand, model, type, tareWeight,\ngrossWeight, millage, registerDate, acquisitionDate,\nmaintenanceFrequency, lastCheckup)
+    + ShowTypes()
     - addVehicle(vehicle)
     - validateVehicle(vehicle)
 }
@@ -49,6 +51,7 @@ class Repositories {
 
 class VehicleController {
     + VehicleController()
+    + ShowTypes()
     + registerVehicle(plateID,brand, model, type, tareWeight,\ngrossWeight, millage, registerDate, acquisitionDate,\nmaintenanceFrequency, lastCheckup)
 }
 

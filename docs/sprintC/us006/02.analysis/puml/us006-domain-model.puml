@@ -21,13 +21,13 @@ package "VFM System" {
          brand
          model
          type
-         tare
+         tareWeight
          grossWeight
-         millage
+         currentKm
+         checkUpFrequency
+         lastCheckUp
          registerDate
          acquisitionDate
-         maintenanceFrequency
-         lastCheckUp
     }
 
 

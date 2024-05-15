@@ -12,6 +12,7 @@ participant ":VehicleController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "vehicleRepository:\nVehicleRepository" as vehicleRepository
+participant "vehicle\n:Vehicle" as VEICULO
 
 activate VFM
 
@@ -19,28 +20,51 @@ activate VFM
 
         activate UI
 
-
+'            UI --> ADM : requests data (reference, description,  informal \n description, technical description, duration, cost)
+            'create CTRL
             UI -> CTRL** : create
 
-
-            UI --> VFM : request data
+        UI --> VFM : request data (plateID, brand, model...)
             deactivate UI
 
-            VFM -> UI : registerVehicle(plateID, brand, model...)
-            activate UI
+        VFM -> UI : types requested data
+        activate UI
+
+        UI -> CTRL : showTypes()
+        activate CTRL
+
+            ref over CTRL
+            Get Vehicle Repository
+            end ref
+
+        CTRL -> vehicleRepository : showTypes()
+        activate vehicleRepository
 
 
+        vehicleRepository --> CTRL : Types
+        deactivate vehicleRepository
 
-        UI --> VFM : show all data registered  for confirmation
+        CTRL --> UI : types
+        deactivate CTRL
+        UI --> VFM : shows types of vehicles\n and request a selection
+            deactivate UI
+
+        VFM -> UI : Select a type
+        activate UI
+
+        UI --> VFM : request data (tareWeight,grossWeight...)
+            deactivate UI
+
+        VFM -> UI : types requested data
+        activate UI
+
+        UI --> VFM : show all data registered\n and the confirmation menu
         deactivate UI
 
-    VFM -> UI : data
+    VFM -> UI : submits data
     activate UI
 
         UI -> CTRL : registerVehicle(plateID, brand, model...)
-            ref over CTRL
-                Get Vehicle Repository
-            end
         activate CTRL
 
 
@@ -49,13 +73,10 @@ activate VFM
             CTRL -> vehicleRepository: registerVehicle(plateID, brand, model...)
             activate vehicleRepository
 
-            ref over vehicleRepository
-                Register Vehicle
-            end
 
-
-
-
+             ref over vehicleRepository
+             Register Vehicle
+             end ref
 
                 vehicleRepository --> CTRL : vehicle
 
@@ -63,7 +84,7 @@ activate VFM
 
             CTRL --> UI: vehicle
             deactivate CTRL
-            UI --> VFM: displays operation success
+            UI --> VFM: shows operation success.
     deactivate UI
 
 deactivate VFM

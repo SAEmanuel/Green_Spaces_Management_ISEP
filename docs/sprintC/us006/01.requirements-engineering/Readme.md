@@ -54,7 +54,11 @@ As an VFM, I wish to register a vehicle including Brand, Model, Type, Tare, Gros
 * **AC02:** There cannot be two cars with the same plate number.
 * **AC03:** All required fields must be filled in (Plate, Brand, Model, Type...).
 * **AC04:** The Maintenance/Checkup Frequency must be field in Kms.
-* **AC05:** The Plate ID must follow the format of the corresponding year. 
+* **AC05:** The Plate ID must follow the format of the corresponding year.
+* **AC06:** The Tare Weight must be lower than the Gross Weight.
+* **AC07:** The last check-up km must be lower than the current km.
+* **AC08:** The register date must be lower than the acquisition date.
+* **AC09:** The inputted data must correspond to the expected data type.
 
 
 
@@ -71,16 +75,21 @@ As an VFM, I wish to register a vehicle including Brand, Model, Type, Tare, Gros
     * a number plate
     * the brand of the car
     * the model of the car
-    * the type of the vehicle
-    * the tare
+    * the tare weight
     * a gross weight
     * the current Km
+    * Checkup Frequency (in Kms)
+    * last check-up
     * a register date
     * the Acquisition Date of the vehicle
-    * Maintenance/Checkup Frequency (in Kms)
+
+* Selected data:
+    * the type of the vehicle
 
 **Output Data:**
 
+* List of types of vehicles
+* Confirmation menu
 * Success of the operation
 * Errors/warnings messages
 

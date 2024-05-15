@@ -15,13 +15,27 @@ activate Employee
     Employee -> System : request to register a vehicle
     activate System
 
-        System --> Employee : request data
+        System --> Employee : request data(plateID, brand, model)
             deactivate System
 
-    Employee -> System : registerVehicle(plateID, brand, model...)
+    Employee -> System : types data
+
     activate System
 
-    System --> Employee : show all data registered  for confirmation
+    System --> Employee : shows types of vehicles\n and request a selection
+    deactivate System
+
+    Employee -> System : Select a type
+    activate System
+
+    System --> Employee : request data(tareweight,grossweight...)
+    deactivate System
+
+    Employee -> System : types data
+
+    activate System
+
+    System --> Employee : show all data registered\n and the confirmation menu
     deactivate System
 
     Employee -> System : submits data

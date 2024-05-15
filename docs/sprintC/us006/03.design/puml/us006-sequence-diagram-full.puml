@@ -30,16 +30,8 @@ activate VFM
         VFM -> UI : types requested data
         activate UI
 
-
-        UI --> VFM : show all data registered  for confirmation
-        deactivate UI
-
-    VFM -> UI : submits data
-    activate UI
-
-        UI -> CTRL : registerVehicle(plateID, brand, model...)
+        UI -> CTRL : showTypes()
         activate CTRL
-
 
             CTRL -> CTRL : getVehicleRepository()
                         activate CTRL
@@ -58,6 +50,39 @@ activate VFM
 
                             CTRL --> CTRL : vehicleRepository
                         deactivate CTRL
+
+        CTRL -> vehicleRepository : showTypes()
+        activate vehicleRepository
+
+
+        vehicleRepository --> CTRL : Types
+        deactivate vehicleRepository
+
+        CTRL --> UI : types
+        deactivate CTRL
+        UI --> VFM : shows types of vehicles\n and request a selection
+            deactivate UI
+
+        VFM -> UI : Select a type
+        activate UI
+
+        UI --> VFM : request data (tareWeight,grossWeight...)
+            deactivate UI
+
+        VFM -> UI : types requested data
+        activate UI
+
+        UI --> VFM : show all data registered\n and the confirmation menu
+        deactivate UI
+
+    VFM -> UI : submits data
+    activate UI
+
+        UI -> CTRL : registerVehicle(plateID, brand, model...)
+        activate CTRL
+
+
+
 
             CTRL -> vehicleRepository: registerVehicle(plateID, brand, model...)
             activate vehicleRepository

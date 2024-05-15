@@ -13,7 +13,7 @@ participant "repositories\n:Repositories" as PLAT
 
 autonumber 3
 
- -> CTRL : registerVehicle(plateID, brand, model...)
+ -> CTRL : showTypes()
 autonumber 3.1
 activate CTRL
     group Get Vehicle Repository
@@ -40,7 +40,7 @@ activate CTRL
 
     end
     autonumber 4
-    CTRL ->   : registerVehicle(plateID, brand, model...)
+    CTRL ->   : showTypes()
 deactivate CTRL
 
 
