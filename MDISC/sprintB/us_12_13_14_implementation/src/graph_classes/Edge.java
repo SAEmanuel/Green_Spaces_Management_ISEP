@@ -1,4 +1,4 @@
-package main.java.pt.ipp.isep.dei.graph_classes;
+package graph_classes;
 
 
 public class Edge implements Comparable<Edge> {

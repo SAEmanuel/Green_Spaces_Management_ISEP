@@ -1,0 +1,11 @@
+@startuml
+graph GraphRep {
+B --F [label="1"]
+A --C [label="2"]
+C --B [label="3"]
+H --G [label="4"]
+C --E [label="6"]
+F --H [label="7"]
+C --D [label="11"]
+}
+@enduml

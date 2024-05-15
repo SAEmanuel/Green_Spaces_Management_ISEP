@@ -1,4 +1,4 @@
-package pt.ipp.isep.dei;
+package file_classes;
 
 public class InvalidFileFormatException extends Exception {
     public InvalidFileFormatException(String message) {

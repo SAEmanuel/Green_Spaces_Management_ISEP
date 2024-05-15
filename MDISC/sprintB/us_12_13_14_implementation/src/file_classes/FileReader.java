@@ -1,9 +1,8 @@
-package main.java.pt.ipp.isep.dei.file_classes;
+package file_classes;
 
-import main.java.pt.ipp.isep.dei.graph_classes.Edge;
-import main.java.pt.ipp.isep.dei.graph_classes.Graph;
-import main.java.pt.ipp.isep.dei.graph_classes.Vertice;
-import pt.ipp.isep.dei.InvalidFileFormatException;
+import graph_classes.Edge;
+import graph_classes.Graph;
+import graph_classes.Vertice;
 
 
 import java.io.File;
@@ -51,9 +50,9 @@ public class FileReader {
 
         if (singleFile) {
             System.out.print("Write the name of the file: ");
-            fileName = "MDISC/us_12_13_14_implementation/src/main/java/pt/ipp/isep/dei/graph_input/" + ler.nextLine();
+            fileName = "MDISC/sprintB/us_12_13_14_implementation/src/graph_input/" + ler.nextLine();
         } else {
-            fileName = "MDISC/us_12_13_14_implementation/src/main/java/pt/ipp/isep/dei/test_input/" + fileNamePerGraph;
+            fileName = "MDISC/sprintB/us_12_13_14_implementation/src/test_input/" + fileNamePerGraph;
         }
 
         try {

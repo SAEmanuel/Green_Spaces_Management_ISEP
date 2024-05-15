@@ -1,7 +1,7 @@
-package main.java.pt.ipp.isep.dei.file_classes;
+package file_classes;
 
 
-import main.java.pt.ipp.isep.dei.graph_classes.Graph;
+import graph_classes.Graph;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class FileScanner {
     static final double CONVERTOR_NS_MLS = Math.pow(10, 6);
     static final double THOUSAND = Math.pow(10, 3);
-    static final String DIRECTORY_CSV = "MDISC/us_12_13_14_implementation/src/main/java/pt/ipp/isep/dei/test_input";
+    static final String DIRECTORY_CSV = "MDISC/sprintB/us_12_13_14_implementation/src/test_input";
     static final int NUM_REPETITIONS = 5;
 
     public static ArrayList<String> scanCSVFiles() {
