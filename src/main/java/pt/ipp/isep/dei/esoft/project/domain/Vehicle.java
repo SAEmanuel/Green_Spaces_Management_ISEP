@@ -7,7 +7,7 @@ public class Vehicle {
     private String plateId;
     private String brand;
     private String model;
-    private String type;
+    private Type type;
 
     private float tareWeight;
     private float grossWeight;
@@ -24,6 +24,51 @@ public class Vehicle {
     private static final int HIGHEST_LIMIT = 2020;
     private static final int MAX_CHARS_PLATE = 8;
 
+    /**
+     * Represents the type of vehicles.
+     */
+    public enum Type{
+        CAR{
+            @Override
+            public String toString() {
+                return "Car";
+            }
+        },
+        TRUCK{
+            @Override
+            public String toString() {
+                return "Truck";
+            }
+        },
+        MOTORCYCLE{
+            @Override
+            public String toString() {
+                return "Motorcycle";
+            }
+        },
+        BUS{
+            @Override
+            public String toString() {
+                return "Bus";
+            }
+        },
+        TRACTOR{
+            @Override
+            public String toString() {
+                return "Tractor";
+            }
+        },
+        BOAT{
+            @Override
+            public String toString() {
+                return "Boat";
+            }
+        }
+    }
+
+    public Type[] showType(){
+        return Type.values();
+    }
 
 
     /**
@@ -42,7 +87,7 @@ public class Vehicle {
      * @param acquisitionDate  The acquisition date of the vehicle.
      * @throws IllegalArgumentException if any parameter validation fails.
      */
-    public Vehicle(String plateId, String brand, String model, String type, float tareWeight, float grossWeight,
+    public Vehicle(String plateId, String brand, String model, int type, float tareWeight, float grossWeight,
                    float currentKm, float checkUpFrequency, float lastCheckUp, Data registerDate, Data acquisitionDate) {
 
         validateVehicle(plateId, brand, model, type, tareWeight, grossWeight, currentKm, checkUpFrequency, lastCheckUp, registerDate, acquisitionDate);
@@ -50,7 +95,7 @@ public class Vehicle {
         this.plateId = plateId;
         this.brand = brand;
         this.model = model;
-        this.type = type;
+        this.type = Type.values()[type];
         this.tareWeight = tareWeight;
         this.grossWeight = grossWeight;
         this.currentKm = currentKm;
@@ -122,13 +167,13 @@ public class Vehicle {
      * @param acquisitionDate  The acquisition date of the vehicle.
      * @throws IllegalArgumentException if any parameter validation fails.
      */
-    private void validateVehicle(String plateId, String brand, String model, String type, float tareWeight, float grossWeight, float currentKm, float checkUpFrequency, float lastCheckUp, Data registerDate, Data acquisitionDate) {
+    private void validateVehicle(String plateId, String brand, String model, int type, float tareWeight, float grossWeight, float currentKm, float checkUpFrequency, float lastCheckUp, Data registerDate, Data acquisitionDate) {
 
         //String validations and plate id format
         validatePlateId(plateId, registerDate);
         validateBrand(brand);
         validateModel(model);
-        validateType(type);
+//        validateType(String.valueOf(type));
         validateKm(currentKm, lastCheckUp);
         validateDates(registerDate, acquisitionDate);
         validatesWeights(tareWeight,grossWeight);
@@ -471,7 +516,7 @@ public class Vehicle {
      * @return A clone of the current instance.
      */
     public Vehicle clone() {
-        return new Vehicle(plateId, brand, model, type, tareWeight, grossWeight, currentKm, checkUpFrequency, lastCheckUp, registerDate, acquisitionDate);
+        return new Vehicle(plateId, brand, model, type.ordinal(), tareWeight, grossWeight, currentKm, checkUpFrequency, lastCheckUp, registerDate, acquisitionDate);
     }
 
 

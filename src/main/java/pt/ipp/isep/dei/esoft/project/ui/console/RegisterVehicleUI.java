@@ -2,8 +2,10 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.VehicleController;
 import pt.ipp.isep.dei.esoft.project.domain.Data;
+import pt.ipp.isep.dei.esoft.project.domain.Job;
 import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 
+import java.lang.reflect.Type;
 import java.util.InputMismatchException;
 import java.util.Optional;
 import java.util.Scanner;
@@ -18,7 +20,8 @@ public class RegisterVehicleUI implements Runnable {
     private String plateId;
     private String brand;
     private String model;
-    private String type;
+
+    private int type;
 
     private float tareWeight;
     private float grossWeight;
@@ -137,7 +140,8 @@ public class RegisterVehicleUI implements Runnable {
      * Displays the typed vehicle information and options for confirmation.
      */
     private void display() {
-        StringBuilder stringBuilder = new StringBuilder(String.format("Plate: %s | Brand: %s | Model: %s | Current Km: %.2f | Register Date: %s | Acquisition Date: %s", plateId, brand, model, currentKm, registerDate, acquisitionDate));
+        Vehicle.Type[] types = controller.showTypes();
+        StringBuilder stringBuilder = new StringBuilder(String.format("Plate: %s | Brand: %s | Model: %s | Type: %s | Tare Weight: %.2f | Gross Weight: %.2f \n               Current Km: %.2f | Check Up Frequency (Km): %.2f | Last Check Up (Km): %.2f\n               Register Date: %s | Acquisition Date: %s", plateId, brand, model,types[type],tareWeight,grossWeight,currentKm,checkUpFrequency,lastCheckUp,registerDate,acquisitionDate));
         System.out.printf("\nTyped data -> [%s%s%s]\n", ANSI_GREEN, stringBuilder, ANSI_RESET);
         System.out.print("Confirmation menu:\n 0 -> Change Vehicle Info\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
     }
@@ -244,13 +248,45 @@ public class RegisterVehicleUI implements Runnable {
 
     /**
      * Requests the type of the vehicle from the user.
+     * Show
      *
      * @return The type entered by the user.
      */
-    private String requestType() {
+
+    /**
+     * Requests the type of the vehicle from the user.
+     * Shows the possibles types of vehicles and user must select.
+     *
+     * @return The type ID inputted by the user.
+     */
+    private int requestType() {
+        int answer;
         Scanner input = new Scanner(System.in);
-        System.out.print("Type: ");
-        return input.next();
+        Vehicle.Type[] types = controller.showTypes();
+        int n = types.length;
+        showTypes(types);
+        System.out.print("Type ID Option: ");
+        while (true) {
+            try {
+                answer = input.nextInt() - 1;
+                if (answer <= n - 1 && answer >= 0) {
+                    return answer;
+                }
+            } catch (InputMismatchException e) {
+                System.out.print(ANSI_BRIGHT_RED + "Invalid Type ID number! Enter a new one: " + ANSI_RESET +"\n");
+                input.nextLine();
+            }
+            System.out.print(ANSI_BRIGHT_YELLOW+"Invalid Type ID, enter a new one: "+ANSI_RESET);
+        }
+
+    }
+
+    private void showTypes(Vehicle.Type[] types) {
+        System.out.println("\n--List of Types--");
+        for (int i = 0; i < types.length; i++) {
+            System.out.println("• Type: " + types[i] + "\n" + ANSI_PURPLE + "   Option -> [" + (i+1) + "]" + ANSI_RESET);
+        }
+        System.out.println("----------------");
     }
 
 

@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.repository;
 import pt.ipp.isep.dei.esoft.project.domain.Data;
 import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -47,7 +48,7 @@ public class VehicleRepository {
      * @param acquisitionDate  The acquisition date of the vehicle.
      * @return An Optional containing the registered Vehicle if successful, otherwise empty.
      */
-    public Optional<Vehicle> registerVehicle(String plateId, String brand, String model, String type, float tareWeight, float grossWeight, float currentKm, float checkUpFrequency, float lastCheckUp, Data registerDate, Data acquisitionDate) {
+    public Optional<Vehicle> registerVehicle(String plateId, String brand, String model, int type, float tareWeight, float grossWeight, float currentKm, float checkUpFrequency, float lastCheckUp, Data registerDate, Data acquisitionDate) {
 
         Optional<Vehicle> optionalVehicle = Optional.empty();
 
@@ -161,6 +162,10 @@ public class VehicleRepository {
 
         }
         return vehiclesForCheckUp;
+    }
+
+    public Vehicle.Type[] showType(){
+        return Vehicle.Type.values();
     }
 
 }
