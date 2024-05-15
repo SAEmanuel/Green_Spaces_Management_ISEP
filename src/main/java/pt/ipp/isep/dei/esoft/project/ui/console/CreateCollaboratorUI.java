@@ -19,7 +19,7 @@ public class CreateCollaboratorUI implements Runnable {
     private String name;
     private String address;
     private String emailAddress;
-    private String docType;
+    private int docType;
     private Data birthDate;
     private Data admissionDate;
     private int phoneNumber;
@@ -65,7 +65,7 @@ public class CreateCollaboratorUI implements Runnable {
                 submitData();
             }
         } else {
-            System.out.println(ANSI_BRIGHT_RED+"Register a Job first!"+ANSI_RESET);
+            System.out.println(ANSI_BRIGHT_RED + "Register a Job first!" + ANSI_RESET);
         }
     }
 
@@ -104,6 +104,7 @@ public class CreateCollaboratorUI implements Runnable {
 
     /**
      * Asks for the confirmation for the register of the new information
+     *
      * @return true if yes and false otherwise
      */
     private boolean repeatProcess() {
@@ -179,8 +180,10 @@ public class CreateCollaboratorUI implements Runnable {
         }
     }
 
+
     /**
      * Requests admission date
+     *
      * @return admission date
      */
     private Data requestAdmissionDate() {
@@ -190,6 +193,7 @@ public class CreateCollaboratorUI implements Runnable {
 
     /**
      * Requests birthdate
+     *
      * @return birthdate
      */
     private Data requestBirthDate() {
@@ -199,6 +203,7 @@ public class CreateCollaboratorUI implements Runnable {
 
     /**
      * Requests data
+     *
      * @return data
      */
     private Data getData() {
@@ -218,6 +223,7 @@ public class CreateCollaboratorUI implements Runnable {
 
     /**
      * Requests year
+     *
      * @return year
      */
     private int requestYear() {
@@ -235,8 +241,29 @@ public class CreateCollaboratorUI implements Runnable {
         }
     }
 
+
+    private int requestCollaboratorDocType() {
+        Collaborator.DocType[] values = collaboratorController.getDocType();
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("Select a document type:");
+        for (int i = 0; i < values.length - 1; i++) {
+            System.out.printf("%d -> %s\n", i + 1, values[i].toString());
+        }
+
+        int answer;
+        do {
+            System.out.print("Enter the number corresponding to the document type: ");
+            answer = input.nextInt();
+        } while (answer < 1 || answer > values.length - 1);
+
+        return answer - 1;
+    }
+
+
     /**
      * Requests month
+     *
      * @return month
      */
     private int requestMonth() {
@@ -256,6 +283,7 @@ public class CreateCollaboratorUI implements Runnable {
 
     /**
      * Requests day
+     *
      * @return day
      */
     private int requestDay() {
@@ -275,6 +303,7 @@ public class CreateCollaboratorUI implements Runnable {
 
     /**
      * Requests name
+     *
      * @return name
      */
     private String requestCollaboratorName() {
@@ -285,6 +314,7 @@ public class CreateCollaboratorUI implements Runnable {
 
     /**
      * Requests address
+     *
      * @return address
      */
     private String requestCollaboratorAddress() {
@@ -295,6 +325,7 @@ public class CreateCollaboratorUI implements Runnable {
 
     /**
      * Requests email address
+     *
      * @return email address
      */
     private String requestCollaboratorEmailAddress() {
@@ -303,18 +334,11 @@ public class CreateCollaboratorUI implements Runnable {
         return input.next().toLowerCase();
     }
 
-    /**
-     * Requests document type
-     * @return document type
-     */
-    private String requestCollaboratorDocType() {
-        Scanner input = new Scanner(System.in);
-        System.out.print("Doc Type: ");
-        return input.next();
-    }
+
 
     /**
      * Requests phone number
+     *
      * @return phone number
      */
     private int requestCollaboratorPhoneNumber() {
@@ -335,6 +359,7 @@ public class CreateCollaboratorUI implements Runnable {
 
     /**
      * Requests taxpayer number
+     *
      * @return taxpayer number
      */
     private int requestCollaboratorTaxPayerNumber() {
@@ -355,6 +380,7 @@ public class CreateCollaboratorUI implements Runnable {
 
     /**
      * Requests job
+     *
      * @return job
      */
     private Job requestCollaboratorJob() {
@@ -373,10 +399,10 @@ public class CreateCollaboratorUI implements Runnable {
                         return job;
                     }
                 } catch (InputMismatchException e) {
-                    System.out.print(ANSI_BRIGHT_RED + "Invalid jobID number! Enter a new one: " + ANSI_RESET +"\n");
+                    System.out.print(ANSI_BRIGHT_RED + "Invalid jobID number! Enter a new one: " + ANSI_RESET + "\n");
                     input.nextLine();
                 }
-                System.out.print(ANSI_BRIGHT_YELLOW+"Invalid Job ID, enter a new one: "+ANSI_RESET);
+                System.out.print(ANSI_BRIGHT_YELLOW + "Invalid Job ID, enter a new one: " + ANSI_RESET);
 
             }
         }

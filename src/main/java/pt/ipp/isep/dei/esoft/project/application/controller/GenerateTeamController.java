@@ -21,10 +21,10 @@ public class GenerateTeamController {
         Data birthDate = new Data(2000, 7, 26);
         Data admissionDate = new Data(2019, 6, 15);
         Job job = new Job("Student");
-        this.collaboratorRepository.registerCollaborator("Emanuel", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456786, "Passport", job);
-        this.collaboratorRepository.registerCollaborator("Paulo", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456788, "Passport", job);
-        this.collaboratorRepository.registerCollaborator("Jorge", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456787, "Passport", job);
-        this.collaboratorRepository.registerCollaborator("Xico", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456789, "Passport", job);
+//        this.collaboratorRepository.registerCollaborator("Emanuel", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456786, "Passport", job);
+//        this.collaboratorRepository.registerCollaborator("Paulo", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456788, "Passport", job);
+//        this.collaboratorRepository.registerCollaborator("Jorge", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456787, "Passport", job);
+//        this.collaboratorRepository.registerCollaborator("Xico", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456789, "Passport", job);
     }
 
     // Returns the list of skills

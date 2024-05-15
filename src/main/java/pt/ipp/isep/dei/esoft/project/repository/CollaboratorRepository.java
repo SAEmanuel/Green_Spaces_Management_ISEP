@@ -30,7 +30,7 @@ public class CollaboratorRepository {
      * @param job of collaborator
      * @return An Optional containing the registered collaborator if successful, or empty otherwise.
      */
-    public Optional<Collaborator> registerCollaborator(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, String docType, Job job) {
+    public Optional<Collaborator> registerCollaborator(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, int docType, Job job) {
 
         Optional<Collaborator> optionalValue = Optional.empty();
 
@@ -134,5 +134,14 @@ public class CollaboratorRepository {
     public boolean assignSkillCollaborator(int collaboratorTaxNumber, Skill skill) {
         Collaborator collaborator = findCollaborator(collaboratorTaxNumber);
         return collaborator.addSkill(skill);
+    }
+
+    public void add(Collaborator collaborator) {
+        collaboratorList.add(collaborator);
+    }
+
+
+    public Collaborator.DocType[] getDocType() {
+        return Collaborator.DocType.values();
     }
 }

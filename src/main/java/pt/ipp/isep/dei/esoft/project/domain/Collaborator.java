@@ -16,7 +16,7 @@ public class Collaborator {
     private int docType;
     private Job job;
     private List<Skill> skills;
-    private static Enum<DocType> documentType;
+    private static Enum<DocType> documentType = DocType.OTHER;
 
     private static final int TAX_PAYER_NUMBER_MIN = 100000000;
     private static final int TAX_PAYER_NUMBER_MAX = 999999999;
@@ -165,15 +165,20 @@ public class Collaborator {
     }
 
     private void isValidDocType(int docType) {
+        boolean isValid = false;
 
-        for (int i = 0; i < DocType.values().length; i++) {
-            if (docType != i) {
-                throw new IllegalArgumentException("Invalid document type!");
+        for (DocType type : DocType.values()) {
+            if (type.ordinal() == docType) {
+                isValid = true;
+                break;
             }
-
         }
 
+        if (!isValid) {
+            throw new IllegalArgumentException("Invalid document type!");
+        }
     }
+
 
 
     /**
@@ -354,7 +359,7 @@ public class Collaborator {
         return documentType;
     }
 
-    private enum DocType {
+    public enum DocType {
         PASSPORT {
             @Override
             public String toString() {
@@ -371,6 +376,12 @@ public class Collaborator {
             @Override
             public String toString() {
                 return "Driver License";
+            }
+        },
+        OTHER {
+            @Override
+            public String toString() {
+                return "Other";
             }
         }
     }

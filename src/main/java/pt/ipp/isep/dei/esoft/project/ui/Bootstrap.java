@@ -36,13 +36,13 @@ public class Bootstrap implements Runnable {
 
     private void addCollaborator() {
         CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
-        collaboratorRepository.add(new Collaborator("Francisco",new Data(2004,5,20),new Data(2023,6,12),"Rua da pedra",912809789,"fran@gmail.com",123456744,"bi",job1));
-        collaboratorRepository.add(new Collaborator("Emanuel",new Data(2004,4,20),new Data(2023,6,12),"Rua da Mariana",912809777,"ema@gmail.com",123456755,"bi",job2));
-        collaboratorRepository.add(new Collaborator("Paulo",new Data(2002,8,20),new Data(2023,6,12),"Rua de Fanzeres",912809888,"paul@gmail.com",123456766,"bi",job3));
-        collaboratorRepository.add(new Collaborator("Xu",new Data(2000,4,20),new Data(2023,6,12),"Rua do restaurante asiatico",912809666,"xu@gmail.com",123456777,"bi",job4));
-        collaboratorRepository.add(new Collaborator("Jorge",new Data(2004,5,31),new Data(2023,6,12),"Rua enganhairo do isep",912809555,"jorge@gmail.com",123456788,"bi",job5));
-        collaboratorRepository.add(new Collaborator("Mariana Silva",new Data(2001,5,31),new Data(2023,6,12),"Rua da igreja",912809551,"mari@gmail.com",123456799,"bi",job6));
-        collaboratorRepository.add(new Collaborator("Gorete",new Data(1993,5,31),new Data(2023,6,12),"Rua de Fanzeres",912809552,"mari@gmail.com",123456999,"bi",job7));
+        collaboratorRepository.add(new Collaborator("Francisco",new Data(2004,5,20),new Data(2023,6,12),"Rua da pedra",912809789,"fran@gmail.com",123456744,1,job1));
+        collaboratorRepository.add(new Collaborator("Emanuel",new Data(2004,4,20),new Data(2023,6,12),"Rua da Mariana",912809777,"ema@gmail.com",123456755,1,job2));
+        collaboratorRepository.add(new Collaborator("Paulo",new Data(2002,8,20),new Data(2023,6,12),"Rua de Fanzeres",912809888,"paul@gmail.com",123456766,1,job3));
+        collaboratorRepository.add(new Collaborator("Xu",new Data(2000,4,20),new Data(2023,6,12),"Rua do restaurante asiatico",912809666,"xu@gmail.com",123456777,1,job4));
+        collaboratorRepository.add(new Collaborator("Jorge",new Data(2004,5,31),new Data(2023,6,12),"Rua enganhairo do isep",912809555,"jorge@gmail.com",123456788,1,job5));
+        collaboratorRepository.add(new Collaborator("Mariana Silva",new Data(2001,5,31),new Data(2023,6,12),"Rua da igreja",912809551,"mari@gmail.com",123456799,1,job6));
+        collaboratorRepository.add(new Collaborator("Gorete",new Data(1993,5,31),new Data(2023,6,12),"Rua de Fanzeres",912809552,"mari@gmail.com",123456999,1,job7));
 
     }
 
