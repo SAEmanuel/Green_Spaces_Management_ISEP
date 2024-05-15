@@ -77,10 +77,6 @@ public class CollaboratorRepository {
         return true;
     }
 
-//    public List<Collaborator> clone() {
-//        return new List<>(this.collaboratorList);
-//    }
-
     /**
      * Gets the collaboratorList
      * @return collaboratorList
@@ -88,28 +84,6 @@ public class CollaboratorRepository {
     public List<Collaborator> getCollaboratorList() {
         return collaboratorList;
     }
-
-//    public boolean findCollaboratorByTaxNumber(int collaboratorTaxNumber) {
-//        return containsCollaboratorByTaxNumber(collaboratorTaxNumber);
-//    }
-
-//    private boolean containsCollaboratorByTaxNumber(int collaboratorTaxNumber) {
-//        System.out.println("Size of collaboratorList: " + collaboratorList.size());
-//
-//        if (!collaboratorList.isEmpty()) {
-//            for (Collaborator collaborator : collaboratorList) {
-//                if (collaborator.getTaxPayerNumber() == collaboratorTaxNumber) {
-//                    return true;
-//                }
-//            }
-//        } else {
-//            System.out.println(ANSI_BRIGHT_RED + "Collaborator List is Empty." + ANSI_RESET);
-//            System.out.println();
-//            return false;
-//        }
-//
-//        return false;
-//    }
 
     /**
      * Finds the collaborator by taxpayer number

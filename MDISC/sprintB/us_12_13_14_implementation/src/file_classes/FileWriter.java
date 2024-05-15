@@ -1,7 +1,7 @@
-package main.java.pt.ipp.isep.dei.file_classes;
+package file_classes;
 
-import main.java.pt.ipp.isep.dei.graph_classes.Edge;
-import main.java.pt.ipp.isep.dei.graph_classes.Graph;
+import graph_classes.Edge;
+import graph_classes.Graph;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;

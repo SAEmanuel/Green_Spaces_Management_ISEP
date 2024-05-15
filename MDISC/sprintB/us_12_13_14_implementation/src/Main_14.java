@@ -1,16 +1,14 @@
-package main.java.pt.ipp.isep.dei;
-
-import main.java.pt.ipp.isep.dei.file_classes.FileScanner;
-import main.java.pt.ipp.isep.dei.file_classes.FileWriter;
+import file_classes.FileScanner;
+import file_classes.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static main.java.pt.ipp.isep.dei.graph_classes.GraphicCreator.createScatterPlot;
+import static graph_classes.GraphicCreator.createScatterPlot;
 
 public class Main_14 {
 
-    static final String OUTPUT_FILE_GRAPHIC = "MDISC/us_12_13_14_implementation/src/main/java/pt/ipp/isep/dei/output_14/runtime_graphic.png";
-    static final String INPUT_FILE_GRAPHIC = "MDISC/us_12_13_14_implementation/src/main/java/pt/ipp/isep/dei/output_14/runtime_log.csv";
+    static final String OUTPUT_FILE_GRAPHIC = "MDISC/sprintB/us_12_13_14_implementation/src/main/java/pt/ipp/isep/dei/output_14/runtime_graphic.png";
+    static final String INPUT_FILE_GRAPHIC = "MDISC/sprintB/us_12_13_14_implementation/src/main/java/pt/ipp/isep/dei/output_14/runtime_log.csv";
 
     public static void main(String[] args) {
         ArrayList<String> runtimes;

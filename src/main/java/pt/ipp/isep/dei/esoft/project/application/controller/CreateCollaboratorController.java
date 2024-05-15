@@ -49,7 +49,7 @@ public class CreateCollaboratorController {
      * Gets the CollaboratorRepository instance
      * @return CollaboratorRepository instance
      */
-    public CollaboratorRepository getCollaboratorRepository2() {
+    public CollaboratorRepository returnCollaboratorRepository() {
         return collaboratorRepository;
     }
 
