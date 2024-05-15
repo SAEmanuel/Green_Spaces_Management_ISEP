@@ -83,7 +83,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
             assertTrue(result.isPresent());
         }
 
-        /*@Test
+        @Test
         public void testRemoveTeam() {
             // Setup
 
@@ -102,5 +102,5 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
             // Verify
             assertTrue(teamRepository.getTeamList().isEmpty());
-        }*/
+        }
 }

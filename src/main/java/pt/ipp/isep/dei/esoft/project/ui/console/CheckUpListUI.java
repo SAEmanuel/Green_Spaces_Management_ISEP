@@ -52,7 +52,7 @@ public class CheckUpListUI implements Runnable {
             printCheckUpList(checkUp.get());
             System.out.println( ANSI_BRIGHT_GREEN + "Check-up list successfully generated!" + ANSI_RESET);
         } else {
-            System.out.println( ANSI_BRIGHT_RED + "Check-up list not generated!" + ANSI_RESET);
+            System.out.println( ANSI_BRIGHT_RED + "No vehicles for check-up!" + ANSI_RESET);
         }
     }
 
