@@ -55,11 +55,13 @@ public class CheckUpRegisterUI implements Runnable {
         vehicleByPlateID = getVehicleByPlateID(plateID); // Retrieves the vehicle object using the plate ID.
 
         if (vehicleByPlateID != null) {
-            System.out.println("Vehicle PlateID: " + plateID);
+            System.out.println();
+            System.out.println( ANSI_GREEN+ "Vehicle license plate was found: " + plateID + ANSI_RESET);
             requestData(); // Requests the check-up date and kilometers.
             submitData(); // Submits the collected data for registering the check-up.
         } else {
-            System.out.println("No vehicle was found for plateID: " + plateID);
+            System.out.print(ANSI_BRIGHT_RED + "No vehicle was found for license plate: " + plateID + ANSI_RESET);
+
         }
     }
 
@@ -229,9 +231,11 @@ public class CheckUpRegisterUI implements Runnable {
 
             // Check if the registration was successful
             if (checkUp.isPresent()) {
+                System.out.println();
                 System.out.println(ANSI_BRIGHT_GREEN + "Check-Up successfully registered!" + ANSI_RESET); // Prints success message.
             } else {
                 // Print error message if vehicle is already registered
+                System.out.println();
                 System.out.println(ANSI_BRIGHT_RED + "Check-Up not registered - Already registered!" + ANSI_RESET); // Prints error message.
             }
         } catch (IllegalArgumentException e) {
@@ -240,48 +244,6 @@ public class CheckUpRegisterUI implements Runnable {
             // Prompt user to repeat registration process
             //runException();
         }
-    }
-
-    /**
-     * Prompts the user to confirm the plate ID.
-     * It displays a confirmation menu and prompts the user to choose an option.
-     * Returns the chosen option.
-     *
-     * @return The chosen option.
-     */
-    private int confirmsPlateID() {
-        int option = -1;
-        Scanner input = new Scanner(System.in);
-
-        while (option != 1) {
-            display(); // Displays the confirmation menu.
-            option = input.nextInt(); // Retrieves user input for option.
-
-            switch (option) {
-                case 0:
-                    System.out.println();
-                    requestVehiclePlateID(); // Requests to change the vehicle plate ID.
-                    break;
-                case 1:
-                    System.out.println();
-                    System.out.printf("Vehicle License Plate -> [%s]\n", plateID); // Prints the confirmed plate ID.
-                    break;
-                case 2:
-                    System.out.println(ANSI_BRIGHT_RED + "LEAVING..." + ANSI_RESET); // Prints leaving message.
-                    return -1;
-                default:
-                    System.out.println(ANSI_BRIGHT_RED + "Invalid choice. Please enter 0 or 1 or 2." + ANSI_RESET); // Prints error message for invalid input.
-            }
-        }
-        return option;
-    }
-
-    /**
-     * Displays the confirmation menu to the user.
-     */
-    private void display() {
-        System.out.printf("\nTyped License Plate -> [%s%s%s]\n",ANSI_GREEN,plateID,ANSI_RESET); // Prints the typed license plate.
-        System.out.print("Confirmation menu:\n 0 -> Change license plate\n 1 -> Continue\n 2 -> Exit\nSelected option: "); // Prints the confirmation menu options.
     }
 
 }
