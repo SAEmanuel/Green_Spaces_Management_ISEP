@@ -65,6 +65,7 @@ public class Collaborator {
     private void validateData(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, String docType, Job job) {
         isValidName(name);
         isValidBirthDate(birthDate, admissionDate);
+        isValidAddress(address);
         isValidPhoneNumber(phoneNumber);
         isValidEmailAddress(emailAddress);
         isValidTaxPayerNumber(taxPayerNumber);
@@ -93,7 +94,7 @@ public class Collaborator {
 
         emailAddress = emailAddress.trim();
         if (!verifyEmail(emailAddress)) {
-            throw new IllegalArgumentException("Invalid email address: must follow name@domain.xxx where \"xxx\" can't contain numbers");
+            throw new IllegalArgumentException("Invalid email address");
         }
     }
 
@@ -118,7 +119,7 @@ public class Collaborator {
                 return false;
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new IllegalArgumentException("Invalid email address: must follow name@domain.xxx where \"xxx\" can't contain numbers");
+            throw new IllegalArgumentException("Invalid email address");
         }
         return true;
     }
@@ -146,6 +147,17 @@ public class Collaborator {
     private void isValidPhoneNumber(int phoneNumber) {
         if (phoneNumber < phoneNumberMin || phoneNumber > phoneNumberMiddleLeft && phoneNumber < phoneNumberMiddleRight || phoneNumber > phoneNumberMax) {
             throw new IllegalArgumentException("Phone number is invalid");
+        }
+    }
+
+    /**
+     * Validates address
+     *
+     * @param address of the collaborator
+     */
+    private void isValidAddress(String address) {
+        if (address == null || address.trim().isEmpty()) {
+            throw new IllegalArgumentException("Address cannot be null or empty.");
         }
     }
 
