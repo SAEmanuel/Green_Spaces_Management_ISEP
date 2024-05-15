@@ -26,7 +26,7 @@ public class CollaboratorRepositoryTest {
         Data admissionDate = new Data(2019, 6, 15);
         Job job = new Job("Student");
 
-        Optional<Collaborator> result = collaboratorRepository.registerCollaborator("Romeu", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456789, "Passport", job);
+        Optional<Collaborator> result = collaboratorRepository.registerCollaborator("Romeu", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456789, 1, job);
         assertTrue(result.isPresent());
     }
 
@@ -39,8 +39,8 @@ public class CollaboratorRepositoryTest {
         Data admissionDate = new Data(2019, 6, 15);
         Job job = new Job("Student");
 
-        collaboratorRepository.registerCollaborator("Romeu", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456789, "Passport", job);
-        Optional<Collaborator> result = collaboratorRepository.registerCollaborator("Romeu", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456789, "Passport", job);
+        collaboratorRepository.registerCollaborator("Romeu", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456789, 1, job);
+        Optional<Collaborator> result = collaboratorRepository.registerCollaborator("Romeu", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456789, 1, job);
         assertFalse(result.isPresent());
     }
 
@@ -53,7 +53,7 @@ public class CollaboratorRepositoryTest {
         Data admissionDate = new Data(2019, 6, 15);
         Job job = new Job("Student");
 
-        collaboratorRepository.registerCollaborator("Romeu", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456789, "Passport", job);
+        collaboratorRepository.registerCollaborator("Romeu", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456789, 1, job);
         Collaborator result = collaboratorRepository.findCollaborator(123456789);
         assertNotNull(result);
     }
@@ -68,7 +68,7 @@ public class CollaboratorRepositoryTest {
         Job job = new Job("Student");
         Skill javaSkill = new Skill("drive");
 
-        collaboratorRepository.registerCollaborator("Romeu", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456789, "Passport", job);
+        collaboratorRepository.registerCollaborator("Romeu", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456789, 1, job);
         boolean result = collaboratorRepository.assignSkillCollaborator(123456789, javaSkill);
         assertTrue(result);
     }
