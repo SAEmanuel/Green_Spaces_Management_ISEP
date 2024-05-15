@@ -354,14 +354,6 @@ public class Collaborator {
         return job;
     }
 
-    /**
-     * Gets the document type of the collaborator
-     *
-     * @return document type of the collaborator
-     */
-    public static Enum getDocumentType() {
-        return documentType;
-    }
 
     /**
      * Enumeration representing various types of documents

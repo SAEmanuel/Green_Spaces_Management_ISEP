@@ -72,6 +72,8 @@ public class CreateCollaboratorController {
         newCollaborator = collaboratorRepository.registerCollaborator(name, birthDate, admissionDate, address, phoneNumber, emailAddress, taxPayerNumber, docType, job);
         return newCollaborator;
     }
+
+
     public Collaborator.DocType[] getDocType() {
         return collaboratorRepository.getDocType();
     }

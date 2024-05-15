@@ -157,8 +157,10 @@ public class CreateCollaboratorUI implements Runnable {
      * phone number, taxpayer number, job and options for confirmation.
      */
     private void display() {
+        Collaborator.DocType[] values = collaboratorController.getDocType();
+
         StringBuilder stringBuilder = new StringBuilder(String.format("Name: %s | Address: %s | Email: %s | Doc Type: %s | Birth Date: %s | Admission Date: %s | Phone Number: %d | Tax Payer Number: %d | Job: %s",
-                name, address, emailAddress, docType, birthDate, admissionDate, phoneNumber, taxPayerNumber, job));
+                name, address, emailAddress, values[docType], birthDate, admissionDate, phoneNumber, taxPayerNumber, job));
         System.out.printf("\nTyped data -> [%s%s%s]\n", ANSI_GREEN, stringBuilder, ANSI_RESET);
         System.out.print("Confirmation menu:\n 0 -> Change Collaborator Info\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
     }
@@ -227,13 +229,13 @@ public class CreateCollaboratorUI implements Runnable {
      * @return year
      */
     private int requestYear() {
-        int resposta;
+        int answer;
         Scanner input = new Scanner(System.in);
         System.out.print("- Year: ");
         while (true) {
             try {
-                resposta = input.nextInt();
-                return resposta;
+                answer = input.nextInt();
+                return answer;
             } catch (InputMismatchException e) {
                 System.out.print(ANSI_BRIGHT_RED + "Invalid DAY! Enter a new one: " + ANSI_RESET);
                 input.nextLine();
@@ -248,13 +250,24 @@ public class CreateCollaboratorUI implements Runnable {
 
         System.out.println("Select a document type:");
         for (int i = 0; i < values.length - 1; i++) {
-            System.out.printf("%d -> %s\n", i + 1, values[i].toString());
+            System.out.printf("• DocType: %s%n", values[i].toString());
+            System.out.printf(ANSI_PURPLE + "   Option -> [%d]%n" + ANSI_RESET, i + 1);
         }
+        System.out.println("----------------");
 
         int answer;
+        boolean flag = true;
         do {
-            System.out.printf("Enter the number corresponding to the document type (between 1 and %d): ", values.length - 1);
-            answer = input.nextInt();
+            if (flag) {
+                System.out.printf("Enter the number corresponding to the document type: ", values.length - 1);
+                answer = input.nextInt();
+                if (answer < 1 || answer > values.length - 1) {
+                    flag = false;
+                }
+            } else {
+                System.out.printf(ANSI_BRIGHT_YELLOW + "Invalid number, enter a new one (between 1 and %d): " + ANSI_RESET, values.length - 1);
+                answer = input.nextInt();
+            }
         } while (answer < 1 || answer > values.length - 1);
 
         return answer - 1;
@@ -333,7 +346,6 @@ public class CreateCollaboratorUI implements Runnable {
         System.out.print("Email: ");
         return input.next().toLowerCase();
     }
-
 
 
     /**

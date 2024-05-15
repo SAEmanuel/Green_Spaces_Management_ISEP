@@ -23,8 +23,10 @@ activate HRM
 
             UI -> CTRL** : create
 
-                UI -> CTRL : getJobs()
+                UI -> CTRL : requestCollaboratorJob()
                 activate CTRL
+                UI -> CTRL : requestCollaboratorDocType()
+
 
                 CTRL -> RepositorySingleton : getInstance()
                                 activate RepositorySingleton
@@ -32,34 +34,48 @@ activate HRM
                                     RepositorySingleton --> CTRL: repositories
                                 deactivate RepositorySingleton
 
-                                CTRL -> PLAT : getJobsRepository()
+                                CTRL -> PLAT : getJobRepository()
                                 activate PLAT
 
-                                    PLAT --> CTRL: jobsRepository
+                                    PLAT --> CTRL: jobRepository
                                 deactivate PLAT
 
                 CTRL -> JobsRepository : getJobsList()
                 activate JobsRepository
+                CTRL -> JobsRepository : requestCollaboratorDocType()
 
-                    JobsRepository --> CTRL : jobsList
-                deactivate JobsRepository
+                JobsRepository -> Collaborator : getDocType()
+                activate Collaborator
+
+                Collaborator --> JobsRepository : docType
+                deactivate Collaborator
+
+
+                JobsRepository --> CTRL : jobsList
+
 
                 CTRL --> UI : jobsList
-            deactivate CTRL
+                JobsRepository --> CTRL: docType
+                deactivate JobsRepository
+
 
             UI --> HRM : shows jobsList list\n and asks to select one job
         deactivate UI
 
     HRM -> UI : selects a job
+    CTRL --> UI : docType
+            deactivate CTRL
     activate UI
 
-        UI --> HRM : requests data
+            UI --> HRM : shows list of Identification document types and asks to select one
+            HRM -> UI: selects a docType
+        UI --> HRM : requests data (name, birthDate, admissionDate,\naddress, phoneNumber, email, taxpayerNumber)
     deactivate UI
 
-    HRM -> UI : types requested data (name, birthDate, admissionDate,\naddress, phoneNumber, email, taxpayerNumber,\ndocType, docNumber)
+    HRM -> UI : types requested data
     activate UI
 
-        UI --> HRM : shows selected job and requested data
+        UI --> HRM : shows selected job, docType and requested data
     deactivate UI
 
     HRM -> UI : submits data
@@ -92,7 +108,7 @@ activate HRM
 
             activate CollaboratorRepository
 
-            CollaboratorRepository -> Collaborator** : registerCollaborator(name, birthDate, admissionDate,\naddress, phoneNumber, email, taxpayerNumber,\ndocType, docNumber and job)
+            CollaboratorRepository -> Collaborator : registerCollaborator(name, birthDate, admissionDate,\naddress, phoneNumber, email, taxpayerNumber,\ndocType and job)
 
             activate Collaborator
 

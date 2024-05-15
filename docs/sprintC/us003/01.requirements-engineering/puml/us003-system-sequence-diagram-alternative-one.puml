@@ -12,28 +12,41 @@ participant ":System" as System
 
 activate Employee
 
-    Employee -> System : asks to register a new collaborator
+    Employee -> System : asks to create a new collaborator
     activate System
 
-        System --> Employee : requests data (i.e. name, birthdate,\n admission date, residence, phone number, email address,\n taxpayer number and Identification document type)
-    deactivate System
-
-    Employee -> System : types requested data
-    activate System
-
-        System --> Employee : shows a list of jobs and asks to select one
+        System --> Employee : shows jobsList list and asks to select one job
     deactivate System
 
     Employee -> System : selects a job
     activate System
 
-        System --> Employee : shows all data and requests confirmation
+        System --> Employee : shows list of Identification document types and asks to select one
     deactivate System
 
-    Employee -> System : confirms data
+    Employee -> System : selects a docType
     activate System
 
-        System --> Employee : displays operation success
+    System --> Employee : shows list of Identification document types and asks to select one
     deactivate System
+
+    Employee -> System : selects a type
+        activate System
+
+        System --> Employee :  requests data (name, birthDate, admissionDate,\naddress, phoneNumber, email, taxpayerNumber)
+    deactivate System
+
+    Employee -> System : types requested data
+    activate System
+
+        System --> Employee : shows selected job, docType and requested data
+    deactivate System
+
+    Employee --> System: submits data
+    activate System
+
+    System -> Employee: Confirms the success of the operation.
+    deactivate System
+    deactivate Employee
 
 @enduml
