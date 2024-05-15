@@ -244,12 +244,20 @@ public class CreateCollaboratorUI implements Runnable {
     }
 
 
+    /**
+     * Prompts the user to select a document type for the collaborator from the available options.
+     * Get the document type values from the collaborator controller
+     * Display the document type options for the user
+     *
+     * @return The (index - 1) of the document type selected by the user.
+     */
     private int requestCollaboratorDocType() {
         Collaborator.DocType[] values = collaboratorController.getDocType();
         Scanner input = new Scanner(System.in);
 
-        System.out.println("Select a document type:");
-        for (int i = 0; i < values.length - 1; i++) {
+
+        System.out.print("\n-- Document type --\n");
+        for (int i = 0; i < values.length; i++) {
             System.out.printf("• DocType: %s%n", values[i].toString());
             System.out.printf(ANSI_PURPLE + "   Option -> [%d]%n" + ANSI_RESET, i + 1);
         }
@@ -259,16 +267,16 @@ public class CreateCollaboratorUI implements Runnable {
         boolean flag = true;
         do {
             if (flag) {
-                System.out.printf("Enter the number corresponding to the document type: ", values.length - 1);
+                System.out.print("Enter the number corresponding to the document type: ");
                 answer = input.nextInt();
-                if (answer < 1 || answer > values.length - 1) {
+                if (answer < 1 || answer > values.length) {
                     flag = false;
                 }
             } else {
-                System.out.printf(ANSI_BRIGHT_YELLOW + "Invalid number, enter a new one (between 1 and %d): " + ANSI_RESET, values.length - 1);
+                System.out.printf(ANSI_BRIGHT_YELLOW + "Invalid number, enter a new one (between 1 and %d): " + ANSI_RESET, values.length);
                 answer = input.nextInt();
             }
-        } while (answer < 1 || answer > values.length - 1);
+        } while (answer < 1 || answer > values.length);
 
         return answer - 1;
     }
