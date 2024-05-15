@@ -1,8 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
-import pt.ipp.isep.dei.esoft.project.domain.Skill;
-import pt.ipp.isep.dei.esoft.project.domain.SkillList;
-import pt.ipp.isep.dei.esoft.project.domain.Team;
+import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.CollaboratorRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.SkillRepository;
@@ -20,7 +18,15 @@ public class GenerateTeamController {
     public GenerateTeamController(){
         teamRepository = getTeamRepository();
         collaboratorRepository = getCollaboratorRepository();
+        Data birthDate = new Data(2000, 7, 26);
+        Data admissionDate = new Data(2019, 6, 15);
+        Job job = new Job("Student");
+        this.collaboratorRepository.registerCollaborator("Emanuel", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456786, "Passport", job);
+        this.collaboratorRepository.registerCollaborator("Paulo", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456788, "Passport", job);
+        this.collaboratorRepository.registerCollaborator("Jorge", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456787, "Passport", job);
+        this.collaboratorRepository.registerCollaborator("Xico", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456789, "Passport", job);
     }
+
     // Returns the list of skills
     public List<Skill> getSkillList() {
         if (skillRepository == null) {
@@ -29,6 +35,7 @@ public class GenerateTeamController {
         }
         return skillRepository.getSkillList();
     }
+
     // Gets the TeamRepository instance
     public TeamRepository getTeamRepository() {
         if(teamRepository == null){
@@ -37,6 +44,7 @@ public class GenerateTeamController {
         }
         return teamRepository;
     }
+
     // Gets the CollaboratorRepository instance
     private CollaboratorRepository getCollaboratorRepository() {
         if (collaboratorRepository == null) {
@@ -45,6 +53,7 @@ public class GenerateTeamController {
         }
         return collaboratorRepository;
     }
+
     // Adds a skill to the skill list
     public void addSkill(Skill skill){
         if(skillList == null)
@@ -55,6 +64,7 @@ public class GenerateTeamController {
         else
             System.out.println("Skill Already Added!");
     }
+
     // Generates a team based on given criteria
     public Optional<Team> generateTeam(int minCollaborators, int maxCollaborators) {
         Optional<Team> optionalValue = Optional.empty();
@@ -72,10 +82,12 @@ public class GenerateTeamController {
             return optionalValue;
         }
     }
+
     // Removes a team with the given teamId
     public void removeTeam(int teamId){
         teamRepository.removeTeam(teamId);
     }
+
     // Cleans the skill list
     public void cleanSkillList(){
         if(skillList == null)

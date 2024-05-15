@@ -5,16 +5,16 @@ import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.TeamRepository;
 
 import java.sql.SQLOutput;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.Scanner;
+import java.util.*;
+
+import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
 
 public class GenerateTeamUI implements Runnable {
 
     private final GenerateTeamController controller;
     private int minCollaborators;
     private int maxCollaborators;
+
     /**
      * Constructs a new GenerateTeamUI with a GenerateTeamController.
      */
@@ -23,23 +23,27 @@ public class GenerateTeamUI implements Runnable {
     }
 
     public GenerateTeamController getController(){ return controller; }
+
     /**
      * Runs the Generate Team UI.
      */
     public void run() {
         System.out.println("\n\n--- Generate Team ------------------------");
 
-        int teamId = 0;
+        int teamId = -1;
 
         if(requestData()){
             teamId = submitData();
         }
 
-        if(!teamConfirmation())
-            getController().removeTeam(teamId);
-        else
-            System.out.println("Team Accepted");
+        if(teamId != -1){
+            if(!teamConfirmation())
+                getController().removeTeam(teamId);
+            else
+                System.out.println(ANSI_BRIGHT_GREEN+"\nTeam Accepted"+ANSI_RESET);
+        }
     }
+
     /**
      * Submits the data to generate a team and displays the result.
      * @return The ID of the generated team.
@@ -47,20 +51,23 @@ public class GenerateTeamUI implements Runnable {
     private int submitData() {
         Optional<Team> team = getController().generateTeam(minCollaborators, maxCollaborators);
 
+
+        getController().cleanSkillList();
         if (team.isPresent()) {
-            System.out.println("Team");
+            System.out.println(ANSI_BLUE+"\nTeam");
             for (Collaborator collaborator : team.get().getCollaborators()) {
                 System.out.println(collaborator.getName());
             }
+            System.out.println(ANSI_BRIGHT_GREEN +"\nTask successfully created!"+ANSI_RESET);
 
-            System.out.println("\nTask successfully created!");
+            return team.get().getTeamId();
         } else {
-            System.out.println("\nTask not created!");
-        }
+            System.out.println(ANSI_BRIGHT_RED+"\nTask not created!"+ANSI_RESET);
 
-        getController().cleanSkillList();
-        return team.get().getTeamId();
+            return -1;
+        }
     }
+
     /**
      * Asks the user for confirmation to accept the generated team.
      * @return True if the user accepts the team, otherwise false.
@@ -70,15 +77,19 @@ public class GenerateTeamUI implements Runnable {
         String answerAdd = "";
 
         while(!answerAdd.equalsIgnoreCase("y") && !answerAdd.equalsIgnoreCase("n") ){
+            System.out.println();
             System.out.print("Do you want to accept the team ? [y / n]");
             answerAdd = input.nextLine();
 
-            if(!answerAdd.equalsIgnoreCase("y") && !answerAdd.equalsIgnoreCase("n"))
-                System.out.println("Wrong answer, try again!");
+            if(!answerAdd.equalsIgnoreCase("y") && !answerAdd.equalsIgnoreCase("n")) {
+                System.out.println();
+                System.out.println(ANSI_BRIGHT_RED + "Wrong answer, try again" + ANSI_RESET);
+            }
         }
 
         return answerAdd.equalsIgnoreCase("y");
     }
+
     /**
      * Requests data from the user for team generation.
      * @return True if data is successfully collected, otherwise false.
@@ -92,26 +103,55 @@ public class GenerateTeamUI implements Runnable {
         maxCollaborators = inputMaxCollab();
         return true;
     }
+
     /**
      * Requests input from the user for the minimum number of collaborators.
      * @return The minimum number of collaborators.
      */
     private int inputMinCollab(){
-        Scanner input = new Scanner(System.in);
+        int minCollab = 0;
+        while(minCollab <= 0) {
+            try {
+                Scanner input = new Scanner(System.in);
 
-        System.out.print("Select the minimum Collaborators: ");
-        return input.nextInt();
+                System.out.print("\nSelect the minimum Collaborators: ");
+                minCollab = input.nextInt();
+            }
+            catch (InputMismatchException e){
+                System.out.println(ANSI_BRIGHT_RED+"Invalid data input"+ANSI_RESET);
+            }
+
+            if(minCollab <= 0)
+                System.out.println(ANSI_BRIGHT_RED+"Invalid minimum collaborator! Need to be greater than 0"+ANSI_RESET);
+        }
+
+        return minCollab;
     }
+
     /**
      * Requests input from the user for the maximum number of collaborators.
      * @return The maximum number of collaborators.
      */
     private int inputMaxCollab(){
-        Scanner input = new Scanner(System.in);
+        int maxCollab = 0;
+        while(maxCollab <= 0) {
+            try {
+                Scanner input = new Scanner(System.in);
 
-        System.out.print("Select the maximum Collaborators: ");
-        return input.nextInt();
+                System.out.print("\nSelect the maximum Collaborators: ");
+                maxCollab = input.nextInt();
+            }
+            catch (InputMismatchException e){
+                System.out.println(ANSI_BRIGHT_RED+"Invalid data input"+ANSI_RESET);
+            }
+
+            if(maxCollab <= 0)
+                System.out.println(ANSI_BRIGHT_RED+"Invalid maximum collaborator! Need to be greater than 0"+ANSI_RESET);
+        }
+
+        return maxCollab;
     }
+
     /**
      * Displays the list of skills and allows the user to select them for team generation.
      * @return True if skills are successfully selected, otherwise false.
@@ -127,37 +167,50 @@ public class GenerateTeamUI implements Runnable {
         int answerList = -2;
         String answerAdd = "";
         boolean addSkills = true;
-
+        boolean skillAdded = false;
         Scanner input = new Scanner(System.in);
 
         while(addSkills) {
-            while (answerList < 0 || answerList > listSize) {
+            while (answerList < -1 || answerList > listSize) {
                 displaySkillListOptions(skillList);
                 System.out.print("Select a skill: ");
                 answerList = input.nextInt();
             }
 
-            if(answerList != -1)
+            if(answerList != 0 && answerList != -1){
                 controller.addSkill(new Skill(skillList.get(answerList - 1).getSkillName()));
+                skillAdded = true;
+            }
 
             input.nextLine();
 
-            while(!answerAdd.equalsIgnoreCase("y") && !answerAdd.equalsIgnoreCase("n") ){
-                System.out.print("Wanna add more skills? [y / n]");
-                answerAdd = input.nextLine();
+            if(answerList != -1) {
+                while (!answerAdd.equalsIgnoreCase("y") && !answerAdd.equalsIgnoreCase("n")) {
+                    System.out.print("Wanna add more skills? [y / n]: ");
+                    answerAdd = input.nextLine();
 
-                if(!answerAdd.equalsIgnoreCase("y") && !answerAdd.equalsIgnoreCase("n"))
-                    System.out.println("Wrong answer, try again!");
-            }
-            if(answerAdd.equalsIgnoreCase("n")) {
-                addSkills = false;
+                    if (!answerAdd.equalsIgnoreCase("y") && !answerAdd.equalsIgnoreCase("n")){
+                        System.out.println(ANSI_BRIGHT_RED+"Wrong answer, try again"+ANSI_RESET);
+                        System.out.println();
+                    }
+                }
+                if (answerAdd.equalsIgnoreCase("n")) {
+                    addSkills = false;
+                }
             }
 
+            if (answerList == -1 || answerList == 0 && !addSkills) {
+                if(answerList == 0 && !addSkills)
+                    System.out.println(ANSI_BRIGHT_RED+"Not enought skills to generate team"+ANSI_RESET);
+                getController().cleanSkillList();
+                return false;
+            }
             answerList= -2;
             answerAdd = "";
         }
         return true;
     }
+
     /**
      * Displays the list of skills as options for selection.
      * @param skillList The list of skills to display.
@@ -170,5 +223,6 @@ public class GenerateTeamUI implements Runnable {
             i++;
         }
         System.out.println("  " + 0 + " - Exit");
+        System.out.println(" " + -1 + " - Cancelar gerar team");
     }
 }
