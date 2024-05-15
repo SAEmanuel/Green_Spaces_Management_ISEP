@@ -120,4 +120,13 @@ public class JobRepository {
     public int numberCollaborators(){
         return jobList.size();
     }
+
+    /**
+     * Add jobs to the Job Repository
+     *
+     * @param job
+     */
+    public void add(Job job){
+        jobList.add(job);
+    }
 }

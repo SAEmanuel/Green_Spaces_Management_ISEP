@@ -135,4 +135,13 @@ public class CollaboratorRepository {
         Collaborator collaborator = findCollaborator(collaboratorTaxNumber);
         return collaborator.addSkill(skill);
     }
+
+    /**
+     * Add collaborator to the Collaborator Repository
+     *
+     * @param collaborator
+     */
+    public void add(Collaborator collaborator) {
+        collaboratorList.add(collaborator);
+    }
 }
