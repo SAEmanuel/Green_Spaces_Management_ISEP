@@ -393,9 +393,9 @@ public class CreateCollaboratorUI implements Runnable {
             System.out.print("Job ID: ");
             while (true) {
                 try {
-                    answer = input.nextInt();
+                    answer = input.nextInt() - 1;
                     if (answer <= n - 1 && answer >= 0) {
-                        Job job = jobController.getJobRepository().getJob(answer - 1);
+                        Job job = jobController.getJobRepository().getJob(answer);
                         return job;
                     }
                 } catch (InputMismatchException e) {

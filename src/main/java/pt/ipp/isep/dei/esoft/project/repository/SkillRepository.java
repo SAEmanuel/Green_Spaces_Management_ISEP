@@ -1,10 +1,14 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
+import pt.ipp.isep.dei.esoft.project.domain.Job;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
+import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_RESET;
 
 public class SkillRepository {
 
@@ -100,6 +104,32 @@ public class SkillRepository {
 
     public void add(Skill skill) {
         skillList.add(skill);
+    }
+
+    /**
+     * Shows all the skills in the list
+     */
+    public void showSkills() {
+        if (skillList.isEmpty()) {
+            System.out.println(ANSI_BRIGHT_RED + "No skills found in the repository." + ANSI_RESET);
+        } else {
+            System.out.println("\n--List of Skills--");
+            for (int i = 0; i < skillList.size(); i++) {
+                Skill skill = skillList.get(i);
+                System.out.println("• Skill: " + skill.getSkillName() + "\n"+ANSI_PURPLE+"   Option -> [" + (i+1) + "]"+ ANSI_RESET);
+            }
+            System.out.println("----------------");
+        }
+    }
+
+    /**
+     * Retrieves a skill from the repository based on its position.
+     *
+     * @param position The position of the skill in the repository.
+     * @return The skill object at the specified position.
+     */
+    public Skill getSkill(int position) {
+        return skillList.get(position);
     }
 
 }

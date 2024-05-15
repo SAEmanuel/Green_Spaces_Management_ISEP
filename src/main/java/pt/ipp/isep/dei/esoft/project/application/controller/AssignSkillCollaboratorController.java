@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
+import pt.ipp.isep.dei.esoft.project.domain.Data;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
 import pt.ipp.isep.dei.esoft.project.repository.CollaboratorRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
@@ -31,7 +32,7 @@ public class AssignSkillCollaboratorController {
      *
      * @return The SkillRepository instance.
      */
-    private SkillRepository getSkillRepository() {
+    public SkillRepository getSkillRepository() {
         if (skillRepository == null) {
             skillRepository = getRepositories().getSkillRepository();
         }
@@ -87,44 +88,13 @@ public class AssignSkillCollaboratorController {
     }
 
     /**
-     * Checks if a skill with the given name exists.
-     *
-     * @param skillName The name of the skill to check.
-     * @return True if the skill exists, false otherwise.
-     */
-    public boolean isSkillNameValid(String skillName) {
-        for (Skill skill : getSkillList()) {
-            if (skill.getSkillName().equalsIgnoreCase(skillName)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Retrieves a skill by its name.
-     *
-     * @param name The name of the skill.
-     * @return The skill with the given name, or null if not found.
-     */
-    private Skill getSkillByName(String name) {
-        for (Skill skill : getSkillList()) {
-            if (skill.getSkillName().equalsIgnoreCase(name)) {
-                return skill;
-            }
-        }
-        return null;
-    }
-
-    /**
      * Assigns a skill to a collaborator based on tax number and skill name.
      *
      * @param collaboratorTaxNumber The tax number of the collaborator.
      * @param skillName             The name of the skill to assign.
      * @return True if the skill was successfully assigned, false otherwise.
      */
-    public boolean assignSkillCollaboratorByTaxNumber(int collaboratorTaxNumber, String skillName) {
-        Skill skill = getSkillByName(skillName);
+    public boolean assignSkillCollaboratorByTaxNumber(int collaboratorTaxNumber, Skill skill) {
         return collaboratorRepository.assignSkillCollaborator(collaboratorTaxNumber, skill);
     }
 
@@ -136,6 +106,26 @@ public class AssignSkillCollaboratorController {
      */
     public String getCollaboratorName(int collaboratorTaxNumber) {
         return collaboratorRepository.findCollaborator(collaboratorTaxNumber).getName();
+    }
+
+    /**
+     * Retrieves the name of the collaborator with the given tax number.
+     *
+     * @param collaboratorTaxNumber The tax number of the collaborator.
+     * @return The email of the collaborator, or null if not found.
+     */
+    public String getCollaboratorEmail(int collaboratorTaxNumber) {
+        return collaboratorRepository.findCollaborator(collaboratorTaxNumber).getEmailAddress();
+    }
+
+    /**
+     * Retrieves the name of the collaborator with the given tax number.
+     *
+     * @param collaboratorTaxNumber The tax number of the collaborator.
+     * @return The birth date of the collaborator, or null if not found.
+     */
+    public Data getCollaboratorBirthDate(int collaboratorTaxNumber) {
+        return collaboratorRepository.findCollaborator(collaboratorTaxNumber).getBirthDate();
     }
 }
 
