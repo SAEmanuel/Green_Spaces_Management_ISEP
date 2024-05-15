@@ -162,6 +162,11 @@ public class Collaborator {
         }
     }
 
+    /**
+     * Validates document type
+     *
+     * @param docType of the collaborator
+     */
     private void isValidDocType(int docType) {
         boolean isValid = false;
 
@@ -176,8 +181,6 @@ public class Collaborator {
             throw new IllegalArgumentException("Invalid document type!");
         }
     }
-
-
 
     /**
      * Validates phone number
@@ -288,8 +291,6 @@ public class Collaborator {
         return name;
     }
 
-
-
     /**
      * Gets the birthdate of the collaborator.
      *
@@ -353,10 +354,18 @@ public class Collaborator {
         return job;
     }
 
+    /**
+     * Gets the document type of the collaborator
+     *
+     * @return document type of the collaborator
+     */
     public static Enum getDocumentType() {
         return documentType;
     }
 
+    /**
+     * Enumeration representing various types of documents
+     */
     public enum DocType {
         CITIZEN_CARD {
             @Override
