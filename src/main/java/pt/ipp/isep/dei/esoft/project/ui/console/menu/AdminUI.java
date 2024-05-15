@@ -26,6 +26,7 @@ public class AdminUI implements Runnable {
         options.add(new MenuItem("Register Vehicle", new RegisterVehicleUI()));
         options.add(new MenuItem("Register Vehicle Check-Up", new CheckUpRegisterUI()));
         options.add(new MenuItem("Create Vehicle Check-Up List", new CheckUpListUI()));
+        options.add(new MenuItem("Register a Green Space", new RegisterGreenSpaceUI()));
 
         int option = 0;
         do {
