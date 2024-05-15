@@ -114,8 +114,13 @@ public class CollaboratorRepository {
         collaboratorList.add(collaborator);
     }
 
-
+    /**
+     * Retrieves an array containing all available document types for collaborators.
+     *
+     * @return An array of Collaborator.DocType values representing the available document types.
+     */
     public Collaborator.DocType[] getDocType() {
         return Collaborator.DocType.values();
     }
+
 }

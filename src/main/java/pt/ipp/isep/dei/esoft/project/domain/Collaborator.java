@@ -14,7 +14,6 @@ public class Collaborator {
     private int docType;
     private Job job;
     private List<Skill> skills;
-    private static Enum<DocType> documentType = DocType.OTHER;
 
     private static final int TAX_PAYER_NUMBER_MIN = 100000000;
     private static final int TAX_PAYER_NUMBER_MAX = 999999999;
@@ -376,13 +375,8 @@ public class Collaborator {
             public String toString() {
                 return "Residence Permit";
             }
-        },
-        OTHER {
-            @Override
-            public String toString() {
-                return "Other";
-            }
         }
+
     }
 
 }
