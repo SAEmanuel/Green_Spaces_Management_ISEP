@@ -53,7 +53,7 @@ public class RegisterJobUI implements Runnable {
             if (job.isPresent()) {
                 System.out.println(ANSI_BRIGHT_GREEN + "Job successfully registered!" + ANSI_RESET);
             } else {
-                System.out.println(ANSI_BRIGHT_RED + "Duplicated name!" + ANSI_RESET);
+                System.out.println(ANSI_BRIGHT_RED + "Job not registered - Already registered!" + ANSI_RESET);
             }
 
         } catch (IllegalArgumentException e) {
@@ -80,7 +80,7 @@ public class RegisterJobUI implements Runnable {
      * @param typedJobName the typed job name
      */
     private void displayTypedJob(String typedJobName) {
-        System.out.printf(ANSI_GREEN + "%nName chosen: %s%n" + ANSI_RESET, typedJobName);
+        System.out.printf("%nTyped name -> [" + ANSI_GREEN + "%s" + ANSI_RESET + "]%n", typedJobName);
     }
 
     /**

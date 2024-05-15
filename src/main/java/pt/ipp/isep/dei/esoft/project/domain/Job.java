@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
+
 import java.util.Objects;
 
 /**
@@ -20,7 +22,6 @@ public class Job {
             isValidJobName(jobName);
             this.jobName = jobName;
         } catch (IllegalArgumentException e) {
-            System.out.println("Invalid job name: " + jobName);
             throw e;
         }
 
@@ -88,6 +89,7 @@ public class Job {
         for (int i = 0; i < jobName.length(); i++) {
             char ch = jobName.charAt(i);
             if (!Character.isLetter(ch) && ch != ' ') {
+                System.out.println(ANSI_BRIGHT_RED + "Invalid job name: " + jobName + ANSI_RESET);
                 throw new IllegalArgumentException();
             }
         }

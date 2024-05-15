@@ -65,10 +65,10 @@ public class Collaborator {
     private void validateData(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, String docType, Job job) {
         isValidName(name);
         isValidBirthDate(birthDate, admissionDate);
-        isValidAddress(address);
         isValidPhoneNumber(phoneNumber);
         isValidEmailAddress(emailAddress);
         isValidTaxPayerNumber(taxPayerNumber);
+        isValidAddress(address);
     }
 
     /**
@@ -94,7 +94,7 @@ public class Collaborator {
 
         emailAddress = emailAddress.trim();
         if (!verifyEmail(emailAddress)) {
-            throw new IllegalArgumentException("Invalid email address");
+            throw new IllegalArgumentException("Invalid email address!");
         }
     }
 
@@ -115,11 +115,11 @@ public class Collaborator {
 
             String[] secondSplit = splitEmailAddress[1].split("\\.");
 
-            if ((secondSplit.length != 2) || hasNoDigits(secondSplit)) {
+            if ((secondSplit.length != 2) && (secondSplit.length != 3) || hasNoDigits(secondSplit)) {
                 return false;
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new IllegalArgumentException("Invalid email address");
+            throw new IllegalArgumentException("Invalid email address!");
         }
         return true;
     }
@@ -132,11 +132,21 @@ public class Collaborator {
      */
     private boolean hasNoDigits(String[] secondSplit) {
         for (int i = 1; i < secondSplit[1].length(); i++) {
-            if (!Character.isDigit(secondSplit[1].charAt(i))) {
+            if (!Character.isDigit(secondSplit[1].charAt(i)) && !Character.isDigit(secondSplit[2].charAt(i)) ) {
                 return false;
             }
         }
         return true;
+    }
+    /**
+     * Validates address
+     *
+     * @param address of the collaborator
+     */
+    private void isValidAddress(String address) {
+        if (address == null || address.trim().isEmpty()) {
+            throw new IllegalArgumentException("Address cannot be null or empty.");
+        }
     }
 
     /**
@@ -147,17 +157,6 @@ public class Collaborator {
     private void isValidPhoneNumber(int phoneNumber) {
         if (phoneNumber < phoneNumberMin || phoneNumber > phoneNumberMiddleLeft && phoneNumber < phoneNumberMiddleRight || phoneNumber > phoneNumberMax) {
             throw new IllegalArgumentException("Phone number is invalid");
-        }
-    }
-
-    /**
-     * Validates address
-     *
-     * @param address of the collaborator
-     */
-    private void isValidAddress(String address) {
-        if (address == null || address.trim().isEmpty()) {
-            throw new IllegalArgumentException("Address cannot be null or empty.");
         }
     }
 
@@ -261,31 +260,67 @@ public class Collaborator {
 
 
 
+    /**
+     * Gets the birthdate of the collaborator.
+     *
+     * @return the birthdate of the collaborator
+     */
     public Data getBirthDate() {
         return birthDate;
     }
 
+    /**
+     * Gets the admission date of the collaborator.
+     *
+     * @return the admission date of the collaborator
+     */
     public Data getAdmissionDate() {
         return admissionDate;
     }
 
+    /**
+     * Gets the address of the collaborator.
+     *
+     * @return the address of the collaborator
+     */
     public String getAddress() {
         return address;
     }
 
+    /**
+     * Gets the phone number of the collaborator.
+     *
+     * @return the phone number of the collaborator
+     */
     public int getPhoneNumber() {
         return phoneNumber;
     }
 
+    /**
+     * Gets the email address of the collaborator.
+     *
+     * @return the email address of the collaborator
+     */
     public String getEmailAddress() {
         return emailAddress;
     }
 
+    /**
+     * Gets the document type of the collaborator.
+     *
+     * @return the document type of the collaborator
+     */
     public String getDocType() {
         return docType;
     }
 
+    /**
+     * Gets the job of the collaborator.
+     *
+     * @return the job of the collaborator
+     */
     public Job getJob() {
         return job;
     }
+
 }
