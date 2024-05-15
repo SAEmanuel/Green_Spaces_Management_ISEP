@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import org.w3c.dom.DocumentType;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,9 +13,10 @@ public class Collaborator {
     private int phoneNumber;
     private String emailAddress;
     private int taxPayerNumber;
-    private String docType;
+    private int docType;
     private Job job;
     private List<Skill> skills;
+    private static Enum<DocType> documentType;
 
     private static final int TAX_PAYER_NUMBER_MIN = 100000000;
     private static final int TAX_PAYER_NUMBER_MAX = 999999999;
@@ -35,7 +38,7 @@ public class Collaborator {
      * @param docType        of the collaborator
      * @param job            of the collaborator
      */
-    public Collaborator(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, String docType, Job job) {
+    public Collaborator(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, int docType, Job job) {
         validateData(name, birthDate, admissionDate, address, phoneNumber, emailAddress, taxPayerNumber, docType, job);
         this.name = name.trim();
         this.birthDate = birthDate;
@@ -44,7 +47,7 @@ public class Collaborator {
         this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress.trim();
         this.taxPayerNumber = taxPayerNumber;
-        this.docType = docType.trim();
+        this.docType = docType;
         this.job = job;
         this.skills = new ArrayList<Skill>();
     }
@@ -62,14 +65,16 @@ public class Collaborator {
      * @param docType        of the collaborator
      * @param job            of the collaborator
      */
-    private void validateData(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, String docType, Job job) {
+    private void validateData(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, int docType, Job job) {
         isValidName(name);
         isValidBirthDate(birthDate, admissionDate);
         isValidPhoneNumber(phoneNumber);
         isValidEmailAddress(emailAddress);
         isValidTaxPayerNumber(taxPayerNumber);
         isValidAddress(address);
+        isValidDocType(docType);
     }
+
 
     /**
      * Validates taxpayer number
@@ -115,7 +120,7 @@ public class Collaborator {
 
             String[] secondSplit = splitEmailAddress[1].split("\\.");
 
-            if ((secondSplit.length != 2) && (secondSplit.length != 3) || hasNoDigits(secondSplit)) {
+            if (secondSplit.length < 2 || secondSplit.length > 3 || hasNoDigits(secondSplit)) {
                 return false;
             }
         } catch (IndexOutOfBoundsException e) {
@@ -131,13 +136,23 @@ public class Collaborator {
      * @return true if String has no digits, false otherwise
      */
     private boolean hasNoDigits(String[] secondSplit) {
-        for (int i = 1; i < secondSplit[1].length(); i++) {
-            if (!Character.isDigit(secondSplit[1].charAt(i)) && !Character.isDigit(secondSplit[2].charAt(i)) ) {
-                return false;
+        if (secondSplit.length == 2) {
+            for (int i = 1; i < secondSplit[1].length(); i++) {
+                if (!Character.isDigit(secondSplit[1].charAt(i))) {
+                    return false;
+                }
             }
+        } else if (secondSplit.length == 3) {
+            for (int i = 1; i < secondSplit[1].length(); i++) {
+                if (!Character.isDigit(secondSplit[1].charAt(i)) && !Character.isDigit(secondSplit[2].charAt(i))) {
+                    return false;
+                }
+            }
+
         }
         return true;
     }
+
     /**
      * Validates address
      *
@@ -148,6 +163,18 @@ public class Collaborator {
             throw new IllegalArgumentException("Address cannot be null or empty.");
         }
     }
+
+    private void isValidDocType(int docType) {
+
+        for (int i = 0; i < DocType.values().length; i++) {
+            if (docType != i) {
+                throw new IllegalArgumentException("Invalid document type!");
+            }
+
+        }
+
+    }
+
 
     /**
      * Validates phone number
@@ -223,7 +250,7 @@ public class Collaborator {
         return (name.equalsIgnoreCase(collaborator.name) && birthDate.equals(collaborator.birthDate)
                 && admissionDate.equals(collaborator.admissionDate) && address.equalsIgnoreCase(collaborator.address)
                 && phoneNumber == collaborator.phoneNumber && emailAddress.equalsIgnoreCase(collaborator.emailAddress)
-                && taxPayerNumber == collaborator.taxPayerNumber && docType.equalsIgnoreCase(collaborator.docType) && job.equals(collaborator.job));
+                && taxPayerNumber == collaborator.taxPayerNumber && docType == collaborator.docType && job.equals(collaborator.job));
     }
 
     /**
@@ -317,7 +344,7 @@ public class Collaborator {
      *
      * @return the document type of the collaborator
      */
-    public String getDocType() {
+    public int getDocType() {
         return docType;
     }
 
@@ -328,6 +355,31 @@ public class Collaborator {
      */
     public Job getJob() {
         return job;
+    }
+
+    public static Enum getDocumentType() {
+        return documentType;
+    }
+
+    private enum DocType {
+        PASSPORT {
+            @Override
+            public String toString() {
+                return "Passport";
+            }
+        },
+        CITIZEN_CARD {
+            @Override
+            public String toString() {
+                return "Citizen Card";
+            }
+        },
+        DRIVER_LICENSE {
+            @Override
+            public String toString() {
+                return "Driver License";
+            }
+        }
     }
 
 }
