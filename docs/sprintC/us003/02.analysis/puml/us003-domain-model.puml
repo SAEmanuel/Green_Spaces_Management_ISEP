@@ -21,7 +21,7 @@ package "HRM System" {
         email
         taxpayerNumber
         id_doc_type
-        id_doc_number
+
     }
 
     class Job {

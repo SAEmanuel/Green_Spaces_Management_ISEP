@@ -12,7 +12,7 @@ public class Bootstrap implements Runnable {
     private final Job job4 = new Job("Medical Assistant");
     private final Job job5 = new Job("Account Executive");
     private final Job job6 = new Job("Project Manager");
-    private final Job job7 = new Job("Web Designer");
+    private final Job job7 = new Job("Pasteleira");
 
     private final Skill skill1 = new Skill("Condutor de ligeiros");
     private final Skill skill2 = new Skill("Condutor de pesados");

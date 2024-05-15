@@ -61,12 +61,13 @@ As a Human Resources Manager, I want to register a collaborator with a job and f
 * **AC2:** Name should only have letters.
 * **AC3:** Admission date can only be valid if the collaborator is over 18 years old.
 * **AC4:** Phone number can only have 9 numbers.
-* **AC5:** Phone number can only be from the specified domains for phone numbers
-* **AC6:** Email address should have a prefix (before "@") and "." after "@".
+* **AC5:** Phone number can only be from the specified domains for phone numbers.
+* **AC6:** Email address should have a prefix (before "@") and one or two "." after "@".
 * **AC7:** Taxpayer number can only have 9 numbers.
 * **AC8:** The user will select a job from a list of jobs provided by the application.
-* **AC9:** An collaborator can only be added if it was not in the list previously (global validation).
-* **AC10:** Every acceptance criteria must be met, in order for the collaborator to be created successfully (local validation).
+* **AC9:** The user will select a document type from a list of document types provided by the application.
+* **AC10:** An collaborator can only be added if it was not in the list previously (global validation).
+* **AC11:** Every acceptance criteria must be met, in order for the collaborator to be created successfully (local validation).
 
 ### 1.4. Found out Dependencies
 
@@ -84,14 +85,14 @@ As a Human Resources Manager, I want to register a collaborator with a job and f
     * the taxpayer number
     * a calendar for birthdate
     * a calendar for admission date
-    * a list to select identification document type
 
 * Selected data:
     * a list to select a job
+    * a list to select identification document type
 
 **Output Data:**
 
-* List of existing jobs
+* Collaborator information
 * (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
@@ -100,7 +101,7 @@ As a Human Resources Manager, I want to register a collaborator with a job and f
 
 #### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us003-system-sequence-diagram-alternative-one.svg)
+![System Sequence Diagram - Alternative One](svg/us003-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
 
 ### 1.7 Other Relevant Remarks
 
