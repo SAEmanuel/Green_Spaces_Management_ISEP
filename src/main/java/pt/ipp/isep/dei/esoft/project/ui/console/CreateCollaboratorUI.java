@@ -20,6 +20,7 @@ public class CreateCollaboratorUI implements Runnable {
     private String address;
     private String emailAddress;
     private int docType;
+    private String docNumber;
     private Data birthDate;
     private Data admissionDate;
     private int phoneNumber;
@@ -74,7 +75,7 @@ public class CreateCollaboratorUI implements Runnable {
      */
     private void submitData() {
         try {
-            Optional<Collaborator> collaborator = getController().registerCollaborator(name, birthDate, admissionDate, address, phoneNumber, emailAddress, taxPayerNumber, docType, job);
+            Optional<Collaborator> collaborator = getController().registerCollaborator(name, birthDate, admissionDate, address, phoneNumber, emailAddress, taxPayerNumber, docType, docNumber, job);
 
             if (collaborator.isPresent()) {
                 System.out.println(ANSI_BRIGHT_GREEN + "Collaborator successfully created!" + ANSI_RESET);
@@ -159,8 +160,8 @@ public class CreateCollaboratorUI implements Runnable {
     private void display() {
         Collaborator.DocType[] values = collaboratorController.getDocType();
 
-        StringBuilder stringBuilder = new StringBuilder(String.format("Name: %s | Address: %s | Email: %s | Doc Type: %s | Birth Date: %s | Admission Date: %s | Phone Number: %d | Tax Payer Number: %d | Job: %s",
-                name, address, emailAddress, values[docType], birthDate, admissionDate, phoneNumber, taxPayerNumber, job));
+        StringBuilder stringBuilder = new StringBuilder(String.format("Name: %s | Address: %s | Email: %s | Doc Type: %s | Doc Number: %s | Birth Date: %s | Admission Date: %s | Phone Number: %d | Tax Payer Number: %d | Job: %s",
+                name, address, emailAddress, values[docType], docNumber, birthDate, admissionDate, phoneNumber, taxPayerNumber, job));
         System.out.printf("\nTyped data -> [%s%s%s]\n", ANSI_GREEN, stringBuilder, ANSI_RESET);
         System.out.print("Confirmation menu:\n 0 -> Change Collaborator Info\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
     }
@@ -177,6 +178,7 @@ public class CreateCollaboratorUI implements Runnable {
             emailAddress = requestCollaboratorEmailAddress();
             taxPayerNumber = requestCollaboratorTaxPayerNumber();
             docType = requestCollaboratorDocType();
+            docNumber = requestCollaboratorDocNumber();
             birthDate = requestBirthDate();
             admissionDate = requestAdmissionDate();
         }
@@ -377,6 +379,7 @@ public class CreateCollaboratorUI implements Runnable {
         }
     }
 
+
     /**
      * Requests taxpayer number
      *
@@ -397,6 +400,41 @@ public class CreateCollaboratorUI implements Runnable {
             }
         }
     }
+
+    /**
+     * Requests document number
+     *
+     * @return document number
+     */
+    private String requestCollaboratorDocNumber() {
+        String resposta;
+        Collaborator.DocType[] values = collaboratorController.getDocType();
+        Scanner input = new Scanner(System.in);
+
+        System.out.printf("Doc Type selected -> [" + ANSI_GREEN + "%s" + ANSI_RESET + "]%n", values[docType]);
+        switch (values[docType]) {
+            case PASSPORT:
+                System.out.println(ANSI_BRIGHT_YELLOW + "Must have 9 digits and a letter in the end." + ANSI_RESET);
+                break;
+            case CITIZEN_CARD:
+                System.out.println(ANSI_BRIGHT_YELLOW + "Must have 9 digits." + ANSI_RESET);
+                break;
+            case RESIDENCE_PERMIT:
+                System.out.println(ANSI_BRIGHT_YELLOW + "Must have between 6 and 9 digits." + ANSI_RESET);
+                break;
+        }
+        System.out.print("Document Number: ");
+        while (true) {
+            try {
+                resposta = input.nextLine();
+                return resposta;
+            } catch (InputMismatchException e) {
+                System.out.print(ANSI_BRIGHT_RED + "Invalid document number! Enter a new one: " + ANSI_RESET);
+                input.nextLine();
+            }
+        }
+    }
+
 
     /**
      * Requests job
@@ -429,3 +467,4 @@ public class CreateCollaboratorUI implements Runnable {
         return null;
     }
 }
+
