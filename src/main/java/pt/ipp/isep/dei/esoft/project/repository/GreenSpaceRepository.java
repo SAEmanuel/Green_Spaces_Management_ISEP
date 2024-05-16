@@ -51,5 +51,9 @@ public class GreenSpaceRepository {
         return true;
     }
 
+    public void add(GreenSpace greenSpace){
+        this.greenSpacesList.add(greenSpace);
+    }
+
 
 }

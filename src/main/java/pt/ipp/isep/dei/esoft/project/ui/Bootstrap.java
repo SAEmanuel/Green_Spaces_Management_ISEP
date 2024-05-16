@@ -23,6 +23,13 @@ public class Bootstrap implements Runnable {
     private final Skill skill7 = new Skill("Cozinheiro");
 
 
+    private final GreenSpace parqueDaCidade = new GreenSpace("Parque da Cidade",2,100,"Matosinhos");
+    private final GreenSpace palacioDeCristal = new GreenSpace("Palacio de Cristal",1,40,"Porto");
+    private final GreenSpace passeioAlegre = new GreenSpace("Passeio Alegre",0,11,"Porto");
+    private final GreenSpace quintaDoCovelo = new GreenSpace("Quinta do Covelo",0,100,"Porto");
+    private final GreenSpace infanteDomHenrique = new GreenSpace("Infante Dom Henrique",0,100,"Porto");
+
+
     //Add some task categories to the repository as bootstrap
     public void run() {
         addTaskCategories();
@@ -31,6 +38,16 @@ public class Bootstrap implements Runnable {
         addSkills();
         addJobs();
 //        addCollaborator();
+        addGreenSpaces();
+    }
+
+    private void addGreenSpaces(){
+        GreenSpaceRepository greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository();
+        greenSpaceRepository.add(parqueDaCidade);
+        greenSpaceRepository.add(palacioDeCristal);
+        greenSpaceRepository.add(passeioAlegre);
+        greenSpaceRepository.add(quintaDoCovelo);
+        greenSpaceRepository.add(infanteDomHenrique);
     }
 
 //    private void addCollaborator() {
@@ -54,8 +71,6 @@ public class Bootstrap implements Runnable {
         jobRepository.add(job5);
         jobRepository.add(job6);
         jobRepository.add(job7);
-
-
     }
 
     private void addSkills() {
