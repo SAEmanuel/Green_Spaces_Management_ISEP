@@ -11,7 +11,7 @@ title Use Case Diagram
 
 left to right direction
 
-rectangle "System Actors                       " as actors {
+
     actor "Human Resources Manager" as HRM
     actor "Vehicles and Fleet Manager" as FM
     actor "Green Spaces Manager" as GSM
@@ -19,7 +19,7 @@ rectangle "System Actors                       " as actors {
 
 
 
-}
+
 
 
 
@@ -30,14 +30,14 @@ rectangle "Use Cases" as usecases{
     usecase "UC4 - Assigning skills to a collaborator" as UC4
     usecase "UC5 - Generate a team proposal automatically" as UC5
     usecase "UC6 - Registering Vehicles" as UC6
-    usecase "UC7 - Register the overhaul of a vehicle" as UC7
-    usecase "UC8 - Overhauling of vehicles " as UC8
-    usecase "UC9 - PUT A TITLE HERE" as UC9
-    usecase "UC10 - PUT A TITLE HERE" as UC10
-    usecase "UC11 - PUT A TITLE HERE" as UC11
-    usecase "UC12 - PUT A TITLE HERE" as UC12
-    usecase "UC13 - PUT A TITLE HERE" as UC13
-    usecase "UC14 - PUT A TITLE HERE" as UC14
+    usecase "UC7 - Register the check-up of a vehicle" as UC7
+    usecase "UC8 - Check-up of vehicles" as UC8
+    usecase "UC9 - Water consumption of green spaces" as UC9
+    usecase "UC10 - Equipment Preferences" as UC10
+    usecase "UC11 - Collect data from the user portal about the use of the park" as UC11
+    usecase "UC12 - Importing Water Point Routes and Installation Costs" as UC12
+    usecase "UC13 - Optimizing irrigation" as UC13
+    usecase "UC14 - Running Asymptotic Behavior Tests" as UC14
 
     HRM --> UC1
     HRM --> UC2
