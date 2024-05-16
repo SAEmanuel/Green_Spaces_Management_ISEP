@@ -45,7 +45,7 @@ public class FileWriterC {
     public static void writeInputGraph(GraphC graph, String inputGraph) {
         try {
             inputGraphPrintWriter = new PrintWriter(inputGraph);
-            inputGraphPrintWriter.println("Input GraphC:");
+            inputGraphPrintWriter.println("Input Graph:");
             for (EdgeC edge : graph) {
                 inputGraphPrintWriter.printf("%s;%s;%.0f%n", edge.getPointX(),
                         edge.getPointY(), edge.getCost());
