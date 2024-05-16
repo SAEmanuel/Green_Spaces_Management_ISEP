@@ -66,10 +66,10 @@ public class CreateCollaboratorController {
      * @param job of the collaborator
      * @return an optional containing the registered collaborator, or empty if registration failed
      */
-    public Optional<Collaborator> registerCollaborator(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, int docType, Job job) {
+    public Optional<Collaborator> registerCollaborator(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, int docType, String docNumber, Job job) {
         Optional<Collaborator> newCollaborator = Optional.empty();
 
-        newCollaborator = collaboratorRepository.registerCollaborator(name, birthDate, admissionDate, address, phoneNumber, emailAddress, taxPayerNumber, docType, job);
+        newCollaborator = collaboratorRepository.registerCollaborator(name, birthDate, admissionDate, address, phoneNumber, emailAddress, taxPayerNumber, docType, docNumber, job);
         return newCollaborator;
     }
 

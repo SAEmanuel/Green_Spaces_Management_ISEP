@@ -23,7 +23,6 @@ public class Bootstrap implements Runnable {
     private final Skill skill7 = new Skill("Cozinheiro");
 
 
-
     //Add some task categories to the repository as bootstrap
     public void run() {
         addTaskCategories();
@@ -31,20 +30,20 @@ public class Bootstrap implements Runnable {
         addUsers();
         addSkills();
         addJobs();
-        addCollaborator();
+//        addCollaborator();
     }
 
-    private void addCollaborator() {
-        CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
-        collaboratorRepository.add(new Collaborator("Francisco",new Data(2004,5,20),new Data(2023,6,12),"Rua da pedra",912809789,"fran@gmail.com",123456744,1,job1));
-        collaboratorRepository.add(new Collaborator("Emanuel",new Data(2004,4,20),new Data(2023,6,12),"Rua da Mariana",912809777,"ema@gmail.com",123456755,1,job2));
-        collaboratorRepository.add(new Collaborator("Paulo",new Data(2002,8,20),new Data(2023,6,12),"Rua de Fanzeres",912809888,"paul@gmail.com",123456766,1,job3));
-        collaboratorRepository.add(new Collaborator("Xu",new Data(2000,4,20),new Data(2023,6,12),"Rua do restaurante asiatico",912809666,"xu@gmail.com",123456777,1,job4));
-        collaboratorRepository.add(new Collaborator("Jorge",new Data(2004,5,31),new Data(2023,6,12),"Rua enganhairo do isep",912809555,"jorge@gmail.com",123456788,1,job5));
-        collaboratorRepository.add(new Collaborator("Mariana Silva",new Data(2001,5,31),new Data(2023,6,12),"Rua da igreja",912809551,"mari@gmail.com",123456799,1,job6));
-        collaboratorRepository.add(new Collaborator("Gorete",new Data(1993,5,31),new Data(2023,6,12),"Rua de Fanzeres",912809552,"gori@gmail.com",123456999,1,job7));
+//    private void addCollaborator() {
+//        CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
+//        collaboratorRepository.add(new Collaborator("Francisco", new Data(2004, 5, 20), new Data(2023, 6, 12), "Rua da pedra", 912809789, "fran@gmail.com", 123456744, 1, "123456789", job1));
+//        collaboratorRepository.add(new Collaborator("Emanuel", new Data(2004, 4, 20), new Data(2023, 6, 12), "Rua da Mariana", 912809777, "ema@gmail.com", 123456755, 1, "123456789", job2));
+//        collaboratorRepository.add(new Collaborator("Paulo", new Data(2002, 8, 20), new Data(2023, 6, 12), "Rua de Fanzeres", 912809888, "paul@gmail.com", 123456766, 1, "123456789", job3));
+//        collaboratorRepository.add(new Collaborator("Xu", new Data(2000, 4, 20), new Data(2023, 6, 12), "Rua do restaurante asiatico", 912809666, "xu@gmail.com", 123456777, 1, "123456789", job4));
+//        collaboratorRepository.add(new Collaborator("Jorge", new Data(2004, 5, 31), new Data(2023, 6, 12), "Rua enganhairo do isep", 912809555, "jorge@gmail.com", 123456788, 1, "123456789", job5));
+//        collaboratorRepository.add(new Collaborator("Mariana Silva", new Data(2001, 5, 31), new Data(2023, 6, 12), "Rua da igreja", 912809551, "mari@gmail.com", 123456799, 1, "123456789", job6));
+//        collaboratorRepository.add(new Collaborator("Gorete", new Data(1993, 5, 31), new Data(2023, 6, 12), "Rua de Fanzeres", 912809552, "gori@gmail.com", 123456999, 1, "123456789", job7));
 
-    }
+//    }
 
     private void addJobs() {
         JobRepository jobRepository = Repositories.getInstance().getJobRepository();
@@ -103,6 +102,7 @@ public class Bootstrap implements Runnable {
         authenticationRepository.addUserRole(AuthenticationController.ROLE_EMPLOYEE, AuthenticationController.ROLE_EMPLOYEE);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_HRM, AuthenticationController.ROLE_HRM);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_VFM, AuthenticationController.ROLE_VFM);
+        authenticationRepository.addUserRole(AuthenticationController.ROLE_GSM, AuthenticationController.ROLE_GSM);
 
         authenticationRepository.addUserWithRole("Main Administrator", "admin@this.app", "admin",
                 AuthenticationController.ROLE_ADMIN);
@@ -113,7 +113,10 @@ public class Bootstrap implements Runnable {
         authenticationRepository.addUserWithRole("Human Resource Manager", "hrm@this.app", "hrm",
                 AuthenticationController.ROLE_HRM);
 
-        authenticationRepository.addUserWithRole("VEHICLE FLEET MANAGER", "vfm@this.app", "vfm",
+        authenticationRepository.addUserWithRole("Vehicle Fleet Manager", "vfm@this.app", "vfm",
                 AuthenticationController.ROLE_VFM);
+
+        authenticationRepository.addUserWithRole("Green Spaces Manager", "gsm@this.app", "gsm",
+                AuthenticationController.ROLE_GSM);
     }
 }

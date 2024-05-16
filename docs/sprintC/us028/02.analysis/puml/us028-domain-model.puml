@@ -3,7 +3,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-left to right direction
+'left to right direction
 
 skinparam classAttributeIconSize 0
 
@@ -11,7 +11,7 @@ hide circle
 hide methods
 package "VFM System" {
 
-title Domain Model - US008
+title Domain Model - US028
 
 
 
@@ -28,11 +28,16 @@ class Agenda {
          Team
 }
 
+class Task{
+        Description
+}
 
 
 
 
-Collaborator "1" -- "*" Agenda : lists tasks >
+
+Collaborator "1" - "*" Task : lists >
+Agenda "1" -- "*" Task : has >
 
 
 
