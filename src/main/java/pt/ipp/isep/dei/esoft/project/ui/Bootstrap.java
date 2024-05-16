@@ -103,6 +103,7 @@ public class Bootstrap implements Runnable {
         authenticationRepository.addUserRole(AuthenticationController.ROLE_EMPLOYEE, AuthenticationController.ROLE_EMPLOYEE);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_HRM, AuthenticationController.ROLE_HRM);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_VFM, AuthenticationController.ROLE_VFM);
+        authenticationRepository.addUserRole(AuthenticationController.ROLE_GSM, AuthenticationController.ROLE_GSM);
 
         authenticationRepository.addUserWithRole("Main Administrator", "admin@this.app", "admin",
                 AuthenticationController.ROLE_ADMIN);
@@ -113,7 +114,10 @@ public class Bootstrap implements Runnable {
         authenticationRepository.addUserWithRole("Human Resource Manager", "hrm@this.app", "hrm",
                 AuthenticationController.ROLE_HRM);
 
-        authenticationRepository.addUserWithRole("VEHICLE FLEET MANAGER", "vfm@this.app", "vfm",
+        authenticationRepository.addUserWithRole("Vehicle Fleet Manager", "vfm@this.app", "vfm",
                 AuthenticationController.ROLE_VFM);
+
+        authenticationRepository.addUserWithRole("Green Spaces Manager", "gsm@this.app", "gsm",
+                AuthenticationController.ROLE_GSM);
     }
 }

@@ -15,7 +15,9 @@ participant ":System" as System
         activate COLLAB
         activate System
 
-        System --> COLLAB : Provides a list of tasks
+        System --> COLLAB : Asks the collaborator taxpayer number
+        COLLAB -> System : Provides the taxpayer number
+        System --> COLLAB: Provides the list of tasks
 
 
         deactivate System
