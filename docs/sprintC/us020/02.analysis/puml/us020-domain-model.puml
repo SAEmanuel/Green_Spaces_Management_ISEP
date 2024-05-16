@@ -22,6 +22,7 @@ class GreenSpace {
          name
          size
          area
+         address
 }
 
 

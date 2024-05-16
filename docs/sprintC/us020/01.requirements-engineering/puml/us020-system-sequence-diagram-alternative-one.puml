@@ -16,10 +16,20 @@ activate Employee
     Employee -> System : ask to register a green space
     activate System
 
-        System --> Employee : request data (name,size,area)
+        System --> Employee : request data (name,area,address)
     deactivate System
 
     Employee -> System : types requested data
+
+
+    activate System
+
+            System --> Employee : shows list of sizes option\n and request a selection
+        deactivate System
+
+        Employee -> System : select an option
+
+
 
     activate System
 

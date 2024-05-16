@@ -11,20 +11,30 @@ As a Green Space Manager, I want to register a green space.
 
 **From the specifications document and client meetings:**
 
-> None.
+> 
 
 **From forum:**
 
-> **Question:** ?
+> **Question:** To register a green space, what is the criteria needed to classify it as a medium-sized park or a large-sized park?
 >
-> **Answer:** ...
+> **Answer:** It's a GSM responsibility to decide the classification.
+
+> **Question:** We understand that type (garden, medium-size, large-size), area, name, and address are required inputs for a Green Space (and if we are wrong in this, please correct us), but are there any other inputs that we are unaware of?
+>
+> **Answer:** Seems enough.
+
+> **Question:** In which unit should the area be measured in?
+>
+> **Answer:** Usually, areas are measured in hectares.
+
+
 
 
 ### 1.3. Acceptance Criteria 
 
 * **AC01:** There cannot be two green spaces with the same name.
 * **AC02:** All required fields must be filled in.
-* **AC03:** The name of a green space cannot have special characters or numbers.
+* **AC03:** The name of a green space cannot have special characters.
 
 
 ### 1.4. Found out Dependencies
@@ -35,13 +45,19 @@ As a Green Space Manager, I want to register a green space.
 
 **Input Data:**
 
-* Name of the Green Space.
-* Size of the Green Space.
-* Area of the Green Space.
+* Typed Data:
+  * Name of the Green Space.
+  * Address of the Green Space.
+  * Area of the Green Space.
+* Selected Data:
+  * Size of the Green Space.
+
 
 **Output Data:**
 
-* (In)Success of the operation
+* Confirmation menu.
+* (In)Success of the operation.
+* Error messages.
 
 ### 1.6. System Sequence Diagram (SSD)
 
