@@ -1,0 +1,27 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - Alternative One
+
+autonumber
+
+actor "Collaborator" as COLLAB
+participant ":System" as System
+
+
+        COLLAB -> System: Asks to record the completion of a task
+        activate COLLAB
+        activate System
+
+        System --> COLLAB : Shows the list of tasks
+        COLLAB -> System: Selects the desired task
+        System --> COLLAB: Asks to enter data (date of\ntask completion)
+        COLLAB -> System: Enters data
+        System --> COLLAB: Displays success of operation
+
+
+        deactivate System
+        deactivate COLLAB
+@enduml

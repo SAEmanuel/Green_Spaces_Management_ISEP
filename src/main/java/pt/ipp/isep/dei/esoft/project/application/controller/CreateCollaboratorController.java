@@ -74,8 +74,14 @@ public class CreateCollaboratorController {
     }
 
 
+    /**
+     * Retrieves an array containing all available document types for collaborators.
+     *
+     * @return An array of Collaborator.DocType values representing the available document types.
+     */
     public Collaborator.DocType[] getDocType() {
         return collaboratorRepository.getDocType();
     }
+
 
 }
