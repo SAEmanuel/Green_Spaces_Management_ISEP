@@ -12,6 +12,7 @@ public class Collaborator {
     private String emailAddress;
     private int taxPayerNumber;
     private int docType;
+    private String docNumber;
     private Job job;
     private List<Skill> skills;
 
@@ -21,6 +22,9 @@ public class Collaborator {
     private static final int phoneNumberMiddleLeft = 939999999;
     private static final int phoneNumberMiddleRight = 960000000;
     private static final int phoneNumberMax = 969999999;
+    private static final int CITIZEN_CARD_LENGTH = 9;
+    private static final int RESIDENCE_PERMIT_MIN_LENGTH = 6;
+
 
     /**
      * Constructor that initializes the Collaborator
@@ -35,8 +39,8 @@ public class Collaborator {
      * @param docType        of the collaborator
      * @param job            of the collaborator
      */
-    public Collaborator(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, int docType, Job job) {
-        validateData(name, birthDate, admissionDate, address, phoneNumber, emailAddress, taxPayerNumber, docType, job);
+    public Collaborator(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, int docType, String docNumber, Job job) {
+        validateData(name, birthDate, admissionDate, address, phoneNumber, emailAddress, taxPayerNumber, docType, docNumber, job);
         this.name = name.trim();
         this.birthDate = birthDate;
         this.admissionDate = admissionDate;
@@ -45,6 +49,7 @@ public class Collaborator {
         this.emailAddress = emailAddress.trim();
         this.taxPayerNumber = taxPayerNumber;
         this.docType = docType;
+        this.docNumber = docNumber.trim();
         this.job = job;
         this.skills = new ArrayList<Skill>();
     }
@@ -62,7 +67,7 @@ public class Collaborator {
      * @param docType        of the collaborator
      * @param job            of the collaborator
      */
-    private void validateData(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, int docType, Job job) {
+    private void validateData(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, int docType, String docNumber, Job job) {
         isValidName(name);
         isValidBirthDate(birthDate, admissionDate);
         isValidPhoneNumber(phoneNumber);
@@ -70,6 +75,7 @@ public class Collaborator {
         isValidTaxPayerNumber(taxPayerNumber);
         isValidAddress(address);
         isValidDocType(docType);
+        isValidDocNumber(docNumber, docType);
     }
 
 
@@ -181,6 +187,34 @@ public class Collaborator {
         }
     }
 
+    private void isValidDocNumber(String docNumber, int docType) {
+        boolean isValid = false;
+        switch (DocType.values()[docType]) {
+            case CITIZEN_CARD:
+                if (docNumber.length() == CITIZEN_CARD_LENGTH) {
+                    isValid = true;
+                }
+                break;
+            case RESIDENCE_PERMIT:
+                if (docNumber.length() >= RESIDENCE_PERMIT_MIN_LENGTH && docNumber.length() <= CITIZEN_CARD_LENGTH) {
+                    isValid = true;
+                }
+                break;
+            case PASSPORT:
+                if (docNumber.length() == CITIZEN_CARD_LENGTH && Character.isLetter(docNumber.charAt(8))) {
+                    isValid = true;
+
+                }
+                break;
+        }
+
+        if (!isValid) {
+            throw new IllegalArgumentException("Invalid document number !");
+        }
+
+    }
+
+
     /**
      * Validates phone number
      *
@@ -228,7 +262,7 @@ public class Collaborator {
      * @return the cloned Collaborator
      */
     public Collaborator clone() {
-        return new Collaborator(this.name, this.birthDate, this.admissionDate, this.address, this.phoneNumber, this.emailAddress, this.taxPayerNumber, this.docType, this.job);
+        return new Collaborator(this.name, this.birthDate, this.admissionDate, this.address, this.phoneNumber, this.emailAddress, this.taxPayerNumber, this.docType, this.docNumber, this.job);
     }
 
     /**
