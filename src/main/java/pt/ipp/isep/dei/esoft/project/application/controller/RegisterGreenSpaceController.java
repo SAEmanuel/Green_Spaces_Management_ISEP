@@ -22,10 +22,10 @@ public class RegisterGreenSpaceController {
     }
 
 
-    public Optional<GreenSpace> registerGreenSpace(String name, int size, float area) {
+    public Optional<GreenSpace> registerGreenSpace(String name, int size, float area,String address) {
         Optional<GreenSpace> newGreenSpace;
 
-        newGreenSpace = greenSpaceRepository.registerGreenSpace(name,size,area);
+        newGreenSpace = greenSpaceRepository.registerGreenSpace(name,size,area,address);
 
         return newGreenSpace;
     }
