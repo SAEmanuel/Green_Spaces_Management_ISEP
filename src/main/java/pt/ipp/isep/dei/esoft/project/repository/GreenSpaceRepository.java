@@ -1,11 +1,15 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
+import pt.ipp.isep.dei.esoft.project.domain.Skill;
 import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
+import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_RESET;
 
 public class GreenSpaceRepository {
     private final List<GreenSpace> greenSpacesList;
@@ -55,5 +59,28 @@ public class GreenSpaceRepository {
         this.greenSpacesList.add(greenSpace);
     }
 
+    public List<GreenSpace> getGreenSpacesList() {
+        return clone();
+    }
+
+    public List<GreenSpace> clone(){
+        return new ArrayList<>(this.greenSpacesList);
+    }
+
+    public void showGreenSpaces() {
+        if (greenSpacesList.isEmpty()) {
+            System.out.println(ANSI_BRIGHT_RED + "No green spaces were found in the repository." + ANSI_RESET);
+        } else {
+            System.out.println("\n--List of Green Spaces--");
+            for (int i = 0; i < greenSpacesList.size(); i++) {
+                GreenSpace greenSpace = greenSpacesList.get(i);
+                System.out.println("• Green Space: " + greenSpace.getName() + "\n"+ANSI_PURPLE+"   Option -> [" + (i+1) + "]"+ ANSI_RESET);
+            }
+            System.out.println("----------------");
+        }
+    }
+
 
 }
+
+

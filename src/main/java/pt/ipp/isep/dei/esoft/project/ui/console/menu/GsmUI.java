@@ -4,6 +4,7 @@ package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 
 import pt.ipp.isep.dei.esoft.project.ui.console.RegisterGreenSpaceUI;
 
+import pt.ipp.isep.dei.esoft.project.ui.console.ToDoListUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class GsmUI implements Runnable {
     public void run() {
         List<MenuItem> options = new ArrayList<MenuItem>();
         options.add(new MenuItem("Register a Green Space", new RegisterGreenSpaceUI()));
+        options.add(new MenuItem("Add a New Entry to the To-Do List", new ToDoListUI()));
 
 
 

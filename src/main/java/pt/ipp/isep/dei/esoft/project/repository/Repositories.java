@@ -13,6 +13,7 @@ public class Repositories {
     private final TeamRepository teamRepository;
     private final VehicleCheckUpRepository vehicleCheckUpRepository;
     private final GreenSpaceRepository greenSpaceRepository;
+    private final ToDoListRepository toDoListRepository;
 
     private Repositories() {
         organizationRepository = new OrganizationRepository();
@@ -25,6 +26,7 @@ public class Repositories {
         teamRepository = new TeamRepository();
         vehicleCheckUpRepository = new VehicleCheckUpRepository();
         greenSpaceRepository = new GreenSpaceRepository();
+        toDoListRepository = new ToDoListRepository();
     }
 
     public static Repositories getInstance() {
@@ -67,4 +69,7 @@ public class Repositories {
     public VehicleCheckUpRepository getVehicleCheckUpRepository() {return vehicleCheckUpRepository; }
 
     public GreenSpaceRepository getGreenSpaceRepository() {return greenSpaceRepository; }
+
+    public ToDoListRepository getToDoRepository() { return toDoListRepository;
+    }
 }

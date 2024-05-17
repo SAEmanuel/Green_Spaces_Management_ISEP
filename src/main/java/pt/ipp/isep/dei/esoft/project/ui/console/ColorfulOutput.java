@@ -4,7 +4,7 @@ public class ColorfulOutput {
     public static final String ANSI_RESET = "\u001B[0m";
 
     public static final String ANSI_BLACK = "\u001B[30m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_YELLOW = "\u001B[38;5;226m";
     public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_CYAN = "\u001B[36m";
@@ -37,5 +37,10 @@ public class ColorfulOutput {
     public static final String ANSI_FIREBRICK = "\u001B[38;5;160m";
     public static final String ANSI_INDIAN_RED = "\u001B[38;5;131m";
     public static final String ANSI_MAROON = "\u001B[38;5;52m";
-
+    public static final String ANSI_ORANGE = "\u001B[38;5;214m";
+    public static final String ANSI_DARK_ORANGE = "\u001B[38;5;208m";
+    public static final String ANSI_LIGHT_ORANGE = "\u001B[38;5;215m";
+    public static final String ANSI_CORAL = "\u001B[38;5;203m";
+    public static final String ANSI_TOMATO = "\u001B[38;5;202m";
+    public static final String ANSI_ORANGE_RED = "\u001B[38;5;196m";
 }
