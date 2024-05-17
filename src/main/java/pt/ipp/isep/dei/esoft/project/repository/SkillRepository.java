@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.repository;
 import pt.ipp.isep.dei.esoft.project.domain.Job;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -10,7 +11,7 @@ import java.util.Optional;
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_RESET;
 
-public class SkillRepository {
+public class SkillRepository implements Serializable {
 
     /**
      * The list of skills.
@@ -102,9 +103,6 @@ public class SkillRepository {
         return new ArrayList<>(this.skillList);
     }
 
-    public void add(Skill skill) {
-        skillList.add(skill);
-    }
 
     /**
      * Shows all the skills in the list
@@ -131,5 +129,30 @@ public class SkillRepository {
     public Skill getSkill(int position) {
         return skillList.get(position);
     }
+
+
+
+    //----------------------- Serialization methods -------------------------------
+
+    public List<Skill> getSkillListSerialization() {
+        return skillList;
+    }
+
+    public void serializationInput(List<Skill> skillList) {
+        this.skillList.clear();
+        this.skillList.addAll(skillList);
+    }
+
+    //-------------------------------------------------------------------------------
+
+
+
+    //---------------------- Boostrap methods ---------------------------------------
+
+    public void add(Skill skill) {
+        skillList.add(skill);
+    }
+
+    //-------------------------------------------------------------------------------
 
 }

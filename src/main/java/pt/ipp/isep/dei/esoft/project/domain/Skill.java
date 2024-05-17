@@ -1,6 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-public class Skill {
+import java.io.Serializable;
+
+public class Skill implements Serializable {
 
     /**
      * The name of the skill.

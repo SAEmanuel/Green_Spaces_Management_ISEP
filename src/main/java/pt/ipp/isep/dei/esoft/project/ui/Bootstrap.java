@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.ui;
 
+import pt.ipp.isep.dei.esoft.project.application.SerializationOutput;
+import pt.ipp.isep.dei.esoft.project.application.SerializationRead;
 import pt.ipp.isep.dei.esoft.project.application.controller.authorization.AuthenticationController;
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.*;
@@ -14,13 +16,13 @@ public class Bootstrap implements Runnable {
     private final Job job6 = new Job("Project Manager");
     private final Job job7 = new Job("Pasteleira");
 
-    private final Skill skill1 = new Skill("Condutor de ligeiros");
-    private final Skill skill2 = new Skill("Condutor de pesados");
-    private final Skill skill3 = new Skill("Fritador de batatas");
-    private final Skill skill4 = new Skill("Programador em Python");
-    private final Skill skill5 = new Skill("Programador em Java");
-    private final Skill skill6 = new Skill("Data Analysis");
-    private final Skill skill7 = new Skill("Cozinheiro");
+//    private final Skill skill1 = new Skill("Condutor de ligeiros");
+//    private final Skill skill2 = new Skill("Condutor de pesados");
+//    private final Skill skill3 = new Skill("Fritador de batatas");
+//    private final Skill skill4 = new Skill("Programador em Python");
+//    private final Skill skill5 = new Skill("Programador em Java");
+//    private final Skill skill6 = new Skill("Data Analysis");
+//    private final Skill skill7 = new Skill("Cozinheiro");
 
 
     private final GreenSpace parqueDaCidade = new GreenSpace("Parque da Cidade",2,100,"Matosinhos");
@@ -32,14 +34,28 @@ public class Bootstrap implements Runnable {
 
     //Add some task categories to the repository as bootstrap
     public void run() {
+        readAppInformation();
         addTaskCategories();
         addOrganization();
         addUsers();
-        addSkills();
         addJobs();
-//        addCollaborator();
         addGreenSpaces();
+//        addSkills();
+//        addCollaborator();
     }
+
+    protected static void readAppInformation(){
+        SerializationRead serializationRead = new SerializationRead();
+        serializationRead.serializeSkill();
+
+    }
+
+
+
+
+
+
+
 
     private void addGreenSpaces(){
         GreenSpaceRepository greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository();
@@ -73,17 +89,16 @@ public class Bootstrap implements Runnable {
         jobRepository.add(job7);
     }
 
-    private void addSkills() {
-        SkillRepository skillRepository = Repositories.getInstance().getSkillRepository();
-        skillRepository.add(skill1);
-        skillRepository.add(skill2);
-        skillRepository.add(skill3);
-        skillRepository.add(skill4);
-        skillRepository.add(skill5);
-        skillRepository.add(skill6);
-        skillRepository.add(skill7);
-
-    }
+//    private void addSkills() {
+//        SkillRepository skillRepository = Repositories.getInstance().getSkillRepository();
+//        skillRepository.add(skill1);
+//        skillRepository.add(skill2);
+//        skillRepository.add(skill3);
+//        skillRepository.add(skill4);
+//        skillRepository.add(skill5);
+//        skillRepository.add(skill6);
+//        skillRepository.add(skill7);
+//    }
 
 
     private void addOrganization() {
