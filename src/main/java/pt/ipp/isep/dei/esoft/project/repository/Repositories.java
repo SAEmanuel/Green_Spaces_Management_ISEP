@@ -3,8 +3,6 @@ package pt.ipp.isep.dei.esoft.project.repository;
 public class Repositories {
 
     private static Repositories instance;
-    private final OrganizationRepository organizationRepository;
-    private final TaskCategoryRepository taskCategoryRepository;
     private final AuthenticationRepository authenticationRepository;
     private final JobRepository jobRepository;
     private final SkillRepository skillRepository;
@@ -16,8 +14,6 @@ public class Repositories {
     private final ToDoListRepository toDoListRepository;
 
     private Repositories() {
-        organizationRepository = new OrganizationRepository();
-        taskCategoryRepository = new TaskCategoryRepository();
         authenticationRepository = new AuthenticationRepository();
         jobRepository = new JobRepository();
         skillRepository = new SkillRepository();
@@ -36,14 +32,6 @@ public class Repositories {
             }
         }
         return instance;
-    }
-
-    public OrganizationRepository getOrganizationRepository() {
-        return organizationRepository;
-    }
-
-    public TaskCategoryRepository getTaskCategoryRepository() {
-        return taskCategoryRepository;
     }
 
     public AuthenticationRepository getAuthenticationRepository() {

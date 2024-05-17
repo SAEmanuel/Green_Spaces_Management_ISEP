@@ -28,11 +28,11 @@ public class Bootstrap implements Runnable {
     private final Skill skill11 = new Skill("Weed Control");
     private final Skill skill12 = new Skill("Lawn Care");
 
-    private final GreenSpace infanteDomHenrique = new GreenSpace("Infante Dom Henrique",0,100,"Porto");
-    private final GreenSpace parqueDaCidade = new GreenSpace("Parque da Cidade",2,100,"Matosinhos");
-    private final GreenSpace palacioDeCristal = new GreenSpace("Palacio de Cristal",1,40,"Porto");
-    private final GreenSpace quintaDoCovelo = new GreenSpace("Quinta do Covelo",0,100,"Porto");
-    private final GreenSpace passeioAlegre = new GreenSpace("Passeio Alegre",0,11,"Porto");
+//    private final GreenSpace infanteDomHenrique = new GreenSpace("Infante Dom Henrique",0,100,"Porto");
+//    private final GreenSpace parqueDaCidade = new GreenSpace("Parque da Cidade",2,100,"Matosinhos");
+//    private final GreenSpace palacioDeCristal = new GreenSpace("Palacio de Cristal",1,40,"Porto");
+//    private final GreenSpace quintaDoCovelo = new GreenSpace("Quinta do Covelo",0,100,"Porto");
+//    private final GreenSpace passeioAlegre = new GreenSpace("Passeio Alegre",0,11,"Porto");
 
     private final Data data1 = new Data(2023,1,1);
     private final Data data2 = new Data(2021,1,1);
@@ -45,11 +45,8 @@ public class Bootstrap implements Runnable {
     //Add some task categories to the repository as bootstrap
     public void run() {
         inputAppInformation();
-        addTaskCategories();
-        addOrganization();
         addUsers();
         addJobs();
-        addGreenSpaces();
 //        addVehicles();
 //        addCollaborator();
 //        addSkills();
@@ -64,23 +61,11 @@ public class Bootstrap implements Runnable {
 
 
 
-
-
-
     private void addVehicles(){
         VehicleRepository vehicleRepository = Repositories.getInstance().getVehicleRepository();
         vehicleRepository.add(vehicle1);
         vehicleRepository.add(vehicle2);
         vehicleRepository.add(vehicle3);
-    }
-
-    private void addGreenSpaces(){
-        GreenSpaceRepository greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository();
-        greenSpaceRepository.add(parqueDaCidade);
-        greenSpaceRepository.add(palacioDeCristal);
-        greenSpaceRepository.add(passeioAlegre);
-        greenSpaceRepository.add(quintaDoCovelo);
-        greenSpaceRepository.add(infanteDomHenrique);
     }
 
     private void addCollaborator() {
@@ -122,29 +107,6 @@ public class Bootstrap implements Runnable {
     }
 
 
-    private void addOrganization() {
-        //TODO: add organizations bootstrap here
-        //get organization repository
-        OrganizationRepository organizationRepository = Repositories.getInstance().getOrganizationRepository();
-        Organization organization = new Organization("This Company");
-        organization.addEmployee(new Employee("admin@this.app"));
-        organization.addEmployee(new Employee("employee@this.app"));
-        organizationRepository.add(organization);
-    }
-
-    private void addTaskCategories() {
-        //TODO: add bootstrap Task Categories here
-
-        //get task category repository
-        TaskCategoryRepository taskCategoryRepository = Repositories.getInstance().getTaskCategoryRepository();
-        taskCategoryRepository.add(new TaskCategory("Analysis"));
-        taskCategoryRepository.add(new TaskCategory("Design"));
-        taskCategoryRepository.add(new TaskCategory("Implementation"));
-        taskCategoryRepository.add(new TaskCategory("Development"));
-        taskCategoryRepository.add(new TaskCategory("Testing"));
-        taskCategoryRepository.add(new TaskCategory("Deployment"));
-        taskCategoryRepository.add(new TaskCategory("Maintenance"));
-    }
 
     private void addUsers() {
         //TODO: add Authentication users here: should be created for each user in the organization

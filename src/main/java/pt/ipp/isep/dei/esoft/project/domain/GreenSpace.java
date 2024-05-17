@@ -4,10 +4,11 @@ import pt.ipp.isep.dei.esoft.project.domain.validations.Validations;
 
 public class GreenSpace {
 
-    private String name;
-    private String address;
+    private final String name;
+    private final String address;
+    private final String responsible;
     private Size size;
-    private float area;
+    private final float area;
 
     public enum Size{
         GARDEN{
@@ -31,7 +32,7 @@ public class GreenSpace {
     }
 
 
-    public GreenSpace(String name, int size, float area, String address) {
+    public GreenSpace(String name, int size, float area, String address,String responsible) {
 
         validateInfo(name,area,address);
 
@@ -39,6 +40,7 @@ public class GreenSpace {
         this.area = area;
         this.address = address;
         this.size = Size.values()[size];
+        this.responsible = responsible;
     }
 
     private void validateInfo(String name, float area,String address) {
@@ -68,7 +70,7 @@ public class GreenSpace {
     }
 
     public GreenSpace clone() {
-        return new GreenSpace(name,size.ordinal(),area,address);
+        return new GreenSpace(name,size.ordinal(),area,address,responsible);
     }
 
     public String getName() {
@@ -77,6 +79,6 @@ public class GreenSpace {
 
     @Override
     public String toString() {
-        return String.format("• Name: %s | Size: %s | Area: %f | Address: %s",name,size,area,address);
+        return String.format("• Name: %s | Size: %s | Area: %f | Address: %s | Responsible: %s",name,size,area,address,responsible);
     }
 }

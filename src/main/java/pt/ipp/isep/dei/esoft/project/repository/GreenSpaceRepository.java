@@ -18,11 +18,11 @@ public class GreenSpaceRepository {
         this.greenSpacesList = new ArrayList<>();
     }
 
-    public Optional<GreenSpace> registerGreenSpace(String name, int size, float area,String address) {
+    public Optional<GreenSpace> registerGreenSpace(String name, int size, float area,String address,String resposible) {
 
         Optional<GreenSpace> optionalGreenSpace = Optional.empty();
 
-        GreenSpace greenSpace = new GreenSpace(name,size,area,address);
+        GreenSpace greenSpace = new GreenSpace(name,size,area,address,resposible);
 
         if (addGreenSpace(greenSpace)) {
             optionalGreenSpace = Optional.of(greenSpace.clone());

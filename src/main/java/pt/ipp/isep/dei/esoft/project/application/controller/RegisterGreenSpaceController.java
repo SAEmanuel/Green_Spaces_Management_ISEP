@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public class RegisterGreenSpaceController {
     private GreenSpaceRepository greenSpaceRepository;
+    private Repositories repositories = Repositories.getInstance();
 
     public RegisterGreenSpaceController(){
         this.greenSpaceRepository = getGreenSpaceRepository();
@@ -15,7 +16,6 @@ public class RegisterGreenSpaceController {
 
     private GreenSpaceRepository getGreenSpaceRepository() {
         if (greenSpaceRepository == null) {
-            Repositories repositories = Repositories.getInstance();
             greenSpaceRepository = repositories.getGreenSpaceRepository();
         }
         return greenSpaceRepository;
@@ -25,7 +25,9 @@ public class RegisterGreenSpaceController {
     public Optional<GreenSpace> registerGreenSpace(String name, int size, float area,String address) {
         Optional<GreenSpace> newGreenSpace;
 
-        newGreenSpace = greenSpaceRepository.registerGreenSpace(name,size,area,address);
+        String resposible = repositories.getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail();
+
+        newGreenSpace = greenSpaceRepository.registerGreenSpace(name,size,area,address,resposible);
 
         return newGreenSpace;
     }
