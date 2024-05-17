@@ -16,20 +16,24 @@ public class Bootstrap implements Runnable {
     private final Job job6 = new Job("Project Manager");
     private final Job job7 = new Job("Pasteleira");
 
-//    private final Skill skill1 = new Skill("Condutor de ligeiros");
-//    private final Skill skill2 = new Skill("Condutor de pesados");
-//    private final Skill skill3 = new Skill("Fritador de batatas");
-//    private final Skill skill4 = new Skill("Programador em Python");
-//    private final Skill skill5 = new Skill("Programador em Java");
-//    private final Skill skill6 = new Skill("Data Analysis");
-//    private final Skill skill7 = new Skill("Cozinheiro");
+    private final Skill skill1 = new Skill("Irrigation Systems Management");
+    private final Skill skill2 = new Skill("Pest Control and Management");
+    private final Skill skill3 = new Skill("Tree Care and Maintenance");
+    private final Skill skill4 = new Skill("Garden Tool Maintenance");
+    private final Skill skill5 = new Skill("Greenhouse Management");
+    private final Skill skill6 = new Skill("Plant Identification");
+    private final Skill skill7 = new Skill("Floral Arrangements");
+    private final Skill skill8 = new Skill("Pruning Techniques");
+    private final Skill skill9 = new Skill("Seasonal Planting");
+    private final Skill skill10 = new Skill("Soil Analysis");
+    private final Skill skill11 = new Skill("Weed Control");
+    private final Skill skill12 = new Skill("Lawn Care");
 
-
+    private final GreenSpace infanteDomHenrique = new GreenSpace("Infante Dom Henrique",0,100,"Porto");
     private final GreenSpace parqueDaCidade = new GreenSpace("Parque da Cidade",2,100,"Matosinhos");
     private final GreenSpace palacioDeCristal = new GreenSpace("Palacio de Cristal",1,40,"Porto");
-    private final GreenSpace passeioAlegre = new GreenSpace("Passeio Alegre",0,11,"Porto");
     private final GreenSpace quintaDoCovelo = new GreenSpace("Quinta do Covelo",0,100,"Porto");
-    private final GreenSpace infanteDomHenrique = new GreenSpace("Infante Dom Henrique",0,100,"Porto");
+    private final GreenSpace passeioAlegre = new GreenSpace("Passeio Alegre",0,11,"Porto");
 
 
     //Add some task categories to the repository as bootstrap
@@ -40,8 +44,8 @@ public class Bootstrap implements Runnable {
         addUsers();
         addJobs();
         addGreenSpaces();
-//        addSkills();
 //        addCollaborator();
+//        addSkills();
     }
 
     protected static void readAppInformation(){
@@ -66,17 +70,16 @@ public class Bootstrap implements Runnable {
         greenSpaceRepository.add(infanteDomHenrique);
     }
 
-//    private void addCollaborator() {
-//        CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
-//        collaboratorRepository.add(new Collaborator("Francisco", new Data(2004, 5, 20), new Data(2023, 6, 12), "Rua da pedra", 912809789, "fran@gmail.com", 123456744, 1, "123456789", job1));
-//        collaboratorRepository.add(new Collaborator("Emanuel", new Data(2004, 4, 20), new Data(2023, 6, 12), "Rua da Mariana", 912809777, "ema@gmail.com", 123456755, 1, "123456789", job2));
-//        collaboratorRepository.add(new Collaborator("Paulo", new Data(2002, 8, 20), new Data(2023, 6, 12), "Rua de Fanzeres", 912809888, "paul@gmail.com", 123456766, 1, "123456789", job3));
-//        collaboratorRepository.add(new Collaborator("Xu", new Data(2000, 4, 20), new Data(2023, 6, 12), "Rua do restaurante asiatico", 912809666, "xu@gmail.com", 123456777, 1, "123456789", job4));
-//        collaboratorRepository.add(new Collaborator("Jorge", new Data(2004, 5, 31), new Data(2023, 6, 12), "Rua enganhairo do isep", 912809555, "jorge@gmail.com", 123456788, 1, "123456789", job5));
-//        collaboratorRepository.add(new Collaborator("Mariana Silva", new Data(2001, 5, 31), new Data(2023, 6, 12), "Rua da igreja", 912809551, "mari@gmail.com", 123456799, 1, "123456789", job6));
-//        collaboratorRepository.add(new Collaborator("Gorete", new Data(1993, 5, 31), new Data(2023, 6, 12), "Rua de Fanzeres", 912809552, "gori@gmail.com", 123456999, 1, "123456789", job7));
-
-//    }
+    private void addCollaborator() {
+        CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
+        collaboratorRepository.add(new Collaborator("Francisco", new Data(2004, 5, 20), new Data(2023, 6, 12), "Rua da pedra", 912809789, "fran@gmail.com", 123456744, 1, "123456789", job1));
+        collaboratorRepository.add(new Collaborator("Emanuel", new Data(2004, 4, 20), new Data(2023, 6, 12), "Rua da Mariana", 912809777, "ema@gmail.com", 123456755, 1, "123456789", job2));
+        collaboratorRepository.add(new Collaborator("Paulo", new Data(2002, 8, 20), new Data(2023, 6, 12), "Rua de Fanzeres", 912809888, "paul@gmail.com", 123456766, 1, "123456789", job3));
+        collaboratorRepository.add(new Collaborator("Xu", new Data(2000, 4, 20), new Data(2023, 6, 12), "Rua do restaurante asiatico", 912809666, "xu@gmail.com", 123456777, 1, "123456789", job4));
+        collaboratorRepository.add(new Collaborator("Jorge", new Data(2004, 5, 31), new Data(2023, 6, 12), "Rua enganhairo do isep", 912809555, "jorge@gmail.com", 123456788, 1, "123456789", job5));
+        collaboratorRepository.add(new Collaborator("Mariana Silva", new Data(2001, 5, 31), new Data(2023, 6, 12), "Rua da igreja", 912809551, "mari@gmail.com", 123456799, 1, "123456789", job6));
+        collaboratorRepository.add(new Collaborator("Gorete", new Data(1993, 5, 31), new Data(2023, 6, 12), "Rua de Fanzeres", 912809552, "gori@gmail.com", 123456999, 1, "123456789", job7));
+    }
 
     private void addJobs() {
         JobRepository jobRepository = Repositories.getInstance().getJobRepository();
@@ -89,16 +92,21 @@ public class Bootstrap implements Runnable {
         jobRepository.add(job7);
     }
 
-//    private void addSkills() {
-//        SkillRepository skillRepository = Repositories.getInstance().getSkillRepository();
-//        skillRepository.add(skill1);
-//        skillRepository.add(skill2);
-//        skillRepository.add(skill3);
-//        skillRepository.add(skill4);
-//        skillRepository.add(skill5);
-//        skillRepository.add(skill6);
-//        skillRepository.add(skill7);
-//    }
+    private void addSkills() {
+        SkillRepository skillRepository = Repositories.getInstance().getSkillRepository();
+        skillRepository.add(skill1);
+        skillRepository.add(skill2);
+        skillRepository.add(skill3);
+        skillRepository.add(skill4);
+        skillRepository.add(skill5);
+        skillRepository.add(skill6);
+        skillRepository.add(skill7);
+        skillRepository.add(skill8);
+        skillRepository.add(skill9);
+        skillRepository.add(skill10);
+        skillRepository.add(skill11);
+        skillRepository.add(skill12);
+    }
 
 
     private void addOrganization() {

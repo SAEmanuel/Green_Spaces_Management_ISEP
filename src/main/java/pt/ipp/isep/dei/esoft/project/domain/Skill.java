@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import pt.ipp.isep.dei.esoft.project.domain.validations.Validations;
+
 import java.io.Serializable;
 
 public class Skill implements Serializable {
@@ -41,45 +43,15 @@ public class Skill implements Serializable {
      */
     private void validateSkillName(String skillName) {
         // Check if skillName is null or empty
-        if (skillName == null || skillName.trim().isEmpty()) {
+        if (!Validations.validateString(skillName)) {
             throw new IllegalArgumentException("Skill name cannot be null or empty.");
         }
-
-        // Check if skillName contains special characters/numbers
-        if (!validateName(skillName.trim())) {
+        if (!Validations.hasOnlyLettersAndSpaces(skillName.trim())) {
             throw new IllegalArgumentException("Skill name have special characters/numbers.");
         }
+
     }
 
-
-    /**
-     * Validates if a string is not empty or not null.
-     *
-     * @param string The string to validate.
-     * @return True if the string is not null and not empty; otherwise, false.
-     */
-    private boolean validateString(String string) {
-        return (string != null && !string.isEmpty());
-    }
-
-
-    /**
-     * Validates if the skill name contains only letters and spaces.
-     *
-     * @param skillName The skill name to validate.
-     * @return True if the skill name contains only letters and spaces; otherwise, false.
-     */
-    private boolean validateName(String skillName) {
-        //This loop iterate through each character in the string
-        for (int i = 0; i < skillName.length(); i++) {
-            char ch = skillName.charAt(i);
-            // Check if the character is not a letter
-            if (!Character.isLetter(ch) && skillName.charAt(i) != ' ') {
-                return false;
-            }
-        }
-        return true;
-    }
 
 
     /**

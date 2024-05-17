@@ -3,6 +3,8 @@ package pt.ipp.isep.dei.esoft.project.ui;
 import pt.ipp.isep.dei.esoft.project.application.SerializationOutput;
 import pt.ipp.isep.dei.esoft.project.ui.console.menu.MainMenuUI;
 
+import java.util.Scanner;
+
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
 
 public class Main {
@@ -18,7 +20,24 @@ public class Main {
             e.printStackTrace();
         }
 
-        saveInfoProcess();
+        save();
+    }
+
+    private static void save() {
+        System.out.printf(ANSI_BRIGHT_YELLOW+"\nDo you wish to save the changes made? (y/n): "+ANSI_RESET);
+        Scanner scanner = new Scanner(System.in);
+        String input;
+        do {
+            input = scanner.nextLine();
+            if (input.equalsIgnoreCase("y")) {
+                saveInfoProcess();
+            } else if (!input.equalsIgnoreCase("n")) {
+                System.out.printf(ANSI_BRIGHT_RED + "Please enter a valid option! (y/n): " + ANSI_RESET);
+            } else {
+                System.out.printf(ANSI_BLUE +"\nNo information saved...\n"+ ANSI_RESET);
+            }
+        }while (!input.equalsIgnoreCase("y") && !input.equalsIgnoreCase("n"));
+
     }
 
 

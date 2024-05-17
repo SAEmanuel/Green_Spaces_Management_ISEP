@@ -2,6 +2,8 @@ package pt.ipp.isep.dei.esoft.project.domain.validations;
 
 public class Validations {
 
+
+    //-------------------------- String Validations ---------------------------------------------
     /**
      * Validates if a string is not null or empty.
      *
@@ -29,5 +31,26 @@ public class Validations {
         return false;
     }
 
+
+    /**
+     * Validates if the skill name contains only letters and spaces.
+     *
+     * @param skillName The skill name to validate.
+     * @return True if the skill name contains only letters and spaces; otherwise, false.
+     */
+    public static boolean hasOnlyLettersAndSpaces(String skillName) {
+        //This loop iterate through each character in the string
+        for (int i = 0; i < skillName.length(); i++) {
+            char ch = skillName.charAt(i);
+            // Check if the character is not a letter
+            if (!Character.isLetter(ch) && skillName.charAt(i) != ' ') {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    //-------------------------------------------------------------------------------------------------
 
 }

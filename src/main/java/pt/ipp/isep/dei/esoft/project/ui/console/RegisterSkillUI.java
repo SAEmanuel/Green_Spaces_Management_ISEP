@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 import pt.ipp.isep.dei.esoft.project.application.controller.RegisterSkillController;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
 
+import java.util.InputMismatchException;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -53,26 +54,34 @@ public class RegisterSkillUI implements Runnable{
      */
     private int confirmsData() {
         Scanner input = new Scanner(System.in);
-        int option = -1;
+        int option = 0;
 
+        do{
+            try {
 
-        while(option != 1){
-            display();
-            option = input.nextInt();
+                display();
+                option = input.nextInt();
 
-            if (option == 0) {
-                System.out.println();
-                requestSkillName(); // Request to change the skill name
-            }else if (option == 1) {
-                System.out.println();
-                System.out.printf("Skill name chosen -> [%s]\n",skillName);
-            } else if (option == 2) {
-                System.out.println(ANSI_BRIGHT_RED+"LEAVING..."+ANSI_RESET);
-                return option; // Exit the registration process
-            } else {
+                if (option == 0) {
+                    System.out.println();
+                    requestSkillName(); // Request to change the skill name
+                }else if (option == 1) {
+                    System.out.println();
+                    System.out.printf("Skill name chosen -> [%s]\n",skillName);
+                } else if (option == 2) {
+                    System.out.println(ANSI_BRIGHT_RED+"LEAVING..."+ANSI_RESET);
+                    return option; // Exit the registration process
+                } else {
+                    System.out.println(ANSI_BRIGHT_RED+ "Invalid choice. Please enter 0 or 1 or 2."+ ANSI_RESET);
+                }
+
+            }catch (InputMismatchException e){
                 System.out.println(ANSI_BRIGHT_RED+ "Invalid choice. Please enter 0 or 1 or 2."+ ANSI_RESET);
+                input.nextLine();
             }
-        }
+
+        }while(option != 1);
+
         return option;
     }
 
