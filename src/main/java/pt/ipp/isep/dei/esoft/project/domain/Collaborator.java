@@ -187,6 +187,12 @@ public class Collaborator {
         }
     }
 
+    /**
+     * Validates document number
+     *
+     * @param docNumber of the collaborator
+     * @param docType of the collaborator
+     */
     private void isValidDocNumber(String docNumber, int docType) {
         boolean isValid = false;
         switch (DocType.values()[docType]) {
@@ -207,11 +213,9 @@ public class Collaborator {
                 }
                 break;
         }
-
         if (!isValid) {
             throw new IllegalArgumentException("Invalid document number !");
         }
-
     }
 
 
