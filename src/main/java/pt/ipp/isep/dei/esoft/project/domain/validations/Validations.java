@@ -53,4 +53,13 @@ public class Validations {
 
     //-------------------------------------------------------------------------------------------------
 
+    /**
+     * Checks if a given float is negative.
+     *
+     * @param num The float to be checked.
+     * @return true if the float is negative, false otherwise.
+     */
+    public static boolean isNegative(float num) {
+        return num < 0;
+    }
 }

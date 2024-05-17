@@ -113,26 +113,30 @@ public class RegisterVehicleUI implements Runnable {
      */
     private int confirmsData() {
         Scanner input = new Scanner(System.in);
-        int option = -1;
+        int option;
 
+        while(true){
+            try {
+                display();
+                option = input.nextInt();
 
-        while (option != 1) {
-            display();
-            option = input.nextInt();
-
-            if (option == 0) {
-                System.out.println();
-                requestVehicleInformation();
-            } else if (option == 1) {
-                System.out.println();
-            } else if (option == 2) {
-                System.out.println(ANSI_BRIGHT_RED + "LEAVING..." + ANSI_RESET);
-                return option;
-            } else {
-                System.out.println(ANSI_BRIGHT_RED + "Invalid choice. Please enter 0 or 1 or 2." + ANSI_RESET);
+                if (option == 0) {
+                    System.out.println();
+                    requestVehicleInformation(); // Request to change the skill name
+                }else if (option == 1) {
+                    System.out.println();
+                    return option;
+                } else if (option == 2) {
+                    System.out.println(ANSI_BRIGHT_RED+"LEAVING..."+ANSI_RESET);
+                    return option; // Exit the registration process
+                } else {
+                    System.out.println(ANSI_BRIGHT_RED+ "Invalid choice. Please enter 0 or 1 or 2."+ ANSI_RESET);
+                }
+            }catch (InputMismatchException e){
+                System.out.println(ANSI_BRIGHT_RED+ "Invalid choice. Please enter 0 or 1 or 2."+ ANSI_RESET);
+                input.nextLine();
             }
         }
-        return option;
     }
 
 

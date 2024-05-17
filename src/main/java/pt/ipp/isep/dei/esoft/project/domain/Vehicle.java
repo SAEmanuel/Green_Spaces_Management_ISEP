@@ -1,6 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
 
+import pt.ipp.isep.dei.esoft.project.domain.validations.Validations;
+
 public class Vehicle {
 
     // Attributes
@@ -169,11 +171,9 @@ public class Vehicle {
      */
     private void validateVehicle(String plateId, String brand, String model, int type, float tareWeight, float grossWeight, float currentKm, float checkUpFrequency, float lastCheckUp, Data registerDate, Data acquisitionDate) {
 
-        //String validations and plate id format
         validatePlateId(plateId, registerDate);
         validateBrand(brand);
         validateModel(model);
-//        validateType(String.valueOf(type));
         validateKm(currentKm, lastCheckUp);
         validateDates(registerDate, acquisitionDate);
         validatesWeights(tareWeight,grossWeight);
@@ -193,19 +193,19 @@ public class Vehicle {
      * @throws IllegalArgumentException if any of the given floats are negative.
      */
     private void validatesNegatives(float tareWeight, float grossWeight, float lastCheckUp, float currentKm, float checkUpFrequency) {
-        if (isNegative(tareWeight)) {
+        if (Validations.isNegative(tareWeight)) {
             throw new IllegalArgumentException("Tare Weight cannot be negative!");
         }
-        if (isNegative(grossWeight)) {
+        if (Validations.isNegative(grossWeight)) {
             throw new IllegalArgumentException("Gross Weight cannot be negative!");
         }
-        if (isNegative(lastCheckUp)) {
+        if (Validations.isNegative(lastCheckUp)) {
             throw new IllegalArgumentException("Last Check Up cannot be negative!");
         }
-        if (isNegative(currentKm)) {
+        if (Validations.isNegative(currentKm)) {
             throw new IllegalArgumentException("Current Km cannot be negative!");
         }
-        if (isNegative(checkUpFrequency)) {
+        if (Validations.isNegative(checkUpFrequency)) {
             throw new IllegalArgumentException("Check Up Frequency cannot be negative!");
         }
     }
@@ -261,7 +261,7 @@ public class Vehicle {
      * @throws IllegalArgumentException if the plate ID format or structure is invalid.
      */
     private void validatePlateId(String plateId, Data registerDate) {
-        if (!validateString(plateId)) {
+        if (!Validations.validateString(plateId)) {
             throw new IllegalArgumentException("PLATE ID cannot be null or empty -> [" + plateId + "].");
         }
         validatePlate(plateId, registerDate);
@@ -275,15 +275,13 @@ public class Vehicle {
      * @throws IllegalArgumentException if the brand is null, empty, contains special characters, or numbers.
      */
     private void validateBrand(String brand) {
-        if (!validateString(brand)) {
+        if (!Validations.validateString(brand)) {
             throw new IllegalArgumentException("BRAND cannot be null or empty -> [" + brand + "].");
         }
-        if (haveSpecialCharacters(brand)) {
-            throw new IllegalArgumentException("BRAND cannot contain special characters -> [" + brand + "].");
+        if (!Validations.hasOnlyLettersAndSpaces(brand.trim())) {
+            throw new IllegalArgumentException("BRAND cannot contain special characters or numbers -> [" + brand + "].");
         }
-        if (haveNumbers(brand)) {
-            throw new IllegalArgumentException("BRAND cannot contain numbers -> [" + brand + "].");
-        }
+
 
     }
 
@@ -295,90 +293,18 @@ public class Vehicle {
      * @throws IllegalArgumentException if the model is null, empty, or contains special characters.
      */
     private void validateModel(String model) {
-        if (!validateString(model)) {
-            throw new IllegalArgumentException("Reference (MODEL) cannot be null or empty.");
+        if (!Validations.validateString(model)) {
+            throw new IllegalArgumentException("MODEL cannot be null or empty -> [" + model + "].");
         }
-        if (haveSpecialCharacters(model)) {
+        if (Validations.haveSpecialCharacters(model)) {
             throw new IllegalArgumentException("MODEL cannot contain special characters -> [" + model + "].");
-
         }
     }
 
-    /**
-     * Validates the type of the vehicle.
-     *
-     * @param type The type of the vehicle.
-     * @throws IllegalArgumentException if the type is null, empty, contains special characters, or numbers.
-     */
-    private void validateType(String type) {
-        if (!validateString(type)) {
-            throw new IllegalArgumentException("TYPE cannot be null or empty -> [" + type + "].");
-        }
-        if (haveSpecialCharacters(type)) {
-            throw new IllegalArgumentException("TYPE cannot contain special characters -> [" + type + "].");
-        }
-        if (haveNumbers(type)) {
-            throw new IllegalArgumentException("TYPE cannot contain numbers -> [" + type + "].");
-        }
-    }
 
 
 
     //--------------------------------INTERNAL METHODS FOR VALIDATIONS--------------------------------
-    /**
-     * Validates if a string is not null or empty.
-     *
-     * @param string The string to be validated.
-     * @return true if the string is not null or empty, false otherwise.
-     */
-    private boolean validateString(String string) {
-        return (string != null && !string.trim().isEmpty());
-    }
-
-
-    /**
-     * Validates if a string contains special characters.
-     *
-     * @param string The string to be validated.
-     * @return true if the string contains special characters, false otherwise.
-     */
-    private boolean haveSpecialCharacters(String string) {
-        for (int i = 0; i < string.length(); i++) {
-            char c = string.charAt(i);
-            if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    /**
-     * Checks if a given float is negative.
-     *
-     * @param weight The float to be checked.
-     * @return true if the float is negative, false otherwise.
-     */
-    private boolean isNegative(float weight) {
-        return weight < 0;
-    }
-
-
-    /**
-     * Validates if a string contains numbers.
-     *
-     * @param string The string to be validated.
-     * @return true if the string contains numbers, false otherwise.
-     */
-    private boolean haveNumbers(String string) {
-        for (int i = 0; i < string.length(); i++) {
-            char c = string.charAt(i);
-            if (Character.isDigit(c) ) {
-                return true;
-            }
-        }
-        return false;
-    }
 
 
     /**
@@ -527,8 +453,8 @@ public class Vehicle {
      */
     @Override
     public String toString() {
-        return String.format("• Plate: %s | Brand: %s | Model: %s | Current Km: %.2f%n" +
-                "    Register Date: %s%n    Acquisition Date: %s", plateId, brand, model, currentKm, registerDate, acquisitionDate);
+        return String.format("• Plate: %s | Brand: %s | Model: %s | Type: %s | Current Km: %.2f%n" +
+                "    Register Date: %s%n    Acquisition Date: %s", plateId, brand, model,type, currentKm, registerDate, acquisitionDate);
     }
 
 }
