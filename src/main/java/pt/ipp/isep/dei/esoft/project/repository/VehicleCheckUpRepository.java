@@ -4,6 +4,7 @@ import pt.ipp.isep.dei.esoft.project.domain.CheckUp;
 import pt.ipp.isep.dei.esoft.project.domain.Data;
 import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -11,7 +12,7 @@ import java.util.Optional;
 /**
  * The VehicleCheckUpRepository class represents a repository of vehicle check-ups in the project.
  */
-public class VehicleCheckUpRepository {
+public class VehicleCheckUpRepository implements Serializable {
     // Attributes
     private final List<CheckUp> vehicleCheckUpsList;
 

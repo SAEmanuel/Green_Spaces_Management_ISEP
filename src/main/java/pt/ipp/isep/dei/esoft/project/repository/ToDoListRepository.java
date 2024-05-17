@@ -2,11 +2,12 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class ToDoListRepository {
+public class ToDoListRepository implements Serializable {
     private final List<ToDoEntry> toDoList;
 
     public ToDoListRepository() {

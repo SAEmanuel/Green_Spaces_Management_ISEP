@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 import pt.ipp.isep.dei.esoft.project.application.controller.RegisterJobController;
 import pt.ipp.isep.dei.esoft.project.domain.Job;
 
+import java.util.InputMismatchException;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -56,9 +57,7 @@ public class RegisterJobUI implements Runnable {
                 System.out.println(ANSI_BRIGHT_RED + "Job not registered - Already registered!" + ANSI_RESET);
             }
 
-        } catch (IllegalArgumentException e) {
-            System.out.println(ANSI_BRIGHT_RED + "Job not registered!" + ANSI_RESET);
-        }
+        } catch (IllegalArgumentException e) {}
 
     }
 
@@ -89,25 +88,36 @@ public class RegisterJobUI implements Runnable {
      * @return the confirmed job name
      */
     private String confirmationJobName() {
-        scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         int answer = -1;
         String newAnswer;
-        String name = requestJobName();
-        displayTypedJob(name);
-
-        while (answer != 1) {
-            System.out.print("Options:\n 0 -> Change name\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
-            answer = scanner.nextInt();
-            if (answer == 0) {
-                newAnswer = requestJobName();
-                displayTypedJob(newAnswer);
-            } else if (answer == 2) {
-                System.out.println(ANSI_BRIGHT_RED + "No changes made!" + ANSI_RESET);
-                return null;
-            } else if (answer != 1) {
-                System.out.println(ANSI_BRIGHT_RED + "Invalid choice. Please enter 0, 1 or 2." + ANSI_RESET);
+        String jobName = requestJobName();
+        displayTypedJob(jobName);
+        boolean flag = true;
+        while (answer != 1 && flag) {
+            try {
+                System.out.print("Options:\n 0 -> Change name\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
+                if (scanner.hasNextInt()) {
+                    answer = scanner.nextInt();
+                    if (answer == 0) {
+                        newAnswer = requestJobName();
+                        displayTypedJob(newAnswer);
+                    } else if (answer == 2) {
+                        System.out.println(ANSI_BRIGHT_RED + "LEAVING..." + ANSI_RESET);
+                        return null;
+                    } else if (answer != 1) {
+                        System.out.println(ANSI_BRIGHT_RED + "Invalid choice. Please enter 0, 1 or 2." + ANSI_RESET);
+                    }
+                } else {
+                    scanner.next();
+                    System.out.println(ANSI_BRIGHT_RED + "Invalid choice. Please enter 0, 1 or 2." + ANSI_RESET);
+                }
+            } catch (InputMismatchException e) {
+                flag = false;
+                System.out.println("Invalid input. Please try again.");
             }
         }
         return jobName;
     }
+
 }

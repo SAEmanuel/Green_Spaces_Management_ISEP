@@ -257,7 +257,6 @@ public class CreateCollaboratorUI implements Runnable {
         Collaborator.DocType[] values = collaboratorController.getDocType();
         Scanner input = new Scanner(System.in);
 
-
         System.out.print("\n-- Document type --\n");
         for (int i = 0; i < values.length; i++) {
             System.out.printf("• DocType: %s%n", values[i].toString());
@@ -265,23 +264,33 @@ public class CreateCollaboratorUI implements Runnable {
         }
         System.out.println("----------------");
 
-        int answer;
+        int answer = 0;
         boolean flag = true;
+        boolean leave = true;
+
         do {
-            if (flag) {
-                System.out.print("Enter the number corresponding to the document type: ");
-                answer = input.nextInt();
-                if (answer < 1 || answer > values.length) {
-                    flag = false;
+            try {
+                if (flag && leave) {
+                    System.out.print("Enter the number corresponding to the document type: ");
+                    answer = input.nextInt();
+                    if (answer < 1 || answer > values.length) {
+                        flag = false;
+                    }
+                } else {
+                    System.out.printf(ANSI_BRIGHT_YELLOW + "Invalid number, enter a new one (between 1 and %d): " + ANSI_RESET, values.length);
+                    input.next();
+                    answer = input.nextInt();
                 }
-            } else {
-                System.out.printf(ANSI_BRIGHT_YELLOW + "Invalid number, enter a new one (between 1 and %d): " + ANSI_RESET, values.length);
-                answer = input.nextInt();
+            } catch (InputMismatchException e) {
+                leave = false;
             }
         } while (answer < 1 || answer > values.length);
 
         return answer - 1;
     }
+
+
+
 
 
     /**

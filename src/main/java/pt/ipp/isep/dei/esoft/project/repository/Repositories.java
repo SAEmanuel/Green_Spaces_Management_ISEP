@@ -1,6 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-public class Repositories {
+import java.io.Serializable;
+
+public class Repositories implements Serializable {
 
     private static Repositories instance;
     private final AuthenticationRepository authenticationRepository;
@@ -60,4 +62,16 @@ public class Repositories {
 
     public ToDoListRepository getToDoRepository() { return toDoListRepository;
     }
+
+    public void copyFrom(Repositories other) {
+        this.skillRepository.getSkillList().clear();
+        this.vehicleRepository.getVehicleList().clear();
+        this.jobRepository.getJobList().clear();
+
+        this.skillRepository.getSkillList().addAll(other.getSkillRepository().getSkillList());
+        this.vehicleRepository.getVehicleList().addAll(other.getVehicleRepository().getVehicleList());
+        this.jobRepository.getJobList().addAll(other.getJobRepository().getJobList());
+    }
+
+
 }

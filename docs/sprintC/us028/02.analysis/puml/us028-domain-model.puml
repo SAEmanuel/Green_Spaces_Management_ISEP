@@ -19,13 +19,12 @@ class Collaborator {
 }
 
 class Agenda {
-         Date
-         Duration
-         Vehicle
-         Equipment
-         ToDoList
-         Status
-         Team
+         duration
+         vehicles
+         equipment
+         tasks
+         status
+         team
 }
 
 class Task{

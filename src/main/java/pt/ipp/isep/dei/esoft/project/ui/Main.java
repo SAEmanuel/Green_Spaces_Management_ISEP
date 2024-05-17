@@ -57,7 +57,8 @@ public class Main {
     protected static void saveAppInformation(){
         Serialization serialization = new Serialization();
         serialization.serializeSkillOutput();
-        serialization.serializeVehicleOutput();
+        serialization.serializeSkillOutput();
+
     }
 
 }

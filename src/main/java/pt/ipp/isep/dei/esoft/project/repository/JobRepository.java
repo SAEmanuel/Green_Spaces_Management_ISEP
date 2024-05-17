@@ -1,14 +1,16 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.Job;
+import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class JobRepository {
+public class JobRepository implements Serializable {
 
     private final List<Job> jobList;
 
@@ -107,7 +109,7 @@ public class JobRepository {
             System.out.println("\n--List of Jobs--");
             for (int i = 0; i < jobList.size(); i++) {
                 Job job = jobList.get(i);
-                System.out.println("• Job: " + job.getJobName() + "\n"+ANSI_PURPLE+"   Option -> [" + (i + 1) + "]"+ ANSI_RESET);
+                System.out.println("• Job: " + job.getJobName() + "\n" + ANSI_PURPLE + "   Option -> [" + (i + 1) + "]" + ANSI_RESET);
             }
             System.out.println("----------------");
         }
@@ -115,9 +117,10 @@ public class JobRepository {
 
     /**
      * Gets the size of the jobList
+     *
      * @return size of the jobList
      */
-    public int numberCollaborators(){
+    public int numberCollaborators() {
         return jobList.size();
     }
 
@@ -126,7 +129,16 @@ public class JobRepository {
      *
      * @param job
      */
-    public void add(Job job){
+    public void add(Job job) {
         jobList.add(job);
     }
+
+    public List<Job> getJobList() {
+        return clone();
+    }
+
+    public void serializationInput(List<Job> vehicleList) {
+        this.jobList.addAll(vehicleList);
+    }
+
 }

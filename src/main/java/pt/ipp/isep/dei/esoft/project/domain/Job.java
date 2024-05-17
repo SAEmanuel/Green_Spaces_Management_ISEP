@@ -2,12 +2,13 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * Represents a job.
  */
-public class Job {
+public class Job implements Serializable{
 
     private String jobName;
 
