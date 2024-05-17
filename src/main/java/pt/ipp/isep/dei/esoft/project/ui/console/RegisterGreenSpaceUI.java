@@ -15,6 +15,7 @@ public class RegisterGreenSpaceUI implements Runnable {
 
     private final RegisterGreenSpaceController controller;
     private String name;
+    private String address;
     private int size;
     private float area;
 
@@ -56,7 +57,7 @@ public class RegisterGreenSpaceUI implements Runnable {
         // Attempt to register the vehicle using the provided data
         try {
 
-            Optional<GreenSpace> greenSpace = getController().registerGreenSpace(name,size,area);
+            Optional<GreenSpace> greenSpace = getController().registerGreenSpace(name,size,area,address);
 
             // Check if the registration was successful
             if (greenSpace.isPresent()) {
@@ -147,7 +148,7 @@ public class RegisterGreenSpaceUI implements Runnable {
      */
     private void display() {
         GreenSpace.Size[] sizes = GreenSpace.Size.values();
-        StringBuilder stringBuilder = new StringBuilder(String.format("Name: %s | Size: %s | Area: %.4f", name,sizes[size],area));
+        StringBuilder stringBuilder = new StringBuilder(String.format("Name: %s | Size: %s | Area: %.4f | Address: %s", name,sizes[size],area,address));
         System.out.printf("\nTyped data -> [%s%s%s]\n", ANSI_GREEN, stringBuilder, ANSI_RESET);
         System.out.print("Confirmation menu:\n 0 -> Change Green Space Info\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
     }
@@ -160,15 +161,22 @@ public class RegisterGreenSpaceUI implements Runnable {
 
     private void requestData() {
         name = requestName();
-        size = requestSize();
         area = requestArea();
+        address = requestAddress();
+        size = requestSize();
+    }
+
+    private String requestAddress() {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Address: ");
+        return input.nextLine();
     }
 
     private float requestArea() {
         float resposta;
         Scanner input = new Scanner(System.in);
 
-        System.out.print("Area (cm3????): ");
+        System.out.print("Area (hectares): ");
         while (true) {
             try {
                 resposta = input.nextFloat();
@@ -205,7 +213,7 @@ public class RegisterGreenSpaceUI implements Runnable {
 
 
     private void showTypes(GreenSpace.Size[] sizes) {
-        System.out.println("\n--List of Types--");
+        System.out.println("\n--List of Sizes--");
         for (int i = 0; i < sizes.length; i++) {
             System.out.println("• Size: " + sizes[i] + "\n" + ANSI_PURPLE + "   Option -> [" + (i+1) + "]" + ANSI_RESET);
         }

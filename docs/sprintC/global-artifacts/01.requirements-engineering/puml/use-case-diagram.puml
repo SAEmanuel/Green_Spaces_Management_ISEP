@@ -11,15 +11,16 @@ title Use Case Diagram
 
 left to right direction
 
-rectangle "System Actors                       " as actors {
+
+
     actor "Human Resources Manager" as HRM
     actor "Vehicles and Fleet Manager" as FM
     actor "Green Spaces Manager" as GSM
     actor "Software Quality Assessment Team Manager" as QAM
+    actor "Collaborator" as COL
 
 
 
-}
 
 
 
@@ -30,14 +31,27 @@ rectangle "Use Cases" as usecases{
     usecase "UC4 - Assigning skills to a collaborator" as UC4
     usecase "UC5 - Generate a team proposal automatically" as UC5
     usecase "UC6 - Registering Vehicles" as UC6
-    usecase "UC7 - Register the overhaul of a vehicle" as UC7
-    usecase "UC8 - Overhauling of vehicles " as UC8
-    usecase "UC9 - PUT A TITLE HERE" as UC9
-    usecase "UC10 - PUT A TITLE HERE" as UC10
-    usecase "UC11 - PUT A TITLE HERE" as UC11
-    usecase "UC12 - PUT A TITLE HERE" as UC12
-    usecase "UC13 - PUT A TITLE HERE" as UC13
-    usecase "UC14 - PUT A TITLE HERE" as UC14
+    usecase "UC7 - Register the check-up of a vehicle" as UC7
+    usecase "UC8 - Check-up of vehicles" as UC8
+    usecase "UC9 - Water consumption of green spaces" as UC9
+    usecase "UC10 - Equipment Preferences" as UC10
+    usecase "UC11 - Collect data from the user portal about the use of the park" as UC11
+    usecase "UC12 - Importing Water Point Routes and Installation Costs" as UC12
+    usecase "UC13 - Optimizing irrigation" as UC13
+    usecase "UC14 - Running Asymptotic Behavior Tests" as UC14
+    usecase "UC17 - TITLE" as UC17
+    usecase "UC18 - TITLE" as UC18
+    usecase "UC19 - TITLE" as UC19
+    usecase "UC20 - TITLE" as UC20
+    usecase "UC21 - TITLE" as UC21
+    usecase "UC22 - TITLE" as UC22
+    usecase "UC23 - TITLE" as UC23
+    usecase "UC24 - TITLE" as UC24
+    usecase "UC25 - TITLE" as UC25
+    usecase "UC26 - TITLE" as UC26
+    usecase "UC27 - TITLE" as UC27
+    usecase "UC28 - TITLE" as UC28
+    usecase "UC29 - TITLE" as UC29
 
     HRM --> UC1
     HRM --> UC2
@@ -53,6 +67,20 @@ rectangle "Use Cases" as usecases{
     GSM --> UC12
     GSM --> UC13
     QAM --> UC14
+    GSM --> UC17
+    GSM --> UC18
+    QAM -> UC19
+    GSM --> UC20
+    GSM --> UC21
+    GSM --> UC22
+    GSM --> UC23
+    GSM --> UC24
+    GSM --> UC25
+    GSM --> UC26
+    GSM --> UC27
+    COL -> UC28
+    COL -> UC29
+
 }
 
 

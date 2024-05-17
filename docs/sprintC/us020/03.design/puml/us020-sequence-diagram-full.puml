@@ -23,10 +23,17 @@ activate Employee
 
     UI -> CTRL** : create
 
-        UI --> Employee : request data (name,size,area)
-    deactivate UI
+        UI --> Employee : request data (name,area,address)
+            deactivate UI
 
-    Employee -> UI : types requested data
+            Employee -> UI : types requested data
+
+            activate UI
+
+                    UI --> Employee : shows list of sizes option\n and request a selection
+                deactivate UI
+
+                Employee -> UI : select an option
 
     activate UI
 

@@ -14,11 +14,11 @@ public class GreenSpaceRepository {
         this.greenSpacesList = new ArrayList<>();
     }
 
-    public Optional<GreenSpace> registerGreenSpace(String name, int size, float area) {
+    public Optional<GreenSpace> registerGreenSpace(String name, int size, float area,String address) {
 
         Optional<GreenSpace> optionalGreenSpace = Optional.empty();
 
-        GreenSpace greenSpace = new GreenSpace(name,size,area);
+        GreenSpace greenSpace = new GreenSpace(name,size,area,address);
 
         if (addGreenSpace(greenSpace)) {
             optionalGreenSpace = Optional.of(greenSpace.clone());
@@ -49,6 +49,10 @@ public class GreenSpaceRepository {
             }
         }
         return true;
+    }
+
+    public void add(GreenSpace greenSpace){
+        this.greenSpacesList.add(greenSpace);
     }
 
 

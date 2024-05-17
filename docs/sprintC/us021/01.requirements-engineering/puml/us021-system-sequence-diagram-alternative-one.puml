@@ -13,28 +13,25 @@ participant ":System" as System
 
 activate Employee
 
-    Employee -> System : ask to register a green space
+    Employee -> System : ask to add a new entry to the To-Do List
     activate System
 
-        System --> Employee : request data (name,area,address)
+        System --> Employee : shows green spaces list
     deactivate System
 
-    Employee -> System : types requested data
-
-
-    activate System
-
-            System --> Employee : shows list of sizes option\n and request a selection
-        deactivate System
-
-        Employee -> System : select an option
-
-
+    Employee -> System : chooses a green space from the list
 
     activate System
 
-        System --> Employee : show all data registered\n and the confirmation menu
+        System --> Employee : request data (Task, Duration, Degree)
     deactivate System
+
+     Employee -> System : types requested data
+
+     activate System
+
+     System --> Employee : show all data registered\n and the confirmation menu
+     deactivate System
 
     Employee -> System : submits data
     activate System

@@ -11,25 +11,25 @@ hide circle
 hide methods
 package "GSM System" {
 
-title Domain Model - US020
+title Domain Model - US021
 
 
 
 class GSM {
 }
 
-class GreenSpace {
-         name
-         size
-         area
-         address
+class ToDoList {
+         greenSpaceID
+         task
+         taskDuration
+         priority
 }
 
 
 
 
 
-GSM "1" -- "*" GreenSpace : register >
+GSM "1" -- "*" ToDoList : register >
 
 
 
