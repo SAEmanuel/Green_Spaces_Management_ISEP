@@ -2,9 +2,7 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.GenerateTeamController;
 import pt.ipp.isep.dei.esoft.project.domain.*;
-import pt.ipp.isep.dei.esoft.project.repository.TeamRepository;
 
-import java.sql.SQLOutput;
 import java.util.*;
 
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
@@ -30,29 +28,73 @@ public class GenerateTeamUI implements Runnable {
     public void run() {
         System.out.println("\n\n--- Generate Team ------------------------");
 
-        int teamId = -1;
+        Team team = new Team(0);
 
         if(requestData()){
-            teamId = submitData();
+            team = submitData();
         }
 
-        if(teamId != -1){
-            if(!teamConfirmation())
-                getController().removeTeam(teamId);
-            else
-                System.out.println(ANSI_BRIGHT_GREEN+"\nTeam Accepted"+ANSI_RESET);
+        if(!teamConfirmation()) {
+            while (true) {
+                if (teamGenerationConfirmation()) {
+                    submitData();
+                } else {
+                    displayGeneratedList();
+                    break;
+                }
+            }
         }
+        else {
+            controller.addTeam(team.getTeamId());
+            System.out.println(ANSI_BRIGHT_GREEN + "\nTeam Accepted" + ANSI_RESET);
+        }
+        getController().cleanSkillList();
+        getController().cleanTeamListAux();
+    }
+
+    private boolean displayGeneratedList() {
+        List<Team> teamList = controller.generatedList();
+
+        if(teamList.isEmpty())
+            return false;
+
+        int listSize = teamList.size();
+        int answerList = -2;
+        Scanner input = new Scanner(System.in);
+
+        while (answerList < 1 || answerList > listSize + 1) {
+            displayGeneratedTeamListOptions(teamList);
+            System.out.print("Select a team: ");
+            answerList = input.nextInt();
+        }
+
+        if (answerList != listSize + 1) {
+            controller.addTeam(teamList.get(answerList - 1).getTeamId());
+        }
+
+        return true;
+    }
+
+    private void displayGeneratedTeamListOptions(List<Team> teamList) {
+        int i = 1;
+        for (Team s : teamList) {
+            System.out.println("• Team: ");
+            for(Collaborator c : s.getCollaborators())
+                System.out.println(c.getName());
+            System.out.println("\n" + ANSI_PURPLE + "   Option -> [" + i + "]" + ANSI_RESET);
+            i++;
+        }
+        System.out.println();
+        System.out.println("• Type: " + " - Exit" + "\n" + ANSI_PURPLE + "   Option -> [" + i + "]" + ANSI_RESET);
     }
 
     /**
      * Submits the data to generate a team and displays the result.
      * @return The ID of the generated team.
      */
-    private int submitData() {
+    private Team submitData() {
         Optional<Team> team = getController().generateTeam(minCollaborators, maxCollaborators);
 
-
-        getController().cleanSkillList();
         if (team.isPresent()) {
             System.out.println(ANSI_BLUE+"\nTeam");
             for (Collaborator collaborator : team.get().getCollaborators()) {
@@ -60,11 +102,11 @@ public class GenerateTeamUI implements Runnable {
             }
             System.out.println(ANSI_BRIGHT_GREEN +"\nTask successfully created!"+ANSI_RESET);
 
-            return team.get().getTeamId();
+            return team.get();
         } else {
             System.out.println(ANSI_BRIGHT_RED+"\nTask not created!"+ANSI_RESET);
 
-            return -1;
+            return null;
         }
     }
 
@@ -79,6 +121,24 @@ public class GenerateTeamUI implements Runnable {
         while(!answerAdd.equalsIgnoreCase("y") && !answerAdd.equalsIgnoreCase("n") ){
             System.out.println();
             System.out.print("Do you want to accept the team ? [y / n]");
+            answerAdd = input.nextLine();
+
+            if(!answerAdd.equalsIgnoreCase("y") && !answerAdd.equalsIgnoreCase("n")) {
+                System.out.println();
+                System.out.println(ANSI_BRIGHT_RED + "Wrong answer, try again" + ANSI_RESET);
+            }
+        }
+
+        return answerAdd.equalsIgnoreCase("y");
+    }
+
+    private boolean teamGenerationConfirmation(){
+        Scanner input = new Scanner(System.in);
+        String answerAdd = "";
+
+        while(!answerAdd.equalsIgnoreCase("y") && !answerAdd.equalsIgnoreCase("n") ){
+            System.out.println();
+            System.out.print("Do you want to generate another team ? [y / n]");
             answerAdd = input.nextLine();
 
             if(!answerAdd.equalsIgnoreCase("y") && !answerAdd.equalsIgnoreCase("n")) {
@@ -171,20 +231,20 @@ public class GenerateTeamUI implements Runnable {
         Scanner input = new Scanner(System.in);
 
         while(addSkills) {
-            while (answerList < -1 || answerList > listSize) {
+            while (answerList < 1 || answerList > listSize+2) {
                 displaySkillListOptions(skillList);
                 System.out.print("Select a skill: ");
                 answerList = input.nextInt();
             }
 
-            if(answerList != 0 && answerList != -1){
+            if(answerList != listSize+1 && answerList != listSize+2){
                 controller.addSkill(new Skill(skillList.get(answerList - 1).getSkillName()));
                 skillAdded = true;
             }
 
             input.nextLine();
 
-            if(answerList != -1) {
+            if(answerList != listSize+2) {
                 while (!answerAdd.equalsIgnoreCase("y") && !answerAdd.equalsIgnoreCase("n")) {
                     System.out.print("Wanna add more skills? [y / n]: ");
                     answerAdd = input.nextLine();
@@ -199,8 +259,8 @@ public class GenerateTeamUI implements Runnable {
                 }
             }
 
-            if (answerList == -1 || answerList == 0 && !addSkills) {
-                if(answerList == 0 && !addSkills)
+            if (answerList == listSize+2 || answerList == listSize+1 && !addSkills) {
+                if(answerList == listSize+1 && !addSkills)
                     System.out.println(ANSI_BRIGHT_RED+"Not enought skills to generate team"+ANSI_RESET);
                 getController().cleanSkillList();
                 return false;
@@ -219,10 +279,11 @@ public class GenerateTeamUI implements Runnable {
         //display the task categories as a menu with number options to select
         int i = 1;
         for (Skill s : skillList) {
-            System.out.println("  " + i + " - " + s.getSkillName());
+            System.out.println("• Type: " + s.getSkillName() + "\n" + ANSI_PURPLE + "   Option -> [" + i + "]" + ANSI_RESET);
             i++;
         }
-        System.out.println("  " + 0 + " - Exit");
-        System.out.println(" " + -1 + " - Cancelar gerar team");
+        System.out.println();
+        System.out.println("• Type: " + " - Exit" + "\n" + ANSI_PURPLE + "   Option -> [" + i + "]" + ANSI_RESET);
+        System.out.println("• Type: " + " - Cancelar geração de team" + "\n" + ANSI_PURPLE + "   Option -> [" + (i+1) + "]" + ANSI_RESET);
     }
 }

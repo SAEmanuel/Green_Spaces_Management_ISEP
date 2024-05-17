@@ -16,6 +16,10 @@ public class Team {
         return teamId;
     }
 
+    public void setCollaborators(List<Collaborator> collaborators) {
+        this.collaborators = collaborators;
+    }
+
     public void addCollaborator(Collaborator c) {
         collaborators.add(c);
     }
