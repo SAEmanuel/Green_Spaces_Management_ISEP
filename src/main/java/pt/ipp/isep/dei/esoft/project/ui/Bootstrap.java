@@ -1,7 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.ui;
 
-import pt.ipp.isep.dei.esoft.project.application.SerializationOutput;
-import pt.ipp.isep.dei.esoft.project.application.SerializationRead;
+import pt.ipp.isep.dei.esoft.project.application.Serialization;
 import pt.ipp.isep.dei.esoft.project.application.controller.authorization.AuthenticationController;
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.*;
@@ -35,22 +34,31 @@ public class Bootstrap implements Runnable {
     private final GreenSpace quintaDoCovelo = new GreenSpace("Quinta do Covelo",0,100,"Porto");
     private final GreenSpace passeioAlegre = new GreenSpace("Passeio Alegre",0,11,"Porto");
 
+    private final Data data1 = new Data(2023,1,1);
+    private final Data data2 = new Data(2021,1,1);
+
+
+    private final Vehicle vehicle1 = new Vehicle("AA-00-AA","Toyota","Camnry",0,1000,2000,10000,2000,9005,data2,data1);
+    private final Vehicle vehicle2 = new Vehicle("BB-00-AA","Toyota","Tundra",0,5000,7000,10000,2000,8000,data2,data1);
+    private final Vehicle vehicle3 = new Vehicle("CC-00-AA","Toyota","Yaris",0,500,1000,10000,2000,4000,data2,data1);
 
     //Add some task categories to the repository as bootstrap
     public void run() {
-        readAppInformation();
+        inputAppInformation();
         addTaskCategories();
         addOrganization();
         addUsers();
         addJobs();
         addGreenSpaces();
+//        addVehicles();
 //        addCollaborator();
 //        addSkills();
     }
 
-    protected static void readAppInformation(){
-        SerializationRead serializationRead = new SerializationRead();
-        serializationRead.serializeSkill();
+    protected static void inputAppInformation(){
+        Serialization serialization = new Serialization();
+        serialization.serializeSkillInput();
+        serialization.serializeVehicleInput();
 
     }
 
@@ -59,7 +67,12 @@ public class Bootstrap implements Runnable {
 
 
 
-
+    private void addVehicles(){
+        VehicleRepository vehicleRepository = Repositories.getInstance().getVehicleRepository();
+        vehicleRepository.add(vehicle1);
+        vehicleRepository.add(vehicle2);
+        vehicleRepository.add(vehicle3);
+    }
 
     private void addGreenSpaces(){
         GreenSpaceRepository greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository();

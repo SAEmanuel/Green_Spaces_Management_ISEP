@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Calendar;
  *
  * @author Make IT Simple
  */
-public class Data implements Comparable<Data> {
+public class Data implements Comparable<Data>, Serializable {
 
     /**
      * The year of the date.

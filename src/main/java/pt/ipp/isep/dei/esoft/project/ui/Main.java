@@ -1,6 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.ui;
 
-import pt.ipp.isep.dei.esoft.project.application.SerializationOutput;
+import pt.ipp.isep.dei.esoft.project.application.Serialization;
 import pt.ipp.isep.dei.esoft.project.ui.console.menu.MainMenuUI;
 
 import java.util.Scanner;
@@ -55,8 +55,9 @@ public class Main {
 
 
     protected static void saveAppInformation(){
-        SerializationOutput serializationOutput = new SerializationOutput();
-        serializationOutput.serializeSkill();
+        Serialization serialization = new Serialization();
+        serialization.serializeSkillOutput();
+        serialization.serializeVehicleOutput();
     }
 
 }

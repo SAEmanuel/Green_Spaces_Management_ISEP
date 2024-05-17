@@ -1,14 +1,16 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.Data;
+import pt.ipp.isep.dei.esoft.project.domain.Skill;
 import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class VehicleRepository {
+public class VehicleRepository implements Serializable {
 
     private final List<Vehicle> vehicleList;
 
@@ -19,15 +21,6 @@ public class VehicleRepository {
      */
     public VehicleRepository() {
         this.vehicleList = new ArrayList<>();
-    }
-
-    /**
-     * Retrieves the list of vehicles in the repository.
-     *
-     * @return The list of vehicles.
-     */
-    public List<Vehicle> getVehicleList() {
-        return vehicleList;
     }
 
 
@@ -80,7 +73,8 @@ public class VehicleRepository {
     }
 
 
-    /**
+    /**        skillList.add(skill);
+
      * Validates a vehicle before adding it to the repository.
      *
      * @param vehicle The vehicle to be validated.
@@ -91,6 +85,14 @@ public class VehicleRepository {
     }
 
 
+    /**
+     * Retrieves the list of vehicles in the repository.
+     *
+     * @return The list of vehicles.
+     */
+    public List<Vehicle> getVehicleList() {
+        return vehicleList;
+    }
 
     /**
      * Checks if the vehicle list does not contain a specific vehicle by plate ID.
@@ -167,5 +169,30 @@ public class VehicleRepository {
     public Vehicle.Type[] showType(){
         return Vehicle.Type.values();
     }
+
+
+
+    //----------------------- Serialization methods -------------------------------
+
+    public List<Vehicle> getVehicleListSerialization() {
+        return vehicleList;
+    }
+
+    public void serializationInput(List<Vehicle> vehicleList) {
+        this.vehicleList.clear();
+        this.vehicleList.addAll(vehicleList);
+    }
+
+    //-------------------------------------------------------------------------------
+
+
+
+    //---------------------- Boostrap methods ---------------------------------------
+
+    public void add(Vehicle vehicle) {
+        vehicleList.add(vehicle);
+    }
+
+    //-------------------------------------------------------------------------------
 
 }
