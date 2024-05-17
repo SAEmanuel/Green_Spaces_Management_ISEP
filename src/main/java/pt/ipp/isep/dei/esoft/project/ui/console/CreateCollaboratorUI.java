@@ -414,13 +414,13 @@ public class CreateCollaboratorUI implements Runnable {
         System.out.printf("Doc Type selected -> [" + ANSI_GREEN + "%s" + ANSI_RESET + "]%n", values[docType]);
         switch (values[docType]) {
             case PASSPORT:
-                System.out.println(ANSI_BRIGHT_YELLOW + "Must have 9 digits and a letter in the end." + ANSI_RESET);
+                System.out.println(ANSI_BRIGHT_YELLOW + "Must have 6 digits and two letters in the beginning." + ANSI_RESET);
                 break;
             case CITIZEN_CARD:
                 System.out.println(ANSI_BRIGHT_YELLOW + "Must have 9 digits." + ANSI_RESET);
                 break;
             case RESIDENCE_PERMIT:
-                System.out.println(ANSI_BRIGHT_YELLOW + "Must have between 6 and 9 digits." + ANSI_RESET);
+                System.out.println(ANSI_BRIGHT_YELLOW + "Must have between 7 digits and two letters." + ANSI_RESET);
                 break;
         }
         System.out.print("Document Number: ");

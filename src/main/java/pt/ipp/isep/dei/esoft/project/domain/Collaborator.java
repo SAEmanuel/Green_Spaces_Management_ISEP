@@ -23,7 +23,7 @@ public class Collaborator {
     private static final int phoneNumberMiddleRight = 960000000;
     private static final int phoneNumberMax = 969999999;
     private static final int CITIZEN_CARD_LENGTH = 9;
-    private static final int RESIDENCE_PERMIT_MIN_LENGTH = 6;
+    private static final int PASSPORT_LENGTH = 8;
 
 
     /**
@@ -202,12 +202,20 @@ public class Collaborator {
                 }
                 break;
             case RESIDENCE_PERMIT:
-                if (docNumber.length() >= RESIDENCE_PERMIT_MIN_LENGTH && docNumber.length() <= CITIZEN_CARD_LENGTH) {
+                int nLetters = 0;
+                for (int i = 0; i < docNumber.length(); i++) {
+                    if (Character.isLetter(docNumber.charAt(i))) {
+                        nLetters++;
+                    }
+
+                }
+                if (docNumber.length() == CITIZEN_CARD_LENGTH && nLetters == 2) {
                     isValid = true;
                 }
                 break;
             case PASSPORT:
-                if (docNumber.length() == CITIZEN_CARD_LENGTH && Character.isLetter(docNumber.charAt(8))) {
+                if (docNumber.length() == PASSPORT_LENGTH && Character.isLetter(docNumber.charAt(0))
+                        && Character.isLetter(docNumber.charAt(1))) {
                     isValid = true;
 
                 }
@@ -290,10 +298,8 @@ public class Collaborator {
         if (otherCollaborator == null || getClass() != otherCollaborator.getClass())
             return false;
         Collaborator collaborator = (Collaborator) otherCollaborator;
-        return (name.equalsIgnoreCase(collaborator.name) && birthDate.equals(collaborator.birthDate)
-                && admissionDate.equals(collaborator.admissionDate) && address.equalsIgnoreCase(collaborator.address)
-                && phoneNumber == collaborator.phoneNumber && emailAddress.equalsIgnoreCase(collaborator.emailAddress)
-                && taxPayerNumber == collaborator.taxPayerNumber && docType == collaborator.docType && job.equals(collaborator.job));
+        return (phoneNumber == collaborator.phoneNumber && emailAddress.equalsIgnoreCase(collaborator.emailAddress)
+                && taxPayerNumber == collaborator.taxPayerNumber && docNumber.equals(collaborator.docNumber));
     }
 
     /**

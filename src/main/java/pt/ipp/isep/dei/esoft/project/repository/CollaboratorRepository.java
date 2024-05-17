@@ -62,7 +62,7 @@ public class CollaboratorRepository {
      * @return True if the collaborator is valid, false otherwise
      */
     private boolean validateCollaborator(Collaborator collaborator) {
-        return collaboratorListDoNotContainsByEmailPhoneTax(collaborator);
+        return collaboratorListDoNotContains(collaborator);
     }
 
     /**
@@ -71,11 +71,9 @@ public class CollaboratorRepository {
      * @param collaborator the collaborator to search
      * @return true if collaborator is not in the collaboratorList, false otherwise
      */
-    private boolean collaboratorListDoNotContainsByEmailPhoneTax(Collaborator collaborator) {
+    private boolean collaboratorListDoNotContains(Collaborator collaborator) {
         for (Collaborator v : collaboratorList) {
-            if (v.getTaxPayerNumber() == collaborator.getTaxPayerNumber()
-                    || v.getPhoneNumber() == collaborator.getPhoneNumber()
-                    || v.getEmailAddress().equals(collaborator.getEmailAddress())) {
+            if (v.equals(collaborator)) {
                 return false;
             }
         }

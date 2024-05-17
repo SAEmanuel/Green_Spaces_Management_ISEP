@@ -1,4 +1,4 @@
-# US008 - Check-up of vehicles
+# US028 - Consulting Tasks
 
 ## 3. Design - User Story Realization
 
@@ -36,7 +36,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![Sequence Diagram - Full](svg/us008-sequence-diagram-full.svg)
+![Sequence Diagram - Full](svg/us028-sequence-diagram-full.svg)
 
 ### Split Diagrams
 
@@ -45,16 +45,16 @@ user story, but it is split in partial diagrams to better illustrate the interac
 
 It uses Interaction Occurrence (a.k.a. Interaction Use).
 
-![Sequence Diagram - split](svg/us008-sequence-diagram-split.svg)
+![Sequence Diagram - split](svg/us028-sequence-diagram-split.svg)
 
 **Get Vehicle List Partial SD**
 
-![Sequence Diagram - Partial - Get Vehicle List](svg/us008-sequence-diagram-partial-get-vehicle-list.svg)
+![Sequence Diagram - Partial - Get Team Repository](svg/us028-sequence-diagram-partial-get-team-repository.svg)
 
 **Generate CheckUp List Partial SD**
 
-![Sequence Diagram - Partial - Generate CheckUp List](svg/us008-sequence-diagram-partial-generate-checkup-list.svg)
+![Sequence Diagram - Partial - Generate Task List](svg/us028-sequence-diagram-partial-generate-tasks-list.svg)
 
 ## 3.3. Class Diagram (CD)
 
-![Class Diagram](svg/us008-class-diagram.svg)
+![Class Diagram](svg/us028-class-diagram.svg)

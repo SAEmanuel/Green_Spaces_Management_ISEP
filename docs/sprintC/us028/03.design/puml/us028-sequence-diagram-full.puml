@@ -1,0 +1,86 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+actor "Collaborator" as Colab
+
+participant ":RetrieveTasksUI" as UI
+participant ":TeamController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "teamRepository\n:TeamRepository" as teamRepository
+
+activate Colab
+
+Colab -> UI : Asks to generate a list of tasks assigned to the collaborator
+activate UI
+UI --> Colab : Asks the start and end dates
+Colab -> UI : Provides the dates
+    UI --> Colab : Asks the collaborator taxpayer number
+    Colab -> UI : Provides the taxpayer number
+
+UI -> CTRL** : create
+
+UI -> CTRL : requestColabTaskList()
+
+deactivate UI
+
+activate CTRL
+CTRL -> RepositorySingleton : getInstance()
+activate RepositorySingleton
+
+RepositorySingleton --> CTRL: repositories
+deactivate RepositorySingleton
+
+CTRL -> PLAT : getTeamRepository()
+activate PLAT
+
+PLAT --> CTRL: teamRepository
+deactivate PLAT
+
+CTRL -> teamRepository : requestColabTaskList()
+
+activate teamRepository
+
+
+
+activate teamRepository
+
+loop for each team in teamList
+    teamRepository -> teamRepository : getTeamByColabTaxNumber()
+    activate teamRepository
+
+
+    teamRepository --> teamRepository : true/false
+    deactivate teamRepository
+
+
+
+deactivate teamRepository
+end
+
+
+
+    teamRepository --> teamRepository : getColabTasksBetweenDates()
+
+
+
+
+teamRepository --> CTRL : colabTaskList
+deactivate teamRepository
+
+
+
+CTRL --> UI : ColabTaskList
+deactivate CTRL
+activate UI
+UI --> Colab : Provides the list of tasks
+deactivate UI
+deactivate Colab
+
+deactivate Colab
+
+@enduml
