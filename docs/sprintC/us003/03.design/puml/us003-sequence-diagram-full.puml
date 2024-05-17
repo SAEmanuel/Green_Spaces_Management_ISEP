@@ -69,7 +69,7 @@ activate HRM
 
             UI --> HRM : shows list of Identification document types and asks to select one
             HRM -> UI: selects a docType
-        UI --> HRM : requests data (name, birthDate, admissionDate,\naddress, phoneNumber, email, taxpayerNumber)
+        UI --> HRM : requests data (name, birthDate, admissionDate,\naddress, phoneNumber, email, taxpayerNumber, docNumber)
     deactivate UI
 
     HRM -> UI : types requested data
@@ -108,7 +108,7 @@ activate HRM
 
             activate CollaboratorRepository
 
-            CollaboratorRepository -> Collaborator : registerCollaborator(name, birthDate, admissionDate,\naddress, phoneNumber, email, taxpayerNumber,\ndocType and job)
+            CollaboratorRepository -> Collaborator : registerCollaborator(name, birthDate, admissionDate,\naddress, phoneNumber, email, taxpayerNumber,\ndocType, docNumber and job)
 
             activate Collaborator
 
