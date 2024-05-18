@@ -48,14 +48,14 @@ public class Bootstrap implements Runnable {
         addUsers();
         addJobs();
 //        addVehicles();
-//        addCollaborator();
 //        addSkills();
+//        addCollaborator();
     }
 
     protected static void inputAppInformation() {
             Serialization serialization = new Serialization();
-            serialization.serializeSkillInput();
-            serialization.serializeVehicleInput();
+            serialization.serializeRepositoriesInput();
+
 
 
 

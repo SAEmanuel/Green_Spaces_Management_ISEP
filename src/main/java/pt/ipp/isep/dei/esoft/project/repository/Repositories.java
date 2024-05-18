@@ -1,11 +1,14 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 
 public class Repositories implements Serializable {
+    private static final long serialVersionUID = 1L; // Defina um valor constante e único
 
     private static Repositories instance;
-    private final AuthenticationRepository authenticationRepository;
+    private transient AuthenticationRepository authenticationRepository;
     private final JobRepository jobRepository;
     private final SkillRepository skillRepository;
     private final VehicleRepository vehicleRepository;
@@ -44,7 +47,7 @@ public class Repositories implements Serializable {
         return jobRepository;
     }
 
-    public SkillRepository getSkillRepository(){
+    public SkillRepository getSkillRepository() {
         return skillRepository;
     }
 
@@ -52,26 +55,40 @@ public class Repositories implements Serializable {
         return vehicleRepository;
     }
 
-    public CollaboratorRepository getCollaboratorRepository() { return collaboratorRepository; }
-
-    public TeamRepository getTeamRepository() { return teamRepository; }
-
-    public VehicleCheckUpRepository getVehicleCheckUpRepository() {return vehicleCheckUpRepository; }
-
-    public GreenSpaceRepository getGreenSpaceRepository() {return greenSpaceRepository; }
-
-    public ToDoListRepository getToDoRepository() { return toDoListRepository;
+    public CollaboratorRepository getCollaboratorRepository() {
+        return collaboratorRepository;
     }
 
-    public void copyFrom(Repositories other) {
-        this.skillRepository.getSkillList().clear();
-        this.vehicleRepository.getVehicleList().clear();
-        this.jobRepository.getJobList().clear();
-
-        this.skillRepository.getSkillList().addAll(other.getSkillRepository().getSkillList());
-        this.vehicleRepository.getVehicleList().addAll(other.getVehicleRepository().getVehicleList());
-        this.jobRepository.getJobList().addAll(other.getJobRepository().getJobList());
+    public TeamRepository getTeamRepository() {
+        return teamRepository;
     }
+
+    public VehicleCheckUpRepository getVehicleCheckUpRepository() {
+        return vehicleCheckUpRepository;
+    }
+
+    public GreenSpaceRepository getGreenSpaceRepository() {
+        return greenSpaceRepository;
+    }
+
+    public ToDoListRepository getToDoRepository() {
+        return toDoListRepository;
+    }
+
+
+    public static void setInstance(Repositories repositories) {
+        synchronized (Repositories.class) {
+            instance = repositories;
+        }
+
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        // Re-inicializar campos transientes
+        authenticationRepository = new AuthenticationRepository();
+    }
+
 
 
 }

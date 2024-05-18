@@ -1,13 +1,11 @@
 package pt.ipp.isep.dei.esoft.project.application;
 
-import pt.ipp.isep.dei.esoft.project.domain.Skill;
-import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
+
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.SkillRepository;
 import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
 
 import java.io.*;
-import java.util.List;
 
 public class Serialization {
 
@@ -38,89 +36,45 @@ public class Serialization {
 
 
     //--------------------------- Serialization of Class Infos **OUTPUTS** -----------------------------
-    public void serializeSkillOutput() {
-        String filePath = "AppInformaion/skills.ser";
-        List<Skill> skillList = skillRepository.getSkillList();
 
-        try {
+    public void serializeRepositoriesOutput() {
+        String filePath = "AppInformaion/repositories.ser";
+
+        try{
             File file = new File(filePath);
             FileOutputStream fileOutputStream = new FileOutputStream(file);
-            ObjectOutputStream output = new ObjectOutputStream(fileOutputStream);
+             ObjectOutputStream output = new ObjectOutputStream(fileOutputStream);
 
-            output.writeObject(skillList);
+            output.writeObject(Repositories.getInstance());
 
-            output.close();
-            fileOutputStream.close();
         } catch (IOException e) {
-            throw new IllegalArgumentException(e.getMessage());
-        }
-    }
-
-
-    public void serializeVehicleOutput() {
-        String filePath = "AppInformaion/vehicle.ser";
-        List<Vehicle> vehicleList = vehicleRepository.getVehicleListSerialization();
-
-        try {
-            File file = new File(filePath);
-            FileOutputStream fileOutputStream = new FileOutputStream(file);
-            ObjectOutputStream output = new ObjectOutputStream(fileOutputStream);
-
-            output.writeObject(vehicleList);
-
-            output.close();
-            fileOutputStream.close();
-        } catch (IOException e) {
-            throw new IllegalArgumentException(e.getMessage());
+            throw new IllegalArgumentException("Error serializing repositories: " + e.getMessage());
         }
     }
     //--------------------------------------------------------------------------------------------------
-
 
 
     //--------------------------- Serialization of Class Infos **INPUTS** -----------------------------
+    public void serializeRepositoriesInput() {
+        String filePath = "AppInformaion/repositories.ser";
 
-    public void serializeSkillInput() {
-        String filePath = "AppInformaion/skills.ser";
-        List<Skill> skillList;
         try {
             File file = new File(filePath);
             FileInputStream fis = new FileInputStream(file);
             ObjectInputStream ois = new ObjectInputStream(fis);
 
-            skillList = (List<Skill>) ois.readObject();
+            Repositories deserializedRepositories = (Repositories) ois.readObject();
+            Repositories.setInstance(deserializedRepositories);
 
-            this.skillRepository.serializationInput(skillList);
+            ois.close();
+            fis.close();
 
-        } catch (IOException e) {
-            throw new IllegalArgumentException(e.getMessage());
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e.getMessage());
+        } catch (IOException | ClassNotFoundException e) {
+            throw new IllegalArgumentException("Error deserializing repositories: " + e.getMessage());
         }
     }
-
-    public void serializeVehicleInput() {
-        String filePath = "AppInformaion/vehicle.ser";
-        List<Vehicle> vehicleList;
-        try {
-            File file = new File(filePath);
-            FileInputStream fis = new FileInputStream(file);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-
-            vehicleList = (List<Vehicle>) ois.readObject();
-
-            this.vehicleRepository.serializationInput(vehicleList);
-
-        } catch (IOException e) {
-            throw new IllegalArgumentException(e.getMessage());
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e.getMessage());
-        }
-    }
-
-
-    //--------------------------------------------------------------------------------------------------
-
-
-
 }
+
+
+//--------------------------------------------------------------------------------------------------
+
