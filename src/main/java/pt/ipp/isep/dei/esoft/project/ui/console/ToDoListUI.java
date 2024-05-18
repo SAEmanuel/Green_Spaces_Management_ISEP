@@ -101,18 +101,24 @@ public class ToDoListUI implements Runnable {
         }
         System.out.println("----------------");
 
-        int answer;
-        boolean flag = true;
+        int answer = 0;
+        boolean flag = true, leave = true;
+
         do {
-            if (flag) {
-                System.out.print("Enter the number corresponding to the urgency level: ");
-                answer = input.nextInt();
-                if (answer < 1 || answer > values.length) {
-                    flag = false;
+            try {
+                if (flag && leave) {
+                    System.out.print("Enter the number corresponding to the urgency level: ");
+                    answer = input.nextInt();
+                    if (answer < 1 || answer > values.length) {
+                        flag = false;
+                    }
+                } else {
+                    System.out.printf(ANSI_BRIGHT_YELLOW + "Invalid number, enter a new one (between 1 and %d): " + ANSI_RESET, values.length);
+                    input.next();
+                    answer = input.nextInt();
                 }
-            } else {
-                System.out.printf(ANSI_BRIGHT_YELLOW + "Invalid number, enter a new one (between 1 and %d): " + ANSI_RESET, values.length);
-                answer = input.nextInt();
+            }catch (InputMismatchException e) {
+                leave = false;
             }
         } while (answer < 1 || answer > values.length);
 

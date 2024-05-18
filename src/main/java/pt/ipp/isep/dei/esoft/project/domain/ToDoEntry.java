@@ -126,4 +126,9 @@ public class ToDoEntry {
     }
 
 
+    @Override
+    public String toString() {
+        Urgency[] urgencies = ToDoEntry.Urgency.values();
+        return String.format("-- To-Do --%nTitle: %s%nDescription: %s%nUrgency: %s%nExpected Duration: %d day(s)%nGreen Space: %s%n", title, description,  urgencies[urgency], expectedDuration, greenSpace.getName());
+    }
 }
