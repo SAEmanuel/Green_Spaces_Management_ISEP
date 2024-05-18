@@ -1,18 +1,17 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-import org.jfree.data.time.Day;
 import pt.ipp.isep.dei.esoft.project.domain.validations.Validations;
 
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
 
 public class ToDoEntry {
 
-    private GreenSpace greenSpace;
-    private String title;
-    private String description;
-    private int urgency;
-    private int expectedDuration;
-    private String status;
+    private final GreenSpace greenSpace;
+    private final String title;
+    private final String description;
+    private final int urgency;
+    private final int expectedDuration;
+    private final String status;
 
     private static final int DAYS_LIMIT = 730; //DOIS ANOS
 

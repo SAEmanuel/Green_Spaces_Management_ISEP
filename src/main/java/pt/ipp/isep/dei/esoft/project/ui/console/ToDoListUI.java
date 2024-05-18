@@ -4,9 +4,7 @@ import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
 import pt.ipp.isep.dei.esoft.project.domain.ToDoEntry;
 
-import java.util.InputMismatchException;
-import java.util.Optional;
-import java.util.Scanner;
+import java.util.*;
 
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_RESET;
@@ -29,13 +27,16 @@ public class ToDoListUI implements Runnable {
         return controller;
     }
 
-
     @Override
     public void run() {
         System.out.println("\n\n--- Add New Entry To-Do List ------------------------");
+        String responsible = controller.getResponsible();
+        List<GreenSpace> greenSpacesAvailableByResponsible;
 
-        if(!controller.getGreenSpaces().isEmpty()){
-            getGreenSpaceListOption();
+        greenSpacesAvailableByResponsible = controller.getGreenSpacesByResponsible(responsible);
+
+        if(!greenSpacesAvailableByResponsible.isEmpty()){
+            getGreenSpaceListOption(greenSpacesAvailableByResponsible);
 
             requestData();
 
@@ -46,19 +47,19 @@ public class ToDoListUI implements Runnable {
             }
 
         } else {
-            System.out.println("There are no green spaces created");
+            System.out.println("You are not responsible for any green space");
         }
 
     }
 
-    public GreenSpace getGreenSpaceListOption() {
+    public GreenSpace getGreenSpaceListOption(List<GreenSpace> greenSpacesAvailableByResponsible) {
         Scanner input = new Scanner(System.in);
 
         int answer;
-        int n = controller.getGreenSpaces().size();
+        int n = greenSpacesAvailableByResponsible.size();
 
 
-        controller.getGreenSpaceRepository().showGreenSpaces();
+        controller.showGreenSpaces(greenSpacesAvailableByResponsible);
 
         if (n != 0) {
             System.out.print("Green Space ID: ");

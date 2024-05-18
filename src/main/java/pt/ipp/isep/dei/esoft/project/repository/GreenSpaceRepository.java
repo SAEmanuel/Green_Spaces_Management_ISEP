@@ -19,11 +19,11 @@ public class GreenSpaceRepository implements Serializable {
         this.greenSpacesList = new ArrayList<>();
     }
 
-    public Optional<GreenSpace> registerGreenSpace(String name, int size, float area,String address,String resposible) {
+    public Optional<GreenSpace> registerGreenSpace(String name, int size, float area, String address, String resposible) {
 
         Optional<GreenSpace> optionalGreenSpace = Optional.empty();
 
-        GreenSpace greenSpace = new GreenSpace(name,size,area,address,resposible);
+        GreenSpace greenSpace = new GreenSpace(name, size, area, address, resposible);
 
         if (addGreenSpace(greenSpace)) {
             optionalGreenSpace = Optional.of(greenSpace.clone());
@@ -56,7 +56,7 @@ public class GreenSpaceRepository implements Serializable {
         return true;
     }
 
-    public void add(GreenSpace greenSpace){
+    public void add(GreenSpace greenSpace) {
         this.greenSpacesList.add(greenSpace);
     }
 
@@ -68,21 +68,32 @@ public class GreenSpaceRepository implements Serializable {
         greenSpacesList.clear();
     }
 
-    public List<GreenSpace> clone(){
+    public List<GreenSpace> clone() {
         return new ArrayList<>(this.greenSpacesList);
     }
 
-    public void showGreenSpaces() {
-        if (greenSpacesList.isEmpty()) {
+    public void showGreenSpaces( List<GreenSpace> greenSpacesAvailableByResponsible) {
+        if (greenSpacesAvailableByResponsible.isEmpty()) {
             System.out.println(ANSI_BRIGHT_RED + "No green spaces were found in the repository." + ANSI_RESET);
         } else {
             System.out.println("\n--List of Green Spaces--");
-            for (int i = 0; i < greenSpacesList.size(); i++) {
-                GreenSpace greenSpace = greenSpacesList.get(i);
-                System.out.println("• Green Space: " + greenSpace.getName() + "\n"+ANSI_PURPLE+"   Option -> [" + (i+1) + "]"+ ANSI_RESET);
+            for (int i = 0; i < greenSpacesAvailableByResponsible.size(); i++) {
+                GreenSpace greenSpace = greenSpacesAvailableByResponsible.get(i);
+                System.out.println("• Green Space: " + greenSpace.getName() + "\n" + ANSI_PURPLE + "   Option -> [" + (i + 1) + "]" + ANSI_RESET);
             }
             System.out.println("----------------");
         }
+    }
+
+    public List<GreenSpace>  getGreenSpacesByResponsible (String responsible) {
+        ArrayList<GreenSpace> greenSpaces = new ArrayList<>();
+
+        for (GreenSpace greenSpace : greenSpacesList) {
+            if (greenSpace.getResponsible().equals(responsible)) {
+                greenSpaces.add(greenSpace);
+            }
+        }
+        return greenSpaces;
     }
 
 

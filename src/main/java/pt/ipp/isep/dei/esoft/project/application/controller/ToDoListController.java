@@ -18,7 +18,7 @@ public class ToDoListController {
 
     // ---- GET REPOSITORY ------------------------------
 
-    public GreenSpaceRepository getGreenSpaceRepository() {
+    private GreenSpaceRepository getGreenSpaceRepository() {
         if (greenSpaceRepository == null) {
             greenSpaceRepository = getRepositories().getGreenSpaceRepository();
         }
@@ -50,14 +50,19 @@ public class ToDoListController {
         return toDoListRepository.getUrgency();
     }
 
+    public String getResponsible() {
+        return getRepositories().getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail();
 
+    }
 
+    public List<GreenSpace> getGreenSpacesByResponsible(String responsible) {
+        return greenSpaceRepository.getGreenSpacesByResponsible(responsible);
+    }
 
+    public void showGreenSpaces(List<GreenSpace> greenSpacesAvailableByResponsible) {
+        getGreenSpaceRepository().showGreenSpaces(greenSpacesAvailableByResponsible);
 
-
-
-
-
+    }
 
 
 }
