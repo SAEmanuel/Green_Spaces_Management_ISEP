@@ -1,9 +1,10 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Collaborator {
+public class Collaborator implements Serializable {
     private String name;
     private Data birthDate;
     private Data admissionDate;

@@ -64,6 +64,10 @@ public class GreenSpaceRepository implements Serializable {
         return clone();
     }
 
+    public void clear() {
+        greenSpacesList.clear();
+    }
+
     public List<GreenSpace> clone(){
         return new ArrayList<>(this.greenSpacesList);
     }

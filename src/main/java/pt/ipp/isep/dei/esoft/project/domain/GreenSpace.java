@@ -2,7 +2,9 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import pt.ipp.isep.dei.esoft.project.domain.validations.Validations;
 
-public class GreenSpace {
+import java.io.Serializable;
+
+public class GreenSpace implements Serializable {
 
     private final String name;
     private final String address;

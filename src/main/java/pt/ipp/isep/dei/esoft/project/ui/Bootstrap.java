@@ -7,6 +7,8 @@ import pt.ipp.isep.dei.esoft.project.repository.*;
 
 public class Bootstrap implements Runnable {
 
+    //--------------------------------- VARS -----------------------------------------
+
     private final Job job1 = new Job("Marketing Coordinator");
     private final Job job2 = new Job("President of Sales");
     private final Job job3 = new Job("Nursing Assistant");
@@ -28,39 +30,55 @@ public class Bootstrap implements Runnable {
     private final Skill skill11 = new Skill("Weed Control");
     private final Skill skill12 = new Skill("Lawn Care");
 
-//    private final GreenSpace infanteDomHenrique = new GreenSpace("Infante Dom Henrique",0,100,"Porto");
-//    private final GreenSpace parqueDaCidade = new GreenSpace("Parque da Cidade",2,100,"Matosinhos");
-//    private final GreenSpace palacioDeCristal = new GreenSpace("Palacio de Cristal",1,40,"Porto");
-//    private final GreenSpace quintaDoCovelo = new GreenSpace("Quinta do Covelo",0,100,"Porto");
-//    private final GreenSpace passeioAlegre = new GreenSpace("Passeio Alegre",0,11,"Porto");
+    private final GreenSpace infanteDomHenrique = new GreenSpace("Infante Dom Henrique",0,100,"Porto","gsm@this.app");
+    private final GreenSpace palacioDeCristal = new GreenSpace("Palacio de Cristal",1,40,"Porto","gsm@this.app");
+    private final GreenSpace parqueDaCidade = new GreenSpace("Parque da Cidade",2,100,"Matosinhos","gsm@this.app");
+    private final GreenSpace quintaDoCovelo = new GreenSpace("Quinta do Covelo",0,100,"Porto","gsm1@this.app");
+    private final GreenSpace passeioAlegre = new GreenSpace("Passeio Alegre",0,11,"Porto","gsm1@this.app");
 
     private final Data data1 = new Data(2023, 1, 1);
     private final Data data2 = new Data(2021, 1, 1);
-
 
     private final Vehicle vehicle1 = new Vehicle("AA-00-AA", "Toyota", "Camnry", 0, 1000, 2000, 10000, 2000, 9005, data2, data1);
     private final Vehicle vehicle2 = new Vehicle("BB-00-AA", "Toyota", "Tundra", 0, 5000, 7000, 10000, 2000, 8000, data2, data1);
     private final Vehicle vehicle3 = new Vehicle("CC-00-AA", "Toyota", "Yaris", 0, 500, 1000, 10000, 2000, 4000, data2, data1);
 
-    //Add some task categories to the repository as bootstrap
+    //---------------------------------------------------------------------------------------------------------------------
+
+
+
+                                        //******** RUN METHOD **********
+
     public void run() {
-        inputAppInformation();
+//        inputAppInformation();
         addUsers();
-//        addJobs();
-//        addVehicles();
-//        addSkills();
-////        addCollaborator();
+        addJobs();
+        addVehicles();
+        addSkills();
+        addCollaborator();
+        addGreenSpace();
     }
 
+                                        //********************************
+
+
+    //------------------------------ Serializable ----------------------------------------------
     protected static void inputAppInformation() {
-            Serialization serialization = new Serialization();
-            serialization.serializeRepositoriesInput();
+        Serialization serialization = new Serialization();
+        serialization.serializeRepositoriesInput();
+    }
+    //------------------------------------------------------------------------------------------
 
-
-
+    //------------------------------ Add Methods ------------------------------------------------
+    private void addGreenSpace() {
+        GreenSpaceRepository greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository();
+        greenSpaceRepository.add(infanteDomHenrique);
+        greenSpaceRepository.add(palacioDeCristal);
+        greenSpaceRepository.add(parqueDaCidade);
+        greenSpaceRepository.add(quintaDoCovelo);
+        greenSpaceRepository.add(passeioAlegre);
 
     }
-
 
     private void addVehicles() {
         VehicleRepository vehicleRepository = Repositories.getInstance().getVehicleRepository();
@@ -72,13 +90,13 @@ public class Bootstrap implements Runnable {
 
     private void addCollaborator() {
         CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
-        collaboratorRepository.add(new Collaborator("Francisco", new Data(2004, 5, 20), new Data(2023, 6, 12), "Rua da pedra", 912809789, "fran@gmail.com", 123456744, 1, "123456789", job1));
-        collaboratorRepository.add(new Collaborator("Emanuel", new Data(2004, 4, 20), new Data(2023, 6, 12), "Rua da Mariana", 912809777, "ema@gmail.com", 123456755, 1, "123456789", job2));
-        collaboratorRepository.add(new Collaborator("Paulo", new Data(2002, 8, 20), new Data(2023, 6, 12), "Rua de Fanzeres", 912809888, "paul@gmail.com", 123456766, 1, "123456789", job3));
-        collaboratorRepository.add(new Collaborator("Xu", new Data(2000, 4, 20), new Data(2023, 6, 12), "Rua do restaurante asiatico", 912809666, "xu@gmail.com", 123456777, 1, "123456789", job4));
-        collaboratorRepository.add(new Collaborator("Jorge", new Data(2004, 5, 31), new Data(2023, 6, 12), "Rua enganhairo do isep", 912809555, "jorge@gmail.com", 123456788, 1, "123456789", job5));
-        collaboratorRepository.add(new Collaborator("Mariana Silva", new Data(2001, 5, 31), new Data(2023, 6, 12), "Rua da igreja", 912809551, "mari@gmail.com", 123456799, 1, "123456789", job6));
-        collaboratorRepository.add(new Collaborator("Gorete", new Data(1993, 5, 31), new Data(2023, 6, 12), "Rua de Fanzeres", 912809552, "gori@gmail.com", 123456999, 1, "123456789", job7));
+        collaboratorRepository.add(new Collaborator("Francisco", new Data(2004, 5, 20), new Data(2023, 6, 12), "Rua da pedra", 912809789, "fran@gmail.com", 123456744, 0, "123456711", job1));
+        collaboratorRepository.add(new Collaborator("Emanuel", new Data(2004, 4, 20), new Data(2023, 6, 12), "Rua da Mariana", 912809777, "ema@gmail.com", 123456755, 0, "123456722", job2));
+        collaboratorRepository.add(new Collaborator("Paulo", new Data(2002, 8, 20), new Data(2023, 6, 12), "Rua de Fanzeres", 912809888, "paul@gmail.com", 123456766, 0, "123456733", job3));
+        collaboratorRepository.add(new Collaborator("Xu", new Data(2000, 4, 20), new Data(2023, 6, 12), "Rua do restaurante asiatico", 912809666, "xu@gmail.com", 123456777, 0, "123456744", job4));
+        collaboratorRepository.add(new Collaborator("Jorge", new Data(2004, 5, 31), new Data(2023, 6, 12), "Rua enganhairo do isep", 912809555, "jorge@gmail.com", 123456788, 0, "123456755", job5));
+        collaboratorRepository.add(new Collaborator("Mariana Silva", new Data(2001, 5, 31), new Data(2023, 6, 12), "Rua da igreja", 912809551, "mari@gmail.com", 123456799, 0, "123456766", job6));
+        collaboratorRepository.add(new Collaborator("Gorete", new Data(1993, 5, 31), new Data(2023, 6, 12), "Rua de Fanzeres", 912809552, "gori@gmail.com", 123456999, 0, "123456777", job7));
     }
 
     private void addJobs() {
@@ -107,7 +125,7 @@ public class Bootstrap implements Runnable {
         skillRepository.add(skill11);
         skillRepository.add(skill12);
     }
-
+    //-----------------------------------------------------------------------------------------------------------
 
     private void addUsers() {
         //TODO: add Authentication users here: should be created for each user in the organization
@@ -131,6 +149,9 @@ public class Bootstrap implements Runnable {
                 AuthenticationController.ROLE_VFM);
 
         authenticationRepository.addUserWithRole("Green Spaces Manager", "gsm@this.app", "gsm",
+                AuthenticationController.ROLE_GSM);
+
+        authenticationRepository.addUserWithRole("Green Spaces Manager 1", "gsm1@this.app", "gsm",
                 AuthenticationController.ROLE_GSM);
     }
 }
