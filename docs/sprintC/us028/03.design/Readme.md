@@ -4,19 +4,19 @@
 
 ### 3.1. Rationale
 
-| Interaction ID | Question: Which class is responsible for...    | Answer                | Justification (with patterns)                                                                                                             |
-|:---------------|:-----------------------------------------------|:----------------------|:------------------------------------------------------------------------------------------------------------------------------------------|
-| Step 1         | ... interacting with the actor?                | CheckupListUI         | Pure Fabrication: A UI component typically handles user interactions and acts as an interface between the user and the system.            |
-|                | ... coordinating the US?                       | VehicleListController | Controller: The controller orchestrates the use case by coordinating the interactions between the UI and the domain model.                |
-| Step 2         | ... coordinating with the repositories?        | VehicleListController | Controller: The controller interacts with repositories to retrieve necessary data and perform business logic.                             |
-|                | ... retrieving the vehicle repository?         | VehicleListController | Controller: The controller interacts with the repositories to retrieve the necessary data for the use case.                               |
-| Step 3         | ... getting the vehicles needing check-up?     | VehicleRepository     | Repository: The repository pattern encapsulates the logic for retrieving data, in this case, vehicles needing check-up.                   |
-| Step 4         | ... iterating over each vehicle?               | VehicleRepository     | Repository: The repository handles the retrieval and manipulation of data, iterating over vehicles needing check-up.                      |
-|                | ... determining if a vehicle needs check-up?   | VehicleRepository     | Repository: The repository pattern encapsulates the logic for data access and business logic, determining vehicle status.                 |
-| Step 5         | ... retrieving the vehicles needing check-up?  | VehicleRepository     | Repository: The repository pattern encapsulates the logic for data access, retrieving vehicles needing check-up.                          |
-| Step 6         | ... validating data?                           | VehicleRepository     | Repository: The repository pattern encapsulates the logic for data access and validation, ensuring data integrity.                        | 
-|                | ... saving the vehicles needing check-up?      | VehicleRepository     | Repository: The repository pattern encapsulates the logic for data access and manipulation, saving vehicles needing check-up.             | 
-| Step 7         | ... sending the list of vehicles to the actor? | CheckupListUI         | Pure Fabrication: The UI component is responsible for presenting information to the user and is a separate concern from the domain logic. |
+| Interaction ID | Question: Which class is responsible for...                | Answer          | Justification (with patterns)                                                                                                             |
+|:---------------|:-----------------------------------------------------------|:----------------|:------------------------------------------------------------------------------------------------------------------------------------------|
+| Step 1         | ... interacting with the actor?                            | RetrieveTasksUI | Pure Fabrication: A UI component typically handles user interactions and acts as an interface between the user and the system.            |
+|                | ... coordinating the US?                                   | TeamController  | Controller: The controller orchestrates the use case by coordinating the interactions between the UI and the domain model.                |
+| Step 2         | ... coordinating with the repositories?                    | TeamController  | Controller: The controller interacts with repositories to retrieve necessary data and perform business logic.                             |
+|                | ... retrieving the vehicle repository?                     | TeamController  | Controller: The controller interacts with the repositories to retrieve the necessary data for the use case.                               |
+| Step 3         | ... getting the tasks assigned to collaborator?            | TeamRepository  | Repository: The repository pattern encapsulates the logic for retrieving data, in this case, tasks assigned.                              |
+| Step 4         | ... iterating over each team?                              | TeamRepository  | Repository: The repository handles the retrieval and manipulation of data, iterating over teams.                                          |
+|                | ... determining in which team the desired collaborator is? | TeamRepository  | Repository: The repository pattern encapsulates the logic for data access and business logic, determining team members.                   |
+| Step 5         | ... retrieving the tasks assigned to that collaborator?    | TeamRepository  | Repository: The repository pattern encapsulates the logic for data access, retrieving the list of tasks assigned to the person.           |
+| Step 6         | ... validating data?                                       | TeamRepository  | Repository: The repository pattern encapsulates the logic for data access and validation, ensuring data integrity.                        | 
+|                | ... saving the tasks assigned to the collaborator?         | TeamRepository  | Repository: The repository pattern encapsulates the logic for data access and manipulation, saving vehicles needing check-up.             | 
+| Step 7         | ... sending the list of tasks to the actor?                | RetrieveTasksUI | Pure Fabrication: The UI component is responsible for presenting information to the user and is a separate concern from the domain logic. |
 
 ### Systematization ##
 
@@ -26,9 +26,9 @@ According to the taken rationale, the conceptual classes promoted to software cl
 
 Other software classes (i.e. Pure Fabrication) identified:
 
-* VehicleListController
-* CheckupListUI
-* VehicleRepository
+* TeamController
+* RetrieveTasksUI
+* TeamRepository
 
 ## 3.2. Sequence Diagram (SD)
 
@@ -47,11 +47,11 @@ It uses Interaction Occurrence (a.k.a. Interaction Use).
 
 ![Sequence Diagram - split](svg/us028-sequence-diagram-split.svg)
 
-**Get Vehicle List Partial SD**
+**Get Team Repository Partial SD**
 
 ![Sequence Diagram - Partial - Get Team Repository](svg/us028-sequence-diagram-partial-get-team-repository.svg)
 
-**Generate CheckUp List Partial SD**
+**Generate Task List Partial SD**
 
 ![Sequence Diagram - Partial - Generate Task List](svg/us028-sequence-diagram-partial-generate-tasks-list.svg)
 

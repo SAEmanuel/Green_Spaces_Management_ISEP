@@ -1,0 +1,31 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+
+participant ":Collaborator" as Colab
+participant ":CompletionTaskUI" as UI
+
+
+
+autonumber 12
+
+UI <- : team
+autonumber 12.1
+
+activate UI
+    group Provide completion task info
+
+UI ---> Colab : Shows the list of tasks
+activate Colab
+
+Colab -> UI : Selects the desired task
+UI --> Colab : Requests data (completionDate)
+
+end
+
+@enduml
