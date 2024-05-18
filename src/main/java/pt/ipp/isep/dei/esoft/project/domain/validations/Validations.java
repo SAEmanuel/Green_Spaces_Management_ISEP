@@ -62,4 +62,5 @@ public class Validations {
     public static boolean isNegative(float num) {
         return num < 0;
     }
+
 }

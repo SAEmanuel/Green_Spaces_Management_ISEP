@@ -11,9 +11,10 @@ public class ToDoEntry {
     private final String description;
     private final int urgency;
     private final int expectedDuration;
-    private final String status;
+    private String status;
 
     private static final int DAYS_LIMIT = 730; //DOIS ANOS
+    private static final String DEFAULT_STATUS = "Pending";
 
     public ToDoEntry(GreenSpace greenSpace, String title, String description, int urgency, int expectedDuration) {
         validateToDo(title, description, urgency, expectedDuration);
@@ -23,8 +24,12 @@ public class ToDoEntry {
         this.description = description;
         this.urgency = urgency;
         this.expectedDuration = expectedDuration;
-        this.status = "Pending";
+        this.status = DEFAULT_STATUS;
 
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public enum Urgency{
@@ -111,7 +116,7 @@ public class ToDoEntry {
     public static void validateExpectedDuration(int expectedDuration) {
 
         if (expectedDuration > DAYS_LIMIT) {
-            throw new IllegalArgumentException("Expected duration cannot be greater than " + DAYS_LIMIT + "days");
+            throw new IllegalArgumentException("Expected duration cannot be greater than " + DAYS_LIMIT + " days");
         }
     }
 
@@ -129,6 +134,6 @@ public class ToDoEntry {
     @Override
     public String toString() {
         Urgency[] urgencies = ToDoEntry.Urgency.values();
-        return String.format("-- To-Do --%nTitle: %s%nDescription: %s%nUrgency: %s%nExpected Duration: %d day(s)%nGreen Space: %s%n", title, description,  urgencies[urgency], expectedDuration, greenSpace.getName());
+        return String.format("[%s | %s | %s | %d | %s]", title, description,  urgencies[urgency], expectedDuration, greenSpace.getName());
     }
 }

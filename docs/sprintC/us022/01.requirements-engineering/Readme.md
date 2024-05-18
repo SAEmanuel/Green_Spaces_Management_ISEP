@@ -1,11 +1,11 @@
-# US008 - Check-up of vehicles
+# US022 - Add a new entry in the Agenda
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As a Fleet Manager I intend to list the vehicles that need overhauling.
+As a GSM, I want to add a new entry in the Agenda.
 
 ### 1.2. Customer Specifications and Clarifications 
 
@@ -19,38 +19,34 @@ As a Fleet Manager I intend to list the vehicles that need overhauling.
 
 **From forum:**
 
-> **Question:** Can the vehicles get placed automatically on a list or the one listing has to be the FM?
+> **Question:** When a new entry is added to the Agenda, the status of that task will be, by default, set to "planned", right??
 >
-> **Answer:**  The list of vehicles is automatically created but the creation is triggered by the FM.
+> **Answer:**  "Planned" as default for Agenda entries, sounds good.
 
-> **Question:** What information will appear on the final list regarding the vehicle, besides the needing for check-up?
+> **Question:** Some tasks are meant to be reoccurring rather than occasional. Is this something that should be asked on creating the task in the to-do list? If so, what inputs should we expect from the user?
 >
-> **Answer:** Data that allow to identify the vehicle like Plate, brand and model, as well as, the data that allowed to select/insert te vehicle in the list, number of kms, frequency of checkup and the last checkup.
+> **Answer:** For the current proof-of-concept there is no need to distinguish between recurring and occasional tasks.
 
-> **Question:** I'm not sure if I understood everything about US08. In this US we should only list the vehicles that need a check up (surpass the check-up frequency in KM) or that will shortly need a check-up (5% to the check-up frequency *already said in another post*), correct? If so, the information about the checkup frequency for each vehicle should be asked in US07?
+> **Question:** When the GSM plans a task (that was previously in To-Do) into the Agenda, what aditional data/information does he need to input when planning?
 >
-> **Answer:** No; the Maintenance/Check-up Frequency (in km) is registered in US06.
+> **Answer:** The starting date for the task. Later the GSM will be able to add the Team and vehicles (if required).
 
-> **Question:** What are the requests/ input data to list the vehicles needing the check-up? Type of vehicle, Current Km and Maintenance/Check-up Frequency (in Kms) are sufficient?
+> **Question:** Some tasks are meant to be reoccurring rather than occasional. Is this something that should be asked on creating the task in the to-do list? If so, what inputs should we expect from the user?
 >
-> **Answer:** Current Km and Maintenance/Check-up Frequency (in Kms) are sufficient, yes;
-The list must contain all vehicles that have already exceeded the number of km required for the inspection or those that are close to it.
-For example: a vehicle that made the checkup at 23500 and has a checkup frequency of 10000km.
-a) If it currently has 33600 (exceeded) or
-b) 33480 (there is a difference minor than 5% of the number of kms of the checkup frequency).
-The list must clearly identify the vehicles through: plate number, brand, model and the that justified the checkup need.
+> **Answer:** For the current proof-of-concept there is no need to distinguish between recurring and occasional tasks.
+
 
 
 ### 1.3. Acceptance Criteria 
 
-* **AC1:** If there are no vehicles that need overhauling, the system notifies the FM.
-* **AC2:** The list of vehicles needing overhauling should contain all the vehicles' info.
-* **AC3:** The list should include vehicles that have either exceeded the maintenance frequency limit or are within 5% of reaching it.
+* **AC1:** The new entry must be associated with a green space managed by the GSM.
+* **AC2:** The new entry must exist in the To-Do list.
 
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US006 - Registering Vehicles" as there must be at least one vehicle in the system so that it can check the need for a check-up.
+* There is a dependency on "US020 - Register a Green Space" as there must exist green spaces in the system so that it can be associated with an entry in the Agenda.
+* There is a dependency on "US021 - Add a new entry to the to-do list" as there must exist tasks in the to-do list so that it can be associated to the Agenda.
 
 ### 1.5 Input and Output Data
 
