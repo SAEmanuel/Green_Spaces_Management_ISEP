@@ -34,6 +34,10 @@ public class ToDoListRepository implements Serializable {
         return optionalToDoEntry;
     }
 
+    public void add(ToDoEntry entry){
+        toDoList.add(entry);
+    }
+
     private boolean addToDoEntry(ToDoEntry toDoEntry) {
         boolean success = false;
 

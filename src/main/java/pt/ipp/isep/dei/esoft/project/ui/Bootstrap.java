@@ -62,9 +62,19 @@ public class Bootstrap implements Runnable {
         addSkills();
         addCollaborator();
         addGreenSpace();
+        addToDoList();
     }
 
-                                        //********************************
+    private void addToDoList() {
+        ToDoListRepository toDoListRepository = Repositories.getInstance().getToDoRepository();
+        toDoListRepository.add(task1);
+        toDoListRepository.add(task2);
+        toDoListRepository.add(task3);
+        toDoListRepository.add(task4);
+        toDoListRepository.add(task5);
+    }
+
+    //********************************
 
 
     //------------------------------ Serializable ----------------------------------------------

@@ -3,9 +3,10 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import pt.ipp.isep.dei.esoft.project.domain.validations.Validations;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class AgendaEntry {
+public class AgendaEntry implements Serializable {
 
     private final ToDoEntry agendaEntry;
 

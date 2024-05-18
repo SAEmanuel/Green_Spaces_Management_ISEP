@@ -2,9 +2,11 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import pt.ipp.isep.dei.esoft.project.domain.validations.Validations;
 
+import java.io.Serializable;
+
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
 
-public class ToDoEntry {
+public class ToDoEntry implements Serializable {
 
     private final GreenSpace greenSpace;
     private final String title;
