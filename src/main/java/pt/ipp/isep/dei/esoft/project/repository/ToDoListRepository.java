@@ -57,4 +57,14 @@ public class ToDoListRepository implements Serializable {
         return ToDoEntry.Urgency.values();
     }
 
+    public List<ToDoEntry> getToDoListForResponsible(String responsible) {
+        List<ToDoEntry> entry = new ArrayList<>();
+
+        for (ToDoEntry toDoEntry : toDoList) {
+            if (toDoEntry.getGreenSpace().getResponsible().equals(responsible)) {
+                entry.add(toDoEntry);
+            }
+        }
+        return entry;
+    }
 }

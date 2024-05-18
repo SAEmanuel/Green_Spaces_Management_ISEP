@@ -36,6 +36,9 @@ public class AgendaController {
         return agenda;
     }
 
+    public String getResponsible() {
+        return Repositories.getInstance().getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail();
+    }
 
     public Optional<AgendaEntry> registerAgendaEntry(ToDoEntry agendaEntry, Data starting_Date, Data end_Date) {
 
@@ -47,8 +50,8 @@ public class AgendaController {
     }
 
 
-    public List<ToDoEntry> getToDoList(){
-        return toDoListRepository.getToDoList();
+    public List<ToDoEntry> getToDoListForResponsible(){
+        return toDoListRepository.getToDoListForResponsible(getResponsible());
     }
 
 }

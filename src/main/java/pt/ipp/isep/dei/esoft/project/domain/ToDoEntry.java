@@ -53,6 +53,10 @@ public class ToDoEntry {
         },
     }
 
+    public GreenSpace getGreenSpace() {
+        return greenSpace;
+    }
+
     private void validateToDo(String title, String description, int urgency, int expectedDuration) {
         isValidTitleAndDescription(title);
         isValidTitleAndDescription(description);

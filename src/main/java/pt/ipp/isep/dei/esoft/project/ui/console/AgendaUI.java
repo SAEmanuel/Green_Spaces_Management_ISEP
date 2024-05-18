@@ -261,7 +261,7 @@ public class AgendaUI implements Runnable {
     private ToDoEntry requestAgendaEntry() {
         int answer;
         Scanner input = new Scanner(System.in);
-        List<ToDoEntry> toDoList = controller.getToDoList();
+        List<ToDoEntry> toDoList = controller.getToDoListForResponsible();
         int n = toDoList.size();
         if (n != 0) {
             showToDoList(toDoList);
@@ -287,7 +287,7 @@ public class AgendaUI implements Runnable {
         System.out.println("\n-- TODO List --");
         System.out.println("Title -> Description -> Urgency -> Spectated duration -> Park");
         for (int i = 0; i < toDoList.size(); i++) {
-            System.out.println("• Task: " + toDoList.get(i).toString() + "\n" + ANSI_PURPLE + "   Option -> [" + (i+1) + "]" + ANSI_RESET);
+            System.out.println("• Task: " + toDoList.get(i).toString() + "\n" + ANSI_PURPLE + "   Option -> [" + (i+1) + "]\n" + ANSI_RESET);
         }
         System.out.println("----------------");
     }

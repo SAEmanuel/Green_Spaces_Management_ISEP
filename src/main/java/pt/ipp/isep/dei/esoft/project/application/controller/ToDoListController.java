@@ -52,7 +52,6 @@ public class ToDoListController {
 
     public String getResponsible() {
         return getRepositories().getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail();
-
     }
 
     public List<GreenSpace> getGreenSpacesByResponsible(String responsible) {

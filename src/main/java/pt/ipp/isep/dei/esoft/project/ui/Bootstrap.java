@@ -43,6 +43,11 @@ public class Bootstrap implements Runnable {
     private final Vehicle vehicle2 = new Vehicle("BB-00-AA", "Toyota", "Tundra", 0, 5000, 7000, 10000, 2000, 8000, data2, data1);
     private final Vehicle vehicle3 = new Vehicle("CC-00-AA", "Toyota", "Yaris", 0, 500, 1000, 10000, 2000, 4000, data2, data1);
 
+    private final ToDoEntry task1 = new ToDoEntry(infanteDomHenrique,"Cortar relva","Nenhuma",0,12);
+    private final ToDoEntry task2 = new ToDoEntry(palacioDeCristal,"Cortar folhas arvores","Nenhuma",1,12);
+    private final ToDoEntry task3 = new ToDoEntry(parqueDaCidade,"Limpar fontes","Nenhuma",2,12);
+    private final ToDoEntry task4 = new ToDoEntry(quintaDoCovelo,"Limpar bancos","Nenhuma",2,12);
+    private final ToDoEntry task5 = new ToDoEntry(passeioAlegre,"Limpar casas de banho","Nenhuma",1,12);
     //---------------------------------------------------------------------------------------------------------------------
 
 

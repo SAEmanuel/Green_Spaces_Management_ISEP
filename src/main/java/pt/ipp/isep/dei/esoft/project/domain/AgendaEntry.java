@@ -7,13 +7,13 @@ import java.util.List;
 
 public class AgendaEntry {
 
-    private ToDoEntry agendaEntry;
+    private final ToDoEntry agendaEntry;
 
     private Team team;
 
     private List<Vehicle> vehicles;
 
-    private Data starting_Date;
+    private final Data starting_Date;
     private Data end_Date;
 
 
