@@ -43,7 +43,7 @@ public class Serialization {
         try{
             File file = new File(filePath);
             FileOutputStream fileOutputStream = new FileOutputStream(file);
-             ObjectOutputStream output = new ObjectOutputStream(fileOutputStream);
+            ObjectOutputStream output = new ObjectOutputStream(fileOutputStream);
 
             output.writeObject(Repositories.getInstance());
 
