@@ -49,6 +49,7 @@ As a Green Space Manager, I want to register a green space.
   * Name of the Green Space.
   * Address of the Green Space.
   * Area of the Green Space.
+  * The system automatically associates the GSM responsible for the park created.
 * Selected Data:
   * Size of the Green Space.
 

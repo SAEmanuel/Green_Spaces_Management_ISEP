@@ -1,0 +1,53 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+participant ":RegisterGreenSpaceController" as CTRL
+participant "repositories\n:Repositories" as PLAT
+participant "authenticationRepository\n:AuthenticationRepository" as authenticationRepository
+
+autonumber 16
+
+autonumber 16.1
+activate CTRL
+
+       CTRL -> CTRL : registerGreenSpace(name,size,area)
+    group     Get User Email
+
+
+           activate CTRL
+
+               CTRL -> PLAT : getAuthenticationRepository()
+               activate PLAT
+
+               PLAT --> CTRL : authenticationRepository
+               deactivate PLAT
+
+               CTRL -> authenticationRepository : getCurrentUserSession()
+               activate authenticationRepository
+
+                   authenticationRepository -> authenticationRepository :getUserId()
+                   activate authenticationRepository
+
+                       authenticationRepository -> authenticationRepository : getEmail()
+                       activate authenticationRepository
+
+                           authenticationRepository --> authenticationRepository
+                       deactivate authenticationRepository
+                           authenticationRepository --> authenticationRepository
+
+                   deactivate authenticationRepository
+
+                   authenticationRepository --> CTRL : resposible
+               deactivate authenticationRepository
+
+               deactivate authenticationRepository
+    end
+            CTRL ->  : registerGreenSpace(name,size,area,resposible)
+
+autonumber 17
+deactivate CTRL
+
+
+@enduml

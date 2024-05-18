@@ -23,6 +23,7 @@ class GreenSpace {
          size
          area
          address
+         responsible
 }
 
 

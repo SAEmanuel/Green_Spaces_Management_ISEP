@@ -7,7 +7,7 @@ participant "greenSpaceRepository:\n:GreenSpaceRepository" as ORG
 participant "greenSpace\n:GreenSpace" as GREENSPACE
 
 autonumber 16
--> ORG: registerGreenSpace(name,size,area)
+-> ORG: registerGreenSpace(name,size,area,responsible)
 
 autonumber 16.1
 activate ORG
@@ -21,7 +21,7 @@ activate ORG
         deactivate GREENSPACE
 
         activate ORG
-            ORG -> ORG: validateGreenSpace(greenSpace)
+            ORG -> ORG: validate(greenSpace)
             activate ORG
                 ORG --> ORG
             deactivate ORG

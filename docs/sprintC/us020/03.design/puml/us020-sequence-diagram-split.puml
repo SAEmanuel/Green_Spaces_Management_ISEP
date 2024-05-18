@@ -51,7 +51,16 @@ activate Employee
     Get GreenSpace Repository
     end ref
 
-    CTRL -> greenSpaceRepository : registerGreenSpace(name,size,area)
+    CTRL -> CTRL : registerGreenSpace(name,size,area)
+        activate CTRL
+
+            ref over CTRL
+                Get User Email
+            end ref
+
+            CTRL -> greenSpaceRepository : registerGreenSpace(name,size,area)
+        deactivate CTRL
+
     activate greenSpaceRepository
 
 

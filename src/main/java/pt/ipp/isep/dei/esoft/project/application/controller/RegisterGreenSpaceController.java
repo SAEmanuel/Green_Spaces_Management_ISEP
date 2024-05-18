@@ -25,11 +25,16 @@ public class RegisterGreenSpaceController {
     public Optional<GreenSpace> registerGreenSpace(String name, int size, float area,String address) {
         Optional<GreenSpace> newGreenSpace;
 
-        String resposible = repositories.getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail();
+        String resposible = getResponsible();
+
 
         newGreenSpace = greenSpaceRepository.registerGreenSpace(name,size,area,address,resposible);
 
         return newGreenSpace;
+    }
+
+    private String getResponsible() {
+        return repositories.getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail();
     }
 
 

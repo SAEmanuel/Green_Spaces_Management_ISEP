@@ -8,19 +8,19 @@ import java.io.Serializable;
 public class Vehicle implements Serializable {
 
     // Attributes
-    private String plateId;
-    private String brand;
-    private String model;
-    private Type type;
+    private final String plateId;
+    private final String brand;
+    private final String model;
+    private final Type type;
 
-    private float tareWeight;
-    private float grossWeight;
-    private float currentKm;
-    private float checkUpFrequency;
+    private final float tareWeight;
+    private final float grossWeight;
+    private final float currentKm;
+    private final float checkUpFrequency;
     private float lastCheckUp;
 
-    private Data registerDate;
-    private Data acquisitionDate;
+    private final Data registerDate;
+    private final Data acquisitionDate;
 
     // Constants
     private static final int LOWEST_LIMIT = 1992;

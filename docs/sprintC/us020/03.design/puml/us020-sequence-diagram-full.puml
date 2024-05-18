@@ -12,6 +12,7 @@ participant ":RegisterGreenSpaceUI" as UI
 participant ":RegisterGreenSpaceController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
+participant "authenticationRepository\n:AuthenticationRepository" as authenticationRepository
 participant "greenSpaceRepository\n:GreenSpaceRepository" as greenSpaceRepository
 participant "greenSpace\n:GreenSpace" as EMPREGO
 
@@ -65,8 +66,38 @@ activate Employee
         CTRL --> CTRL : greenSpaceRepository
 
     deactivate CTRL
+    |||
 
-    CTRL -> greenSpaceRepository : registerGreenSpace(name,size,area)
+    CTRL -> CTRL : registerGreenSpace(name,size,area)
+    activate CTRL
+
+        CTRL -> PLAT : getAuthenticationRepository()
+        activate PLAT
+
+        PLAT --> CTRL : authenticationRepository
+        deactivate PLAT
+
+        CTRL -> authenticationRepository : getCurrentUserSession()
+        activate authenticationRepository
+
+            authenticationRepository -> authenticationRepository :getUserId()
+            activate authenticationRepository
+
+                authenticationRepository -> authenticationRepository : getEmail()
+                activate authenticationRepository
+
+                    authenticationRepository --> authenticationRepository
+                deactivate authenticationRepository
+                    authenticationRepository --> authenticationRepository
+
+            deactivate authenticationRepository
+
+            authenticationRepository --> CTRL : resposible
+        deactivate authenticationRepository
+    |||
+            CTRL -> greenSpaceRepository : registerGreenSpace(name,size,area,resposible)
+
+    deactivate CTRL
     activate greenSpaceRepository
 
     greenSpaceRepository -> EMPREGO** : create
@@ -74,7 +105,7 @@ activate Employee
     greenSpaceRepository -> greenSpaceRepository : addGreenSpace(greenSpace)
 
     activate greenSpaceRepository
-    greenSpaceRepository -> greenSpaceRepository : validateGreenSpace(greenSpace)
+    greenSpaceRepository -> greenSpaceRepository : validate(greenSpace)
     activate greenSpaceRepository
     greenSpaceRepository --> greenSpaceRepository
     deactivate greenSpaceRepository

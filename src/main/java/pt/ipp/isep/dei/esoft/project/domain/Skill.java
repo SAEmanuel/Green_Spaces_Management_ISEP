@@ -9,7 +9,7 @@ public class Skill implements Serializable {
     /**
      * The name of the skill.
      */
-    private String skillName;
+    private final String skillName;
 
 
     /**

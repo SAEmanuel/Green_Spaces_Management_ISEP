@@ -47,13 +47,19 @@ It uses Interaction Occurrence (a.k.a. Interaction Use).
 
 ![Sequence Diagram - split](svg/us020-sequence-diagram-split.svg)
 
+**Get Green Space Repository**
+
+![Sequence Diagram - Partial - Get GreenSpace Repository](svg/us020-sequence-diagram-partial-get_green_space_repository.svg)
+
+**Get User Email**
+
+![Sequence Diagram - Partial - Get User Email](svg/us020-sequence-diagram-partial-register-Get-User-Email.svg)
+
+
 **Register Green Space**
 
 ![Sequence Diagram - Partial - Register Green Space](svg/us020-sequence-diagram-partial-register-greenSpace.svg)
 
-**Get Green Space Repository**
-
-![Sequence Diagram - Partial - Get GreenSpace Repository](svg/us020-sequence-diagram-partial-get_green_space_repository.svg)
 
 ## 3.3. Class Diagram (CD)
 

@@ -9,7 +9,7 @@ public class GreenSpace implements Serializable {
     private final String name;
     private final String address;
     private final String responsible;
-    private Size size;
+    private final Size size;
     private final float area;
 
     public enum Size{
