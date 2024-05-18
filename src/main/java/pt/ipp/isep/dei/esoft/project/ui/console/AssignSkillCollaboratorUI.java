@@ -114,7 +114,7 @@ public class AssignSkillCollaboratorUI implements Runnable {
         int n = controller.getSkillList().size();
 
 
-        controller.getSkillRepository().showSkills();
+        controller.showSkills();
 
         if (n != 0) {
             System.out.print("Skill ID: ");
@@ -122,7 +122,7 @@ public class AssignSkillCollaboratorUI implements Runnable {
                 try {
                     answer = input.nextInt() - 1;
                     if (answer <= n - 1 && answer >= 0) {
-                        skill = controller.getSkillRepository().getSkill(answer);
+                        skill = controller.getSkill(answer);
                         return skill;
                     }
                 } catch (InputMismatchException e) {

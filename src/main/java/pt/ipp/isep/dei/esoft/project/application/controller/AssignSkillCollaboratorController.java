@@ -32,7 +32,7 @@ public class AssignSkillCollaboratorController {
      *
      * @return The SkillRepository instance.
      */
-    public SkillRepository getSkillRepository() {
+    private SkillRepository getSkillRepository() {
         if (skillRepository == null) {
             skillRepository = getRepositories().getSkillRepository();
         }
@@ -41,7 +41,6 @@ public class AssignSkillCollaboratorController {
 
     /**
      * Retrieves the CollaboratorRepository instance.
-     *
      * @return The CollaboratorRepository instance.
      */
     private CollaboratorRepository getCollaboratorRepository() {
@@ -126,6 +125,14 @@ public class AssignSkillCollaboratorController {
      */
     public Data getCollaboratorBirthDate(int collaboratorTaxNumber) {
         return collaboratorRepository.findCollaborator(collaboratorTaxNumber).getBirthDate();
+    }
+
+    public void showSkills() {
+        getSkillRepository().showSkills();
+    }
+
+    public Skill getSkill(int position) {
+        return getSkillRepository().getSkill(position);
     }
 }
 
