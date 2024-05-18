@@ -1,12 +1,11 @@
-# US008 - Check-up of vehicles
+# US0023 -  Assign a Team to an entry in the Agenda
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As a Fleet Manager I intend to list the vehicles that need overhauling.
-
+As a GSM, I want to assign a Team to an entry in the Agenda
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the specifications document and client meetings:**
@@ -43,9 +42,8 @@ The list must clearly identify the vehicles through: plate number, brand, model 
 
 ### 1.3. Acceptance Criteria 
 
-* **AC1:** If there are no vehicles that need overhauling, the system notifies the FM.
-* **AC2:** The list of vehicles needing overhauling should contain all the vehicles' info.
-* **AC3:** The list should include vehicles that have either exceeded the maintenance frequency limit or are within 5% of reaching it.
+* **AC1** A message must be sent to all team members informing them about the assignment.
+* **AC2** Different email services can send the message. These services must be defined through a configuration file to allow the use of different platforms (e.g. Gmail, DEI’s email service, etc.).
 
 
 ### 1.4. Found out Dependencies
@@ -56,7 +54,8 @@ The list must clearly identify the vehicles through: plate number, brand, model 
 
 **Input Data:**
 
-* The system automatically retrieves the maintenance frequency of each vehicle and calculates the 5% threshold limit before reaching it without requiring any manual input.
+* Team number
+* 
 
 **Output Data:**
 

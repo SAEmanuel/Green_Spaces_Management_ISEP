@@ -7,21 +7,23 @@ title System Sequence Diagram (SSD) - Alternative One
 
 autonumber
 
-actor "Collaborator" as COLLAB
+actor "Collaborator" as COLAB
 participant ":System" as System
 
 
-        COLLAB -> System: Asks to record the completion of a task
-        activate COLLAB
+        COLAB -> System: Asks to record the completion of a task
+        activate COLAB
         activate System
 
-        System --> COLLAB : Shows the list of tasks
-        COLLAB -> System: Selects the desired task
-        System --> COLLAB: Asks to enter data (date of\ntask completion)
-        COLLAB -> System: Enters data
-        System --> COLLAB: Displays success of operation
+        System --> COLAB : Requests data (taxPayerNumber)
+        COLAB -> System: Submits requested data
+        System --> COLAB : Shows the list of tasks
+        COLAB -> System: Selects the desired task
+        System --> COLAB: Requests data (completionDate)
+        COLAB -> System: Submits requested data
+        System --> COLAB: Displays operation success
 
 
         deactivate System
-        deactivate COLLAB
+        deactivate COLAB
 @enduml

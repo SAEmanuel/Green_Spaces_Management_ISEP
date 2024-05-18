@@ -7,22 +7,21 @@ import pt.ipp.isep.dei.esoft.project.domain.Team;
 
 import java.io.Serializable;
 import java.sql.SQLOutput;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_BRIGHT_RED;
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_RESET;
 
 public class TeamRepository implements Serializable {
     private final List<Team> teamList;
+    private List<Team> teamListAux;
 
     /**
      * Constructs a new TeamRepository with an empty list of teams.
      */
     public TeamRepository() {
         this.teamList = new ArrayList<>();
+        this.teamListAux = new ArrayList<>();
     }
 
     /**
@@ -36,63 +35,134 @@ public class TeamRepository implements Serializable {
     public Optional<Team> generateTeam(SkillList skills, List<Collaborator> collaboratorList, int minCollaborators, int maxCollaborators){
         Optional<Team> optionalValue = Optional.empty();
 
+
         if(minCollaborators > maxCollaborators) {
             System.out.println(ANSI_BRIGHT_RED+"Minimum collaborators is greater than maximum collaborators"+ANSI_RESET);
             return optionalValue;
         }
-
-        if(verifyIfExistingCollab(skills,collaboratorList, minCollaborators)) {
+        int verifyValue = verifyIfExistingCollab(skills,collaboratorList, minCollaborators);
+        if( verifyValue == -1 || teamListAux.size() >= combinacao(verifyValue, minCollaborators) ) {
             System.out.println(ANSI_BRIGHT_RED+"Not enought collaborators to generate team"+ANSI_RESET);
             return optionalValue;
         }
 
-        Team team = new Team(teamList.size()+1);
 
+        int newTeamId = 1 + teamListAux.size();
+        for(Team t : teamList) {
+            if (t.getTeamId() != newTeamId) {
+                break;
+            }
+            newTeamId++;
+        }
+
+        System.out.println(newTeamId);
+        Team team = new Team(newTeamId);
         int encontrados = 0;
+        boolean allSkillsDone = false;
+        boolean diferentTeam = true;
         SkillList skillsClone = new SkillList();
         skillsClone.setSkills(skills.getSkillList());
-        boolean allSkillsDone = false;
+        List<Collaborator> shuffledCollaboratorList = new ArrayList<>(collaboratorList);
 
-        while(encontrados < maxCollaborators) {
-            for (Collaborator c : collaboratorList){
-                if(skills.getSkillList().isEmpty())
-                    break;
+        while(true){
+            Collections.shuffle(shuffledCollaboratorList);
 
-                if(checkIfHasSkills(c, skills)){
-                    if(!collaboratorHasTeam(c) && !team.getCollaborators().contains(c)) {
-                        if(!allSkillsDone)
-                            removeSkills(c,skills);
-                        else
-                            skills.setSkills(skillsClone.getSkillList());
+            while(encontrados < maxCollaborators) {
+                for (Collaborator c : shuffledCollaboratorList){
+                    if(skills.getSkillList().isEmpty())
+                        break;
 
-                        team.addCollaborator(c);
-                        encontrados++;
+                    if(checkIfHasSkills(c, skills)){
+                        if(!collaboratorHasTeam(c, teamList) && !team.getCollaborators().contains(c)) {
+                            if(!allSkillsDone)
+                                removeSkills(c,skills);
+                            else
+                                skills.setSkills(skillsClone.getSkillList());
+
+                            team.addCollaborator(c);
+                            encontrados++;
+                        }
+                    }
+
+                    if(allSkillsDone && encontrados == minCollaborators) {
+                        skills.setSkills(new ArrayList<>());
                     }
                 }
 
-                if(allSkillsDone && encontrados == minCollaborators) {
-                    skills.setSkills(new ArrayList<>());
+                if(encontrados >= minCollaborators && skills.getSkillList().isEmpty()){
+                    encontrados = maxCollaborators;
                 }
+                else
+                    if(encontrados < minCollaborators && skills.getSkillList().isEmpty()){
+                        skills.setSkills(skillsClone.getSkillList());
+                        allSkillsDone = true;
+                    }
+
             }
 
-            if(encontrados >= minCollaborators && skills.getSkillList().isEmpty()){
-                encontrados = maxCollaborators;
+            if(!checkTeamCollaborators(team)) {
+                diferentTeam = false;
             }
-            else
-                if(encontrados < minCollaborators && skills.getSkillList().isEmpty()){
-                    skills.setSkills(skillsClone.getSkillList());
-                    allSkillsDone = true;
-                }
+
+            if(diferentTeam == true){
+                break;
+            }
+
+            team.setCollaborators(new ArrayList<>());
+            skills.setSkills(skillsClone.getSkillList());
+            diferentTeam = true;
+            encontrados = 0;
         }
 
         optionalValue = Optional.of(team);
 
         if(!team.getCollaborators().isEmpty()) {
-            teamList.add(team);
+            teamListAux.add(team);
         }
 
         return optionalValue;
     }
+
+    public static long fatorial(int n) {
+        if (n == 0)
+            return 1;
+        else
+            return n * fatorial(n - 1);
+    }
+
+    // Método para calcular combinações
+    public static long combinacao(int n, int r) {
+        return fatorial(n) / (fatorial(r) * fatorial(n - r));
+    }
+
+    public boolean checkTeamCollaborators(Team team) {
+        for (Team t : teamListAux) {
+            if (areCollaboratorsEqual(t.getCollaborators(), team.getCollaborators())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean areCollaboratorsEqual(List<Collaborator> collaborators1, List<Collaborator> collaborators2) {
+        if (collaborators1.size() != collaborators2.size()) {
+            return false;
+        }
+        int count = 0;
+
+        for (Collaborator c1: collaborators1) {
+            for (Collaborator c2 : collaborators2)
+                if (c1.getTaxPayerNumber() == c2.getTaxPayerNumber()) {
+                    count++;
+                    break;
+                }
+        }
+
+        if(count == collaborators2.size())
+            return true;
+        return false;
+    }
+
 
     /**
      * Checks if there are enough collaborators with the required skills available.
@@ -101,7 +171,7 @@ public class TeamRepository implements Serializable {
      * @param minCollaborators The minimum number of collaborators required for the team.
      * @return True if there are not enough collaborators with the required skills, otherwise false.
      */
-    private boolean verifyIfExistingCollab(SkillList skills, List<Collaborator> collaboratorList, int minCollaborators) {
+    private int verifyIfExistingCollab(SkillList skills, List<Collaborator> collaboratorList, int minCollaborators) {
         int count=0;
         boolean allSkillsDone = false;
 
@@ -110,7 +180,7 @@ public class TeamRepository implements Serializable {
 
         for (Collaborator c : collaboratorList){
             if(checkIfHasSkills(c, skillsCloneVerify)){
-                if(!collaboratorHasTeam(c)){
+                if(!collaboratorHasTeam(c, teamList)){
                     if(!allSkillsDone)
                         removeSkills(c, skillsCloneVerify);
                     else
@@ -125,8 +195,8 @@ public class TeamRepository implements Serializable {
         }
 
         if(count < minCollaborators)
-            return true;
-        return false;
+            return -1;
+        return count;
     }
 
     /**
@@ -134,7 +204,7 @@ public class TeamRepository implements Serializable {
      * @param c The collaborator to check.
      * @return True if the collaborator is already in a team, otherwise false.
      */
-    private boolean collaboratorHasTeam(Collaborator c) {
+    private boolean collaboratorHasTeam(Collaborator c, List<Team> teamList) {
         for (Team team: teamList){
             if(team.getCollaborators().contains(c)){
                 return true;
@@ -171,6 +241,23 @@ public class TeamRepository implements Serializable {
                 skills.removeSkill(s);
             }
         }
+    }
+
+    public void addTeam(int teamId){
+        for (Team t : teamListAux) {
+            if (t.getTeamId() == teamId) {
+                teamList.add(t);
+                break;
+            }
+        }
+    }
+
+    public void cleanTeamListAux(){
+        teamListAux = new ArrayList<>();
+    }
+
+    public List<Team> generatedList(){
+        return new ArrayList<>(teamListAux);
     }
 
     /**

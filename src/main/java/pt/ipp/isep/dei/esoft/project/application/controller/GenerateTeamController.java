@@ -6,6 +6,7 @@ import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.SkillRepository;
 import pt.ipp.isep.dei.esoft.project.repository.TeamRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,13 +19,6 @@ public class GenerateTeamController {
     public GenerateTeamController(){
         teamRepository = getTeamRepository();
         collaboratorRepository = getCollaboratorRepository();
-        Data birthDate = new Data(2000, 7, 26);
-        Data admissionDate = new Data(2019, 6, 15);
-        Job job = new Job("Student");
-//        this.collaboratorRepository.registerCollaborator("Emanuel", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456786, "Passport", job);
-//        this.collaboratorRepository.registerCollaborator("Paulo", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456788, "Passport", job);
-//        this.collaboratorRepository.registerCollaborator("Jorge", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456787, "Passport", job);
-//        this.collaboratorRepository.registerCollaborator("Xico", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456789, "Passport", job);
     }
 
     // Returns the list of skills
@@ -94,5 +88,17 @@ public class GenerateTeamController {
             skillList = new SkillList();
 
         skillList.cleanSkillList();
+    }
+
+    public List<Team> generatedList(){
+        return teamRepository.generatedList();
+    }
+
+    public void addTeam(int teamId){
+        teamRepository.addTeam(teamId);
+    }
+
+    public void cleanTeamListAux(){
+        teamRepository.cleanTeamListAux();
     }
 }
