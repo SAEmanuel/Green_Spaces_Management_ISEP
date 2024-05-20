@@ -1,7 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
 
-import pt.ipp.isep.dei.esoft.project.domain.validations.Validations;
+import pt.ipp.isep.dei.esoft.project.domain.Extras.validations.Validations;
 
 import java.io.Serializable;
 

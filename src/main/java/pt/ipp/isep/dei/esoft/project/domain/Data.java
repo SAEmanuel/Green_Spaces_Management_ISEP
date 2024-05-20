@@ -42,7 +42,7 @@ public class Data implements Comparable<Data>, Serializable {
     private static final int CURRENT_YEAR = 2024;
 
 
-    private static final int MIN_ALLOWED_YEAR = 1992;
+    private static final int MIN_ALLOWED_YEAR = 1400;
     private static final int MIN_ALLOWED_MONTH = 1;
     private static final int MAX_ALLOWED_MONTH = 12;
     private static final int MIN_ALLOWED_DAY = 1;

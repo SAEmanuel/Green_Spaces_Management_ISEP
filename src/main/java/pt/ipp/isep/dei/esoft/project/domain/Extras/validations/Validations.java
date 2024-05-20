@@ -1,4 +1,4 @@
-package pt.ipp.isep.dei.esoft.project.domain.validations;
+package pt.ipp.isep.dei.esoft.project.domain.Extras.validations;
 
 public class Validations {
 

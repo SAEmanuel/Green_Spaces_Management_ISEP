@@ -1,10 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
-import pt.ipp.isep.dei.esoft.project.domain.AgendaEntry;
-import pt.ipp.isep.dei.esoft.project.domain.Data;
-import pt.ipp.isep.dei.esoft.project.domain.ToDoEntry;
-import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
+import pt.ipp.isep.dei.esoft.project.domain.*;
+import pt.ipp.isep.dei.esoft.project.domain.Extras.Inputs.GetDatasFromUsers;
 
 import java.util.InputMismatchException;
 import java.util.List;
@@ -148,112 +146,13 @@ public class AgendaUI implements Runnable {
         
     }
 
-    private Data requestEndDate() {
-        System.out.print("-- End Date --\n");
-        return getData();
-    }
 
     private Data requestStartDate() {
         System.out.print("-- Starting Date --\n");
-        return getData();
+        return GetDatasFromUsers.getData();
     }
 
 
-
-    private Data getData() {
-        Data data;
-        while (true) {
-            int year = requestYear();
-            int month = requestMonth();
-            int day = requestDay();
-            try {
-                data = new Data(year, month, day);
-                return data;
-            } catch (IllegalArgumentException e) {
-                System.out.println(ANSI_BRIGHT_RED + e.getMessage() + ANSI_RESET);
-            }
-        }
-    }
-
-    /**
-     * Prompts the user to input a day.
-     * This method prompts the user to input a day as an integer.
-     * It handles any invalid inputs gracefully and keeps prompting
-     * until a valid day is provided.
-     *
-     * @return The day input by the user.
-     */
-    private int requestDay() {
-        int resposta;
-        Scanner input = new Scanner(System.in);
-        System.out.print("- Day: ");
-        while (true) {
-            try {
-                resposta = input.nextInt();
-                return resposta;
-            } catch (InputMismatchException e) {
-                System.out.print(ANSI_BRIGHT_RED + "Invalid DAY! Enter a new one: " + ANSI_RESET);
-                input.nextLine();
-            }
-        }
-    }
-
-
-    /**
-     * Prompts the user to input a month.
-     * This method prompts the user to input a month as an integer.
-     * It handles any invalid inputs gracefully and keeps prompting
-     * until a valid month is provided.
-     *
-     * @return The month input by the user.
-     */
-    private int requestMonth() {
-        int resposta;
-        Scanner input = new Scanner(System.in);
-        System.out.print("- Month: ");
-        while (true) {
-            try {
-                resposta = input.nextInt();
-                return resposta;
-            } catch (InputMismatchException e) {
-                System.out.print(ANSI_BRIGHT_RED + "Invalid MONTH! Enter a new one: " + ANSI_RESET);
-                input.nextLine();
-            }
-        }
-    }
-
-    /**
-     * Prompts the user to input a year.
-     * This method prompts the user to input a year as an integer.
-     * It handles any invalid inputs gracefully and keeps prompting
-     * until a valid year is provided.
-     *
-     * @return The year input by the user.
-     */
-    private int requestYear() {
-        int resposta;
-        Scanner input = new Scanner(System.in);
-        System.out.print("- Year: ");
-        while (true) {
-            try {
-                resposta = input.nextInt();
-                return resposta;
-            } catch (InputMismatchException e) {
-                System.out.print(ANSI_BRIGHT_RED + "Invalid DAY! Enter a new one: " + ANSI_RESET);
-                input.nextLine();
-            }
-        }
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
     private ToDoEntry requestAgendaEntry() {
         int answer;

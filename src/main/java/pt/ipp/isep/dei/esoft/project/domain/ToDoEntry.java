@@ -1,6 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-import pt.ipp.isep.dei.esoft.project.domain.validations.Validations;
+import pt.ipp.isep.dei.esoft.project.domain.Extras.validations.Validations;
 
 import java.io.Serializable;
 
@@ -12,8 +12,9 @@ public class ToDoEntry implements Serializable {
     private final String title;
     private final String description;
     private final int urgency;
-    private final int expectedDuration;
+    private int expectedDuration;
     private String status;
+    private final String responsible;
 
     private static final int DAYS_LIMIT = 730; //DOIS ANOS
     private static final String DEFAULT_STATUS = "Pending";
@@ -27,6 +28,7 @@ public class ToDoEntry implements Serializable {
         this.urgency = urgency;
         this.expectedDuration = expectedDuration;
         this.status = DEFAULT_STATUS;
+        this.responsible = greenSpace.getResponsible();
 
     }
 
@@ -45,6 +47,17 @@ public class ToDoEntry implements Serializable {
         return greenSpace;
     }
 
+    public String getResponsible() {
+        return responsible;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setExpectedDuration(int expectedDuration) {
+        this.expectedDuration = expectedDuration;
+    }
 
 
     public enum Urgency{

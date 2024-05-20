@@ -36,10 +36,6 @@ public class AgendaController {
         return agenda;
     }
 
-    public String getResponsible() {
-        return Repositories.getInstance().getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail();
-    }
-
     public Optional<AgendaEntry> registerAgendaEntry(ToDoEntry agendaEntry, Data starting_Date) {
 
         Optional<AgendaEntry> optionalAgenda;
@@ -49,9 +45,26 @@ public class AgendaController {
         return optionalAgenda;
     }
 
+    //------------------------------------ Postpone task --------------------------------
+    public boolean postponeTask(int agendaTaskID,Data postponeDate, AgendaEntry agendaEntry) {
+        return agenda.postponeTask(agendaTaskID,postponeDate,agendaEntry);
+    }
+
+
+
+    //--------------------------------------  Extra Methods -----------------------------
+
+    public String getResponsible() {
+        return Repositories.getInstance().getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail();
+    }
 
     public List<ToDoEntry> getToDoListForResponsible(){
         return toDoListRepository.getToDoListForResponsible(getResponsible());
     }
+
+    public List<AgendaEntry> getAgendaEntriesForResponsible(){
+        return agenda.getAgendaEntriesForResponsible(getResponsible());
+    }
+
 
 }

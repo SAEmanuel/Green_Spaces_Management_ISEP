@@ -1,22 +1,21 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
 
-import pt.ipp.isep.dei.esoft.project.domain.validations.Validations;
-
 import java.io.Serializable;
 import java.util.List;
+
+import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_MEDIUM_SPRING_GREEN;
+import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_RESET;
 
 public class AgendaEntry implements Serializable {
 
     private final ToDoEntry agendaEntry;
 
     private Team team;
-
     private List<Vehicle> vehicles;
-
     private final Data starting_Date;
     private Data end_Date;
-
+    private final String responsible;
 
     private enum Status {
         PLANNED{
@@ -45,6 +44,8 @@ public class AgendaEntry implements Serializable {
         }
     }
 
+
+
     public AgendaEntry(ToDoEntry agendaEntry, Data starting_Date) {
 //        validationAgendaEntry(starting_Date,end_Date);
 
@@ -54,10 +55,7 @@ public class AgendaEntry implements Serializable {
         this.end_Date = calculateEndDate(starting_Date,agendaEntry);
         this.team = null;
         this.vehicles = null;
-    }
-
-    private Data calculateEndDate(Data startingDate, ToDoEntry agendaEntry) {
-        return startingDate.calculateData(agendaEntry.getExpectedDuration());
+        this.responsible = agendaEntry.getResponsible();
     }
 
 
@@ -71,10 +69,43 @@ public class AgendaEntry implements Serializable {
         }
     }
 
-    public AgendaEntry clone() {
-        return new AgendaEntry(agendaEntry, starting_Date);
+
+
+    private Data calculateEndDate(Data startingDate, ToDoEntry agendaEntry) {
+        return startingDate.calculateData(agendaEntry.getExpectedDuration());
     }
 
+
+    //------------------------------------ Sets and Gets ----------------------------
+
+    // ********** Sets ************
+    public void setEnd_Date(Data end_Date) {
+        this.end_Date = end_Date;
+        agendaEntry.setStatus(String.valueOf(Status.POSTPONED));
+    }
+
+    // **********************
+
+    // ********** Gets ************
+    public String getResponsible() {
+        return responsible;
+    }
+
+    public Data getEnd_Date() {
+        return end_Date;
+    }
+
+    public ToDoEntry getAgendaEntry() {
+        return agendaEntry;
+    }
+
+    public Data getStarting_Date() {
+        return starting_Date;
+    }
+
+    // **********************
+
+    //------------------------------------- JAVA -------------------------------------
     public boolean equals(Object otherObject) {
         if (this == otherObject)
             return true;
@@ -88,8 +119,12 @@ public class AgendaEntry implements Serializable {
     }
 
 
+    public AgendaEntry clone() {
+        return new AgendaEntry(agendaEntry, starting_Date);
+    }
+
     @Override
     public String toString() {
-        return String.format(" ---- Agenda Entry Inf ----\n •Task information: %s \n •Team: %s \n •Vehicles: %s \n •Starting Date: %s \n •End Date: %s",agendaEntry,team,vehicles,starting_Date,end_Date);
+        return String.format("  Information: %s \n  Status: %s%s%s \n  Team: %s \n  Vehicles: %s \n  Starting Date: %s \n  End Date: %s",agendaEntry,ANSI_MEDIUM_SPRING_GREEN,agendaEntry.getStatus(),ANSI_RESET,team,vehicles,starting_Date,end_Date);
     }
 }
