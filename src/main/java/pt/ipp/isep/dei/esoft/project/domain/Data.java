@@ -476,4 +476,36 @@ public class Data implements Comparable<Data>, Serializable {
         return totalDays;
     }
 
+
+    public Data calculateData(int days){
+        int ttlDays = this.countDays() + days;
+
+        int year = 1;
+        int month = 1;
+        int day = 1;
+
+        // Find the year
+        while (ttlDays > 365) {
+            if (isLeapYear(year))
+                ttlDays -= 366;
+            else
+                ttlDays -= 365;
+            year++;
+        }
+
+        // Find the month and day within that year
+        for (int i = 1; i <= 12; i++) {
+            int daysInMonth = Month.getMonth(i).numberOfDays(year);
+            if (ttlDays <= daysInMonth) {
+                month = i;
+                day = ttlDays;
+                break;
+            }
+            ttlDays -= daysInMonth;
+        }
+
+        return new Data(year, month, day);
+    }
+
+
 }

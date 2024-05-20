@@ -19,7 +19,6 @@ public class AgendaUI implements Runnable {
 
     private ToDoEntry agendaEntry;
     private Data starting_Date;
-    private Data ending_Date;
 
 
     public AgendaUI(){
@@ -79,9 +78,8 @@ public class AgendaUI implements Runnable {
     }
 
     private void display() {
-//        Vehicle.Type[] types = controller.showTypes();
-//        StringBuilder stringBuilder = new StringBuilder(String.format("Plate: %s | Brand: %s | Model: %s | Type: %s | Tare Weight: %.2f | Gross Weight: %.2f \n               Current Km: %.2f | Check Up Frequency (Km): %.2f | Last Check Up (Km): %.2f\n               Register Date: %s | Acquisition Date: %s", plateId, brand, model,types[type],tareWeight,grossWeight,currentKm,checkUpFrequency,lastCheckUp,registerDate,acquisitionDate));
-//        System.out.printf("\nTyped data -> [%s%s%s]\n", ANSI_GREEN, stringBuilder, ANSI_RESET);
+        StringBuilder stringBuilder = new StringBuilder(String.format("Task: %s | Starting Date: %s", "\""+ agendaEntry.getTitle() + "\" in \"" + agendaEntry.getGreenSpace().getName()+"\"", starting_Date));
+        System.out.printf("\nTyped data -> [%s%s%s]\n", ANSI_GREEN, stringBuilder, ANSI_RESET);
         System.out.print("Confirmation menu:\n 0 -> Change Entry Info\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
     }
 
@@ -90,7 +88,7 @@ public class AgendaUI implements Runnable {
         // Attempt to register the vehicle using the provided data
         try {
 
-            Optional<AgendaEntry> entry = getController().registerAgendaEntry(agendaEntry, starting_Date, ending_Date);
+            Optional<AgendaEntry> entry = getController().registerAgendaEntry(agendaEntry, starting_Date);
 
             // Check if the registration was successful
             if (entry.isPresent()) {
@@ -144,7 +142,6 @@ public class AgendaUI implements Runnable {
         agendaEntry = requestAgendaEntry();
         if (agendaEntry != null) {
             starting_Date = requestStartDate();
-            ending_Date = requestEndDate();
             return true;
         }
         return false;
@@ -285,7 +282,7 @@ public class AgendaUI implements Runnable {
 
     private void showToDoList(List<ToDoEntry> toDoList) {
         System.out.println("\n-- TODO List --");
-        System.out.println("Title -> Description -> Urgency -> Spectated duration -> Park");
+        System.out.println("Title -> Description -> Urgency -> Spectated duration -> Park\n");
         for (int i = 0; i < toDoList.size(); i++) {
             System.out.println("• Task: " + toDoList.get(i).toString() + "\n" + ANSI_PURPLE + "   Option -> [" + (i+1) + "]\n" + ANSI_RESET);
         }

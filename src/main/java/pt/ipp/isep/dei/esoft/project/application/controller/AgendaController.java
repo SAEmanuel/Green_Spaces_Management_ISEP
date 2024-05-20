@@ -40,11 +40,11 @@ public class AgendaController {
         return Repositories.getInstance().getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail();
     }
 
-    public Optional<AgendaEntry> registerAgendaEntry(ToDoEntry agendaEntry, Data starting_Date, Data end_Date) {
+    public Optional<AgendaEntry> registerAgendaEntry(ToDoEntry agendaEntry, Data starting_Date) {
 
         Optional<AgendaEntry> optionalAgenda;
 
-        optionalAgenda = agenda.registerAgendaEntry(agendaEntry, starting_Date, end_Date);
+        optionalAgenda = agenda.registerAgendaEntry(agendaEntry, starting_Date);
 
         return optionalAgenda;
     }

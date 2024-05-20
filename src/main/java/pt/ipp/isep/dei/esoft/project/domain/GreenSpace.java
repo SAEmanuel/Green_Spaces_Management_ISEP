@@ -12,6 +12,8 @@ public class GreenSpace implements Serializable {
     private final Size size;
     private final float area;
 
+
+
     public enum Size{
         GARDEN{
             @Override

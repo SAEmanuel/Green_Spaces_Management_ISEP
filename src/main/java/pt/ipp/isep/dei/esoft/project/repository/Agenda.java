@@ -22,11 +22,11 @@ public class Agenda implements Serializable {
 
 
 
-    public Optional<AgendaEntry> registerAgendaEntry(ToDoEntry agendaEntry, Data starting_Date, Data end_Date) {
+    public Optional<AgendaEntry> registerAgendaEntry(ToDoEntry agendaEntry, Data starting_Date) {
 
         Optional<AgendaEntry> optionalAgenda = Optional.empty();
 
-        AgendaEntry entry = new AgendaEntry(agendaEntry,starting_Date,end_Date);
+        AgendaEntry entry = new AgendaEntry(agendaEntry,starting_Date);
 
         if (addAgendaEntry(entry)) {
             optionalAgenda = Optional.of(entry);
@@ -41,7 +41,6 @@ public class Agenda implements Serializable {
         if (validateEntry(entry)) {
             sucess = agenda.add(entry);
         }
-
         return sucess;
     }
 

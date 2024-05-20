@@ -34,6 +34,19 @@ public class ToDoEntry implements Serializable {
         this.status = status;
     }
 
+    public int getExpectedDuration() {
+        return expectedDuration;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+    public GreenSpace getGreenSpace() {
+        return greenSpace;
+    }
+
+
+
     public enum Urgency{
         LOW{
             @Override
@@ -55,9 +68,7 @@ public class ToDoEntry implements Serializable {
         },
     }
 
-    public GreenSpace getGreenSpace() {
-        return greenSpace;
-    }
+
 
     private void validateToDo(String title, String description, int urgency, int expectedDuration) {
         isValidTitleAndDescription(title);

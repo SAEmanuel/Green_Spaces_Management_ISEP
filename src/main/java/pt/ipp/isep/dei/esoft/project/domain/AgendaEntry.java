@@ -45,16 +45,21 @@ public class AgendaEntry implements Serializable {
         }
     }
 
-    public AgendaEntry(ToDoEntry agendaEntry, Data starting_Date, Data end_Date) {
-        validationAgendaEntry(starting_Date,end_Date);
+    public AgendaEntry(ToDoEntry agendaEntry, Data starting_Date) {
+//        validationAgendaEntry(starting_Date,end_Date);
 
         this.agendaEntry = agendaEntry;
         agendaEntry.setStatus(String.valueOf(Status.PLANNED));
         this.starting_Date = starting_Date;
-        this.end_Date = end_Date;
+        this.end_Date = calculateEndDate(starting_Date,agendaEntry);
         this.team = null;
         this.vehicles = null;
     }
+
+    private Data calculateEndDate(Data startingDate, ToDoEntry agendaEntry) {
+        return startingDate.calculateData(agendaEntry.getExpectedDuration());
+    }
+
 
     private void validationAgendaEntry(Data startingDate, Data endDate) {
         validateDates(startingDate,endDate);
@@ -67,7 +72,7 @@ public class AgendaEntry implements Serializable {
     }
 
     public AgendaEntry clone() {
-        return new AgendaEntry(agendaEntry, starting_Date, end_Date);
+        return new AgendaEntry(agendaEntry, starting_Date);
     }
 
     public boolean equals(Object otherObject) {
