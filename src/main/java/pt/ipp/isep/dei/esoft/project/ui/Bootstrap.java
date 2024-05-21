@@ -77,7 +77,7 @@ public class Bootstrap implements Runnable {
         addCollaborator();
         addGreenSpace();
         addToDoList();
-        addTeam();
+//        addTeam();
     }
 
     private void addToDoList() {

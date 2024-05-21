@@ -45,7 +45,7 @@ public class AssignTeamToTaskAgendaUI implements Runnable {
                 submitData();
             }
         } else {
-            System.out.println(ANSI_BRIGHT_RED + "Does not exist task in the AGENDA... Add some" + ANSI_RESET);
+            System.out.println(ANSI_BRIGHT_RED + "Does not exist task in the AGENDA or there is no TEAM in the system... Add some" + ANSI_RESET);
         }
 
     }
@@ -96,7 +96,7 @@ public class AssignTeamToTaskAgendaUI implements Runnable {
         agendaEntryID = requestAgendaEntryID();
         if (agendaEntryID != -1) {
             teamID = requestTeamID();
-            return true;
+            return teamID != -1;
         }
         return false;
 

@@ -15,12 +15,17 @@ public class ToDoListRepository implements Serializable {
     }
 
     public List<ToDoEntry> getToDoList() {
+        return toDoList;
+    }
+
+    public List<ToDoEntry> getToDoListCLone() {
         return clone();
     }
 
     public List<ToDoEntry> clone() {
         return new ArrayList<>(this.toDoList);
     }
+
 
     public Optional<ToDoEntry> registerToDoEntry(GreenSpace greenSpace, String title, String description, int urgency, int expectedDuration) {
         Optional<ToDoEntry> optionalToDoEntry = Optional.empty();
@@ -71,4 +76,6 @@ public class ToDoListRepository implements Serializable {
         }
         return entry;
     }
+
+
 }
