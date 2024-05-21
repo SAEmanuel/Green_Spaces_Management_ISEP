@@ -395,6 +395,14 @@ public class Data implements Comparable<Data>, Serializable {
         return Integer.compare(year, yearParam);
     }
 
+    public boolean isGreaterOrEquals(Data otherDate) {
+        int totalDays = countDays();
+        int totalDays1 = otherDate.countDays();
+
+        return totalDays >= totalDays1;
+    }
+
+
     /**
      * Returns the difference in number of days between the date and the date received by parameter.
      *

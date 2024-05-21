@@ -13,7 +13,7 @@ public class AgendaEntry implements Serializable {
 
     private Team team;
     private List<Vehicle> vehicles;
-    private final Data starting_Date;
+    private Data starting_Date;
     private Data end_Date;
     private final String responsible;
 
@@ -81,6 +81,11 @@ public class AgendaEntry implements Serializable {
     // ********** Sets ************
     public void setEnd_Date(Data end_Date) {
         this.end_Date = end_Date;
+    }
+
+    public void setStarting_Date(Data starting_Date) {
+        this.starting_Date = starting_Date;
+        this.end_Date = calculateEndDate(starting_Date, agendaEntry);
         agendaEntry.setStatus(String.valueOf(Status.POSTPONED));
     }
 

@@ -18,6 +18,7 @@ public class Agenda implements Serializable {
         this.agenda =new ArrayList<>();
     }
 
+    //------------------------------------ Add task to agenda --------------------------------
 
     public Optional<AgendaEntry> registerAgendaEntry(ToDoEntry agendaEntry, Data starting_Date) {
 
@@ -60,27 +61,15 @@ public class Agenda implements Serializable {
         AgendaEntry taskInAgenda =  getTaskByResposible(agendaTaskID,agendaTasks);
 
         if (!validPostponeDate(taskInAgenda,postponeDate)) {
-            taskInAgenda.setEnd_Date(postponeDate);
-            taskInAgenda.getAgendaEntry().setExpectedDuration(calculateExpectedDuration(postponeDate,taskInAgenda.getStarting_Date()));
-            printResult(agendaTasks);
+            taskInAgenda.setStarting_Date(postponeDate);
             return true;
         }
         return false;
 
     }
 
-    private int calculateExpectedDuration(Data postponeDate, Data startingDate) {
-        return startingDate.difference(postponeDate);
-    }
-
-    private void printResult(List<AgendaEntry> agendaTasks) {
-        for (AgendaEntry agendaEntry : agendaTasks) {
-            System.out.println(agendaEntry);
-        }
-    }
-
     private boolean validPostponeDate(AgendaEntry task, Data postponeDate) {
-        return task.getEnd_Date().isGreater(postponeDate);
+        return task.getStarting_Date().isGreaterOrEquals(postponeDate);
     }
 
     private AgendaEntry getTaskByResposible(int agendaTaskID, List<AgendaEntry> agendaTasks) {

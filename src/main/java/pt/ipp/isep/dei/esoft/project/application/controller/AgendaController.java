@@ -36,6 +36,7 @@ public class AgendaController {
         return agenda;
     }
 
+//----------------------------------- Register an entry in agenda --------------------------------------
     public Optional<AgendaEntry> registerAgendaEntry(ToDoEntry agendaEntry, Data starting_Date) {
 
         Optional<AgendaEntry> optionalAgenda;

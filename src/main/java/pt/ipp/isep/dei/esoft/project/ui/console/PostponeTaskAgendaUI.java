@@ -58,7 +58,7 @@ public class PostponeTaskAgendaUI implements Runnable {
         if (result) {
             System.out.println(ANSI_BRIGHT_GREEN + "Task successfully postponed!" + ANSI_RESET);
         } else {
-            System.out.printf(ANSI_BRIGHT_RED + "Task not postponed - Make sure date inputted is gratter than :[%s]!" + ANSI_RESET, agendaEntry.getEnd_Date());
+            System.out.printf(ANSI_BRIGHT_RED + "Task not postponed - Make sure date inputted is gratter than :[%s]!" + ANSI_RESET, agendaEntry.getStarting_Date());
         }
 
 
