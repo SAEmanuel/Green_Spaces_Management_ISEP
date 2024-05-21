@@ -19,11 +19,12 @@ public class GreenSpaceRepository implements Serializable {
         this.greenSpacesList = new ArrayList<>();
     }
 
+    //------------------------------ Register Green Space ---------------------------------
     public Optional<GreenSpace> registerGreenSpace(String name, int size, float area, String address, String resposible) {
 
         Optional<GreenSpace> optionalGreenSpace = Optional.empty();
 
-        GreenSpace greenSpace = new GreenSpace(name, size, area, address, resposible);
+        GreenSpace greenSpace = new GreenSpace(name.trim(), size, area, address.trim(), resposible);
 
         if (addGreenSpace(greenSpace)) {
             optionalGreenSpace = Optional.of(greenSpace.clone());
@@ -31,6 +32,7 @@ public class GreenSpaceRepository implements Serializable {
 
         return optionalGreenSpace;
     }
+
 
     private boolean addGreenSpace(GreenSpace greenSpace) {
         boolean success = false;
@@ -43,34 +45,23 @@ public class GreenSpaceRepository implements Serializable {
         return success;
     }
 
+
     private boolean validate(GreenSpace greenSpace) {
         return greenSpaceListDoNotContainsByName(greenSpace.getName());
     }
 
+
     private boolean greenSpaceListDoNotContainsByName(String greenSpaceName) {
         for (GreenSpace g : greenSpacesList) {
-            if (g.getName().equalsIgnoreCase(greenSpaceName)) {
+            if ((g.getName().trim()).equalsIgnoreCase(greenSpaceName.trim())) {
                 return false;
             }
         }
         return true;
     }
 
-    public void add(GreenSpace greenSpace) {
-        this.greenSpacesList.add(greenSpace);
-    }
+    //---------------------------------------------------------------------------------
 
-    public List<GreenSpace> getGreenSpacesList() {
-        return clone();
-    }
-
-    public void clear() {
-        greenSpacesList.clear();
-    }
-
-    public List<GreenSpace> clone() {
-        return new ArrayList<>(this.greenSpacesList);
-    }
 
     public void showGreenSpaces( List<GreenSpace> greenSpacesAvailableByResponsible) {
         if (greenSpacesAvailableByResponsible.isEmpty()) {
@@ -94,6 +85,21 @@ public class GreenSpaceRepository implements Serializable {
             }
         }
         return greenSpaces;
+    }
+
+    //-------------------------------------- Extra Methods -----------------------------------------
+    public void add(GreenSpace greenSpace) {
+        this.greenSpacesList.add(greenSpace);
+    }
+
+    public List<GreenSpace> getGreenSpacesList() {
+        return clone();
+    }
+
+
+
+    public List<GreenSpace> clone() {
+        return new ArrayList<>(this.greenSpacesList);
     }
 
 

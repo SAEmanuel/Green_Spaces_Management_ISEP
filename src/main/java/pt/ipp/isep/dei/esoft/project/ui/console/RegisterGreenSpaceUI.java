@@ -66,8 +66,6 @@ public class RegisterGreenSpaceUI implements Runnable {
                 // Print error message if vehicle is already registered
                 System.out.println(ANSI_BRIGHT_RED + "Green Space not registered - Already registered!" + ANSI_RESET);
             }
-            System.out.println(greenSpace);
-
 
         } catch (IllegalArgumentException e) {
             // Catch IllegalArgumentException indicating invalid data
