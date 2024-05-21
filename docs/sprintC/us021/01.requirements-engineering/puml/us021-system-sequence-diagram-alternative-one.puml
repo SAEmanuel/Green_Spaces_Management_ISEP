@@ -23,7 +23,7 @@ activate Employee
 
     activate System
 
-        System --> Employee : request data (Task, Duration, Degree)
+        System --> Employee : request data (title, description, urgency, expectedDuration)
     deactivate System
 
      Employee -> System : types requested data
