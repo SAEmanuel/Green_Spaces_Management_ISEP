@@ -27,4 +27,14 @@ public class Team {
     public List<Collaborator> getCollaborators() {
         return collaborators;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        for (Collaborator c : collaborators) {
+
+            builder.append(c.getName()+" ");
+        }
+        return String.format("[ Team ID: %d | Collaborators: %s ]", teamId,builder);
+    }
 }

@@ -2,9 +2,11 @@ package pt.ipp.isep.dei.esoft.project.application.controller;
 
 import pt.ipp.isep.dei.esoft.project.domain.AgendaEntry;
 import pt.ipp.isep.dei.esoft.project.domain.Data;
+import pt.ipp.isep.dei.esoft.project.domain.Team;
 import pt.ipp.isep.dei.esoft.project.domain.ToDoEntry;
 import pt.ipp.isep.dei.esoft.project.repository.Agenda;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
+import pt.ipp.isep.dei.esoft.project.repository.TeamRepository;
 import pt.ipp.isep.dei.esoft.project.repository.ToDoListRepository;
 
 import java.util.List;
@@ -14,10 +16,20 @@ public class AgendaController {
 
     private Agenda agenda;
     private ToDoListRepository toDoListRepository;
+    private TeamRepository teamRepository;
 
     public AgendaController() {
         this.agenda = getAgenda();
         this.toDoListRepository = getToDoRepository();
+        this.teamRepository = getTeamRepository();
+    }
+
+    private TeamRepository getTeamRepository() {
+        if (teamRepository == null) {
+            Repositories repositories = Repositories.getInstance();
+            teamRepository = repositories.getTeamRepository();
+        }
+        return teamRepository;
     }
 
     private ToDoListRepository getToDoRepository() {
@@ -51,6 +63,12 @@ public class AgendaController {
         return agenda.postponeTask(agendaTaskID,postponeDate,agendaEntry);
     }
 
+    //------------------------------------ Assign team to task in agenda --------------------------------
+    public boolean assignTeam(int teamID, int agendaEntryID) {
+        List<Team> teams = teamRepository.getListTeam();
+        return agenda.assignTeam(teams.get(teamID),agendaEntryID);
+    }
+
 
 
     //--------------------------------------  Extra Methods -----------------------------
@@ -65,6 +83,10 @@ public class AgendaController {
 
     public List<AgendaEntry> getAgendaEntriesForResponsible(){
         return agenda.getAgendaEntriesForResponsible(getResponsible());
+    }
+
+    public List<Team> getTeams(){
+        return teamRepository.getTeamList();
     }
 
 

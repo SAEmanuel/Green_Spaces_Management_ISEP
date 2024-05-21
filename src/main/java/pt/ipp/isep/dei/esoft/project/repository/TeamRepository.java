@@ -291,4 +291,12 @@ public class TeamRepository implements Serializable {
             }
         }
     }
+
+    public List<Team> getListTeam() {
+        return teamList;
+    }
+
+    public void add(Team team) {
+        teamList.add(team);
+    }
 }

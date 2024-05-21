@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.AgendaEntry;
 import pt.ipp.isep.dei.esoft.project.domain.Data;
+import pt.ipp.isep.dei.esoft.project.domain.Team;
 import pt.ipp.isep.dei.esoft.project.domain.ToDoEntry;
 
 import java.io.Serializable;
@@ -74,6 +75,30 @@ public class Agenda implements Serializable {
 
     private AgendaEntry getTaskByResposible(int agendaTaskID, List<AgendaEntry> agendaTasks) {
         return agendaTasks.get(agendaTaskID);
+    }
+
+    //------------------------------------ Assign team to task in agenda --------------------------------
+
+    public boolean assignTeam(Team team, int agendaEntryID) {
+        AgendaEntry task = getAgendaEntryByID(agendaEntryID);
+
+        if (validateInfo(team,task)) {
+            task.setTeam(team);
+            System.out.println(task);
+            return true;
+        }
+        return false;
+
+    }
+
+
+    private boolean validateInfo(Team team, AgendaEntry task) {
+       return task.getTeam() == null;
+    }
+
+
+    private AgendaEntry getAgendaEntryByID(int agendaEntryID) {
+        return agenda.get(agendaEntryID);
     }
 
 

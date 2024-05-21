@@ -76,7 +76,6 @@ public class PostponeTaskAgendaUI implements Runnable {
                     System.out.println();
                     requestEntryInformation();
                 case 2:
-                    System.out.println(ANSI_BRIGHT_RED + "LEAVING..." + ANSI_RESET);
                     return option;
                 case 1:
                     System.out.println();

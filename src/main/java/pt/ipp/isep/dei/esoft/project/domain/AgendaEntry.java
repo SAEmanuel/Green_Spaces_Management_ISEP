@@ -89,6 +89,10 @@ public class AgendaEntry implements Serializable {
         agendaEntry.setStatus(String.valueOf(Status.POSTPONED));
     }
 
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
     // **********************
 
     // ********** Gets ************
@@ -108,6 +112,10 @@ public class AgendaEntry implements Serializable {
         return starting_Date;
     }
 
+    public Team getTeam() {
+        return team;
+    }
+
     // **********************
 
     //------------------------------------- JAVA -------------------------------------
@@ -120,7 +128,7 @@ public class AgendaEntry implements Serializable {
 
         AgendaEntry otherAgenda = (AgendaEntry) otherObject;
         return agendaEntry.equals(otherAgenda.agendaEntry) && starting_Date.equals(otherAgenda.starting_Date)
-                && end_Date.equals(otherAgenda.end_Date) && team.equals(otherAgenda.team) && vehicles.equals(otherAgenda.vehicles);
+                && end_Date.equals(otherAgenda.end_Date);
     }
 
 

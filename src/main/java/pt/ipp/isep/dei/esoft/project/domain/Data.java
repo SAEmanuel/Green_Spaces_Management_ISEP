@@ -39,7 +39,6 @@ public class Data implements Comparable<Data>, Serializable {
      * The default day.
      */
     private static final int DEFAULT_DAY = 1;
-    private static final int CURRENT_YEAR = 2024;
 
 
     private static final int MIN_ALLOWED_YEAR = 1400;
@@ -296,8 +295,8 @@ public class Data implements Comparable<Data>, Serializable {
      * @param day the new day of the date.
      */
     public final void setData(int year, int month, int day) {
-        if (year < MIN_ALLOWED_YEAR || year > CURRENT_YEAR) {
-            throw new IllegalArgumentException("INVALID YEAR, verify that is in the interval: [" + MIN_ALLOWED_YEAR + "-" + CURRENT_YEAR + "]");
+        if (year < MIN_ALLOWED_YEAR ) {
+            throw new IllegalArgumentException("INVALID YEAR, verify that year is gratter than: [" + MIN_ALLOWED_YEAR + "]");
         }
 
         this.year = year;
