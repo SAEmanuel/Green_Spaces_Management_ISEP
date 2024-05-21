@@ -93,6 +93,10 @@ public class AgendaEntry implements Serializable {
         this.team = team;
     }
 
+    public void cancelTask(){
+        agendaEntry.setStatus(String.valueOf(Status.CANCELED));
+    }
+
     // **********************
 
     // ********** Gets ************

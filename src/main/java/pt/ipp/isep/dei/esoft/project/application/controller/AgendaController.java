@@ -74,6 +74,12 @@ public class AgendaController {
 
 
 
+    //--------------------------------------  Cancel Task -----------------------------
+
+    public boolean cancelTask(int agendaTaskID) {
+        return agenda.cancelTask(agendaTaskID,getResponsible());
+    }
+
     //--------------------------------------  Extra Methods -----------------------------
 
     public String getResponsible() {

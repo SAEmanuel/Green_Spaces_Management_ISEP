@@ -14,6 +14,8 @@ public class Agenda implements Serializable {
 
     private final List<AgendaEntry> agenda;
 
+    private static final String STATUS_CANCELLED = "Canceled";
+
 
     public Agenda() {
         this.agenda =new ArrayList<>();
@@ -75,6 +77,25 @@ public class Agenda implements Serializable {
 
     private AgendaEntry getTaskByResposible(int agendaTaskID, List<AgendaEntry> agendaTasks) {
         return agendaTasks.get(agendaTaskID);
+    }
+
+    //------------------------------------ Cancel Task --------------------------------
+
+    public boolean cancelTask(int agendaTaskID,String responsible) {
+        List<AgendaEntry> agendaTasks = getAgendaEntriesForResponsible(responsible);
+        AgendaEntry taskInAgenda =  getTaskByResposible(agendaTaskID,agendaTasks);
+
+        if (validatesStatus(taskInAgenda)) {
+            return false;
+        }
+        System.out.println(validatesStatus(taskInAgenda));
+        System.out.println(taskInAgenda.getAgendaEntry().getStatus());
+        taskInAgenda.cancelTask();
+        return true;
+    }
+
+    private boolean validatesStatus(AgendaEntry taskInAgenda) {
+        return taskInAgenda.getAgendaEntry().getStatus().equals(STATUS_CANCELLED);
     }
 
     //------------------------------------ Assign team to task in agenda --------------------------------
