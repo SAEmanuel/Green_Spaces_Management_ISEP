@@ -31,9 +31,8 @@ public class AgendaUI implements Runnable {
     }
 
 
-    /**
-     * Executes the user interface logic for registering a vehicle.
-     */
+
+    //------------------------------------ Run UI ---------------------------------------
     public void run() {
         System.out.println("\n\n--- Add Agenda Entry ------------------------");
 
@@ -68,6 +67,7 @@ public class AgendaUI implements Runnable {
         }
     }
 
+
     private void display() {
         System.out.printf("\nTyped data -> [%s]\n", String.format(ANSI_GREEN+"Task: "+ ANSI_RESET+"%s |" +ANSI_GREEN+ " Starting Date: "+ANSI_RESET+"%s", "\"" + agendaEntry.getObjDto().getTitle() + "\" in \"" + agendaEntry.getObjDto().getGreenSpace().getName() + "\"", starting_Date));
         System.out.print("Confirmation menu:\n 0 -> Change Entry Info\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
@@ -94,7 +94,7 @@ public class AgendaUI implements Runnable {
             // Prompt user to repeat registration process
         }
     }
-
+    //------------------------------------------------------------------------------------
 
     //--------------------------------------- Request Inputs ------------------------------------------
     private boolean requestEntryInformation() {
@@ -125,6 +125,7 @@ public class AgendaUI implements Runnable {
         }
         return -1;
     }
+    //------------------------------------------------------------------------------------
 
 
 
@@ -156,5 +157,6 @@ public class AgendaUI implements Runnable {
         }
         System.out.println("----------------");
     }
+    //------------------------------------------------------------------------------------
 
 }

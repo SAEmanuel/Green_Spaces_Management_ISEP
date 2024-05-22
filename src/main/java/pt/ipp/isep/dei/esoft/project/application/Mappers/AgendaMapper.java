@@ -17,13 +17,11 @@ public class AgendaMapper {
     //------------------------------------------------
 
     public List<ToDoEntryDTO> listToDto(List<ToDoEntry> toDoEntries) {
-        ListToDoEntryDTO listToDoEntryDTO = new ListToDoEntryDTO();
         for (ToDoEntry toDoEntry : toDoEntries) {
             ToDoEntryDTO obj =  toDto(toDoEntry);
-            listToDoEntryDTO.addObjDto(obj);
+            agendaDTO.addObjDto(obj);
         }
-        List<ToDoEntryDTO> listDto = listToDoEntryDTO.getListToDoEntryDto();
-        return listDto;
+        return agendaDTO.getListToDoEntryDto();
     }
 
     private ToDoEntryDTO toDto(ToDoEntry toDoEntry) {
