@@ -525,7 +525,7 @@ public class Data implements Comparable<Data>, Serializable {
      * @return true if current day and month equals birthdate day and month.
      */
     public boolean isBirthDate(int day, int month) {
-        return currentDate().getDay() == day || currentDate().getMonth() == month;
+        return currentDate().getDay() == day && currentDate().getMonth() == month;
     }
 
 

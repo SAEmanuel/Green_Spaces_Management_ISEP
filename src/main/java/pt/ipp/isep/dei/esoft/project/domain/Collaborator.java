@@ -11,11 +11,12 @@ public class Collaborator implements Serializable {
     private final Data birthDate;
     private final Data admissionDate;
     private final String address;
-    private final int phoneNumber;
     private final String emailAddress;
+    private final String docNumber;
+    private final String responsible;
+    private final int phoneNumber;
     private final int taxPayerNumber;
     private final int docType;
-    private final String docNumber;
     private Job job;
     private List<Skill> skills;
     private Password password;
@@ -43,7 +44,7 @@ public class Collaborator implements Serializable {
      * @param docType        of the collaborator
      * @param job            of the collaborator
      */
-    public Collaborator(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, int docType, String docNumber, Job job, Password password) {
+    public Collaborator(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, int docType, String docNumber, Job job, Password password, String responsible) {
         validateData(name, birthDate, admissionDate, address, phoneNumber, emailAddress, taxPayerNumber, docType, docNumber, job);
         this.name = name.trim();
         this.birthDate = birthDate;
@@ -57,6 +58,7 @@ public class Collaborator implements Serializable {
         this.job = job;
         this.skills = new ArrayList<Skill>();
         this.password = password;
+        this.responsible = emailAddress;
     }
 
     /**
@@ -279,7 +281,7 @@ public class Collaborator implements Serializable {
      * @return the cloned Collaborator
      */
     public Collaborator clone() {
-        return new Collaborator(this.name, this.birthDate, this.admissionDate, this.address, this.phoneNumber, this.emailAddress, this.taxPayerNumber, this.docType, this.docNumber, this.job, this.password);
+        return new Collaborator(this.name, this.birthDate, this.admissionDate, this.address, this.phoneNumber, this.emailAddress, this.taxPayerNumber, this.docType, this.docNumber, this.job, this.password, this.responsible);
     }
 
     /**

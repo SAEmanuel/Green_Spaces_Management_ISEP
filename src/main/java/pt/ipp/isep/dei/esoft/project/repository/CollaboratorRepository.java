@@ -33,10 +33,10 @@ public class CollaboratorRepository implements Serializable {
      * @param job            of collaborator
      * @return An Optional containing the registered collaborator if successful, or empty otherwise.
      */
-    public Optional<Collaborator> registerCollaborator(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, int docType, String docNumber, Job job, Password password) {
+    public Optional<Collaborator> registerCollaborator(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, int docType, String docNumber, Job job, Password password, String responsible) {
 
         Optional<Collaborator> optionalValue = Optional.empty();
-        Collaborator collaborator = new Collaborator(name, birthDate, admissionDate, address, phoneNumber, emailAddress, taxPayerNumber, docType, docNumber, job, password);
+        Collaborator collaborator = new Collaborator(name, birthDate, admissionDate, address, phoneNumber, emailAddress, taxPayerNumber, docType, docNumber, job, password, responsible);
         if (addCollaborator(collaborator)) {
             optionalValue = Optional.of(collaborator);
         }

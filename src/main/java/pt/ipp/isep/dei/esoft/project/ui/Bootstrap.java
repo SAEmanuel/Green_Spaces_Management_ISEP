@@ -107,13 +107,13 @@ public class Bootstrap implements Runnable {
 
     private void addCollaborator() {
         CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
-        collaboratorRepository.add(new Collaborator("Francisco", new Data(2004, 5, 20), new Data(2023, 6, 12), "Rua da pedra", 912809789, "fran@gmail.com", 123456744, 0, "123456711", job1, new Password("AAA12ab")));
-        collaboratorRepository.add(new Collaborator("Emanuel", new Data(2004, 4, 20), new Data(2023, 6, 12), "Rua da Mariana", 912809777, "ema@gmail.com", 123456755, 0, "123456722", job2, new Password("AAA12ac")));
-        collaboratorRepository.add(new Collaborator("Paulo", new Data(2002, 8, 20), new Data(2023, 6, 12), "Rua de Fanzeres", 912809888, "paul@gmail.com", 123456766, 0, "123456733", job3, new Password("AAA12ad")));
-        collaboratorRepository.add(new Collaborator("Xu", new Data(2000, 4, 20), new Data(2023, 6, 12), "Rua do restaurante asiatico", 912809666, "xu@gmail.com", 123456777, 0, "123456744", job4, new Password("AAA12ae")));
-        collaboratorRepository.add(new Collaborator("Jorge", new Data(2004, 5, 31), new Data(2023, 6, 12), "Rua enganhairo do isep", 912809555, "jorge@gmail.com", 123456788, 0, "123456755", job5, new Password("AAA12af")));
-        collaboratorRepository.add(new Collaborator("Mariana Silva", new Data(2001, 5, 31), new Data(2023, 6, 12), "Rua da igreja", 912809551, "mari@gmail.com", 123456799, 0, "123456766", job6, new Password("AAA12ag")));
-        collaboratorRepository.add(new Collaborator("Gorete", new Data(1993, 5, 31), new Data(2023, 6, 12), "Rua de Fanzeres", 912809552, "gori@gmail.com", 123456999, 0, "123456777", job7, new Password("AAA12ah")));
+        collaboratorRepository.add(new Collaborator("Francisco", new Data(2004, 5, 22), new Data(2023, 6, 12), "Rua da pedra", 912809789, "fran@gmail.com", 123456744, 0, "123456711", job1, new Password("AAA12ab"), "fran@gmail.com"));
+        collaboratorRepository.add(new Collaborator("Emanuel", new Data(2004, 4, 20), new Data(2023, 6, 12), "Rua da Mariana", 912809777, "ema@gmail.com", 123456755, 0, "123456722", job2, new Password("AAA12ac"), "ema@gmail.com"));
+        collaboratorRepository.add(new Collaborator("Paulo", new Data(2002, 8, 20), new Data(2023, 6, 12), "Rua de Fanzeres", 912809888, "paul@gmail.com", 123456766, 0, "123456733", job3, new Password("AAA12ad"), "paul@gmail.com"));
+        collaboratorRepository.add(new Collaborator("Xu", new Data(2000, 4, 20), new Data(2023, 6, 12), "Rua do restaurante asiatico", 912809666, "xu@gmail.com", 123456777, 0, "123456744", job4, new Password("AAA12ae"), "xu@gmail.com"));
+        collaboratorRepository.add(new Collaborator("Jorge", new Data(2004, 5, 31), new Data(2023, 6, 12), "Rua enganhairo do isep", 912809555, "jorge@gmail.com", 123456788, 0, "123456755", job5, new Password("AAA12af"), "jorge@gmail.com"));
+        collaboratorRepository.add(new Collaborator("Mariana Silva", new Data(2001, 5, 31), new Data(2023, 6, 12), "Rua da igreja", 912809551, "mari@gmail.com", 123456799, 0, "123456766", job6, new Password("AAA12ag"), "mari@gmail.com"));
+        collaboratorRepository.add(new Collaborator("Gorete", new Data(1985, 5, 22), new Data(2023, 6, 12), "Rua de Fanzeres", 912809552, "gori@gmail.com", 123456999, 0, "123456777", job7, new Password("AAA12ah"), "gori@gmail.com"));
     }
 
     private void addJobs() {

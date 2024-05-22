@@ -13,6 +13,7 @@ import java.util.Optional;
 public class CreateCollaboratorController {
     private CollaboratorRepository collaboratorRepository;
     private JobRepository jobRepository;
+    private Repositories repositories = Repositories.getInstance();
 
     /**
      * Default constructor that initializes the CreateCollaboratorController and RegisterJobController
@@ -68,9 +69,10 @@ public class CreateCollaboratorController {
      * @return an optional containing the registered collaborator, or empty if registration failed
      */
     public Optional<Collaborator> registerCollaborator(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, int docType, String docNumber, Job job, Password password) {
-        Optional<Collaborator> newCollaborator = Optional.empty();
+        Optional<Collaborator> newCollaborator;
+        String responsible = getResponsible();
 
-        newCollaborator = collaboratorRepository.registerCollaborator(name, birthDate, admissionDate, address, phoneNumber, emailAddress, taxPayerNumber, docType, docNumber, job, password);
+        newCollaborator = collaboratorRepository.registerCollaborator(name, birthDate, admissionDate, address, phoneNumber, emailAddress, taxPayerNumber, docType, docNumber, job, password, responsible);
         return newCollaborator;
     }
 
@@ -84,5 +86,7 @@ public class CreateCollaboratorController {
         return collaboratorRepository.getDocType();
     }
 
-
+    public String getResponsible() {
+        return repositories.getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail();
+    }
 }
