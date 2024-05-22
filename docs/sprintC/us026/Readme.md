@@ -1,4 +1,4 @@
-# US008 - Overhauling of vehicles
+# US026 - Assign One or More Vehicles to Agenda Entry
 
 [Requirements Engineering](01.requirements-engineering/Readme.md)
 
