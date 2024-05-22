@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.*;
+import pt.ipp.isep.dei.esoft.project.domain.Extras.Inputs.Password;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -32,10 +33,10 @@ public class CollaboratorRepository implements Serializable {
      * @param job            of collaborator
      * @return An Optional containing the registered collaborator if successful, or empty otherwise.
      */
-    public Optional<Collaborator> registerCollaborator(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, int docType, String docNumber, Job job) {
+    public Optional<Collaborator> registerCollaborator(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, int docType, String docNumber, Job job, Password password) {
 
         Optional<Collaborator> optionalValue = Optional.empty();
-        Collaborator collaborator = new Collaborator(name, birthDate, admissionDate, address, phoneNumber, emailAddress, taxPayerNumber, docType, docNumber, job);
+        Collaborator collaborator = new Collaborator(name, birthDate, admissionDate, address, phoneNumber, emailAddress, taxPayerNumber, docType, docNumber, job, password);
         if (addCollaborator(collaborator)) {
             optionalValue = Optional.of(collaborator);
         }

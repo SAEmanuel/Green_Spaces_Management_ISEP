@@ -4,6 +4,7 @@ import pt.ipp.isep.dei.esoft.project.application.controller.CreateCollaboratorCo
 import pt.ipp.isep.dei.esoft.project.application.controller.RegisterJobController;
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.Data;
+import pt.ipp.isep.dei.esoft.project.domain.Extras.Inputs.Password;
 import pt.ipp.isep.dei.esoft.project.domain.Job;
 
 import java.util.InputMismatchException;
@@ -26,6 +27,7 @@ public class CreateCollaboratorUI implements Runnable {
     private int phoneNumber;
     private int taxPayerNumber;
     private Job job;
+    private Password password;
 
     /**
      * Default constructor that initializes the CreateCollaboratorController and RegisterJobController
@@ -64,6 +66,7 @@ public class CreateCollaboratorUI implements Runnable {
             int continueApp = confirmsData();
             if (continueApp != 2) {
                 submitData();
+
             }
         } else {
             System.out.println(ANSI_BRIGHT_RED + "Register a Job first!" + ANSI_RESET);
@@ -75,7 +78,7 @@ public class CreateCollaboratorUI implements Runnable {
      */
     private void submitData() {
         try {
-            Optional<Collaborator> collaborator = getController().registerCollaborator(name, birthDate, admissionDate, address, phoneNumber, emailAddress, taxPayerNumber, docType, docNumber, job);
+            Optional<Collaborator> collaborator = getController().registerCollaborator(name, birthDate, admissionDate, address, phoneNumber, emailAddress, taxPayerNumber, docType, docNumber, job, password);
 
             if (collaborator.isPresent()) {
                 System.out.println(ANSI_BRIGHT_GREEN + "Collaborator successfully created!" + ANSI_RESET);
@@ -160,8 +163,8 @@ public class CreateCollaboratorUI implements Runnable {
     private void display() {
         Collaborator.DocType[] values = collaboratorController.getDocType();
 
-        StringBuilder stringBuilder = new StringBuilder(String.format("Name: %s | Address: %s | Email: %s | Doc Type: %s | Doc Number: %s | Birth Date: %s | Admission Date: %s | Phone Number: %d | Tax Payer Number: %d | Job: %s",
-                name, address, emailAddress, values[docType], docNumber, birthDate, admissionDate, phoneNumber, taxPayerNumber, job));
+        StringBuilder stringBuilder = new StringBuilder(String.format("Name: %s | Address: %s | Email: %s | Doc Type: %s | Doc Number: %s | Birth Date: %s | Admission Date: %s | Phone Number: %d | Tax Payer Number: %d | Job: %s | Password: %s",
+                name, address, emailAddress, values[docType], docNumber, birthDate, admissionDate, phoneNumber, taxPayerNumber, job, password));
         System.out.printf("\nTyped data -> [%s%s%s]\n", ANSI_GREEN, stringBuilder, ANSI_RESET);
         System.out.print("Confirmation menu:\n 0 -> Change Collaborator Info\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
     }
@@ -181,7 +184,14 @@ public class CreateCollaboratorUI implements Runnable {
             docNumber = requestCollaboratorDocNumber();
             birthDate = requestBirthDate();
             admissionDate = requestAdmissionDate();
+            password = requestPassword();
         }
+    }
+
+    private Password requestPassword() {
+        System.out.print("\n-- Collaborator's Password --\n");
+        System.out.println(ANSI_BRIGHT_YELLOW + "(Password must have 7 alphanumeric characters, including three capital letters and two digits)" + ANSI_RESET);
+        return getPassword();
     }
 
 
@@ -221,6 +231,36 @@ public class CreateCollaboratorUI implements Runnable {
                 return data;
             } catch (IllegalArgumentException e) {
                 System.out.println(ANSI_BRIGHT_RED + e.getMessage() + ANSI_RESET);
+            }
+        }
+    }
+
+    private Password getPassword() {
+        Password password;
+
+        while (true) {
+            String pass = requestPass();
+            try {
+                password = new Password(pass);
+                return password;
+            } catch (IllegalArgumentException e) {
+                System.out.println(ANSI_BRIGHT_RED + e.getMessage() + ANSI_RESET);
+            }
+        }
+
+    }
+
+    private String requestPass() {
+        String pass;
+        Scanner input = new Scanner(System.in);
+        System.out.print("- Password: ");
+        while (true) {
+            try {
+                pass = input.nextLine();
+                return pass;
+            } catch (InputMismatchException e) {
+                System.out.print(ANSI_BRIGHT_RED + "Invalid Password! Enter a new one: " + ANSI_RESET);
+                input.nextLine();
             }
         }
     }
@@ -288,9 +328,6 @@ public class CreateCollaboratorUI implements Runnable {
 
         return answer - 1;
     }
-
-
-
 
 
     /**

@@ -3,9 +3,9 @@ package pt.ipp.isep.dei.esoft.project.ui;
 import pt.ipp.isep.dei.esoft.project.application.Serialization;
 import pt.ipp.isep.dei.esoft.project.application.controller.authorization.AuthenticationController;
 import pt.ipp.isep.dei.esoft.project.domain.*;
+import pt.ipp.isep.dei.esoft.project.domain.Extras.Inputs.Password;
 import pt.ipp.isep.dei.esoft.project.repository.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Bootstrap implements Runnable {
@@ -33,11 +33,11 @@ public class Bootstrap implements Runnable {
     private final Skill skill11 = new Skill("Weed Control");
     private final Skill skill12 = new Skill("Lawn Care");
 
-    private final GreenSpace infanteDomHenrique = new GreenSpace("Infante Dom Henrique",0,100,"Porto","gsm@this.app");
-    private final GreenSpace palacioDeCristal = new GreenSpace("Palacio de Cristal",1,40,"Porto","gsm@this.app");
-    private final GreenSpace parqueDaCidade = new GreenSpace("Parque da Cidade",2,100,"Matosinhos","gsm@this.app");
-    private final GreenSpace quintaDoCovelo = new GreenSpace("Quinta do Covelo",0,100,"Porto","gsm1@this.app");
-    private final GreenSpace passeioAlegre = new GreenSpace("Passeio Alegre",0,11,"Porto","gsm1@this.app");
+    private final GreenSpace infanteDomHenrique = new GreenSpace("Infante Dom Henrique", 0, 100, "Porto", "gsm@this.app");
+    private final GreenSpace palacioDeCristal = new GreenSpace("Palacio de Cristal", 1, 40, "Porto", "gsm@this.app");
+    private final GreenSpace parqueDaCidade = new GreenSpace("Parque da Cidade", 2, 100, "Matosinhos", "gsm@this.app");
+    private final GreenSpace quintaDoCovelo = new GreenSpace("Quinta do Covelo", 0, 100, "Porto", "gsm1@this.app");
+    private final GreenSpace passeioAlegre = new GreenSpace("Passeio Alegre", 0, 11, "Porto", "gsm1@this.app");
 
     private final Data data1 = new Data(2023, 1, 1);
     private final Data data2 = new Data(2021, 1, 1);
@@ -46,38 +46,25 @@ public class Bootstrap implements Runnable {
     private final Vehicle vehicle2 = new Vehicle("BB-00-AA", "Toyota", "Tundra", 0, 5000, 7000, 10000, 2000, 8000, data2, data1);
     private final Vehicle vehicle3 = new Vehicle("CC-00-AA", "Toyota", "Yaris", 0, 500, 1000, 10000, 2000, 4000, data2, data1);
 
-    private final ToDoEntry task1 = new ToDoEntry(infanteDomHenrique,"Cortar relva","Nenhuma",0,12);
-    private final ToDoEntry task2 = new ToDoEntry(palacioDeCristal,"Cortar folhas arvores","Nenhuma",1,12);
-    private final ToDoEntry task3 = new ToDoEntry(parqueDaCidade,"Limpar fontes","Nenhuma",2,12);
-    private final ToDoEntry task4 = new ToDoEntry(quintaDoCovelo,"Limpar bancos","Nenhuma",2,12);
-    private final ToDoEntry task5 = new ToDoEntry(passeioAlegre,"Limpar casas de banho","Nenhuma",1,12);
-
-    private final Collaborator colla1 = new Collaborator("Francisco", new Data(2004, 5, 20), new Data(2023, 6, 12), "Rua da pedra", 912809789, "fran@gmail.com", 123456744, 0, "123456711", job1);
-    private final Collaborator colla2 = new Collaborator("Emanuel", new Data(2004, 4, 20), new Data(2023, 6, 12), "Rua da Mariana", 912809777, "ema@gmail.com", 123456755, 0, "123456722", job2);
-    private final Collaborator colla3 = new Collaborator("Paulo", new Data(2002, 8, 20), new Data(2023, 6, 12), "Rua de Fanzeres", 912809888, "paul@gmail.com", 123456766, 0, "123456733", job3);
-    private final Collaborator colla4 =new Collaborator("Xu", new Data(2000, 4, 20), new Data(2023, 6, 12), "Rua do restaurante asiatico", 912809666, "xu@gmail.com", 123456777, 0, "123456744", job4);
-    private final Collaborator colla5 =new Collaborator("Jorge", new Data(2004, 5, 31), new Data(2023, 6, 12), "Rua enganhairo do isep", 912809555, "jorge@gmail.com", 123456788, 0, "123456755", job5);
-    private final Collaborator colla6 =new Collaborator("Mariana Silva", new Data(2001, 5, 31), new Data(2023, 6, 12), "Rua da igreja", 912809551, "mari@gmail.com", 123456799, 0, "123456766", job6);
-    private final Collaborator colla7 =new Collaborator("Gorete", new Data(1993, 5, 31), new Data(2023, 6, 12), "Rua de Fanzeres", 912809552, "gori@gmail.com", 123456999, 0, "123456777", job7);
-
-    private final Team team1 = new Team(1);
-
+    private final ToDoEntry task1 = new ToDoEntry(infanteDomHenrique, "Cortar relva", "Nenhuma", 0, 12);
+    private final ToDoEntry task2 = new ToDoEntry(palacioDeCristal, "Cortar folhas arvores", "Nenhuma", 1, 12);
+    private final ToDoEntry task3 = new ToDoEntry(parqueDaCidade, "Limpar fontes", "Nenhuma", 2, 12);
+    private final ToDoEntry task4 = new ToDoEntry(quintaDoCovelo, "Limpar bancos", "Nenhuma", 2, 12);
+    private final ToDoEntry task5 = new ToDoEntry(passeioAlegre, "Limpar casas de banho", "Nenhuma", 1, 12);
     //---------------------------------------------------------------------------------------------------------------------
 
 
-
-                                        //******** RUN METHOD **********
+    //******** RUN METHOD **********
 
     public void run() {
 //        inputAppInformation();
-        addUsers();
         addJobs();
         addVehicles();
         addSkills();
         addCollaborator();
         addGreenSpace();
         addToDoList();
-//        addTeam();
+        addUsers();
     }
 
     private void addToDoList() {
@@ -100,15 +87,6 @@ public class Bootstrap implements Runnable {
     //------------------------------------------------------------------------------------------
 
     //------------------------------ Add Methods ------------------------------------------------
-    private void addTeam(){
-        TeamRepository teamRepository = Repositories.getInstance().getTeamRepository();
-        List<Collaborator> collaboratorList = new ArrayList<>();
-        collaboratorList.add(colla1);
-        collaboratorList.add(colla2);
-        team1.setCollaborators(collaboratorList);
-        teamRepository.add(team1);
-    }
-
     private void addGreenSpace() {
         GreenSpaceRepository greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository();
         greenSpaceRepository.add(infanteDomHenrique);
@@ -129,13 +107,13 @@ public class Bootstrap implements Runnable {
 
     private void addCollaborator() {
         CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
-        collaboratorRepository.add(colla1);
-        collaboratorRepository.add(colla2);
-        collaboratorRepository.add(colla3);
-        collaboratorRepository.add(colla4);
-        collaboratorRepository.add(colla5);
-        collaboratorRepository.add(colla6);
-        collaboratorRepository.add(colla7);
+        collaboratorRepository.add(new Collaborator("Francisco", new Data(2004, 5, 20), new Data(2023, 6, 12), "Rua da pedra", 912809789, "fran@gmail.com", 123456744, 0, "123456711", job1, new Password("AAA12ab")));
+        collaboratorRepository.add(new Collaborator("Emanuel", new Data(2004, 4, 20), new Data(2023, 6, 12), "Rua da Mariana", 912809777, "ema@gmail.com", 123456755, 0, "123456722", job2, new Password("AAA12ac")));
+        collaboratorRepository.add(new Collaborator("Paulo", new Data(2002, 8, 20), new Data(2023, 6, 12), "Rua de Fanzeres", 912809888, "paul@gmail.com", 123456766, 0, "123456733", job3, new Password("AAA12ad")));
+        collaboratorRepository.add(new Collaborator("Xu", new Data(2000, 4, 20), new Data(2023, 6, 12), "Rua do restaurante asiatico", 912809666, "xu@gmail.com", 123456777, 0, "123456744", job4, new Password("AAA12ae")));
+        collaboratorRepository.add(new Collaborator("Jorge", new Data(2004, 5, 31), new Data(2023, 6, 12), "Rua enganhairo do isep", 912809555, "jorge@gmail.com", 123456788, 0, "123456755", job5, new Password("AAA12af")));
+        collaboratorRepository.add(new Collaborator("Mariana Silva", new Data(2001, 5, 31), new Data(2023, 6, 12), "Rua da igreja", 912809551, "mari@gmail.com", 123456799, 0, "123456766", job6, new Password("AAA12ag")));
+        collaboratorRepository.add(new Collaborator("Gorete", new Data(1993, 5, 31), new Data(2023, 6, 12), "Rua de Fanzeres", 912809552, "gori@gmail.com", 123456999, 0, "123456777", job7, new Password("AAA12ah")));
     }
 
     private void addJobs() {
@@ -174,6 +152,7 @@ public class Bootstrap implements Runnable {
         authenticationRepository.addUserRole(AuthenticationController.ROLE_HRM, AuthenticationController.ROLE_HRM);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_VFM, AuthenticationController.ROLE_VFM);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_GSM, AuthenticationController.ROLE_GSM);
+        authenticationRepository.addUserRole(AuthenticationController.ROLE_COLLABORATOR, AuthenticationController.ROLE_COLLABORATOR);
 
         authenticationRepository.addUserWithRole("Main Administrator", "admin@this.app", "admin",
                 AuthenticationController.ROLE_ADMIN);
@@ -192,5 +171,15 @@ public class Bootstrap implements Runnable {
 
         authenticationRepository.addUserWithRole("Green Spaces Manager 1", "gsm1@this.app", "gsm",
                 AuthenticationController.ROLE_GSM);
+
+        Repositories repositories = Repositories.getInstance();
+        List<Collaborator> collaborators = repositories.getCollaboratorRepository().getCollaboratorList();
+
+        for (int i = 0; i < collaborators.size(); i++) {
+            authenticationRepository.addUserWithRole(collaborators.get(i).getName(),
+                    collaborators.get(i).getEmailAddress(), collaborators.get(i).getPassword(),
+                    AuthenticationController.ROLE_COLLABORATOR);
+        }
+
     }
 }
