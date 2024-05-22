@@ -1,10 +1,10 @@
-# US008 - Check-up of vehicles
+# US022 - Add a new entry in the Agenda
 
 ## 2. Analysis
 
 ### 2.1. Relevant Domain Model Excerpt 
 
-![Domain Model](svg/us008-domain-model-Domain_Model___US008.svg)
+![Domain Model](svg/us022-domain-model-Domain_Model.svg)
 
 ### 2.2. Other Remarks
 

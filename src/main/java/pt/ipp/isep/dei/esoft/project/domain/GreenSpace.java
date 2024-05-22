@@ -51,9 +51,9 @@ public class GreenSpace implements Serializable {
 
         validateInfo(name,area,address);
 
-        this.name = name;
+        this.name = name.trim();
         this.area = area;
-        this.address = address;
+        this.address = address.trim();
         this.size = Size.values()[size];
         this.responsible = responsible;
     }
@@ -144,6 +144,15 @@ public class GreenSpace implements Serializable {
         return responsible;
     }
 
+
+    /**
+     * Returns the address for the green space.
+     *
+     * @return the address for the green space
+     */
+    public String getAddress() {
+        return address;
+    }
 
     /**
      * Returns a string representation of the object.

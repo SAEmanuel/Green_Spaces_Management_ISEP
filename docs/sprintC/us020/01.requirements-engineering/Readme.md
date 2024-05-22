@@ -30,7 +30,7 @@ area.
 
 > **Question:** Can two different green spaces have the same address?
 >
-> **Answer:** .
+> **Answer:** No.
 
 > **Question:** Can two green spaces have the same name?
 >
@@ -38,7 +38,7 @@ area.
 
 ### 1.3. Acceptance Criteria 
 
-* **AC01:** There cannot be two green spaces with the same "name".
+* **AC01:** There cannot be two green spaces with the same "name" or "address".
 * **AC02:** All required fields must be filled in.
 * **AC03:** The "name" of a green space cannot have special characters.
 * **AC04:** When a certain GSM create a GS this must be associate to the same park.
@@ -67,6 +67,7 @@ area.
 **Output Data:**
 
 * Confirmation menu.
+* List of sizes
 * (In)Success of the operation.
 * Option to repeat process in case of failure.
 * Error messages.

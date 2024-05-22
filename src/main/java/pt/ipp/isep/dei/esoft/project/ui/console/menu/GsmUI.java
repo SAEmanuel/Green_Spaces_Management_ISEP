@@ -16,12 +16,12 @@ public class GsmUI implements Runnable {
 
     public void run() {
         List<MenuItem> options = new ArrayList<MenuItem>();
-        options.add(new MenuItem("Register a Green Space", new RegisterGreenSpaceUI()));
-        options.add(new MenuItem("Add a New Entry to the To-Do List", new ToDoListUI()));
-        options.add(new MenuItem("Add a New Entry to the Agenda", new AgendaUI()));
-        options.add(new MenuItem("Assign a team to a task in the Agenda", new AssignTeamToTaskAgendaUI()));
-        options.add(new MenuItem("Postpone task in the Agenda", new PostponeTaskAgendaUI()));
-        options.add(new MenuItem("Cancel task in the Agenda", new CancelAgendaTaskUI()));
+        options.add(new MenuItem("Register Green Space", new RegisterGreenSpaceUI()));
+        options.add(new MenuItem("Add Entry To-Do List", new ToDoListUI()));
+        options.add(new MenuItem("Add Entry Agenda", new AgendaUI()));
+        options.add(new MenuItem("Assign Team to Task in Agenda", new AssignTeamToTaskAgendaUI()));
+        options.add(new MenuItem("Postpone Task in Agenda", new PostponeTaskAgendaUI()));
+        options.add(new MenuItem("Cancel Task in  Agenda", new CancelAgendaTaskUI()));
 
 
 

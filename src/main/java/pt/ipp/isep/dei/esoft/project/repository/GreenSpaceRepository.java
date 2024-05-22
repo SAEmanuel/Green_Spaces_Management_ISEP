@@ -1,8 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
-import pt.ipp.isep.dei.esoft.project.domain.Skill;
-import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -71,7 +69,7 @@ public class GreenSpaceRepository implements Serializable {
      * @return {@code true} if the green space is valid, otherwise {@code false}
      */
     private boolean validate(GreenSpace greenSpace) {
-        return greenSpaceListDoNotContainsByName(greenSpace.getName());
+        return validateInRepository(greenSpace.getName(), greenSpace.getAddress() );
     }
 
     /**
@@ -80,9 +78,9 @@ public class GreenSpaceRepository implements Serializable {
      * @param greenSpaceName the name of the green space to check
      * @return {@code true} if the green space does not exist, otherwise {@code false}
      */
-    private boolean greenSpaceListDoNotContainsByName(String greenSpaceName) {
+    private boolean validateInRepository(String greenSpaceName, String address) {
         for (GreenSpace g : greenSpacesList) {
-            if ((g.getName().trim()).equalsIgnoreCase(greenSpaceName.trim())) {
+            if ((g.getName()).equalsIgnoreCase(greenSpaceName) || g.getAddress().equalsIgnoreCase(address)) {
                 return false;
             }
         }
