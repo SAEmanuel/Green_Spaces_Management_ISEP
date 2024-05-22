@@ -56,8 +56,8 @@ public class ToDoListController {
     }
 
     public List<GreenSpace> getGreenSpacesByResponsible() {
-        String responsible = getResponsible();
-        return greenSpaceRepository.getGreenSpacesByResponsible(responsible);
+        String responsibleEmail = getResponsible();
+        return greenSpaceRepository.getGreenSpacesByResponsible(responsibleEmail);
     }
 
     public void showGreenSpaces(List<GreenSpace> greenSpacesAvailableByResponsible) {

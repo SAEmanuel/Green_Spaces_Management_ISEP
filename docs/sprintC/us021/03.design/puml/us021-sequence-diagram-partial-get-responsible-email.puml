@@ -39,7 +39,7 @@ deactivate APP
 
 CTRL -> SESSAO: getUserEmail()
 activate SESSAO
-SESSAO --> CTRL: email
+SESSAO --> CTRL: responsibleEmail
 end
 deactivate SESSAO
 

@@ -48,13 +48,13 @@ activate Employee
                     CTRL -> SESSAO: getUserEmail()
                     activate SESSAO
 
-                        SESSAO --> CTRL: email
+                        SESSAO --> CTRL: responsibleEmail
                     deactivate SESSAO
                     CTRL --> CTRL
                     deactivate CTRL
                     |||
 
-                    CTRL -> CTRL : getGreenSpacesByResponsible(email)
+                    CTRL -> CTRL : getGreenSpacesByResponsible(responsibleEmail)
                     activate CTRL
 
                     CTRL -> RepositorySingleton : getInstance()
@@ -69,7 +69,7 @@ activate Employee
                     PLAT --> CTRL: GreenSpaceRepository
                     deactivate PLAT
 
-                    CTRL -> GREENSpaceRepository : getGreenSpacesByResponsible(email)
+                    CTRL -> GREENSpaceRepository : getGreenSpacesByResponsible(responsibleEmail)
 
                     activate GREENSpaceRepository
 

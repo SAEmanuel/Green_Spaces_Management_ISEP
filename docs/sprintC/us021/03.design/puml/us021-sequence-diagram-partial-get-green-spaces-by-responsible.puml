@@ -17,7 +17,7 @@ participant "greenSpaceRepository\n:GreenSpaceRepository" as GREENSpaceRepositor
 
 activate CTRL
 autonumber 12
-CTRL -> CTRL : getGreenSpacesByResponsible(email)
+CTRL -> CTRL : getGreenSpacesByResponsible(responsibleEmail)
 
 group Get Green Spaces by Responsible User
 autonumber 12.1
@@ -31,7 +31,7 @@ activate PLAT
 PLAT --> CTRL: GreenSpaceRepository
 deactivate PLAT
 
-CTRL -> GREENSpaceRepository : getGreenSpacesByResponsible(email)
+CTRL -> GREENSpaceRepository : getGreenSpacesByResponsible(responsibleEmail)
 activate GREENSpaceRepository
 GREENSpaceRepository -> CTRL : greenSpaces
 deactivate GREENSpaceRepository
