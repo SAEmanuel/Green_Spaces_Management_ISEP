@@ -30,10 +30,9 @@ public class ToDoListUI implements Runnable {
     @Override
     public void run() {
         System.out.println("\n\n--- Add New Entry To-Do List ------------------------");
-        String responsible = controller.getResponsible();
         List<GreenSpace> greenSpacesAvailableByResponsible;
 
-        greenSpacesAvailableByResponsible = controller.getGreenSpacesByResponsible(responsible);
+        greenSpacesAvailableByResponsible = controller.getGreenSpacesByResponsible();
 
         if(!greenSpacesAvailableByResponsible.isEmpty()){
             getGreenSpaceListOption(greenSpacesAvailableByResponsible);

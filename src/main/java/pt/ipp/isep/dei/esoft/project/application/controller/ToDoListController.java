@@ -39,6 +39,7 @@ public class ToDoListController {
     // ---- GET REPOSITORY ------------------------------
 
     public Optional<ToDoEntry> registerToDoEntry(GreenSpace greenSpace, String title, String description, int urgency, int expectedDuration) {
+
         return toDoListRepository.registerToDoEntry(greenSpace, title, description, urgency, expectedDuration);
     }
 
@@ -50,12 +51,13 @@ public class ToDoListController {
         return toDoListRepository.getUrgency();
     }
 
-    public String getResponsible() {
+    private String getResponsible() {
         return getRepositories().getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail();
     }
 
-    public List<GreenSpace> getGreenSpacesByResponsible(String responsible) {
-        return greenSpaceRepository.getGreenSpacesByResponsible(responsible);
+    public List<GreenSpace> getGreenSpacesByResponsible() {
+        String responsibleEmail = getResponsible();
+        return greenSpaceRepository.getGreenSpacesByResponsible(responsibleEmail);
     }
 
     public void showGreenSpaces(List<GreenSpace> greenSpacesAvailableByResponsible) {

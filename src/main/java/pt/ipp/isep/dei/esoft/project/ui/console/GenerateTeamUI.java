@@ -34,20 +34,22 @@ public class GenerateTeamUI implements Runnable {
             team = submitData();
         }
 
-        if(!teamConfirmation()) {
-            while (true) {
-                if (teamGenerationConfirmation()) {
-                    submitData();
-                } else {
-                    displayGeneratedList();
-                    break;
+        if(team != null) {
+            if (!teamConfirmation()) {
+                while (true) {
+                    if (team != null && teamGenerationConfirmation()) {
+                        team = submitData();
+                    } else {
+                        displayGeneratedList();
+                        break;
+                    }
                 }
+            } else {
+                controller.addTeam(team.getTeamId());
+                System.out.println(ANSI_BRIGHT_GREEN + "Team Accepted\n" + ANSI_RESET);
             }
         }
-        else {
-            controller.addTeam(team.getTeamId());
-            System.out.println(ANSI_BRIGHT_GREEN + "\nTeam Accepted" + ANSI_RESET);
-        }
+
         getController().cleanSkillList();
         getController().cleanTeamListAux();
     }
@@ -100,14 +102,14 @@ public class GenerateTeamUI implements Runnable {
             for (Collaborator collaborator : team.get().getCollaborators()) {
                 System.out.println(collaborator.getName());
             }
-            System.out.println(ANSI_BRIGHT_GREEN +"\nTask successfully created!"+ANSI_RESET);
+            System.out.println(ANSI_BRIGHT_GREEN +"\nTeam successfully created!"+ANSI_RESET);
 
             return team.get();
         } else {
-            System.out.println(ANSI_BRIGHT_RED+"\nTask not created!"+ANSI_RESET);
-
+            System.out.println(ANSI_BRIGHT_RED+"\nTeam not created!"+ANSI_RESET);
             return null;
         }
+
     }
 
     /**
@@ -227,7 +229,6 @@ public class GenerateTeamUI implements Runnable {
         int answerList = -2;
         String answerAdd = "";
         boolean addSkills = true;
-        boolean skillAdded = false;
         Scanner input = new Scanner(System.in);
 
         while(addSkills) {
@@ -239,7 +240,6 @@ public class GenerateTeamUI implements Runnable {
 
             if(answerList != listSize+1 && answerList != listSize+2){
                 controller.addSkill(new Skill(skillList.get(answerList - 1).getSkillName()));
-                skillAdded = true;
             }
 
             input.nextLine();

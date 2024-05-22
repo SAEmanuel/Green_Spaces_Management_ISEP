@@ -7,8 +7,8 @@ import static graph_classes.GraphicCreator.createScatterPlot;
 
 public class Main_14 {
 
-    static final String OUTPUT_FILE_GRAPHIC = "MDISC/sprintB/us_12_13_14_implementation/src/main/java/pt/ipp/isep/dei/output_14/runtime_graphic.png";
-    static final String INPUT_FILE_GRAPHIC = "MDISC/sprintB/us_12_13_14_implementation/src/main/java/pt/ipp/isep/dei/output_14/runtime_log.csv";
+    static final String OUTPUT_FILE_GRAPHIC = "MDISC/sprintB/us_12_13_14_implementation/src/output_14/runtime_graphic.png";
+    static final String INPUT_FILE_GRAPHIC = "MDISC/sprintB/us_12_13_14_implementation/src/output_14/runtime_log.csv";
 
     public static void main(String[] args) {
         ArrayList<String> runtimes;

@@ -1,0 +1,45 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title UI Sequence Diagram (SSD) - Get Green Spaces by Responsible User
+
+autonumber
+
+
+participant ":ToDoListController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "greenSpaceRepository\n:GreenSpaceRepository" as GREENSpaceRepository
+
+
+
+activate CTRL
+autonumber 12
+CTRL -> CTRL : getGreenSpacesByResponsible(responsibleEmail)
+
+group Get Green Spaces by Responsible User
+autonumber 12.1
+CTRL -> RepositorySingleton : getInstance()
+activate RepositorySingleton
+RepositorySingleton --> CTRL: repositories
+deactivate RepositorySingleton
+
+CTRL -> PLAT : getGreenSpaceRepository()
+activate PLAT
+PLAT --> CTRL: GreenSpaceRepository
+deactivate PLAT
+
+CTRL -> GREENSpaceRepository : getGreenSpacesByResponsible(responsibleEmail)
+activate GREENSpaceRepository
+GREENSpaceRepository -> CTRL : greenSpaces
+deactivate GREENSpaceRepository
+end
+
+deactivate CTRL
+
+
+
+
+@enduml

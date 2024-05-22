@@ -1,21 +1,25 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import pt.ipp.isep.dei.esoft.project.domain.Extras.Inputs.Password;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Collaborator implements Serializable {
-    private String name;
-    private Data birthDate;
-    private Data admissionDate;
-    private String address;
-    private int phoneNumber;
-    private String emailAddress;
-    private int taxPayerNumber;
-    private int docType;
-    private String docNumber;
+    private final String name;
+    private final Data birthDate;
+    private final Data admissionDate;
+    private final String address;
+    private final String emailAddress;
+    private final String docNumber;
+    private final String responsible;
+    private final int phoneNumber;
+    private final int taxPayerNumber;
+    private final int docType;
     private Job job;
     private List<Skill> skills;
+    private Password password;
 
     private static final int TAX_PAYER_NUMBER_MIN = 100000000;
     private static final int TAX_PAYER_NUMBER_MAX = 999999999;
@@ -40,7 +44,7 @@ public class Collaborator implements Serializable {
      * @param docType        of the collaborator
      * @param job            of the collaborator
      */
-    public Collaborator(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, int docType, String docNumber, Job job) {
+    public Collaborator(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, int docType, String docNumber, Job job, Password password, String responsible) {
         validateData(name, birthDate, admissionDate, address, phoneNumber, emailAddress, taxPayerNumber, docType, docNumber, job);
         this.name = name.trim();
         this.birthDate = birthDate;
@@ -53,6 +57,8 @@ public class Collaborator implements Serializable {
         this.docNumber = docNumber.trim();
         this.job = job;
         this.skills = new ArrayList<Skill>();
+        this.password = password;
+        this.responsible = responsible;
     }
 
     /**
@@ -192,7 +198,7 @@ public class Collaborator implements Serializable {
      * Validates document number
      *
      * @param docNumber of the collaborator
-     * @param docType of the collaborator
+     * @param docType   of the collaborator
      */
     private void isValidDocNumber(String docNumber, int docType) {
         boolean isValid = false;
@@ -275,7 +281,7 @@ public class Collaborator implements Serializable {
      * @return the cloned Collaborator
      */
     public Collaborator clone() {
-        return new Collaborator(this.name, this.birthDate, this.admissionDate, this.address, this.phoneNumber, this.emailAddress, this.taxPayerNumber, this.docType, this.docNumber, this.job);
+        return new Collaborator(this.name, this.birthDate, this.admissionDate, this.address, this.phoneNumber, this.emailAddress, this.taxPayerNumber, this.docType, this.docNumber, this.job, this.password, this.responsible);
     }
 
     /**
@@ -342,6 +348,10 @@ public class Collaborator implements Serializable {
      */
     public Data getBirthDate() {
         return birthDate;
+    }
+
+    public String getPassword(){
+        return password.getPass();
     }
 
     /**

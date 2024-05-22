@@ -1,0 +1,48 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title UI Sequence Diagram (SSD) - Get Responsible User's Email
+
+autonumber
+
+
+participant ":ToDoListUI" as UI
+participant ":ToDoListController" as CTRL
+participant ":ApplicationSession" as _APP
+participant "appSession\n:ApplicationSession" as APP
+participant "currentSession\n:UserSession" as SESSAO
+
+activate UI
+autonumber 3
+UI -> CTRL : getGreenSpacesByResponsible()
+activate CTRL
+
+group Get Responsible User's Email
+
+autonumber 3.1
+CTRL -> CTRL : getResponsible()
+activate CTRL
+
+activate CTRL
+
+CTRL -> _APP: getInstance()
+activate _APP
+_APP -> CTRL: appSession
+deactivate _APP
+
+CTRL -> APP: getCurrentSession()
+activate APP
+APP --> CTRL: currentSession
+deactivate APP
+
+CTRL -> SESSAO: getUserEmail()
+activate SESSAO
+SESSAO --> CTRL: responsibleEmail
+end
+deactivate SESSAO
+
+deactivate CTRL
+
+@enduml

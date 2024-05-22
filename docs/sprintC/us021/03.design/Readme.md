@@ -4,31 +4,39 @@
 
 ### 3.1. Rationale
 
-| Interaction ID | Question: Which class is responsible for...    | Answer                | Justification (with patterns)                                                                                                             |
-|:---------------|:-----------------------------------------------|:----------------------|:------------------------------------------------------------------------------------------------------------------------------------------|
-| Step 1         | ... interacting with the actor?                | CheckupListUI         | Pure Fabrication: A UI component typically handles user interactions and acts as an interface between the user and the system.            |
-|                | ... coordinating the US?                       | VehicleListController | Controller: The controller orchestrates the use case by coordinating the interactions between the UI and the domain model.                |
-| Step 2         | ... coordinating with the repositories?        | VehicleListController | Controller: The controller interacts with repositories to retrieve necessary data and perform business logic.                             |
-|                | ... retrieving the vehicle repository?         | VehicleListController | Controller: The controller interacts with the repositories to retrieve the necessary data for the use case.                               |
-| Step 3         | ... getting the vehicles needing check-up?     | VehicleRepository     | Repository: The repository pattern encapsulates the logic for retrieving data, in this case, vehicles needing check-up.                   |
-| Step 4         | ... iterating over each vehicle?               | VehicleRepository     | Repository: The repository handles the retrieval and manipulation of data, iterating over vehicles needing check-up.                      |
-|                | ... determining if a vehicle needs check-up?   | VehicleRepository     | Repository: The repository pattern encapsulates the logic for data access and business logic, determining vehicle status.                 |
-| Step 5         | ... retrieving the vehicles needing check-up?  | VehicleRepository     | Repository: The repository pattern encapsulates the logic for data access, retrieving vehicles needing check-up.                          |
-| Step 6         | ... validating data?                           | VehicleRepository     | Repository: The repository pattern encapsulates the logic for data access and validation, ensuring data integrity.                        | 
-|                | ... saving the vehicles needing check-up?      | VehicleRepository     | Repository: The repository pattern encapsulates the logic for data access and manipulation, saving vehicles needing check-up.             | 
-| Step 7         | ... sending the list of vehicles to the actor? | CheckupListUI         | Pure Fabrication: The UI component is responsible for presenting information to the user and is a separate concern from the domain logic. |
+| Interaction ID | Question: Which class is responsible for...                 | Answer                | Justification (with patterns)                                                                                                             |
+|:---------------|:------------------------------------------------------------|:----------------------|:------------------------------------------------------------------------------------------------------------------------------------------|
+| Step 1         | ... interacting with the actor?                             | ToDoListUI            | Pure Fabrication: A UI component typically handles user interactions and acts as an interface between the user and the system.            |
+|                | ... coordinating the use case?                              | ToDoListController    | Controller: The controller orchestrates the use case by coordinating the interactions between the UI and the domain model.                |
+| Step 2         | ... getting the current session instance?                   | ApplicationSession    | Singleton: The session instance is retrieved using the Singleton pattern to ensure a single instance throughout the application.           |
+|                | ... getting the current user session?                       | ApplicationSession    | Controller: The controller retrieves the current session details to determine the responsible user's email.                               |
+| Step 3         | ... getting the responsible user's email?                   | UserSession           | Controller: The controller retrieves the email from the user session to identify the responsible user.                                     |
+| Step 4         | ... getting the green spaces by the responsible user?       | GreenSpaceRepository  | Repository: The repository pattern encapsulates the logic for retrieving green spaces managed by the responsible user.                     |
+| Step 5         | ... retrieving the green space repository instance?         | Repositories          | Singleton: The repository instance is retrieved using the Singleton pattern to ensure a single instance throughout the application.        |
+| Step 6         | ... showing the list of green spaces to the actor?          | ToDoListUI            | Pure Fabrication: The UI component is responsible for presenting the list of green spaces to the user.                                     |
+| Step 7         | ... registering the to-do entry?                            | ToDoListRepository    | Repository: The repository pattern encapsulates the logic for data access, in this case, registering a new to-do entry.                    |
+| Step 8         | ... creating a new to-do entry?                             | GreenSpace            | Entity: The GreenSpace entity is used to encapsulate the creation of a new to-do entry within its context.                                  |
+| Step 9         | ... adding the to-do entry to the repository?               | ToDoListRepository    | Repository: The repository handles the addition of new to-do entries, ensuring data persistence and integrity.                             |
+| Step 10        | ... validating the to-do entry?                             | ToDoListRepository    | Repository: The repository ensures that the new to-do entry meets the required criteria before saving it.                                  |
+| Step 11        | ... sending the to-do entry to the controller?              | ToDoListRepository    | Repository: The repository encapsulates the logic for data access, sending the validated to-do entry back to the controller.               |
+| Step 12        | ... showing the result of the operation to the actor?       | ToDoListUI            | Pure Fabrication: The UI component presents the outcome of the operation (success or failure) to the user.                                 |
 
-### Systematization ##
+### Systematization
 
 According to the taken rationale, the conceptual classes promoted to software classes are:
 
-* None
+* GreenSpace (Entity)
+* ApplicationSession (Singleton)
+* UserSession (Entity)
 
 Other software classes (i.e. Pure Fabrication) identified:
 
-* VehicleListController
-* CheckupListUI
-* VehicleRepository
+* ToDoListController
+* ToDoListUI
+* GreenSpaceRepository
+* ToDoListRepository
+* Repositories (Singleton)
+
 
 ## 3.2. Sequence Diagram (SD)
 
@@ -36,7 +44,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![Sequence Diagram - Full](svg/us008-sequence-diagram-full.svg)
+![Sequence Diagram - Full](svg/us021-sequence-diagram-full.svg)
 
 ### Split Diagrams
 
@@ -45,15 +53,20 @@ user story, but it is split in partial diagrams to better illustrate the interac
 
 It uses Interaction Occurrence (a.k.a. Interaction Use).
 
-![Sequence Diagram - split](svg/us008-sequence-diagram-split.svg)
+![Sequence Diagram - split](svg/us021-sequence-diagram-split.svg)
 
-**Get Vehicle List Partial SD**
+**Get Responsible User's Email Partial SD**
 
-![Sequence Diagram - Partial - Get Vehicle List](svg/us008-sequence-diagram-partial-get-vehicle-list.svg)
+![Sequence Diagram - Partial - Get Responsible User's Email](svg/us021-sequence-diagram-partial-get-responsible-email-UI_Sequence_Diagram__SSD____Get_Responsible_User_s_Email.svg)
 
-**Generate CheckUp List Partial SD**
+**Get Green Spaces by Responsible User Partial SD**
 
-![Sequence Diagram - Partial - Generate CheckUp List](svg/us008-sequence-diagram-partial-generate-checkup-list.svg)
+![Sequence Diagram - Partial - Get Green Spaces by Responsible User](svg/us021-sequence-diagram-partial-get-green-spaces-by-responsible-UI_Sequence_Diagram__SSD____Get_Green_Spaces_by_Responsible_User.svg)
+
+**Register To-Do Entry Partial SD**
+
+![Sequence Diagram - Partial - Register To-Do Entry](svg/us021-sequence-diagram-partial-register-to-do-entry-UI_Sequence_Diagram__SSD____Register_To_Do_Entry.svg)
+
 
 ## 3.3. Class Diagram (CD)
 

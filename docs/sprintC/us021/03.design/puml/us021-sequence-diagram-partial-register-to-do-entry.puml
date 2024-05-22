@@ -1,0 +1,45 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title UI Sequence Diagram (SSD) - Register To-Do Entry
+
+autonumber
+
+
+participant ":ToDoListUI" as UI
+participant ":ToDoListController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "toDoListRepository\n:toDoListRepository" as toDoListRepository
+participant "greenSpace\n:GreenSpace" as GREEN
+
+
+activate CTRL
+
+autonumber 32
+CTRL -> toDoListRepository : registerToDoEntry(greenSpace ,title, description, urgency, expectedDuration)
+activate toDoListRepository
+group Register To-Do Entry
+autonumber 32.1
+toDoListRepository -> GREEN** : create
+toDoListRepository -> toDoListRepository : addToDoEntry(toDoEntry)
+activate toDoListRepository
+toDoListRepository -> toDoListRepository : validateToDoEntry(toDoEntry)
+activate toDoListRepository
+toDoListRepository --> toDoListRepository
+deactivate toDoListRepository
+toDoListRepository --> toDoListRepository
+deactivate toDoListRepository
+toDoListRepository --> CTRL : toDoEntry
+end
+deactivate toDoListRepository
+
+autonumber 33
+CTRL --> UI : toDoEntry
+deactivate CTRL
+
+deactivate UI
+
+@enduml

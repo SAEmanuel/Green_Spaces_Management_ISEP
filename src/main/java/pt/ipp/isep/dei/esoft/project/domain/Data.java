@@ -232,9 +232,9 @@ public class Data implements Comparable<Data>, Serializable {
     /**
      * Constructs an instance of Data by receiving the year, month, and day, calling the @method setData.
      *
-     * @param year the year of the date.
+     * @param year  the year of the date.
      * @param month the month of the date.
-     * @param day the day of the date.
+     * @param day   the day of the date.
      */
     public Data(int year, int month, int day) {
         setData(year, month, day);
@@ -290,9 +290,9 @@ public class Data implements Comparable<Data>, Serializable {
     /**
      * Modifies the year, month, and day of the date.
      *
-     * @param year the new year of the date.
+     * @param year  the new year of the date.
      * @param month the new month of the date.
-     * @param day the new day of the date.
+     * @param day   the new day of the date.
      */
     public final void setData(int year, int month, int day) {
         if (year < MIN_ALLOWED_YEAR ) {
@@ -417,10 +417,11 @@ public class Data implements Comparable<Data>, Serializable {
 
     /**
      * Verifies if the difference between two dates exceeds 18 years
+     *
      * @param data to be compared
      * @return true if exceeds 18 years, false otherwise
      */
-    public boolean over18(Data data){
+    public boolean over18(Data data) {
         int result = difference(data);
         return (result / 365) >= 18;
     }
@@ -428,9 +429,9 @@ public class Data implements Comparable<Data>, Serializable {
     /**
      * Returns the difference in number of days between the date and the date received by parameter with year, month, and day.
      *
-     * @param year the year of the date with which the date is compared to calculate the difference in number of days.
+     * @param year  the year of the date with which the date is compared to calculate the difference in number of days.
      * @param month the month of the date with which the date is compared to calculate the difference in number of days.
-     * @param day the day of the date with which the date is compared to calculate the difference in number of days.
+     * @param day   the day of the date with which the date is compared to calculate the difference in number of days.
      * @return difference in number of days between the date and the date received by parameter with year, month, and day.
      */
     public int difference(int year, int month, int day) {
@@ -483,8 +484,12 @@ public class Data implements Comparable<Data>, Serializable {
         return totalDays;
     }
 
-
-    public Data calculateData(int days){
+    /**
+     *
+     * @param days
+     * @return add days to a date and returns date in specific format.
+     */
+    public Data calculateData(int days) {
         int ttlDays = this.countDays() + days;
 
         int year = 1;
@@ -512,6 +517,15 @@ public class Data implements Comparable<Data>, Serializable {
         }
 
         return new Data(year, month, day);
+    }
+
+    /**
+     * @param day
+     * @param month
+     * @return true if current day and month equals birthdate day and month.
+     */
+    public boolean isBirthDate(int day, int month) {
+        return currentDate().getDay() == day && currentDate().getMonth() == month;
     }
 
 

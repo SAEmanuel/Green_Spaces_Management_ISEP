@@ -8,10 +8,10 @@ autonumber
 actor "Collaborator" as Colab
 
 participant ":RetrieveTasksUI" as UI
-participant ":TeamController" as CTRL
+participant AgendaController as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "teamRepository\n:TeamRepository" as teamRepository
+participant "agenda\n:Agenda" as agenda
 
 activate Colab
 
@@ -38,39 +38,39 @@ deactivate RepositorySingleton
 CTRL -> PLAT : getTeamRepository()
 activate PLAT
 
-PLAT --> CTRL: teamRepository
+PLAT --> CTRL: agenda
 deactivate PLAT
 
-CTRL -> teamRepository : requestColabTaskList()
+CTRL -> agenda : requestColabTaskList()
 
-activate teamRepository
+activate agenda
 
 
 
-activate teamRepository
+activate agenda
 
 loop for each team in teamList
-    teamRepository -> teamRepository : getTeamByColabTaxNumber()
-    activate teamRepository
+    agenda -> agenda : getTeamByColabTaxNumber()
+    activate agenda
 
 
-    teamRepository --> teamRepository : true/false
-    deactivate teamRepository
+    agenda --> agenda : true/false
+    deactivate agenda
 
 
 
-deactivate teamRepository
+deactivate agenda
 end
 
 
 
-    teamRepository --> teamRepository : getColabTasksBetweenDates()
+    agenda --> agenda : getColabTasksBetweenDates()
 
 
 
 
-teamRepository --> CTRL : colabTaskList
-deactivate teamRepository
+agenda --> CTRL : colabTaskList
+deactivate agenda
 
 
 
