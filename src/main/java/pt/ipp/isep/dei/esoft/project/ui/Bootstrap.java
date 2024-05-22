@@ -144,7 +144,7 @@ public class Bootstrap implements Runnable {
     }
     //-----------------------------------------------------------------------------------------------------------
 
-    private void addUsers() {
+    public static void addUsers() {
         //TODO: add Authentication users here: should be created for each user in the organization
         AuthenticationRepository authenticationRepository = Repositories.getInstance().getAuthenticationRepository();
         authenticationRepository.addUserRole(AuthenticationController.ROLE_ADMIN, AuthenticationController.ROLE_ADMIN);

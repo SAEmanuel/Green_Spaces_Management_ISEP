@@ -7,6 +7,7 @@ import pt.ipp.isep.dei.esoft.project.domain.Job;
 import pt.ipp.isep.dei.esoft.project.repository.CollaboratorRepository;
 import pt.ipp.isep.dei.esoft.project.repository.JobRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
+import pt.ipp.isep.dei.esoft.project.ui.Bootstrap;
 
 import java.util.Optional;
 
@@ -73,6 +74,7 @@ public class CreateCollaboratorController {
         String responsible = getResponsible();
 
         newCollaborator = collaboratorRepository.registerCollaborator(name, birthDate, admissionDate, address, phoneNumber, emailAddress, taxPayerNumber, docType, docNumber, job, password, responsible);
+        Bootstrap.addUsers();
         return newCollaborator;
     }
 

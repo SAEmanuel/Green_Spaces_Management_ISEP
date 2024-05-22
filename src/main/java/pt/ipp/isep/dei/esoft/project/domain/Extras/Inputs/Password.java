@@ -8,7 +8,7 @@ public class Password {
     public static final int NUMBER_DIGITS = 2;
     public static final int PASSWORD_LENGTH = 7;
 
-    private String pass;
+    private final String pass;
 
     public Password(String pass) {
         if (!verifyPassword(pass)) {
@@ -24,10 +24,9 @@ public class Password {
     }
 
     private static boolean verifyCapitalLetters(String password) {
-        String word = password;
         int counter = 0;
-        for (int i = 0; i < word.length(); i++) {
-            if (Character.isUpperCase(word.charAt(i))) {
+        for (int i = 0; i < password.length(); i++) {
+            if (Character.isUpperCase(password.charAt(i))) {
                 counter++;
             }
         }
@@ -35,10 +34,9 @@ public class Password {
     }
 
     private static boolean verifyNumber(String password) {
-        String word = password;
         int counter = 0;
-        for (int i = 0; i < word.length(); i++) {
-            if (Character.isDigit(word.charAt(i))) {
+        for (int i = 0; i < password.length(); i++) {
+            if (Character.isDigit(password.charAt(i))) {
                 counter++;
             }
         }

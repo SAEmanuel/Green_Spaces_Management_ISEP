@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 
+import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.ui.console.DevTeamUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.authorization.AuthenticationUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
@@ -22,7 +23,6 @@ public class MainMenuUI implements Runnable {
         int option = 0;
         do {
             option = Utils.showAndSelectIndex(options, "\n\n--- MAIN MENU --------------------------");
-
             if ((option >= 0) && (option < options.size())) {
                 options.get(option).run();
             }

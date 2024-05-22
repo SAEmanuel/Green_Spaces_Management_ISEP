@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.domain.Extras.Inputs.Password;
+import pt.ipp.isep.dei.esoft.project.ui.Bootstrap;
 
 import java.io.Serializable;
 import java.util.ArrayList;

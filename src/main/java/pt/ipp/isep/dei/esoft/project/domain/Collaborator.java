@@ -58,7 +58,7 @@ public class Collaborator implements Serializable {
         this.job = job;
         this.skills = new ArrayList<Skill>();
         this.password = password;
-        this.responsible = emailAddress;
+        this.responsible = responsible;
     }
 
     /**
