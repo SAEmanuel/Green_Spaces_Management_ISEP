@@ -1,0 +1,36 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+participant ":RegisterGreenSpaceController" as CTRL
+participant "greenSpaceRepository\n:GreenSpaceRepository" as greenSpaceRepository
+participant "greenSpace\n:GreenSpace" as EMPREGO
+autonumber 3
+
+
+ -> CTRL :getGreenSpacesSizes()
+autonumber 3.1
+activate CTRL
+    group Get Sizes List
+            CTRL ->  greenSpaceRepository : getGreenSpacesSizes()
+            activate greenSpaceRepository
+
+                greenSpaceRepository -> EMPREGO: GreenSpace.Size.values()
+                activate EMPREGO
+
+                EMPREGO --> greenSpaceRepository : sizesList
+                deactivate EMPREGO
+                greenSpaceRepository --> CTRL : sizesList
+            deactivate greenSpaceRepository
+
+    end
+            <-- CTRL : sizesList
+    autonumber 4
+deactivate CTRL
+
+
+@enduml

@@ -13,36 +13,39 @@ autonumber 16.1
 activate CTRL
 
        CTRL -> CTRL : registerGreenSpace(name,size,area)
-    group     Get User Email
-
-
            activate CTRL
+              CTRL -> CTRL : getResponsible()
+                     activate CTRL
+    group Get Responsible
 
-               CTRL -> PLAT : getAuthenticationRepository()
-               activate PLAT
 
-               PLAT --> CTRL : authenticationRepository
-               deactivate PLAT
 
-               CTRL -> authenticationRepository : getCurrentUserSession()
-               activate authenticationRepository
+                     CTRL -> PLAT : getAuthenticationRepository()
+                     activate PLAT
 
-                   authenticationRepository -> authenticationRepository :getUserId()
-                   activate authenticationRepository
+                     PLAT --> CTRL : authenticationRepository
+                     deactivate PLAT
 
-                       authenticationRepository -> authenticationRepository : getEmail()
-                       activate authenticationRepository
+                     CTRL -> authenticationRepository : getCurrentUserSession()
+                     activate authenticationRepository
 
-                           authenticationRepository --> authenticationRepository
-                       deactivate authenticationRepository
-                           authenticationRepository --> authenticationRepository
+                         authenticationRepository -> authenticationRepository :getUserId()
+                         activate authenticationRepository
 
-                   deactivate authenticationRepository
+                             authenticationRepository -> authenticationRepository : getEmail()
+                             activate authenticationRepository
 
-                   authenticationRepository --> CTRL : resposible
-               deactivate authenticationRepository
+                                 authenticationRepository --> authenticationRepository
+                             deactivate authenticationRepository
+                                 authenticationRepository --> authenticationRepository
+                         deactivate authenticationRepository
 
-               deactivate authenticationRepository
+
+                         authenticationRepository --> CTRL : email
+                     deactivate authenticationRepository
+                         CTRL --> CTRL : resposible
+
+                         deactivate CTRL
     end
             CTRL ->  : registerGreenSpace(name,size,area,resposible)
 

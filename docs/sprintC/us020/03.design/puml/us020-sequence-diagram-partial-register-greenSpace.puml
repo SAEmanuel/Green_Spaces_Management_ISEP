@@ -13,7 +13,7 @@ autonumber 16.1
 activate ORG
     group Register Green Space
 
-        ORG -> GREENSPACE**: create
+        ORG -> GREENSPACE: create
 
 
 

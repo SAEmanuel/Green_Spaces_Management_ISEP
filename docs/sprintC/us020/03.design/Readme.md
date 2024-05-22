@@ -51,7 +51,12 @@ It uses Interaction Occurrence (a.k.a. Interaction Use).
 
 ![Sequence Diagram - Partial - Get GreenSpace Repository](svg/us020-sequence-diagram-partial-get_green_space_repository.svg)
 
-**Get User Email**
+**Get Sizes List**
+
+![Sequence Diagram - Partial - Get Sizes List](svg/us020-sequence-diagram-partial-get_sizes_list.svg)
+
+
+**Get Responsible**
 
 ![Sequence Diagram - Partial - Get User Email](svg/us020-sequence-diagram-partial-register-Get-User-Email.svg)
 

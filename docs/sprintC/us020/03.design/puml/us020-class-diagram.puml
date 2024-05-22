@@ -7,37 +7,57 @@ skinparam linetype polyline
 skinparam classAttributeIconSize 0
 'left to right direction
 
-class VehicleRepository {
-    - List<Vehicle> vehicleList
-    + requestList(activation)
-    - getVehiclesNeedingCheckUp(activation)
-    - checkUpListCreated()
-    + getVehicleCheckUpList(): List<Vehicle>
+class GreenSpaceRepository {
+    - List<GreenSpace> greenSpacesList
+    + registerGreenSpace(String name, int size, float area, String address, String resposible)
+    - addGreenSpace(greenSpace)
+    - validate(greenSpace)
+    + getGreenSpacesSizes()
+}
+
+class GreenSpace {
+    -  String name
+    -  String address;
+    -  String responsible;
+    -  Size size;
+    -  float area;
+
+    + GreenSpace(String name, int size, float area, String address,String responsible)
+    - validateInfo(String name, float area,String address)
+
+}
+
+class enum_Size {
+    GARDEN
+    MEDIUM
+    LARGE
 }
 
 class Repositories {
     - Repositories()
     + getInstance() : Repositories
-    + getVehicleRepository()
+    + getGreenSpaceRepository()
 }
 
-class VehicleListController {
-    + VehicleListController()
-    + requestList(activation)
-    + receiveVehicleList(List<Vehicle>)
-    + sendVehicleListToUI(List<Vehicle>)
+class GreenSpaceController {
+    + GreenSpaceController()
+    + registerGreenSpace(String name, int size, float area,String address)
+    + getResponsible()
+    + getGreenSpacesSizes()
 }
 
-class CheckUpListUI {
-    + displayVehicleList(List<Vehicle>)
+class RegisterGreenSpaceUI {
+    + showSizes(GreenSpace.Size[] sizes)
 }
 
-CheckUpListUI ..> VehicleListController
+RegisterGreenSpaceUI ..> GreenSpaceController
 
-VehicleListController --> CheckUpListUI : sendVehicleListToUI()
-VehicleListController .> Repositories : repositories
-Repositories  --> "1 " VehicleRepository
+GreenSpaceController <-- RegisterGreenSpaceUI : getGreenSpacesSizes()
+GreenSpaceController .> Repositories : repositories
+Repositories  --> "1 " GreenSpaceRepository
 Repositories -> Repositories : instance
-VehicleListController ..>  VehicleRepository : vehicleRepository
-VehicleRepository -> VehicleListController : getVehicleCheckUpList()
+GreenSpaceController ..>  GreenSpaceRepository : greenSpaceRepository
+GreenSpaceRepository <- GreenSpaceController : getGreenSpacesSizes()
+GreenSpaceRepository --> GreenSpace : register
+enum_Size - GreenSpace
 @enduml

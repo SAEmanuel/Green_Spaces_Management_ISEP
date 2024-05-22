@@ -14,7 +14,7 @@ participant "repositories\n:Repositories" as PLAT
 autonumber 3
 
 
- -> CTRL :registerGreenSpace(name,size,area)
+ -> CTRL :create
 autonumber 3.1
 activate CTRL
     group Get GreenSpace Repository
