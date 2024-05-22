@@ -40,12 +40,10 @@ public class TeamRepository implements Serializable {
             System.out.println(ANSI_BRIGHT_RED+"Minimum collaborators is greater than maximum collaborators"+ANSI_RESET);
             return optionalValue;
         }
-        int verifyValue = verifyIfExistingCollab(skills,collaboratorList, minCollaborators);
-        if( verifyValue == -1 || teamListAux.size() >= combinacao(verifyValue, minCollaborators) ) {
+        if( verifyIfExistingCollab(skills,collaboratorList, minCollaborators) ) {
             System.out.println(ANSI_BRIGHT_RED+"Not enought collaborators to generate team"+ANSI_RESET);
             return optionalValue;
         }
-
 
         int newTeamId = 1 + teamListAux.size();
         for(Team t : teamList) {
@@ -55,7 +53,6 @@ public class TeamRepository implements Serializable {
             newTeamId++;
         }
 
-        System.out.println(newTeamId);
         Team team = new Team(newTeamId);
         int encontrados = 0;
         boolean allSkillsDone = false;
@@ -64,7 +61,9 @@ public class TeamRepository implements Serializable {
         skillsClone.setSkills(skills.getSkillList());
         List<Collaborator> shuffledCollaboratorList = new ArrayList<>(collaboratorList);
 
-        while(true){
+        int breakDown = 0;
+
+        while(true && breakDown != 5){
             Collections.shuffle(shuffledCollaboratorList);
 
             while(encontrados < maxCollaborators) {
@@ -92,16 +91,19 @@ public class TeamRepository implements Serializable {
                 if(encontrados >= minCollaborators && skills.getSkillList().isEmpty()){
                     encontrados = maxCollaborators;
                 }
-                else
-                    if(encontrados < minCollaborators && skills.getSkillList().isEmpty()){
-                        skills.setSkills(skillsClone.getSkillList());
-                        allSkillsDone = true;
-                    }
+                else {
+
+                    skills.setSkills(skillsClone.getSkillList());
+                    allSkillsDone = true;
+                }
+                if(encontrados < minCollaborators && skills.getSkillList().isEmpty()){
+                }
 
             }
 
             if(!checkTeamCollaborators(team)) {
                 diferentTeam = false;
+                breakDown++;
             }
 
             if(diferentTeam == true){
@@ -114,6 +116,11 @@ public class TeamRepository implements Serializable {
             encontrados = 0;
         }
 
+        if(breakDown == 5){
+            System.out.println(ANSI_BRIGHT_RED+"Not enought collaborators to generate team"+ANSI_RESET);
+            return optionalValue;
+        }
+
         optionalValue = Optional.of(team);
 
         if(!team.getCollaborators().isEmpty()) {
@@ -121,18 +128,6 @@ public class TeamRepository implements Serializable {
         }
 
         return optionalValue;
-    }
-
-    public static long fatorial(int n) {
-        if (n == 0)
-            return 1;
-        else
-            return n * fatorial(n - 1);
-    }
-
-    // Método para calcular combinações
-    public static long combinacao(int n, int r) {
-        return fatorial(n) / (fatorial(r) * fatorial(n - r));
     }
 
     public boolean checkTeamCollaborators(Team team) {
@@ -171,7 +166,7 @@ public class TeamRepository implements Serializable {
      * @param minCollaborators The minimum number of collaborators required for the team.
      * @return True if there are not enough collaborators with the required skills, otherwise false.
      */
-    private int verifyIfExistingCollab(SkillList skills, List<Collaborator> collaboratorList, int minCollaborators) {
+    private boolean verifyIfExistingCollab(SkillList skills, List<Collaborator> collaboratorList, int minCollaborators) {
         int count=0;
         boolean allSkillsDone = false;
 
@@ -193,10 +188,9 @@ public class TeamRepository implements Serializable {
                 allSkillsDone = true;
             }
         }
-
         if(count < minCollaborators)
-            return -1;
-        return count;
+            return true;
+        return false;
     }
 
     /**
