@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
+import pt.ipp.isep.dei.esoft.project.application.DTOS.ToDoEntryDTO;
+import pt.ipp.isep.dei.esoft.project.application.Mappers.AgendaMapper;
 import pt.ipp.isep.dei.esoft.project.domain.AgendaEntry;
 import pt.ipp.isep.dei.esoft.project.domain.Data;
 import pt.ipp.isep.dei.esoft.project.domain.Team;
@@ -49,16 +51,17 @@ public class AgendaController {
     }
 
 //----------------------------------- Register an entry in agenda --------------------------------------
-    public Optional<AgendaEntry> registerAgendaEntry(ToDoEntry agendaEntry, Data starting_Date) {
-        List<ToDoEntry> toDoEntries = toDoListRepository.getToDoList();
+    public Optional<AgendaEntry> registerAgendaEntry(int toDoEntryOption, Data starting_Date) {
+        ToDoEntry agendaEntry = searchForOption(toDoEntryOption);
         Optional<AgendaEntry> optionalAgenda;
 
         optionalAgenda = agenda.registerAgendaEntry(agendaEntry, starting_Date);
-        if (optionalAgenda.isPresent()) {
-            toDoEntries.remove(agendaEntry);
-        }
 
         return optionalAgenda;
+    }
+
+    private ToDoEntry searchForOption(int toDoEntryOption) {
+        return getToDoListForResponsible().get(toDoEntryOption);
     }
 
     //------------------------------------ Postpone task --------------------------------
@@ -86,8 +89,12 @@ public class AgendaController {
         return Repositories.getInstance().getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail();
     }
 
-    public List<ToDoEntry> getToDoListForResponsible(){
+    private List<ToDoEntry> getToDoListForResponsible(){
         return toDoListRepository.getToDoListForResponsible(getResponsible());
+    }
+
+    public List<ToDoEntryDTO> getToDoListDTOForResponsible(){
+        return toDTO(getToDoListForResponsible());
     }
 
     public List<AgendaEntry> getAgendaEntriesForResponsible(){
@@ -98,5 +105,11 @@ public class AgendaController {
         return teamRepository.getTeamList();
     }
 
+    //-------------------------------------- Mapper -----------------------------
+
+    private List<ToDoEntryDTO> toDTO(List<ToDoEntry> toDoEntries){
+        AgendaMapper agendaMapper = new AgendaMapper();
+        return agendaMapper.listToDto(toDoEntries);
+    }
 
 }
