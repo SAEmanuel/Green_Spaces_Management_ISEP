@@ -1,45 +1,49 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
-import pt.ipp.isep.dei.esoft.project.application.controller.RegisterGreenSpaceController;
+import pt.ipp.isep.dei.esoft.project.application.controller.GreenSpaceController;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
-import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 
 import java.util.InputMismatchException;
 import java.util.Optional;
 import java.util.Scanner;
 
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
-import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_BRIGHT_YELLOW;
 
+/**
+ * The {@code RegisterGreenSpaceUI} class handles the user interface for registering a new green space.
+ * It interacts with the {@code GreenSpaceController} to perform operations and display appropriate messages.
+ */
 public class RegisterGreenSpaceUI implements Runnable {
 
-    private final RegisterGreenSpaceController controller;
+    private final GreenSpaceController controller; // Controller to manage green spaces
     private String name;
     private String address;
     private int size;
     private float area;
 
     /**
-     * Default constructor that initializes the RegisterGreenSpaceController.
+     * Default constructor that initializes the {@code GreenSpaceController}.
      */
     public RegisterGreenSpaceUI() {
-        controller = new RegisterGreenSpaceController();
+        controller = new GreenSpaceController();
     }
 
     /**
-     * Gets the RegisterGreenSpaceController instance.
+     * Gets the {@code GreenSpaceController} instance.
      *
-     * @return The RegisterGreenSpaceController instance.
+     * @return The {@code GreenSpaceController} instance.
      */
-    private RegisterGreenSpaceController getController() {
+    private GreenSpaceController getController() {
         return controller;
     }
+
+    //-------------------------------------- Run if happy success -------------------------
 
     /**
      * Main method that executes the green space registration interface.
      */
     public void run() {
-        System.out.println("\n\n--- Green Space ------------------------");
+        System.out.println("\n\n--- Register a \"Green Space\" ------------------------");
 
         requestData();
 
@@ -48,22 +52,21 @@ public class RegisterGreenSpaceUI implements Runnable {
         if (continueApp != 2) {
             submitData();
         }
-
     }
 
-
-
+    /**
+     * Submits the green space data to be registered.
+     */
     private void submitData() {
-        // Attempt to register the vehicle using the provided data
+        // Attempt to register the green space using the provided data
         try {
-
-            Optional<GreenSpace> greenSpace = getController().registerGreenSpace(name,size,area,address);
+            Optional<GreenSpace> greenSpace = getController().registerGreenSpace(name, size, area, address);
 
             // Check if the registration was successful
             if (greenSpace.isPresent()) {
                 System.out.println(ANSI_BRIGHT_GREEN + "Green Space successfully registered!" + ANSI_RESET);
             } else {
-                // Print error message if vehicle is already registered
+                // Print error message if green space is already registered
                 System.out.println(ANSI_BRIGHT_RED + "Green Space not registered - Already registered!" + ANSI_RESET);
             }
 
@@ -75,10 +78,10 @@ public class RegisterGreenSpaceUI implements Runnable {
         }
     }
 
-
-
+    /**
+     * Handles the registration process in case of an exception.
+     */
     public void runException() {
-
         if (repeatProcess()) {
             requestData();
             int continueApp = confirmsMenu();
@@ -87,14 +90,12 @@ public class RegisterGreenSpaceUI implements Runnable {
                 submitData();
             }
         }
-
     }
-
 
     /**
      * Asks the user whether to repeat the registration process.
      *
-     * @return True if the user wants to register a new vehicle, false otherwise.
+     * @return True if the user wants to register a new green space, false otherwise.
      */
     private boolean repeatProcess() {
         System.out.print("\nDo you wish to register new info? (y/n): ");
@@ -112,7 +113,6 @@ public class RegisterGreenSpaceUI implements Runnable {
         }
     }
 
-
     /**
      * Asks the user to confirm the entered Green Space data.
      *
@@ -121,7 +121,6 @@ public class RegisterGreenSpaceUI implements Runnable {
     private int confirmsMenu() {
         Scanner input = new Scanner(System.in);
         int option = -1;
-
 
         while (option != 1) {
             display();
@@ -142,23 +141,21 @@ public class RegisterGreenSpaceUI implements Runnable {
         return option;
     }
 
-
     /**
-     * Displays the typed vehicle information and options for confirmation.
+     * Displays the entered Green Space information and options for confirmation.
      */
     private void display() {
         GreenSpace.Size[] sizes = GreenSpace.Size.values();
-        StringBuilder stringBuilder = new StringBuilder(String.format("Name: %s | Size: %s | Area: %.4f | Address: %s", name,sizes[size],area,address));
+        StringBuilder stringBuilder = new StringBuilder(String.format("Name: %s | Size: %s | Area: %.4f | Address: %s", name, sizes[size], area, address));
         System.out.printf("\nTyped data -> [%s%s%s]\n", ANSI_GREEN, stringBuilder, ANSI_RESET);
         System.out.print("Confirmation menu:\n 0 -> Change Green Space Info\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
     }
 
-
-
-
     //-------------------- Data Request -----------------------------------
 
-
+    /**
+     * Requests all necessary data for registering a green space.
+     */
     private void requestData() {
         name = requestName();
         area = requestArea();
@@ -166,21 +163,42 @@ public class RegisterGreenSpaceUI implements Runnable {
         size = requestSize();
     }
 
+    /**
+     * Requests the name of the green space.
+     *
+     * @return The entered name.
+     */
+    private String requestName() {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Name: ");
+        return input.nextLine();
+    }
+
+    /**
+     * Requests the address of the green space.
+     *
+     * @return The entered address.
+     */
     private String requestAddress() {
         Scanner input = new Scanner(System.in);
         System.out.print("Address: ");
         return input.nextLine();
     }
 
+    /**
+     * Requests the area of the green space.
+     *
+     * @return The entered area.
+     */
     private float requestArea() {
-        float resposta;
+        float response;
         Scanner input = new Scanner(System.in);
 
         System.out.print("Area (hectares): ");
         while (true) {
             try {
-                resposta = input.nextFloat();
-                return resposta;
+                response = input.nextFloat();
+                return response;
             } catch (InputMismatchException e) {
                 System.out.print(ANSI_BRIGHT_RED + "Invalid Area! Enter a new one: " + ANSI_RESET);
                 input.nextLine();
@@ -188,42 +206,43 @@ public class RegisterGreenSpaceUI implements Runnable {
         }
     }
 
-    //-------------------- Request Size ---------------------------
+    /**
+     * Requests the size of the green space.
+     *
+     * @return The entered size option.
+     */
     private int requestSize() {
         int answer;
         Scanner input = new Scanner(System.in);
-        GreenSpace.Size[] sizes = GreenSpace.Size.values();
+        GreenSpace.Size[] sizes = controller.getGreenSpacesSizes();
         int n = sizes.length;
-        showTypes(sizes);
+        showSizes(sizes);
 
         System.out.print("Sizes options: ");
         while (true) {
             try {
-                answer = input.nextInt() -1;
+                answer = input.nextInt() - 1;
                 if (answer <= n - 1 && answer >= 0) {
-                    return answer ;
+                    return answer;
                 }
             } catch (InputMismatchException e) {
-                System.out.print(ANSI_BRIGHT_RED + "Invalid data inputted! Enter a new one: " + ANSI_RESET +"\n");
+                System.out.print(ANSI_BRIGHT_RED + "Invalid data inputted! Enter a new one: " + ANSI_RESET + "\n");
                 input.nextLine();
             }
-            System.out.print(ANSI_BRIGHT_YELLOW+"Invalid size option, enter a new one: "+ANSI_RESET);
+            System.out.print(ANSI_BRIGHT_YELLOW + "Invalid size option, enter a new one: " + ANSI_RESET);
         }
     }
 
-
-    private void showTypes(GreenSpace.Size[] sizes) {
+    /**
+     * Displays the list of possible sizes for green spaces.
+     *
+     * @param sizes The array of green space sizes.
+     */
+    private void showSizes(GreenSpace.Size[] sizes) {
         System.out.println("\n--List of Sizes--");
         for (int i = 0; i < sizes.length; i++) {
-            System.out.println("• Size: " + sizes[i] + "\n" + ANSI_PURPLE + "   Option -> [" + (i+1) + "]" + ANSI_RESET);
+            System.out.println("• Size: " + sizes[i] + "\n" + ANSI_PURPLE + "   Option -> [" + (i + 1) + "]" + ANSI_RESET);
         }
         System.out.println("----------------");
-    }
-
-    //----------------------------------------------------------
-    private String requestName() {
-        Scanner input = new Scanner(System.in);
-        System.out.print("Name: ");
-        return input.nextLine();
     }
 }
