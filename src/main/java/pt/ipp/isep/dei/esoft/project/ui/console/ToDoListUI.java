@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.ui.console;
 
+import pt.ipp.isep.dei.esoft.project.application.DTOS.GreenSpaceDTO;
 import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
 import pt.ipp.isep.dei.esoft.project.domain.ToDoEntry;
@@ -11,7 +12,8 @@ import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_RESET
 
 public class ToDoListUI implements Runnable {
 
-    private GreenSpace greenSpace;
+    private GreenSpaceDTO greenSpaceDTO;
+    private int greenSpaceId;
     private String title;
     private String description;
     private int urgency;
@@ -30,9 +32,9 @@ public class ToDoListUI implements Runnable {
     @Override
     public void run() {
         System.out.println("\n\n--- Add New Entry To-Do List ------------------------");
-        List<GreenSpace> greenSpacesAvailableByResponsible;
+        List<GreenSpaceDTO> greenSpacesAvailableByResponsible;
 
-        greenSpacesAvailableByResponsible = controller.getGreenSpacesByResponsible();
+        greenSpacesAvailableByResponsible = controller.getToDoListDTOForResponsible();
 
         if(!greenSpacesAvailableByResponsible.isEmpty()){
             getGreenSpaceListOption(greenSpacesAvailableByResponsible);
@@ -51,14 +53,13 @@ public class ToDoListUI implements Runnable {
 
     }
 
-    public GreenSpace getGreenSpaceListOption(List<GreenSpace> greenSpacesAvailableByResponsible) {
+    public int getGreenSpaceListOption(List<GreenSpaceDTO> greenSpacesAvailableByResponsible) {
         Scanner input = new Scanner(System.in);
 
         int answer;
         int n = greenSpacesAvailableByResponsible.size();
 
-
-        controller.showGreenSpaces(greenSpacesAvailableByResponsible);
+        showGreenSpaces(greenSpacesAvailableByResponsible);
 
         if (n != 0) {
             System.out.print("Green Space ID: ");
@@ -66,8 +67,8 @@ public class ToDoListUI implements Runnable {
                 try {
                     answer = input.nextInt() - 1;
                     if (answer <= n - 1 && answer >= 0) {
-                        greenSpace = controller.getGreenSpaces().get(answer);
-                        return greenSpace;
+                        greenSpaceDTO = greenSpacesAvailableByResponsible.get(answer);
+                        return greenSpaceId;
                     }
                 } catch (InputMismatchException e) {
                     System.out.print(ANSI_BRIGHT_RED + "Invalid Green Space ID number! Enter a new one: " + ANSI_RESET + "\n");
@@ -77,8 +78,34 @@ public class ToDoListUI implements Runnable {
 
             }
         }
-        return null;
+        return -1;
     }
+
+
+
+    /**
+     * Displays a list of green spaces available for a responsible person.
+     *
+     * @param greenSpacesAvailableByResponsible the list of green spaces
+     */
+    public void showGreenSpaces( List<GreenSpaceDTO> greenSpacesAvailableByResponsible) {
+        if (greenSpacesAvailableByResponsible.isEmpty()) {
+            System.out.println(ANSI_BRIGHT_RED + "No green spaces were found in the repository." + ANSI_RESET);
+        } else {
+            System.out.println("\n--List of Green Spaces--");
+            for (int i = 0; i < greenSpacesAvailableByResponsible.size(); i++) {
+                GreenSpaceDTO greenSpace = greenSpacesAvailableByResponsible.get(i);
+                System.out.println("• Green Space: " + greenSpace.getObjDto().getName() + "\n" + ANSI_PURPLE + "   Option -> [" + (i + 1) + "]" + ANSI_RESET);
+            }
+            System.out.println("----------------");
+        }
+    }
+
+
+
+
+
+
 
     private void requestData() {
        title = requestTitle();
@@ -156,7 +183,7 @@ public class ToDoListUI implements Runnable {
         // Attempt to register the vehicle using the provided data
         try {
 
-            Optional<ToDoEntry> toDoEntry = getController().registerToDoEntry(greenSpace, title, description, urgency, expectedDuration);
+            Optional<ToDoEntry> toDoEntry = getController().registerToDoEntry(greenSpaceId, title, description, urgency, expectedDuration);
 
             // Check if the registration was successful
             if (toDoEntry.isPresent()) {
@@ -234,7 +261,7 @@ public class ToDoListUI implements Runnable {
         System.out.println(ANSI_BRIGHT_YELLOW + "Description: " + description + ANSI_RESET);
         System.out.println(ANSI_BRIGHT_YELLOW + "Urgency: " + urgencies[urgency] + ANSI_RESET);
         System.out.println(ANSI_BRIGHT_YELLOW + "Expected Duration: " + expectedDuration + " day(s)" + ANSI_RESET);
-        System.out.println(ANSI_BRIGHT_YELLOW + "Green Space: " + greenSpace.getName() + ANSI_RESET);
+        System.out.println(ANSI_BRIGHT_YELLOW + "Green Space: " + greenSpaceDTO.getObjDto().getName() + ANSI_RESET);
         System.out.print("\nConfirmation menu:\n 0 -> Change Green Space Info\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
     }
 
