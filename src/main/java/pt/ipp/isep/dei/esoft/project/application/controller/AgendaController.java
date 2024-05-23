@@ -2,10 +2,7 @@ package pt.ipp.isep.dei.esoft.project.application.controller;
 
 import pt.ipp.isep.dei.esoft.project.application.DTOS.ToDoEntryDTO;
 import pt.ipp.isep.dei.esoft.project.application.Mappers.AgendaMapper;
-import pt.ipp.isep.dei.esoft.project.domain.AgendaEntry;
-import pt.ipp.isep.dei.esoft.project.domain.Data;
-import pt.ipp.isep.dei.esoft.project.domain.Team;
-import pt.ipp.isep.dei.esoft.project.domain.ToDoEntry;
+import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.Agenda;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.TeamRepository;
@@ -65,22 +62,21 @@ public class AgendaController {
     }
 
     //------------------------------------ Postpone task --------------------------------
-    public boolean postponeTask(int agendaTaskID,Data postponeDate, AgendaEntry agendaEntry) {
-        return agenda.postponeTask(agendaTaskID,postponeDate,agendaEntry);
+    public boolean postponeTask(int agendaTaskID, Data postponeDate, AgendaEntry agendaEntry) {
+        return agenda.postponeTask(agendaTaskID, postponeDate, agendaEntry);
     }
 
     //------------------------------------ Assign team to task in agenda --------------------------------
     public boolean assignTeam(int teamID, int agendaEntryID) {
         List<Team> teams = teamRepository.getListTeam();
-        return agenda.assignTeam(teams.get(teamID),agendaEntryID);
+        return agenda.assignTeam(teams.get(teamID), agendaEntryID);
     }
-
 
 
     //--------------------------------------  Cancel Task -----------------------------
 
     public boolean cancelTask(int agendaTaskID) {
-        return agenda.cancelTask(agendaTaskID,getResponsible());
+        return agenda.cancelTask(agendaTaskID, getResponsible());
     }
 
     //--------------------------------------  Extra Methods -----------------------------
@@ -89,27 +85,38 @@ public class AgendaController {
         return Repositories.getInstance().getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail();
     }
 
-    private List<ToDoEntry> getToDoListForResponsible(){
+    private List<ToDoEntry> getToDoListForResponsible() {
         return toDoListRepository.getToDoListForResponsible(getResponsible());
     }
 
-    public List<ToDoEntryDTO> getToDoListDTOForResponsible(){
+    public List<ToDoEntryDTO> getToDoListDTOForResponsible() {
         return toDTO(getToDoListForResponsible());
     }
 
-    public List<AgendaEntry> getAgendaEntriesForResponsible(){
+    public List<AgendaEntry> getAgendaEntriesForResponsible() {
         return agenda.getAgendaEntriesForResponsible(getResponsible());
     }
 
-    public List<Team> getTeams(){
+    public List<Team> getTeams() {
         return teamRepository.getTeamList();
     }
 
     //-------------------------------------- Mapper -----------------------------
 
-    private List<ToDoEntryDTO> toDTO(List<ToDoEntry> toDoEntries){
+    private List<ToDoEntryDTO> toDTO(List<ToDoEntry> toDoEntries) {
         AgendaMapper agendaMapper = new AgendaMapper();
         return agendaMapper.listToDto(toDoEntries);
+    }
+
+    public Optional<List<AgendaEntry>> requestColabTaskList(Collaborator collaborator, Data startDate, Data endDate, int filterSelection) {
+        Optional<List<AgendaEntry>> request;
+
+        request = agenda.requestColabTaskList(collaborator, startDate, endDate, filterSelection);
+        return request;
+    }
+
+    public AgendaEntry.Status[] getStatus() {
+        return agenda.getStatus();
     }
 
 }

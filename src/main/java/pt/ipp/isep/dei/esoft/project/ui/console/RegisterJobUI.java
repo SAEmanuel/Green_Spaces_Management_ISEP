@@ -57,7 +57,9 @@ public class RegisterJobUI implements Runnable {
                 System.out.println(ANSI_BRIGHT_RED + "Job not registered - Already registered!" + ANSI_RESET);
             }
 
-        } catch (IllegalArgumentException e) {}
+        } catch (IllegalArgumentException e) {
+            System.out.print("");
+        }
 
     }
 

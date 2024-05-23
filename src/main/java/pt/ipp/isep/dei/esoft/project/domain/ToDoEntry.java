@@ -43,6 +43,7 @@ public class ToDoEntry implements Serializable {
     public String getTitle() {
         return title;
     }
+
     public GreenSpace getGreenSpace() {
         return greenSpace;
     }
@@ -60,27 +61,26 @@ public class ToDoEntry implements Serializable {
     }
 
 
-    public enum Urgency{
-        LOW{
+    public enum Urgency {
+        LOW {
             @Override
             public String toString() {
                 return ANSI_SPRING_GREEN + "Low" + ANSI_RESET;
             }
         },
-        MEDIUM{
+        MEDIUM {
             @Override
             public String toString() {
                 return ANSI_YELLOW + "Medium" + ANSI_RESET;
             }
         },
-        HIGH{
+        HIGH {
             @Override
             public String toString() {
                 return ANSI_FIREBRICK + "High" + ANSI_RESET;
             }
         },
     }
-
 
 
     private void validateToDo(String title, String description, int urgency, int expectedDuration) {
@@ -92,11 +92,10 @@ public class ToDoEntry implements Serializable {
         //TODO: ACEITAR A MESMA ENTRY SE A ATUAL ESTIVER COM UM STATUS DIFERENTE
 
 
-
     }
 
     public ToDoEntry clone() {
-        return new ToDoEntry(this.greenSpace, this.title, this.description , this.urgency, this.expectedDuration);
+        return new ToDoEntry(this.greenSpace, this.title, this.description, this.urgency, this.expectedDuration);
     }
 
     public boolean equals(Object otherObject) {
@@ -164,6 +163,6 @@ public class ToDoEntry implements Serializable {
     @Override
     public String toString() {
         Urgency[] urgencies = ToDoEntry.Urgency.values();
-        return String.format("[%s | %s | %s | %d | %s]", title, description,  urgencies[urgency], expectedDuration, greenSpace.getName());
+        return String.format("[%s | %s | %s | %d | %s]", title, description, urgencies[urgency], expectedDuration, greenSpace.getName());
     }
 }

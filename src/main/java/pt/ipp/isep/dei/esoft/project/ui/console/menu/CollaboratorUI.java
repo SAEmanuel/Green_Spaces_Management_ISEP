@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 import pt.ipp.isep.dei.esoft.project.application.controller.CreateCollaboratorController;
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
+import pt.ipp.isep.dei.esoft.project.ui.console.RetrieveTasksUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.util.ArrayList;
@@ -18,9 +19,12 @@ public class CollaboratorUI implements Runnable {
     public void run() {
         Repositories repositories = Repositories.getInstance();
         List<Collaborator> collaborators = repositories.getCollaboratorRepository().getCollaboratorList();
-        for (Collaborator c : collaborators) {
-            if (c.getEmailAddress().equals(controller.getResponsible()) && c.getBirthDate().isBirthDate(c.getBirthDate().getDay(), c.getBirthDate().getMonth())) {
-                System.out.printf("Happy Birthday %s%nWe are happy to have you at MusgoSublime%n", c.getName());
+        Collaborator loggedInCollaborator = getLoggedInCollaborator(collaborators);
+        ;
+        for (Collaborator colab : collaborators) {
+            if (colab.getEmailAddress().equals(controller.getResponsible()) &&
+                    colab.getBirthDate().isBirthDate(colab.getBirthDate().getDay(), colab.getBirthDate().getMonth())) {
+                System.out.printf("Happy Birthday %s!!!%nWe are happy to have you at MusgoSublime%n", colab.getName());
                 System.out.println("                0   0\n" +
                         "                |   |\n" +
                         "            ____|___|____\n" +
@@ -39,10 +43,7 @@ public class CollaboratorUI implements Runnable {
 
         }
         List<MenuItem> options = new ArrayList<MenuItem>();
-//        options.add(new MenuItem("Register a Green Space", new RegisterGreenSpaceUI()));
-//        options.add(new MenuItem("Add a New Entry to the To-Do List", new ToDoListUI()));
-//        options.add(new MenuItem("Add a New Entry to the Agenda", new AgendaUI()));
-//        options.add(new MenuItem("Postpone task in the Agenda", new PostponeTaskAgendaUI()));
+        options.add(new MenuItem("Consult assigned tasks", new RetrieveTasksUI(loggedInCollaborator)));
 
 
         int option = 0;
@@ -53,5 +54,15 @@ public class CollaboratorUI implements Runnable {
                 options.get(option).run();
             }
         } while (option != -1);
+    }
+
+    private Collaborator getLoggedInCollaborator(List<Collaborator> collaborators) {
+        String loggedInEmail = controller.getResponsible();
+        for (Collaborator collaborator : collaborators) {
+            if (collaborator.getEmailAddress().equals(loggedInEmail)) {
+                return collaborator;
+            }
+        }
+        return null;
     }
 }
