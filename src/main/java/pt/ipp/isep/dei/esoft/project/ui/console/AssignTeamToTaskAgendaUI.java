@@ -6,6 +6,7 @@ import pt.ipp.isep.dei.esoft.project.domain.Extras.ConfirmationMenu.Confirmation
 import pt.ipp.isep.dei.esoft.project.domain.Team;
 import pt.ipp.isep.dei.esoft.project.repository.Agenda;
 
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -56,12 +57,10 @@ public class AssignTeamToTaskAgendaUI implements Runnable {
         boolean result = getController().assignTeam(teamID,agendaEntryID);
 
         if (result) {
-            System.out.println(ANSI_BRIGHT_GREEN + "Team successfully assigned!" + ANSI_RESET);
+            System.out.println(ANSI_BRIGHT_GREEN + "\nTeam successfully assigned!" + ANSI_RESET);
         } else {
-            System.out.printf(ANSI_BRIGHT_RED + "Team not assigned - This task already have a team assigned!" + ANSI_RESET);
+            System.out.printf(ANSI_BRIGHT_RED + "\nTeam not assigned - This task already have a team assigned!" + ANSI_RESET);
         }
-
-
     }
 
 

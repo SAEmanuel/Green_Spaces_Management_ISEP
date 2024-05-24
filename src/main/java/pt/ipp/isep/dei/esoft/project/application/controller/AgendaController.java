@@ -8,6 +8,8 @@ import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.TeamRepository;
 import pt.ipp.isep.dei.esoft.project.repository.ToDoListRepository;
 
+//import javax.mail.MessagingException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,11 +18,13 @@ public class AgendaController {
     private Agenda agenda;
     private ToDoListRepository toDoListRepository;
     private TeamRepository teamRepository;
+    private SendEmail sendEmail;
 
     public AgendaController() {
         this.agenda = getAgenda();
         this.toDoListRepository = getToDoRepository();
         this.teamRepository = getTeamRepository();
+        this.sendEmail = getSendEmail();
     }
 
     private TeamRepository getTeamRepository() {
@@ -45,6 +49,14 @@ public class AgendaController {
             agenda = repositories.getAgenda();
         }
         return agenda;
+    }
+
+    private SendEmail getSendEmail() {
+        if (sendEmail == null) {
+            Repositories repositories = Repositories.getInstance();
+            sendEmail = repositories.getSendEmail();
+        }
+        return sendEmail;
     }
 
 //----------------------------------- Register an entry in agenda --------------------------------------
@@ -75,7 +87,21 @@ public class AgendaController {
     //------------------------------------ Assign team to task in agenda --------------------------------
     public boolean assignTeam(int teamID, int agendaEntryID) {
         List<Team> teams = teamRepository.getListTeam();
-        return agenda.assignTeam(teams.get(teamID), agendaEntryID);
+        if(agenda.assignTeam(teams.get(teamID), agendaEntryID)){
+            try {
+                String[] emails = new String[1];
+                emails[0] = "1231498@isep.ipp.pt";
+                sendEmail.sendEmail("src/main/resources/config.properties", "isep_ipp_pt", emails, "Assunto", "Texto do email");
+//            } catch (MessagingException e) {
+//                System.out.println("Team added but not message sent(messaginException)");
+//                return false;
+            } catch (IOException e) {
+                System.out.println("Team added but not message sent(IOException)");
+                return false;
+            }
+            return true;
+        }
+        return false;
     }
 
 

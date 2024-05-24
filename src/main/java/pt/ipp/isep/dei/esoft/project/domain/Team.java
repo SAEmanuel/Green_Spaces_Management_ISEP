@@ -40,9 +40,13 @@ public class Team {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
+        int i = 0;
         for (Collaborator c : collaborators) {
-
-            builder.append(c.getName() + " ");
+            if(i!=0)
+                builder.append(", "+c.getName() + " ");
+            else
+                builder.append(c.getName() + " ");
+            i++;
         }
         return String.format("[ Team ID: %d | Collaborators: %s ]", teamId, builder);
     }

@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
+import pt.ipp.isep.dei.esoft.project.domain.SendEmail;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
@@ -18,6 +20,7 @@ public class Repositories implements Serializable {
     private final GreenSpaceRepository greenSpaceRepository;
     private final ToDoListRepository toDoListRepository;
     private final Agenda agenda;
+    private final SendEmail sendEmail;
 
     private Repositories() {
         authenticationRepository = new AuthenticationRepository();
@@ -30,6 +33,7 @@ public class Repositories implements Serializable {
         greenSpaceRepository = new GreenSpaceRepository();
         toDoListRepository = new ToDoListRepository();
         agenda = new Agenda();
+        sendEmail = new SendEmail();
     }
 
     public static Repositories getInstance() {
@@ -81,6 +85,7 @@ public class Repositories implements Serializable {
         return agenda;
     }
 
+    public SendEmail getSendEmail() { return sendEmail; }
 
     public static void setInstance(Repositories repositories) {
         synchronized (Repositories.class) {
