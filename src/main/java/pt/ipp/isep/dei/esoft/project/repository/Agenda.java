@@ -48,7 +48,7 @@ public class Agenda implements Serializable {
                     if (agendaEntry.getTeam().hasCollaborator(collaborator)
                             && agendaEntry.getStartingDate().isGreater(startDate)
                             && !agendaEntry.getStartingDate().isGreater(endDate)
-                            && agendaEntry.agendaEntry().getStatus().equals("Planned")) {
+                            && agendaEntry.getAgendaEntry().getStatus().equals("Planned")) {
                         taskList.add(agendaEntry);
                     }
 
@@ -59,7 +59,7 @@ public class Agenda implements Serializable {
                     if (agendaEntry.getTeam().hasCollaborator(collaborator)
                             && agendaEntry.getStartingDate().isGreater(startDate)
                             && !agendaEntry.getStartingDate().isGreater(endDate)
-                            && agendaEntry.agendaEntry().getStatus().equals("Postponed")) {
+                            && agendaEntry.getAgendaEntry().getStatus().equals("Postponed")) {
                         taskList.add(agendaEntry);
                     }
 
@@ -70,7 +70,7 @@ public class Agenda implements Serializable {
                     if (agendaEntry.getTeam().hasCollaborator(collaborator)
                             && agendaEntry.getStartingDate().isGreater(startDate)
                             && !agendaEntry.getStartingDate().isGreater(endDate)
-                            && agendaEntry.agendaEntry().getStatus().equals("Canceled")) {
+                            && agendaEntry.getAgendaEntry().getStatus().equals("Canceled")) {
                         taskList.add(agendaEntry);
                     }
 
@@ -81,7 +81,7 @@ public class Agenda implements Serializable {
                     if (agendaEntry.getTeam().hasCollaborator(collaborator)
                             && agendaEntry.getStartingDate().isGreater(startDate)
                             && !agendaEntry.getStartingDate().isGreater(endDate)
-                            && agendaEntry.agendaEntry().getStatus().equals("Done")) {
+                            && agendaEntry.getAgendaEntry().getStatus().equals("Done")) {
                         taskList.add(agendaEntry);
                     }
 

@@ -9,7 +9,7 @@ import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_RESET
 
 public class AgendaEntry implements Serializable {
 
-    private final ToDoEntry agendaEntry;
+    private ToDoEntry agendaEntry;
 
     private Team team;
     private List<Vehicle> vehicles;
@@ -18,7 +18,7 @@ public class AgendaEntry implements Serializable {
     private Data real_end_Date;
     private final String responsible;
 
-    private enum Status {
+    public enum Status {
         PLANNED{
             @Override
             public String toString() {
@@ -111,13 +111,15 @@ public class AgendaEntry implements Serializable {
         return agendaEntry;
     }
 
-    public Data getStarting_Date() {
+    public Data getStartingDate() {
         return starting_Date;
     }
 
     public Team getTeam() {
         return team;
     }
+
+
 
     // **********************
 
