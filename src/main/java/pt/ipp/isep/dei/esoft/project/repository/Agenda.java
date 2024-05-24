@@ -187,8 +187,6 @@ public class Agenda implements Serializable {
         if (validatesStatus(taskInAgenda)) {
             return false;
         }
-        System.out.println(validatesStatus(taskInAgenda));
-        System.out.println(taskInAgenda.getAgendaEntry().getStatus());
         taskInAgenda.cancelTask();
         return true;
     }

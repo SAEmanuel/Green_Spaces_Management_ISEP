@@ -1,0 +1,50 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+
+actor "Green Space Manager" as Employee
+
+participant ":AgendaUI" as UI
+participant ":AgendaController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "vehicleRepository\n:VehicleRepository" as vehicleRepository
+participant "agenda\n:Agenda" as AGENDA
+participant "agendaEntry\n:AgendaEntry" as AGENDAENTRY
+
+activate Employee
+
+    Employee -> UI : ask to add an entry in the Agenda
+    activate UI
+
+
+    UI --> Employee : shows list of task\n and request a selection
+    deactivate UI
+
+    Employee -> UI : select an option
+
+    activate UI
+
+    UI --> Employee : request data (startingDate)
+    deactivate UI
+
+    Employee -> UI : types requested data
+
+
+    activate UI
+
+        UI --> Employee : show all data registered\n and the confirmation menu
+    deactivate UI
+
+    Employee -> UI : submits data
+    activate UI
+
+        UI --> Employee : shows operation (in)success
+    deactivate UI
+
+@enduml
+@enduml
