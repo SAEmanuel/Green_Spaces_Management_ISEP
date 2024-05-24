@@ -14,7 +14,8 @@ public class AgendaEntry implements Serializable {
     private Team team;
     private List<Vehicle> vehicles;
     private Data starting_Date;
-    private Data end_Date;
+    private Data expected_end_Date;
+    private Data real_end_Date;
     private final String responsible;
 
     private enum Status {
@@ -22,12 +23,6 @@ public class AgendaEntry implements Serializable {
             @Override
             public String toString() {
                 return "Planned";
-            }
-        },
-        POSTPONED{
-            @Override
-            public String toString() {
-                return "Postponed";
             }
         },
         CANCELED{
@@ -52,7 +47,8 @@ public class AgendaEntry implements Serializable {
         this.agendaEntry = agendaEntry;
         agendaEntry.setStatus(String.valueOf(Status.PLANNED));
         this.starting_Date = starting_Date;
-        this.end_Date = calculateEndDate(starting_Date,agendaEntry);
+        this.expected_end_Date = calculateEndDate(starting_Date,agendaEntry);
+        this.real_end_Date = null;
         this.team = null;
         this.vehicles = null;
         this.responsible = agendaEntry.getResponsible();
@@ -79,18 +75,21 @@ public class AgendaEntry implements Serializable {
     //------------------------------------ Sets and Gets ----------------------------
 
     // ********** Sets ************
-    public void setEnd_Date(Data end_Date) {
-        this.end_Date = end_Date;
+    public void setExpected_end_Date(Data expected_end_Date) {
+        this.expected_end_Date = expected_end_Date;
     }
 
     public void setStarting_Date(Data starting_Date) {
         this.starting_Date = starting_Date;
-        this.end_Date = calculateEndDate(starting_Date, agendaEntry);
-        agendaEntry.setStatus(String.valueOf(Status.POSTPONED));
+        this.expected_end_Date = calculateEndDate(starting_Date, agendaEntry);
     }
 
     public void setTeam(Team team) {
         this.team = team;
+    }
+
+    public void setReal_end_Date(Data real_end_Date) {
+        this.real_end_Date = real_end_Date;
     }
 
     public void cancelTask(){
@@ -104,8 +103,8 @@ public class AgendaEntry implements Serializable {
         return responsible;
     }
 
-    public Data getEnd_Date() {
-        return end_Date;
+    public Data getExpected_end_Date() {
+        return expected_end_Date;
     }
 
     public ToDoEntry getAgendaEntry() {
@@ -132,7 +131,7 @@ public class AgendaEntry implements Serializable {
 
         AgendaEntry otherAgenda = (AgendaEntry) otherObject;
         return agendaEntry.equals(otherAgenda.agendaEntry) && starting_Date.equals(otherAgenda.starting_Date)
-                && end_Date.equals(otherAgenda.end_Date);
+                && expected_end_Date.equals(otherAgenda.expected_end_Date);
     }
 
 
@@ -142,6 +141,6 @@ public class AgendaEntry implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("  Information: %s \n  Status: %s%s%s \n  Team: %s \n  Vehicles: %s \n  Starting Date: %s \n  End Date: %s",agendaEntry,ANSI_MEDIUM_SPRING_GREEN,agendaEntry.getStatus(),ANSI_RESET,team,vehicles,starting_Date,end_Date);
+        return String.format("  Information: %s \n  Status: %s%s%s \n  Team: %s \n  Vehicles: %s \n  Starting Date: %s \n  Expected End Date: %s \n  Real End Date: %s",agendaEntry,ANSI_MEDIUM_SPRING_GREEN,agendaEntry.getStatus(),ANSI_RESET,team,vehicles,starting_Date, expected_end_Date,real_end_Date);
     }
 }

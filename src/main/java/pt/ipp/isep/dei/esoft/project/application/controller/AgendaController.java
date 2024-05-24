@@ -52,10 +52,16 @@ public class AgendaController {
 
 //----------------------------------- Register an entry in agenda --------------------------------------
     public Optional<AgendaEntry> registerAgendaEntry(int toDoEntryOption, Data starting_Date) {
+        List<ToDoEntry> toDoEntries = toDoListRepository.getToDoList();
         ToDoEntry agendaEntry = searchForOption(toDoEntryOption);
+
         Optional<AgendaEntry> optionalAgenda;
 
         optionalAgenda = agenda.registerAgendaEntry(agendaEntry, starting_Date);
+        if (optionalAgenda.isPresent()) {
+            toDoEntries.remove(agendaEntry);
+        }
+
 
         return optionalAgenda;
     }
