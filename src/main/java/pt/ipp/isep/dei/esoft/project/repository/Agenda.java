@@ -232,4 +232,15 @@ public class Agenda implements Serializable {
         return agendaEntries;
     }
 
+    public List<AgendaEntry> getAgendaEntries() {
+        return agenda;
+    }
+
+    //--------------------------------------  Assign Vehicle -----------------------------
+
+    public boolean assignVehicle(AgendaEntry agendaTask, Vehicle vehicle) {
+        return agendaTask.addVehicle(vehicle);
+    }
+
+
 }

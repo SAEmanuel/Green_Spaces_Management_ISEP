@@ -90,7 +90,7 @@ public class AssignSkillCollaboratorController {
      * Assigns a skill to a collaborator based on tax number and skill name.
      *
      * @param collaboratorTaxNumber The tax number of the collaborator.
-     * @param skillName             The name of the skill to assign.
+     * @param skill            The skill to assign.
      * @return True if the skill was successfully assigned, false otherwise.
      */
     public boolean assignSkillCollaboratorByTaxNumber(int collaboratorTaxNumber, Skill skill) {

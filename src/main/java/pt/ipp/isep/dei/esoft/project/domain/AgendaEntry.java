@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_MEDIUM_SPRING_GREEN;
@@ -50,7 +51,7 @@ public class AgendaEntry implements Serializable {
         this.expected_end_Date = calculateEndDate(starting_Date,agendaEntry);
         this.real_end_Date = null;
         this.team = null;
-        this.vehicles = null;
+        this.vehicles = new ArrayList<Vehicle>();
         this.responsible = agendaEntry.getResponsible();
     }
 
@@ -119,6 +120,19 @@ public class AgendaEntry implements Serializable {
         return team;
     }
 
+
+    public List<Vehicle> getVehicles() {
+        return vehicles;
+    }
+
+    public boolean addVehicle(Vehicle vehicle) {
+
+        if (!vehicles.contains(vehicle)) {
+            vehicles.add(vehicle);
+            return true;
+        }
+        return false;
+    }
 
 
     // **********************

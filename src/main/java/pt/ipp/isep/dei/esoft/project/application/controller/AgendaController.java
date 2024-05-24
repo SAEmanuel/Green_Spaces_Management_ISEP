@@ -3,13 +3,8 @@ package pt.ipp.isep.dei.esoft.project.application.controller;
 import pt.ipp.isep.dei.esoft.project.application.DTOS.ToDoEntryDTO;
 import pt.ipp.isep.dei.esoft.project.application.Mappers.AgendaMapper;
 import pt.ipp.isep.dei.esoft.project.domain.*;
-import pt.ipp.isep.dei.esoft.project.repository.Agenda;
-import pt.ipp.isep.dei.esoft.project.repository.Repositories;
-import pt.ipp.isep.dei.esoft.project.repository.TeamRepository;
-import pt.ipp.isep.dei.esoft.project.repository.ToDoListRepository;
+import pt.ipp.isep.dei.esoft.project.repository.*;
 
-//import javax.mail.MessagingException;
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,13 +13,21 @@ public class AgendaController {
     private Agenda agenda;
     private ToDoListRepository toDoListRepository;
     private TeamRepository teamRepository;
-    private SendEmail sendEmail;
+    private VehicleRepository vehicleRepository;
 
     public AgendaController() {
         this.agenda = getAgenda();
         this.toDoListRepository = getToDoRepository();
         this.teamRepository = getTeamRepository();
-        this.sendEmail = getSendEmail();
+        this.vehicleRepository = getVehicleRepository();
+    }
+
+    private VehicleRepository getVehicleRepository() {
+        if (vehicleRepository == null) {
+            Repositories repositories = Repositories.getInstance();
+            vehicleRepository = repositories.getVehicleRepository();
+        }
+        return vehicleRepository;
     }
 
     private TeamRepository getTeamRepository() {
@@ -51,26 +54,12 @@ public class AgendaController {
         return agenda;
     }
 
-    private SendEmail getSendEmail() {
-        if (sendEmail == null) {
-            Repositories repositories = Repositories.getInstance();
-            sendEmail = repositories.getSendEmail();
-        }
-        return sendEmail;
-    }
-
 //----------------------------------- Register an entry in agenda --------------------------------------
     public Optional<AgendaEntry> registerAgendaEntry(int toDoEntryOption, Data starting_Date) {
-        List<ToDoEntry> toDoEntries = toDoListRepository.getToDoList();
         ToDoEntry agendaEntry = searchForOption(toDoEntryOption);
-
         Optional<AgendaEntry> optionalAgenda;
 
         optionalAgenda = agenda.registerAgendaEntry(agendaEntry, starting_Date);
-        if (optionalAgenda.isPresent()) {
-            toDoEntries.remove(agendaEntry);
-        }
-
 
         return optionalAgenda;
     }
@@ -87,21 +76,7 @@ public class AgendaController {
     //------------------------------------ Assign team to task in agenda --------------------------------
     public boolean assignTeam(int teamID, int agendaEntryID) {
         List<Team> teams = teamRepository.getListTeam();
-        if(agenda.assignTeam(teams.get(teamID), agendaEntryID)){
-            try {
-                String[] emails = new String[1];
-                emails[0] = "1231498@isep.ipp.pt";
-                sendEmail.sendEmail("src/main/resources/config.properties", "isep_ipp_pt", emails, "Assunto", "Texto do email");
-//            } catch (MessagingException e) {
-//                System.out.println("Team added but not message sent(messaginException)");
-//                return false;
-            } catch (IOException e) {
-                System.out.println("Team added but not message sent(IOException)");
-                return false;
-            }
-            return true;
-        }
-        return false;
+        return agenda.assignTeam(teams.get(teamID), agendaEntryID);
     }
 
 
@@ -133,7 +108,22 @@ public class AgendaController {
         return teamRepository.getTeamList();
     }
 
-    //-------------------------------------- Mapper -----------------------------
+
+    public List<AgendaEntry> getAgendaEntries(){
+        return agenda.getAgendaEntries();
+    }
+
+    //--------------------------------------  Assign Vehicle -----------------------------
+
+    public List<Vehicle> getAvailableVehicles() {
+        return vehicleRepository.getAvailableVehicles(getAgendaEntries());
+    }
+
+    public boolean assignVehicle(AgendaEntry agendaTask, Vehicle vehicle) {
+        return agenda.assignVehicle(agendaTask, vehicle);
+    }
+
+    //-------------------------------------- Mapper -----------------------------------
 
     private List<ToDoEntryDTO> toDTO(List<ToDoEntry> toDoEntries) {
         AgendaMapper agendaMapper = new AgendaMapper();

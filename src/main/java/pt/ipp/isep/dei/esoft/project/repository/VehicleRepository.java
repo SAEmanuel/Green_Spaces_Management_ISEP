@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
+import pt.ipp.isep.dei.esoft.project.domain.AgendaEntry;
 import pt.ipp.isep.dei.esoft.project.domain.Data;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
 import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
@@ -22,7 +23,6 @@ public class VehicleRepository implements Serializable {
     public VehicleRepository() {
         this.vehicleList = new ArrayList<>();
     }
-
 
 
     /**
@@ -73,8 +73,9 @@ public class VehicleRepository implements Serializable {
     }
 
 
-    /**        skillList.add(skill);
-
+    /**
+     * skillList.add(skill);
+     * <p>
      * Validates a vehicle before adding it to the repository.
      *
      * @param vehicle The vehicle to be validated.
@@ -119,7 +120,6 @@ public class VehicleRepository implements Serializable {
     }
 
 
-
     /**
      * Requests a list of vehicles needing check-up.
      *
@@ -136,7 +136,6 @@ public class VehicleRepository implements Serializable {
         }
         return optionalValue;
     }
-
 
 
     /**
@@ -166,10 +165,9 @@ public class VehicleRepository implements Serializable {
         return vehiclesForCheckUp;
     }
 
-    public Vehicle.Type[] showType(){
+    public Vehicle.Type[] showType() {
         return Vehicle.Type.values();
     }
-
 
 
     //----------------------- Serialization methods -------------------------------
@@ -186,7 +184,6 @@ public class VehicleRepository implements Serializable {
     //-------------------------------------------------------------------------------
 
 
-
     //---------------------- Boostrap methods ---------------------------------------
 
     public void add(Vehicle vehicle) {
@@ -195,4 +192,19 @@ public class VehicleRepository implements Serializable {
 
     //-------------------------------------------------------------------------------
 
+    public List<Vehicle> getAvailableVehicles(List<AgendaEntry> tasks) {
+        List<Vehicle> availableVehicles = getVehicleList();
+
+        for (AgendaEntry task : tasks) {
+            List<Vehicle> taskVehicle = task.getVehicles();
+            if (taskVehicle != null) {
+                for (Vehicle vehicle : taskVehicle) {
+                    availableVehicles.remove(vehicle);
+                }
+            }
+        }
+
+        return availableVehicles;
+
+    }
 }
