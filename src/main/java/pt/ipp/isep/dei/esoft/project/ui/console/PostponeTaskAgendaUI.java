@@ -4,7 +4,7 @@ import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
 import pt.ipp.isep.dei.esoft.project.domain.AgendaEntry;
 import pt.ipp.isep.dei.esoft.project.domain.Data;
 import pt.ipp.isep.dei.esoft.project.domain.Extras.ConfirmationMenu.ConfirmationMenu;
-import pt.ipp.isep.dei.esoft.project.domain.Extras.Inputs.GetDatasFromUsers;
+import pt.ipp.isep.dei.esoft.project.domain.Extras.Inputs.GetDatesFromUsers;
 
 import java.util.InputMismatchException;
 import java.util.List;
@@ -58,7 +58,7 @@ public class PostponeTaskAgendaUI implements Runnable {
         if (result) {
             System.out.println(ANSI_BRIGHT_GREEN + "Task successfully postponed!" + ANSI_RESET);
         } else {
-            System.out.printf(ANSI_BRIGHT_RED + "Task not postponed - Make sure date inputted is gratter than :[%s]!" + ANSI_RESET, agendaEntry.getStarting_Date());
+            System.out.printf(ANSI_BRIGHT_RED + "Task not postponed - Make sure date inputted is gratter than :[%s]!" + ANSI_RESET, agendaEntry.getStartingDate());
         }
 
 
@@ -107,7 +107,7 @@ public class PostponeTaskAgendaUI implements Runnable {
 
     private Data requestPostponedData() {
         System.out.print("-- Postponed Date --\n");
-        return GetDatasFromUsers.getData();
+        return GetDatesFromUsers.getData();
     }
 
 

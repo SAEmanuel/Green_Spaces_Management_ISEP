@@ -91,23 +91,6 @@ public class GreenSpaceRepository implements Serializable {
 
 
 
-    /**
-     * Displays a list of green spaces available for a responsible person.
-     *
-     * @param greenSpacesAvailableByResponsible the list of green spaces
-     */
-    public void showGreenSpaces( List<GreenSpace> greenSpacesAvailableByResponsible) {
-        if (greenSpacesAvailableByResponsible.isEmpty()) {
-            System.out.println(ANSI_BRIGHT_RED + "No green spaces were found in the repository." + ANSI_RESET);
-        } else {
-            System.out.println("\n--List of Green Spaces--");
-            for (int i = 0; i < greenSpacesAvailableByResponsible.size(); i++) {
-                GreenSpace greenSpace = greenSpacesAvailableByResponsible.get(i);
-                System.out.println("• Green Space: " + greenSpace.getName() + "\n" + ANSI_PURPLE + "   Option -> [" + (i + 1) + "]" + ANSI_RESET);
-            }
-            System.out.println("----------------");
-        }
-    }
 
     /**
      * Retrieves a list of green spaces managed by a specific responsible person.

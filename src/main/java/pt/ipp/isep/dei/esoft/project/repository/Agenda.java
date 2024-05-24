@@ -1,9 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import pt.ipp.isep.dei.esoft.project.domain.AgendaEntry;
-import pt.ipp.isep.dei.esoft.project.domain.Data;
-import pt.ipp.isep.dei.esoft.project.domain.Team;
-import pt.ipp.isep.dei.esoft.project.domain.ToDoEntry;
+import pt.ipp.isep.dei.esoft.project.domain.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,13 +9,115 @@ import java.util.Optional;
 
 public class Agenda implements Serializable {
 
-    private final List<AgendaEntry> agenda;
+    private List<AgendaEntry> agenda;
 
     private static final String STATUS_CANCELLED = "Canceled";
 
 
     public Agenda() {
-        this.agenda =new ArrayList<>();
+        this.agenda = new ArrayList<>();
+    }
+
+    public Optional<List<AgendaEntry>> requestColabTaskList(Collaborator collaborator, Data startDate, Data endDate, int filterSelection) {
+        Optional<List<AgendaEntry>> optionalValue = Optional.empty();
+
+        List<AgendaEntry> taskList = getTaskList(collaborator, startDate, endDate, filterSelection);
+
+        if (taskListCreated(collaborator, startDate, endDate, filterSelection)) {
+            optionalValue = Optional.of(taskList);
+        }
+        return optionalValue;
+    }
+
+    private List<AgendaEntry> getTaskList(Collaborator collaborator, Data startDate, Data endDate, int filterSelection) {
+        List<AgendaEntry> taskList = new ArrayList<>();
+        switch (filterSelection - 1) {
+            case 0:
+                for (AgendaEntry agendaEntry : agenda) {
+                    if (agendaEntry.getTeam().hasCollaborator(collaborator)
+                            && agendaEntry.getStartingDate().isGreater(startDate)
+                            && !agendaEntry.getStartingDate().isGreater(endDate)) {
+
+                        taskList.add(agendaEntry);
+                    }
+
+                }
+                break;
+            case 1:
+                for (AgendaEntry agendaEntry : agenda) {
+                    if (agendaEntry.getTeam().hasCollaborator(collaborator)
+                            && agendaEntry.getStartingDate().isGreater(startDate)
+                            && !agendaEntry.getStartingDate().isGreater(endDate)
+                            && agendaEntry.agendaEntry().getStatus().equals("Planned")) {
+                        taskList.add(agendaEntry);
+                    }
+
+                }
+                break;
+            case 2:
+                for (AgendaEntry agendaEntry : agenda) {
+                    if (agendaEntry.getTeam().hasCollaborator(collaborator)
+                            && agendaEntry.getStartingDate().isGreater(startDate)
+                            && !agendaEntry.getStartingDate().isGreater(endDate)
+                            && agendaEntry.agendaEntry().getStatus().equals("Postponed")) {
+                        taskList.add(agendaEntry);
+                    }
+
+                }
+                break;
+            case 3:
+                for (AgendaEntry agendaEntry : agenda) {
+                    if (agendaEntry.getTeam().hasCollaborator(collaborator)
+                            && agendaEntry.getStartingDate().isGreater(startDate)
+                            && !agendaEntry.getStartingDate().isGreater(endDate)
+                            && agendaEntry.agendaEntry().getStatus().equals("Canceled")) {
+                        taskList.add(agendaEntry);
+                    }
+
+                }
+                break;
+            case 4:
+                for (AgendaEntry agendaEntry : agenda) {
+                    if (agendaEntry.getTeam().hasCollaborator(collaborator)
+                            && agendaEntry.getStartingDate().isGreater(startDate)
+                            && !agendaEntry.getStartingDate().isGreater(endDate)
+                            && agendaEntry.agendaEntry().getStatus().equals("Done")) {
+                        taskList.add(agendaEntry);
+                    }
+
+                }
+                break;
+
+
+        }
+
+
+        return sortByStartDate(taskList);
+    }
+
+    public boolean taskListCreated(Collaborator collaborator, Data startDate, Data endDate, int filterSelection) {
+        List<AgendaEntry> taskList = getTaskList(collaborator, startDate, endDate, filterSelection);
+        return !taskList.isEmpty();
+    }
+
+    public List<AgendaEntry> sortByStartDate(List<AgendaEntry> taskList) {
+        for (int i = 0; i < taskList.size(); i++) {
+            for (int j = i + 1; j < taskList.size(); j++) {
+                if (taskList.get(i).getStartingDate().isGreater(taskList.get(j).getStartingDate())) {
+                    AgendaEntry temp = taskList.get(i);
+                    taskList.set(i, taskList.get(j));
+                    taskList.set(j, temp);
+                }
+
+            }
+
+        }
+
+        return taskList;
+    }
+
+    public AgendaEntry.Status[] getStatus() {
+        return AgendaEntry.Status.values();
     }
 
     //------------------------------------ Add task to agenda --------------------------------
@@ -27,7 +126,7 @@ public class Agenda implements Serializable {
 
         Optional<AgendaEntry> optionalAgenda = Optional.empty();
 
-        AgendaEntry entry = new AgendaEntry(agendaEntry,starting_Date);
+        AgendaEntry entry = new AgendaEntry(agendaEntry, starting_Date);
 
         if (addAgendaEntry(entry)) {
             optionalAgenda = Optional.of(entry);
@@ -59,11 +158,11 @@ public class Agenda implements Serializable {
 
     //------------------------------------ Postpone task --------------------------------
 
-    public boolean postponeTask(int agendaTaskID,Data postponeDate, AgendaEntry agendaEntry) {
+    public boolean postponeTask(int agendaTaskID, Data postponeDate, AgendaEntry agendaEntry) {
         List<AgendaEntry> agendaTasks = getAgendaEntriesForResponsible(agendaEntry.getResponsible());
-        AgendaEntry taskInAgenda =  getTaskByResposible(agendaTaskID,agendaTasks);
+        AgendaEntry taskInAgenda = getTaskByResposible(agendaTaskID, agendaTasks);
 
-        if (!validPostponeDate(taskInAgenda,postponeDate)) {
+        if (!validPostponeDate(taskInAgenda, postponeDate)) {
             taskInAgenda.setStarting_Date(postponeDate);
             return true;
         }
@@ -72,7 +171,7 @@ public class Agenda implements Serializable {
     }
 
     private boolean validPostponeDate(AgendaEntry task, Data postponeDate) {
-        return task.getStarting_Date().isGreaterOrEquals(postponeDate);
+        return task.getStartingDate().isGreaterOrEquals(postponeDate);
     }
 
     private AgendaEntry getTaskByResposible(int agendaTaskID, List<AgendaEntry> agendaTasks) {
@@ -81,9 +180,9 @@ public class Agenda implements Serializable {
 
     //------------------------------------ Cancel Task --------------------------------
 
-    public boolean cancelTask(int agendaTaskID,String responsible) {
+    public boolean cancelTask(int agendaTaskID, String responsible) {
         List<AgendaEntry> agendaTasks = getAgendaEntriesForResponsible(responsible);
-        AgendaEntry taskInAgenda =  getTaskByResposible(agendaTaskID,agendaTasks);
+        AgendaEntry taskInAgenda = getTaskByResposible(agendaTaskID, agendaTasks);
 
         if (validatesStatus(taskInAgenda)) {
             return false;
@@ -103,7 +202,7 @@ public class Agenda implements Serializable {
     public boolean assignTeam(Team team, int agendaEntryID) {
         AgendaEntry task = getAgendaEntryByID(agendaEntryID);
 
-        if (validateInfo(team,task)) {
+        if (validateInfo(team, task)) {
             task.setTeam(team);
             System.out.println(task);
             return true;
@@ -114,7 +213,7 @@ public class Agenda implements Serializable {
 
 
     private boolean validateInfo(Team team, AgendaEntry task) {
-       return task.getTeam() == null;
+        return task.getTeam() == null;
     }
 
 

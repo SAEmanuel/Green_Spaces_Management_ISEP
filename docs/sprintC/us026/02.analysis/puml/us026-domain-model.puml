@@ -1,0 +1,50 @@
+@startuml
+
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+'left to right direction
+
+title Domain Model - US026
+
+hide circles
+hide methods
+
+package "GSM System" {
+
+
+
+    class Vehicle {
+        plateID
+                 brand
+                 model
+                 type
+                 tare
+                 grossWeight
+                 millage
+                 registerDate
+                 acquisitionDate
+                 maintenanceFrequency
+                 lastCheckUp
+    }
+
+    class AgendaEntry {
+       team
+       vehicles
+       startingDate
+       endDate
+       responsible
+    }
+
+    class GSM {
+       }
+
+    GSM "1" - "1..*" Vehicle : assigns >
+    AgendaEntry "1  " -- "1..*"  Vehicle  : has >
+}
+
+
+
+@enduml
+

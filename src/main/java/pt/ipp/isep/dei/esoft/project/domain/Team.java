@@ -28,13 +28,22 @@ public class Team {
         return collaborators;
     }
 
+    public boolean hasCollaborator(Collaborator collaborator) {
+        for (Collaborator c : collaborators) {
+            if (!c.equals(collaborator)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
         for (Collaborator c : collaborators) {
 
-            builder.append(c.getName()+" ");
+            builder.append(c.getName() + " ");
         }
-        return String.format("[ Team ID: %d | Collaborators: %s ]", teamId,builder);
+        return String.format("[ Team ID: %d | Collaborators: %s ]", teamId, builder);
     }
 }

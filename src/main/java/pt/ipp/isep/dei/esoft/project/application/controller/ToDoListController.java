@@ -1,5 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
+import pt.ipp.isep.dei.esoft.project.application.DTOS.GreenSpaceDTO;
+import pt.ipp.isep.dei.esoft.project.application.DTOS.ToDoEntryDTO;
+import pt.ipp.isep.dei.esoft.project.application.Mappers.AgendaMapper;
+import pt.ipp.isep.dei.esoft.project.application.Mappers.ToDoMapper;
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.*;
 
@@ -38,8 +42,9 @@ public class ToDoListController {
 
     // ---- GET REPOSITORY ------------------------------
 
-    public Optional<ToDoEntry> registerToDoEntry(GreenSpace greenSpace, String title, String description, int urgency, int expectedDuration) {
+    public Optional<ToDoEntry> registerToDoEntry(int greenSpaceID, String title, String description, int urgency, int expectedDuration) {
 
+        GreenSpace greenSpace = getGreenSpacesByResponsible().get(greenSpaceID);
         return toDoListRepository.registerToDoEntry(greenSpace, title, description, urgency, expectedDuration);
     }
 
@@ -56,13 +61,18 @@ public class ToDoListController {
     }
 
     public List<GreenSpace> getGreenSpacesByResponsible() {
-        String responsibleEmail = getResponsible();
-        return greenSpaceRepository.getGreenSpacesByResponsible(responsibleEmail);
+        return greenSpaceRepository.getGreenSpacesByResponsible(getResponsible());
     }
 
-    public void showGreenSpaces(List<GreenSpace> greenSpacesAvailableByResponsible) {
-        getGreenSpaceRepository().showGreenSpaces(greenSpacesAvailableByResponsible);
 
+
+    public List<GreenSpaceDTO> getToDoListDTOForResponsible(){
+        return toDTO(getGreenSpacesByResponsible());
+    }
+
+    private List<GreenSpaceDTO> toDTO(List<GreenSpace> greenSpaceList){
+        ToDoMapper toDoMapper = new ToDoMapper();
+        return toDoMapper.listToDto(greenSpaceList);
     }
 
 

@@ -4,7 +4,7 @@ import pt.ipp.isep.dei.esoft.project.application.DTOS.ToDoEntryDTO;
 import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.domain.Extras.ConfirmationMenu.ConfirmationMenu;
-import pt.ipp.isep.dei.esoft.project.domain.Extras.Inputs.GetDatasFromUsers;
+import pt.ipp.isep.dei.esoft.project.domain.Extras.Inputs.GetDatesFromUsers;
 
 import java.util.InputMismatchException;
 import java.util.List;
@@ -109,7 +109,7 @@ public class AgendaUI implements Runnable {
 
     private Data requestStartDate() {
         System.out.print("-- Starting Date --\n");
-        return GetDatasFromUsers.getData();
+        return GetDatesFromUsers.getData();
     }
 
     private int requestAgendaEntry() {

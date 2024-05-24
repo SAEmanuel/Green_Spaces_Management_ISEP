@@ -144,6 +144,13 @@ public class GreenSpace implements Serializable {
         return responsible;
     }
 
+    /**
+     *
+     * @return the area of the green space
+     */
+    public float getArea() {
+        return area;
+    }
 
     /**
      * Returns the address for the green space.

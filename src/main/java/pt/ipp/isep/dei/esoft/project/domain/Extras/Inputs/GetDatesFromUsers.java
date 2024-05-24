@@ -8,17 +8,17 @@ import java.util.Scanner;
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_BRIGHT_RED;
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_RESET;
 
-public class GetDatasFromUsers {
+public class GetDatesFromUsers {
 
     public static Data getData() {
-        Data data;
+        Data date;
         while (true) {
             int year = requestYear();
             int month = requestMonth();
             int day = requestDay();
             try {
-                data = new Data(year, month, day);
-                return data;
+                date = new Data(year, month, day);
+                return date;
             } catch (IllegalArgumentException e) {
                 System.out.println(ANSI_BRIGHT_RED + e.getMessage() + ANSI_RESET);
             }
