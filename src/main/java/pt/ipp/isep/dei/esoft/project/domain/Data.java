@@ -528,5 +528,9 @@ public class Data implements Comparable<Data>, Serializable {
         return currentDate().getDay() == day && currentDate().getMonth() == month;
     }
 
+    public boolean isGraterThanCurrentDate(){
+        return this.isGreaterOrEquals(currentDate());
+    }
+
 
 }

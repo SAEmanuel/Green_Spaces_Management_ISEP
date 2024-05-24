@@ -85,7 +85,7 @@ public class AgendaUI implements Runnable {
                 System.out.println(ANSI_BRIGHT_GREEN + "Agenda entry successfully added!" + ANSI_RESET);
             } else {
                 // Print error message if vehicle is already registered
-                System.out.println(ANSI_BRIGHT_RED + "VAgenda entry not added - Already exist!" + ANSI_RESET);
+                System.out.println(ANSI_BRIGHT_RED + "Agenda entry not added - Already exist!" + ANSI_RESET);
             }
 
         } catch (IllegalArgumentException e) {

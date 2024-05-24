@@ -8,15 +8,14 @@ import java.util.List;
 
 public class AgendaMapper {
 
-    private ListToDoEntryDTO agendaDTO;
 
     public AgendaMapper() {
-        agendaDTO = new ListToDoEntryDTO();
     }
 
     //------------------------------------------------
 
-    public List<ToDoEntryDTO> listToDto(List<ToDoEntry> toDoEntries) {
+    public List<ToDoEntryDTO> toDto(List<ToDoEntry> toDoEntries) {
+        ListToDoEntryDTO agendaDTO = new ListToDoEntryDTO();
         for (ToDoEntry toDoEntry : toDoEntries) {
             ToDoEntryDTO obj =  toDto(toDoEntry);
             agendaDTO.addObjDto(obj);

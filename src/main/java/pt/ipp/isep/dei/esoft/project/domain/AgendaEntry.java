@@ -43,7 +43,7 @@ public class AgendaEntry implements Serializable {
 
 
     public AgendaEntry(ToDoEntry agendaEntry, Data starting_Date) {
-//        validationAgendaEntry(starting_Date,end_Date);
+        validationAgendaEntry(starting_Date);
 
         this.agendaEntry = agendaEntry;
         agendaEntry.setStatus(String.valueOf(Status.PLANNED));
@@ -56,13 +56,14 @@ public class AgendaEntry implements Serializable {
     }
 
 
-    private void validationAgendaEntry(Data startingDate, Data endDate) {
-        validateDates(startingDate,endDate);
+    private void validationAgendaEntry(Data startingDate) {
+        validateDate(startingDate);
     }
 
-    private void validateDates(Data startingDate, Data endDate) {
-        if (startingDate.isGreater(endDate)){
-            throw new IllegalArgumentException("Start date cannot be greater than end date.");
+    private void validateDate(Data startingDate) {
+
+        if (!startingDate.isGraterThanCurrentDate()){
+            throw new IllegalArgumentException("Start date must be grater than current date.");
         }
     }
 

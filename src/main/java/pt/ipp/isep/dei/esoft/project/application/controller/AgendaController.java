@@ -5,6 +5,7 @@ import pt.ipp.isep.dei.esoft.project.application.Mappers.AgendaMapper;
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,15 +58,19 @@ public class AgendaController {
 //----------------------------------- Register an entry in agenda --------------------------------------
     public Optional<AgendaEntry> registerAgendaEntry(int toDoEntryOption, Data starting_Date) {
         ToDoEntry agendaEntry = searchForOption(toDoEntryOption);
+
         Optional<AgendaEntry> optionalAgenda;
 
-        optionalAgenda = agenda.registerAgendaEntry(agendaEntry, starting_Date);
 
+        optionalAgenda = agenda.registerAgendaEntry(agendaEntry, starting_Date);
+        if (optionalAgenda.isPresent()) {
+            toDoListRepository.getToDoList().remove(agendaEntry);
+        }
         return optionalAgenda;
     }
 
     private ToDoEntry searchForOption(int toDoEntryOption) {
-        return getToDoListForResponsible().get(toDoEntryOption);
+        return getToDoEntryListForResponsible().get(toDoEntryOption);
     }
 
     //------------------------------------ Postpone task --------------------------------
@@ -92,12 +97,14 @@ public class AgendaController {
         return Repositories.getInstance().getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail();
     }
 
-    private List<ToDoEntry> getToDoListForResponsible() {
-        return toDoListRepository.getToDoListForResponsible(getResponsible());
+    private List<ToDoEntry> getToDoEntryListForResponsible() {
+        List<ToDoEntry> listToDoEntry = toDoListRepository.getToDoListForResponsible(getResponsible());
+        return listToDoEntry;
     }
 
     public List<ToDoEntryDTO> getToDoListDTOForResponsible() {
-        return toDTO(getToDoListForResponsible());
+        AgendaMapper agendaMapper = new AgendaMapper();
+        return agendaMapper.toDto(getToDoEntryListForResponsible());
     }
 
     public List<AgendaEntry> getAgendaEntriesForResponsible() {
@@ -125,10 +132,6 @@ public class AgendaController {
 
     //-------------------------------------- Mapper -----------------------------------
 
-    private List<ToDoEntryDTO> toDTO(List<ToDoEntry> toDoEntries) {
-        AgendaMapper agendaMapper = new AgendaMapper();
-        return agendaMapper.listToDto(toDoEntries);
-    }
 
     public Optional<List<AgendaEntry>> requestColabTaskList(Collaborator collaborator, Data startDate, Data endDate, int filterSelection) {
         Optional<List<AgendaEntry>> request;

@@ -12,7 +12,15 @@ participant ":AgendaUI" as UI
 participant ":AgendaController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
-participant "vehicleRepository\n:VehicleRepository" as vehicleRepository
+participant "authenticationRepository\n:AuthenticationRepository" as authenticationRepository
+participant "userSession\n:UserSession" as UserSession
+participant "email\n:Email" as Email
+participant "agendaMapper\n:AgendaMapper" as mapper
+participant "listToDoEntry\n:List<ToDoEntry>" as listToDo
+participant "listToDoEntryDTO\n: List<ToDoEntryDTO>" as listDTO
+participant "objDto\n: ToDoEntryDto" as objDto
+
+participant "toDoListRepository\n:ToDoListRepository" as toDoListRepository
 participant "agenda\n:Agenda" as AGENDA
 participant "agendaEntry\n:AgendaEntry" as AGENDAENTRY
 
@@ -21,9 +29,132 @@ activate Employee
     Employee -> UI : ask to add an entry in the Agenda
     activate UI
 
+   UI -> CTRL** : create
 
-    UI --> Employee : shows list of task\n and request a selection
-    deactivate UI
+       activate CTRL
+
+            CTRL -> CTRL : getAgenda()
+            activate CTRL
+
+                CTRL -> RepositorySingleton : getInstance()
+                activate RepositorySingleton
+
+                    RepositorySingleton --> CTRL : repositories
+                deactivate RepositorySingleton
+
+                CTRL -> PLAT : getAgenda()
+                activate PLAT
+
+                    PLAT --> CTRL : agenda
+                deactivate PLAT
+                CTRL --> CTRL: agenda
+            deactivate CTRL
+            |||
+
+            CTRL -> CTRL : getToDoRepository()
+            activate CTRL
+
+                CTRL -> RepositorySingleton : getInstance()
+                activate RepositorySingleton
+
+                    RepositorySingleton --> CTRL : repositories
+                deactivate RepositorySingleton
+
+                CTRL -> PLAT : getToDoRepository()
+                activate PLAT
+
+                    PLAT --> CTRL : toDoRepository
+                deactivate PLAT
+                CTRL --> CTRL: toDoRepository
+            deactivate CTRL
+
+       deactivate CTRL
+
+       |||
+
+       UI -> CTRL : getToDoListDTOForResponsible()
+
+       activate CTRL
+
+            CTRL -> CTRL : getResponsible()
+            activate CTRL
+
+                CTRL -> PLAT  : getAuthenticationRepository()
+                activate PLAT
+
+                PLAT --> CTRL : authenticationRepository
+                deactivate PLAT
+
+                CTRL -> authenticationRepository : getCurrentUserSession()
+                activate authenticationRepository
+
+                    authenticationRepository --> CTRL : currentUserSession
+                deactivate authenticationRepository
+
+                CTRL -> UserSession : getUserId()
+                activate UserSession
+
+                    UserSession --> CTRL : userSession
+                deactivate UserSession
+
+                CTRL -> Email : getEmail()
+                activate Email
+
+                    Email --> CTRL : email
+                deactivate Email
+            CTRL --> CTRL : email
+            deactivate CTRL
+
+            |||
+            CTRL -> CTRL : getToDoEntryListForResponsible()
+            activate CTRL
+
+                CTRL -> listToDo ** : create
+                CTRL -> toDoListRepository: getToDoListForResponsible( getResponsible() )
+                activate toDoListRepository
+
+                    toDoListRepository --> CTRL : listToDoEntryByResponsible
+                deactivate toDoListRepository
+
+                CTRL --> CTRL : listToDoEntryByResponsible
+            deactivate CTRL
+            |||
+
+       CTRL -> CTRL : getToDoListDTOForResponsible()
+       activate CTRL
+
+            CTRL -> mapper** : create
+            CTRL -> mapper : toDto( getToDoEntryListForResponsible() )
+            activate mapper
+
+                mapper -> listDTO** : create
+                group loop
+                    mapper -> listToDo: obj = get(i)
+                    activate listToDo
+                    deactivate listToDo
+
+                    mapper -> mapper : objDto = toDTO(obj)
+                    activate mapper
+
+                        mapper --> objDto** : create(obj)
+                    deactivate mapper
+
+                    mapper -> listDTO : add(objDto)
+                    activate listDTO
+                    deactivate listDTO
+                end
+                mapper --> CTRL : listToDoEntryDto
+            deactivate mapper
+            CTRL --> CTRL : listToDoEntryDto
+       deactivate CTRL
+
+       CTRL --> UI : listToDoEntryDto
+
+
+
+       deactivate CTRL
+       UI --> Employee : shows list of toDoEntry\n and request a selection
+   deactivate UI
 
     Employee -> UI : select an option
 
@@ -43,8 +174,51 @@ activate Employee
     Employee -> UI : submits data
     activate UI
 
-        UI --> Employee : shows operation (in)success
+    UI -> CTRL : registerAgendaEntry(toDoEntryOption, starting_Date)
+    activate CTRL
+
+        CTRL -> CTRL : searchForOption(toDoEntryOption)
+        activate CTRL
+
+            CTRL -> listToDo: obj  = get(toDoEntryOption)
+            activate listToDo
+            deactivate listToDo
+
+        CTRL --> CTRL : obj
+        deactivate CTRL
+
+        CTRL -> AGENDA : registerAgendaEntry(obj, starting_Date)
+        activate AGENDA
+
+            AGENDA -> AGENDAENTRY** : create
+            AGENDA -> AGENDA : addAgendaEntry(agendaEntry)
+            activate AGENDA
+
+            AGENDA -> AGENDA : validateEntry(agendaEntry)
+            activate AGENDA
+
+            deactivate AGENDA
+
+            deactivate AGENDA
+
+
+        AGENDA --> CTRL : agendaEntry
+
+
+
+
+        CTRL -> toDoListRepository : remove(agendaEntry)
+        activate toDoListRepository
+        deactivate toDoListRepository
+
+
+
+        deactivate AGENDA
+        CTRL --> UI :  agendaEntry
+    deactivate CTRL
+
+    UI --> Employee : shows operation (in)success
     deactivate UI
 
 @enduml
-@enduml
+

@@ -47,9 +47,9 @@ b) different tasks can be executed at same time in the same park.
 * **AC1:** The new entry must be associated with a green space managed by the GSM.
 * **AC2:** The new entry must exist in the To-Do list.
 * **AC3:** The new entry must change the "Task status" to "Planned".
-* **AC4:** When adding an entry in the agenda, this doesn't need to be eliminated from the "TODO list"
-* **AC5:** Both "Team" and "Vehicles" would be associate later, no need to be introduced now.
-* **AC6:** The "end Date" must be obtained from the calculus between "Starting Date" introduce and the "Expected Duration" of the task. 
+* **AC4:** When adding an entry in the agenda, this need to be eliminated from the "TODO list"
+* **AC5:** Both "Team" and "Vehicles" would be associate later, no need to be introduced when introducing an entry in agenda.
+* **AC6:** The "End Date" must be obtained from the calculus between "Starting Date" introduce and the "Expected Duration" of the task. 
 
 
 ### 1.4. Found out Dependencies
