@@ -45,7 +45,7 @@ public class PostponeTaskAgendaUI implements Runnable {
                 submitData();
             }
         } else {
-            System.out.println(ANSI_BRIGHT_RED + "Does not exist task in the TODO list... Add some" + ANSI_RESET);
+            System.out.println(ANSI_BRIGHT_RED + "Does not exist task in the AGENDA... Add some" + ANSI_RESET);
         }
 
     }
@@ -53,12 +53,16 @@ public class PostponeTaskAgendaUI implements Runnable {
 
     private void submitData() {
 
-        boolean result = getController().postponeTask(agendaTaskID, postponedDate, agendaEntry);
+        try{
+            boolean result = getController().postponeTask(agendaTaskID, postponedDate, agendaEntry);
 
-        if (result) {
-            System.out.println(ANSI_BRIGHT_GREEN + "Task successfully postponed!" + ANSI_RESET);
-        } else {
-            System.out.printf(ANSI_BRIGHT_RED + "Task not postponed - Make sure date inputted is gratter than :[%s]!" + ANSI_RESET, agendaEntry.getStartingDate());
+            if (result) {
+                System.out.println(ANSI_BRIGHT_GREEN + "Task successfully postponed!" + ANSI_RESET);
+            } else {
+                System.out.printf(ANSI_BRIGHT_RED + "Task not postponed - Make sure date inputted is gratter than :[%s]!" + ANSI_RESET, agendaEntry.getStartingDate());
+            }
+        }catch (IllegalArgumentException e ){
+            System.out.println(ANSI_BRIGHT_RED+e.getMessage()+ANSI_RESET);
         }
 
 

@@ -159,8 +159,12 @@ public class AgendaRepository implements Serializable {
     //------------------------------------ Postpone task --------------------------------
 
     public boolean postponeTask(int agendaTaskID, Data postponeDate, AgendaEntry agendaEntry) {
+        if (agendaEntry.getAgendaEntry().getStatus().equals(STATUS_CANCELLED)) {
+            throw new IllegalArgumentException("Cancelled agenda entry - can't pospone this task.");
+        }
         List<AgendaEntry> agendaTasks = getAgendaEntriesForResponsible(agendaEntry.getResponsible());
         AgendaEntry taskInAgenda = getTaskByResposible(agendaTaskID, agendaTasks);
+
 
         if (!validPostponeDate(taskInAgenda, postponeDate)) {
             taskInAgenda.setStarting_Date(postponeDate);
