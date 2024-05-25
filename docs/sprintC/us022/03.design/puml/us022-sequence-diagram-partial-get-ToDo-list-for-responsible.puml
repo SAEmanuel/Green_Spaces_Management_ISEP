@@ -10,7 +10,7 @@ autonumber
 
 participant ":AgendaController" as CTRL
 participant "toDoListRepository\n:ToDoListRepository" as toDoListRepository
-participant "greenSpace\n:GreenSpace>" as green
+participant "toDoEntry\n:ToDoEntry>" as green
 participant "listToDoEntry\n:List<ToDoEntry>" as listToDo
 
 
@@ -32,7 +32,7 @@ autonumber 3.1
                                         activate toDoListRepository
                                         deactivate toDoListRepository
 
-                                           toDoListRepository -> green : getGreenSpace()
+                                           toDoListRepository -> green : getResponsible()
                                            activate green
                                                 green -> green : getResponsible()
                                                 activate green

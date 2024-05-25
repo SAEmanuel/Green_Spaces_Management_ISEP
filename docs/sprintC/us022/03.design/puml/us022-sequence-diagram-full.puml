@@ -20,7 +20,7 @@ participant "listToDoEntryDTO\n: List<ToDoEntryDTO>" as listDTO
 participant "objDto\n: ToDoEntryDto" as objDto
 
 participant "toDoListRepository\n:ToDoListRepository" as toDoListRepository
-participant "greenSpace\n:GreenSpace>" as green
+participant "toDoEntry\n:ToDoEntry>" as green
 participant "listToDoEntry\n:List<ToDoEntry>" as listToDo
 participant "agenda\n:Agenda" as AGENDA
 participant "agendaEntry\n:AgendaEntry" as AGENDAENTRY
@@ -120,7 +120,7 @@ activate Employee
                             activate toDoListRepository
                             deactivate toDoListRepository
 
-                               toDoListRepository -> green : getGreenSpace()
+                               toDoListRepository -> green : getResponsible()
                                activate green
                                     green -> green : getResponsible()
                                     activate green

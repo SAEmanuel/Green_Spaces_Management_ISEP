@@ -70,7 +70,7 @@ public class ToDoListRepository implements Serializable {
         List<ToDoEntry> entry = new ArrayList<>();
 
         for (ToDoEntry toDoEntry : toDoList) {
-            if (toDoEntry.getGreenSpace().getResponsible().equals(responsible)) {
+            if (toDoEntry.getResponsible().equals(responsible)) {
                 entry.add(toDoEntry);
             }
         }
