@@ -7,7 +7,7 @@ skinparam linetype polyline
 skinparam classAttributeIconSize 0
 'left to right direction
 
-class VehicleRepository {
+class Agenda {
     - List<Vehicle> vehicleList
     + requestList(activation)
     - getVehiclesNeedingCheckUp(activation)
@@ -21,23 +21,20 @@ class Repositories {
     + getVehicleRepository()
 }
 
-class VehicleListController {
-    + VehicleListController()
-    + requestList(activation)
-    + receiveVehicleList(List<Vehicle>)
-    + sendVehicleListToUI(List<Vehicle>)
+class AgendaController {
+    + AgendaController()
+
 }
 
-class CheckUpListUI {
-    + displayVehicleList(List<Vehicle>)
+class AgendaUI {
 }
 
-CheckUpListUI ..> VehicleListController
+AgendaUI ..> AgendaController
 
-VehicleListController --> CheckUpListUI : sendVehicleListToUI()
-VehicleListController .> Repositories : repositories
-Repositories  --> "1 " VehicleRepository
+AgendaController --> AgendaUI : sendVehicleListToUI()
+AgendaController .> Repositories : repositories
+Repositories  --> "1 " Agenda
 Repositories -> Repositories : instance
-VehicleListController ..>  VehicleRepository : vehicleRepository
-VehicleRepository -> VehicleListController : getVehicleCheckUpList()
+AgendaController ..>  Agenda : vehicleRepository
+Agenda -> AgendaController : getVehicleCheckUpList()
 @enduml
