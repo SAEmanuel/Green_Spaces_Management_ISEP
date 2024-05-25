@@ -1,0 +1,64 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+
+
+participant ":AgendaController" as CTRL
+
+participant "toDoListRepository\n:ToDoListRepository" as toDoListRepository
+participant "listToDoEntry\n:List<ToDoEntry>" as listToDo
+participant "agenda\n:Agenda" as AGENDA
+participant "agendaEntry\n:AgendaEntry" as AGENDAENTRY
+
+autonumber 8
+
+autonumber 3.1
+ -> CTRL : registerAgendaEntry(toDoEntryOption, starting_Date)
+    group Register Agenda Entry
+activate CTRL
+
+        CTRL -> CTRL : searchForOption(toDoEntryOption)
+        activate CTRL
+
+            CTRL -> listToDo: toDoEntry  = get(toDoEntryOption)
+            activate listToDo
+            deactivate listToDo
+
+        CTRL --> CTRL : toDoEntry
+        deactivate CTRL
+
+        CTRL -> AGENDA : registerAgendaEntry(toDoEntry, starting_Date)
+        activate AGENDA
+
+            AGENDA -> AGENDAENTRY** : create
+            AGENDA -> AGENDA : addAgendaEntry(agendaEntry)
+            activate AGENDA
+
+            AGENDA -> AGENDA : validateEntry(agendaEntry)
+            activate AGENDA
+
+            deactivate AGENDA
+
+            deactivate AGENDA
+
+        AGENDA --> CTRL : agendaEntry
+        deactivate AGENDA
+
+
+
+
+        CTRL -> toDoListRepository : remove(agendaEntry)
+        activate toDoListRepository
+        deactivate toDoListRepository
+
+
+        deactivate AGENDA
+    end
+        <-- CTRL  :  agendaEntry
+
+@enduml

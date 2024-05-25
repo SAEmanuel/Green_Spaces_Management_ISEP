@@ -1,0 +1,70 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+participant ":AgendaUI" as UI
+participant ":AgendaController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+
+
+autonumber 3
+activate UI
+
+   UI -> CTRL **: create
+    |||
+autonumber 3.1
+activate CTRL
+
+group Get Repositories
+|||
+    group Get Agenda Repository
+            CTRL -> CTRL : getAgenda()
+            activate CTRL
+
+                CTRL -> RepositorySingleton : getInstance()
+                activate RepositorySingleton
+
+                    RepositorySingleton --> CTRL : repositories
+                deactivate RepositorySingleton
+
+                CTRL -> PLAT : getAgenda()
+                activate PLAT
+
+                    PLAT --> CTRL : agenda
+                deactivate PLAT
+                CTRL --> CTRL: agenda
+            deactivate CTRL
+    end
+
+            |||
+    group Get ToDo Repository
+            CTRL -> CTRL : getToDoRepository()
+            activate CTRL
+
+                CTRL -> RepositorySingleton : getInstance()
+                activate RepositorySingleton
+
+                    RepositorySingleton --> CTRL : repositories
+                deactivate RepositorySingleton
+
+                CTRL -> PLAT : getToDoRepository()
+                activate PLAT
+
+                    PLAT --> CTRL : toDoRepository
+                deactivate PLAT
+                CTRL --> CTRL: toDoRepository
+            deactivate CTRL
+
+       deactivate CTRL
+    end
+|||
+end
+deactivate CTRL
+
+
+@enduml

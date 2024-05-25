@@ -1,4 +1,4 @@
-# US008 - Check-up of vehicles
+# US022 - Add a new entry in the Agenda
 
 ## 3. Design - User Story Realization
 
@@ -22,13 +22,11 @@
 
 According to the taken rationale, the conceptual classes promoted to software classes are:
 
-* None
+* FAZERRRRRRRRRRRRR
 
 Other software classes (i.e. Pure Fabrication) identified:
 
-* VehicleListController
-* CheckupListUI
-* VehicleRepository
+* FAZERRRRRRRRRRRRR
 
 ## 3.2. Sequence Diagram (SD)
 
@@ -36,7 +34,7 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![Sequence Diagram - Full](svg/us008-sequence-diagram-full.svg)
+![Sequence Diagram - Full](svg/us022-sequence-diagram-full.svg)
 
 ### Split Diagrams
 
@@ -45,16 +43,29 @@ user story, but it is split in partial diagrams to better illustrate the interac
 
 It uses Interaction Occurrence (a.k.a. Interaction Use).
 
-![Sequence Diagram - split](svg/us008-sequence-diagram-split.svg)
+![Sequence Diagram - split](svg/us022-sequence-diagram-split.svg)
 
-**Get Vehicle List Partial SD**
+**Get Repositories**
 
-![Sequence Diagram - Partial - Get Vehicle List](svg/us008-sequence-diagram-partial-get-vehicle-list.svg)
+![Sequence Diagram - Partial - Get Repositories](svg/us022-sequence-diagram-partial-get-repositories.svg)
 
-**Generate CheckUp List Partial SD**
+**Get Responsible email**
 
-![Sequence Diagram - Partial - Generate CheckUp List](svg/us008-sequence-diagram-partial-generate-checkup-list.svg)
+![Sequence Diagram - Partial - Get Responsible email](svg/us022-sequence-diagram-partial-get-responsible.svg)
+
+**Get ToDo list for responsible**
+
+![Sequence Diagram - Partial - Get ToDo list for responsible](svg/us022-sequence-diagram-partial-get-ToDo-list-for-responsible.svg)
+
+**List to DTO**
+
+![Sequence Diagram - Partial - List to DTO](svg/us022-sequence-diagram-partial-toDto.svg)
+
+**Register Agenda Entry**
+
+![Sequence Diagram - Partial - Register Agenda Entry](svg/us022-sequence-diagram-partial-register-Agenda-Entry.svg)
+
 
 ## 3.3. Class Diagram (CD)
 
-![Class Diagram](svg/us008-class-diagram.svg)
+![Class Diagram](svg/us022-class-diagram.svg)

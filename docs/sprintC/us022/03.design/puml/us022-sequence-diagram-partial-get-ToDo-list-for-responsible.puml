@@ -1,0 +1,59 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+
+
+participant ":AgendaController" as CTRL
+participant "toDoListRepository\n:ToDoListRepository" as toDoListRepository
+participant "greenSpace\n:GreenSpace>" as green
+participant "listToDoEntry\n:List<ToDoEntry>" as listToDo
+
+
+autonumber 8
+
+autonumber 3.1
+ activate CTRL
+            CTRL -> CTRL : getToDoEntryListForResponsible()
+    group Get ToDo List For Responsible
+    activate CTRL
+
+             CTRL -> toDoListRepository: getToDoListForResponsible( getResponsible() )
+                            activate toDoListRepository
+
+                                   toDoListRepository -> listToDo** : create
+                                   group loop [for each object in the toDoListRepository]
+
+                                        toDoListRepository -> toDoListRepository :  obj = get(i)
+                                        activate toDoListRepository
+                                        deactivate toDoListRepository
+
+                                           toDoListRepository -> green : getGreenSpace()
+                                           activate green
+                                                green -> green : getResponsible()
+                                                activate green
+                                                deactivate green
+
+                                                green --> toDoListRepository : objResponsible
+                                           deactivate green
+                                        group if [objResponsible == responsible]
+
+                                           toDoListRepository -> listToDo : add(obj)
+                                           activate listToDo
+
+                                           deactivate listToDo
+                                        end
+
+                                   end
+
+                                toDoListRepository --> CTRL : listToDoEntryByResponsible
+                            deactivate toDoListRepository
+
+ deactivate CTRL
+    end
+
+@enduml

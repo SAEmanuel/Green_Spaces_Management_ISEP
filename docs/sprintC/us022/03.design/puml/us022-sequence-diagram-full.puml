@@ -16,11 +16,12 @@ participant "authenticationRepository\n:AuthenticationRepository" as authenticat
 participant "userSession\n:UserSession" as UserSession
 participant "email\n:Email" as Email
 participant "agendaMapper\n:AgendaMapper" as mapper
-participant "listToDoEntry\n:List<ToDoEntry>" as listToDo
 participant "listToDoEntryDTO\n: List<ToDoEntryDTO>" as listDTO
 participant "objDto\n: ToDoEntryDto" as objDto
 
 participant "toDoListRepository\n:ToDoListRepository" as toDoListRepository
+participant "greenSpace\n:GreenSpace>" as green
+participant "listToDoEntry\n:List<ToDoEntry>" as listToDo
 participant "agenda\n:Agenda" as AGENDA
 participant "agendaEntry\n:AgendaEntry" as AGENDAENTRY
 
@@ -109,9 +110,33 @@ activate Employee
             CTRL -> CTRL : getToDoEntryListForResponsible()
             activate CTRL
 
-                CTRL -> listToDo ** : create
                 CTRL -> toDoListRepository: getToDoListForResponsible( getResponsible() )
                 activate toDoListRepository
+
+                       toDoListRepository -> listToDo** : create
+                       group loop [for each object in the toDoListRepository]
+
+                            toDoListRepository -> toDoListRepository :  obj = get(i)
+                            activate toDoListRepository
+                            deactivate toDoListRepository
+
+                               toDoListRepository -> green : getGreenSpace()
+                               activate green
+                                    green -> green : getResponsible()
+                                    activate green
+                                    deactivate green
+
+                                    green --> toDoListRepository : objResponsible
+                               deactivate green
+                            group if [objResponsible == responsible]
+
+                               toDoListRepository -> listToDo : add(obj)
+                               activate listToDo
+
+                               deactivate listToDo
+                            end
+
+                       end
 
                     toDoListRepository --> CTRL : listToDoEntryByResponsible
                 deactivate toDoListRepository
@@ -128,7 +153,7 @@ activate Employee
             activate mapper
 
                 mapper -> listDTO** : create
-                group loop
+                group loop [for each object in listToDoEntry]
                     mapper -> listToDo: obj = get(i)
                     activate listToDo
                     deactivate listToDo
@@ -180,14 +205,14 @@ activate Employee
         CTRL -> CTRL : searchForOption(toDoEntryOption)
         activate CTRL
 
-            CTRL -> listToDo: obj  = get(toDoEntryOption)
+            CTRL -> listToDo: toDoEntry  = get(toDoEntryOption)
             activate listToDo
             deactivate listToDo
 
-        CTRL --> CTRL : obj
+        CTRL --> CTRL : toDoEntry
         deactivate CTRL
 
-        CTRL -> AGENDA : registerAgendaEntry(obj, starting_Date)
+        CTRL -> AGENDA : registerAgendaEntry(toDoEntrybj, starting_Date)
         activate AGENDA
 
             AGENDA -> AGENDAENTRY** : create
@@ -203,6 +228,7 @@ activate Employee
 
 
         AGENDA --> CTRL : agendaEntry
+        deactivate AGENDA
 
 
 
@@ -213,7 +239,6 @@ activate Employee
 
 
 
-        deactivate AGENDA
         CTRL --> UI :  agendaEntry
     deactivate CTRL
 
