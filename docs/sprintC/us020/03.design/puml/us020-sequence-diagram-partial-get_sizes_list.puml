@@ -7,8 +7,8 @@ autonumber
 
 'hide footbox
 participant ":RegisterGreenSpaceController" as CTRL
-participant "greenSpaceRepository\n:GreenSpaceRepository" as greenSpaceRepository
-participant "greenSpace\n:GreenSpace" as EMPREGO
+participant ":GreenSpace" as greenSpaceRepository
+participant ":Size" as EMPREGO
 autonumber 3
 
 
@@ -16,19 +16,20 @@ autonumber 3
 autonumber 3.1
 activate CTRL
     group Get Sizes List
-            CTRL ->  greenSpaceRepository : getGreenSpacesSizes()
+            CTRL ->  greenSpaceRepository : GreenSpace
             activate greenSpaceRepository
 
-                greenSpaceRepository -> EMPREGO: GreenSpace.Size.values()
+                greenSpaceRepository -> EMPREGO: Size
                 activate EMPREGO
+                    EMPREGO -> EMPREGO : values()
 
-                EMPREGO --> greenSpaceRepository : sizesList
+                EMPREGO --> greenSpaceRepository : sizeList
                 deactivate EMPREGO
-                greenSpaceRepository --> CTRL : sizesList
+                greenSpaceRepository --> CTRL : sizeList
             deactivate greenSpaceRepository
 
     end
-            <-- CTRL : sizesList
+            <-- CTRL : sizeList
     autonumber 4
 deactivate CTRL
 

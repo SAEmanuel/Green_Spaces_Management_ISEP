@@ -137,14 +137,6 @@ public class GreenSpaceRepository implements Serializable {
         return new ArrayList<>(this.greenSpacesList);
     }
 
-    /**
-     * Retrieves all possible sizes for green spaces.
-     *
-     * @return an array of all {@code GreenSpace.Size} values
-     */
-    public GreenSpace.Size[] getGreenSpacesSizes() {
-        return GreenSpace.Size.values();
-    }
 
 
 }

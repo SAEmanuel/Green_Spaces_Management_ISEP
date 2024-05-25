@@ -67,9 +67,7 @@ public class GreenSpaceController {
      *
      * @return an array of all {@code GreenSpace.Size} values
      */
-    public GreenSpace.Size[] getGreenSpacesSizes(){
-        return greenSpaceRepository.getGreenSpacesSizes();
+    public GreenSpace.Size[] getGreenSpacesSizes() {
+        return GreenSpace.Size.values();
     }
-
-
 }

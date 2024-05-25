@@ -51,7 +51,7 @@ It uses Interaction Occurrence (a.k.a. Interaction Use).
 
 ![Sequence Diagram - Partial - Get GreenSpace Repository](svg/us020-sequence-diagram-partial-get_green_space_repository.svg)
 
-**Get Sizes List**
+**Get Sizes List Values**
 
 ![Sequence Diagram - Partial - Get Sizes List](svg/us020-sequence-diagram-partial-get_sizes_list.svg)
 

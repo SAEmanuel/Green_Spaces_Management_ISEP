@@ -73,7 +73,7 @@ activate Employee
       end
     |||
 
-            CTRL -> greenSpaceRepository : registerGreenSpace(name,size,area,resposible)
+            CTRL -> greenSpaceRepository : registerGreenSpace(name,size,area,email)
 deactivate CTRL
     activate greenSpaceRepository
 

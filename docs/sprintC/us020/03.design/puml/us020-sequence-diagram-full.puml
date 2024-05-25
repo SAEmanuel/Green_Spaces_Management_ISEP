@@ -13,7 +13,11 @@ participant ":RegisterGreenSpaceController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "authenticationRepository\n:AuthenticationRepository" as authenticationRepository
+participant "userSession\n:UserSession" as UserSession
+participant "email\n:Email" as Email
 participant "greenSpaceRepository\n:GreenSpaceRepository" as greenSpaceRepository
+participant ":GreenSpace" as green
+participant ":Size" as Size
 participant "greenSpace\n:GreenSpace" as EMPREGO
 
 
@@ -56,17 +60,20 @@ activate Employee
     UI -> CTRL : getGreenSpacesSizes()
         activate CTRL
 
-           CTRL ->  greenSpaceRepository : getGreenSpacesSizes()
-            activate greenSpaceRepository
+           CTRL ->  green : GreenSpace
+                activate green
 
-                greenSpaceRepository -> EMPREGO: GreenSpace.Size.values()
-                activate EMPREGO
+                green -> Size: Size
 
-                EMPREGO --> greenSpaceRepository : sizesList
-                deactivate EMPREGO
-                greenSpaceRepository --> CTRL : sizesList
-            deactivate greenSpaceRepository
-            CTRL --> UI : sizesList
+                    activate Size
+                    Size -> Size : values()
+
+                        Size --> green :sizeList
+                    deactivate Size
+
+                    green --> CTRL : sizeList
+                deactivate green
+            CTRL --> UI : sizeList
 
         deactivate CTRL
 
@@ -92,50 +99,50 @@ activate Employee
     activate CTRL
 
         CTRL -> CTRL : getResponsible()
-        activate CTRL
+                    activate CTRL
 
-        CTRL -> PLAT : getAuthenticationRepository()
-        activate PLAT
+                        CTRL -> PLAT  : getAuthenticationRepository()
+                        activate PLAT
 
-        PLAT --> CTRL : authenticationRepository
-        deactivate PLAT
+                        PLAT --> CTRL : authenticationRepository
+                        deactivate PLAT
 
-        CTRL -> authenticationRepository : getCurrentUserSession()
-        activate authenticationRepository
+                        CTRL -> authenticationRepository : getCurrentUserSession()
+                        activate authenticationRepository
 
-            authenticationRepository -> authenticationRepository :getUserId()
-            activate authenticationRepository
+                            authenticationRepository --> CTRL : currentUserSession
+                        deactivate authenticationRepository
 
-                authenticationRepository -> authenticationRepository : getEmail()
-                activate authenticationRepository
+                        CTRL -> UserSession : getUserId()
+                        activate UserSession
 
-                    authenticationRepository --> authenticationRepository
-                deactivate authenticationRepository
-                    authenticationRepository --> authenticationRepository
-            deactivate authenticationRepository
+                            UserSession --> CTRL : userSession
+                        deactivate UserSession
 
+                        CTRL -> Email : getEmail()
+                        activate Email
 
-            authenticationRepository --> CTRL : email
-        deactivate authenticationRepository
-            CTRL --> CTRL: resposible
+                            Email --> CTRL : email
+                        deactivate Email
+                    CTRL --> CTRL : email
+                    deactivate CTRL
 
             deactivate CTRL
     |||
-            CTRL -> greenSpaceRepository : registerGreenSpace(name,size,area,resposible)
+            CTRL -> greenSpaceRepository : registerGreenSpace(name,size,area,email)
 
-    deactivate CTRL
     activate greenSpaceRepository
 
-    greenSpaceRepository -> EMPREGO : create
+    greenSpaceRepository -> EMPREGO** : create
 
     greenSpaceRepository -> greenSpaceRepository : addGreenSpace(greenSpace)
 
     activate greenSpaceRepository
     greenSpaceRepository -> greenSpaceRepository : validate(greenSpace)
     activate greenSpaceRepository
-    greenSpaceRepository --> greenSpaceRepository
+
     deactivate greenSpaceRepository
-    greenSpaceRepository --> greenSpaceRepository
+
     deactivate greenSpaceRepository
 
 

@@ -18,39 +18,37 @@ activate CTRL
                      activate CTRL
     group Get Responsible
 
+                        CTRL -> PLAT  : getAuthenticationRepository()
+                        activate PLAT
 
+                        PLAT --> CTRL : authenticationRepository
+                        deactivate PLAT
 
-                     CTRL -> PLAT : getAuthenticationRepository()
-                     activate PLAT
+                        CTRL -> authenticationRepository : getCurrentUserSession()
+                        activate authenticationRepository
 
-                     PLAT --> CTRL : authenticationRepository
-                     deactivate PLAT
+                            authenticationRepository --> CTRL : currentUserSession
+                        deactivate authenticationRepository
 
-                     CTRL -> authenticationRepository : getCurrentUserSession()
-                     activate authenticationRepository
+                        CTRL -> UserSession : getUserId()
+                        activate UserSession
 
-                         authenticationRepository -> authenticationRepository :getUserId()
-                         activate authenticationRepository
+                            UserSession --> CTRL : userSession
+                        deactivate UserSession
 
-                             authenticationRepository -> authenticationRepository : getEmail()
-                             activate authenticationRepository
+                        CTRL -> Email : getEmail()
+                        activate Email
 
-                                 authenticationRepository --> authenticationRepository
-                             deactivate authenticationRepository
-                                 authenticationRepository --> authenticationRepository
-                         deactivate authenticationRepository
-
-
-                         authenticationRepository --> CTRL : email
-                     deactivate authenticationRepository
-                         CTRL --> CTRL : resposible
-
-                         deactivate CTRL
+                            Email --> CTRL : email
+                        deactivate Email
+                    CTRL --> CTRL : email
+                    deactivate CTRL
     end
-            CTRL ->  : registerGreenSpace(name,size,area,resposible)
 
 autonumber 17
 deactivate CTRL
+
+    CTRL ->  : registerGreenSpace(name,size,area,email)
 
 
 @enduml
