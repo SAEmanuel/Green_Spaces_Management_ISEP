@@ -7,14 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class Agenda implements Serializable {
+public class AgendaRepository implements Serializable {
 
     private List<AgendaEntry> agenda;
 
     private static final String STATUS_CANCELLED = "Canceled";
 
 
-    public Agenda() {
+    public AgendaRepository() {
         this.agenda = new ArrayList<>();
     }
 

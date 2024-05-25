@@ -7,34 +7,123 @@ skinparam linetype polyline
 skinparam classAttributeIconSize 0
 'left to right direction
 
-class Agenda {
-    - List<Vehicle> vehicleList
-    + requestList(activation)
-    - getVehiclesNeedingCheckUp(activation)
-    - checkUpListCreated()
-    + getVehicleCheckUpList(): List<Vehicle>
+class AgendaUI {
+}
+
+
+class AgendaController {
+    - AgendaRepository agendaRepository
+    - ToDoListRepository toDoListRepository
+    + AgendaController()
+    - getAgenda()
+    - getToDoRepository()
+    + registerAgendaEntry()
+    - searchForOption(int toDoEntryOption)
+    - getToDoEntryListForResponsible()
+    + getResponsible()
+    + getToDoListDTOForResponsible()
 }
 
 class Repositories {
     - Repositories()
     + getInstance() : Repositories
-    + getVehicleRepository()
+    + getAgenda()
+    + getToDoRepository()
+    + getAuthenticationRepository()
 }
 
-class AgendaController {
-    + AgendaController()
+class AuthenticationRepository {
+    + getCurrentUserSession()
+}
+
+class UserSession {
+    + getUserId()
+}
+
+class Email {
+    + getEmail()
+}
+
+
+
+class AgendaRepository {
+    -List<AgendaEntry> agenda
+    + registerAgendaEntry(ToDoEntry agendaEntry, Data starting_Date)
+    - addAgendaEntry(AgendaEntry entry)
+    - validateEntry(AgendaEntry entry)
 
 }
 
-class AgendaUI {
+
+class ToDoListRepository {
+    - List<ToDoEntry> toDoList
+    +getToDoListForResponsible(String responsible)
 }
 
-AgendaUI ..> AgendaController
+class AgendaMapper {
+ +AgendaMapper()
+ + toDto(List<ToDoEntry> toDoEntries)
+ - toDto(ToDoEntry toDoEntry)
+}
 
-AgendaController --> AgendaUI : sendVehicleListToUI()
+class ToDoEntryDTO{
+    - ToDoEntry objDto
+    + ToDoEntryDTO(ToDoEntry toDoEntry)
+    + getObjDto()
+}
+
+
+class AgendaEntry {
+     -Team team;
+     -List<Vehicle> vehicles;
+     -Data starting_Date;
+     -Data expected_end_Date;
+     -Data real_end_Date;
+     -String responsible;
+     + AgendaEntry(ToDoEntry agendaEntry, Data starting_Date)
+     - validationAgendaEntry(Data startingDate)
+     - validateDate(Data startingDate)
+     - calculateEndDate(Data startingDate, ToDoEntry agendaEntry)
+}
+
+class enum_Status {
+    PLANNED
+    CANCELED
+    DONE
+    + toString()
+}
+
+class ToDoEntry {
+    -  GreenSpace greenSpace;
+    -  String title;
+    -  String description;
+    -  int urgency;
+    - int expectedDuration;
+    - String status;
+    -  String responsible;
+}
+
+
+
+
+AgendaUI .> AgendaController
+'
+AgendaController ..> AgendaMapper : sendToDoEntryList()
+AgendaController <... AgendaMapper : sendToDoEntryListDTO()
+AgendaMapper ..> ToDoEntryDTO
+Repositories --> ToDoListRepository: conttains
+AgendaController ..> ToDoListRepository : getToDoEntryLIst
+ToDoListRepository "1" --> "*" ToDoEntry : contains
+Repositories "1" --> "1" AuthenticationRepository : contains
+AuthenticationRepository -> UserSession : contains
+UserSession "1" --> "*" Email : contains
 AgendaController .> Repositories : repositories
-Repositories  --> "1 " Agenda
+Repositories  --> "1 " AgendaRepository
 Repositories -> Repositories : instance
-AgendaController ..>  Agenda : vehicleRepository
-Agenda -> AgendaController : getVehicleCheckUpList()
+AgendaController ...>  AgendaRepository : agendaRepository
+'AgendaRepository --> AgendaController : getVehicleCheckUpList()
+AgendaRepository --> AgendaEntry : contains
+ToDoEntryDTO ..> AgendaMapper : returns Dto Obj
+enum_Status - AgendaRepository
+
 @enduml

@@ -1,9 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.application.Mappers;
 
-import pt.ipp.isep.dei.esoft.project.application.DTOS.ListToDoEntryDTO;
 import pt.ipp.isep.dei.esoft.project.application.DTOS.ToDoEntryDTO;
 import pt.ipp.isep.dei.esoft.project.domain.ToDoEntry;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AgendaMapper {
@@ -15,12 +15,12 @@ public class AgendaMapper {
     //------------------------------------------------
 
     public List<ToDoEntryDTO> toDto(List<ToDoEntry> toDoEntries) {
-        ListToDoEntryDTO agendaDTO = new ListToDoEntryDTO();
+        List<ToDoEntryDTO> agendaDTO = new ArrayList<>();
         for (ToDoEntry toDoEntry : toDoEntries) {
             ToDoEntryDTO obj =  toDto(toDoEntry);
-            agendaDTO.addObjDto(obj);
+            agendaDTO.add(obj);
         }
-        return agendaDTO.getListToDoEntryDto();
+        return agendaDTO;
     }
 
     private ToDoEntryDTO toDto(ToDoEntry toDoEntry) {

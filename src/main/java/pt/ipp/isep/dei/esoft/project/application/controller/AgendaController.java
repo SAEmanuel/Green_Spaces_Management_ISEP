@@ -5,19 +5,18 @@ import pt.ipp.isep.dei.esoft.project.application.Mappers.AgendaMapper;
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class AgendaController {
 
-    private Agenda agenda;
+    private AgendaRepository agendaRepository;
     private ToDoListRepository toDoListRepository;
     private TeamRepository teamRepository;
     private VehicleRepository vehicleRepository;
 
     public AgendaController() {
-        this.agenda = getAgenda();
+        this.agendaRepository = getAgenda();
         this.toDoListRepository = getToDoRepository();
         this.teamRepository = getTeamRepository();
         this.vehicleRepository = getVehicleRepository();
@@ -47,12 +46,12 @@ public class AgendaController {
         return toDoListRepository;
     }
 
-    private Agenda getAgenda() {
-        if (agenda == null) {
+    private AgendaRepository getAgenda() {
+        if (agendaRepository == null) {
             Repositories repositories = Repositories.getInstance();
-            agenda = repositories.getAgenda();
+            agendaRepository = repositories.getAgenda();
         }
-        return agenda;
+        return agendaRepository;
     }
 
 //----------------------------------- Register an entry in agenda --------------------------------------
@@ -62,7 +61,7 @@ public class AgendaController {
         Optional<AgendaEntry> optionalAgenda;
 
 
-        optionalAgenda = agenda.registerAgendaEntry(agendaEntry, starting_Date);
+        optionalAgenda = agendaRepository.registerAgendaEntry(agendaEntry, starting_Date);
         if (optionalAgenda.isPresent()) {
             toDoListRepository.getToDoList().remove(agendaEntry);
         }
@@ -75,20 +74,20 @@ public class AgendaController {
 
     //------------------------------------ Postpone task --------------------------------
     public boolean postponeTask(int agendaTaskID, Data postponeDate, AgendaEntry agendaEntry) {
-        return agenda.postponeTask(agendaTaskID, postponeDate, agendaEntry);
+        return agendaRepository.postponeTask(agendaTaskID, postponeDate, agendaEntry);
     }
 
     //------------------------------------ Assign team to task in agenda --------------------------------
     public boolean assignTeam(int teamID, int agendaEntryID) {
         List<Team> teams = teamRepository.getListTeam();
-        return agenda.assignTeam(teams.get(teamID), agendaEntryID);
+        return agendaRepository.assignTeam(teams.get(teamID), agendaEntryID);
     }
 
 
     //--------------------------------------  Cancel Task -----------------------------
 
     public boolean cancelTask(int agendaTaskID) {
-        return agenda.cancelTask(agendaTaskID, getResponsible());
+        return agendaRepository.cancelTask(agendaTaskID, getResponsible());
     }
 
     //--------------------------------------  Extra Methods -----------------------------
@@ -108,7 +107,7 @@ public class AgendaController {
     }
 
     public List<AgendaEntry> getAgendaEntriesForResponsible() {
-        return agenda.getAgendaEntriesForResponsible(getResponsible());
+        return agendaRepository.getAgendaEntriesForResponsible(getResponsible());
     }
 
     public List<Team> getTeams() {
@@ -117,7 +116,7 @@ public class AgendaController {
 
 
     public List<AgendaEntry> getAgendaEntries(){
-        return agenda.getAgendaEntries();
+        return agendaRepository.getAgendaEntries();
     }
 
     //--------------------------------------  Assign Vehicle -----------------------------
@@ -127,7 +126,7 @@ public class AgendaController {
     }
 
     public boolean assignVehicle(AgendaEntry agendaTask, Vehicle vehicle) {
-        return agenda.assignVehicle(agendaTask, vehicle);
+        return agendaRepository.assignVehicle(agendaTask, vehicle);
     }
 
     //-------------------------------------- Mapper -----------------------------------
@@ -136,12 +135,12 @@ public class AgendaController {
     public Optional<List<AgendaEntry>> requestColabTaskList(Collaborator collaborator, Data startDate, Data endDate, int filterSelection) {
         Optional<List<AgendaEntry>> request;
 
-        request = agenda.requestColabTaskList(collaborator, startDate, endDate, filterSelection);
+        request = agendaRepository.requestColabTaskList(collaborator, startDate, endDate, filterSelection);
         return request;
     }
 
     public AgendaEntry.Status[] getStatus() {
-        return agenda.getStatus();
+        return agendaRepository.getStatus();
     }
 
 }

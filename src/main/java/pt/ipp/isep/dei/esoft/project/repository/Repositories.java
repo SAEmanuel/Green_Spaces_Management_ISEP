@@ -19,7 +19,7 @@ public class Repositories implements Serializable {
     private final VehicleCheckUpRepository vehicleCheckUpRepository;
     private final GreenSpaceRepository greenSpaceRepository;
     private final ToDoListRepository toDoListRepository;
-    private final Agenda agenda;
+    private final AgendaRepository agendaRepository;
     private final SendEmail sendEmail;
 
     private Repositories() {
@@ -32,7 +32,7 @@ public class Repositories implements Serializable {
         vehicleCheckUpRepository = new VehicleCheckUpRepository();
         greenSpaceRepository = new GreenSpaceRepository();
         toDoListRepository = new ToDoListRepository();
-        agenda = new Agenda();
+        agendaRepository = new AgendaRepository();
         sendEmail = new SendEmail();
     }
 
@@ -81,8 +81,8 @@ public class Repositories implements Serializable {
         return toDoListRepository;
     }
 
-    public Agenda getAgenda() {
-        return agenda;
+    public AgendaRepository getAgenda() {
+        return agendaRepository;
     }
 
     public SendEmail getSendEmail() { return sendEmail; }
