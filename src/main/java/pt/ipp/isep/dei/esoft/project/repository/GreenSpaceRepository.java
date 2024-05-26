@@ -89,9 +89,6 @@ public class GreenSpaceRepository implements Serializable {
 
     //---------------------------------------------------------------------------------
 
-
-
-
     /**
      * Retrieves a list of green spaces managed by a specific responsible person.
      *
@@ -136,9 +133,6 @@ public class GreenSpaceRepository implements Serializable {
     public List<GreenSpace> clone() {
         return new ArrayList<>(this.greenSpacesList);
     }
-
-
-
 }
 
 

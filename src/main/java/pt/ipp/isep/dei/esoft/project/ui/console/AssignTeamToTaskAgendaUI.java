@@ -47,7 +47,6 @@ public class AssignTeamToTaskAgendaUI implements Runnable {
         } else {
             System.out.println(ANSI_BRIGHT_RED + "Does not exist task in the AGENDA or there is no TEAM in the system... Add some" + ANSI_RESET);
         }
-
     }
 
 
