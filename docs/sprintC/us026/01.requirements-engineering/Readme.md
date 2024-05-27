@@ -42,13 +42,10 @@ In a real context, we would also need to manage the (un)availability of vehicles
 
 ### 1.5 Input and Output Data
 
-**Input Data:**
-
-* PlateID
-
 **Selected Data:**
 
 * Agenda Entry ID
+* Vehicle ID
 
 **Output Data:**
 

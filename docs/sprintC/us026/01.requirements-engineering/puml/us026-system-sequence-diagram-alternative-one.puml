@@ -23,14 +23,14 @@ activate Employee
 
     activate System
 
-        System --> Employee : request data (plateID)
+        System --> Employee : shows list of available vehicles
     deactivate System
 
-     Employee -> System : types requested data
+     Employee -> System : chooses a vehicle from the list
 
      activate System
 
-     System --> Employee : show all data registered\n and the confirmation menu
+     System --> Employee : shows the confirmation menu
      deactivate System
 
     Employee -> System : submits data
