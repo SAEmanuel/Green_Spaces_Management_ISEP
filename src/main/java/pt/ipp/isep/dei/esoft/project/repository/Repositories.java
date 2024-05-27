@@ -20,7 +20,6 @@ public class Repositories implements Serializable {
     private final GreenSpaceRepository greenSpaceRepository;
     private final ToDoListRepository toDoListRepository;
     private final AgendaRepository agendaRepository;
-    private final SendEmail sendEmail;
 
     private Repositories() {
         authenticationRepository = new AuthenticationRepository();
@@ -33,7 +32,6 @@ public class Repositories implements Serializable {
         greenSpaceRepository = new GreenSpaceRepository();
         toDoListRepository = new ToDoListRepository();
         agendaRepository = new AgendaRepository();
-        sendEmail = new SendEmail();
     }
 
     public static Repositories getInstance() {
@@ -84,8 +82,6 @@ public class Repositories implements Serializable {
     public AgendaRepository getAgenda() {
         return agendaRepository;
     }
-
-    public SendEmail getSendEmail() { return sendEmail; }
 
     public static void setInstance(Repositories repositories) {
         synchronized (Repositories.class) {

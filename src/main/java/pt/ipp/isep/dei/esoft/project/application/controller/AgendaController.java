@@ -15,14 +15,12 @@ public class AgendaController {
     private ToDoListRepository toDoListRepository;
     private TeamRepository teamRepository;
     private VehicleRepository vehicleRepository;
-    private SendEmail sendEmail;
 
     public AgendaController() {
         this.agendaRepository = getAgenda();
         this.toDoListRepository = getToDoRepository();
         this.teamRepository = getTeamRepository();
         this.vehicleRepository = getVehicleRepository();
-        this.sendEmail = getSendEmail();
     }
 
     private VehicleRepository getVehicleRepository() {
@@ -57,14 +55,6 @@ public class AgendaController {
         return agendaRepository;
     }
 
-    private SendEmail getSendEmail() {
-        if (sendEmail == null) {
-            Repositories repositories = Repositories.getInstance();
-            sendEmail = repositories.getSendEmail();
-        }
-        return sendEmail;
-    }
-
 //----------------------------------- Register an entry in agenda --------------------------------------
     public Optional<AgendaEntry> registerAgendaEntry(int toDoEntryOption, Data starting_Date) {
         ToDoEntry agendaEntry = searchForOption(toDoEntryOption);
@@ -91,6 +81,8 @@ public class AgendaController {
     //------------------------------------ Assign team to task in agenda --------------------------------
     public boolean assignTeam(int teamID, int agendaEntryID) {
         List<Team> teams = teamRepository.getListTeam();
+        SendEmail sendEmail = new SendEmail();
+
         if(agendaRepository.assignTeam(teams.get(teamID), agendaEntryID)){
             try {
                 String[] emails = new String[1];
