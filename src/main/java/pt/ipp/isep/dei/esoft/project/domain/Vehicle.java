@@ -5,6 +5,9 @@ import pt.ipp.isep.dei.esoft.project.domain.Extras.validations.Validations;
 
 import java.io.Serializable;
 
+import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_BRIGHT_YELLOW;
+import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_RESET;
+
 public class Vehicle implements Serializable {
 
     // Attributes
@@ -457,6 +460,14 @@ public class Vehicle implements Serializable {
     public String toString() {
         return String.format("• Plate: %s | Brand: %s | Model: %s | Type: %s | Current Km: %.2f%n" +
                 "    Register Date: %s%n    Acquisition Date: %s", plateId, brand, model,type, currentKm, registerDate, acquisitionDate);
+    }
+
+    public String toStringTask() {
+        return String.format("• Plate: %s | Brand: %s | Model: %s | Type: %s | Current Km: %.2f", plateId, brand, model,type, currentKm);
+    }
+
+    public String toStringTaskPreview() {
+        return String.format(ANSI_BRIGHT_YELLOW + "\n• Plate: %s | Model: %s | Type: %s " + ANSI_RESET, plateId, model,type);
     }
 
 }

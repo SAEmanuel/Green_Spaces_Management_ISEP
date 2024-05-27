@@ -70,7 +70,7 @@ public class AssignVehicleToAgendaTaskUI implements Runnable {
     private void showAvailableVehiclesList(List<Vehicle> availableVehicles) {
         System.out.println("\n-- Available Vehicle(s) --");
         for (int i = 0; i < availableVehicles.size(); i++) {
-            System.out.println(ANSI_CORAL + "•Vehicle: " + (i + 1) + ANSI_RESET + "\n" + availableVehicles.get(i).toString() + "\n" + ANSI_PURPLE + "   Option -> [" + (i + 1) + "]\n" + ANSI_RESET);
+            System.out.println(ANSI_CORAL + "•Vehicle: " + (i + 1) + ANSI_RESET + "\n" + availableVehicles.get(i).toStringTask() + "\n" + ANSI_PURPLE + "   Option -> [" + (i + 1) + "]\n" + ANSI_RESET);
         }
         System.out.println("----------------");
     }
