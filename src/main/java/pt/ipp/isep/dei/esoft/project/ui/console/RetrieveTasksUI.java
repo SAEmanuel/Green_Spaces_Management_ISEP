@@ -8,10 +8,13 @@ import pt.ipp.isep.dei.esoft.project.domain.Extras.Inputs.GetDatesFromUsers;
 
 import java.util.*;
 
-
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_RESET;
 
+/**
+ * This class represents the User Interface for retrieving tasks assigned to a collaborator.
+ * It implements the Runnable interface to allow running in a separate thread.
+ */
 public class RetrieveTasksUI implements Runnable {
 
     private final AgendaController controller;
@@ -24,15 +27,28 @@ public class RetrieveTasksUI implements Runnable {
 
     private static final int PLANNED_TASKS = 2;
 
+    /**
+     * Constructor for the RetrieveTasksUI class.
+     *
+     * @param collaborator The collaborator whose tasks are to be retrieved.
+     */
     public RetrieveTasksUI(Collaborator collaborator) {
         controller = new AgendaController();
         this.collaborator = collaborator;
     }
 
+    /**
+     * Returns the controller associated with this UI.
+     *
+     * @return The AgendaController instance.
+     */
     public AgendaController getController() {
         return controller;
     }
 
+    /**
+     * The main method to run the UI, which handles the flow of retrieving tasks.
+     */
     @Override
     public void run() {
         System.out.println("\n\n--- Tasks Assigned ------------------------");
@@ -42,15 +58,18 @@ public class RetrieveTasksUI implements Runnable {
         printData();
         askConfirmation();
         submitDataForPlanned();
-
-
     }
 
+    /**
+     * Requests the user to select a task for completion and returns the selected task ID.
+     *
+     * @return The selected task ID.
+     */
     private int requestCompletionTask() {
         Optional<List<AgendaEntry>> taskList = getController().requestPlannedColabTaskList(collaborator, startDate, endDate, filterSelection);
         if (taskList.isPresent()) {
             Scanner scanner = new Scanner(System.in);
-            int id = -1;
+            int id;
             printDataForPlanned();
             System.out.println();
 
@@ -75,10 +94,12 @@ public class RetrieveTasksUI implements Runnable {
         return -1;
     }
 
+    /**
+     * Asks the user for confirmation if they want to register a task completion.
+     */
     private void askConfirmation() {
         Optional<List<AgendaEntry>> plannedTaskList = getController().requestPlannedColabTaskList(collaborator, startDate, endDate, filterSelection);
         if (plannedTaskList.isPresent()) {
-
             if (filterSelection == PLANNED_TASKS && !plannedTaskList.get().isEmpty()) {
                 confirmation = requestConfirmation();
                 selectedTask = requestCompletionTask();
@@ -86,12 +107,19 @@ public class RetrieveTasksUI implements Runnable {
         }
     }
 
+    /**
+     * Requests the user to provide information for task retrieval.
+     */
     private void requestInfo() {
         filterSelection = selectFilter();
         requestDates();
-
     }
 
+    /**
+     * Prompts the user to select a filter for task retrieval.
+     *
+     * @return The selected filter option.
+     */
     private int selectFilter() {
         Scanner scanner = new Scanner(System.in);
         int option;
@@ -116,17 +144,17 @@ public class RetrieveTasksUI implements Runnable {
                 System.out.println(ANSI_BRIGHT_RED + "Invalid input! Please enter a valid number." + ANSI_RESET);
                 System.out.print("Select a filter: ");
                 scanner.nextLine();
-
             }
         } while (option < 0 || option > controller.getStatus().length);
 
         return option + 1;
     }
 
-
+    /**
+     * Requests the user to enter the start and end dates for task retrieval.
+     */
     private void requestDates() {
         do {
-
             System.out.println("Enter start date: ");
             startDate = GetDatesFromUsers.getData();
             System.out.println("Enter end date: ");
@@ -134,10 +162,14 @@ public class RetrieveTasksUI implements Runnable {
             if (startDate.isGreater(endDate)) {
                 System.out.println(ANSI_BRIGHT_RED + "Start date can't be greater than the end date!" + ANSI_RESET);
             }
-
         } while (startDate.isGreater(endDate));
     }
 
+    /**
+     * Prompts the user for confirmation to register a task completion.
+     *
+     * @return The confirmation input from the user.
+     */
     private String requestConfirmation() {
         Scanner scanner = new Scanner(System.in);
         String confirmation;
@@ -153,12 +185,14 @@ public class RetrieveTasksUI implements Runnable {
         return confirmation;
     }
 
+    /**
+     * Submits the data for task retrieval based on the provided information.
+     */
     private void submitData() {
         try {
             Optional<List<AgendaEntry>> taskList = getController().requestColabTaskList(collaborator, startDate, endDate, filterSelection);
 
             if (filterSelection != PLANNED_TASKS) {
-
                 if (taskList.isPresent()) {
                     System.out.println(ANSI_BRIGHT_GREEN + "Task list successfully generated!" + ANSI_RESET);
                 } else {
@@ -170,6 +204,9 @@ public class RetrieveTasksUI implements Runnable {
         }
     }
 
+    /**
+     * Submits the data for registering a planned task completion.
+     */
     private void submitDataForPlanned() {
         try {
             if (filterSelection == PLANNED_TASKS) {
@@ -184,36 +221,41 @@ public class RetrieveTasksUI implements Runnable {
         } catch (IllegalArgumentException e) {
             System.out.print("");
         }
-
     }
 
+    /**
+     * Prints the retrieved tasks to the console.
+     */
     private void printData() {
         Optional<List<AgendaEntry>> taskList = getController().requestColabTaskList(collaborator, startDate, endDate, filterSelection);
         printList(taskList);
     }
 
-
+    /**
+     * Prints the planned tasks to the console.
+     */
     private void printDataForPlanned() {
         Optional<List<AgendaEntry>> plannedTaskList = getController().requestPlannedColabTaskList(collaborator, startDate, endDate, filterSelection);
         printList(plannedTaskList);
         if (plannedTaskList.isEmpty()) {
             System.out.printf(ANSI_BRIGHT_RED + "No tasks assigned to you %s or for those filters!" + ANSI_RESET, collaborator.getName());
-
         }
     }
 
+    /**
+     * Prints a list of tasks to the console.
+     *
+     * @param taskList The list of tasks to be printed.
+     */
     private void printList(Optional<List<AgendaEntry>> taskList) {
         int counter = 1;
         if (taskList.isPresent()) {
-            System.out.println("-----");
+            System.out.println(ANSI_BRIGHT_YELLOW + "-----" + ANSI_RESET);
             for (AgendaEntry task : taskList.get()) {
                 System.out.printf(ANSI_PURPLE + "[%d]%n" + ANSI_RESET, counter++);
                 System.out.println(task);
-                System.out.println("-----");
-
+                System.out.println(ANSI_BRIGHT_YELLOW + "-----" + ANSI_RESET);
             }
         }
     }
-
-
 }
