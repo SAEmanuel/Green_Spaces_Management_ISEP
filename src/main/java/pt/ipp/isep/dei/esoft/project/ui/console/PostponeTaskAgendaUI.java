@@ -13,6 +13,9 @@ import java.util.Scanner;
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_PURPLE;
 
+/**
+ * User interface for postponing a task in the agenda.
+ */
 public class PostponeTaskAgendaUI implements Runnable {
 
     private final AgendaController controller;
@@ -21,22 +24,28 @@ public class PostponeTaskAgendaUI implements Runnable {
     private int agendaTaskID;
     private Data postponedDate;
 
+    /**
+     * Constructor for PostponeTaskAgendaUI.
+     * Initializes the controller.
+     */
     public PostponeTaskAgendaUI() {
         this.controller = new AgendaController();
     }
 
+    /**
+     * Gets the controller instance.
+     *
+     * @return The AgendaController instance.
+     */
     private AgendaController getController() {
         return controller;
     }
 
-    //-------------------------------------- Run if happy success -------------------------
-
     /**
-     * Executes the user interface logic for registering a vehicle.
+     * Executes the user interface logic for postponing a task in the agenda.
      */
     public void run() {
         System.out.println("\n\n--- Postpone a task in agenda ------------------------");
-
 
         if (requestEntryInformation()) {
             int continueApp = confirmsData();
@@ -47,28 +56,30 @@ public class PostponeTaskAgendaUI implements Runnable {
         } else {
             System.out.println(ANSI_BRIGHT_RED + "Does not exist task in the AGENDA... Add some" + ANSI_RESET);
         }
-
     }
 
-
+    /**
+     * Submits the data for postponing a task.
+     */
     private void submitData() {
-
-        try{
+        try {
             boolean result = getController().postponeTask(agendaTaskID, postponedDate, agendaEntry);
 
             if (result) {
                 System.out.println(ANSI_BRIGHT_GREEN + "Task successfully postponed!" + ANSI_RESET);
             } else {
-                System.out.printf(ANSI_BRIGHT_RED + "Task not postponed - Make sure date inputted is gratter than :[%s]!" + ANSI_RESET, agendaEntry.getStartingDate());
+                System.out.printf(ANSI_BRIGHT_RED + "Task not postponed - Make sure date inputted is greater than: [%s]!" + ANSI_RESET, agendaEntry.getStartingDate());
             }
-        }catch (IllegalArgumentException e ){
-            System.out.println(ANSI_BRIGHT_RED+e.getMessage()+ANSI_RESET);
+        } catch (IllegalArgumentException e) {
+            System.out.println(ANSI_BRIGHT_RED + e.getMessage() + ANSI_RESET);
         }
-
-
     }
 
-
+    /**
+     * Confirms the data with the user.
+     *
+     * @return The user's option.
+     */
     private int confirmsData() {
         int option;
         display();
@@ -88,16 +99,18 @@ public class PostponeTaskAgendaUI implements Runnable {
         }
     }
 
+    /**
+     * Displays the confirmation menu.
+     */
     private void display() {
-//        StringBuilder stringBuilder = new StringBuilder(String.format("Task: %s | Starting Date: %s", "\""+ agendaEntry.getTitle() + "\" in \"" + agendaEntry.getGreenSpace().getName()+"\"", starting_Date));
-//        System.out.printf("\nTyped data -> [%s%s%s]\n", ANSI_GREEN, stringBuilder, ANSI_RESET);
         System.out.print("\nConfirmation menu:\n 0 -> Change Entry Info\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
     }
 
-    //--------------------------------------------------------------------------------
-
-
-    //----------------------------------- Requests ----------------------------------
+    /**
+     * Requests entry information from the user.
+     *
+     * @return true if the information was successfully requested, false otherwise.
+     */
     private boolean requestEntryInformation() {
         agendaTaskID = requestAgendaEntry();
         if (agendaTaskID != -1) {
@@ -105,16 +118,23 @@ public class PostponeTaskAgendaUI implements Runnable {
             return true;
         }
         return false;
-
     }
 
-
+    /**
+     * Requests the postponed date from the user.
+     *
+     * @return The postponed date.
+     */
     private Data requestPostponedData() {
         System.out.print("-- Postponed Date --\n");
         return GetDatesFromUsers.getData();
     }
 
-
+    /**
+     * Requests the agenda entry from the user.
+     *
+     * @return The agenda task ID.
+     */
     private int requestAgendaEntry() {
         List<AgendaEntry> agendaTasks = controller.getAgendaEntriesForResponsible();
         int n = agendaTasks.size();
@@ -126,6 +146,13 @@ public class PostponeTaskAgendaUI implements Runnable {
         return -1;
     }
 
+    /**
+     * Gets the user's answer for the agenda task ID.
+     *
+     * @param agendaTasks The list of agenda tasks.
+     * @param n The number of agenda tasks.
+     * @return The user's selected task ID.
+     */
     private int getAnswer(List<AgendaEntry> agendaTasks, int n) {
         Scanner input = new Scanner(System.in);
         int answer;
@@ -144,13 +171,16 @@ public class PostponeTaskAgendaUI implements Runnable {
         }
     }
 
+    /**
+     * Displays the list of agenda tasks to the user.
+     *
+     * @param agendaTasks The list of agenda tasks.
+     */
     private void showToDoList(List<AgendaEntry> agendaTasks) {
         System.out.println("\n-- Agenda --");
         for (int i = 0; i < agendaTasks.size(); i++) {
-            System.out.println(ANSI_CORAL+"•Task: "+i+ANSI_RESET+ "\n" + agendaTasks.get(i).toString() + "\n" + ANSI_PURPLE + "   Option -> [" + (i + 1) + "]\n" + ANSI_RESET);
+            System.out.println(ANSI_CORAL + "•Task: " + i + ANSI_RESET + "\n" + agendaTasks.get(i).toString() + "\n" + ANSI_PURPLE + "   Option -> [" + (i + 1) + "]\n" + ANSI_RESET);
         }
         System.out.println("----------------");
     }
-
-
 }

@@ -216,6 +216,7 @@ public class RetrieveTasksUI implements Runnable {
                     System.out.println(ANSI_BRIGHT_GREEN + "Task completion successfully registered!" + ANSI_RESET);
                 } else if (!plannedTaskList.isPresent() && confirmation.equalsIgnoreCase("y")) {
                     System.out.printf(ANSI_BRIGHT_RED + "No tasks assigned to you %s or for those filters!" + ANSI_RESET, collaborator.getName());
+
                 }
             }
         } catch (IllegalArgumentException e) {
@@ -249,13 +250,14 @@ public class RetrieveTasksUI implements Runnable {
      */
     private void printList(Optional<List<AgendaEntry>> taskList) {
         int counter = 1;
-        if (taskList.isPresent() && confirmation.equalsIgnoreCase("y")) {
+        if (taskList.isPresent() && confirmation.equalsIgnoreCase("y") && filterSelection == PLANNED_TASKS) {
             System.out.println(ANSI_BRIGHT_YELLOW + "-----" + ANSI_RESET);
             for (AgendaEntry task : taskList.get()) {
                 System.out.printf(ANSI_CORAL + "•Task: %d%n" + ANSI_RESET, counter);
                 System.out.println(task);
                 System.out.printf(ANSI_PURPLE + "   Option -> [%d]%n" + ANSI_RESET, counter++);
                 System.out.println(ANSI_BRIGHT_YELLOW + "-----" + ANSI_RESET);
+
             }
         } else if (taskList.isPresent()) {
             System.out.println(ANSI_BRIGHT_YELLOW + "-----" + ANSI_RESET);
