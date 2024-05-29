@@ -29,26 +29,66 @@ public class AgendaRepository implements Serializable {
         return optionalValue;
     }
 
+    public Optional<List<AgendaEntry>> requestColabPlannedTaskList(Collaborator collaborator, Data startDate, Data endDate, int filterSelection) {
+        Optional<List<AgendaEntry>> optionalValue = Optional.empty();
+
+        List<AgendaEntry> taskList = getTaskPlannedList(collaborator, startDate, endDate, filterSelection);
+
+        if (taskPlannedListCreated(collaborator, startDate, endDate, filterSelection)) {
+            optionalValue = Optional.of(taskList);
+        }
+        return optionalValue;
+    }
+
+    private boolean taskPlannedListCreated(Collaborator collaborator, Data startDate, Data endDate, int filterSelection) {
+        List<AgendaEntry> taskList = getTaskPlannedList(collaborator, startDate, endDate, filterSelection);
+        return !taskList.isEmpty();
+    }
+
+    private List<AgendaEntry> getTaskPlannedList(Collaborator collaborator, Data startDate, Data endDate, int filterSelection) {
+
+        List<AgendaEntry> plannedList = new ArrayList<>();
+        if ((filterSelection - 1) == 1) {
+            for (AgendaEntry agendaEntry : agenda) {
+                if (agendaEntry.getTeam().hasCollaborator(collaborator)
+                        && agendaEntry.getStartingDate().isGreaterOrEquals(startDate)
+                        && !agendaEntry.getStartingDate().isGreater(endDate)
+                        && agendaEntry.getAgendaEntry().getStatus().equals("Planned")) {
+                    plannedList.add(agendaEntry);
+                }
+
+            }
+        }
+        return plannedList;
+    }
+
+    public Optional<List<AgendaEntry>> changedTaskStatusList(Collaborator collaborator, Data startDate, Data endDate, int filterSelection, String confirmation, int selectedTask) {
+        List<AgendaEntry> list = getTaskPlannedList(collaborator, startDate, endDate, filterSelection);
+        Optional<List<AgendaEntry>> optionalValue;
+        if (confirmation.equalsIgnoreCase("y") && !list.isEmpty()) {
+
+            List<AgendaEntry> taskList = getTaskPlannedList(collaborator, startDate, endDate, filterSelection);
+            taskList.get(selectedTask).setReal_end_Date(Data.currentDate());
+            taskList.get(selectedTask).getAgendaEntry().setStatus(String.valueOf(AgendaEntry.Status.DONE));
+
+
+            optionalValue = Optional.of(taskList);
+            return optionalValue;
+        }
+
+        return Optional.empty();
+    }
+
+
     private List<AgendaEntry> getTaskList(Collaborator collaborator, Data startDate, Data endDate, int filterSelection) {
         List<AgendaEntry> taskList = new ArrayList<>();
         switch (filterSelection - 1) {
             case 0:
                 for (AgendaEntry agendaEntry : agenda) {
                     if (agendaEntry.getTeam().hasCollaborator(collaborator)
-                            && agendaEntry.getStartingDate().isGreater(startDate)
+                            && agendaEntry.getStartingDate().isGreaterOrEquals(startDate)
                             && !agendaEntry.getStartingDate().isGreater(endDate)) {
 
-                        taskList.add(agendaEntry);
-                    }
-
-                }
-                break;
-            case 1:
-                for (AgendaEntry agendaEntry : agenda) {
-                    if (agendaEntry.getTeam().hasCollaborator(collaborator)
-                            && agendaEntry.getStartingDate().isGreater(startDate)
-                            && !agendaEntry.getStartingDate().isGreater(endDate)
-                            && agendaEntry.getAgendaEntry().getStatus().equals("Planned")) {
                         taskList.add(agendaEntry);
                     }
 
@@ -57,9 +97,9 @@ public class AgendaRepository implements Serializable {
             case 2:
                 for (AgendaEntry agendaEntry : agenda) {
                     if (agendaEntry.getTeam().hasCollaborator(collaborator)
-                            && agendaEntry.getStartingDate().isGreater(startDate)
+                            && agendaEntry.getStartingDate().isGreaterOrEquals(startDate)
                             && !agendaEntry.getStartingDate().isGreater(endDate)
-                            && agendaEntry.getAgendaEntry().getStatus().equals("Postponed")) {
+                            && agendaEntry.getAgendaEntry().getStatus().equals(String.valueOf(AgendaEntry.Status.CANCELED))) {
                         taskList.add(agendaEntry);
                     }
 
@@ -68,27 +108,14 @@ public class AgendaRepository implements Serializable {
             case 3:
                 for (AgendaEntry agendaEntry : agenda) {
                     if (agendaEntry.getTeam().hasCollaborator(collaborator)
-                            && agendaEntry.getStartingDate().isGreater(startDate)
+                            && agendaEntry.getStartingDate().isGreaterOrEquals(startDate)
                             && !agendaEntry.getStartingDate().isGreater(endDate)
-                            && agendaEntry.getAgendaEntry().getStatus().equals("Canceled")) {
+                            && agendaEntry.getAgendaEntry().getStatus().equals(String.valueOf(AgendaEntry.Status.DONE))) {
                         taskList.add(agendaEntry);
                     }
 
                 }
                 break;
-            case 4:
-                for (AgendaEntry agendaEntry : agenda) {
-                    if (agendaEntry.getTeam().hasCollaborator(collaborator)
-                            && agendaEntry.getStartingDate().isGreater(startDate)
-                            && !agendaEntry.getStartingDate().isGreater(endDate)
-                            && agendaEntry.getAgendaEntry().getStatus().equals("Done")) {
-                        taskList.add(agendaEntry);
-                    }
-
-                }
-                break;
-
-
         }
 
 

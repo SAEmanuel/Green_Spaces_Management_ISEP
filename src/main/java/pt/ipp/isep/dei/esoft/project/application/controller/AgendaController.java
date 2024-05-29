@@ -153,8 +153,21 @@ public class AgendaController {
         return request;
     }
 
+    public Optional<List<AgendaEntry>> requestPlannedColabTaskList(Collaborator collaborator, Data startDate, Data endDate, int filterSelection) {
+        Optional<List<AgendaEntry>> request;
+
+        request = agendaRepository.requestColabPlannedTaskList(collaborator, startDate, endDate, filterSelection);
+        return request;
+    }
+
     public AgendaEntry.Status[] getStatus() {
         return agendaRepository.getStatus();
     }
 
+    public Optional<List<AgendaEntry>> requestChangedStatusTaskList(Collaborator collaborator, Data startDate, Data endDate, int filterSelection, String confirmation, int selectedTask) {
+        Optional<List<AgendaEntry>> request;
+
+        request = agendaRepository.changedTaskStatusList(collaborator, startDate, endDate, filterSelection, confirmation,selectedTask);
+        return request;
+    }
 }

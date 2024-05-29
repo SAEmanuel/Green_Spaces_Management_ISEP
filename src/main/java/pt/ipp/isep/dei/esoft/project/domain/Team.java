@@ -30,11 +30,11 @@ public class Team {
 
     public boolean hasCollaborator(Collaborator collaborator) {
         for (Collaborator c : collaborators) {
-            if (!c.equals(collaborator)) {
-                return false;
+            if (c.equals(collaborator)) {
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     @Override
