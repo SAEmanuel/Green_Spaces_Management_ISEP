@@ -79,12 +79,12 @@ public class RetrieveTasksUI implements Runnable {
                     try {
                         id = scanner.nextInt();
                         if (id < 1 || id > taskList.get().size()) {
-                            System.out.printf(ANSI_BRIGHT_RED + "Invalid task id. Must be between 1 and %d.%n" + ANSI_RESET, taskList.get().size());
+                            System.out.printf(ANSI_BRIGHT_RED + "Invalid task id. Must be a number between 1 and %d.%n" + ANSI_RESET, taskList.get().size());
                         } else {
                             break;
                         }
                     } catch (InputMismatchException e) {
-                        System.out.println(ANSI_BRIGHT_RED + "Invalid task id. Must be between 1 and %d.%n" + ANSI_RESET);
+                        System.out.printf(ANSI_BRIGHT_RED + "Invalid task id. Must be a number between 1 and %d.%n" + ANSI_RESET, taskList.get().size());
                         scanner.next();
                     }
                 }
@@ -249,13 +249,22 @@ public class RetrieveTasksUI implements Runnable {
      */
     private void printList(Optional<List<AgendaEntry>> taskList) {
         int counter = 1;
-        if (taskList.isPresent()) {
+        if (taskList.isPresent() && confirmation.equalsIgnoreCase("y")) {
             System.out.println(ANSI_BRIGHT_YELLOW + "-----" + ANSI_RESET);
             for (AgendaEntry task : taskList.get()) {
-                System.out.printf(ANSI_PURPLE + "[%d]%n" + ANSI_RESET, counter++);
+                System.out.printf(ANSI_CORAL + "•Task: %d%n" + ANSI_RESET, counter);
+                System.out.println(task);
+                System.out.printf(ANSI_PURPLE + "   Option -> [%d]%n" + ANSI_RESET, counter++);
+                System.out.println(ANSI_BRIGHT_YELLOW + "-----" + ANSI_RESET);
+            }
+        } else if (taskList.isPresent()) {
+            System.out.println(ANSI_BRIGHT_YELLOW + "-----" + ANSI_RESET);
+            for (AgendaEntry task : taskList.get()) {
+                System.out.printf(ANSI_CORAL + "•Task: %d%n" + ANSI_RESET, counter++);
                 System.out.println(task);
                 System.out.println(ANSI_BRIGHT_YELLOW + "-----" + ANSI_RESET);
             }
+
         }
     }
 }
