@@ -26,10 +26,11 @@ public class CreateCollaboratorController {
 
     /**
      * Gets the JobRepository instance
+     *
      * @return JobRepository instance
      */
     private JobRepository getJobRepository() {
-        if (this.jobRepository == null){
+        if (this.jobRepository == null) {
             Repositories repositories = Repositories.getInstance();
             jobRepository = repositories.getJobRepository();
         }
@@ -38,6 +39,7 @@ public class CreateCollaboratorController {
 
     /**
      * Gets the CollaboratorRepository instance
+     *
      * @return CollaboratorRepository instance
      */
     public CollaboratorRepository getCollaboratorRepository() {
@@ -50,6 +52,7 @@ public class CreateCollaboratorController {
 
     /**
      * Gets the CollaboratorRepository instance
+     *
      * @return CollaboratorRepository instance
      */
     public CollaboratorRepository returnCollaboratorRepository() {
@@ -58,15 +61,16 @@ public class CreateCollaboratorController {
 
     /**
      * Register a collaborator with the given parameters
-     * @param name of the collaborator
-     * @param birthDate of the collaborator
-     * @param admissionDate of the collaborator
-     * @param address of the collaborator
-     * @param phoneNumber of the collaborator
-     * @param emailAddress of the collaborator
+     *
+     * @param name           of the collaborator
+     * @param birthDate      of the collaborator
+     * @param admissionDate  of the collaborator
+     * @param address        of the collaborator
+     * @param phoneNumber    of the collaborator
+     * @param emailAddress   of the collaborator
      * @param taxPayerNumber of the collaborator
-     * @param docType of the collaborator
-     * @param job of the collaborator
+     * @param docType        of the collaborator
+     * @param job            of the collaborator
      * @return an optional containing the registered collaborator, or empty if registration failed
      */
     public Optional<Collaborator> registerCollaborator(String name, Data birthDate, Data admissionDate, String address, int phoneNumber, String emailAddress, int taxPayerNumber, int docType, String docNumber, Job job, Password password) {
@@ -90,5 +94,9 @@ public class CreateCollaboratorController {
 
     public String getResponsible() {
         return repositories.getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail();
+    }
+
+    public boolean changePassword(Collaborator collaborator, Password newPassword) {
+        return collaboratorRepository.changePassword(collaborator,newPassword);
     }
 }
