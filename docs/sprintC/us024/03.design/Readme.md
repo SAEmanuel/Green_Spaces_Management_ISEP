@@ -14,9 +14,8 @@
 | Step 4         | ... displaying the form for the actor to input data?       | PostponeTaskAgendaUI | Pure Fabrication                                                                                                                |
 | Step 5         | ... temporarily keeping the input option?                  | PostponeTaskAgendaUI | Pure Fabrication                                                                                                                |
 | Step 6         | ... display all the information before submitting?         | PostponeTaskAgendaUI | Pure Fabrication.                                                                                                               |
-| Step 7         | ... postponing the date?                                   | AgendaRepository     | Repository: The repository handles the retrieval and manipulation of data, iterating over the existent Tasks in the repository. |              
+| Step 7         | ... register the Task object in to the Agenda?             | AgendaRepository     | Repository: The repository handles the retrieval and manipulation of data, iterating over the existent Tasks in the repository. |              
 | 	              | ... validating all data (global validation)?               | AgendaRepository     | IE: knows all its information.                                                                                                  |
-| 	              | ... saving the new postponed date?                         | AgendaRepository     | IE: owns all its Task.                                                                                                          |
 | Step 8         | ... informing operation success?                           | PostponeTaskAgendaUI | IE: is responsible for user interactions.                                                                                       | 
 
 ### Systematization ##
