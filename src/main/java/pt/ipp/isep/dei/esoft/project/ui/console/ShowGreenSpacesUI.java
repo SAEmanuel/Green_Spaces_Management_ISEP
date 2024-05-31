@@ -54,28 +54,27 @@ public class ShowGreenSpacesUI implements Runnable {
         int answerList = -2;
         Scanner input = new Scanner(System.in);
 
-        while (answerList < 1 || answerList > listSize + 1) {
+        while (answerList < 0 || answerList > listSize) {
             displaySortTypesListOptions(sortTypes);
             System.out.print("Select a team: ");
             answerList = input.nextInt();
         }
 
-        if (answerList != listSize + 1) {
+        if (answerList != 0) {
             sortType = sortTypes.get(answerList-1);
+            return true;
         }else
             return false;
-
-        return true;
     }
 
     private void displaySortTypesListOptions(List<String> sortTypes) {
         int i = 1;
         for (String s : sortTypes) {
             System.out.println("• Type: " + s);
-            System.out.println("\n" + ANSI_PURPLE + "   Option -> [" + i + "]" + ANSI_RESET);
+            System.out.println(ANSI_PURPLE + "   Option -> [" + i + "]" + ANSI_RESET + "\n");
             i++;
         }
         System.out.println();
-        System.out.println("• Type: " + " - Exit" + "\n" + ANSI_PURPLE + "   Option -> [" + i + "]" + ANSI_RESET);
+        System.out.println("• Type: " + " - Exit" + "\n" + ANSI_PURPLE + "   Option -> [" + 0 + "]" + ANSI_RESET);
     }
 }
