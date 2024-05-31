@@ -1,0 +1,43 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+left to right direction
+
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+package "GSM System" {
+
+title Domain Model - US022
+
+
+
+class GSM {
+}
+
+class AgendaEntry {
+         toDoEntry
+         StartingDate
+         EndDate
+         Team
+         List<Vehicles>
+
+}
+
+
+
+
+
+
+
+
+GSM "1" -- "*" AgendaEntry : postpone entry >
+
+
+
+
+
+@enduml

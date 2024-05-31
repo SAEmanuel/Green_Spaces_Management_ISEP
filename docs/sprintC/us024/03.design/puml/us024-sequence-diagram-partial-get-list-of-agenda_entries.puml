@@ -1,0 +1,59 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+
+
+participant ":AgendaController" as CTRL
+participant "agendaRepository\n:AgendaRepository" as agendaRepo
+participant "agendaEntry \n:AgendaEntry>" as green
+participant "listAgendaEntry\n:List<AgendaEntry>" as listToDo
+
+
+
+ activate CTRL
+autonumber 8
+
+autonumber 3.1
+    group Get List of Agenda Repositories
+     CTRL -> agendaRepo : getAgendaEntriesForResponsible(email)
+               activate agendaRepo
+
+
+                           agendaRepo -> listToDo** : create
+                           group loop [for each object in the toDoListRepository]
+
+                                agendaRepo -> agendaRepo :  obj = get(i)
+                                activate agendaRepo
+                                deactivate agendaRepo
+
+                                   agendaRepo -> green : getResponsible()
+                                   activate green
+                                        green -> green : getResponsible()
+                                        activate green
+                                        deactivate green
+
+                                        green --> agendaRepo : objResponsible
+                                   deactivate green
+                                group if [objResponsible == responsible]
+
+                                   agendaRepo -> listToDo : add(obj)
+                                   activate listToDo
+
+                                   deactivate listToDo
+                                end
+
+                           end
+
+                        agendaRepo --> CTRL : listAgendaEntriesByResponsible
+
+               deactivate agendaRepo
+
+ deactivate CTRL
+    end
+
+@enduml

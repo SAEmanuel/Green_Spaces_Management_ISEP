@@ -1,0 +1,51 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+
+
+participant ":AgendaController" as CTRL
+participant "agendaMapper\n:AgendaMapper" as mapper
+participant "listAgendaEntryDTO\n: List<AgendaEntryDTO>" as listDTO
+participant "objDto\n: AgendaEntryDto" as objDto
+participant "listAgendaEntry\n:List<AgendaEntry>" as listToDo
+
+
+autonumber 8
+
+autonumber 3.1
+ activate CTRL
+    group Get Agenda List DTO for Responsible
+            CTRL -> CTRL : getAgendaDTOForResponsible()
+     activate CTRL
+
+                CTRL -> mapper** : create
+                CTRL -> mapper : toDto( getAgendaEntryListForResponsible() )
+                activate mapper
+
+                    mapper -> listDTO** : create
+                    group loop [for each object in listToDoEntry]
+                        mapper -> listToDo: obj = get(i)
+                        activate listToDo
+                        deactivate listToDo
+
+                        mapper -> mapper : objDto = toDTO(obj)
+                        activate mapper
+
+                            mapper --> objDto** : create(obj)
+                        deactivate mapper
+
+                        mapper -> listDTO : add(objDto)
+                        activate listDTO
+                        deactivate listDTO
+                    end
+                    mapper --> CTRL : listAgendaEntryDto
+                deactivate mapper
+           deactivate CTRL
+    end
+
+@enduml

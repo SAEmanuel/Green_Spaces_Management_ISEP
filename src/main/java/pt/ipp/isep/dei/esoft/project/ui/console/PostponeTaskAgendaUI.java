@@ -89,8 +89,6 @@ public class PostponeTaskAgendaUI implements Runnable {
     }
 
     private void display() {
-//        StringBuilder stringBuilder = new StringBuilder(String.format("Task: %s | Starting Date: %s", "\""+ agendaEntry.getTitle() + "\" in \"" + agendaEntry.getGreenSpace().getName()+"\"", starting_Date));
-//        System.out.printf("\nTyped data -> [%s%s%s]\n", ANSI_GREEN, stringBuilder, ANSI_RESET);
         System.out.print("\nConfirmation menu:\n 0 -> Change Entry Info\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
     }
 
