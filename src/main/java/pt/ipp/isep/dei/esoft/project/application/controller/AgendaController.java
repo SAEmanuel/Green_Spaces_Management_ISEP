@@ -128,21 +128,31 @@ public class AgendaController {
      * @param agendaEntryID The ID of the agenda entry.
      * @return true if the team was assigned successfully, false otherwise.
      */
-    public boolean assignTeam(int teamID, int agendaEntryID) {
+    public boolean assignTeam(int teamID, int agendaEntryID, String emailService) {
         List<Team> teams = teamRepository.getListTeam();
         SendEmail sendEmail = new SendEmail();
 
         if (agendaRepository.assignTeam(teams.get(teamID), agendaEntryID)) {
             try {
-                String[] emails = new String[1];
+                String[] emails = new String[2];
                 emails[0] = "belinha@this.app";
-                sendEmail.sendEmail("src/main/resources/config.properties", "gmail", emails, "Whats", "Passa ai o whats novinha");
+                emails[1] = "mari@this.app";
+                sendEmail.sendEmail(emailService, emails, "Whats", "Passa ai o whats novinha");
                 return true;
             } catch (IOException e) {
                 System.out.println("Email not sent");
             }
         }
         return false;
+    }
+
+    public List<String> getEmailServices(){
+        try {
+            SendEmail sendEmail = new SendEmail();
+            return sendEmail.getEmailServices();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
