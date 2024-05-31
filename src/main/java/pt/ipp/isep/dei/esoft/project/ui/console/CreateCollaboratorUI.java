@@ -11,6 +11,7 @@ import java.util.InputMismatchException;
 import java.util.Optional;
 import java.util.Scanner;
 
+import static pt.ipp.isep.dei.esoft.project.domain.Extras.Inputs.Password.getPasswordInput;
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_RESET;
 
@@ -20,14 +21,14 @@ public class CreateCollaboratorUI implements Runnable {
     private String name;
     private String address;
     private String emailAddress;
-    private int docType;
     private String docNumber;
     private Data birthDate;
     private Data admissionDate;
+    private Password password;
+    private Job job;
+    private int docType;
     private int phoneNumber;
     private int taxPayerNumber;
-    private Job job;
-    private Password password;
 
     /**
      * Default constructor that initializes the CreateCollaboratorController and RegisterJobController
@@ -237,7 +238,6 @@ public class CreateCollaboratorUI implements Runnable {
 
     private Password getPassword() {
         Password password;
-
         while (true) {
             String pass = requestPass();
             try {
@@ -251,18 +251,7 @@ public class CreateCollaboratorUI implements Runnable {
     }
 
     private String requestPass() {
-        String pass;
-        Scanner input = new Scanner(System.in);
-        System.out.print("- Password: ");
-        while (true) {
-            try {
-                pass = input.nextLine();
-                return pass;
-            } catch (InputMismatchException e) {
-                System.out.print(ANSI_BRIGHT_RED + "Invalid Password! Enter a new one: " + ANSI_RESET);
-                input.nextLine();
-            }
-        }
+        return getPasswordInput();
     }
 
     /**

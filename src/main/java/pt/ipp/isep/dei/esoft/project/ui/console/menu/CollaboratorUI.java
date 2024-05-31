@@ -3,8 +3,12 @@ package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 import pt.ipp.isep.dei.esoft.project.application.controller.CreateCollaboratorController;
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
+import pt.ipp.isep.dei.esoft.project.ui.Bootstrap;
+import pt.ipp.isep.dei.esoft.project.ui.console.ChangePasswordUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.RetrieveTasksUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
+
+import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +24,11 @@ public class CollaboratorUI implements Runnable {
         Repositories repositories = Repositories.getInstance();
         List<Collaborator> collaborators = repositories.getCollaboratorRepository().getCollaboratorList();
         Collaborator loggedInCollaborator = getLoggedInCollaborator(collaborators);
-        ;
+
         for (Collaborator colab : collaborators) {
             if (colab.getEmailAddress().equals(controller.getResponsible()) &&
                     colab.getBirthDate().isBirthDate(colab.getBirthDate().getDay(), colab.getBirthDate().getMonth())) {
-                System.out.printf("Happy Birthday %s!!!%nWe are happy to have you at MusgoSublime%n", colab.getName());
+                System.out.printf(ANSI_BRIGHT_YELLOW + "Happy Birthday %s!!!%nWe are happy to have you at MusgoSublime%n", colab.getName());
                 System.out.println("                0   0\n" +
                         "                |   |\n" +
                         "            ____|___|____\n" +
@@ -38,12 +42,13 @@ public class CollaboratorUI implements Runnable {
                         "|             H a p p y             |\n" +
                         "|         B i r t h d a y           |\n" +
                         "| ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ |\n" +
-                        "|___________________________________|");
+                        "|___________________________________|" + ANSI_RESET);
             }
 
         }
         List<MenuItem> options = new ArrayList<MenuItem>();
         options.add(new MenuItem("Consult assigned tasks", new RetrieveTasksUI(loggedInCollaborator)));
+        options.add(new MenuItem("Change password", new ChangePasswordUI(loggedInCollaborator)));
 
 
         int option = 0;

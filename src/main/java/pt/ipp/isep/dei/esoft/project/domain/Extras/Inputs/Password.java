@@ -1,9 +1,14 @@
 package pt.ipp.isep.dei.esoft.project.domain.Extras.Inputs;
 
+import java.io.Serializable;
+import java.util.InputMismatchException;
+import java.util.Objects;
+import java.util.Scanner;
+
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
 
 
-public class Password {
+public class Password implements Serializable {
     public static final int NUMBER_CAP_LETTERS = 3;
     public static final int NUMBER_DIGITS = 2;
     public static final int PASSWORD_LENGTH = 7;
@@ -12,7 +17,7 @@ public class Password {
 
     public Password(String pass) {
         if (!verifyPassword(pass)) {
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED + "Password invalid" + ANSI_RESET);
+            throw new IllegalArgumentException(ANSI_BRIGHT_RED + "Invalid password!" + ANSI_RESET);
         }
         this.pass = pass;
 
@@ -45,6 +50,35 @@ public class Password {
 
     public String getPass() {
         return pass;
+    }
+
+    public static String getPasswordInput() {
+        String pass;
+        Scanner input = new Scanner(System.in);
+        System.out.print("- Password: ");
+        while (true) {
+            try {
+                pass = input.nextLine();
+                return pass;
+            } catch (InputMismatchException e) {
+                System.out.print(ANSI_BRIGHT_RED + "Invalid Password! Enter a new one: " + ANSI_RESET);
+                input.nextLine();
+            }
+        }
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Password password = (Password) o;
+        return Objects.equals(pass, password.pass);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(pass);
     }
 
     @Override

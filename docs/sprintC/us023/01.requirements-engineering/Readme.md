@@ -10,35 +10,18 @@ As a GSM, I want to assign a Team to an entry in the Agenda
 
 **From the specifications document and client meetings:**
 
->	The system should prompt all the vehicles that need check-up. 
-
->	It is possible that no vehicles need overhauling.
-
->   The system takes in consideration the maintenance frequency (in kms) introduced by the HRM when the vehicle is registered and when the kms are 5% close to reach that limit it will be eligible for check-up.
+> The Agenda is made
+up of entries that relate to a task (which was previously in the To-Do List),
+the team that will carry out the task, the vehicles/equipment assigned to
+the task, expected duration, and the status (Planned, Postponed, Canceled,
+Done).
+ 
 
 **From forum:**
 
 > **Question:** Can the vehicles get placed automatically on a list or the one listing has to be the FM?
 >
 > **Answer:**  The list of vehicles is automatically created but the creation is triggered by the FM.
-
-> **Question:** What information will appear on the final list regarding the vehicle, besides the needing for check-up?
->
-> **Answer:** Data that allow to identify the vehicle like Plate, brand and model, as well as, the data that allowed to select/insert te vehicle in the list, number of kms, frequency of checkup and the last checkup.
-
-> **Question:** I'm not sure if I understood everything about US08. In this US we should only list the vehicles that need a check up (surpass the check-up frequency in KM) or that will shortly need a check-up (5% to the check-up frequency *already said in another post*), correct? If so, the information about the checkup frequency for each vehicle should be asked in US07?
->
-> **Answer:** No; the Maintenance/Check-up Frequency (in km) is registered in US06.
-
-> **Question:** What are the requests/ input data to list the vehicles needing the check-up? Type of vehicle, Current Km and Maintenance/Check-up Frequency (in Kms) are sufficient?
->
-> **Answer:** Current Km and Maintenance/Check-up Frequency (in Kms) are sufficient, yes;
-The list must contain all vehicles that have already exceeded the number of km required for the inspection or those that are close to it.
-For example: a vehicle that made the checkup at 23500 and has a checkup frequency of 10000km.
-a) If it currently has 33600 (exceeded) or
-b) 33480 (there is a difference minor than 5% of the number of kms of the checkup frequency).
-The list must clearly identify the vehicles through: plate number, brand, model and the that justified the checkup need.
-
 
 ### 1.3. Acceptance Criteria 
 
@@ -48,23 +31,25 @@ The list must clearly identify the vehicles through: plate number, brand, model 
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US006 - Registering Vehicles" as there must be at least one vehicle in the system so that it can check the need for a check-up.
+* There is a dependency on "US005 - Generate Team" as there must be at least one team in the system so that it can associate it to an agenda entry.
+* There is a dependency on "US022 - Add a new entry in the Agenda" as there must be at least one entry in agenda, in the system so that it can associate a team to it.
 
 ### 1.5 Input and Output Data
 
 **Input Data:**
 
 * Team number
-* 
+* Agenda entry
+* Email Service
 
 **Output Data:**
 
-* List of vehicles that need a check-up
-* (In)Success of the operation
+* Email to all team members
+* Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
 
 #### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us008-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
+![System Sequence Diagram - Alternative One](svg/us023-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
 

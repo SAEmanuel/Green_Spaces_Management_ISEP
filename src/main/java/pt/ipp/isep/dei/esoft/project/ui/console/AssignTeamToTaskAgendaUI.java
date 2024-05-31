@@ -5,7 +5,6 @@ import pt.ipp.isep.dei.esoft.project.domain.AgendaEntry;
 import pt.ipp.isep.dei.esoft.project.domain.Extras.ConfirmationMenu.ConfirmationMenu;
 import pt.ipp.isep.dei.esoft.project.domain.Team;
 
-import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -19,6 +18,7 @@ public class AssignTeamToTaskAgendaUI implements Runnable {
 
     private int teamID;
     private int agendaEntryID;
+    private String emailService;
 
     public AssignTeamToTaskAgendaUI() {
         this.controller = new AgendaController();
@@ -52,7 +52,7 @@ public class AssignTeamToTaskAgendaUI implements Runnable {
 
     private void submitData() {
 
-        boolean result = getController().assignTeam(teamID,agendaEntryID);
+        boolean result = getController().assignTeam(teamID,agendaEntryID, emailService);
 
         if (result) {
             System.out.println(ANSI_BRIGHT_GREEN + "\nTeam successfully assigned!" + ANSI_RESET);
@@ -93,10 +93,12 @@ public class AssignTeamToTaskAgendaUI implements Runnable {
         agendaEntryID = requestAgendaEntryID();
         if (agendaEntryID != -1) {
             teamID = requestTeamID();
-            return teamID != -1;
+            if(teamID != -1){
+                emailService = requestEmailService();
+                return emailService != null;
+            }
         }
         return false;
-
     }
 
 
@@ -117,7 +119,7 @@ public class AssignTeamToTaskAgendaUI implements Runnable {
     private void showToDoList(List<AgendaEntry> agendaTasks) {
         System.out.println("\n-- Agenda --");
         for (int i = 0; i < agendaTasks.size(); i++) {
-            System.out.println(ANSI_CORAL+"•Task: "+i+ANSI_RESET+ "\n" + agendaTasks.get(i).toString() + "\n" + ANSI_PURPLE + "   Option -> [" + (i + 1) + "]\n" + ANSI_RESET);
+            System.out.println(ANSI_CORAL+"•Task: "+(i+1)+ANSI_RESET+ "\n" + agendaTasks.get(i).toString() + "\n" + ANSI_PURPLE + "   Option -> [" + (i + 1) + "]\n" + ANSI_RESET);
         }
         System.out.println("----------------");
     }
@@ -139,7 +141,7 @@ public class AssignTeamToTaskAgendaUI implements Runnable {
     private void showTeams(List<Team> teams) {
         System.out.println("\n-- Teams --");
         for (int i = 0; i < teams.size(); i++) {
-            System.out.println(ANSI_CORAL+"•Team: "+i+ANSI_RESET+ "\n" + teams.get(i).toString() + "\n" + ANSI_PURPLE + "   Option -> [" + (i + 1) + "]\n" + ANSI_RESET);
+            System.out.println(ANSI_CORAL+"•Team: "+(i+1)+ANSI_RESET+ "\n" + teams.get(i).toString() + "\n" + ANSI_PURPLE + "   Option -> [" + (i + 1) + "]\n" + ANSI_RESET);
         }
         System.out.println("----------------");
     }
@@ -160,5 +162,24 @@ public class AssignTeamToTaskAgendaUI implements Runnable {
             }
             System.out.print(ANSI_BRIGHT_YELLOW + "Invalid ID, enter a new one: " + ANSI_RESET);
         }
+    }
+
+    private String requestEmailService() {
+        List<String > emailServices = controller.getEmailServices();
+        int n = emailServices.size();
+        if (n != 0) {
+            showEmailServices(emailServices);
+            System.out.print("Type ID Option: ");
+            return emailServices.get(getAnswer(n));
+        }
+        return null;
+    }
+
+    private void showEmailServices(List<String> emailServices) {
+        System.out.println("\n-- Email Services --");
+        for (int i = 0; i < emailServices.size(); i++) {
+            System.out.println(ANSI_CORAL+"•Service: "+(i+1)+ANSI_RESET+ "\n" + emailServices.get(i).toString() + "\n" + ANSI_PURPLE + "   Option -> [" + (i + 1) + "]\n" + ANSI_RESET);
+        }
+        System.out.println("----------------");
     }
 }
