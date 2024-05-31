@@ -1,0 +1,53 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+skinparam classAttributeIconSize 0
+'left to right direction
+
+class AgendaRepository {
+    -List<AgendaEntry> agenda
+    - getTaskPlannedList()
+    - getTaskList()
+    - taskPlannedListCreated()
+    - taskListCreated()
+    + changedTaskStatusList()
+    + sortByStartDate()
+    + getStatus()
+    + requestColabTaskList(): List<AgendaEntry>
+    + requestColabPlannedTaskList(): List<AgendaEntry>
+}
+
+class Repositories {
+    - Repositories()
+    + getAgenda()
+    + getInstance() : Repositories
+}
+
+class AgendaController {
+    - AgendaRepository agendaRepository
+    - ToDoListRepository toDoListRepository;
+    - TeamRepository teamRepository;
+    - VehicleRepository vehicleRepository;
+    + requestColabTaskList()
+    + requestPlannedColabTaskList()
+    + getStatus()
+    + requestChangedStatusTaskList()
+
+}
+
+class RetrieveTaskUI {
+}
+
+RetrieveTaskUI ..> AgendaController
+
+AgendaController --> RetrieveTaskUI
+AgendaController .> Repositories : repositories
+Repositories  --> "1 " AgendaRepository
+Repositories -> Repositories : instance
+AgendaController ..>  AgendaRepository : agendaRepository
+AgendaRepository --> AgendaController : requestColabTaskList()
+AgendaRepository --> AgendaController : requestColabPlannedTaskList()
+@enduml

@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.domain.Extras.Inputs;
 
+import java.io.Serializable;
 import java.util.InputMismatchException;
 import java.util.Objects;
 import java.util.Scanner;
@@ -7,7 +8,7 @@ import java.util.Scanner;
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
 
 
-public class Password {
+public class Password implements Serializable {
     public static final int NUMBER_CAP_LETTERS = 3;
     public static final int NUMBER_DIGITS = 2;
     public static final int PASSWORD_LENGTH = 7;

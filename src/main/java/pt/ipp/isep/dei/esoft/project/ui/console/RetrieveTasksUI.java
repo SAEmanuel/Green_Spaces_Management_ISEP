@@ -22,7 +22,7 @@ public class RetrieveTasksUI implements Runnable {
     private Data startDate;
     private Data endDate;
     private int filterSelection;
-    private String confirmation;
+    private String confirmation = "n";
     private int selectedTask;
 
     private static final int PLANNED_TASKS = 2;

@@ -1,0 +1,32 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - Alternative Two
+
+autonumber
+
+actor "Collaborator" as COLAB
+participant ":System" as System
+
+
+        COLAB -> System: Asks to generate a list of tasks assigned to the collaborator
+        activate COLAB
+        activate System
+
+         System --> COLAB: Asks to select a filter
+        COLAB -> System : Selects the "Planned" filter
+        System --> COLAB: Asks the start and end dates
+        COLAB -> System : Provides the start and end dates
+        System --> COLAB: Asks continuation confirmation
+        COLAB -> System : Confirms operation
+
+        System --> COLAB: Provides the list of tasks
+        COLAB -> System : Selects the task to register completion
+        System --> COLAB: Confirms success of operation
+
+
+        deactivate System
+        deactivate COLAB
+@enduml

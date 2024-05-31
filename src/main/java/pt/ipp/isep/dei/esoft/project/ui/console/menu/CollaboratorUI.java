@@ -3,7 +3,8 @@ package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 import pt.ipp.isep.dei.esoft.project.application.controller.CreateCollaboratorController;
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
-import pt.ipp.isep.dei.esoft.project.ui.ChangePasswordUI;
+import pt.ipp.isep.dei.esoft.project.ui.Bootstrap;
+import pt.ipp.isep.dei.esoft.project.ui.console.ChangePasswordUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.RetrieveTasksUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 

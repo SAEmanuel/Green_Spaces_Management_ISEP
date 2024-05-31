@@ -1,0 +1,85 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+actor "Collaborator" as Colab
+
+participant ":RetrieveTasksUI" as UI
+participant AgendaController as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "agendaRepository\n:AgendaRepository" as agenda
+
+activate Colab
+
+Colab -> UI : Asks to generate a list of tasks assigned to the collaborator
+activate UI
+UI --> Colab : Asks to select a filter
+Colab -> UI : Selects a filter
+UI --> Colab :  Asks the start and end dates
+Colab -> UI : Provides the start and end dates
+
+UI -> CTRL** : create
+
+UI -> CTRL : requestColabTaskList()
+
+deactivate UI
+
+activate CTRL
+CTRL -> RepositorySingleton : getInstance()
+activate RepositorySingleton
+
+RepositorySingleton --> CTRL: repositories
+deactivate RepositorySingleton
+
+CTRL -> PLAT : getTeamRepository()
+activate PLAT
+
+PLAT --> CTRL: agenda
+deactivate PLAT
+
+CTRL -> agenda : requestColabTaskList()
+
+activate agenda
+
+
+
+
+
+    agenda -> agenda : getTaskList()
+
+
+
+
+
+
+
+
+
+
+
+
+
+    agenda --> agenda : taskListCreated()
+
+
+
+
+agenda --> CTRL : colabTaskList
+deactivate agenda
+
+
+
+CTRL --> UI :colabTaskList
+deactivate CTRL
+activate UI
+UI --> Colab : Provides the list of tasks
+deactivate UI
+deactivate Colab
+
+deactivate Colab
+
+@enduml

@@ -1,0 +1,46 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+'left to right direction
+
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+package "VFM System" {
+
+title Domain Model - US028 and US029
+
+
+
+class Collaborator {
+}
+
+class Agenda {
+         duration
+         vehicles
+         equipment
+         tasks
+         status
+         team
+}
+
+class Task{
+        Description
+}
+
+
+
+
+
+Collaborator "1" -- "*" Task : lists >
+Collaborator "1" - "1" Task : registers task completion >
+Agenda "1" -- "*" Task : has >
+
+
+
+
+
+@enduml
