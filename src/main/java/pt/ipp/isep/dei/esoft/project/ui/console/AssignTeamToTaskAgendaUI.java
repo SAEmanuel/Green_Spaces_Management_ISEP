@@ -52,7 +52,7 @@ public class AssignTeamToTaskAgendaUI implements Runnable {
 
     private void submitData() {
 
-        boolean result = getController().assignTeam(teamID,agendaEntryID, emailService);
+        boolean result = getController().assignTeam(teamID,agendaEntryID, emailService, controller.getResponsible());
 
         if (result) {
             System.out.println(ANSI_BRIGHT_GREEN + "\nTeam successfully assigned!" + ANSI_RESET);

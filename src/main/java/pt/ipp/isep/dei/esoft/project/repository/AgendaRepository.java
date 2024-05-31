@@ -270,9 +270,9 @@ public class AgendaRepository implements Serializable {
     /**
      * Postpones a task in the agenda.
      *
-     * @param agendaTaskID  The ID of the agenda task.
-     * @param postponeDate  The new date to postpone the task to.
-     * @param agendaEntry   The agenda entry to be postponed.
+     * @param agendaTaskID The ID of the agenda task.
+     * @param postponeDate The new date to postpone the task to.
+     * @param agendaEntry  The agenda entry to be postponed.
      * @return true if the task was postponed successfully, false otherwise.
      */
     public boolean postponeTask(int agendaTaskID, Data postponeDate, AgendaEntry agendaEntry) {
@@ -342,12 +342,12 @@ public class AgendaRepository implements Serializable {
     /**
      * Assigns a team to a task in the agenda.
      *
-     * @param team         The team to assign.
+     * @param team          The team to assign.
      * @param agendaEntryID The ID of the agenda entry.
      * @return true if the team was assigned successfully, false otherwise.
      */
-    public boolean assignTeam(Team team, int agendaEntryID) {
-        AgendaEntry task = getAgendaEntryByID(agendaEntryID);
+    public boolean assignTeam(Team team, int agendaEntryID, String responsible) {
+        AgendaEntry task = getAgendaEntryByID(agendaEntryID, responsible);
 
         if (validateInfo(team, task)) {
             task.setTeam(team);
@@ -374,7 +374,8 @@ public class AgendaRepository implements Serializable {
      * @param agendaEntryID The ID of the agenda entry.
      * @return The agenda entry.
      */
-    private AgendaEntry getAgendaEntryByID(int agendaEntryID) {
+    private AgendaEntry getAgendaEntryByID(int agendaEntryID, String responsible) {
+        List<AgendaEntry> agenda = getAgendaEntriesForResponsible(responsible);
         return agenda.get(agendaEntryID);
     }
 
@@ -387,7 +388,12 @@ public class AgendaRepository implements Serializable {
     public List<AgendaEntry> getAgendaEntriesForResponsible(String responsible) {
         List<AgendaEntry> agendaEntries = new ArrayList<>();
         for (AgendaEntry agendaEntry : agenda) {
-            if (agendaEntry.getResponsible().equals(responsible)) {
+            if (agendaEntry.getTeam() != null) {
+
+                if (agendaEntry.getResponsible().equals(responsible) && !agendaEntry.containsTeam(agendaEntry.getTeam())) {
+                    agendaEntries.add(agendaEntry);
+                }
+            } else if (agendaEntry.getTeam() == null && agendaEntry.getResponsible().equals(responsible)) {
                 agendaEntries.add(agendaEntry);
             }
         }

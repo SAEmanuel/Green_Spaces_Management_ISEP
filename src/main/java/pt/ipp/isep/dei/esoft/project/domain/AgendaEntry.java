@@ -21,19 +21,19 @@ public class AgendaEntry implements Serializable {
     private final String responsible;
 
     public enum Status {
-        PLANNED{
+        PLANNED {
             @Override
             public String toString() {
                 return "Planned";
             }
         },
-        CANCELED{
+        CANCELED {
             @Override
             public String toString() {
                 return "Canceled";
             }
         },
-        DONE{
+        DONE {
             @Override
             public String toString() {
                 return "Done";
@@ -42,14 +42,13 @@ public class AgendaEntry implements Serializable {
     }
 
 
-
     public AgendaEntry(ToDoEntry agendaEntry, Data starting_Date) {
         validationAgendaEntry(starting_Date);
 
         this.agendaEntry = agendaEntry;
         agendaEntry.setStatus(String.valueOf(Status.PLANNED));
         this.starting_Date = starting_Date;
-        this.expected_end_Date = calculateEndDate(starting_Date,agendaEntry);
+        this.expected_end_Date = calculateEndDate(starting_Date, agendaEntry);
         this.real_end_Date = null;
         this.team = null;
         this.vehicles = new ArrayList<Vehicle>();
@@ -63,15 +62,18 @@ public class AgendaEntry implements Serializable {
 
     private void validateDate(Data startingDate) {
 
-        if (!startingDate.isGraterThanCurrentDate()){
+        if (!startingDate.isGraterThanCurrentDate()) {
             throw new IllegalArgumentException("Start date must be grater than current date.");
         }
     }
 
 
-
     private Data calculateEndDate(Data startingDate, ToDoEntry agendaEntry) {
         return startingDate.calculateData(agendaEntry.getExpectedDuration());
+    }
+
+    public boolean containsTeam(Team team) {
+        return this.team.equals(team);
     }
 
 
@@ -95,7 +97,7 @@ public class AgendaEntry implements Serializable {
         this.real_end_Date = real_end_Date;
     }
 
-    public void cancelTask(){
+    public void cancelTask() {
         agendaEntry.setStatus(String.valueOf(Status.CANCELED));
     }
 
@@ -159,6 +161,6 @@ public class AgendaEntry implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("  Information: %s \n  Status: %s%s%s \n  Team: %s \n  Vehicles: %s \n  Starting Date: %s \n  Expected End Date: %s \n  Real End Date: %s",agendaEntry,ANSI_MEDIUM_SPRING_GREEN,agendaEntry.getStatus(),ANSI_RESET,team,vehicles.stream().map(Vehicle::toStringTaskPreview).collect(Collectors.joining("")),starting_Date, expected_end_Date,real_end_Date);
+        return String.format("  Information: %s \n  Status: %s%s%s \n  Team: %s \n  Vehicles: %s \n  Starting Date: %s \n  Expected End Date: %s \n  Real End Date: %s", agendaEntry, ANSI_MEDIUM_SPRING_GREEN, agendaEntry.getStatus(), ANSI_RESET, team, vehicles.stream().map(Vehicle::toStringTaskPreview).collect(Collectors.joining("")), starting_Date, expected_end_Date, real_end_Date);
     }
 }

@@ -128,11 +128,11 @@ public class AgendaController {
      * @param agendaEntryID The ID of the agenda entry.
      * @return true if the team was assigned successfully, false otherwise.
      */
-    public boolean assignTeam(int teamID, int agendaEntryID, String emailService) {
+    public boolean assignTeam(int teamID, int agendaEntryID, String emailService, String responsible) {
         List<Team> teams = teamRepository.getListTeam();
         SendEmail sendEmail = new SendEmail();
 
-        if (agendaRepository.assignTeam(teams.get(teamID), agendaEntryID)) {
+        if (agendaRepository.assignTeam(teams.get(teamID), agendaEntryID, responsible)) {
             try {
                 sendEmail.sendEmail(emailService, teams.get(teamID).getCollaboratorsEmail(), "Assigned to a Task", "You and your team members have been assigned to a task in a agenda");
                 return true;
