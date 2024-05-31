@@ -1,0 +1,29 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - Alternative One
+
+autonumber
+
+actor "Green Space Manager" as Employee
+participant ":System" as System
+
+
+activate Employee
+
+    Employee -> System : ask to select a sorted list of managed green spaces
+    activate System
+
+    System --> Employee : request to select a sorting method
+    deactivate System
+
+    Employee -> System : select an option
+    activate System
+
+    System --> Employee : show all request data
+    System --> Employee : shows operation successfully
+    deactivate System
+
+@enduml
