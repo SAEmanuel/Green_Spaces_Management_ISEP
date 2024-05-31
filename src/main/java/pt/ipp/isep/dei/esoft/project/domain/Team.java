@@ -27,6 +27,15 @@ public class Team {
     public List<Collaborator> getCollaborators() {
         return collaborators;
     }
+    public List<String> getCollaboratorsEmail() {
+        List<String> collaboratorsEmail = new ArrayList<>();
+
+        for(Collaborator c : collaborators){
+            collaboratorsEmail.add(c.getEmailAddress());
+        }
+
+        return collaboratorsEmail;
+    }
 
     public boolean hasCollaborator(Collaborator collaborator) {
         for (Collaborator c : collaborators) {

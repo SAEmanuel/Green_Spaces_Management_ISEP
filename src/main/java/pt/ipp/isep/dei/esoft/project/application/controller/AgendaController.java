@@ -134,10 +134,7 @@ public class AgendaController {
 
         if (agendaRepository.assignTeam(teams.get(teamID), agendaEntryID)) {
             try {
-                String[] emails = new String[2];
-                emails[0] = "belinha@this.app";
-                emails[1] = "mari@this.app";
-                sendEmail.sendEmail(emailService, emails, "Whats", "Passa ai o whats novinha");
+                sendEmail.sendEmail(emailService, teams.get(teamID).getCollaboratorsEmail(), "Assigned to a Task", "You and your team members have been assigned to a task in a agenda");
                 return true;
             } catch (IOException e) {
                 System.out.println("Email not sent");

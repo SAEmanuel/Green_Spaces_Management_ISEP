@@ -1,8 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
 
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -25,7 +24,7 @@ public class SendEmail {
     }
 
     // Send email using the specified service
-    public static void sendEmail(String serviceName, String[] toEmails, String subject, String body) throws IOException {
+    public static void sendEmail(String serviceName, List<String> toEmails, String subject, String body) throws IOException {
         loadEmailConfig();
 
         String defaultService = config.getProperty("email_service.email.default_service");
@@ -37,8 +36,6 @@ public class SendEmail {
         int port = Integer.parseInt(config.getProperty(servicePrefix + ".port"));
         boolean useTls = Boolean.parseBoolean(config.getProperty(servicePrefix + ".use_tls"));
         boolean useSsl = Boolean.parseBoolean(config.getProperty(servicePrefix + ".use_ssl"));
-        String username = config.getProperty(servicePrefix + ".username");
-        String password = config.getProperty(servicePrefix + ".password");
 
         Properties props = new Properties();
         props.put("mail.smtp.host", smtpServer);
@@ -52,20 +49,60 @@ public class SendEmail {
             props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         }
 
+        try {
+            BufferedWriter writer = null;
+            try {
+                // Create BufferedWriter object
+                writer = new BufferedWriter(new FileWriter("src/main/java/pt/ipp/isep/dei/esoft/project/ui/email_log.txt"));
+                // Write data to the file
+                writer.write(smtpServer);
+                writer.newLine();
+                writer.write(String.valueOf(port));
+                writer.newLine();
+                writer.write(String.valueOf(useTls));
+                writer.newLine();
+                writer.write(String.valueOf(useSsl));
+                writer.newLine();
+                writer.newLine();
+                writer.write(serviceName);
+                writer.newLine();
+                StringBuilder emailStringBuilder = new StringBuilder();
+                for (int i = 0; i < toEmails.size(); i++) {
+                    if (i > 0) {
+                        emailStringBuilder.append(", ");
+                    }
+                    emailStringBuilder.append(toEmails.get(i));
+                }
+                writer.write(emailStringBuilder.toString());
+                writer.newLine();
+                writer.write(subject);
+                writer.newLine();
+                writer.write(body);
+            }finally {
+                writer.flush();
+                writer.close();
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        System.out.println();
-        System.out.println(smtpServer);
-        System.out.println(port);
-        System.out.println(useTls);
-        System.out.println(useSsl);
-        System.out.println(username);
-        System.out.println(password);
-        System.out.println();
-        System.out.println(serviceName);
-        for (String s : toEmails)
-            System.out.println(s);
-        System.out.println(subject);
-        System.out.println(body);
+//        System.out.println();
+//        System.out.println(smtpServer);
+//        System.out.println(port);
+//        System.out.println(useTls);
+//        System.out.println(useSsl);
+//        System.out.println();
+//        System.out.println(serviceName);
+//        for (int i = 0; i < toEmails.size(); i++) {
+//            if(i == 0)
+//                System.out.printf(toEmails.get(i));
+//            else
+//                System.out.printf(", " + toEmails.get(i));
+//        }
+//        System.out.println();
+//        System.out.println(subject);
+//        System.out.println(body);
 
 //        System.out.println("oi2");
 //
