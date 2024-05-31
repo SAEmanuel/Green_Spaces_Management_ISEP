@@ -2,8 +2,6 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.domain.Extras.Inputs.Password;
-import pt.ipp.isep.dei.esoft.project.ui.Bootstrap;
-import pt.isep.lei.esoft.auth.AuthFacade;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -144,9 +142,6 @@ public class CollaboratorRepository implements Serializable {
             System.out.println(ANSI_BRIGHT_RED + "Your new password must be different from the old one!" + ANSI_RESET);
         } else {
             collaborator.setPassword(newPassword);
-            AuthFacade authFacade = new AuthFacade();
-            authFacade.removeUser(collaborator.getEmailAddress());
-            Bootstrap.addUsers();
             System.out.println("Password changed to: " + collaborator.getColabPassword());
             return true;
         }
