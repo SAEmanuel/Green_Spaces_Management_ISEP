@@ -54,14 +54,14 @@ public class Bootstrap implements Runnable {
     private final ToDoEntry task5 = new ToDoEntry(passeioAlegre, "Limpar casas de banho", "Nenhuma", 1, 12);
 
 
-    private final Collaborator colla1 = new Collaborator("Francisco", new Data(2004, 5, 20), new Data(2023, 6, 12), "Rua da pedra", 912809789, "fran@gmail.com", 123456744, 0, "123456711", job1, new Password("AAA12ab"), "fran@gmail.com");
+    private final Collaborator colla1 = new Collaborator("Francisco", new Data(2004, 5, 20), new Data(2023, 6, 12), "Rua da pedra", 912809789, "xico@gmail.com", 123456744, 0, "123456711", job1, new Password("AAA12ab"), "xico@gmail.com");
     private final Collaborator colla2 = new Collaborator("Emanuel", new Data(2004, 4, 20), new Data(2023, 6, 12), "Rua da Mariana", 912809777, "ema@gmail.com", 123456755, 0, "123456722", job2, new Password("AAA12ac"), "ema@gmail.com");
     private final Collaborator colla3 = new Collaborator("Paulo", new Data(2002, 8, 20), new Data(2023, 6, 12), "Rua de Fanzeres", 912809888, "paul@gmail.com", 123456766, 0, "123456733", job3, new Password("AAA12ad"), "paul@gmail.com");
-    private final Collaborator colla4 =new Collaborator("Xu", new Data(2000, 4, 20), new Data(2023, 6, 12), "Rua do restaurante asiatico", 912809666, "xu@gmail.com", 123456777, 0, "123456744", job4, new Password("AAA12ae"), "xu@gmail.com");
-    private final Collaborator colla5 =new Collaborator("Jorge", new Data(2004, 5, 31), new Data(2023, 6, 12), "Rua enganhairo do isep", 912809555, "jorge@gmail.com", 123456788, 0, "123456755", job5, new Password("AAA12af"), "jorge@gmail.com");
-    private final Collaborator colla6 =new Collaborator("Mariana Silva", new Data(2001, 5, 31), new Data(2023, 6, 12), "Rua da igreja", 912809551, "mari@gmail.com", 123456799, 0, "123456766", job6, new Password("AAA12ag"), "mari@gmail.com");
-    private final Collaborator colla7 =new Collaborator("Gorete", new Data(1993, 5, 31), new Data(2023, 6, 12), "Rua de Fanzeres", 912809552, "gori@gmail.com", 123456999, 0, "123456777", job7, new Password("AAA12ah"), "gori@gmail.com");
-    private final Collaborator colla8 =new Collaborator("Anabela", new Data(1976, 8, 14), new Data(2023, 6, 12), "Rua Sampaio", 912809552, "belinha@gmail.com", 123456900, 0, "123456700", job7, new Password("AAA12be"), "belinha@gmail.com");
+    private final Collaborator colla4 = new Collaborator("Xu", new Data(2000, 4, 20), new Data(2023, 6, 12), "Rua do restaurante asiatico", 912809666, "xu@gmail.com", 123456777, 0, "123456744", job4, new Password("AAA12ae"), "xu@gmail.com");
+    private final Collaborator colla5 = new Collaborator("Jorge", new Data(2004, 5, 31), new Data(2023, 6, 12), "Rua enganhairo do isep", 912809555, "jorge@gmail.com", 123456788, 0, "123456755", job5, new Password("AAA12af"), "jorge@gmail.com");
+    private final Collaborator colla6 = new Collaborator("Mariana Silva", new Data(2001, 5, 31), new Data(2023, 6, 12), "Rua da igreja", 912809551, "mari@gmail.com", 123456799, 0, "123456766", job6, new Password("AAA12ag"), "mari@gmail.com");
+    private final Collaborator colla7 = new Collaborator("Gorete", new Data(1993, 5, 31), new Data(2023, 6, 12), "Rua de Fanzeres", 912809552, "gori@gmail.com", 123456999, 0, "123456777", job7, new Password("AAA12ah"), "gori@gmail.com");
+    private final Collaborator colla8 = new Collaborator("Anabela", new Data(1976, 8, 14), new Data(2023, 6, 12), "Rua Sampaio", 912809552, "belinha@gmail.com", 123456900, 0, "123456700", job7, new Password("AAA12be"), "belinha@gmail.com");
 
     private final Team team1 = new Team(1);
 
@@ -159,7 +159,7 @@ public class Bootstrap implements Runnable {
         skillRepository.add(skill12);
     }
 
-    private void addTeam(){
+    private void addTeam() {
         TeamRepository teamRepository = Repositories.getInstance().getTeamRepository();
         List<Collaborator> collaboratorList = new ArrayList<>();
         collaboratorList.add(colla1);
@@ -200,6 +200,7 @@ public class Bootstrap implements Runnable {
         Repositories repositories = Repositories.getInstance();
         List<Collaborator> collaborators = repositories.getCollaboratorRepository().getCollaboratorList();
 
+        System.out.println(repositories.getCollaboratorRepository().getCollaboratorList().get(0).getPassword());
         for (int i = 0; i < collaborators.size(); i++) {
             authenticationRepository.addUserWithRole(collaborators.get(i).getName(),
                     collaborators.get(i).getEmailAddress(), collaborators.get(i).getPassword(),

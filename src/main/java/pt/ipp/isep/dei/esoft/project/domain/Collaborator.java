@@ -353,6 +353,9 @@ public class Collaborator implements Serializable {
     public String getPassword(){
         return password.getPass();
     }
+    public Password getColabPassword(){
+        return password;
+    }
 
     /**
      * Gets the admission date of the collaborator.
@@ -408,6 +411,9 @@ public class Collaborator implements Serializable {
         return job;
     }
 
+    public void setPassword(Password password) {
+        this.password = password;
+    }
 
     /**
      * Enumeration representing various types of documents
@@ -433,5 +439,6 @@ public class Collaborator implements Serializable {
         }
 
     }
+
 
 }

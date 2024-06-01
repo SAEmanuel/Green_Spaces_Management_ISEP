@@ -1,0 +1,46 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+
+
+participant ":AgendaController" as CTRL
+participant "agendaRepository\n:AgendaRepository" as agendaRepo
+participant "agendaEntry \n:AgendaEntry>" as green
+participant "listAgendaEntry\n:List<AgendaEntry>" as listToDo
+
+
+
+ activate CTRL
+autonumber 8
+
+autonumber 3.1
+    group Postpone task
+
+
+CTRL -> agendaRepo: postponeTask(int agendaTaskID, Data postponeDate)
+    activate agendaRepo
+
+        agendaRepo -> green :setStarting_Date(postponeDate)
+        activate green
+            agendaRepo -> agendaRepo : validPostponeDate(postponeDate)
+            activate agendaRepo
+
+            deactivate agendaRepo
+
+
+            green -> green : setStarting_Date(postponeDate)
+            activate green
+                green -> green : calculateEndDate()
+
+            deactivate green
+
+
+            agendaRepo --> CTRL: true
+    end
+
+@enduml

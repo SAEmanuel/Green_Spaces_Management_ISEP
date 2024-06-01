@@ -1,0 +1,107 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+skinparam classAttributeIconSize 0
+'left to right direction
+
+class AgendaUI {
+}
+
+
+class AgendaController {
+    - AgendaRepository agendaRepository
+    + AgendaController()
+    - getAgenda()
+    + postponeTask(int agendaTaskID, Data postponeDate)
+
+}
+class Repositories {
+    - Repositories()
+    + getInstance() : Repositories
+    + getAgenda()
+    + getAuthenticationRepository()
+}
+
+class AuthenticationRepository {
+    + getCurrentUserSession()
+}
+
+class UserSession {
+    + getUserId()
+}
+
+class Email {
+    + getEmail()
+}
+
+
+
+class AgendaRepository {
+    -List<AgendaEntry> agendaEntries
+    + postponeTask(ToDoEntry agendaEntry, Data starting_Date)
+    - getAgendaEntriesForResponsible(String responsible)
+    - getTaskByResposible(int agendaTaskID, List<AgendaEntry> agendaTasks)
+    - validPostponeDate(AgendaEntry task, Data postponeDate)
+}
+
+
+
+
+class AgendaMapper {
+ +AgendaMapper()
+ + toDto(List<AgendaEntry> agendaEntries)
+ - toDto(AgendaEntry agendaEntry)
+}
+
+class AgendaEntryDTO{
+    - AgendaEntry objDto
+    + AgendaEntryDTO(AgendaEntry agendaEntry)
+    + getObjDto()
+    +getResponsible()
+}
+
+
+class AgendaEntry {
+     -Team team;
+     -List<Vehicle> vehicles;
+     -Data starting_Date;
+     -Data expected_end_Date;
+     -Data real_end_Date;
+     -String responsible;
+     + AgendaEntry(ToDoEntry agendaEntry, Data starting_Date)
+     - setStarting_Date(Data starting_Date)
+     - calculateEndDate(Data startingDate, ToDoEntry agendaEntry)
+}
+
+class enum_Status {
+    PLANNED
+    CANCELED
+    DONE
+    + toString()
+}
+
+
+
+
+
+AgendaUI .> AgendaController
+'
+AgendaController ..> AgendaMapper : sendToDoEntryList()
+AgendaController <... AgendaMapper : sendToDoEntryListDTO()
+AgendaMapper ..> AgendaEntryDTO
+Repositories "1" --> "1" AuthenticationRepository : contains
+AuthenticationRepository -> UserSession : contains
+UserSession "1" --> "*" Email : contains
+AgendaController .> Repositories : repositories
+Repositories  --> "1 " AgendaRepository
+Repositories -> Repositories : instance
+AgendaController ...>  AgendaRepository : agendaRepository
+'AgendaRepository --> AgendaController : getVehicleCheckUpList()
+AgendaRepository --> AgendaEntry : contains
+AgendaEntryDTO ..> AgendaMapper : returns Dto Obj
+enum_Status - AgendaRepository
+
+@enduml

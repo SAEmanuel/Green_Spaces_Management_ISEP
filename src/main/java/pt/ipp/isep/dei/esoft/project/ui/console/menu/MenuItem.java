@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 
 import org.apache.commons.lang3.StringUtils;
+import pt.ipp.isep.dei.esoft.project.ui.Bootstrap;
 
 import java.util.Objects;
 

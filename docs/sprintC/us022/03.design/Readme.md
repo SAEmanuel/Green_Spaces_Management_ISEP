@@ -4,29 +4,35 @@
 
 ### 3.1. Rationale
 
-| Interaction ID | Question: Which class is responsible for...    | Answer                | Justification (with patterns)                                                                                                             |
-|:---------------|:-----------------------------------------------|:----------------------|:------------------------------------------------------------------------------------------------------------------------------------------|
-| Step 1         | ... interacting with the actor?                | CheckupListUI         | Pure Fabrication: A UI component typically handles user interactions and acts as an interface between the user and the system.            |
-|                | ... coordinating the US?                       | VehicleListController | Controller: The controller orchestrates the use case by coordinating the interactions between the UI and the domain model.                |
-| Step 2         | ... coordinating with the repositories?        | VehicleListController | Controller: The controller interacts with repositories to retrieve necessary data and perform business logic.                             |
-|                | ... retrieving the vehicle repository?         | VehicleListController | Controller: The controller interacts with the repositories to retrieve the necessary data for the use case.                               |
-| Step 3         | ... getting the vehicles needing check-up?     | VehicleRepository     | Repository: The repository pattern encapsulates the logic for retrieving data, in this case, vehicles needing check-up.                   |
-| Step 4         | ... iterating over each vehicle?               | VehicleRepository     | Repository: The repository handles the retrieval and manipulation of data, iterating over vehicles needing check-up.                      |
-|                | ... determining if a vehicle needs check-up?   | VehicleRepository     | Repository: The repository pattern encapsulates the logic for data access and business logic, determining vehicle status.                 |
-| Step 5         | ... retrieving the vehicles needing check-up?  | VehicleRepository     | Repository: The repository pattern encapsulates the logic for data access, retrieving vehicles needing check-up.                          |
-| Step 6         | ... validating data?                           | VehicleRepository     | Repository: The repository pattern encapsulates the logic for data access and validation, ensuring data integrity.                        | 
-|                | ... saving the vehicles needing check-up?      | VehicleRepository     | Repository: The repository pattern encapsulates the logic for data access and manipulation, saving vehicles needing check-up.             | 
-| Step 7         | ... sending the list of vehicles to the actor? | CheckupListUI         | Pure Fabrication: The UI component is responsible for presenting information to the user and is a separate concern from the domain logic. |
+| Interaction ID | Question: Which class is responsible for...                | Answer                                  | Justification (with patterns)                                                                                                   |
+|:---------------|:-----------------------------------------------------------|:----------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------|
+| Step 1         | ... interacting with the actor?                            | AgendaUI                                | Pure Fabrication: A UI component typically handles user interactions and acts as an interface between the user and the system.  |
+|                | ... coordinating the US?                                   | AgendaController                        | Controller: The controller orchestrates the use case by coordinating the interactions between the UI and the domain model.      |
+|                | ... knowing the user using the system?                     | UserSession                             | IE: cf. A&A component documentation.                                                                                            |
+|                | ... retrieving the list of ToDO Entry?                     | AgendaController and ToDoListRepository | Repository: The repository pattern encapsulates the logic for retrieving data, in this case, vehicles needing check-up.         |
+| Step 2         | ... displaying the list for the actor to select an option? | AgendaUI                                | Pure Fabrication                                                                                                                |
+| Step 3         | ... temporarily keeping the input option?                  | AgendaUI                                | Pure Fabrication                                                                                                                |
+| Step 4         | ... displaying the form for the actor to input data?       | AgendaUI                                | Pure Fabrication                                                                                                                |
+| Step 5         | ... temporarily keeping the input option?                  | AgendaUI                                | Pure Fabrication                                                                                                                |
+| Step 6         | ... display all the information before submitting?         | AgendaUI                                | Pure Fabrication.                                                                                                               |
+| Step 7         | ... postponing the date?                                   | AgendaRepository                        | Repository: The repository handles the retrieval and manipulation of data, iterating over the existent Tasks in the repository. |              
+| 	              | ... validating all data (local validation)?                | AgendaEntry                             | IE: kowns its data.                                                                                                             | 
+| 	              | ... validating all data (global validation)?               | AgendaRepository                        | IE: knows all its information.                                                                                                  |
+| 	              | ... saving the register agendaEntry?                       | AgendaRepository                        | IE: owns all its Task.                                                                                                          |
+| Step 8         | ... informing operation success?                           | AgendaUI                                | IE: is responsible for user interactions.                                                                                       | 
 
 ### Systematization ##
 
 According to the taken rationale, the conceptual classes promoted to software classes are:
 
-* FAZERRRRRRRRRRRRR
+* AgendaEntry
+* AgendaRepository
+* ToDoListRepository
 
 Other software classes (i.e. Pure Fabrication) identified:
 
-* FAZERRRRRRRRRRRRR
+* AgendaController
+* AgendaUI
 
 ## 3.2. Sequence Diagram (SD)
 
@@ -64,7 +70,6 @@ It uses Interaction Occurrence (a.k.a. Interaction Use).
 **Register Agenda Entry**
 
 ![Sequence Diagram - Partial - Register Agenda Entry](svg/us022-sequence-diagram-partial-register-Agenda-Entry.svg)
-
 
 ## 3.3. Class Diagram (CD)
 
