@@ -1,0 +1,140 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+actor "Green Space Manager" as GSM
+
+participant ":AssignTeamToTaskAgendaUI" as UI
+participant ":AgendaController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "agendaRepository\n:AgendaRepository" as agendaRepository
+participant "teamRepository\n:TeamRepository" as teamRepository
+participant "sendEmail\n:SendEmail" as sendEmail
+participant "MusgoSublime" as MusgoSublime
+
+activate GSM
+
+GSM -> UI : Asks to assign a team to an Agenda Entry
+activate UI
+
+UI -> CTRL** : create
+
+UI -> CTRL : requestEntryInformation()
+
+deactivate UI
+
+activate CTRL
+
+CTRL -> RepositorySingleton : getInstance()
+activate RepositorySingleton
+
+RepositorySingleton --> CTRL: repositories
+deactivate RepositorySingleton
+
+
+
+CTRL -> PLAT : getTeamRepository()
+activate PLAT
+
+PLAT --> CTRL: teamRepository
+deactivate PLAT
+
+CTRL -> PLAT : getAgendaRepository()
+activate PLAT
+
+PLAT --> CTRL: AgendaRepository
+deactivate PLAT
+
+
+
+CTRL -> agendaRepository : getAgendaEntriesForResponsible()
+activate agendaRepository
+loop for agendaEntry in agenda
+    agendaRepository -> MusgoSublime : getResponsible()
+    activate MusgoSublime
+    MusgoSublime -> MusgoSublime : getResponsible()
+
+    activate MusgoSublime
+             MusgoSublime --> MusgoSublime : responsible
+            deactivate MusgoSublime
+
+        MusgoSublime --> agendaRepository : responsible
+    opt if agendaEntry.getResponsible().equals(responsible) && !agendaEntry.containsTeam(agendaEntry.getTeam())
+        deactivate MusgoSublime
+        agendaRepository --> agendaRepository : add to agendaEntryList
+    end
+    deactivate MusgoSublime
+
+end
+
+activate agendaRepository
+
+agendaRepository --> CTRL : agendaEntryList
+deactivate agendaRepository
+
+
+CTRL -> teamRepository : getListTeam()
+
+activate teamRepository
+
+teamRepository --> CTRL : teamList
+deactivate teamRepository
+
+
+CTRL -> sendEmail: getEmailServices()
+activate sendEmail
+
+sendEmail --> CTRL: emailServicesList
+deactivate sendEmail
+
+CTRL --> UI : agendaEntryList, teamList and emailServicesList
+
+deactivate CTRL
+
+activate UI
+
+UI --> GSM : Provides a list of agenda entries, teams and email Services (and all their info)
+UI --> GSM : request to select an agenda entry, a team to assign and the preferred email service
+
+GSM -> UI : select requested information
+UI-> CTRL : assignTeam(int teamID, int agendaEntryID, String emailService, String responsible)
+deactivate UI
+activate CTRL
+
+
+            CTRL -> agendaRepository: assignTeam(int teamID, int agendaEntryID, String emailService, String responsible)
+            deactivate CTRL
+
+            activate agendaRepository
+            opt if validate(team, task)
+                agendaRepository -> agendaRepository : validateInfo(team, task)
+                activate agendaRepository
+                agendaRepository --> agendaRepository : task.setTeam(team)
+                deactivate agendaRepository
+
+
+                agendaRepository -> sendEmail : sendEmail(emailService, teams.get(teamID).getCollaboratorsEmail())
+                activate sendEmail
+
+                sendEmail -> agendaRepository : true
+                deactivate sendEmail
+            end
+            agendaRepository --> CTRL : true
+            deactivate agendaRepository
+
+            activate CTRL
+
+            CTRL --> UI : true
+            deactivate CTRL
+
+            activate UI
+
+            UI --> GSM : team successfully assigned
+            deactivate UI
+deactivate GSM
+
+@enduml
