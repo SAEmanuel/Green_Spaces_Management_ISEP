@@ -1,4 +1,4 @@
-# US008 - Overhauling of vehicles
+# US0023 -  Assign a Team to an entry in the Agenda
 
 [Requirements Engineering](01.requirements-engineering/Readme.md)
 
