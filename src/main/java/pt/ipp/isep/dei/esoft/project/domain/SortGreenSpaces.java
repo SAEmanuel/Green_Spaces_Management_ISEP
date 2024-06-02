@@ -61,7 +61,6 @@ public class SortGreenSpaces {
         return greenSpaces;
     }
 
-    // Example sorting method
     private static List<GreenSpace> descendingName(List<GreenSpace> greenSpaces) {
         Collections.sort(greenSpaces, Comparator.comparing(GreenSpace::getName).reversed());
         return greenSpaces;
