@@ -38,6 +38,7 @@ public class AgendaRepositoryTest {
 
     @Test
     public void testRequestColabTaskList() {
+        List<AgendaEntry> taskList = new ArrayList<>();
         Job job = new Job("Marketing Coordinator");
         Data starting_Date = new Data(2025, 2, 2);
         Data expected_end_Date = new Data(2025, 2, 10);
@@ -58,6 +59,7 @@ public class AgendaRepositoryTest {
         ToDoEntry agendaEntry = new ToDoEntry(greenSpace, "Cortar relva", "description", 0, 8);
 
         Optional<List<AgendaEntry>> registered = repository.requestColabPlannedTaskList(new Collaborator("Francisco", new Data(2004, 5, 20), new Data(2023, 6, 12), "Rua da pedra", 912809789, "xico@gmail.com", 123456744, 0, "123456711", job, new Password("AAA12ab"), "xico@gmail.com"), starting_Date, expected_end_Date,1);
+        System.out.println("resgistered: " + registered.isPresent());
         assertTrue(registered.isPresent());
         assertEquals(agendaEntry, registered.get().get(0).getAgendaEntry());
     }
@@ -68,6 +70,11 @@ public class AgendaRepositoryTest {
         GreenSpace greenSpace = new GreenSpace("Infante Dom Henrique", 0, 100, "Porto", "gsm@this.app");
         ToDoEntry agendaEntry = new ToDoEntry(greenSpace, "Cortar relva", "description", 0, 8);
         AgendaEntry agenda = new AgendaEntry(agendaEntry, new Data(2025, 2, 2));
+        Team team = new Team(1);
+        Job job = new Job("Marketing Coordinator");
+        Collaborator collaborator = new Collaborator("Francisco", new Data(2004, 5, 20), new Data(2023, 6, 12), "Rua da pedra", 912809789, "xico@gmail.com", 123456744, 0, "123456711", job, new Password("AAA12ab"), "xico@gmail.com");
+        team.addCollaborator(collaborator);
+        agenda.setTeam(team);
         taskList.add(agenda);
         boolean result = taskList.contains(agenda);
         assertTrue(result);
