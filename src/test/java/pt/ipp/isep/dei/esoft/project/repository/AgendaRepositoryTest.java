@@ -43,7 +43,20 @@ public class AgendaRepositoryTest {
         Data expected_end_Date = new Data(2025, 2, 10);
         GreenSpace greenSpace = new GreenSpace("Infante Dom Henrique", 0, 100, "Porto", "gsm@this.app");
         ToDoEntry agendaEntry = new ToDoEntry(greenSpace, "Cortar relva", "description", 0, 8);
+
         Optional<List<AgendaEntry>> registered = repository.requestColabTaskList(new Collaborator("Francisco", new Data(2004, 5, 20), new Data(2023, 6, 12), "Rua da pedra", 912809789, "xico@gmail.com", 123456744, 0, "123456711", job, new Password("AAA12ab"), "xico@gmail.com"), starting_Date, expected_end_Date,1);
+        assertTrue(registered.isPresent());
+        assertEquals(agendaEntry, registered.get().get(0).getAgendaEntry());
+    }
+
+    @Test
+    public void testRequestColabPlannedTaskList() {
+        Job job = new Job("Marketing Coordinator");
+        Data starting_Date = new Data(2025, 2, 2);
+        Data expected_end_Date = new Data(2025, 2, 10);
+        GreenSpace greenSpace = new GreenSpace("Infante Dom Henrique", 0, 100, "Porto", "gsm@this.app");
+        ToDoEntry agendaEntry = new ToDoEntry(greenSpace, "Cortar relva", "description", 0, 8);
+        Optional<List<AgendaEntry>> registered = repository.requestColabPlannedTaskList(new Collaborator("Francisco", new Data(2004, 5, 20), new Data(2023, 6, 12), "Rua da pedra", 912809789, "xico@gmail.com", 123456744, 0, "123456711", job, new Password("AAA12ab"), "xico@gmail.com"), starting_Date, expected_end_Date,1);
         assertTrue(registered.isPresent());
         assertEquals(agendaEntry, registered.get().get(0).getAgendaEntry());
     }
