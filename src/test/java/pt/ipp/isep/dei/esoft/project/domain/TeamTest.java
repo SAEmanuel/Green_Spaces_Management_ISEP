@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pt.ipp.isep.dei.esoft.project.domain.Extras.Inputs.Password;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +16,10 @@ public class TeamTest {
     Data birthDate = new Data(2000, 7, 26);
     Data admissionDate = new Data(2019, 6, 15);
     Job job = new Job("Student");
+    Password password = new Password("AAA12ab");
 
-    Collaborator collaborator1 = new Collaborator("Romeu", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456789, 1, job);
-    Collaborator collaborator2 = new Collaborator("Paulo", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456788, 1, job);
+    Collaborator collaborator1 = new Collaborator("Romeu", birthDate, admissionDate, "Rua da fonte", 912345678, "romeu@gmail.com", 123456789, 0, "123456789", job, password, "romeu@gmail.com");
+    Collaborator collaborator2 = new Collaborator("Paulo", birthDate, admissionDate, "Rua da fonte", 912345677, "paulo@gmail.com", 123456788, 0, "123456788", job, password, "paulo@gmail.com");
     @BeforeEach
     public void setUp() {
         team = new Team(1);

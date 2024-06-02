@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.esoft.project.application.controller.GenerateTeamController;
 import pt.ipp.isep.dei.esoft.project.domain.*;
+import pt.ipp.isep.dei.esoft.project.domain.Extras.Inputs.Password;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
         List<Collaborator> collaborators = new ArrayList<>();
         Skill skill1 = new Skill("jardineiro");
         Skill skill2 = new Skill("construtor");
+       private final Password password = new Password("AAA12ab");
 
         @BeforeEach
         public void setUp() {
@@ -31,10 +33,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
             Data birthDate = new Data(2000, 7, 26);
             Data admissionDate = new Data(2019, 6, 15);
             Job job = new Job("Student");
-            collaboratorRepository.registerCollaborator("Romeu", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456789, 1, job);
-            collaboratorRepository.registerCollaborator("Paulo", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456788, 1, job);
-            collaboratorRepository.registerCollaborator("Jorge", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456787, 1, job);
-            collaboratorRepository.registerCollaborator("Emanuel", birthDate, admissionDate, "Rua da fonte", 912345678, "Romeu@.com", 123456786, 1, job);
+            collaboratorRepository.registerCollaborator("Romeu", birthDate, admissionDate, "Rua da fonte", 912345678, "romeu@gmail.com", 123456789, 0, "123456789", job, password, "romeu@gmail.com");
+            collaboratorRepository.registerCollaborator("Paulo", birthDate, admissionDate, "Rua da fonte", 912345677, "paulo@gmail.com", 123456788, 0, "123456788", job, password, "paulo@gmail.com");
+            collaboratorRepository.registerCollaborator("Jorge", birthDate, admissionDate, "Rua da fonte", 912345676, "jorge@gmail.com", 123456787, 0, "123456787", job, password, "jorge@gmail.com");
+            collaboratorRepository.registerCollaborator("Emanuel", birthDate, admissionDate, "Rua da fonte", 912345675, "emanuel@gmail.com", 123456786, 0, "123456786", job, password, "emanuel@gmail.com");
 
             collaboratorRepository.findCollaborator(123456789).addSkill(skill1);
             collaboratorRepository.findCollaborator(123456788).addSkill(skill2);

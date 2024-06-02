@@ -20,7 +20,7 @@ class VehicleCheckUpRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        v1 = new Vehicle("12-AB-34", "AUDI", "A1", "NA", 120, 200, 2000, 500, 1655, new Data(2010, 4, 20), new Data(2010, 4, 20));
+        v1 = new Vehicle("12-AB-34", "AUDI", "A1", 0, 120, 200, 2000, 500, 1655, new Data(2010, 4, 20), new Data(2010, 4, 20));
         data = new Data(2024, 4, 26);
         kms = 2100f;
     }
