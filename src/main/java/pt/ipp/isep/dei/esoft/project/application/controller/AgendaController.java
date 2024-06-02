@@ -126,6 +126,8 @@ public class AgendaController {
      *
      * @param teamID        The ID of the team.
      * @param agendaEntryID The ID of the agenda entry.
+     * @param emailService  The email service to be used.
+     * @param responsible   The responsible person's email.
      * @return true if the team was assigned successfully, false otherwise.
      */
     public boolean assignTeam(int teamID, int agendaEntryID, String emailService, String responsible) {
@@ -134,7 +136,7 @@ public class AgendaController {
 
         if (agendaRepository.assignTeam(teams.get(teamID), agendaEntryID, responsible)) {
             try {
-                sendEmail.sendEmail(emailService, teams.get(teamID).getCollaboratorsEmail(), "Assigned to a Task", "You and your team members have been assigned to a task in a agenda");
+                sendEmail.sendEmail(emailService, teams.get(teamID).getCollaboratorsEmail(), "Assigned to a Task", "You and your team members have been assigned to a task in an agenda");
             } catch (IOException e) {
                 System.out.println("Email not sent");
             }
@@ -143,7 +145,12 @@ public class AgendaController {
         return false;
     }
 
-    public List<String> getEmailServices(){
+    /**
+     * Gets the available email services.
+     *
+     * @return A list of email services.
+     */
+    public List<String> getEmailServices() {
         try {
             SendEmail sendEmail = new SendEmail();
             return sendEmail.getEmailServices();
