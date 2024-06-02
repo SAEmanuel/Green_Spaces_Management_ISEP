@@ -1,8 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import pt.ipp.isep.dei.esoft.project.domain.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.domain.Extras.Inputs.Password;
 
 import java.util.Optional;
@@ -11,59 +12,96 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CollaboratorRepositoryTest {
 
-    private CollaboratorRepository collaboratorRepository;
-    private final Data birthDate = new Data(2000, 7, 26);
-    private final Data admissionDate = new Data(2019, 6, 15);
-    private final Job job = new Job("Student");
-    private final Password password = new Password("AAA12ab");
+    private CollaboratorRepository repository;
+    private Collaborator collaborator;
+    private Data birthDate;
+    private Data admissionDate;
+    private Job job;
+    private Password password;
 
     @BeforeEach
     public void setUp() {
-        collaboratorRepository = new CollaboratorRepository();
-
+        repository = new CollaboratorRepository();
+        birthDate = new Data(2000, 1, 1);
+        admissionDate = new Data(2020, 1, 1);
+        job = new Job("Software Engineer");
+        password = new Password("AAA12ab");
+        collaborator = new Collaborator("Francisco", birthDate, admissionDate, "123 Street",
+                912345678, "xico@gmail.com", 123456789, 0, "123456789", job, password, "xico@gmail.com");
     }
 
-    /**
-     * Tests if collaborator is registered successfully
-     */
     @Test
     public void testRegisterCollaborator() {
-        Optional<Collaborator> result = collaboratorRepository.registerCollaborator("Romeu", birthDate, admissionDate, "Rua da fonte", 912345678, "romeu@gmail.com", 123456789, 0, "123456789", job, password, "romeu@gmail.com");
-        assertTrue(result.isPresent());
+        Optional<Collaborator> registered = repository.registerCollaborator("Francisco", birthDate, admissionDate,
+                "123 Street", 912345678, "xico@gmail.com", 123456789, 0, "123456789", job, password, "xico@gmail.com");
+        assertTrue(registered.isPresent());
+        assertEquals("Francisco", registered.get().getName());
     }
 
-    /**
-     * Tests if collaborator registered is not duplicated
-     */
     @Test
-    public void testRegisterDuplicateCollaborator() {
-
-        collaboratorRepository.registerCollaborator("Romeu", birthDate, admissionDate, "Rua da fonte", 912345678, "romeu@gmail.com", 123456789, 0, "123456789", job, password, "romeu@gmail.com");
-        Optional<Collaborator> result = collaboratorRepository.registerCollaborator("Romeu", birthDate, admissionDate, "Rua da fonte", 912345678, "romeu@gmail.com", 123456789, 0, "123456789", job, password, "romeu@gmail.com");
-        assertFalse(result.isPresent());
+    public void testRegisterCollaboratorDuplicate() {
+        repository.add(collaborator);
+        Optional<Collaborator> registered = repository.registerCollaborator("Francisco", birthDate, admissionDate,
+                "123 Street", 912345678, "xico@gmail.com", 123456789, 0, "123456789", job, password, "xico@gmail.com");
+        assertFalse(registered.isPresent());
     }
 
-    /**
-     * Tests if collaborator is found
-     */
+    @Test
+    public void testAddCollaborator() {
+        assertTrue(repository.addCollaborator(collaborator));
+        assertFalse(repository.addCollaborator(collaborator)); // Duplicated
+    }
+
+    @Test
+    public void testValidateCollaborator() {
+        assertTrue(repository.validateCollaborator(collaborator));
+        repository.add(collaborator);
+        assertFalse(repository.validateCollaborator(collaborator)); // Duplicated
+    }
+
+    @Test
+    public void testCollaboratorListDoNotContains() {
+        assertTrue(repository.collaboratorListDoNotContains(collaborator));
+        repository.add(collaborator);
+        assertFalse(repository.collaboratorListDoNotContains(collaborator)); // Now it contains
+    }
+
+    @Test
+    public void testGetCollaboratorList() {
+        assertEquals(0, repository.getCollaboratorList().size());
+        repository.add(collaborator);
+        assertEquals(1, repository.getCollaboratorList().size());
+    }
+
     @Test
     public void testFindCollaborator() {
-
-        collaboratorRepository.registerCollaborator("Romeu", birthDate, admissionDate, "Rua da fonte", 912345678, "romeu@gmail.com", 123456789, 0, "123456789", job, password, "romeu@gmail.com");
-        Collaborator result = collaboratorRepository.findCollaborator(123456789);
-        assertNotNull(result);
+        repository.add(collaborator);
+        assertNotNull(repository.findCollaborator(123456789));
+        assertNull(repository.findCollaborator(987654321)); // Not existing
     }
 
-    /**
-     * Tests if skill is assigned to a collaborator
-     */
     @Test
     public void testAssignSkillCollaborator() {
-        Skill javaSkill = new Skill("drive");
+        Skill skill = new Skill("Java");
+        repository.add(new Collaborator("Francisco", birthDate, admissionDate, "123 Street",
+                912345678, "xico@gmail.com", 123456789, 0, "123456789", job, password, "xico@gmail.com"));
+        assertTrue(repository.assignSkillCollaborator(123456789, skill));
 
-        collaboratorRepository.registerCollaborator("Romeu", birthDate, admissionDate, "Rua da fonte", 912345678, "romeu@gmail.com", 123456789, 0, "123456789", job, password, "romeu@gmail.com");
-        boolean result = collaboratorRepository.assignSkillCollaborator(123456789, javaSkill);
-        assertTrue(result);
+    }
+
+    @Test
+    public void testChangePassword() {
+        Password newPassword = new Password("AAA12ac");
+        repository.add(collaborator);
+
+        assertTrue(repository.changePassword(collaborator, newPassword));
+        assertFalse(repository.changePassword(collaborator, newPassword));
+    }
+
+    @Test
+    public void testGetDocType() {
+        Collaborator.DocType[] docTypes = repository.getDocType();
+        assertNotNull(docTypes);
+        assertTrue(docTypes.length > 0);
     }
 }
-

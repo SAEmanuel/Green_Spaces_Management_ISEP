@@ -52,7 +52,7 @@ public class CollaboratorRepository implements Serializable {
      * @param collaborator the collaborator to add
      * @return True if the collaborator is added successfully, false otherwise.
      */
-    private boolean addCollaborator(Collaborator collaborator) {
+    boolean addCollaborator(Collaborator collaborator) {
         boolean success = false;
         if (validateCollaborator(collaborator)) {
             success = collaboratorList.add(collaborator.clone());
@@ -66,7 +66,7 @@ public class CollaboratorRepository implements Serializable {
      * @param collaborator the collaborator to add
      * @return True if the collaborator is valid, false otherwise
      */
-    private boolean validateCollaborator(Collaborator collaborator) {
+    boolean validateCollaborator(Collaborator collaborator) {
         return collaboratorListDoNotContains(collaborator);
     }
 
@@ -76,7 +76,7 @@ public class CollaboratorRepository implements Serializable {
      * @param collaborator the collaborator to search
      * @return true if collaborator is not in the collaboratorList, false otherwise
      */
-    private boolean collaboratorListDoNotContains(Collaborator collaborator) {
+    boolean collaboratorListDoNotContains(Collaborator collaborator) {
         for (Collaborator v : collaboratorList) {
             if (v.equals(collaborator)) {
                 return false;
