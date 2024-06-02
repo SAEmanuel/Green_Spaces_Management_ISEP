@@ -1,0 +1,45 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+participant ":AgendaController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+
+
+autonumber 3
+-> CTRL : create
+    |||
+autonumber 3.1
+activate CTRL
+
+group Get Repositories
+|||
+            CTRL -> CTRL : getAgenda()
+            activate CTRL
+
+                CTRL -> RepositorySingleton : getInstance()
+                activate RepositorySingleton
+
+                    RepositorySingleton --> CTRL : repositories
+                deactivate RepositorySingleton
+
+                CTRL -> PLAT : getAgenda()
+                activate PLAT
+
+                    PLAT --> CTRL : agenda
+                deactivate PLAT
+                CTRL --> CTRL: agenda
+            deactivate CTRL
+
+
+|||
+end
+deactivate CTRL
+
+
+@enduml

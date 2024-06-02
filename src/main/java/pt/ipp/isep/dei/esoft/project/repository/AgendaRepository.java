@@ -15,6 +15,7 @@ public class AgendaRepository implements Serializable {
     private List<AgendaEntry> agenda;
 
     private static final String STATUS_CANCELLED = "Canceled";
+    private static final String STATUS_DONE = "Done";
 
     /**
      * Constructor for AgendaRepository.
@@ -279,6 +280,9 @@ public class AgendaRepository implements Serializable {
         if (agendaEntry.getAgendaEntry().getStatus().equals(STATUS_CANCELLED)) {
             throw new IllegalArgumentException("Cancelled agenda entry - can't postpone this task.");
         }
+        if (agendaEntry.getAgendaEntry().getStatus().equals(STATUS_DONE)) {
+            throw new IllegalArgumentException("Done agenda entry - can't postpone this task.");
+        }
         List<AgendaEntry> agendaTasks = getAgendaEntriesForResponsible(agendaEntry.getResponsible());
         AgendaEntry taskInAgenda = getTaskByResponsible(agendaTaskID, agendaTasks);
 
@@ -287,6 +291,7 @@ public class AgendaRepository implements Serializable {
             return true;
         }
         return false;
+
     }
 
     /**
@@ -336,6 +341,9 @@ public class AgendaRepository implements Serializable {
      * @return true if the task status is valid, false otherwise.
      */
     private boolean validatesStatus(AgendaEntry taskInAgenda) {
+        if (taskInAgenda.getAgendaEntry().getStatus().equals(STATUS_DONE)) {
+            throw new IllegalArgumentException("Done agenda entry - can't cancel this task.");
+        }
         return taskInAgenda.getAgendaEntry().getStatus().equals(STATUS_CANCELLED);
     }
 

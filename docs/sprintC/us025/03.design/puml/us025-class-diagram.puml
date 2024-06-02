@@ -7,7 +7,7 @@ skinparam linetype polyline
 skinparam classAttributeIconSize 0
 'left to right direction
 
-class PostponeTaskUI {
+class CancelAgendaTaskUI {
 }
 
 
@@ -41,10 +41,10 @@ class Email {
 
 class AgendaRepository {
     -List<AgendaEntry> agendaEntries
-    + postponeTask(ToDoEntry agendaEntry, Data starting_Date)
+    + cancelTask(int agendaTaskID, String responsible)
     - getAgendaEntriesForResponsible(String responsible)
     - getTaskByResposible(int agendaTaskID, List<AgendaEntry> agendaTasks)
-    - validPostponeDate(AgendaEntry task, Data postponeDate)
+    - validatesStatus(AgendaEntry taskInAgenda)
 }
 
 
@@ -77,7 +77,7 @@ class enum_Status {
 
 
 
-PostponeTaskUI .> AgendaController
+CancelAgendaTaskUI .> AgendaController
 '
 AgendaController ..> AgendaMapper : sendToDoEntryList()
 AgendaController <... AgendaMapper : sendToDoEntryListDTO()

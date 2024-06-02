@@ -27,7 +27,7 @@ public class CancelAgendaTaskUI implements Runnable{
 
 
 
-    //-------------------------------------- Run if happy success -------------------------
+    //-------------------------------------- Run if happy path -------------------------
 
     /**
      * Executes the user interface logic for registering a vehicle.

@@ -11,10 +11,9 @@ participant ":PostponeTaskUI" as UI
 participant ":AgendaController" as CTRL
 
 
-
 activate Employee
 
-    Employee -> UI : ask to postpone an entry in the Agenda
+    Employee -> UI : ask to cancel an entry in the Agenda
     activate UI
 
         UI-> CTRL** : create
@@ -55,12 +54,7 @@ activate Employee
 
     Employee -> UI : select an option
 
-    activate UI
 
-    UI --> Employee : request data (postponeDate)
-    deactivate UI
-
-    Employee -> UI : types requested data
 
 
     activate UI
@@ -71,12 +65,13 @@ activate Employee
     Employee -> UI : submits data
     activate UI
 
-    UI -> CTRL : postponeTask(agendaTaskID, postponeDate)
+    UI -> CTRL : cancelTask(agendaTaskID)
     activate CTRL
 
             ref over CTRL
-                    Postpone Task
+                    Cancel Task
             end
+
 
 
         CTRL -> UI : true

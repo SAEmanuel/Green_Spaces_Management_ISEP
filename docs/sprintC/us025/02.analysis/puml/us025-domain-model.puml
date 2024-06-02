@@ -11,7 +11,7 @@ hide circle
 hide methods
 package "GSM System" {
 
-title Domain Model - US024
+title Domain Model - US025
 
 
 
@@ -36,9 +36,8 @@ class Agenda {
 
 
 
-GSM "1" -- "*" AgendaEntry : postpone entry >
+GSM "1" -- "*" AgendaEntry : cancel entry >
 Agenda "1" - "*" AgendaEntry : posses >
-
 
 
 

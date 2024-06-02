@@ -1,0 +1,47 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+
+
+participant ":AgendaController" as CTRL
+participant "agendaRepository\n:AgendaRepository" as agendaRepo
+participant "agendaEntry \n:AgendaEntry>" as green
+participant "listAgendaEntry\n:List<AgendaEntry>" as listToDo
+
+
+
+ activate CTRL
+autonumber 8
+
+autonumber 3.1
+    group Cancel task
+
+
+    CTRL -> agendaRepo: cancelTask(agendaTaskID)
+    activate agendaRepo
+
+    agendaRepo -> agendaRepo : getTaskByResponsible(agendaTaskID)
+    activate agendaRepo
+    agendaRepo --> agendaRepo : agendaTask
+
+    deactivate agendaRepo
+
+            agendaRepo -> agendaRepo : validatesStatus(agendaTask)
+            activate agendaRepo
+            deactivate agendaRepo
+
+        agendaRepo -> green :cancelTask()
+        activate green
+
+
+            green -> green : setStatus()
+                        agendaRepo --> CTRL: true
+
+    end
+
+@enduml

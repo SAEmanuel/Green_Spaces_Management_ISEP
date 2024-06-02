@@ -1,0 +1,199 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+actor "Green Space Manager" as Employee
+
+participant ":PostponeTaskUI" as UI
+participant ":AgendaController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "agendaRepository\n:AgendaRepository" as agendaRepo
+participant "authenticationRepository\n:AuthenticationRepository" as authenticationRepository
+participant "userSession\n:UserSession" as UserSession
+participant "email\n:Email" as Email
+participant "agendaEntry \n:AgendaEntry>" as green
+participant "agendaMapper\n:AgendaMapper" as mapper
+participant "listAgendaEntry\n:List<AgendaEntry>" as listToDo
+participant "listAgendaEntryDTO\n: List<AgendaEntryDTO>" as listDTO
+participant "objDto\n: AgendaEntryDto" as objDto
+
+
+
+activate Employee
+
+    Employee -> UI : ask to cancel an entry in the Agenda
+    activate UI
+
+        UI-> CTRL** : create
+        activate CTRL
+            CTRL -> CTRL : getAgenda()
+            activate CTRL
+
+                CTRL -> RepositorySingleton : getInstance()
+                activate RepositorySingleton
+
+                    RepositorySingleton --> CTRL : repositories
+                deactivate RepositorySingleton
+
+                CTRL -> PLAT : getAgendaRepository()
+                activate PLAT
+
+                    PLAT --> CTRL : agendaRepository
+                deactivate PLAT
+                CTRL --> CTRL: agendaRepository
+            deactivate CTRL
+
+        UI -> CTRL : getAgendaEntriesForResponsible()
+        CTRL -> CTRL : getResponsible()
+            activate CTRL
+
+                CTRL -> PLAT  : getAuthenticationRepository()
+                activate PLAT
+
+                PLAT --> CTRL : authenticationRepository
+                deactivate PLAT
+
+                CTRL -> authenticationRepository : getCurrentUserSession()
+                activate authenticationRepository
+
+                    authenticationRepository --> CTRL : currentUserSession
+                deactivate authenticationRepository
+
+                CTRL -> UserSession : getUserId()
+                activate UserSession
+
+                    UserSession --> CTRL : userSession
+                deactivate UserSession
+
+                CTRL -> Email : getEmail()
+                activate Email
+
+                    Email --> CTRL : email
+                deactivate Email
+            CTRL --> CTRL : email
+            deactivate CTRL
+
+           CTRL -> agendaRepo : getAgendaEntriesForResponsible(email)
+           activate agendaRepo
+
+
+                       agendaRepo -> listToDo** : create
+                       group loop [for each object in the toDoListRepository]
+
+                            agendaRepo -> agendaRepo :  obj = get(i)
+                            activate agendaRepo
+                            deactivate agendaRepo
+
+                               agendaRepo -> green : getResponsible()
+                               activate green
+                                    green -> green : getResponsible()
+                                    activate green
+                                    deactivate green
+
+                                    green --> agendaRepo : objResponsible
+                               deactivate green
+                            group if [objResponsible == responsible]
+
+                               agendaRepo -> listToDo : add(obj)
+                               activate listToDo
+
+                               deactivate listToDo
+                            end
+
+                       end
+
+                    agendaRepo --> CTRL : listAgendaEntryByResponsible
+
+           deactivate agendaRepo
+
+
+
+        |||
+         CTRL -> CTRL : getAgendaDTOForResponsible()
+       activate CTRL
+
+            CTRL -> mapper** : create
+            CTRL -> mapper : toDto( listAgendaEntryByResponsible )
+            activate mapper
+
+                mapper -> listDTO** : create
+                group loop [for each object in listToDoEntry]
+                    mapper -> listToDo: obj = get(i)
+                    activate listToDo
+                    deactivate listToDo
+
+                    mapper -> mapper : objDto = toDTO(obj)
+                    activate mapper
+
+                        mapper --> objDto** : create(obj)
+                    deactivate mapper
+
+                    mapper -> listDTO : add(objDto)
+                    activate listDTO
+                    deactivate listDTO
+                end
+                mapper --> CTRL : listAgendaEntryDto
+            deactivate mapper
+            CTRL --> CTRL : listAgendaEntryDto
+       deactivate CTRL
+
+       CTRL --> UI : listAgendaEntryDto
+       deactivate CTRL
+
+
+    UI --> Employee : shows list of agenda entry\n and request a selection
+    deactivate UI
+
+    Employee -> UI : select an option
+
+
+    activate UI
+
+        UI --> Employee : show all data registered\n and the confirmation menu
+    deactivate UI
+
+    Employee -> UI : submits data
+    activate UI
+
+
+
+    UI -> CTRL : cancelTask(agendaTaskID)
+    activate CTRL
+
+    CTRL -> agendaRepo: cancelTask(agendaTaskID)
+    activate agendaRepo
+
+    agendaRepo -> agendaRepo : getTaskByResponsible(agendaTaskID)
+    activate agendaRepo
+    agendaRepo --> agendaRepo : agendaTask
+
+    deactivate agendaRepo
+
+            agendaRepo -> agendaRepo : validatesStatus(agendaTask)
+            activate agendaRepo
+            deactivate agendaRepo
+
+        agendaRepo -> green :cancelTask()
+        activate green
+
+
+            green -> green : setStatus()
+
+
+            agendaRepo --> CTRL: true
+
+    deactivate agendaRepo
+        deactivate green
+        CTRL -> UI : true
+
+    deactivate CTRL
+
+        UI --> Employee : shows operation (in)success
+    deactivate UI
+
+@enduml
+
