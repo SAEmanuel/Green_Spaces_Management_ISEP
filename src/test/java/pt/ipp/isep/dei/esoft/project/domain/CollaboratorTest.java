@@ -18,10 +18,10 @@ public class CollaboratorTest {
 
     @BeforeEach
     public void setUp() {
-        birthDate = new Data(2000, 1, 1); // assuming Data has this constructor
-        admissionDate = new Data(2020, 1, 1); // assuming Data has this constructor
-        job = new Job("Software Engineer"); // assuming Job has this constructor
-        password = new Password("AAA12ab"); // assuming Password has this constructor
+        birthDate = new Data(2000, 1, 1);
+        admissionDate = new Data(2020, 1, 1);
+        job = new Job("Software Engineer");
+        password = new Password("AAA12ab");
         collaborator = new Collaborator("Francisco", birthDate, admissionDate, "123 Street",
                 912345678, "xico@gmail.com", 123456789, 0, "123456789", job, password, "xico@gmail.com");
     }
@@ -68,7 +68,7 @@ public class CollaboratorTest {
 
     @Test
     public void testValidBirthDate() {
-        Data invalidBirthDate = new Data(2010, 1, 1); // assuming Data has this constructor
+        Data invalidBirthDate = new Data(2010, 1, 1);
         assertThrows(IllegalArgumentException.class, () -> {
             new Collaborator("Francisco", invalidBirthDate, admissionDate, "123 Street",
                     912345678, "xico@gmail.com", 123456789, 0, "123456789", job, password, "xico@gmail.com");
@@ -85,7 +85,7 @@ public class CollaboratorTest {
 
     @Test
     public void testAddSkill() {
-        Skill skill = new Skill("Java"); // assuming Skill has this constructor
+        Skill skill = new Skill("Java");
         assertTrue(collaborator.addSkill(skill));
         assertFalse(collaborator.addSkill(skill));
     }

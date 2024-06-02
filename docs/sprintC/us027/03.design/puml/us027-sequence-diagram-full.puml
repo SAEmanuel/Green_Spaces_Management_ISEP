@@ -1,0 +1,121 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+actor "Green Space Manager" as GSM
+
+participant ":ShowGreenSpacesUI" as UI
+participant ":ShowGreenSpacesByManagerController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "greenSpacesRepository\n:GreenSpacesRepository" as greenSpacesRepository
+participant "sortGreenSpaces\n:SortGreenSpaces" as sortGreenSpaces
+participant "authenticationRepository\n:AuthenticationRepository" as authenticationRepository
+participant "userSession\n:UserSession" as UserSession
+participant "email\n:Email" as Email
+
+activate GSM
+
+GSM -> UI : Asks to show the list of managed green spaces
+activate UI
+
+UI -> CTRL** : create
+
+UI -> CTRL : requestActivation()
+
+activate CTRL
+
+CTRL -> sortGreenSpaces : getSortTypes()
+activate sortGreenSpaces
+
+sortGreenSpaces --> CTRL : sortTypes
+deactivate sortGreenSpaces
+CTRL --> UI : sortTypes
+deactivate CTRL
+UI --> GSM : show sorting methods and requests to select one
+deactivate UI
+
+GSM -> UI : Selects a sorting method
+activate UI
+
+UI -> CTRL : showGreenSpaces(sortOrder)
+
+activate CTRL
+
+CTRL -> sortGreenSpaces** : create
+
+CTRL -> CTRL : getResponsible()
+                    activate CTRL
+
+                        CTRL -> PLAT  : getAuthenticationRepository()
+                        activate PLAT
+
+                        PLAT --> CTRL : authenticationRepository
+                        deactivate PLAT
+
+                        CTRL -> authenticationRepository : getCurrentUserSession()
+                        activate authenticationRepository
+
+                            authenticationRepository --> CTRL : currentUserSession
+                        deactivate authenticationRepository
+
+                        CTRL -> UserSession : getUserId()
+                        activate UserSession
+
+                            UserSession --> CTRL : userSession
+                        deactivate UserSession
+
+                        CTRL -> Email : getEmail()
+                        activate Email
+
+                            Email --> CTRL : email
+                        deactivate Email
+                    CTRL --> CTRL : responsible
+                    deactivate CTRL
+    |||
+
+
+
+CTRL -> RepositorySingleton : getInstance()
+activate RepositorySingleton
+
+RepositorySingleton --> CTRL: repositories
+deactivate RepositorySingleton
+
+CTRL -> PLAT : getGreenSpacesRepository()
+activate PLAT
+
+PLAT --> CTRL: greenSpacesRepository
+deactivate PLAT
+
+CTRL -> greenSpacesRepository : getGreenSpacesByResponsible(responsible)
+activate greenSpacesRepository
+
+loop greenSpace in greenSpaces
+    opt if greenSpace.getResponsible().equals(responsible)
+        greenSpacesRepository --> greenSpacesRepository : greenSpacesList.add(greenSpace)
+    end
+
+end
+
+greenSpacesRepository --> CTRL : greenSpacesList
+
+deactivate greenSpacesRepository
+
+CTRL -> sortGreenSpaces :  sortGreenSpaces( sortOrder, greenSpacesList)
+activate sortGreenSpaces
+
+sortGreenSpaces --> CTRL : sortedGreenSpaces
+deactivate sortGreenSpaces
+
+CTRL --> UI : sortedGreenSpacesList
+deactivate CTRL
+
+UI --> GSM : sorted Green Spaces List
+deactivate UI
+
+deactivate GSM
+@enduml
