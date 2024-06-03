@@ -1,0 +1,161 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title UI Sequence Diagram (SSD) - Alternative One
+
+autonumber
+
+actor "Green Space Manager" as Employee
+participant ":ToDoListUI" as UI
+participant ":ToDoListController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "agenda\n:Agenda" as AGENDA
+participant "vehicleRepository\n:VehicleRepository" as VEHICLEREPOSITORY
+participant ":ApplicationSession" as _APP
+participant "appSession\n:ApplicationSession" as APP
+participant "currentSession\n:UserSession" as SESSAO
+
+activate Employee
+
+    Employee -> UI : ask to assign a vehicle to a task
+    activate UI
+
+    UI -> CTRL** : create
+
+    UI -> CTRL : getAgendaEntriesByResponsible()
+    activate CTRL
+
+    CTRL -> CTRL : getResponsible()
+    activate CTRL
+
+                    CTRL -> _APP: getInstance()
+                    activate _APP
+                        _APP -> CTRL: appSession
+                    deactivate _APP
+
+
+                    CTRL -> APP: getCurrentSession()
+                    activate APP
+
+                        APP --> CTRL: currentSession
+                    deactivate APP
+
+                    CTRL -> SESSAO: getUserEmail()
+                    activate SESSAO
+
+                        SESSAO --> CTRL: responsibleEmail
+                    deactivate SESSAO
+
+                    deactivate CTRL
+                    |||
+
+                    CTRL -> CTRL : getAgendaEntriesByResponsible(responsibleEmail)
+                    activate CTRL
+
+                    CTRL -> RepositorySingleton : getInstance()
+                    activate RepositorySingleton
+
+                    RepositorySingleton --> CTRL: repositories
+                    deactivate RepositorySingleton
+
+                    CTRL -> PLAT : getAgenda()
+                    activate PLAT
+
+                    PLAT --> CTRL: Agenda
+                    deactivate PLAT
+
+                    CTRL -> AGENDA : getAgendaEntriesByResponsible(responsibleEmail)
+
+                    activate AGENDA
+
+                    AGENDA -> CTRL : agendaEntries
+                    deactivate AGENDA
+
+                    deactivate CTRL
+
+
+                    CTRL -> UI : agendaEntries
+
+                    deactivate CTRL
+
+
+        UI -> Employee : shows list of agenda entries
+
+        Employee -> UI : selects an agenda entry from the list
+
+        UI -> CTRL : getAvailableVehicles()
+        activate CTRL
+                            activate CTRL
+
+                            CTRL -> AGENDA : getAgendaEntries()
+
+                            activate AGENDA
+
+                            AGENDA -> CTRL : agendaEntries
+                            deactivate AGENDA
+                           |||
+                            deactivate CTRL
+
+                            CTRL -> CTRL : getAvailableVehicles(agendaEntries)
+
+                             activate CTRL
+
+                                                        CTRL -> RepositorySingleton : getInstance()
+                                                        activate RepositorySingleton
+
+                                                        RepositorySingleton --> CTRL: repositories
+                                                        deactivate RepositorySingleton
+
+                                                        CTRL -> PLAT : getVehicleRepository()
+                                                        activate PLAT
+
+                                                        PLAT --> CTRL: VehicleRepository
+                                                        deactivate PLAT
+
+                                                        CTRL -> VEHICLEREPOSITORY :getAvailableVehicles(agendaEntries)
+
+                                                        activate VEHICLEREPOSITORY
+
+                                                        VEHICLEREPOSITORY -> CTRL : availableVehicles
+                                                        deactivate VEHICLEREPOSITORY
+
+                                                        deactivate CTRL
+
+
+    CTRL -> UI : availableVehicles
+    deactivate CTRL
+
+    UI -> Employee : shows list of available vehicles
+
+    Employee -> UI : selects a vehicle from the list
+
+
+        UI --> Employee : shows the confirmation menu
+    deactivate UI
+
+    Employee -> UI : submits data
+    activate UI
+
+    UI -> CTRL : assignVehicle(agendaTask, vehicle)
+    activate CTRL
+
+    CTRL -> AGENDA : assignVehicle(agendaTask, vehicle)
+      deactivate CTRL
+    activate AGENDA
+
+    AGENDA -> AGENDA : addVehicle(vehicle)
+
+    AGENDA --> CTRL : success
+    deactivate AGENDA
+
+    activate CTRL
+    CTRL --> UI : success
+    deactivate CTRL
+
+        UI --> Employee : shows operation (in)success
+    deactivate UI
+
+@enduml
