@@ -30,11 +30,11 @@ package "GSM System" {
     }
 
     class AgendaEntry {
-       team
-       vehicles
-       startingDate
-       endDate
-       responsible
+        toDoEntry
+        StartingDate
+        EndDate
+        Team
+        List<Vehicles>
     }
 
     class GSM {
