@@ -48,7 +48,7 @@ public class AgendaEntry implements Serializable {
     /**
      * Constructor for AgendaEntry.
      *
-     * @param agendaEntry  The to-do entry for this agenda entry.
+     * @param agendaEntry   The to-do entry for this agenda entry.
      * @param starting_Date The starting date of the agenda entry.
      */
     public AgendaEntry(ToDoEntry agendaEntry, Data starting_Date) {
@@ -200,6 +200,7 @@ public class AgendaEntry implements Serializable {
      */
     public Team getTeam() {
         return team;
+
     }
 
     /**
@@ -223,6 +224,9 @@ public class AgendaEntry implements Serializable {
             return true;
         }
         return false;
+    }
+    public void addTeam(Team team) {
+        this.team = team;
     }
 
     // **********************
@@ -256,6 +260,15 @@ public class AgendaEntry implements Serializable {
     @Override
     public AgendaEntry clone() {
         return new AgendaEntry(agendaEntry, starting_Date);
+    }
+
+    public Team removeTeam(Team team) {
+        this.team = null;
+        return team;
+    }
+
+    public void removeVehicle(Vehicle vehicle) {
+        this.vehicles.remove(vehicle);
     }
 
     /**

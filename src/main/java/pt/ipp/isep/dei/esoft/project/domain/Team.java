@@ -12,6 +12,14 @@ public class Team {
         this.collaborators = new ArrayList<>();
     }
 
+    public Team(Team originalTeam) {
+        this.teamId = originalTeam.getTeamId();
+        this.collaborators = new ArrayList<>(originalTeam.getCollaborators());
+    }
+
+
+
+
     public int getTeamId() {
         return teamId;
     }
