@@ -5,9 +5,14 @@ import pt.ipp.isep.dei.esoft.project.domain.AgendaEntry;
 import pt.ipp.isep.dei.esoft.project.domain.Extras.ConfirmationMenu.ConfirmationMenu;
 import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 
+import java.io.FileNotFoundException;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+
+import java.io.FileInputStream;
+import java.io.BufferedInputStream;
+import javazoom.jl.player.Player;
 
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_PURPLE;
@@ -17,6 +22,7 @@ public class AssignVehicleToAgendaTaskUI implements Runnable {
     private final AgendaController controller;
     private AgendaEntry agendaTask;
     private Vehicle vehicle;
+    String caminhoDoArquivo = "src/main/resources/test.mp3";
 
     public AssignVehicleToAgendaTaskUI() {
         this.controller = new AgendaController();
@@ -29,6 +35,16 @@ public class AssignVehicleToAgendaTaskUI implements Runnable {
     @Override
     public void run() {
         System.out.println("\n\n--- Assign a Vehicle to a Task in Agenda ------------------------");
+        try {
+            FileInputStream fis = new FileInputStream(caminhoDoArquivo);
+            BufferedInputStream bis = new BufferedInputStream(fis);
+            Player player = new Player(bis);
+
+            player.play();
+        } catch (Exception e) {
+            System.out.println("Erro ao tocar a música: " + e.getMessage());
+            e.printStackTrace();
+        }
 
         if (requestAgendaTaskInformation()) {
 
