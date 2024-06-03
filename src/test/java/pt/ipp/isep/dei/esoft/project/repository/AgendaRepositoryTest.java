@@ -42,7 +42,6 @@ public class AgendaRepositoryTest {
     taskPlannedListCreated
     changedTaskStatusList
     getTaskList
-    sortByStartDate (doable)
     getAgendaEntriesForResponsible
      */
 
@@ -123,6 +122,14 @@ public class AgendaRepositoryTest {
     public void testInValidEntry() {
         repository.addAgendaEntry(agendaEntry);
         assertFalse(repository.validateEntry(agendaEntry));
+    }
+
+    @Test
+    public void testSortByStartDate() {
+        List<AgendaEntry> sortedList = repository.sortByStartDate(agenda);
+        for (int i = 0; i < sortedList.size()-1; i++) {
+            assertFalse(sortedList.get(i).getStartingDate().isGreaterOrEquals(sortedList.get(i+1).getStartingDate()));
+        }
     }
 
     @Test
