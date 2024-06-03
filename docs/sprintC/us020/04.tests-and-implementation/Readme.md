@@ -77,9 +77,9 @@
 
 **Test 6:**
    
- @Test
-    void testRegisterGreenSpaceWithDuplicateName() {
-    GreenSpaceRepository repository = new GreenSpaceRepository();
+     @Test
+        void testRegisterGreenSpaceWithDuplicateName() {
+        GreenSpaceRepository repository = new GreenSpaceRepository();
 
         repository.registerGreenSpace("Park", 2, 1000, "123 Main St", "John Doe");
 
