@@ -212,6 +212,10 @@ public class AgendaEntry implements Serializable {
         return vehicles;
     }
 
+    public void removeAllVehicles() {
+        vehicles.clear();
+    }
+
     /**
      * Adds a vehicle to the list of vehicles assigned to this agenda entry.
      *
@@ -225,6 +229,11 @@ public class AgendaEntry implements Serializable {
         }
         return false;
     }
+
+    public void addVehicles(List<Vehicle> vehicles) {
+        this.vehicles.addAll(vehicles);
+    }
+
     public void addTeam(Team team) {
         this.team = team;
     }
@@ -262,9 +271,10 @@ public class AgendaEntry implements Serializable {
         return new AgendaEntry(agendaEntry, starting_Date);
     }
 
-    public Team removeTeam(Team team) {
+    public Team removeTeam() {
+        Team removedTeam = this.team;
         this.team = null;
-        return team;
+        return removedTeam;
     }
 
     public void removeVehicle(Vehicle vehicle) {
