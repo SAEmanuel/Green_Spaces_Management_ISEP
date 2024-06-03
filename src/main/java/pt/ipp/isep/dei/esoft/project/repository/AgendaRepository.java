@@ -88,7 +88,7 @@ public class AgendaRepository implements Serializable {
      * @param filterSelection The filter selection.
      * @return A list of planned agenda entries.
      */
-    private List<AgendaEntry> getTaskPlannedList(Collaborator collaborator, Data startDate, Data endDate, int filterSelection) {
+    public List<AgendaEntry> getTaskPlannedList(Collaborator collaborator, Data startDate, Data endDate, int filterSelection) {
         List<AgendaEntry> plannedList = new ArrayList<>();
         if ((filterSelection - 1) == 1) {
             for (AgendaEntry agendaEntry : agenda) {
@@ -244,7 +244,7 @@ public class AgendaRepository implements Serializable {
      * @param entry The agenda entry to add.
      * @return true if the entry was added successfully, false otherwise.
      */
-    private boolean addAgendaEntry(AgendaEntry entry) {
+    public boolean addAgendaEntry(AgendaEntry entry) {
         boolean success = false;
 
         if (validateEntry(entry)) {
@@ -259,7 +259,7 @@ public class AgendaRepository implements Serializable {
      * @param entry The agenda entry to validate.
      * @return true if the entry is valid, false otherwise.
      */
-    private boolean validateEntry(AgendaEntry entry) {
+    public boolean validateEntry(AgendaEntry entry) {
         for (AgendaEntry agendaEntry : agenda) {
             if (agendaEntry.equals(entry)) {
                 return false;
@@ -301,7 +301,7 @@ public class AgendaRepository implements Serializable {
      * @param postponeDate The postpone date to validate.
      * @return true if the postpone date is valid, false otherwise.
      */
-    private boolean validPostponeDate(AgendaEntry task, Data postponeDate) {
+    public boolean validPostponeDate(AgendaEntry task, Data postponeDate) {
         return task.getStartingDate().isGreaterOrEquals(postponeDate);
     }
 
@@ -312,7 +312,7 @@ public class AgendaRepository implements Serializable {
      * @param agendaTasks  The list of agenda tasks.
      * @return The agenda task.
      */
-    private AgendaEntry getTaskByResponsible(int agendaTaskID, List<AgendaEntry> agendaTasks) {
+    public AgendaEntry getTaskByResponsible(int agendaTaskID, List<AgendaEntry> agendaTasks) {
         return agendaTasks.get(agendaTaskID);
     }
 
@@ -340,7 +340,7 @@ public class AgendaRepository implements Serializable {
      * @param taskInAgenda The task to validate.
      * @return true if the task status is valid, false otherwise.
      */
-    private boolean validatesStatus(AgendaEntry taskInAgenda) {
+    public boolean validatesStatus(AgendaEntry taskInAgenda) {
         if (taskInAgenda.getAgendaEntry().getStatus().equals(STATUS_DONE)) {
             throw new IllegalArgumentException("Done agenda entry - can't cancel this task.");
         }
@@ -372,7 +372,7 @@ public class AgendaRepository implements Serializable {
      * @param task The task to validate.
      * @return true if the information is valid, false otherwise.
      */
-    private boolean validateInfo(Team team, AgendaEntry task) {
+    public boolean validateInfo(Team team, AgendaEntry task) {
         return task.getTeam() == null;
     }
 
@@ -382,7 +382,7 @@ public class AgendaRepository implements Serializable {
      * @param agendaEntryID The ID of the agenda entry.
      * @return The agenda entry.
      */
-    private AgendaEntry getAgendaEntryByID(int agendaEntryID, String responsible) {
+    public AgendaEntry getAgendaEntryByID(int agendaEntryID, String responsible) {
         List<AgendaEntry> agenda = getAgendaEntriesForResponsible(responsible);
         return agenda.get(agendaEntryID);
     }
