@@ -150,6 +150,34 @@ public class Vehicle implements Serializable {
         return plateId;
     }
 
+    public String getBrand() {
+        return brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public float getTareWeight() {
+        return tareWeight;
+    }
+
+    public float getGrossWeight() {
+        return grossWeight;
+    }
+
+    public Data getRegisterDate() {
+        return registerDate;
+    }
+
+    public Data getAcquisitionDate() {
+        return acquisitionDate;
+    }
+
     public void setLastCheckUp(float lastCheckUp) {
         this.lastCheckUp = lastCheckUp;
     }

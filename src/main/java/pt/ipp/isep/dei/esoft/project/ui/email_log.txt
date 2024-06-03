@@ -6,4 +6,4 @@ true
 email_service.dei.university.edu
 xico@gmail.com, ema@gmail.com
 Assigned to a Task
-You and your team members have been assigned to a task in a agenda
+You and your team members have been assigned to a task in an agenda

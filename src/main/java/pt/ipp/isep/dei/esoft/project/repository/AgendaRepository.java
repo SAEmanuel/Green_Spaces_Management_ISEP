@@ -13,6 +13,8 @@ import java.util.Optional;
 public class AgendaRepository implements Serializable {
 
     private List<AgendaEntry> agenda;
+    private List<AgendaEntry> agendaBackUp = new ArrayList<>();
+
 
     private static final String STATUS_CANCELLED = "Canceled";
     private static final String STATUS_DONE = "Done";
@@ -115,20 +117,47 @@ public class AgendaRepository implements Serializable {
      * @return An optional list of tasks with changed status.
      */
     public Optional<List<AgendaEntry>> changedTaskStatusList(Collaborator collaborator, Data startDate, Data endDate, int filterSelection, String confirmation, int selectedTask) {
-        List<AgendaEntry> list = getTaskPlannedList(collaborator, startDate, endDate, filterSelection);
-        Optional<List<AgendaEntry>> optionalValue;
-        if (confirmation.equalsIgnoreCase("y") && !list.isEmpty()) {
+        List<AgendaEntry> taskList = getTaskPlannedList(collaborator, startDate, endDate, filterSelection);
 
-            List<AgendaEntry> taskList = getTaskPlannedList(collaborator, startDate, endDate, filterSelection);
+        if (confirmation.equalsIgnoreCase("y") && !taskList.isEmpty() && selectedTask >= 0 && selectedTask < taskList.size()) {
+            for (int i = 0; i < taskList.size(); i++) {
+                if (taskList.get(i).getTeam() != null && taskList.get(i).getVehicles() != null) {
+                    System.out.println(i);
+                    copy(clone(taskList), i);
+                }
+            }
+
             taskList.get(selectedTask).setReal_end_Date(Data.currentDate());
             taskList.get(selectedTask).getAgendaEntry().setStatus(String.valueOf(AgendaEntry.Status.DONE));
 
-            optionalValue = Optional.of(taskList);
-            return optionalValue;
+            if (!taskList.get(selectedTask).getVehicles().isEmpty() && taskList.get(selectedTask).getTeam() != null) {
+
+                Team removedTeam = taskList.get(selectedTask).removeTeam(taskList.get(selectedTask).getTeam());
+                System.out.println(taskList.get(selectedTask).getTeam());
+                Vehicle removedVehicle = taskList.get(selectedTask).getVehicles().remove(selectedTask);
+                System.out.println(taskList.get(selectedTask).getVehicles());
+                agendaBackUp.get(selectedTask).addVehicle(new Vehicle(
+                        removedVehicle.getPlateId(),
+                        removedVehicle.getBrand(),
+                        removedVehicle.getModel(),
+                        removedVehicle.getType().ordinal(),
+                        removedVehicle.getTareWeight(),
+                        removedVehicle.getGrossWeight(),
+                        removedVehicle.getCurrentKm(),
+                        removedVehicle.getCheckUpFrequency(),
+                        removedVehicle.getLastCheckUp(),
+                        removedVehicle.getRegisterDate(),
+                        removedVehicle.getAcquisitionDate()
+                ));
+                agendaBackUp.get(selectedTask).setTeam(new Team(removedTeam));
+            }
+
+            return Optional.of(taskList);
         }
 
         return Optional.empty();
     }
+
 
     /**
      * Gets the task list for a collaborator within a date range and filter.
@@ -141,6 +170,7 @@ public class AgendaRepository implements Serializable {
      */
     private List<AgendaEntry> getTaskList(Collaborator collaborator, Data startDate, Data endDate, int filterSelection) {
         List<AgendaEntry> taskList = new ArrayList<>();
+
         switch (filterSelection - 1) {
             case 0:
                 for (AgendaEntry agendaEntry : agenda) {
@@ -163,7 +193,8 @@ public class AgendaRepository implements Serializable {
                 }
                 break;
             case 3:
-                for (AgendaEntry agendaEntry : agenda) {
+                for (AgendaEntry agendaEntry : agendaBackUp) {
+                    System.out.println(agendaEntry.getVehicles());
                     if (agendaEntry.getTeam().hasCollaborator(collaborator)
                             && agendaEntry.getStartingDate().isGreaterOrEquals(startDate)
                             && !agendaEntry.getStartingDate().isGreater(endDate)
@@ -417,6 +448,13 @@ public class AgendaRepository implements Serializable {
         return agenda;
     }
 
+    public void copy(List<AgendaEntry> list, int index) {
+        List<AgendaEntry> other = new ArrayList<>();
+        other.add(list.get(index));
+        agendaBackUp.addAll(other);
+    }
+
+
     /**
      * Assigns a vehicle to an agenda task.
      *
@@ -427,4 +465,9 @@ public class AgendaRepository implements Serializable {
     public boolean assignVehicle(AgendaEntry agendaTask, Vehicle vehicle) {
         return agendaTask.addVehicle(vehicle);
     }
+
+    public List<AgendaEntry> clone(List<AgendaEntry> list) {
+        return new ArrayList<>(list);
+    }
+
 }
