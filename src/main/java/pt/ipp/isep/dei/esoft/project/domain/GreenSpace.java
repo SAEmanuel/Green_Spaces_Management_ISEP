@@ -12,6 +12,10 @@ public class GreenSpace implements Serializable {
     private final Size size;         // The size of the green space
     private final float area;        // The area of the green space
 
+    public Size getSize() {
+        return size;
+    }
+
 
     /**
      * Enum {@code Size} defines the possible sizes for a green space.

@@ -21,6 +21,10 @@ public class AgendaEntry implements Serializable {
     private Data real_end_Date;
     private final String responsible;
 
+    public Data getReal_end_Date() {
+        return real_end_Date;
+    }
+
     /**
      * Enumeration representing the status of an agenda entry.
      */
