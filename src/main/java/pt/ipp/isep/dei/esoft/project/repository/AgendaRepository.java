@@ -431,10 +431,12 @@ public class AgendaRepository implements Serializable {
         for (AgendaEntry agendaEntry : agenda) {
             if (agendaEntry.getTeam() != null) {
 
-                if (agendaEntry.getResponsible().equals(responsible) && !agendaEntry.containsTeam(agendaEntry.getTeam())) {
+                if (agendaEntry.getResponsible().equals(responsible) && !agendaEntry.containsTeam(agendaEntry.getTeam()) &&
+                        !agendaEntry.getAgendaEntry().getStatus().equals(String.valueOf(AgendaEntry.Status.DONE))) {
                     agendaEntries.add(agendaEntry);
                 }
-            } else if (agendaEntry.getTeam() == null && agendaEntry.getResponsible().equals(responsible)) {
+            } else if (agendaEntry.getTeam() == null && agendaEntry.getResponsible().equals(responsible)&&
+            !agendaEntry.getAgendaEntry().getStatus().equals(String.valueOf(AgendaEntry.Status.DONE))) {
                 agendaEntries.add(agendaEntry);
             }
         }
