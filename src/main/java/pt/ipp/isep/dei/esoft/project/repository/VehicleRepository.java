@@ -196,6 +196,7 @@ public class VehicleRepository implements Serializable {
         List<Vehicle> availableVehicles = getVehicleList();
 
         for (AgendaEntry task : tasks) {
+            System.out.println(task);
             List<Vehicle> taskVehicle = task.getVehicles();
             if (taskVehicle != null) {
                 for (Vehicle vehicle : taskVehicle) {
