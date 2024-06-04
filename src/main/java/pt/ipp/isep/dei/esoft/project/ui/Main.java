@@ -5,26 +5,15 @@ import pt.ipp.isep.dei.esoft.project.ui.console.menu.MainMenuUI;
 
 import java.util.Scanner;
 
-import java.io.FileInputStream;
-import java.io.BufferedInputStream;
-import javazoom.jl.player.Player;
-
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
 
 public class Main {
 
     public static void main(String[] args) {
-        String caminhoDoArquivo = "src/main/resources/testpg.mp3";
         Bootstrap bootstrap = new Bootstrap();
         bootstrap.run();
 
         try {
-            FileInputStream fis = new FileInputStream(caminhoDoArquivo);
-            BufferedInputStream bis = new BufferedInputStream(fis);
-            Player player = new Player(bis);
-
-            player.play();
-
             MainMenuUI menu = new MainMenuUI();
             menu.run();
         } catch (Exception e) {

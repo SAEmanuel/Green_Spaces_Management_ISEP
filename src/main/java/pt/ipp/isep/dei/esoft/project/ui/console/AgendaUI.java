@@ -11,10 +11,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
-import java.io.FileInputStream;
-import java.io.BufferedInputStream;
-import javazoom.jl.player.Player;
-
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
 
 public class AgendaUI implements Runnable {
@@ -23,8 +19,6 @@ public class AgendaUI implements Runnable {
     private ToDoEntryDTO agendaEntry;
     private int toDoEntryOption;
     private Data starting_Date;
-    String caminhoDoArquivo = "src/main/resources/testsus.mp3";
-    String caminhoDoArquivo2 = "src/main/resources/testco.mp3";
 
     /**
      * Constructor for AgendaUI.
@@ -49,33 +43,11 @@ public class AgendaUI implements Runnable {
     public void run() {
         System.out.println("\n\n--- Add Agenda Entry ------------------------");
 
-        try {
-            FileInputStream fis = new FileInputStream(caminhoDoArquivo);
-            BufferedInputStream bis = new BufferedInputStream(fis);
-            Player player = new Player(bis);
-
-            player.play();
-        } catch (Exception e) {
-            System.out.println("Erro ao tocar a música: " + e.getMessage());
-            e.printStackTrace();
-        }
-
         if (requestEntryInformation()) {
             int continueApp = confirmsData();
 
             if (continueApp != 2) {
                 submitData();
-
-                try {
-                    FileInputStream fis = new FileInputStream(caminhoDoArquivo2);
-                    BufferedInputStream bis = new BufferedInputStream(fis);
-                    Player player = new Player(bis);
-
-                    player.play();
-                } catch (Exception e) {
-                    System.out.println("Erro ao tocar a música: " + e.getMessage());
-                    e.printStackTrace();
-                }
             }
         } else {
             System.out.println(ANSI_BRIGHT_RED + "Does not exist task in the TODO list... Add some" + ANSI_RESET);

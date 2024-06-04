@@ -1,13 +1,10 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.authorization;
 
-import javazoom.jl.player.Player;
 import pt.ipp.isep.dei.esoft.project.application.controller.authorization.AuthenticationController;
 import pt.ipp.isep.dei.esoft.project.ui.console.menu.*;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
 
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -29,17 +26,6 @@ public class AuthenticationUI implements Runnable {
         boolean success = doLogin();
 
         if (success) {
-            String caminhoDoArquivo = "src/main/resources/testhi.mp3";
-            try {
-                FileInputStream fis = new FileInputStream(caminhoDoArquivo);
-                BufferedInputStream bis = new BufferedInputStream(fis);
-                Player player = new Player(bis);
-
-                player.play();
-            } catch (Exception e) {
-                System.out.println("Erro ao tocar a música: " + e.getMessage());
-                e.printStackTrace();
-            }
             List<UserRoleDTO> roles = this.ctrl.getUserRoles();
             if ((roles == null) || (roles.isEmpty())) {
                 System.out.println("No role assigned to user.");
