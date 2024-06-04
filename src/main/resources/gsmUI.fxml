@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1020.0" stylesheets="@Css/GsmUI.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.javaFX.GsmUI_Controller">
+   <children>
+      <VBox prefHeight="620.0" prefWidth="398.0">
+         <children>
+            <AnchorPane fx:id="side_anchorpane" prefHeight="625.0" prefWidth="316.0" stylesheets="@Css/GsmUI.css">
+               <children>
+                  <Button layoutX="29.0" layoutY="138.0" mnemonicParsing="false" onAction="#changeToAddGreenSpace" prefHeight="39.0" prefWidth="254.0" stylesheets="@Css/GsmUI.css" text="Add Green Space" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Button>
+                  <Button layoutX="29.0" layoutY="198.0" mnemonicParsing="false" onAction="#changeToEntryToDoList" prefHeight="39.0" prefWidth="254.0" stylesheets="@Css/GsmUI.css" text="Add Entry in ToDoList" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="29.0" layoutY="258.0" mnemonicParsing="false" onAction="#changeToAddEntryAgenda" prefHeight="39.0" prefWidth="254.0" stylesheets="@Css/GsmUI.css" text="Add Entry in Agenda" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="29.0" layoutY="498.0" mnemonicParsing="false" onAction="#changeToCancelTask" prefHeight="39.0" prefWidth="254.0" stylesheets="@Css/GsmUI.css" text="Cancel Task" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="29.0" layoutY="318.0" mnemonicParsing="false" onAction="#changeToAssignTeam" prefHeight="39.0" prefWidth="254.0" stylesheets="@Css/GsmUI.css" text="Assign Team to Task" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="29.0" layoutY="378.0" mnemonicParsing="false" onAction="#changeToAssignVehicle" prefHeight="39.0" prefWidth="254.0" stylesheets="@Css/GsmUI.css" text="Assign Vehicle(s) to Task" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="29.0" layoutY="438.0" mnemonicParsing="false" onAction="#changeToPsotponeTask" prefHeight="39.0" prefWidth="254.0" stylesheets="@Css/GsmUI.css" text="Postpone Task" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="29.0" layoutY="558.0" mnemonicParsing="false" onAction="#changeToMyGreenSpaces" prefHeight="39.0" prefWidth="254.0" stylesheets="@Css/GsmUI.css" text="Show my Green Spaces" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Pane layoutX="2.0" prefHeight="105.0" prefWidth="307.0">
+                     <children>
+                        <ImageView fitHeight="66.0" fitWidth="66.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Images/mail_pro.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="92.0" layoutY="34.0" text="Name" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="11.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="92.0" layoutY="48.0" text="Email" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="11.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="121.0" layoutY="96.0" text="Options" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Line endX="140.0" fill="RED" layoutX="-36.0" layoutY="108.0" startX="84.0" stroke="#00acff" />
+                        <Line endX="140.0" fill="WHITE" layoutX="113.0" layoutY="107.0" startX="84.0" stroke="#00acff" />
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+      <Pane prefHeight="620.0" prefWidth="785.0">
+         <children>
+            <Pane fx:id="search_bar" layoutX="146.0" layoutY="14.0" prefHeight="46.0" prefWidth="412.0">
+               <children>
+                  <TextField layoutX="113.0" layoutY="11.0" prefHeight="24.0" prefWidth="232.0" promptText="search" />
+                  <ImageView fitHeight="24.0" fitWidth="27.0" layoutX="75.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/Procurar.png" />
+                     </image>
+                  </ImageView>
+               </children></Pane>
+            <Label layoutX="29.0" layoutY="84.0" text="Hello!">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <Label layoutX="160.0" layoutY="84.0" prefHeight="44.0" prefWidth="544.0" text="name">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <Label layoutX="29.0" layoutY="128.0" text="This is the GSM WorkSpace">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Pane fx:id="inf_one" layoutX="14.0" layoutY="217.0" prefHeight="298.0" prefWidth="200.0">
+               <children>
+                  <Button layoutX="3.0" layoutY="2.0" mnemonicParsing="false" onAction="#changeToEntryToDoList" prefHeight="298.0" prefWidth="191.0" stylesheets="@Css/GsmUI.css" text="Add Entry in ToDoList" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <ImageView fitHeight="79.0" fitWidth="82.0" layoutX="-11.0" layoutY="-17.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/exame.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </Pane>
+            <Pane fx:id="inf_two" layoutX="252.0" layoutY="217.0" prefHeight="298.0" prefWidth="200.0">
+               <children>
+                  <Button layoutX="4.0" mnemonicParsing="false" onAction="#changeToAddEntryAgenda" prefHeight="298.0" prefWidth="191.0" stylesheets="@Css/GsmUI.css" text="Add Entry in Agenda" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <ImageView fitHeight="79.0" fitWidth="82.0" layoutX="-15.0" layoutY="-15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/dicionario.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </Pane>
+            <Pane fx:id="inf_3" layoutX="490.0" layoutY="217.0" prefHeight="298.0" prefWidth="200.0">
+               <children>
+                  <Button layoutX="5.0" mnemonicParsing="false" onAction="#changeToPsotponeTask" prefHeight="298.0" prefWidth="191.0" stylesheets="@Css/GsmUI.css" text="Postpone Task" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <ImageView fitHeight="79.0" fitWidth="82.0" layoutX="-11.0" layoutY="-15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/certificado.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </Pane>
+            <Button fx:id="back_btn" layoutX="465.0" layoutY="571.0" mnemonicParsing="false" onAction="#switchToLoginMenu" prefHeight="35.0" prefWidth="232.0" stylesheets="@Css/LoginBtns.css" text="&lt;--  |  Back to Login" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Button>
+            <Line endX="57.0" endY="72.29290771484375" fill="WHITE" layoutX="69.0" layoutY="53.0" startX="-20.79900550842285" startY="72.29289245605469" stroke="#00acff" strokeWidth="3.0" />
+            <Line endX="57.0" endY="72.29290771484375" fill="WHITE" layoutX="174.0" layoutY="80.0" startX="-20.79900550842285" startY="72.29289245605469" stroke="#00acff" strokeWidth="3.0" />
+            <Label layoutX="18.0" layoutY="589.0" opacity="0.7" text="Terms and Conditions | Privacy  Policy">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label layoutX="18.0" layoutY="571.0" opacity="0.7" text="Copyright Reserved @2024">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</HBox>

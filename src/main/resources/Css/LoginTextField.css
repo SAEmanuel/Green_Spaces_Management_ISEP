@@ -1,0 +1,19 @@
+/* Estilo base para os campos de texto */
+.textField {
+    -fx-background-color: transparent;
+    -fx-border-color: #1b99f8;
+    -fx-border-width: 0px 0px 3px 0px;
+    -fx-text-fill: #fff;
+}
+
+/* Estilo do campo de texto quando o mouse está sobre ele */
+.textField:hover {
+    -fx-border-color: #dcb61d;
+    -fx-border-width: 0px 5px 3px 0px;
+
+}
+
+/* Estilo do campo de texto quando é pressionado */
+.textField:pressed {
+    -fx-border-color: #dcb61d;
+}

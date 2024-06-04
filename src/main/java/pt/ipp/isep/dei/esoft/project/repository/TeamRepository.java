@@ -6,7 +6,6 @@ import pt.ipp.isep.dei.esoft.project.domain.SkillList;
 import pt.ipp.isep.dei.esoft.project.domain.Team;
 
 import java.io.Serializable;
-import java.sql.SQLOutput;
 import java.util.*;
 
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_BRIGHT_RED;

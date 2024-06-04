@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.MotionBlur?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="loginScene" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@Css/Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.javaFX.Login_Controller">
+   <children>
+      <AnchorPane layoutX="480.0" layoutY="50.0" opacity="0.67" prefHeight="502.0" prefWidth="453.0" style="-fx-background-color: #171a21; -fx-background-radius: 50;">
+         <effect>
+            <MotionBlur />
+         </effect></AnchorPane>
+      <AnchorPane layoutX="480.0" layoutY="49.0" prefHeight="502.0" prefWidth="453.0" style="-fx-background-color: transparent; -fx-background-radius: 50; -fx-border-color: #fff; -fx-border-radius: 49; -fx-border-width: 4px 4px 4px 4px;">
+         <children>
+            <TextField fx:id="userEmail" layoutX="108.0" layoutY="196.0" prefHeight="35.0" prefWidth="236.0" promptText="User email" style="-fx-background-color: transparent; -fx-border-color: #1b99f8; -fx-border-width: 0px 0px 3px 0px; -fx-border-radius: 0; -fx-text-fill: #fff;" />
+            <PasswordField fx:id="userPassword" layoutX="108.0" layoutY="265.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="236.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #1b99f8; -fx-border-width: 0px 0px 3px 0px; -fx-text-fill: #fff;" />
+            <Label layoutX="134.0" layoutY="120.0" text="Acces to your account!" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="161.0" layoutY="466.0" text="Forgot your password?" textFill="WHITE">
+               <font>
+                  <Font name="System Bold Italic" size="10.0" />
+               </font>
+            </Label>
+            <Label layoutX="182.0" layoutY="78.0" text="Login" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="29.0" />
+               </font>
+            </Label>
+            <Button fx:id="cancelbtn" layoutX="234.0" layoutY="384.0" mnemonicParsing="false" onAction="#logout" prefHeight="35.0" prefWidth="110.0" stylesheets="@Css/LoginBtns.css" text="Cancel" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="submitBtn" layoutX="108.0" layoutY="384.0" mnemonicParsing="false" onAction="#submit" prefHeight="35.0" prefWidth="110.0" stylesheets="@Css/LoginBtns.css" text="Submit" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Button>
+            <CheckBox layoutX="108.0" layoutY="315.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Remember Me" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </CheckBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="30.0" opacity="0.66" prefHeight="600.0" prefWidth="420.0" style="-fx-background-color: #fff;">
+         <children>
+            <Label layoutX="24.0" layoutY="279.0" text="WELCOME BACK!" textFill="#1b99f8">
+               <font>
+                  <Font name="System Bold" size="39.0" />
+               </font>
+            </Label>
+            <Label layoutX="129.0" layoutY="260.0" text="Nice to see you again" textFill="#1b99f8">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="33.0" layoutY="572.0" opacity="0.7" text="Copyright Reserved @2024">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Line endX="-28.0" layoutX="274.0" layoutY="336.0" startX="-100.0" stroke="#dcb61d" strokeLineCap="ROUND" strokeLineJoin="ROUND" style="-fx-stroke-width: 5;" />
+            <Label layoutX="196.0" layoutY="572.0" opacity="0.7" text="Terms and Conditions | Privacy  Policy">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Button layoutX="943.0" layoutY="9.0" mnemonicParsing="false" onAction="#switchToMainMenu" prefHeight="35.0" prefWidth="47.0" stylesheets="@Css/LoginBtns.css" text="&lt;-" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
