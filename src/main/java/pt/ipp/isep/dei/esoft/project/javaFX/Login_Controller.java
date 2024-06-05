@@ -53,7 +53,8 @@ public class Login_Controller implements Initializable {
         password = userPassword.getText();
 
         if (ctrl.doLogin(email, password)) {
-            verificaUSR(email, event);
+            switchToGsmMenu(event);
+//            verificaUSR(email, event);
         } else {
             alertBox();
         }
