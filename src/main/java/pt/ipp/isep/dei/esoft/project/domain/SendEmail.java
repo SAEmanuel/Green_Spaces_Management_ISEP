@@ -15,7 +15,11 @@ import java.util.Properties;
 public class SendEmail {
     private static Properties config;
 
-    // Load email configuration from properties file
+    /**
+     * Loads the email configuration from the properties file.
+     *
+     * @throws IOException if there is an error reading the properties file
+     */
     private static void loadEmailConfig() throws IOException {
         config = new Properties();
         try (FileInputStream fis = new FileInputStream("src/main/resources/config.properties")) {
@@ -23,7 +27,15 @@ public class SendEmail {
         }
     }
 
-    // Send email using the specified service
+    /**
+     * Sends an email using the specified service.
+     *
+     * @param serviceName the name of the email service to use (can be null for default service)
+     * @param toEmails the list of recipient email addresses
+     * @param subject the subject of the email
+     * @param body the body of the email
+     * @throws IOException if there is an error loading the email configuration
+     */
     public static void sendEmail(String serviceName, List<String> toEmails, String subject, String body) throws IOException {
         loadEmailConfig();
 
@@ -86,47 +98,14 @@ public class SendEmail {
         catch (IOException e) {
             e.printStackTrace();
         }
-
-//        System.out.println();
-//        System.out.println(smtpServer);
-//        System.out.println(port);
-//        System.out.println(useTls);
-//        System.out.println(useSsl);
-//        System.out.println();
-//        System.out.println(serviceName);
-//        for (int i = 0; i < toEmails.size(); i++) {
-//            if(i == 0)
-//                System.out.printf(toEmails.get(i));
-//            else
-//                System.out.printf(", " + toEmails.get(i));
-//        }
-//        System.out.println();
-//        System.out.println(subject);
-//        System.out.println(body);
-
-//        System.out.println("oi2");
-//
-//        Session session = Session.getInstance(props, null);
-//        MimeMessage msg = new MimeMessage(session);
-//        msg.setFrom(new InternetAddress(username));
-//        for (String toEmail : toEmails) {
-//            msg.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
-//        }
-//        msg.setSubject(subject);
-//        msg.setText(body);
-//        System.out.println("oi3");
-//
-//        SMTPTransport transport = (SMTPTransport) session.getTransport("smtp");
-//        transport.connect(smtpServer, username, password);
-//        System.out.println("oi4");
-//
-//        transport.sendMessage(msg, msg.getAllRecipients());
-//        System.out.println("oi5");
-//
-//        transport.close();
-
     }
 
+    /**
+     * Retrieves the available email services from the configuration.
+     *
+     * @return a list of available email service names
+     * @throws IOException if there is an error loading the email configuration
+     */
     public static List<String> getEmailServices() throws IOException {
         loadEmailConfig();
         List<String> emailServices = new ArrayList<>();

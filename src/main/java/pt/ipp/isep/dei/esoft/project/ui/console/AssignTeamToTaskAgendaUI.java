@@ -15,7 +15,6 @@ import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_RESET
 public class AssignTeamToTaskAgendaUI implements Runnable {
 
     private final AgendaController controller;
-
     private int teamID;
     private int agendaEntryID;
     private String emailService;
@@ -32,7 +31,7 @@ public class AssignTeamToTaskAgendaUI implements Runnable {
     //-------------------------------------- Run if happy success -------------------------
 
     /**
-     * Executes the user interface logic for registering a vehicle.
+     * Executes the user interface logic for assigning a team to a task in the agenda.
      */
     public void run() {
         System.out.println("\n\n--- Postpone a task in agenda ------------------------");
@@ -49,7 +48,9 @@ public class AssignTeamToTaskAgendaUI implements Runnable {
         }
     }
 
-
+    /**
+     * Submits the data for assigning a team to a task in the agenda.
+     */
     private void submitData() {
 
         boolean result = getController().assignTeam(teamID,agendaEntryID, emailService, controller.getResponsible());
@@ -61,7 +62,11 @@ public class AssignTeamToTaskAgendaUI implements Runnable {
         }
     }
 
-
+    /**
+     * Displays a confirmation menu and handles the user's selection.
+     *
+     * @return the selected option
+     */
     private int confirmsData() {
         int option;
         display();
@@ -81,14 +86,22 @@ public class AssignTeamToTaskAgendaUI implements Runnable {
         }
     }
 
+    /**
+     * Displays the confirmation menu options.
+     */
     private void display() {
         System.out.print("\nConfirmation menu:\n 0 -> Change Entry Info\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
     }
 
     //--------------------------------------------------------------------------------
 
-
     //----------------------------------- Requests ----------------------------------
+
+    /**
+     * Requests entry information from the user.
+     *
+     * @return true if the information was successfully requested, false otherwise
+     */
     private boolean requestEntryInformation() {
         agendaEntryID = requestAgendaEntryID();
         if (agendaEntryID != -1) {
@@ -101,8 +114,11 @@ public class AssignTeamToTaskAgendaUI implements Runnable {
         return false;
     }
 
-
-
+    /**
+     * Requests the agenda entry ID from the user.
+     *
+     * @return the selected agenda entry ID, or -1 if none is selected
+     */
     private int requestAgendaEntryID() {
         List<AgendaEntry> agendaTasks = controller.getAgendaEntriesForResponsible();
         int n = agendaTasks.size();
@@ -114,8 +130,11 @@ public class AssignTeamToTaskAgendaUI implements Runnable {
         return -1;
     }
 
-
-
+    /**
+     * Displays the list of agenda entries.
+     *
+     * @param agendaTasks the list of agenda entries to display
+     */
     private void showToDoList(List<AgendaEntry> agendaTasks) {
         System.out.println("\n-- Agenda --");
         for (int i = 0; i < agendaTasks.size(); i++) {
@@ -124,9 +143,11 @@ public class AssignTeamToTaskAgendaUI implements Runnable {
         System.out.println("----------------");
     }
 
-
-
-
+    /**
+     * Requests the team ID from the user.
+     *
+     * @return the selected team ID, or -1 if none is selected
+     */
     private int requestTeamID() {
         List<Team> teams = controller.getTeams();
         int n = teams.size();
@@ -138,6 +159,11 @@ public class AssignTeamToTaskAgendaUI implements Runnable {
         return -1;
     }
 
+    /**
+     * Displays the list of teams.
+     *
+     * @param teams the list of teams to display
+     */
     private void showTeams(List<Team> teams) {
         System.out.println("\n-- Teams --");
         for (int i = 0; i < teams.size(); i++) {
@@ -146,7 +172,12 @@ public class AssignTeamToTaskAgendaUI implements Runnable {
         System.out.println("----------------");
     }
 
-
+    /**
+     * Gets the user's answer for selecting an option.
+     *
+     * @param n the number of options available
+     * @return the selected option
+     */
     private int getAnswer( int n) {
         Scanner input = new Scanner(System.in);
         int answer;
@@ -164,6 +195,11 @@ public class AssignTeamToTaskAgendaUI implements Runnable {
         }
     }
 
+    /**
+     * Requests the email service from the user.
+     *
+     * @return the selected email service, or null if none is selected
+     */
     private String requestEmailService() {
         List<String > emailServices = controller.getEmailServices();
         int n = emailServices.size();
@@ -175,6 +211,11 @@ public class AssignTeamToTaskAgendaUI implements Runnable {
         return null;
     }
 
+    /**
+     * Displays the list of email services.
+     *
+     * @param emailServices the list of email services to display
+     */
     private void showEmailServices(List<String> emailServices) {
         System.out.println("\n-- Email Services --");
         for (int i = 0; i < emailServices.size(); i++) {
