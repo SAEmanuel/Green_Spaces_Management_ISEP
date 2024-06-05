@@ -200,11 +200,11 @@ public class Bootstrap implements Runnable {
         Repositories repositories = Repositories.getInstance();
         List<Collaborator> collaborators = repositories.getCollaboratorRepository().getCollaboratorList();
 
-        System.out.println(repositories.getCollaboratorRepository().getCollaboratorList().get(0).getPassword());
         for (int i = 0; i < collaborators.size(); i++) {
             authenticationRepository.addUserWithRole(collaborators.get(i).getName(),
                     collaborators.get(i).getEmailAddress(), collaborators.get(i).getPassword(),
                     AuthenticationController.ROLE_COLLABORATOR);
+
         }
 
     }

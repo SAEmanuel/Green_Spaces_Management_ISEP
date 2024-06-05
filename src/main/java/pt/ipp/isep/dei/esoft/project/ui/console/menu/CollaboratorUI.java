@@ -3,8 +3,6 @@ package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 import pt.ipp.isep.dei.esoft.project.application.controller.CreateCollaboratorController;
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
-import pt.ipp.isep.dei.esoft.project.ui.Bootstrap;
-import pt.ipp.isep.dei.esoft.project.ui.console.ChangePasswordUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.RetrieveTasksUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
@@ -48,7 +46,6 @@ public class CollaboratorUI implements Runnable {
         }
         List<MenuItem> options = new ArrayList<MenuItem>();
         options.add(new MenuItem("Consult assigned tasks", new RetrieveTasksUI(loggedInCollaborator)));
-        options.add(new MenuItem("Change password", new ChangePasswordUI(loggedInCollaborator)));
 
 
         int option = 0;

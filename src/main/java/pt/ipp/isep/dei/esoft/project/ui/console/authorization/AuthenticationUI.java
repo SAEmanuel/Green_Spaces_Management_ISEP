@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.authorization;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.authorization.AuthenticationController;
+import pt.ipp.isep.dei.esoft.project.ui.Bootstrap;
 import pt.ipp.isep.dei.esoft.project.ui.console.menu.*;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
