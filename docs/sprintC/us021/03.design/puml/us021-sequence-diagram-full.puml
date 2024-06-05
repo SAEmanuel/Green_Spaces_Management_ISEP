@@ -10,15 +10,22 @@ autonumber
 actor "Green Space Manager" as Employee
 participant ":ToDoListUI" as UI
 participant ":ToDoListController" as CTRL
-participant ":Repositories" as RepositorySingleton
-participant "repositories\n:Repositories" as PLAT
-participant "greenSpaceRepository\n:GreenSpaceRepository" as GREENSpaceRepository
-participant "toDoEntry" as ENTRY
-participant "toDoListRepository\n:toDoListRepository" as toDoListRepository
-participant "greenSpace\n:GreenSpace" as GREEN
 participant ":ApplicationSession" as _APP
 participant "appSession\n:ApplicationSession" as APP
 participant "currentSession\n:UserSession" as SESSAO
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "greenSpaceRepository\n:GreenSpaceRepository" as GREENSpaceRepository
+participant "greenSpace\n:GreenSpace" as GREEN
+participant "listGreenSpace\n:List<GreenSpace>" as listGreenSpace
+participant "toDoEntryMapper\n:toDoEntryMapper" as mapper
+participant "listGreenSpaceDTO\n: List<GreenSpaceDTO>" as listDTO
+participant "objDto\n: greenSpaceDto" as objDto
+participant "toDoListRepository\n:toDoListRepository" as toDoListRepository
+participant "toDoEntry\n:ToDoEntry" as TODO
+
+
+
 
 activate Employee
 
@@ -27,7 +34,7 @@ activate Employee
 
     UI -> CTRL** : create
 
-    UI -> CTRL : getGreenSpacesByResponsible()
+    UI -> CTRL : getGreenSpaceDTOByResponsible()
     activate CTRL
 
     CTRL -> CTRL : getResponsible()
@@ -50,38 +57,73 @@ activate Employee
 
                         SESSAO --> CTRL: responsibleEmail
                     deactivate SESSAO
-                    CTRL --> CTRL
                     deactivate CTRL
-                    |||
+                     |||
+                    CTRL -> CTRL :getGreenSpacesByResponsible()
+                                activate CTRL
 
-                    CTRL -> CTRL : getGreenSpacesByResponsible(responsibleEmail)
-                    activate CTRL
+                                    CTRL -> GREENSpaceRepository: getGreenSpacesByResponsible(responsibleEmail)
+                                    activate GREENSpaceRepository
 
-                    CTRL -> RepositorySingleton : getInstance()
-                    activate RepositorySingleton
+                                           GREENSpaceRepository -> listGreenSpace** : create
+                                           group loop [for each object in the GreenSpaceRepository]
 
-                    RepositorySingleton --> CTRL: repositories
-                    deactivate RepositorySingleton
+                                                GREENSpaceRepository -> GREENSpaceRepository :  obj = get(i)
+                                                activate GREENSpaceRepository
+                                                deactivate GREENSpaceRepository
 
-                    CTRL -> PLAT : getGreenSpaceRepository()
-                    activate PLAT
+                                                   GREENSpaceRepository -> GREEN : getResponsible()
+                                                   activate GREEN
+                                                        GREEN -> GREEN : getResponsible()
 
-                    PLAT --> CTRL: GreenSpaceRepository
-                    deactivate PLAT
+                                                        GREEN --> GREENSpaceRepository : objResponsible
+                                                   deactivate GREEN
+                                                group if [objResponsible == responsibleEmail]
 
-                    CTRL -> GREENSpaceRepository : getGreenSpacesByResponsible(responsibleEmail)
+                                                   GREENSpaceRepository -> listGreenSpace : add(obj)
+                                                   activate listGreenSpace
 
-                    activate GREENSpaceRepository
+                                                   deactivate listGreenSpace
+                                                end
 
-                    GREENSpaceRepository -> CTRL : greenSpaces
-                    deactivate GREENSpaceRepository
-                    CTRL --> CTRL
-                    deactivate CTRL
+                                           end
 
+                                        GREENSpaceRepository --> CTRL : listGreenSpaceByResponsible
+                                    deactivate GREENSpaceRepository
 
-                    CTRL -> UI : greenSpaces
+                                deactivate CTRL
+                                |||
 
-                    deactivate CTRL
+                           CTRL -> CTRL : getGreenSpaceDTOByResponsible()
+                           activate CTRL
+
+                                CTRL -> mapper** : create
+                                CTRL -> mapper : toDto(getGreenSpaceDTOByResponsible())
+                                activate mapper
+
+                                    mapper -> listDTO** : create
+                                    group loop [for each object in listGreenSpace]
+                                        mapper -> listGreenSpace: obj = get(i)
+                                        activate listGreenSpace
+                                        deactivate listGreenSpace
+
+                                        mapper -> mapper : objDto = toDTO(obj)
+                                        activate mapper
+
+                                            mapper --> objDto** : create(obj)
+                                        deactivate mapper
+
+                                        mapper -> listDTO : add(objDto)
+                                        activate listDTO
+                                        deactivate listDTO
+                                    end
+                                    mapper --> CTRL : listGreenSpaceDto
+                                deactivate mapper
+                           deactivate CTRL
+
+                           CTRL --> UI : listGreenSpaceDto
+
+                           deactivate CTRL
 
 
         UI -> Employee : shows list of green spaces
@@ -101,8 +143,20 @@ activate Employee
     Employee -> UI : submits data
     activate UI
 
-    UI -> CTRL : registerToDoEntry(greenSpace ,title, description, urgency, expectedDuration)
+    UI -> CTRL : registerToDoEntry(greenSpaceID ,title, description, urgency, expectedDuration)
     activate CTRL
+
+    activate CTRL
+
+            CTRL -> CTRL : searchForGreenSpaceID(greenSpaceID)
+            activate CTRL
+
+                CTRL -> listGreenSpace: greenSpace  = get(greenSpaceID)
+                activate listGreenSpace
+                deactivate listGreenSpace
+
+
+            deactivate CTRL
 
 
 
@@ -118,27 +172,19 @@ activate Employee
         PLAT --> CTRL: toDoListRepository
         deactivate PLAT
 
-    CTRL -> toDoListRepository : registerToDoEntry(greenSpace ,title, description, urgency, expectedDuration)
+    CTRL -> toDoListRepository** : registerToDoEntry(greenSpace ,title, description, urgency, expectedDuration)
       deactivate CTRL
     activate toDoListRepository
 
-    toDoListRepository -> GREEN** : create
+    toDoListRepository -> TODO** : create
 
     toDoListRepository -> toDoListRepository : addToDoEntry(toDoEntry)
-    activate toDoListRepository
 
     toDoListRepository -> toDoListRepository : validateToDoEntry(toDoEntry)
-    activate toDoListRepository
-
-    toDoListRepository --> toDoListRepository
-    deactivate toDoListRepository
-    toDoListRepository --> toDoListRepository
-    deactivate toDoListRepository
 
     toDoListRepository --> CTRL : toDoEntry
     deactivate toDoListRepository
 
-    activate CTRL
     CTRL --> UI : toDoEntry
     deactivate CTRL
 

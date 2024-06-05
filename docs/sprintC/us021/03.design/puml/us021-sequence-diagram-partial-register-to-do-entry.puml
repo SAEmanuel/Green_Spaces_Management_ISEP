@@ -7,39 +7,52 @@ title UI Sequence Diagram (SSD) - Register To-Do Entry
 
 autonumber
 
-
-participant ":ToDoListUI" as UI
 participant ":ToDoListController" as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "toDoListRepository\n:toDoListRepository" as toDoListRepository
+participant "toDoEntry\n:ToDoEntry" as TODO
 participant "greenSpace\n:GreenSpace" as GREEN
-
+participant "listGreenSpace\n:List<GreenSpace>" as listGreenSpace
 
 activate CTRL
 
-autonumber 32
-CTRL -> toDoListRepository : registerToDoEntry(greenSpace ,title, description, urgency, expectedDuration)
+            CTRL -> CTRL : searchForGreenSpaceID(greenSpaceID)
+            activate CTRL
+
+                CTRL -> listGreenSpace: greenSpace  = get(greenSpaceID)
+                activate listGreenSpace
+                deactivate listGreenSpace
+
+
+            deactivate CTRL
+
+
+
+        CTRL -> RepositorySingleton : getInstance()
+        activate RepositorySingleton
+
+        RepositorySingleton --> CTRL: repositories
+        deactivate RepositorySingleton
+
+        CTRL -> PLAT : getToDoListRepository()
+        activate PLAT
+
+        PLAT --> CTRL: toDoListRepository
+        deactivate PLAT
+
+CTRL -> listGreenSpace: greenSpace = get(greenSpaceID)
+activate listGreenSpace
+deactivate listGreenSpace
+
+CTRL -> toDoListRepository : registerToDoEntry(greenSpace, title, description, urgency, expectedDuration)
 activate toDoListRepository
-group Register To-Do Entry
-autonumber 32.1
-toDoListRepository -> GREEN** : create
+
+toDoListRepository -> TODO** : create
 toDoListRepository -> toDoListRepository : addToDoEntry(toDoEntry)
-activate toDoListRepository
 toDoListRepository -> toDoListRepository : validateToDoEntry(toDoEntry)
-activate toDoListRepository
-toDoListRepository --> toDoListRepository
-deactivate toDoListRepository
-toDoListRepository --> toDoListRepository
-deactivate toDoListRepository
 toDoListRepository --> CTRL : toDoEntry
-end
 deactivate toDoListRepository
 
-autonumber 33
-CTRL --> UI : toDoEntry
-deactivate CTRL
-
-deactivate UI
 
 @enduml

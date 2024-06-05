@@ -65,8 +65,6 @@ public class ToDoListController {
         return greenSpaceRepository.getGreenSpacesByResponsible(getResponsible());
     }
 
-
-
     public List<GreenSpaceDTO> getGreenSpaceDTOByResponsible(){
         return toDTO(getGreenSpacesByResponsible());
     }
