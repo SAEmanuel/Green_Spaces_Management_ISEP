@@ -45,7 +45,12 @@ public class AddGreenSpace_Controller {
         stage.show();
     }
 
-    public void changeToAssignTeam(ActionEvent event) {
+    public void changeToAssignTeam(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/assignTeamToAgendaTask.fxml")));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void changeToAssignVehicle(ActionEvent event) {
