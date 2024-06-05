@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 
+import javazoom.jl.player.Player;
 import pt.ipp.isep.dei.esoft.project.application.controller.CreateCollaboratorController;
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
@@ -8,6 +9,8 @@ import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +44,19 @@ public class CollaboratorUI implements Runnable {
                         "|         B i r t h d a y           |\n" +
                         "| ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ |\n" +
                         "|___________________________________|" + ANSI_RESET);
+
+
+                String path = "src/main/java/pt/ipp/isep/dei/esoft/project/domain/Extras/Sounds/happyBirthday.mp3";
+                try {
+                    FileInputStream fis = new FileInputStream(path);
+                    BufferedInputStream bis = new BufferedInputStream(fis);
+                    Player player = new Player(bis);
+
+                    player.play();
+                } catch (Exception e) {
+                    System.out.println("Music didn't play: " + e.getMessage());
+                    e.printStackTrace();
+                }
             }
 
         }
