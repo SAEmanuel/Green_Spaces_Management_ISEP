@@ -53,7 +53,12 @@ public class AddToDoEntry_Controller {
         stage.show();
     }
 
-    public void changeToAssignVehicle(ActionEvent event) {
+    public void changeToAssignVehicle(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/assignVehicleToAgendaTask.fxml")));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void changeToPsotponeTask(ActionEvent event) {
