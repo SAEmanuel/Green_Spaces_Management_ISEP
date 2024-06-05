@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class AssignVehicleToAgendaTask_Controller {
+public class PostponeTask_Controller {
 
     private Stage stage;
 
@@ -61,13 +61,14 @@ public class AssignVehicleToAgendaTask_Controller {
         stage.show();
     }
 
-    public void changeToPsotponeTask(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/postponeTask.fxml")));
+    public void changeToAssignVehicle(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/assignVehicleToAgendaTask.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
+
 
     public void changeToCancelTask(ActionEvent event) {
     }
