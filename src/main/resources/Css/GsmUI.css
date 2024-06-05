@@ -161,3 +161,65 @@
     -fx-border-width: 0px 0px 2px 0px;
     -fx-border-color: #41673c;
 }
+
+#form{
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-background-radius: 20;
+    -fx-effect: innershadow( gaussian, rgba( 0, 0, 0, 0.5 ), 20, 0.1, 5, 5);
+}
+
+#submit_btn{
+    -fx-background-color: rgb(48, 80, 37);
+    -fx-border-color: rgba(48, 80, 37, 0.80);
+    -fx-border-width: 3px 3px 3px 3px;
+    -fx-border-radius: 15;
+    -fx-text-fill: #fff;
+    -fx-cursor: hand;
+}
+
+
+#submit_btn:hover {
+    -fx-background-color: rgba(48, 80, 37, 0.78);
+    -fx-border-color: #EAEEF4;
+    -fx-translate-y: 2;
+    -fx-border-radius: 0;
+    -fx-border-width: 0px 0px 0px 0px;
+}
+
+#submit_btn:pressed{
+    -fx-border-color: #EAEEF4 ;
+    -fx-background-color: rgba(48, 80, 37, 0.93);
+
+}
+
+#clear_btn{
+    -fx-background-color: rgb(128, 36, 36);
+    -fx-border-color: rgba(128, 36, 36, 0.80);
+    -fx-border-width: 3px 3px 3px 3px;
+    -fx-border-radius: 15;
+    -fx-text-fill: #fff;
+    -fx-cursor: hand;
+}
+
+
+#clear_btn:hover {
+    -fx-background-color: rgba(128, 36, 36, 0.78);
+    -fx-border-color: #EAEEF4;
+    -fx-translate-y: 2;
+    -fx-border-radius: 0;
+    -fx-border-width: 0px 0px 0px 0px;
+}
+
+#clear_btn:pressed{
+    -fx-border-color: #EAEEF4 ;
+    -fx-background-color: rgba(128, 36, 36, 0.93);
+
+}
+
+.table-view{
+    -fx-background-color: transparent;
+    -fx-border-color: #304851;
+    -fx-border-radius: 8px;
+}
+
+

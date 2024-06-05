@@ -4,6 +4,8 @@ import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
 import pt.ipp.isep.dei.esoft.project.repository.GreenSpaceRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class GreenSpaceController {
@@ -69,5 +71,9 @@ public class GreenSpaceController {
      */
     public GreenSpace.Size[] getGreenSpacesSizes() {
         return GreenSpace.Size.values();
+    }
+
+    public List<GreenSpace> getAllGreenSpaces() {
+        return greenSpaceRepository.getGreenSpacesList();
     }
 }
