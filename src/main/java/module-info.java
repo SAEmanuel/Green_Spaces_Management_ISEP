@@ -12,5 +12,7 @@ module pt.ipp.isep.dei.esoft.project {
 
     opens pt.ipp.isep.dei.esoft.project.javaFX to javafx.fxml;
     exports pt.ipp.isep.dei.esoft.project.javaFX;
+    exports pt.ipp.isep.dei.esoft.project.javaFX.gsmMenu;
+    opens pt.ipp.isep.dei.esoft.project.javaFX.gsmMenu to javafx.fxml;
 
 }

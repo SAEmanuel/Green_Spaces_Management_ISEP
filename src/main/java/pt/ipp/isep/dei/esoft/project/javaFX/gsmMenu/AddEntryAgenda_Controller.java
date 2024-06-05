@@ -1,4 +1,4 @@
-package pt.ipp.isep.dei.esoft.project.javaFX;
+package pt.ipp.isep.dei.esoft.project.javaFX.gsmMenu;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class AddToDoEntry_Controller {
+public class AddEntryAgenda_Controller {
 
     private Stage stage;
 
@@ -30,20 +30,21 @@ public class AddToDoEntry_Controller {
 
     //------------------------------------ Options Side Bar --------------------------
     public void changeToAddGreenSpace(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/addGreenSpace.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/addGreenSpace.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-    public void changeToAddEntryAgenda(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/addEntryAgenda.fxml")));
+    public void changeToEntryToDoList(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/addToDoEntry.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
+
 
     public void changeToAssignTeam(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/assignTeamToAgendaTask.fxml")));

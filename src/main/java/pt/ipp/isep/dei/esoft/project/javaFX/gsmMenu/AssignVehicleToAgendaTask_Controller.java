@@ -1,4 +1,4 @@
-package pt.ipp.isep.dei.esoft.project.javaFX;
+package pt.ipp.isep.dei.esoft.project.javaFX.gsmMenu;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class AssignTeamToAgendaTask_Controller {
+public class AssignVehicleToAgendaTask_Controller {
 
     private Stage stage;
 
@@ -53,9 +53,8 @@ public class AssignTeamToAgendaTask_Controller {
         stage.show();
     }
 
-
-    public void changeToAssignVehicle(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/assignVehicleToAgendaTask.fxml")));
+    public void changeToAssignTeam(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/assignTeamToAgendaTask.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
