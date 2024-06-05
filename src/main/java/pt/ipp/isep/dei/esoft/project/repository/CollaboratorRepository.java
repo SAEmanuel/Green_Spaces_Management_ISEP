@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.domain.Extras.Inputs.Password;
+import pt.ipp.isep.dei.esoft.project.ui.Bootstrap;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -134,17 +135,4 @@ public class CollaboratorRepository implements Serializable {
         return Collaborator.DocType.values();
     }
 
-    public boolean changePassword(Collaborator collaborator, Password newPassword) {
-        System.out.println("Current Password: " + collaborator.getColabPassword());
-        System.out.println("New Password: " + newPassword);
-
-        if (collaborator.getColabPassword().equals(newPassword)) {
-            System.out.println(ANSI_BRIGHT_RED + "Your new password must be different from the old one!" + ANSI_RESET);
-        } else {
-            collaborator.setPassword(newPassword);
-            System.out.println("Password changed to: " + collaborator.getColabPassword());
-            return true;
-        }
-        return false;
-    }
 }

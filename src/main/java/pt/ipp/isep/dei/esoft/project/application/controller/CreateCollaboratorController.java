@@ -96,7 +96,4 @@ public class CreateCollaboratorController {
         return repositories.getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail();
     }
 
-    public boolean changePassword(Collaborator collaborator, Password newPassword) {
-        return collaboratorRepository.changePassword(collaborator,newPassword);
-    }
 }
