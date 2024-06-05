@@ -1,0 +1,84 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+
+participant ":AgendaController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "agendaRepository\n:AgendaRepository" as agendaRepository
+participant "teamRepository\n:TeamRepository" as teamRepository
+participant "sendEmail\n:SendEmail" as sendEmail
+participant "MusgoSublime" as MusgoSublime
+
+ -> CTRL : requestEntryInformation()
+activate CTRL
+
+CTRL -> RepositorySingleton : getInstance()
+activate RepositorySingleton
+
+RepositorySingleton --> CTRL: repositories
+deactivate RepositorySingleton
+
+
+
+CTRL -> PLAT : getTeamRepository()
+activate PLAT
+
+PLAT --> CTRL: teamRepository
+deactivate PLAT
+
+CTRL -> PLAT : getAgendaRepository()
+activate PLAT
+
+PLAT --> CTRL: AgendaRepository
+deactivate PLAT
+
+
+
+CTRL -> agendaRepository : getAgendaEntriesForResponsible()
+activate agendaRepository
+loop for agendaEntry in agenda
+    agendaRepository -> MusgoSublime : getResponsible()
+    activate MusgoSublime
+    MusgoSublime -> MusgoSublime : getResponsible()
+
+    activate MusgoSublime
+             MusgoSublime --> MusgoSublime : responsible
+            deactivate MusgoSublime
+
+        MusgoSublime --> agendaRepository : responsible
+    opt if agendaEntry.getResponsible().equals(responsible) && !agendaEntry.containsTeam(agendaEntry.getTeam())
+        deactivate MusgoSublime
+        agendaRepository --> agendaRepository : add to agendaEntryList
+    end
+    deactivate MusgoSublime
+
+end
+
+activate agendaRepository
+
+agendaRepository --> CTRL : agendaEntryList
+deactivate agendaRepository
+
+
+CTRL -> teamRepository : getListTeam()
+
+activate teamRepository
+
+teamRepository --> CTRL : teamList
+deactivate teamRepository
+
+
+CTRL -> sendEmail: getEmailServices()
+activate sendEmail
+
+sendEmail --> CTRL: emailServicesList
+deactivate sendEmail
+
+<-- CTRL  : agendaEntryList, teamList and emailServicesList
+
+@enduml

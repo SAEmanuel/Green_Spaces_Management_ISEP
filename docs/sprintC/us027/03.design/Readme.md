@@ -45,16 +45,8 @@ user story, but it is split in partial diagrams to better illustrate the interac
 
 It uses Interaction Occurrence (a.k.a. Interaction Use).
 
-![Sequence Diagram - split](svg/us008-sequence-diagram-split.svg)
-
-**Get Vehicle List Partial SD**
-
-![Sequence Diagram - Partial - Get Vehicle List](svg/us008-sequence-diagram-partial-get-vehicle-list.svg)
-
-**Generate CheckUp List Partial SD**
-
-![Sequence Diagram - Partial - Generate CheckUp List](svg/us008-sequence-diagram-partial-generate-checkup-list.svg)
+![Sequence Diagram - split](svg/us027-sequence-diagram-split_GetResponsible.svg)
 
 ## 3.3. Class Diagram (CD)
 
-![Class Diagram](svg/us008-class-diagram.svg)
+![Class Diagram](svg/us027-class-diagram.svg)
