@@ -299,6 +299,7 @@ This section provides an overview of the key features of MusgoSublime, a digital
   - Select the completed task.
   - Update the task status to "Completed" and save the changes.
 
+
 # Troubleshooting
 
 - **Problem identification**: Create a collaborator without jobs.
@@ -315,5 +316,72 @@ This section provides an overview of the key features of MusgoSublime, a digital
 
 - **Problem identification**: Creating an agenda without having a team.
 - **Solution**: Generate a team before creating an agenda, so that the agenda has a team registered with it.
+
+
+# FAQ - MusgoSublime
+
+### How do I register skills for collaborators in MusgoSublime?
+
+To register skills for collaborators:
+1. Access the application interface.
+2. Navigate to the Skills Registration section.
+3. View or add skills as needed.
+4. Confirm the entered data to save the changes.
+
+### How do I generate a team proposal automatically?
+
+To generate a team proposal automatically:
+1. Navigate to the Team Proposal Generator tool.
+2. Specify the criteria, including minimum and maximum team size and required skills.
+3. Click on the "Generate Proposal" button to create the team proposal.
+
+### How do I view a list of vehicles needing check-up in MusgoSublime?
+
+To view a list of vehicles needing check-up:
+1. Navigate to the Check-up Status page within the application.
+2. View the list of vehicles due for a check-up, along with their details.
+
+### How do I postpone an entry in the Agenda to a specific future date?
+
+To postpone an entry in the Agenda:
+1. Select the entry you wish to postpone.
+2. Choose the option to postpone or reschedule.
+3. Specify the new date for the entry.
+4. Confirm the changes to update the entry in the Agenda.
+
+### How do I record the completion of a task as a collaborator in MusgoSublime?
+
+To record the completion of a task as a collaborator:
+1. Access the application interface.
+2. Navigate to the list of tasks assigned to you.
+3. Select the task you have completed.
+
+
+### How do I register a new vehicle in MusgoSublime?
+
+To register a new vehicle:
+1. Go to the Vehicle Registration section.
+2. Enter the vehicle details, including brand, model, type, weight, and maintenance information.
+3. Save the vehicle information to complete the registration process.
+
+
+### How can I resolve login issues with MusgoSublime?
+
+If you experience login issues:
+1. Double-check your credentials for accuracy.
+2. Rewrite your password if necessary.
+3. Read all error messages.
+
+### What should I do if I encounter errors while using a specific feature in MusgoSublime?
+
+If you encounter errors with a specific feature:
+1. Make sure you are following the correct steps outlined in the user manual.
+
+### How can I get help or support for MusgoSublime?
+
+If you need assistance with MusgoSublime:
+1. Check the user manual or documentation provided within the application.
+
+
 
 
