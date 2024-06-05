@@ -10,6 +10,11 @@ import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_RESET
 public class SortGreenSpaces {
     private static Properties config;
 
+    /**
+     * Loads the configuration properties file.
+     *
+     * @throws IOException if there is an error reading the properties file
+     */
     private static void loadFileConfig() throws IOException {
         config = new Properties();
         try (FileInputStream fis = new FileInputStream("src/main/resources/config.properties")) {
@@ -17,6 +22,13 @@ public class SortGreenSpaces {
         }
     }
 
+    /**
+     * Sorts a list of GreenSpace objects based on the sorting methods specified in the configuration.
+     *
+     * @param greenSpaces the list of GreenSpace objects to sort
+     * @return the sorted list of GreenSpace objects, or null if no sorting method is found
+     * @throws IOException if there is an error loading the configuration
+     */
     public static List<GreenSpace> sortGreenSpaces( List<GreenSpace> greenSpaces) throws IOException {
         loadFileConfig();
         boolean sorted = false;
@@ -53,16 +65,34 @@ public class SortGreenSpaces {
         }
     }
 
+    /**
+     * Sorts a list of GreenSpace objects in ascending order by name.
+     *
+     * @param greenSpaces the list of GreenSpace objects to sort
+     * @return the sorted list of GreenSpace objects
+     */
     private static List<GreenSpace> ascendingName(List<GreenSpace> greenSpaces) {
         Collections.sort(greenSpaces, Comparator.comparing(GreenSpace::getName));
         return greenSpaces;
     }
 
+    /**
+     * Sorts a list of GreenSpace objects in descending order by name.
+     *
+     * @param greenSpaces the list of GreenSpace objects to sort
+     * @return the sorted list of GreenSpace objects
+     */
     private static List<GreenSpace> descendingName(List<GreenSpace> greenSpaces) {
         Collections.sort(greenSpaces, Comparator.comparing(GreenSpace::getName).reversed());
         return greenSpaces;
     }
 
+    /**
+     * Sorts a list of GreenSpace objects using the bubble sort algorithm by area.
+     *
+     * @param greenSpaces the list of GreenSpace objects to sort
+     * @return the sorted list of GreenSpace objects
+     */
     private static List<GreenSpace> bubbleSort(List<GreenSpace> greenSpaces) {
         List<GreenSpace> newGreenSpacesList = new ArrayList<>(greenSpaces);
         int n = newGreenSpacesList.size();
@@ -79,7 +109,12 @@ public class SortGreenSpaces {
         return newGreenSpacesList;
     }
 
-
+    /**
+     * Sorts a list of GreenSpace objects using the insertion sort algorithm by area.
+     *
+     * @param greenSpaces the list of GreenSpace objects to sort
+     * @return the sorted list of GreenSpace objects
+     */
     private static List<GreenSpace> insertionSort(List<GreenSpace> greenSpaces) {
         List<GreenSpace> newGreenSpacesList = new ArrayList<>(greenSpaces);
         int n = newGreenSpacesList.size();
@@ -99,7 +134,12 @@ public class SortGreenSpaces {
         return newGreenSpacesList;
     }
 
-
+    /**
+     * Retrieves the available sorting types from the configuration.
+     *
+     * @return a list of available sorting type names
+     * @throws IOException if there is an error loading the configuration
+     */
     public static List<String> getSortTypes() throws IOException {
         loadFileConfig();
         List<String> sortTypes = new ArrayList<>();
