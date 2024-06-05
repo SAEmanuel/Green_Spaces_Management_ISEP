@@ -67,28 +67,35 @@ public class RetrieveTasksUI implements Runnable {
      */
     private int requestCompletionTask() {
         Optional<List<AgendaEntry>> taskList = getController().requestPlannedColabTaskList(collaborator, startDate, endDate, filterSelection);
+        Optional<List<AgendaEntry>> possibleTaskList = getController().requestPossiblePlannedColabTaskList(collaborator, startDate, endDate, filterSelection);
         if (taskList.isPresent()) {
             Scanner scanner = new Scanner(System.in);
             int id;
-            printDataForPlanned();
             System.out.println();
 
             if (confirmation.equalsIgnoreCase("y")) {
-                while (true) {
-                    System.out.print("Select the task you want to choose: ");
-                    try {
-                        id = scanner.nextInt();
-                        if (id < 1 || id > taskList.get().size()) {
-                            System.out.printf(ANSI_BRIGHT_RED + "Invalid task id. Must be a number between 1 and %d.%n" + ANSI_RESET, taskList.get().size());
-                        } else {
-                            break;
+                if (possibleTaskList.isPresent()) {
+                    if (!possibleTaskList.get().isEmpty()) {
+                        printPossibleDataForPlanned();
+                        while (true) {
+                            System.out.print("Select the task you want to choose: ");
+                            try {
+                                id = scanner.nextInt();
+                                if (id < 1 || id > possibleTaskList.get().size()) {
+                                    System.out.printf(ANSI_BRIGHT_RED + "Invalid task id. Must be a number between 1 and %d.%n" + ANSI_RESET, possibleTaskList.get().size());
+                                } else {
+                                    break;
+                                }
+                            } catch (InputMismatchException e) {
+                                System.out.printf(ANSI_BRIGHT_RED + "Invalid task id. Must be a number between 1 and %d.%n" + ANSI_RESET, possibleTaskList.get().size());
+                                scanner.next();
+                            }
                         }
-                    } catch (InputMismatchException e) {
-                        System.out.printf(ANSI_BRIGHT_RED + "Invalid task id. Must be a number between 1 and %d.%n" + ANSI_RESET, taskList.get().size());
-                        scanner.next();
+                        return id - 1;
                     }
                 }
-                return id - 1;
+            } else {
+                printDataForPlanned();
             }
         }
         return -1;
@@ -239,6 +246,17 @@ public class RetrieveTasksUI implements Runnable {
         Optional<List<AgendaEntry>> plannedTaskList = getController().requestPlannedColabTaskList(collaborator, startDate, endDate, filterSelection);
         printList(plannedTaskList);
         if (plannedTaskList.isEmpty()) {
+            System.out.printf(ANSI_BRIGHT_RED + "No tasks assigned to you %s or for those filters!" + ANSI_RESET, collaborator.getName());
+        }
+    }
+
+    /**
+     * Prints the possible planned tasks to the console.
+     */
+    private void printPossibleDataForPlanned() {
+        Optional<List<AgendaEntry>> possiblePlannedTaskList = getController().requestPossiblePlannedColabTaskList(collaborator, startDate, endDate, filterSelection);
+        printList(possiblePlannedTaskList);
+        if (possiblePlannedTaskList.isEmpty()) {
             System.out.printf(ANSI_BRIGHT_RED + "No tasks assigned to you %s or for those filters!" + ANSI_RESET, collaborator.getName());
         }
     }

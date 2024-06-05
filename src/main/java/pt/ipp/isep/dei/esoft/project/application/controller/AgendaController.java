@@ -245,6 +245,14 @@ public class AgendaController {
     }
 
     /**
+     * Gets the status options available.
+     *
+     * @return An array of status options.
+     */
+    public AgendaEntry.Status[] getStatus() {
+        return agendaRepository.getStatus();
+    }
+    /**
      * Requests the list of tasks assigned to a collaborator.
      *
      * @param collaborator    The collaborator whose tasks are to be retrieved.
@@ -271,15 +279,6 @@ public class AgendaController {
     }
 
     /**
-     * Gets the status options available.
-     *
-     * @return An array of status options.
-     */
-    public AgendaEntry.Status[] getStatus() {
-        return agendaRepository.getStatus();
-    }
-
-    /**
      * Requests the list of tasks with changed status assigned to a collaborator.
      *
      * @param collaborator    The collaborator whose tasks are to be retrieved.
@@ -292,5 +291,18 @@ public class AgendaController {
      */
     public Optional<List<AgendaEntry>> requestChangedStatusTaskList(Collaborator collaborator, Data startDate, Data endDate, int filterSelection, String confirmation, int selectedTask) {
         return agendaRepository.changedTaskStatusList(collaborator, startDate, endDate, filterSelection, confirmation, selectedTask);
+    }
+
+    /**
+     * Requests the list of possible planned tasks assigned to a collaborator.
+     *
+     * @param collaborator    The collaborator whose tasks are to be retrieved.
+     * @param startDate       The start date of the task list.
+     * @param endDate         The end date of the task list.
+     * @param filterSelection The filter selection.
+     * @return The list of possible planned tasks assigned to the collaborator.
+     */
+    public Optional<List<AgendaEntry>> requestPossiblePlannedColabTaskList(Collaborator collaborator, Data startDate, Data endDate, int filterSelection) {
+        return agendaRepository.requestPossibleColabPlannedTaskList(collaborator, startDate, endDate, filterSelection);
     }
 }

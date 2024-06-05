@@ -70,6 +70,29 @@ public class AgendaRepository implements Serializable {
     }
 
     /**
+     * Requests the possible planned task list for a collaborator within a specified date range and filter selection.
+     * This method retrieves a list of planned tasks that have the potential to be marked as done, considering the provided
+     * collaborator, date range, and filter selection.
+     *
+     * @param collaborator    The collaborator whose tasks are being requested.
+     * @param startDate       The start date of the range within which tasks are being requested.
+     * @param endDate         The end date of the range within which tasks are being requested.
+     * @param filterSelection The filter selection used to determine which tasks to include in the list.
+     * @return An optional list of possible planned agenda entries for the specified collaborator within the given date range and filter selection.
+     *         If the list is empty, the optional will be empty as well.
+     */
+    public Optional<List<AgendaEntry>> requestPossibleColabPlannedTaskList(Collaborator collaborator, Data startDate, Data endDate, int filterSelection) {
+        Optional<List<AgendaEntry>> optionalValue = Optional.empty();
+
+        List<AgendaEntry> taskList = getPossibleDoneTaskPlannedList(collaborator, startDate, endDate, filterSelection);
+
+        if (taskPlannedListCreated(collaborator, startDate, endDate, filterSelection)) {
+            optionalValue = Optional.of(taskList);
+        }
+        return optionalValue;
+    }
+
+    /**
      * Checks if a planned task list was created for a collaborator within a date range and filter.
      *
      * @param collaborator    The collaborator.
@@ -94,20 +117,54 @@ public class AgendaRepository implements Serializable {
      */
     public List<AgendaEntry> getTaskPlannedList(Collaborator collaborator, Data startDate, Data endDate, int filterSelection) {
         List<AgendaEntry> plannedList = new ArrayList<>();
-        try {
 
-            if ((filterSelection - 1) == 1) {
-                for (AgendaEntry agendaEntry : agenda) {
+        if ((filterSelection - 1) == 1) {
+            for (AgendaEntry agendaEntry : agenda) {
+                try {
                     if (agendaEntry.getTeam().hasCollaborator(collaborator)
                             && agendaEntry.getStartingDate().isGreaterOrEquals(startDate)
                             && !agendaEntry.getStartingDate().isGreater(endDate)
                             && agendaEntry.getAgendaEntry().getStatus().equals("Planned")) {
                         plannedList.add(agendaEntry);
                     }
+                } catch (NullPointerException e) {
+                    System.out.print("");
+                }
+
+            }
+        }
+        return sortByStartDate(plannedList);
+    }
+
+    /**
+     * Retrieves a list of planned agenda entries for a collaborator within the specified date range and filter selection
+     * that have the potential to be marked as done. This method considers only those tasks that are currently planned and
+     * have not started yet, and are within the provided date range.
+     *
+     * @param collaborator    The collaborator for whom the tasks are being retrieved.
+     * @param startDate       The start date of the range within which tasks are being retrieved.
+     * @param endDate         The end date of the range within which tasks are being retrieved.
+     * @param filterSelection The filter selection used to determine which tasks to include in the list.
+     * @return A list of planned agenda entries for the specified collaborator within the given date range and filter selection,
+     *         which have the potential to be marked as done. The list is sorted by start date.
+     */
+    public List<AgendaEntry> getPossibleDoneTaskPlannedList(Collaborator collaborator, Data startDate, Data endDate, int filterSelection) {
+        List<AgendaEntry> plannedList = new ArrayList<>();
+
+        if ((filterSelection - 1) == 1) {
+            for (AgendaEntry agendaEntry : agenda) {
+                try {
+                    if (agendaEntry.getTeam().hasCollaborator(collaborator)
+                            && agendaEntry.getStartingDate().isGreaterOrEquals(startDate)
+                            && !agendaEntry.getStartingDate().isGreater(endDate)
+                            && agendaEntry.getAgendaEntry().getStatus().equals("Planned")
+                            && !agendaEntry.getStartingDate().isGreater(Data.currentDate())) {
+                        plannedList.add(agendaEntry);
+                    }
+                } catch (NullPointerException e) {
+                    System.out.print("");
                 }
             }
-        } catch (NullPointerException e) {
-            System.out.print("");
         }
         return sortByStartDate(plannedList);
     }
@@ -125,29 +182,29 @@ public class AgendaRepository implements Serializable {
      */
     public Optional<List<AgendaEntry>> changedTaskStatusList(Collaborator collaborator, Data startDate, Data endDate, int filterSelection, String confirmation, int selectedTask) {
         List<AgendaEntry> taskList = getTaskPlannedList(collaborator, startDate, endDate, filterSelection);
+        List<AgendaEntry> taskPossibleList = getPossibleDoneTaskPlannedList(collaborator, startDate, endDate, filterSelection);
 
-        if (confirmation.equalsIgnoreCase("y") && !taskList.isEmpty() && selectedTask >= 0 && selectedTask < taskList.size()) {
+        if (confirmation.equalsIgnoreCase("y") && !taskPossibleList.isEmpty() && selectedTask >= 0 && selectedTask < taskPossibleList.size()) {
 
-            taskList.get(selectedTask).setReal_end_Date(Data.currentDate());
-            taskList.get(selectedTask).getAgendaEntry().setStatus(String.valueOf(AgendaEntry.Status.DONE));
+            taskPossibleList.get(selectedTask).setReal_end_Date(Data.currentDate());
+            taskPossibleList.get(selectedTask).getAgendaEntry().setStatus(String.valueOf(AgendaEntry.Status.DONE));
 
-            if (!taskList.get(selectedTask).getVehicles().isEmpty() || taskList.get(selectedTask).getTeam() != null) {
+            if (!taskPossibleList.get(selectedTask).getVehicles().isEmpty() || taskPossibleList.get(selectedTask).getTeam() != null) {
                 agendaBackUp.get(selectedTask).setReal_end_Date(Data.currentDate());
-                List<Vehicle> removedVehicles = new ArrayList<>(taskList.get(selectedTask).getVehicles());
-                taskList.get(selectedTask).getVehicles().clear();
+                List<Vehicle> removedVehicles = new ArrayList<>(taskPossibleList.get(selectedTask).getVehicles());
+                taskPossibleList.get(selectedTask).getVehicles().clear();
                 agendaBackUp.get(selectedTask).addVehicles(removedVehicles);
-                Team removedTeam = taskList.get(selectedTask).getTeam();
-                taskList.get(selectedTask).setTeam(null);
+                Team removedTeam = taskPossibleList.get(selectedTask).getTeam();
+                taskPossibleList.get(selectedTask).setTeam(null);
                 agendaBackUp.get(selectedTask).addTeam(removedTeam);
 
             }
 
-            return Optional.of(taskList);
+            return Optional.of(taskPossibleList);
         }
 
         return Optional.empty();
     }
-
 
     /**
      * Gets the task list for a collaborator within a date range and filter.
@@ -164,39 +221,53 @@ public class AgendaRepository implements Serializable {
         switch (filterSelection - 1) {
             case 0:
                 for (AgendaEntry agendaEntry : agenda) {
-                    if (agendaEntry.getTeam().hasCollaborator(collaborator)
-                            && agendaEntry.getStartingDate().isGreaterOrEquals(startDate)
-                            && !agendaEntry.getStartingDate().isGreater(endDate)) {
-
-                        taskList.add(agendaEntry);
+                    try {
+                        if (agendaEntry.getTeam().hasCollaborator(collaborator)
+                                && agendaEntry.getStartingDate().isGreaterOrEquals(startDate)
+                                && !agendaEntry.getStartingDate().isGreater(endDate)) {
+                            taskList.add(agendaEntry);
+                        }
+                    } catch (NullPointerException e) {
+                        System.out.print("");
                     }
                 }
                 for (AgendaEntry agendaEntry : agendaBackUp) {
-                    if (agendaEntry.getTeam().hasCollaborator(collaborator)
-                            && agendaEntry.getStartingDate().isGreaterOrEquals(startDate)
-                            && !agendaEntry.getStartingDate().isGreater(endDate)) {
-
-                        taskList.add(agendaEntry);
+                    try {
+                        if (agendaEntry.getTeam().hasCollaborator(collaborator)
+                                && agendaEntry.getStartingDate().isGreaterOrEquals(startDate)
+                                && !agendaEntry.getStartingDate().isGreater(endDate) && !taskList.contains(agendaEntry)) {
+                            taskList.add(agendaEntry);
+                        }
+                    } catch (NullPointerException e) {
+                        System.out.print("");
                     }
                 }
                 break;
             case 2:
                 for (AgendaEntry agendaEntry : agenda) {
-                    if (agendaEntry.getTeam().hasCollaborator(collaborator)
-                            && agendaEntry.getStartingDate().isGreaterOrEquals(startDate)
-                            && !agendaEntry.getStartingDate().isGreater(endDate)
-                            && agendaEntry.getAgendaEntry().getStatus().equals(String.valueOf(AgendaEntry.Status.CANCELED))) {
-                        taskList.add(agendaEntry);
+                    try {
+                        if (agendaEntry.getTeam().hasCollaborator(collaborator)
+                                && agendaEntry.getStartingDate().isGreaterOrEquals(startDate)
+                                && !agendaEntry.getStartingDate().isGreater(endDate)
+                                && agendaEntry.getAgendaEntry().getStatus().equals(String.valueOf(AgendaEntry.Status.CANCELED))) {
+                            taskList.add(agendaEntry);
+                        }
+                    } catch (NullPointerException e) {
+                        System.out.print("");
                     }
                 }
                 break;
             case 3:
                 for (AgendaEntry agendaEntry : agendaBackUp) {
-                    if (agendaEntry.getTeam().hasCollaborator(collaborator)
-                            && agendaEntry.getStartingDate().isGreaterOrEquals(startDate)
-                            && !agendaEntry.getStartingDate().isGreater(endDate)
-                            && agendaEntry.getAgendaEntry().getStatus().equals(String.valueOf(AgendaEntry.Status.DONE))) {
-                        taskList.add(agendaEntry);
+                    try {
+                        if (agendaEntry.getTeam().hasCollaborator(collaborator)
+                                && agendaEntry.getStartingDate().isGreaterOrEquals(startDate)
+                                && !agendaEntry.getStartingDate().isGreater(endDate)
+                                && agendaEntry.getAgendaEntry().getStatus().equals(String.valueOf(AgendaEntry.Status.DONE))) {
+                            taskList.add(agendaEntry);
+                        }
+                    } catch (NullPointerException e) {
+                        System.out.print("");
                     }
                 }
                 break;
@@ -282,6 +353,13 @@ public class AgendaRepository implements Serializable {
         return success;
     }
 
+    /**
+     * Adds a backup copy of the provided agenda entry to the backup agenda list.
+     *
+     * @param entry The agenda entry to be added to the backup list.
+     * @return true if the backup copy of the agenda entry was successfully added to the backup list,
+     *         false otherwise (e.g., if the provided entry is not valid for backup).
+     */
     public boolean addAgendaBackup(AgendaEntry entry) {
         boolean success = false;
         AgendaEntry entryCopy = new AgendaEntry(entry.getAgendaEntry(), entry.getStartingDate());
@@ -291,7 +369,6 @@ public class AgendaRepository implements Serializable {
         }
         return success;
     }
-
 
     /**
      * Validates an agenda entry.
@@ -308,6 +385,15 @@ public class AgendaRepository implements Serializable {
         return true;
     }
 
+    /**
+     * Validates whether the provided agenda entry is unique in the backup agenda list.
+     * This method checks if an agenda entry with the same details as the provided entry already exists
+     * in the backup agenda list.
+     *
+     * @param entry The agenda entry to be validated.
+     * @return true if the provided agenda entry is unique and can be added to the backup list,
+     *         false if there is already an identical entry in the backup list.
+     */
     public boolean validateBackUp(AgendaEntry entry) {
         for (AgendaEntry agendaEntry : agendaBackUp) {
             if (agendaEntry.equals(entry)) {
@@ -438,11 +524,18 @@ public class AgendaRepository implements Serializable {
         return agenda.get(agendaEntryID);
     }
 
+    /**
+     * Retrieves an agenda entry from the backup agenda list based on its ID and responsible collaborator.
+     * This method retrieves the agenda entry with the specified ID from the backup agenda list for the given responsible collaborator.
+     *
+     * @param agendaEntryID The ID of the agenda entry to retrieve.
+     * @param responsible   The responsible collaborator associated with the agenda entry.
+     * @return The agenda entry with the specified ID and responsible collaborator from the backup agenda list.
+     */
     public AgendaEntry getAgendaBackUpByID(int agendaEntryID, String responsible) {
         List<AgendaEntry> agenda = getAgendaEntriesBackUp(responsible);
         return agenda.get(agendaEntryID);
     }
-
 
     /**
      * Gets the agenda entries for a specific responsible collaborator.
@@ -454,15 +547,31 @@ public class AgendaRepository implements Serializable {
         return getAgendaEntries(responsible, agenda);
     }
 
+    /**
+     * Retrieves the backup agenda entries associated with a specific responsible collaborator.
+     * This method returns a list of backup agenda entries for the given responsible collaborator.
+     *
+     * @param responsible The responsible collaborator for whom to retrieve backup agenda entries.
+     * @return A list of backup agenda entries associated with the specified responsible collaborator.
+     */
     public List<AgendaEntry> getAgendaEntriesBackUp(String responsible) {
+        // Delegate the retrieval of backup agenda entries to the private method
         return getAgendaEntries(responsible, agendaBackUp);
     }
 
+    /**
+     * Retrieves agenda entries associated with a specific responsible collaborator from a given list of agenda entries.
+     * This method filters and returns agenda entries for the specified responsible collaborator from the provided list,
+     * excluding those that are already associated with a team and those with a status of 'Done'.
+     *
+     * @param responsible The responsible collaborator for whom to retrieve agenda entries.
+     * @param agenda      The list of agenda entries to filter.
+     * @return A list of agenda entries associated with the specified responsible collaborator.
+     */
     private List<AgendaEntry> getAgendaEntries(String responsible, List<AgendaEntry> agenda) {
         List<AgendaEntry> agendaEntries = new ArrayList<>();
         for (AgendaEntry agendaEntry : agenda) {
             if (agendaEntry.getTeam() != null) {
-
                 if (agendaEntry.getResponsible().equals(responsible) && !agendaEntry.containsTeam(agendaEntry.getTeam()) &&
                         !agendaEntry.getAgendaEntry().getStatus().equals(String.valueOf(AgendaEntry.Status.DONE))) {
                     agendaEntries.add(agendaEntry);
@@ -475,7 +584,6 @@ public class AgendaRepository implements Serializable {
         return agendaEntries;
     }
 
-
     /**
      * Gets all agenda entries.
      *
@@ -484,7 +592,6 @@ public class AgendaRepository implements Serializable {
     public List<AgendaEntry> getAgendaEntries() {
         return agenda;
     }
-
 
     /**
      * Assigns a vehicle to an agenda task.
@@ -497,16 +604,33 @@ public class AgendaRepository implements Serializable {
         return agendaTask.addVehicle(vehicle);
     }
 
+    /**
+     * Retrieves a list of teams that are currently in use in the agenda.
+     * This method returns a list of teams associated with agenda entries.
+     *
+     * @return A list of teams currently in use in the agenda.
+     */
     public List<Team> getTeamsInUse() {
+        // Initialize a list to store teams currently in use
         List<Team> teams = new ArrayList<>();
+        // Iterate through the agenda entries
         for (AgendaEntry agendaEntry : agenda) {
+            // Check if the agenda entry has a team associated with it
             if (agendaEntry.getTeam() != null) {
+                // Add the team to the list of teams in use
                 teams.add(agendaEntry.getTeam());
             }
         }
+        // Return the list of teams in use
         return teams;
     }
 
+    /**
+     * Retrieves a list of teams that are available for assignment in the agenda.
+     * This method returns a list of teams that are not currently in use in the agenda.
+     *
+     * @return A list of teams available for assignment in the agenda.
+     */
     public List<Team> getTeams() {
         teamRepository = getTeamRepository();
         List<Team> totalList = teamRepository.getTeamList();
@@ -518,10 +642,15 @@ public class AgendaRepository implements Serializable {
                 possibleOptions.add(team);
             }
         }
-        System.out.println(possibleOptions.size());
         return possibleOptions;
     }
 
+    /**
+     * Retrieves the team repository.
+     * This method ensures that the team repository is initialized and returns it.
+     *
+     * @return The team repository.
+     */
     private TeamRepository getTeamRepository() {
         if (teamRepository == null) {
             Repositories repositories = Repositories.getInstance();
@@ -529,6 +658,5 @@ public class AgendaRepository implements Serializable {
         }
         return teamRepository;
     }
-
 
 }
