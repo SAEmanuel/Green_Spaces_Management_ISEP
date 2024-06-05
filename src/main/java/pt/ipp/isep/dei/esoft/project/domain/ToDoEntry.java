@@ -64,19 +64,19 @@ public class ToDoEntry implements Serializable {
         LOW {
             @Override
             public String toString() {
-                return ANSI_SPRING_GREEN + "Low" + ANSI_RESET;
+                return  "Low";
             }
         },
         MEDIUM {
             @Override
             public String toString() {
-                return ANSI_YELLOW + "Medium" + ANSI_RESET;
+                return  "Medium";
             }
         },
         HIGH {
             @Override
             public String toString() {
-                return ANSI_FIREBRICK + "High" + ANSI_RESET;
+                return"High";
             }
         },
     }
@@ -158,6 +158,14 @@ public class ToDoEntry implements Serializable {
         return expectedDuration < 0;
     }
 
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getUrgency() {
+        return urgency;
+    }
 
     @Override
     public String toString() {
