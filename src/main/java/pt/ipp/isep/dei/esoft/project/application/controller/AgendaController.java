@@ -202,8 +202,12 @@ public class AgendaController {
      *
      * @return The list of agenda entries.
      */
-    public List<AgendaEntry> getAgendaEntriesForResponsible() {
-        return agendaRepository.getAgendaEntriesForResponsible(getResponsible());
+    public List<AgendaEntry> getAgendaEntriesForResponsibleTeam() {
+        return agendaRepository.getAgendaEntriesForResponsibleTeam(getResponsible());
+    }
+
+    public List<AgendaEntry> getAgendaEntriesForResponsibleVehicle() {
+        return agendaRepository.getAgendaEntriesForResponsibleVehicle(getResponsible());
     }
 
     /**
@@ -212,7 +216,7 @@ public class AgendaController {
      * @return The list of teams.
      */
     public List<Team> getTeams() {
-        return agendaRepository.getTeams();
+        return teamRepository.getTeamList();
     }
 
     /**
@@ -221,7 +225,7 @@ public class AgendaController {
      * @return The list of all agenda entries.
      */
     public List<AgendaEntry> getAgendaEntries() {
-        return agendaRepository.getAgendaEntries();
+        return agendaRepository.getAgendaEntriesTeam();
     }
 
     /**

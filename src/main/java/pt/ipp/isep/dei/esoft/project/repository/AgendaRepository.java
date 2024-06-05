@@ -418,7 +418,7 @@ public class AgendaRepository implements Serializable {
         if (agendaEntry.getAgendaEntry().getStatus().equals(STATUS_DONE)) {
             throw new IllegalArgumentException("Done agenda entry - can't postpone this task.");
         }
-        List<AgendaEntry> agendaTasks = getAgendaEntriesForResponsible(agendaEntry.getResponsible());
+        List<AgendaEntry> agendaTasks = getAgendaEntriesForResponsibleTeam(agendaEntry.getResponsible());
         AgendaEntry taskInAgenda = getTaskByResponsible(agendaTaskID, agendaTasks);
 
         if (!validPostponeDate(taskInAgenda, postponeDate)) {
@@ -459,7 +459,7 @@ public class AgendaRepository implements Serializable {
      * @return true if the task was cancelled successfully, false otherwise.
      */
     public boolean cancelTask(int agendaTaskID, String responsible) {
-        List<AgendaEntry> agendaTasks = getAgendaEntriesForResponsible(responsible);
+        List<AgendaEntry> agendaTasks = getAgendaEntriesForResponsibleTeam(responsible);
         AgendaEntry taskInAgenda = getTaskByResponsible(agendaTaskID, agendaTasks);
 
         if (validatesStatus(taskInAgenda)) {
@@ -520,7 +520,7 @@ public class AgendaRepository implements Serializable {
      * @return The agenda entry.
      */
     public AgendaEntry getAgendaEntryByID(int agendaEntryID, String responsible) {
-        List<AgendaEntry> agenda = getAgendaEntriesForResponsible(responsible);
+        List<AgendaEntry> agenda = getAgendaEntriesForResponsibleTeam(responsible);
         return agenda.get(agendaEntryID);
     }
 
@@ -543,8 +543,12 @@ public class AgendaRepository implements Serializable {
      * @param responsible The responsible collaborator.
      * @return A list of agenda entries.
      */
-    public List<AgendaEntry> getAgendaEntriesForResponsible(String responsible) {
-        return getAgendaEntries(responsible, agenda);
+    public List<AgendaEntry> getAgendaEntriesForResponsibleTeam(String responsible) {
+        return getAgendaEntriesTeam(responsible, agenda);
+    }
+
+    public List<AgendaEntry> getAgendaEntriesForResponsibleVehicle(String responsible) {
+        return getAgendaEntriesVehicle(responsible, agenda);
     }
 
     /**
@@ -556,7 +560,7 @@ public class AgendaRepository implements Serializable {
      */
     public List<AgendaEntry> getAgendaEntriesBackUp(String responsible) {
         // Delegate the retrieval of backup agenda entries to the private method
-        return getAgendaEntries(responsible, agendaBackUp);
+        return getAgendaEntriesTeam(responsible, agendaBackUp);
     }
 
     /**
@@ -568,7 +572,7 @@ public class AgendaRepository implements Serializable {
      * @param agenda      The list of agenda entries to filter.
      * @return A list of agenda entries associated with the specified responsible collaborator.
      */
-    private List<AgendaEntry> getAgendaEntries(String responsible, List<AgendaEntry> agenda) {
+    private List<AgendaEntry> getAgendaEntriesTeam(String responsible, List<AgendaEntry> agenda) {
         List<AgendaEntry> agendaEntries = new ArrayList<>();
         for (AgendaEntry agendaEntry : agenda) {
             if (agendaEntry.getTeam() != null) {
@@ -584,12 +588,22 @@ public class AgendaRepository implements Serializable {
         return agendaEntries;
     }
 
+    private List<AgendaEntry> getAgendaEntriesVehicle(String responsible, List<AgendaEntry> agenda) {
+        List<AgendaEntry> agendaEntries = new ArrayList<>();
+        for (AgendaEntry agendaEntry : agenda) {
+            if (agendaEntry.getVehicles() != null && agendaEntry.getResponsible().equals(responsible) &&
+                    !agendaEntry.getAgendaEntry().getStatus().equals(String.valueOf(AgendaEntry.Status.DONE)))
+                agendaEntries.add(agendaEntry);
+        }
+        return agendaEntries;
+    }
+
     /**
      * Gets all agenda entries.
      *
      * @return A list of all agenda entries.
      */
-    public List<AgendaEntry> getAgendaEntries() {
+    public List<AgendaEntry> getAgendaEntriesTeam() {
         return agenda;
     }
 
@@ -623,26 +637,6 @@ public class AgendaRepository implements Serializable {
         }
         // Return the list of teams in use
         return teams;
-    }
-
-    /**
-     * Retrieves a list of teams that are available for assignment in the agenda.
-     * This method returns a list of teams that are not currently in use in the agenda.
-     *
-     * @return A list of teams available for assignment in the agenda.
-     */
-    public List<Team> getTeams() {
-        teamRepository = getTeamRepository();
-        List<Team> totalList = teamRepository.getTeamList();
-        List<Team> usedTeams = getTeamsInUse();
-        List<Team> possibleOptions = new ArrayList<>();
-
-        for (Team team : totalList) {
-            if (!usedTeams.contains(team)) {
-                possibleOptions.add(team);
-            }
-        }
-        return possibleOptions;
     }
 
     /**

@@ -133,25 +133,4 @@ public class SortGreenSpaces {
 
         return newGreenSpacesList;
     }
-
-    /**
-     * Retrieves the available sorting types from the configuration.
-     *
-     * @return a list of available sorting type names
-     * @throws IOException if there is an error loading the configuration
-     */
-    public static List<String> getSortTypes() throws IOException {
-        loadFileConfig();
-        List<String> sortTypes = new ArrayList<>();
-
-        for (String key : config.stringPropertyNames()) {
-            if (key.startsWith("sorting.")) {
-                String value = config.getProperty(key);
-                if(!value.equalsIgnoreCase("false"))
-                    sortTypes.add(value);
-            }
-        }
-
-        return sortTypes;
-    }
 }
