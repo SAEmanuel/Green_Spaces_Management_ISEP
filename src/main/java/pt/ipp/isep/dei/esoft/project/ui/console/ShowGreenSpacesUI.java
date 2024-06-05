@@ -7,6 +7,7 @@ import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
 import pt.ipp.isep.dei.esoft.project.domain.Team;
 
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -51,20 +52,29 @@ public class ShowGreenSpacesUI implements Runnable {
             return false;
 
         int listSize = sortTypes.size();
-        int answerList = -2;
         Scanner input = new Scanner(System.in);
 
-        while (answerList < 0 || answerList > listSize) {
-            displaySortTypesListOptions(sortTypes);
-            System.out.print("Select a team: ");
-            answerList = input.nextInt();
-        }
+        int answer;
+        displaySortTypesListOptions(sortTypes);
+        System.out.println("Select a Team: ");
+        while (true) {
+            try {
+                answer = input.nextInt();
+                if (answer <= listSize && answer > 0) {
+                    sortType = sortTypes.get(answer-1);
+                    return true;
+                }
+                else
+                    if(answer == 0)
+                        return false;
+                    else
+                        System.out.print(ANSI_BRIGHT_YELLOW + "Invalid ID, enter a new one: " + ANSI_RESET);
 
-        if (answerList != 0) {
-            sortType = sortTypes.get(answerList-1);
-            return true;
-        }else
-            return false;
+            } catch (InputMismatchException e) {
+                System.out.print(ANSI_BRIGHT_RED + "Invalid ID number! Enter a new one: " + ANSI_RESET);
+                input.nextLine();
+            }
+        }
     }
 
     private void displaySortTypesListOptions(List<String> sortTypes) {
