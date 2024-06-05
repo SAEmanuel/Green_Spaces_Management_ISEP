@@ -65,12 +65,12 @@
                               <Image url="@Images/mail_pro.png" />
                            </image>
                         </ImageView>
-                        <Label layoutX="92.0" layoutY="34.0" text="Name" textFill="WHITE">
+                        <Label fx:id="name_label" layoutX="92.0" layoutY="34.0" prefHeight="14.0" prefWidth="191.0" text="Jorge" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="11.0" />
                            </font>
                         </Label>
-                        <Label layoutX="92.0" layoutY="48.0" text="Email" textFill="WHITE">
+                        <Label fx:id="email_label" layoutX="92.0" layoutY="48.0" prefHeight="14.0" prefWidth="191.0" text="Email" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="11.0" />
                            </font>
@@ -104,7 +104,7 @@
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <Label layoutX="160.0" layoutY="84.0" prefHeight="44.0" prefWidth="544.0" text="name">
+            <Label fx:id="name_mid" layoutX="160.0" layoutY="84.0" prefHeight="44.0" prefWidth="544.0" text="name">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
