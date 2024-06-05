@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import pt.ipp.isep.dei.esoft.project.ui.Bootstrap;
 
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * JavaFX App
@@ -22,10 +23,10 @@ public class App extends Application {
         Bootstrap bootstrap = new Bootstrap();
         bootstrap.run();
 
-        Parent root = FXMLLoader.load(getClass().getResource("/mainMenu.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/mainMenu.fxml")));
         Scene scene = new Scene(root,1000,600);
         stage.setTitle("MusgoSublime | GS Managment");
-        Image icon = new Image(getClass().getResourceAsStream("/Images/Logo_black.png"));
+        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Images/Logo_black.png")));
         stage.getIcons().add(icon);
         stage.setScene(scene);
         stage.setResizable(false);
