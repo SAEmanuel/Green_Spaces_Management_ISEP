@@ -29,9 +29,7 @@ public class ShowGreenSpacesUI implements Runnable {
     public void run() {
         System.out.println("\n\n--- Current managed green spaces ------------------------");
 
-        if(displaySortTypesList()){
-            submitData();
-        }
+        submitData();
     }
 
     private void submitData() {
@@ -45,46 +43,5 @@ public class ShowGreenSpacesUI implements Runnable {
         }
     }
 
-    private boolean displaySortTypesList() {
-        List<String> sortTypes = controller.getSortTypes();
 
-        if(sortTypes.isEmpty())
-            return false;
-
-        int listSize = sortTypes.size();
-        Scanner input = new Scanner(System.in);
-
-        int answer;
-        displaySortTypesListOptions(sortTypes);
-        System.out.println("Select a Team: ");
-        while (true) {
-            try {
-                answer = input.nextInt();
-                if (answer <= listSize && answer > 0) {
-                    sortType = sortTypes.get(answer-1);
-                    return true;
-                }
-                else
-                    if(answer == 0)
-                        return false;
-                    else
-                        System.out.print(ANSI_BRIGHT_YELLOW + "Invalid ID, enter a new one: " + ANSI_RESET);
-
-            } catch (InputMismatchException e) {
-                System.out.print(ANSI_BRIGHT_RED + "Invalid ID number! Enter a new one: " + ANSI_RESET);
-                input.nextLine();
-            }
-        }
-    }
-
-    private void displaySortTypesListOptions(List<String> sortTypes) {
-        int i = 1;
-        for (String s : sortTypes) {
-            System.out.println("• Type: " + s);
-            System.out.println(ANSI_PURPLE + "   Option -> [" + i + "]" + ANSI_RESET + "\n");
-            i++;
-        }
-        System.out.println();
-        System.out.println("• Type: " + " - Exit" + "\n" + ANSI_PURPLE + "   Option -> [" + 0 + "]" + ANSI_RESET);
-    }
 }

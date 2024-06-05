@@ -17,33 +17,30 @@ public class SortGreenSpaces {
         }
     }
 
-    public static List<GreenSpace> sortGreenSpaces( String sortingMethod, List<GreenSpace> greenSpaces) throws IOException {
+    public static List<GreenSpace> sortGreenSpaces( List<GreenSpace> greenSpaces) throws IOException {
         loadFileConfig();
         boolean sorted = false;
 
         for (String key : config.stringPropertyNames()) {
             if (key.startsWith("sorting.")) {
                 String value = config.getProperty(key);
-
-                if(value.equalsIgnoreCase(sortingMethod)){
-                    switch (sortingMethod){
-                        case "Ascending By Name":
-                            greenSpaces = ascendingName(greenSpaces);
-                            sorted= true;
-                            break;
-                        case "Descending By Name":
-                            greenSpaces = descendingName(greenSpaces);
-                            sorted= true;
-                            break;
-                        case "Bubble Sort":
-                            greenSpaces = bubbleSort(greenSpaces);
-                            sorted= true;
-                            break;
-                        case "Insertion Sort":
-                            greenSpaces = insertionSort(greenSpaces);
-                            sorted= true;
-                            break;
-                    }
+                switch (value) {
+                    case "Ascending By Name":
+                        greenSpaces = ascendingName(greenSpaces);
+                        sorted = true;
+                        break;
+                    case "Descending By Name":
+                        greenSpaces = descendingName(greenSpaces);
+                        sorted = true;
+                        break;
+                    case "Bubble Sort":
+                        greenSpaces = bubbleSort(greenSpaces);
+                        sorted = true;
+                        break;
+                    case "Insertion Sort":
+                        greenSpaces = insertionSort(greenSpaces);
+                        sorted = true;
+                        break;
                 }
             }
         }
@@ -71,8 +68,8 @@ public class SortGreenSpaces {
         int n = newGreenSpacesList.size();
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
-                if (newGreenSpacesList.get(j).getArea() < newGreenSpacesList.get(j + 1).getArea()) {
-                    // Swap greenSpaces[j] and greenSpaces[j+1] for descending order
+                if (newGreenSpacesList.get(j).getArea() > newGreenSpacesList.get(j + 1).getArea()) {
+                    // Swap greenSpaces[j] and greenSpaces[j+1] for ascending order
                     GreenSpace temp = newGreenSpacesList.get(j);
                     newGreenSpacesList.set(j, newGreenSpacesList.get(j + 1));
                     newGreenSpacesList.set(j + 1, temp);
@@ -81,6 +78,7 @@ public class SortGreenSpaces {
         }
         return newGreenSpacesList;
     }
+
 
     private static List<GreenSpace> insertionSort(List<GreenSpace> greenSpaces) {
         List<GreenSpace> newGreenSpacesList = new ArrayList<>(greenSpaces);
@@ -91,7 +89,7 @@ public class SortGreenSpaces {
 
             // Move elements of arr[0..i-1], that are greater than key, to one position ahead
             // of their current position
-            while (j >= 0 && newGreenSpacesList.get(j).getArea() < key.getArea()) {
+            while (j >= 0 && newGreenSpacesList.get(j).getArea() > key.getArea()) {
                 newGreenSpacesList.set(j + 1, newGreenSpacesList.get(j));
                 j = j - 1;
             }
@@ -100,6 +98,7 @@ public class SortGreenSpaces {
 
         return newGreenSpacesList;
     }
+
 
     public static List<String> getSortTypes() throws IOException {
         loadFileConfig();
