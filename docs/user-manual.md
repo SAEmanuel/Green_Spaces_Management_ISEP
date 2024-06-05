@@ -6,7 +6,7 @@
 
 This manual serves as a comprehensive guide for green space managers and administrators utilizing MusgoSublime, a digital tool created to streamline the management and maintenance of green spaces.
 
-MusgoSublime is a digital software product developed to simplify upkeep of green areas. It provides a diverse variety of features and functionalities to assist users in organizing and maintaining green spaces.
+MusgoSublime is a digital software product developed to simplify the upkeep of green areas. It provides a diverse variety of features and functionalities to assist users in organizing and maintaining green spaces.
 
 Within this manual, readers will discover detailed instructions on how to effectively utilize the various features and tools offered by the MusgoSublime application. From fundamental navigation to advanced functionalities, each aspect of the application is extensively explained to ensure users can understand its full potential.
 
@@ -46,29 +46,6 @@ MusgoSublime is structured around a modular architecture, with each module cater
 
 By combining these modules, MusgoSublime offers a solution for effective green space management, empowering users to maintain and enhance the quality of green areas for the benefit of communities and the environment.
 
-```plaintext
-  +-------------------------+
-  |      User Portal        |
-  +-------------------------+
-              |
-              v
-  +-------------------------+
-  |  Administrative Module  |
-  +-------------------------+
-              |
-              v
-  +-------------------------+
-  |   Resource Management   |
-  +-------------------------+
-              |
-              v
-  +-------------------------+
-  | Reporting and Analytics |
-  +-------------------------+
-
-```
-
-
 # Features
 
 This section provides an overview of the key features of MusgoSublime, a digital tool designed for the management and maintenance of green spaces. Each feature corresponds to a user story and is targeted at specific user roles within the application.
@@ -82,7 +59,6 @@ This section provides an overview of the key features of MusgoSublime, a digital
   - Confirm the entered data.
   - Upon confirmation, the system displays a success message.
 
-
 ## 2. Register Job for Collaborators | Human Resources Manager
 
 - **Description**: This feature enables the Human Resources Manager to register a job that a collaborator needs to have.
@@ -92,7 +68,6 @@ This section provides an overview of the key features of MusgoSublime, a digital
   - Provide the name.
   - Confirm the entered data.
   - Upon submission, the system confirms the successful addition of the job.
-
 
 ## 3. Register Collaborator with Job and Characteristics | Human Resources Manager
 
@@ -104,7 +79,6 @@ This section provides an overview of the key features of MusgoSublime, a digital
   - Confirm the entered data and job selection.
   - Upon confirmation, the system displays a success message indicating the completion of the operation.
 
-
 ## 4. Assign Skills to Collaborators | Human Resources Manager
 
 - **Description**: This feature enables the Human Resources Manager to assign one or more skills to a collaborator.
@@ -114,7 +88,6 @@ This section provides an overview of the key features of MusgoSublime, a digital
   - Choose the relevant skills from the provided list.
   - Confirm the selection to save the assignment.
 
-
 ## 5. Generate Team Proposal Automatically | Human Resources Manager
 
 - **Description**: This feature allows the Human Resources Manager to automatically generate a proposal for a team based on specified criteria.
@@ -123,15 +96,13 @@ This section provides an overview of the key features of MusgoSublime, a digital
   - Specify the minimum and maximum team size and the required set of skills.
   - Click on the "Generate Proposal" button to create a team proposal.
 
-
 ## 6. Register Vehicle Details | Fleet Manager
 
 - **Description**: This feature enables the Fleet Manager to register a new vehicle along with its details such as brand, model, type, weight, and maintenance information.
 - **Instructions**:
   - Navigate to the Vehicle Registration section within the application.
-  - Enter the required vehicle details, including brand, model, type, weight, maintenance frequency and last check-up.
+  - Enter the required vehicle details, including brand, model, type, weight, maintenance frequency, and last check-up.
   - Save the vehicle information.
-
 
 ## 7. Register Vehicle Check-up | Fleet Manager
 
@@ -142,11 +113,188 @@ This section provides an overview of the key features of MusgoSublime, a digital
   - Enter the details of the check-up, such as the date and current mileage.
   - Save the check-up record.
 
-
 ## 8. View List of Vehicles Needing Check-up | Fleet Manager
+
 - **Description**: This feature enables the Fleet Manager to view a list of vehicles that require a check-up.
 - **Instructions**:
   - Navigate to the Check-up Status page within the application.
   - View the list of vehicles due for a check-up, along with their details.
 
-These features are essential for the efficient operation of the MusgoSublime application and are targeted at those responsible for managing green spaces. Each feature is now accompanied by clear instructions on how to use it within the application.
+## 9. Analyze Water Consumption Costs | Green Space Manager (GSM)
+
+- **Description**: This feature allows the GSM to analyze water consumption costs for specific green spaces.
+- **Instructions**:
+  - Load the "water consumption.csv" file containing daily water consumption records.
+  - Specify the year, time period (StartMonth, EndMonth), and park identification.
+  - Generate a bar plot representing monthly water consumption.
+  - Specify the number of parks to be analyzed and park identification to calculate the average monthly water consumption costs.
+  - Compare statistical indicators (mean, median, standard deviation, coefficient of skewness) between the park with the highest and lowest water consumption.
+  - Create frequency tables, check for outliers, and generate histograms with specified class numbers.
+
+## 10. Analyze Equipment Usage | Green Space Manager (GSM)
+
+- **Description**: This feature allows the GSM to understand user preferences regarding park equipment usage.
+- **Instructions**:
+  - Load the "EquipmentUsed.csv" file containing equipment usage records from 1000 users.
+  - Create a pie chart representing the percentage usage of each piece of equipment.
+
+## 11. Analyze Park Use by Age Group | Green Space Manager (GSM)
+
+- **Description**: This feature allows the GSM to analyze park usage by different age groups.
+- **Instructions**:
+  - Load the "Inquiry.csv" file containing survey responses.
+  - Identify the type of each variable (age range, recommendation, monthly visits).
+  - Calculate the proportion of users in each age group who would recommend the park.
+  - Generate box plots for each age group regarding monthly park visits and draw conclusions from the results.
+
+## 12. Import Water Supply Data | Green Space Manager (GSM)
+
+- **Description**: This feature allows the GSM to import a CSV file containing water supply points and distances.
+- **Instructions**:
+  - Load the CSV file with lines containing Water Point X, Water Point Y, and Distance.
+  - Import the data into a unified data structure representing possible routes for laying pipes.
+
+## 13. Optimize Irrigation Routes | Green Space Manager (GSM)
+
+- **Description**: This feature enables the GSM to optimize the routes for irrigation systems to minimize cost.
+- **Instructions**:
+  - Apply an algorithm to determine the minimum cost routes for laying pipes.
+  - Ensure all water points are adequately supplied.
+  - Output the subgraph with routes and costs to a CSV file.
+  - Visualize the input and output graphs using a suitable package (e.g., Graphviz).
+
+## 14. Test Algorithm Efficiency | Quality Assurance Manager (QAM)
+
+- **Description**: This feature allows the QAM to test the algorithm's efficiency with varying input sizes.
+- **Instructions**:
+  - Run tests on 30 input files of variable sizes.
+  - Record the execution time for each input size in a CSV file.
+  - Generate a graph showing the execution time as a function of input size.
+  - Present the results in a CSV file and an image file with the execution time graph.
+
+## 15. Predict Monthly Water Cost for New Park | Green Space Manager (GSM)
+
+- **Description**: This feature enables the GSM to predict the average monthly cost of water consumption for a new park based on its size.
+- **Instructions**:
+  - Load the "water consumption updated.csv" file and the "Area.csv" file containing park areas.
+  - Apply a linear regression model using park area as the independent variable and average monthly water cost as the response variable.
+  - Assess the feasibility of the linear model.
+  - Predict the average monthly water cost for a new 55-hectare park.
+
+## 16. Polynomial Regression for Execution Time | Green Space Manager (GSM)
+
+- **Description**: This feature allows the GSM to apply polynomial regression to determine the best fit line for execution time data.
+- **Instructions**:
+  - Load the data from US14 or the "solution us14.csv" file.
+  - Apply polynomial regression to find the best fit line.
+  - Analyze the results and interpret the polynomial regression model.
+
+## 17. Plan Emergency Evacuation Routes | Green Space Manager (GSM)
+
+- **Description**: This feature enables the GSM to plan emergency evacuation routes to an Assembly Point.
+- **Instructions**:
+  - Import a CSV file containing a weighted matrix of costs between points.
+  - Use an algorithm to determine the shortest route from any sign to the Assembly Point.
+  - Output the routes and path costs to a CSV file.
+  - Visualize the input graph and output paths.
+
+## 18. Plan Multiple Emergency Evacuation Routes | Green Space Manager (GSM)
+
+- **Description**: This feature allows the GSM to plan emergency evacuation routes to the closest Assembly Point.
+- **Instructions**:
+  - Import a CSV file containing a weighted matrix of costs between points.
+  - Use an algorithm to determine the shortest route to the closest Assembly Point.
+  - Output the routes and path costs to a CSV file.
+  - Visualize the input graph and output paths.
+
+## 19. Analyze Worst-Case Time Complexity | Quality Assurance Manager (QAM)
+
+- **Description**: This feature allows the QAM to analyze the worst-case time complexity of developed procedures.
+- **Instructions**:
+  - Analyze the worst-case time complexity for the algorithms developed in US13, US17, and US18.
+  - Present the algorithms in pseudo-code.
+  - Document the theoretical framework and complexity analysis in a PDF.
+
+## 20. Register Green Space | Green Space Manager (GSM)
+
+- **Description**: This feature allows the GSM to register a new green space, specifying its type and area.
+- **Instructions**:
+  - Access the Green Space Registration section within the application.
+  - Provide details such as the name, type (garden, medium-sized park, large-sized park), and area.
+  - Save the new green space.
+
+## 21. Add New Entry to To-Do List | Green Space Manager (GSM)
+
+- **Description**: This feature enables the GSM to add a new entry to the To-Do list.
+- **Instructions**:
+  - Go to the To-Do List section within the application.
+  - Select the green space for the new entry from a list of managed spaces.
+  - Provide the details for the new entry.
+  - Save the entry to the To-Do list.
+
+## 22. Add New Entry to Agenda | Green Space Manager (GSM)
+
+- **Description**: This feature allows the GSM to add a new entry to the Agenda.
+- **Instructions**:
+  - Navigate to the Agenda section within the application.
+  - Select the green space associated with the new entry.
+  - Ensure the new entry exists in the To-Do list.
+  - Provide details for the new entry and save it to the Agenda.
+
+## 23. Assign Team to Agenda Entry | Green Space Manager (GSM)
+
+- **Description**: This feature enables the GSM to assign a team to an entry in the Agenda.
+- **Instructions**:
+  - Access the Agenda section within the application.
+  - Select the entry to which a team needs to be assigned.
+  - Choose team members from a list and save the assignment.
+  - Send a notification message to all team members using a configured email service.
+
+## 24. Postpone Agenda Entry | Green Space Manager (GSM)
+
+- **Description**: This feature allows the GSM to postpone an entry in the Agenda to a specific future date.
+- **Instructions**:
+  - Access the Agenda section within the application.
+  - Select the entry that needs to be postponed.
+  - Choose a new date for the entry and save the changes.
+
+## 25. Cancel Agenda Entry | Green Space Manager (GSM)
+
+- **Description**: This feature enables the GSM to cancel an entry in the Agenda.
+- **Instructions**:
+  - Access the Agenda section within the application.
+  - Select the entry that needs to be canceled.
+  - Change the state of the entry to "Canceled" without deleting it.
+
+## 26. Assign Vehicles to Agenda Entry | Green Space Manager (GSM)
+
+- **Description**: This feature allows the GSM to assign one or more vehicles to an entry in the Agenda.
+- **Instructions**:
+  - Go to the Agenda section within the application.
+  - Select the entry to which vehicles need to be assigned.
+  - Choose vehicles from a list and save the assignment.
+
+## 27. List Managed Green Spaces | Green Space Manager (GSM)
+
+- **Description**: This feature enables the GSM to list all green spaces managed by them.
+- **Instructions**:
+  - Access the Managed Green Spaces section within the application.
+  - View the list of green spaces, sorted by size in descending order.
+  - The sorting algorithm used should be configurable, with at least two options available.
+
+## 28. Consult Assigned Tasks | Collaborator
+
+- **Description**: This feature allows a collaborator to consult tasks assigned to them between two dates.
+- **Instructions**:
+  - Access the Assigned Tasks section within the application.
+  - Specify the date range for the task consultation.
+  - View the list of tasks, sorted by date.
+  - Filter the tasks by status if necessary.
+
+## 29. Record Task Completion | Collaborator
+
+- **Description**: This feature allows a collaborator to record the completion of a task.
+- **Instructions**:
+  - Navigate to the Assigned Tasks section within the application.
+  - Select the completed task.
+  - Update the task status to "Completed" and save the changes.
