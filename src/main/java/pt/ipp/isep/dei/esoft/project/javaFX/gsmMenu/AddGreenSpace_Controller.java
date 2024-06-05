@@ -77,6 +77,11 @@ public class AddGreenSpace_Controller {
         stage.show();
     }
 
-    public void changeToMyGreenSpaces(ActionEvent event) {
+    public void changeToMyGreenSpaces(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/myGreenSpaces.fxml")));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }

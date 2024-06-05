@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class PostponeTask_Controller {
+public class MyGreenSpace_Controller {
 
     private Stage stage;
 
@@ -69,6 +69,15 @@ public class PostponeTask_Controller {
         stage.show();
     }
 
+
+    public void changeToPsotponeTask(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/postponeTask.fxml")));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public void changeToCancelTask(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cancelTask.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -77,12 +86,5 @@ public class PostponeTask_Controller {
         stage.show();
     }
 
-    public void changeToMyGreenSpaces(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/myGreenSpaces.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
 }
 
