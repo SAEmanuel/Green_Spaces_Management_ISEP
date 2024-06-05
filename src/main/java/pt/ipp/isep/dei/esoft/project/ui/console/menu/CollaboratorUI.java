@@ -16,6 +16,7 @@ import java.util.List;
 
 public class CollaboratorUI implements Runnable {
     private CreateCollaboratorController controller;
+    private static final String PATH = "src/main/java/pt/ipp/isep/dei/esoft/project/domain/Extras/Sounds/happyBirthday.mp3";
 
     public CollaboratorUI() {
         this.controller = new CreateCollaboratorController();
@@ -45,18 +46,9 @@ public class CollaboratorUI implements Runnable {
                         "| ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ |\n" +
                         "|___________________________________|" + ANSI_RESET);
 
+                playSong();
 
-                String path = "src/main/java/pt/ipp/isep/dei/esoft/project/domain/Extras/Sounds/happyBirthday.mp3";
-                try {
-                    FileInputStream fis = new FileInputStream(path);
-                    BufferedInputStream bis = new BufferedInputStream(fis);
-                    Player player = new Player(bis);
 
-                    player.play();
-                } catch (Exception e) {
-                    System.out.println("Music didn't play: " + e.getMessage());
-                    e.printStackTrace();
-                }
             }
 
         }
@@ -82,5 +74,18 @@ public class CollaboratorUI implements Runnable {
             }
         }
         return null;
+    }
+
+    private void playSong() {
+        try {
+            FileInputStream fis = new FileInputStream(PATH);
+            BufferedInputStream bis = new BufferedInputStream(fis);
+            Player player = new Player(bis);
+
+            player.play();
+        } catch (Exception e) {
+            System.out.println("Music didn't play: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }
