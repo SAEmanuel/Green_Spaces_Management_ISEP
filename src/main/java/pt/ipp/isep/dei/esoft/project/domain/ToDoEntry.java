@@ -28,7 +28,6 @@ public class ToDoEntry implements Serializable {
         this.expectedDuration = expectedDuration;
         this.status = DEFAULT_STATUS;
         this.responsible = greenSpace.getResponsible();
-
     }
 
     public void setStatus(String status) {
@@ -166,6 +165,11 @@ public class ToDoEntry implements Serializable {
     public Urgency getUrgency() {
         return Urgency.values()[urgency];
     }
+
+    public String getParkName(){
+        return greenSpace.getName();
+    }
+
 
     @Override
     public String toString() {
