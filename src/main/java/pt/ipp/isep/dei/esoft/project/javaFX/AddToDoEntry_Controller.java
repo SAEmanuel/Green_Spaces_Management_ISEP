@@ -22,12 +22,21 @@ public class AddToDoEntry_Controller {
     }
 
 
-    public void changeToEntryToDoList(ActionEvent event) {
-    }
-    public void changeToAddEntryAgenda(ActionEvent event) {
+
+
+
+
+
+    //------------------------------------ Options Side Bar --------------------------
+    public void changeToAddGreenSpace(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/addGreenSpace.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
-    public void changeToCancelTask(ActionEvent event) {
+    public void changeToAddEntryAgenda(ActionEvent event) {
     }
 
     public void changeToAssignTeam(ActionEvent event) {
@@ -37,6 +46,9 @@ public class AddToDoEntry_Controller {
     }
 
     public void changeToPsotponeTask(ActionEvent event) {
+    }
+
+    public void changeToCancelTask(ActionEvent event) {
     }
 
     public void changeToMyGreenSpaces(ActionEvent event) {

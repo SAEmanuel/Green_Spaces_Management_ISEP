@@ -45,7 +45,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Button>
-            <CheckBox layoutX="108.0" layoutY="315.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Remember Me" textFill="WHITE">
+            <CheckBox fx:id="rememberMe" layoutX="108.0" layoutY="315.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Remember Me" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="10.0" />
                </font>

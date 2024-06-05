@@ -8,6 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import pt.ipp.isep.dei.esoft.project.ui.Bootstrap;
 
 import java.io.IOException;
 
@@ -18,6 +19,9 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        Bootstrap bootstrap = new Bootstrap();
+        bootstrap.run();
+
         Parent root = FXMLLoader.load(getClass().getResource("/mainMenu.fxml"));
         Scene scene = new Scene(root,1000,600);
         stage.setTitle("MusgoSublime | GS Managment");

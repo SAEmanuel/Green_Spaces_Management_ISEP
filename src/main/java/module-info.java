@@ -8,6 +8,7 @@ module pt.ipp.isep.dei.esoft.project {
     requires jlayer;
     requires org.apache.commons.lang3;
     requires java.logging;
+    requires java.prefs;
 
     opens pt.ipp.isep.dei.esoft.project.javaFX to javafx.fxml;
     exports pt.ipp.isep.dei.esoft.project.javaFX;

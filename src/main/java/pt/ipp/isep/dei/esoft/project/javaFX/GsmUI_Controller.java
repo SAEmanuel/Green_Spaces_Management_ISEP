@@ -35,16 +35,25 @@ public class GsmUI_Controller {
     }
 
 
-    public void changeToEntryToDoList(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/addToDoEntry.fxml"));
+
+
+
+
+
+
+
+
+    //------------------------------------ Options Side Bar --------------------------
+    public void changeToAddGreenSpace(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/addGreenSpace.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-    public void changeToAddGreenSpace(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/addGreenSpace.fxml"));
+    public void changeToEntryToDoList(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/addToDoEntry.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -54,9 +63,6 @@ public class GsmUI_Controller {
     public void changeToAddEntryAgenda(ActionEvent event) {
     }
 
-    public void changeToCancelTask(ActionEvent event) {
-    }
-
     public void changeToAssignTeam(ActionEvent event) {
     }
 
@@ -64,6 +70,9 @@ public class GsmUI_Controller {
     }
 
     public void changeToPsotponeTask(ActionEvent event) {
+    }
+
+    public void changeToCancelTask(ActionEvent event) {
     }
 
     public void changeToMyGreenSpaces(ActionEvent event) {

@@ -17,11 +17,11 @@
          <children>
             <AnchorPane fx:id="side_anchorpane" prefHeight="625.0" prefWidth="316.0" stylesheets="@Css/GsmUI.css">
                <children>
-                  <Button layoutX="29.0" layoutY="138.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="254.0" stylesheets="@Css/GsmUI.css" text="Add Green Space" textAlignment="CENTER">
+                  <Button layoutX="29.0" layoutY="138.0" mnemonicParsing="false" onAction="#changeToAddGreenSpace" prefHeight="39.0" prefWidth="254.0" stylesheets="@Css/GsmUI.css" text="Add Green Space" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font></Button>
-                  <Button layoutX="29.0" layoutY="198.0" mnemonicParsing="false" onAction="#changeToEntryToDoList" prefHeight="39.0" prefWidth="254.0" style="-fx-border-width: 0px 0px 4px 0px; -fx-border-color: #fff;" stylesheets="@Css/GsmUI.css" text="Add Entry in ToDoList" textAlignment="CENTER">
+                  <Button layoutX="29.0" layoutY="198.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="254.0" style="-fx-border-width: 0px 0px 4px 0px; -fx-border-color: #fff;" stylesheets="@Css/GsmUI.css" text="Add Entry in ToDoList" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
