@@ -76,5 +76,9 @@ public class ToDoListController {
         return toDoMapper.listToDto(greenSpaceList);
     }
 
+    public List<ToDoEntry> getToDoEntries() {
+        return toDoListRepository.getToDoList();
+    }
+
 
 }
