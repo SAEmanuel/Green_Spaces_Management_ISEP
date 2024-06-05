@@ -298,3 +298,22 @@ This section provides an overview of the key features of MusgoSublime, a digital
   - Navigate to the Assigned Tasks section within the application.
   - Select the completed task.
   - Update the task status to "Completed" and save the changes.
+
+# Troubleshooting
+
+- **Problem identification**: Create a collaborator without jobs.
+- **Solution**: Create a job before creating a collaborator, so that the job can be given to the collaborator during the creation.
+
+
+- **Problem identification**: Assign skills without collaborators.
+- **Solution**: Create a collaborator before assigning a skill to it, since it is impossible to assign a skill to anything else.
+
+
+- **Problem identification**: Generate teams without collaborators.
+- **Solution**: Create a collaborator before generating a team, since it is impossible to generate a team without at least one collaborator.
+
+
+- **Problem identification**: Creating an agenda without having a team.
+- **Solution**: Generate a team before creating an agenda, so that the agenda has a team registered with it.
+
+

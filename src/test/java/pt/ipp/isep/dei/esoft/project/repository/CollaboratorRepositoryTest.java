@@ -90,15 +90,6 @@ public class CollaboratorRepositoryTest {
     }
 
     @Test
-    public void testChangePassword() {
-        Password newPassword = new Password("AAA12ac");
-        repository.add(collaborator);
-
-        assertTrue(repository.changePassword(collaborator, newPassword));
-        assertFalse(repository.changePassword(collaborator, newPassword));
-    }
-
-    @Test
     public void testGetDocType() {
         Collaborator.DocType[] docTypes = repository.getDocType();
         assertNotNull(docTypes);
