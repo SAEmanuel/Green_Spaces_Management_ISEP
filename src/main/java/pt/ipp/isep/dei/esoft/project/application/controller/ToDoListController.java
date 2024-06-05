@@ -1,8 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
 import pt.ipp.isep.dei.esoft.project.application.DTOS.GreenSpaceDTO;
-import pt.ipp.isep.dei.esoft.project.application.DTOS.ToDoEntryDTO;
-import pt.ipp.isep.dei.esoft.project.application.Mappers.AgendaMapper;
 import pt.ipp.isep.dei.esoft.project.application.Mappers.ToDoMapper;
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.*;
@@ -43,9 +41,12 @@ public class ToDoListController {
     // ---- GET REPOSITORY ------------------------------
 
     public Optional<ToDoEntry> registerToDoEntry(int greenSpaceID, String title, String description, int urgency, int expectedDuration) {
-
-        GreenSpace greenSpace = getGreenSpacesByResponsible().get(greenSpaceID);
+        GreenSpace greenSpace = searchForGreenSpaceID(greenSpaceID);
         return toDoListRepository.registerToDoEntry(greenSpace, title, description, urgency, expectedDuration);
+    }
+
+    private GreenSpace searchForGreenSpaceID(int greenSpaceID) {
+        return getGreenSpacesByResponsible().get(greenSpaceID);
     }
 
     public List<GreenSpace> getGreenSpaces() {
@@ -66,7 +67,7 @@ public class ToDoListController {
 
 
 
-    public List<GreenSpaceDTO> getToDoListDTOForResponsible(){
+    public List<GreenSpaceDTO> getGreenSpaceDTOByResponsible(){
         return toDTO(getGreenSpacesByResponsible());
     }
 

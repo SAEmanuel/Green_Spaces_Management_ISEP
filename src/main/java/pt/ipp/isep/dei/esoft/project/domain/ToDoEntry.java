@@ -15,7 +15,6 @@ public class ToDoEntry implements Serializable {
     private int expectedDuration;
     private String status;
     private final String responsible;
-
     private static final int DAYS_LIMIT = 730; //DOIS ANOS
     private static final String DEFAULT_STATUS = "Pending";
 

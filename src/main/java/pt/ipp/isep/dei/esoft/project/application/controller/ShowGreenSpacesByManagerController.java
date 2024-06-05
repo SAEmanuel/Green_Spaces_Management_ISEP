@@ -38,20 +38,13 @@ public class ShowGreenSpacesByManagerController {
         }
 
         try {
-            greenSpaces = sortGreenSpaces.sortGreenSpaces( sortOrder, greenSpaces);
+            greenSpaces = sortGreenSpaces.sortGreenSpaces(greenSpaces);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         return greenSpaces;
     }
 
-    public List<String> getSortTypes(){
-        try {
-            return sortGreenSpaces.getSortTypes();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
     //------------------------------ Extra Methods ---------------
     private String getResponsible() {
         return repositories.getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail();

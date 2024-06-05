@@ -56,7 +56,7 @@ public class AgendaEntry implements Serializable {
      * @param starting_Date The starting date of the agenda entry.
      */
     public AgendaEntry(ToDoEntry agendaEntry, Data starting_Date) {
-        validationAgendaEntry(starting_Date);
+//        validationAgendaEntry(starting_Date);
 
         this.agendaEntry = agendaEntry;
         agendaEntry.setStatus(String.valueOf(Status.PLANNED));
@@ -73,20 +73,20 @@ public class AgendaEntry implements Serializable {
      *
      * @param startingDate The starting date to validate.
      */
-    private void validationAgendaEntry(Data startingDate) {
-        validateDate(startingDate);
-    }
+//    private void validationAgendaEntry(Data startingDate) {
+//        validateDate(startingDate);
+//    }
 
     /**
      * Validates the given date.
      *
      * @param startingDate The date to validate.
      */
-    private void validateDate(Data startingDate) {
-        if (!startingDate.isGraterThanCurrentDate()) {
-            throw new IllegalArgumentException("Start date must be greater than the current date.");
-        }
-    }
+//    private void validateDate(Data startingDate) {
+//        if (!startingDate.isGraterThanCurrentDate()) {
+//            throw new IllegalArgumentException("Start date must be greater than the current date.");
+//        }
+//    }
 
     /**
      * Calculates the end date based on the starting date and the expected duration of the to-do entry.
@@ -216,10 +216,6 @@ public class AgendaEntry implements Serializable {
         return vehicles;
     }
 
-    public void removeAllVehicles() {
-        vehicles.clear();
-    }
-
     /**
      * Adds a vehicle to the list of vehicles assigned to this agenda entry.
      *
@@ -275,15 +271,6 @@ public class AgendaEntry implements Serializable {
         return new AgendaEntry(agendaEntry, starting_Date);
     }
 
-    public Team removeTeam() {
-        Team removedTeam = this.team;
-        this.team = null;
-        return removedTeam;
-    }
-
-    public void removeVehicle(Vehicle vehicle) {
-        this.vehicles.remove(vehicle);
-    }
 
     /**
      * Returns a string representation of the agenda entry.

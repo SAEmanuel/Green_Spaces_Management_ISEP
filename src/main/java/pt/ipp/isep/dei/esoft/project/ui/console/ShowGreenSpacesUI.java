@@ -7,6 +7,7 @@ import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
 import pt.ipp.isep.dei.esoft.project.domain.Team;
 
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -28,9 +29,7 @@ public class ShowGreenSpacesUI implements Runnable {
     public void run() {
         System.out.println("\n\n--- Current managed green spaces ------------------------");
 
-        if(displaySortTypesList()){
-            submitData();
-        }
+        submitData();
     }
 
     private void submitData() {
@@ -44,37 +43,5 @@ public class ShowGreenSpacesUI implements Runnable {
         }
     }
 
-    private boolean displaySortTypesList() {
-        List<String> sortTypes = controller.getSortTypes();
 
-        if(sortTypes.isEmpty())
-            return false;
-
-        int listSize = sortTypes.size();
-        int answerList = -2;
-        Scanner input = new Scanner(System.in);
-
-        while (answerList < 0 || answerList > listSize) {
-            displaySortTypesListOptions(sortTypes);
-            System.out.print("Select a team: ");
-            answerList = input.nextInt();
-        }
-
-        if (answerList != 0) {
-            sortType = sortTypes.get(answerList-1);
-            return true;
-        }else
-            return false;
-    }
-
-    private void displaySortTypesListOptions(List<String> sortTypes) {
-        int i = 1;
-        for (String s : sortTypes) {
-            System.out.println("• Type: " + s);
-            System.out.println(ANSI_PURPLE + "   Option -> [" + i + "]" + ANSI_RESET + "\n");
-            i++;
-        }
-        System.out.println();
-        System.out.println("• Type: " + " - Exit" + "\n" + ANSI_PURPLE + "   Option -> [" + 0 + "]" + ANSI_RESET);
-    }
 }
