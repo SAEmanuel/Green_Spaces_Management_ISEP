@@ -212,7 +212,7 @@ public class AgendaController {
      * @return The list of teams.
      */
     public List<Team> getTeams() {
-        return teamRepository.getTeamList();
+        return agendaRepository.getTeams();
     }
 
     /**
@@ -247,9 +247,9 @@ public class AgendaController {
     /**
      * Requests the list of tasks assigned to a collaborator.
      *
-     * @param collaborator   The collaborator whose tasks are to be retrieved.
-     * @param startDate      The start date of the task list.
-     * @param endDate        The end date of the task list.
+     * @param collaborator    The collaborator whose tasks are to be retrieved.
+     * @param startDate       The start date of the task list.
+     * @param endDate         The end date of the task list.
      * @param filterSelection The filter selection.
      * @return The list of tasks assigned to the collaborator.
      */
@@ -260,9 +260,9 @@ public class AgendaController {
     /**
      * Requests the list of planned tasks assigned to a collaborator.
      *
-     * @param collaborator   The collaborator whose tasks are to be retrieved.
-     * @param startDate      The start date of the task list.
-     * @param endDate        The end date of the task list.
+     * @param collaborator    The collaborator whose tasks are to be retrieved.
+     * @param startDate       The start date of the task list.
+     * @param endDate         The end date of the task list.
      * @param filterSelection The filter selection.
      * @return The list of planned tasks assigned to the collaborator.
      */
@@ -282,12 +282,12 @@ public class AgendaController {
     /**
      * Requests the list of tasks with changed status assigned to a collaborator.
      *
-     * @param collaborator   The collaborator whose tasks are to be retrieved.
-     * @param startDate      The start date of the task list.
-     * @param endDate        The end date of the task list.
+     * @param collaborator    The collaborator whose tasks are to be retrieved.
+     * @param startDate       The start date of the task list.
+     * @param endDate         The end date of the task list.
      * @param filterSelection The filter selection.
-     * @param confirmation   The confirmation status.
-     * @param selectedTask   The selected task ID.
+     * @param confirmation    The confirmation status.
+     * @param selectedTask    The selected task ID.
      * @return The list of tasks with changed status assigned to the collaborator.
      */
     public Optional<List<AgendaEntry>> requestChangedStatusTaskList(Collaborator collaborator, Data startDate, Data endDate, int filterSelection, String confirmation, int selectedTask) {

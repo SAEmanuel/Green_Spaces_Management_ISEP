@@ -14,6 +14,7 @@ public class AgendaRepository implements Serializable {
 
     private List<AgendaEntry> agenda;
     private List<AgendaEntry> agendaBackUp;
+    private TeamRepository teamRepository;
 
 
     private static final String STATUS_CANCELLED = "Canceled";
@@ -93,15 +94,20 @@ public class AgendaRepository implements Serializable {
      */
     public List<AgendaEntry> getTaskPlannedList(Collaborator collaborator, Data startDate, Data endDate, int filterSelection) {
         List<AgendaEntry> plannedList = new ArrayList<>();
-        if ((filterSelection - 1) == 1) {
-            for (AgendaEntry agendaEntry : agenda) {
-                if (agendaEntry.getTeam().hasCollaborator(collaborator)
-                        && agendaEntry.getStartingDate().isGreaterOrEquals(startDate)
-                        && !agendaEntry.getStartingDate().isGreater(endDate)
-                        && agendaEntry.getAgendaEntry().getStatus().equals("Planned")) {
-                    plannedList.add(agendaEntry);
+        try {
+
+            if ((filterSelection - 1) == 1) {
+                for (AgendaEntry agendaEntry : agenda) {
+                    if (agendaEntry.getTeam().hasCollaborator(collaborator)
+                            && agendaEntry.getStartingDate().isGreaterOrEquals(startDate)
+                            && !agendaEntry.getStartingDate().isGreater(endDate)
+                            && agendaEntry.getAgendaEntry().getStatus().equals("Planned")) {
+                        plannedList.add(agendaEntry);
+                    }
                 }
             }
+        } catch (NullPointerException e) {
+            System.out.print("");
         }
         return sortByStartDate(plannedList);
     }
@@ -125,11 +131,13 @@ public class AgendaRepository implements Serializable {
             taskList.get(selectedTask).setReal_end_Date(Data.currentDate());
             taskList.get(selectedTask).getAgendaEntry().setStatus(String.valueOf(AgendaEntry.Status.DONE));
 
-            if (!taskList.get(selectedTask).getVehicles().isEmpty() && taskList.get(selectedTask).getTeam() != null) {
+            if (!taskList.get(selectedTask).getVehicles().isEmpty() || taskList.get(selectedTask).getTeam() != null) {
+                agendaBackUp.get(selectedTask).setReal_end_Date(Data.currentDate());
                 List<Vehicle> removedVehicles = new ArrayList<>(taskList.get(selectedTask).getVehicles());
                 taskList.get(selectedTask).getVehicles().clear();
                 agendaBackUp.get(selectedTask).addVehicles(removedVehicles);
-                Team removedTeam = taskList.get(selectedTask).removeTeam();
+                Team removedTeam = taskList.get(selectedTask).getTeam();
+                taskList.get(selectedTask).setTeam(null);
                 agendaBackUp.get(selectedTask).addTeam(removedTeam);
 
             }
@@ -156,6 +164,14 @@ public class AgendaRepository implements Serializable {
         switch (filterSelection - 1) {
             case 0:
                 for (AgendaEntry agendaEntry : agenda) {
+                    if (agendaEntry.getTeam().hasCollaborator(collaborator)
+                            && agendaEntry.getStartingDate().isGreaterOrEquals(startDate)
+                            && !agendaEntry.getStartingDate().isGreater(endDate)) {
+
+                        taskList.add(agendaEntry);
+                    }
+                }
+                for (AgendaEntry agendaEntry : agendaBackUp) {
                     if (agendaEntry.getTeam().hasCollaborator(collaborator)
                             && agendaEntry.getStartingDate().isGreaterOrEquals(startDate)
                             && !agendaEntry.getStartingDate().isGreater(endDate)) {
@@ -389,9 +405,11 @@ public class AgendaRepository implements Serializable {
      */
     public boolean assignTeam(Team team, int agendaEntryID, String responsible) {
         AgendaEntry task = getAgendaEntryByID(agendaEntryID, responsible);
+        AgendaEntry taskBackUp = getAgendaBackUpByID(agendaEntryID, responsible);
 
         if (validateInfo(team, task)) {
             task.setTeam(team);
+            taskBackUp.setTeam(team);
             System.out.println(task);
             return true;
         }
@@ -420,6 +438,12 @@ public class AgendaRepository implements Serializable {
         return agenda.get(agendaEntryID);
     }
 
+    public AgendaEntry getAgendaBackUpByID(int agendaEntryID, String responsible) {
+        List<AgendaEntry> agenda = getAgendaEntriesBackUp(responsible);
+        return agenda.get(agendaEntryID);
+    }
+
+
     /**
      * Gets the agenda entries for a specific responsible collaborator.
      *
@@ -427,6 +451,14 @@ public class AgendaRepository implements Serializable {
      * @return A list of agenda entries.
      */
     public List<AgendaEntry> getAgendaEntriesForResponsible(String responsible) {
+        return getAgendaEntries(responsible, agenda);
+    }
+
+    public List<AgendaEntry> getAgendaEntriesBackUp(String responsible) {
+        return getAgendaEntries(responsible, agendaBackUp);
+    }
+
+    private List<AgendaEntry> getAgendaEntries(String responsible, List<AgendaEntry> agenda) {
         List<AgendaEntry> agendaEntries = new ArrayList<>();
         for (AgendaEntry agendaEntry : agenda) {
             if (agendaEntry.getTeam() != null) {
@@ -435,13 +467,14 @@ public class AgendaRepository implements Serializable {
                         !agendaEntry.getAgendaEntry().getStatus().equals(String.valueOf(AgendaEntry.Status.DONE))) {
                     agendaEntries.add(agendaEntry);
                 }
-            } else if (agendaEntry.getTeam() == null && agendaEntry.getResponsible().equals(responsible)&&
-            !agendaEntry.getAgendaEntry().getStatus().equals(String.valueOf(AgendaEntry.Status.DONE))) {
+            } else if (agendaEntry.getTeam() == null && agendaEntry.getResponsible().equals(responsible) &&
+                    !agendaEntry.getAgendaEntry().getStatus().equals(String.valueOf(AgendaEntry.Status.DONE))) {
                 agendaEntries.add(agendaEntry);
             }
         }
         return agendaEntries;
     }
+
 
     /**
      * Gets all agenda entries.
@@ -450,12 +483,6 @@ public class AgendaRepository implements Serializable {
      */
     public List<AgendaEntry> getAgendaEntries() {
         return agenda;
-    }
-
-    public void copy(List<AgendaEntry> list, int index) {
-        List<AgendaEntry> other = new ArrayList<>();
-        other.add(list.get(index));
-        agendaBackUp.addAll(other);
     }
 
 
@@ -468,6 +495,39 @@ public class AgendaRepository implements Serializable {
      */
     public boolean assignVehicle(AgendaEntry agendaTask, Vehicle vehicle) {
         return agendaTask.addVehicle(vehicle);
+    }
+
+    public List<Team> getTeamsInUse() {
+        List<Team> teams = new ArrayList<>();
+        for (AgendaEntry agendaEntry : agenda) {
+            if (agendaEntry.getTeam() != null) {
+                teams.add(agendaEntry.getTeam());
+            }
+        }
+        return teams;
+    }
+
+    public List<Team> getTeams() {
+        teamRepository = getTeamRepository();
+        List<Team> totalList = teamRepository.getTeamList();
+        List<Team> usedTeams = getTeamsInUse();
+        List<Team> possibleOptions = new ArrayList<>();
+
+        for (Team team : totalList) {
+            if (!usedTeams.contains(team)) {
+                possibleOptions.add(team);
+            }
+        }
+        System.out.println(possibleOptions.size());
+        return possibleOptions;
+    }
+
+    private TeamRepository getTeamRepository() {
+        if (teamRepository == null) {
+            Repositories repositories = Repositories.getInstance();
+            teamRepository = repositories.getTeamRepository();
+        }
+        return teamRepository;
     }
 
 
