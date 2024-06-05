@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1020.0" stylesheets="@Css/GsmUI.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.javaFX.AddToDoEntry_Controller">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1020.0" stylesheets="@Css/GsmUI.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.javaFX.AssignVehicleToAgendaTask_Controller">
    <children>
       <VBox prefHeight="620.0" prefWidth="398.0">
          <children>
@@ -21,7 +21,7 @@
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font></Button>
-                  <Button layoutX="29.0" layoutY="198.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="254.0" style="-fx-border-width: 0px 0px 4px 0px; -fx-border-color: #fff;" stylesheets="@Css/GsmUI.css" text="Add Entry in ToDoList" textAlignment="CENTER">
+                  <Button layoutX="29.0" layoutY="198.0" mnemonicParsing="false" onAction="#changeToEntryToDoList" prefHeight="39.0" prefWidth="254.0" stylesheets="@Css/GsmUI.css" text="Add Entry in ToDoList" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
@@ -41,7 +41,7 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Button>
-                  <Button layoutX="29.0" layoutY="378.0" mnemonicParsing="false" onAction="#changeToAssignVehicle" prefHeight="39.0" prefWidth="254.0" stylesheets="@Css/GsmUI.css" text="Assign Vehicle(s) to Task" textAlignment="CENTER">
+                  <Button layoutX="29.0" layoutY="378.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="254.0" style="-fx-border-width: 0px 0px 4px 0px; -fx-border-color: #fff;" stylesheets="@Css/GsmUI.css" text="Assign Vehicle(s) to Task" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
@@ -88,7 +88,7 @@
       </VBox>
       <Pane prefHeight="620.0" prefWidth="785.0">
          <children>
-            <Label layoutX="14.0" layoutY="14.0" text="Entry in ToDoList">
+            <Label layoutX="14.0" layoutY="14.0" text="Assign Vehicle ">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
