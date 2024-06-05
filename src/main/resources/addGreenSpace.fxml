@@ -121,9 +121,9 @@
             </Label>
             <Pane fx:id="form" layoutX="8.0" layoutY="95.0" prefHeight="506.0" prefWidth="689.0">
                <children>
-                  <Label layoutX="23.0" layoutY="321.0" prefHeight="21.0" prefWidth="111.0" text="Name:">
+                  <Label layoutX="48.0" layoutY="320.0" prefHeight="21.0" prefWidth="61.0" text="Name:">
                      <font>
-                        <Font name="System Bold" size="19.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
                   <TableView fx:id="table_greenSpaces" layoutX="7.0" layoutY="14.0" prefHeight="200.0" prefWidth="674.0">
@@ -144,21 +144,21 @@
                   </Label>
                   <TextField fx:id="label_parkName" layoutX="134.0" layoutY="320.0" prefHeight="24.0" prefWidth="204.0" promptText="Ex: Parque da Cidade" />
                   <TextField fx:id="label_parkArea" layoutX="459.0" layoutY="321.0" prefHeight="24.0" prefWidth="111.0" promptText="Ex: 50" />
-                  <Label layoutX="390.0" layoutY="320.0" prefHeight="21.0" prefWidth="111.0" text="Area:">
+                  <Label layoutX="400.0" layoutY="320.0" prefHeight="21.0" prefWidth="46.0" text="Area:">
                      <font>
-                        <Font name="System Bold" size="19.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
                   <TextField fx:id="label_parkAddress" layoutX="134.0" layoutY="370.0" prefHeight="24.0" prefWidth="204.0" promptText="Ex: Rua Enganheiro Farinas" />
-                  <Label layoutX="23.0" layoutY="370.0" prefHeight="21.0" prefWidth="111.0" text="Address:">
+                  <Label layoutX="46.0" layoutY="370.0" prefHeight="21.0" prefWidth="76.0" text="Address:">
                      <font>
-                        <Font name="System Bold" size="19.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
                   <Line endX="119.0" endY="72.29290771484375" fill="WHITE" layoutX="322.0" layoutY="199.0" startX="-76.0" startY="72.29290771484375" stroke="#00acff" strokeWidth="3.0" />
-                  <Label layoutX="390.0" layoutY="370.0" prefHeight="21.0" prefWidth="111.0" text="Size:">
+                  <Label layoutX="400.0" layoutY="370.0" prefHeight="21.0" prefWidth="46.0" text="Size:">
                      <font>
-                        <Font name="System Bold" size="19.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
                   <ChoiceBox fx:id="choiceBox_Size" layoutX="459.0" layoutY="370.0" prefHeight="24.0" prefWidth="111.0" />

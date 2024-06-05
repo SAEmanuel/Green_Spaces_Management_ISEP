@@ -64,7 +64,7 @@ public class ToDoEntry implements Serializable {
         LOW {
             @Override
             public String toString() {
-                return  "Low";
+                return "Low";
             }
         },
         MEDIUM {
@@ -163,8 +163,8 @@ public class ToDoEntry implements Serializable {
         return description;
     }
 
-    public int getUrgency() {
-        return urgency;
+    public Urgency getUrgency() {
+        return Urgency.values()[urgency];
     }
 
     @Override
