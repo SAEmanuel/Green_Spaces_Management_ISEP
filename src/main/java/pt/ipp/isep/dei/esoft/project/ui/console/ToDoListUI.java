@@ -2,7 +2,6 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.DTOS.GreenSpaceDTO;
 import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
-import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
 import pt.ipp.isep.dei.esoft.project.domain.ToDoEntry;
 
 import java.util.*;
@@ -34,7 +33,7 @@ public class ToDoListUI implements Runnable {
         System.out.println("\n\n--- Add New Entry To-Do List ------------------------");
         List<GreenSpaceDTO> greenSpacesAvailableByResponsible;
 
-        greenSpacesAvailableByResponsible = controller.getToDoListDTOForResponsible();
+        greenSpacesAvailableByResponsible = controller.getGreenSpaceDTOByResponsible();
 
         if(!greenSpacesAvailableByResponsible.isEmpty()){
             getGreenSpaceListOption(greenSpacesAvailableByResponsible);
@@ -68,7 +67,8 @@ public class ToDoListUI implements Runnable {
                     answer = input.nextInt() - 1;
                     if (answer <= n - 1 && answer >= 0) {
                         greenSpaceDTO = greenSpacesAvailableByResponsible.get(answer);
-                        return greenSpaceId;
+                        greenSpaceId = answer;
+                        return 0;
                     }
                 } catch (InputMismatchException e) {
                     System.out.print(ANSI_BRIGHT_RED + "Invalid Green Space ID number! Enter a new one: " + ANSI_RESET + "\n");
@@ -100,11 +100,6 @@ public class ToDoListUI implements Runnable {
             System.out.println("----------------");
         }
     }
-
-
-
-
-
 
 
     private void requestData() {
