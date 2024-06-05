@@ -136,7 +136,7 @@ public class PostponeTaskAgendaUI implements Runnable {
      * @return The agenda task ID.
      */
     private int requestAgendaEntry() {
-        List<AgendaEntry> agendaTasks = controller.getAgendaEntriesForResponsible();
+        List<AgendaEntry> agendaTasks = controller.getAgendaEntriesForResponsibleTeam();
         int n = agendaTasks.size();
         if (n != 0) {
             showToDoList(agendaTasks);

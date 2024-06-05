@@ -8,38 +8,81 @@ title UI Sequence Diagram (SSD) - Get Green Spaces by Responsible User
 autonumber
 
 
-participant ":ToDoListController" as CTRL
-participant ":Repositories" as RepositorySingleton
-participant "repositories\n:Repositories" as PLAT
-participant "greenSpaceRepository\n:GreenSpaceRepository" as GREENSpaceRepository
 
+participant ":ToDoListController" as CTRL
+participant ":ApplicationSession" as _APP
+participant "appSession\n:ApplicationSession" as APP
+participant "currentSession\n:UserSession" as SESSAO
+participant "greenSpaceRepository\n:GreenSpaceRepository" as GREENSpaceRepository
+participant "listGreenSpace\n:List<GreenSpace>" as listGreenSpace
+participant "toDoEntryMapper\n:toDoEntryMapper" as mapper
+participant "greenSpace\n:GreenSpace" as GREEN
+participant "listGreenSpaceDTO\n:List<GreenSpaceDTO>" as listDTO
 
 
 activate CTRL
-autonumber 12
-CTRL -> CTRL : getGreenSpacesByResponsible(responsibleEmail)
 
-group Get Green Spaces by Responsible User
-autonumber 12.1
-CTRL -> RepositorySingleton : getInstance()
-activate RepositorySingleton
-RepositorySingleton --> CTRL: repositories
-deactivate RepositorySingleton
+CTRL -> CTRL : getResponsible()
+activate CTRL
 
-CTRL -> PLAT : getGreenSpaceRepository()
-activate PLAT
-PLAT --> CTRL: GreenSpaceRepository
-deactivate PLAT
+CTRL -> _APP: getInstance()
+activate _APP
+_APP -> CTRL: appSession
+deactivate _APP
 
-CTRL -> GREENSpaceRepository : getGreenSpacesByResponsible(responsibleEmail)
-activate GREENSpaceRepository
-GREENSpaceRepository -> CTRL : greenSpaces
-deactivate GREENSpaceRepository
-end
+CTRL -> APP: getCurrentSession()
+activate APP
+APP --> CTRL: currentSession
+deactivate APP
 
+CTRL -> SESSAO: getUserEmail()
+activate SESSAO
+SESSAO --> CTRL: responsibleEmail
+deactivate SESSAO
 deactivate CTRL
 
+CTRL -> GREENSpaceRepository: getGreenSpacesByResponsible(responsibleEmail)
+activate GREENSpaceRepository
 
+GREENSpaceRepository -> listGreenSpace** : create
+group loop [for each object in the GreenSpaceRepository]
+    GREENSpaceRepository -> GREENSpaceRepository :  obj = get(i)
+    activate GREENSpaceRepository
+    deactivate GREENSpaceRepository
+
+    GREENSpaceRepository -> GREEN** : getResponsible()
+    activate GREEN
+    GREEN -> GREEN : getResponsible()
+    GREEN --> GREENSpaceRepository : objResponsible
+    deactivate GREEN
+
+    group if [objResponsible == responsibleEmail]
+        GREENSpaceRepository -> listGreenSpace : add(obj)
+        activate listGreenSpace
+        deactivate listGreenSpace
+    end
+end
+GREENSpaceRepository --> CTRL : listGreenSpaceByResponsible
+deactivate GREENSpaceRepository
+
+CTRL -> mapper : toDto(listGreenSpaceByResponsible)
+activate mapper
+mapper -> listDTO** : create
+group loop [for each object in listGreenSpace]
+    mapper -> listGreenSpace: obj = get(i)
+    activate listGreenSpace
+    deactivate listGreenSpace
+
+    mapper -> mapper : objDto = toDTO(obj)
+    activate mapper
+    mapper --> objDto** : create(obj)
+    deactivate mapper
+
+    mapper -> listDTO : add(objDto)
+    activate listDTO
+    deactivate listDTO
+end
+mapper --> CTRL : listGreenSpaceDto
 
 
 @enduml

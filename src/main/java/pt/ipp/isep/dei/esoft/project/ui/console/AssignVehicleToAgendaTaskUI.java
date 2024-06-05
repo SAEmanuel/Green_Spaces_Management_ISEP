@@ -81,7 +81,7 @@ public class AssignVehicleToAgendaTaskUI implements Runnable {
     }
 
     private AgendaEntry requestAgendaEntry() {
-        List<AgendaEntry> agendaTasks = controller.getAgendaEntriesForResponsible();
+        List<AgendaEntry> agendaTasks = controller.getAgendaEntriesForResponsibleVehicle();
         int n = agendaTasks.size();
         if (n != 0) {
             showToDoList(agendaTasks);

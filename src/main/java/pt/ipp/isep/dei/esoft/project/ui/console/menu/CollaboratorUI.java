@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CollaboratorUI implements Runnable {
-    private CreateCollaboratorController controller;
+    private final CreateCollaboratorController controller;
     private static final String PATH = "src/main/java/pt/ipp/isep/dei/esoft/project/domain/Extras/Sounds/happyBirthday.mp3";
 
     public CollaboratorUI() {
@@ -52,11 +52,11 @@ public class CollaboratorUI implements Runnable {
             }
 
         }
-        List<MenuItem> options = new ArrayList<MenuItem>();
+        List<MenuItem> options = new ArrayList<>();
         options.add(new MenuItem("Consult assigned tasks", new RetrieveTasksUI(loggedInCollaborator)));
 
 
-        int option = 0;
+        int option;
         do {
             option = Utils.showAndSelectIndex(options, "\n\n--- COLLABORATOR MENU -------------------------");
 
@@ -84,8 +84,8 @@ public class CollaboratorUI implements Runnable {
 
             player.play();
         } catch (Exception e) {
-            System.out.println("Music didn't play: " + e.getMessage());
-            e.printStackTrace();
+            System.out.println(ANSI_BRIGHT_RED + "Error playing music!" + ANSI_RESET);
+
         }
     }
 }

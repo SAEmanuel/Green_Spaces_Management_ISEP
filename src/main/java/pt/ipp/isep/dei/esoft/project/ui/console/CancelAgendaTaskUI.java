@@ -114,7 +114,7 @@ public class CancelAgendaTaskUI implements Runnable {
      * @return The index of the selected agenda entry, or -1 if no entries are available.
      */
     private int requestAgendaEntry() {
-        List<AgendaEntry> agendaTasks = controller.getAgendaEntriesForResponsible();
+        List<AgendaEntry> agendaTasks = controller.getAgendaEntriesForResponsibleTeam();
         int n = agendaTasks.size();
         if (n != 0) {
             showToDoList(agendaTasks);

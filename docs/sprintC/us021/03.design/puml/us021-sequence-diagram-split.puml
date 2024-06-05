@@ -10,15 +10,10 @@ autonumber
 actor "Green Space Manager" as Employee
 participant ":ToDoListUI" as UI
 participant ":ToDoListController" as CTRL
-participant ":Repositories" as RepositorySingleton
-participant "repositories\n:Repositories" as PLAT
-participant "greenSpaceRepository\n:GreenSpaceRepository" as GREENSpaceRepository
-participant "toDoEntry" as ENTRY
-participant "toDoListRepository\n:toDoListRepository" as toDoListRepository
-participant "greenSpace\n:GreenSpace" as GREEN
-participant ":ApplicationSession" as _APP
-participant "appSession\n:ApplicationSession" as APP
-participant "currentSession\n:UserSession" as SESSAO
+
+
+
+
 
 activate Employee
 
@@ -27,28 +22,22 @@ activate Employee
 
     UI -> CTRL** : create
 
-    UI -> CTRL : getGreenSpacesByResponsible()
+    UI -> CTRL : getGreenSpaceDTOByResponsible()
     activate CTRL
-    |||
     ref over CTRL
-      Get Responsible User's Email
-      end ref
+    Get Responsible User's Email
+    end ref
 
-                    |||
-
-                    CTRL -> CTRL : getGreenSpacesByResponsible(email)
-
-            |||
-            ref over CTRL
-        Get Green Spaces by Responsible User
-            end ref
+                     |||
+                    CTRL -> CTRL :getGreenSpacesByResponsible()
+                                ref over CTRL
+                                Get Green Spaces by Responsible User
+                                end ref
 
 
+                           CTRL --> UI : listGreenSpaceDto
 
-
-                    CTRL -> UI : greenSpaces
-
-                    deactivate CTRL
+                           deactivate CTRL
 
 
         UI -> Employee : shows list of green spaces
@@ -68,35 +57,15 @@ activate Employee
     Employee -> UI : submits data
     activate UI
 
-    UI -> CTRL : registerToDoEntry(greenSpace ,title, description, urgency, expectedDuration)
+    UI -> CTRL : registerToDoEntry(greenSpaceID ,title, description, urgency, expectedDuration)
     activate CTRL
 
 
 
-        CTRL -> RepositorySingleton : getInstance()
-        activate RepositorySingleton
-
-        RepositorySingleton --> CTRL: repositories
-        deactivate RepositorySingleton
-
-        CTRL -> PLAT : getToDoListRepository()
-        activate PLAT
-
-        PLAT --> CTRL: toDoListRepository
-        deactivate PLAT
-
-    CTRL -> toDoListRepository : registerToDoEntry(greenSpace ,title, description, urgency, expectedDuration)
-      deactivate CTRL
-    activate toDoListRepository
-
-    ref over toDoListRepository
-        Register To-Do Entry
+            ref over CTRL
+            Register To-Do Entry
             end ref
 
-    toDoListRepository --> CTRL : toDoEntry
-    deactivate toDoListRepository
-
-    activate CTRL
     CTRL --> UI : toDoEntry
     deactivate CTRL
 

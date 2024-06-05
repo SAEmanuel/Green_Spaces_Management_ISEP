@@ -19,15 +19,54 @@ Done).
 
 **From forum:**
 
-> **Question:** Can the vehicles get placed automatically on a list or the one listing has to be the FM?
+> **Question:** When I choose to associate a team with an agenda entry, is there a maximum number of team members? Are the team members collaborators, GSM...? We can choose them through their email, right?
 >
-> **Answer:**  The list of vehicles is automatically created but the creation is triggered by the FM.
+> **Answer:** Have you ever read the text of the US05 concerning the generation of Teams?
+
+
+> **Question:** Can an entry in the Agenda that already has a Team assigned be reassigned another Team?  Also, an entry that has been Postponed, Canceled or Done shouldn't be available to get a Team assigned, correct? Thank you
+>
+> **Answer:**
+
+
+> **Question:** Also only the GSM responsible for the Green Space associated with the entry can assign the team to that entry? Thank you
+>
+> **Answer:**
+
+
+> **Question:** Good afternoon. Can an Agenda entry have more than one team assigned to it?  Best regards.
+>
+> **Answer:** No.
+
+> **Question:**  Can a Team be assigned to multiple entrys?  Best Regards.
+
+> **Answer:** yes.
+
+> **Question:** Good afternoon. In this US, can any GSM do the action of assigning a Team to the entry in the agenda? Or it must be the GSM that created that entry? Or the GSM responsible for the green space associated with that entry? Best regards.
+>
+> **Answer:**
+
+
+> **Question:** Good afternoon, Regarding US22 and 23:1 - Tasks have a status of Planned, Postponed, Canceled or Done. When do they pass to "Planned" status? When they are added to the agenda (before the GSM assigns a team) or when a team is assigned to them? 2 - Task duration should be considered in hours or in half days (morning/afternoon)? Thank you for your time. Best regards, Tiago Sá
+>
+> **Answer:** Hi, The use of states and their values ​​is a technical modeling issue, it is not the client's responsibility. Assuming you are using states, a task would become "Planned" as soon as it enters the Agenda. Hours should be ok, but keep in mind, that the storage format doesn't need to be same as the input/output format.
+
+
 
 ### 1.3. Acceptance Criteria 
 
-* **AC1** A message must be sent to all team members informing them about the assignment.
-* **AC2** Different email services can send the message. These services must be defined through a configuration file to allow the use of different platforms (e.g. Gmail, DEI’s email service, etc.).
-
+* **AC1** Must have tasks in the agenda entry to assign the team
+* **AC2** Must have teams to assign to an agenda entry
+* **AC3** Must be at least one email service in configuration file.
+* **AC4** In order to add more email services in the configuration file it should fulfill all parameters in terms of data and names, as the following example:
+"
+  email_service.isep.ipp.pt.smtp_server_name = isep_ipp_pt
+  email_service.isep_ipp_pt.smtp_server = smtp.isep.ipp.pt
+  email_service.isep_ipp_pt.port = 587
+  email_service.isep_ipp_pt.use_tls = true
+  email_service.isep_ipp_pt.use_ssl = false
+"
+* **AC5** A team can be assigned to multiple entries but an agenda entry can only have one team assigned
 
 ### 1.4. Found out Dependencies
 
@@ -38,9 +77,10 @@ Done).
 
 **Input Data:**
 
-* Team number
-* Agenda entry
-* Email Service
+* Selected Data
+  * Team number
+  * Agenda entry
+  * Email Service
 
 **Output Data:**
 

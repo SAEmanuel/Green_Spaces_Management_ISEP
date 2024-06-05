@@ -16,7 +16,7 @@ participant "currentSession\n:UserSession" as SESSAO
 
 activate UI
 autonumber 3
-UI -> CTRL : getGreenSpacesByResponsible()
+UI -> CTRL : getGreenSpaceDTOByResponsible()
 activate CTRL
 
 group Get Responsible User's Email

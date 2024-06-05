@@ -1,0 +1,62 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype ortho
+skinparam classAttributeIconSize 0
+'left to right direction
+
+class AssignTeamToTaskAgendaUI{
+}
+
+class AgendaController {
+    - AgendaRepository agendaRepository
+    - TeamRepository teamRepository
+
+    + assignTeam(int, int, String, String): boolean
+    + getEmailServices(): List<String>
+    + getResponsible(): String
+    + getAgendaEntriesForResponsible(): List<AgendaEntry>
+    + getTeams(): List<Team>
+}
+
+class AgendaRepository {
+    - List<AgendaEntry> agenda
+
+    + getAgendaEntriesForResponsible(String): List<AgendaEntry>
+    + assignTeam(Team, int, String): boolean
+}
+
+class ToDoListRepository {
+    - List<ToDoEntry> toDoList
+}
+
+class TeamRepository {
+    - List<Team> teamList
+    + getListTeam(): List<Team>
+}
+class Repositories {
+    - Repositories()
+    + getInstance() : Repositories
+    + getSkillRepository()
+}
+
+class SendEmail {
+    + sendEmail(String, String, String, String): void
+    + getEmailServices(): List<String>
+}
+
+AssignTeamToTaskAgendaUI ..> AgendaController
+AgendaController ..> AgendaRepository : agendaRepository
+AgendaController ..> TeamRepository : teamRepository
+AgendaRepository ..> ToDoListRepository : toDoListRepository
+AgendaRepository ..> TeamRepository : teamRepository
+AgendaController ..> SendEmail : sendEmail
+Repositories -> Repositories : instance
+Repositories  --> "1 " TeamRepository
+Repositories  --> "1 " ToDoListRepository
+Repositories  --> "1 " AgendaRepository
+AgendaController ..> Repositories : Repositories
+
+@enduml

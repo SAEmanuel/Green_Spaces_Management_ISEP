@@ -44,7 +44,7 @@ public class AssignTeamToTaskAgendaUI implements Runnable {
                 submitData();
             }
         } else {
-            System.out.println(ANSI_BRIGHT_RED + "Does not exist task in the AGENDA or there is no TEAM in the system... Add some" + ANSI_RESET);
+            System.out.println(ANSI_BRIGHT_RED + "Does not exist task in the AGENDA or no TEAM in the system or the isn't any email service available ... Add some" + ANSI_RESET);
         }
     }
 
@@ -120,7 +120,7 @@ public class AssignTeamToTaskAgendaUI implements Runnable {
      * @return the selected agenda entry ID, or -1 if none is selected
      */
     private int requestAgendaEntryID() {
-        List<AgendaEntry> agendaTasks = controller.getAgendaEntriesForResponsible();
+        List<AgendaEntry> agendaTasks = controller.getAgendaEntriesForResponsibleTeam();
         int n = agendaTasks.size();
         if (n != 0) {
             showToDoList(agendaTasks);
