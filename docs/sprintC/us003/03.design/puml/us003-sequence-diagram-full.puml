@@ -113,9 +113,6 @@ activate HRM
             activate Collaborator
 
                 Collaborator -> Collaborator : validateData(name, birthDate, admissionDate,\naddress, phoneNumber, email, taxpayerNumber,\ndocType, docNumber and job)
-                activate Collaborator
-                Collaborator --> Collaborator :
-                deactivate Collaborator
 
             CollaboratorRepository -> CollaboratorRepository : addCollaborator(collaborator)
             deactivate Collaborator
