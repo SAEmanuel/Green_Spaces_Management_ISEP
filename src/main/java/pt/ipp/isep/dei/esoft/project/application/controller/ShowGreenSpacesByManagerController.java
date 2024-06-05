@@ -20,6 +20,11 @@ public class ShowGreenSpacesByManagerController {
         this.greenSpaceRepository = getGreenSpaceRepository();
     }
 
+    /**
+     * Initializes the greenSpaceRepository if it is null, otherwise returns the existing instance.
+     *
+     * @return the GreenSpaceRepository instance
+     */
     private GreenSpaceRepository getGreenSpaceRepository() {
         if (greenSpaceRepository == null) {
             greenSpaceRepository = repositories.getGreenSpaceRepository();
@@ -28,6 +33,12 @@ public class ShowGreenSpacesByManagerController {
     }
 
     //--------------------------- Show Green Spaces ------------------------------------
+    /**
+     * Retrieves and sorts the green spaces managed by the currently logged-in user.
+     *
+     * @param sortOrder the order in which to sort the green spaces
+     * @return a sorted list of GreenSpace objects managed by the current user, or null if none are found
+     */
     public List<GreenSpace> showGreenSpaces(String sortOrder) {
         String resposible = getResponsible();
 
@@ -46,6 +57,11 @@ public class ShowGreenSpacesByManagerController {
     }
 
     //------------------------------ Extra Methods ---------------
+    /**
+     * Retrieves the email of the currently logged-in user from the authentication repository.
+     *
+     * @return the email of the current user
+     */
     private String getResponsible() {
         return repositories.getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail();
     }
