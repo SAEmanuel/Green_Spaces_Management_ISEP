@@ -21,14 +21,9 @@ import java.util.ResourceBundle;
 
 public class GsmUI_Controller implements Initializable {
 
-    private Repositories repositories = Repositories.getInstance();
+    private final Repositories repositories = Repositories.getInstance();
 
-    @FXML
-    private AnchorPane side_anchorpane;
-    @FXML
-    private Pane search_bar,inf_one,inf_two,inf_3;
-    @FXML
-    private Button back_btn;
+
     @FXML
     private Label email_label,name_mid,name_label;
 

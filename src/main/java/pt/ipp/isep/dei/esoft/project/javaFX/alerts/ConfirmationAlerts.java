@@ -11,4 +11,14 @@ public class ConfirmationAlerts {
         alert.setContentText(content);
         alert.show();
     }
+
+    public Alert confirmationMessagesGiveAlert(String title, String header, String content){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.show();
+        return alert;
+    }
+
 }
