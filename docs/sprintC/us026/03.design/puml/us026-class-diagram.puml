@@ -3,41 +3,54 @@
 skinparam packageStyle rectangle
 skinparam shadowing false
 skinparam linetype polyline
-'skinparam linetype orto
+'skinparam linetype ortho
 skinparam classAttributeIconSize 0
 'left to right direction
 
-class VehicleRepository {
-    - List<Vehicle> vehicleList
-    + requestList(activation)
-    - getVehiclesNeedingCheckUp(activation)
-    - checkUpListCreated()
-    + getVehicleCheckUpList(): List<Vehicle>
+class AssignVehicleToTaskAgendaUI{
 }
 
+class AgendaController {
+    - AgendaRepository agendaRepository
+    - VehicleRepository vehicleRepository
+
+    + assignVehicle(AgendaEntry agendaTask, Vehicle vehicle)
+    + String getResponsible()
+    + List<ToDoEntry> getToDoEntryListForResponsible()
+    + List <Vehicle> getAvailableVehicles()
+}
+
+class AgendaRepository {
+    - List<AgendaEntry> agenda
+
+    + List<AgendaEntry> getAgendaEntriesForResponsible(String responsibleEmail)
+    + assignVehicle(AgendaEntry agendaTask, Vehicle vehicle)
+}
+
+class ToDoListRepository {
+    - List<ToDoEntry> toDoList
+}
+
+class VehicleRepository {
+    - List<Vehicle> vehicleList
+    + List<Vehicle> getListVehicle()
+}
 class Repositories {
     - Repositories()
     + getInstance() : Repositories
-    + getVehicleRepository()
+    + getSkillRepository()
 }
 
-class VehicleListController {
-    + VehicleListController()
-    + requestList(activation)
-    + receiveVehicleList(List<Vehicle>)
-    + sendVehicleListToUI(List<Vehicle>)
-}
 
-class CheckUpListUI {
-    + displayVehicleList(List<Vehicle>)
-}
-
-CheckUpListUI ..> VehicleListController
-
-VehicleListController --> CheckUpListUI : sendVehicleListToUI()
-VehicleListController .> Repositories : repositories
-Repositories  --> "1 " VehicleRepository
+AssignVehicleToTaskAgendaUI ..> AgendaController
+AgendaController ..> AgendaRepository : agendaRepository
+AgendaController ..> VehicleRepository : vehicleRepository
+AgendaRepository ..> ToDoListRepository : toDoListRepository
+AgendaRepository ..> VehicleRepository : vehicleRepository
 Repositories -> Repositories : instance
-VehicleListController ..>  VehicleRepository : vehicleRepository
-VehicleRepository -> VehicleListController : getVehicleCheckUpList()
+Repositories  --> "1 " VehicleRepository
+Repositories  --> "1 " ToDoListRepository
+Repositories  --> "1 " AgendaRepository
+AgendaController ..> Repositories : Repositories
+
 @enduml

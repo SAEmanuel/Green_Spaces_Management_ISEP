@@ -10,13 +10,19 @@ autonumber
 actor "Green Space Manager" as Employee
 participant ":ToDoListUI" as UI
 participant ":ToDoListController" as CTRL
-participant ":Repositories" as RepositorySingleton
-participant "repositories\n:Repositories" as PLAT
-participant "agenda\n:Agenda" as AGENDA
-participant "vehicleRepository\n:VehicleRepository" as VEHICLEREPOSITORY
 participant ":ApplicationSession" as _APP
 participant "appSession\n:ApplicationSession" as APP
 participant "currentSession\n:UserSession" as SESSAO
+participant "responsibleEmail\n:String" as EMAIL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "agenda\n:AgendaRepository" as AGENDA
+participant "agendaEntries\n: List<AgendaEntry>" as listAgenda
+participant "vehicleRepository\n:VehicleRepository" as VEHICLEREPOSITORY
+participant "availableVehicles\n: List<Vehicle>" as listVehicle
+participant "v1\n:Vehicle" as v1
+participant "task1\n:AgendaEntry" as task1
+
 
 activate Employee
 
@@ -46,7 +52,10 @@ activate Employee
                     CTRL -> SESSAO: getUserEmail()
                     activate SESSAO
 
-                        SESSAO --> CTRL: responsibleEmail
+
+
+
+
                     deactivate SESSAO
 
                     deactivate CTRL
@@ -139,14 +148,23 @@ activate Employee
     Employee -> UI : submits data
     activate UI
 
-    UI -> CTRL : assignVehicle(agendaTask, vehicle)
+    UI -> CTRL : assignVehicle(agendaTaskID, vehicleID)
     activate CTRL
+    CTRL -> VEHICLEREPOSITORY : getVehicleByID(vehicleID)
+    activate VEHICLEREPOSITORY
 
-    CTRL -> AGENDA : assignVehicle(agendaTask, vehicle)
+    deactivate VEHICLEREPOSITORY
+
+    CTRL -> AGENDA : getTaskByID(agendaTaskID)
+    activate AGENDA
+
+     deactivate AGENDA
+
+    CTRL -> AGENDA : assignVehicle(task1, v1)
       deactivate CTRL
     activate AGENDA
 
-    AGENDA -> AGENDA : addVehicle(vehicle)
+    AGENDA -> AGENDA : addVehicle(v1)
 
     AGENDA --> CTRL : success
     deactivate AGENDA
