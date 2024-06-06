@@ -15,9 +15,9 @@ import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_RESET
 public class AssignTeamToTaskAgendaUI implements Runnable {
 
     private final AgendaController controller;
-    private int teamID;
-    private int agendaEntryID;
-    private String emailService;
+    private int teamID = -1;
+    private int agendaEntryID = -1;
+    private String emailService = null;
 
     public AssignTeamToTaskAgendaUI() {
         this.controller = new AgendaController();
@@ -44,7 +44,8 @@ public class AssignTeamToTaskAgendaUI implements Runnable {
                 submitData();
             }
         } else {
-            System.out.println(ANSI_BRIGHT_RED + "Does not exist task in the AGENDA or no TEAM in the system or the isn't any email service available ... Add some" + ANSI_RESET);
+            if(teamID == -1 || agendaEntryID == -1)
+                System.out.println(ANSI_BRIGHT_RED + "Does not exist task in the AGENDA or no TEAM in the system or the isn't any email service file available ... Add some" + ANSI_RESET);
         }
     }
 
@@ -202,6 +203,8 @@ public class AssignTeamToTaskAgendaUI implements Runnable {
      */
     private String requestEmailService() {
         List<String > emailServices = controller.getEmailServices();
+        if(emailServices == null)
+            return null;
         int n = emailServices.size();
         if (n != 0) {
             showEmailServices(emailServices);

@@ -54,7 +54,7 @@ public class Bootstrap implements Runnable {
     private final ToDoEntry task5 = new ToDoEntry(passeioAlegre, "Limpar casas de banho", "Nenhuma", 1, 12);
 
 
-    private final Collaborator colla1 = new Collaborator("Francisco", new Data(2004, 5, 20), new Data(2023, 6, 12), "Rua da pedra", 912809789, "xico@gmail.com", 123456744, 0, "123456711", job1, new Password("AAA12ab"), "xico@gmail.com");
+    private final Collaborator colla1 = new Collaborator("Francisco", new Data(2004, 7, 6), new Data(2023, 6, 12), "Rua da pedra", 912809789, "xico@gmail.com", 123456744, 0, "123456711", job1, new Password("AAA12ab"), "xico@gmail.com");
     private final Collaborator colla2 = new Collaborator("Emanuel", new Data(2004, 4, 20), new Data(2023, 6, 12), "Rua da Mariana", 912809777, "ema@gmail.com", 123456755, 0, "123456722", job2, new Password("AAA12ac"), "ema@gmail.com");
     private final Collaborator colla3 = new Collaborator("Paulo", new Data(2002, 8, 20), new Data(2023, 6, 12), "Rua de Fanzeres", 912809888, "paul@gmail.com", 123456766, 0, "123456733", job3, new Password("AAA12ad"), "paul@gmail.com");
     private final Collaborator colla4 = new Collaborator("Xu", new Data(2000, 4, 20), new Data(2023, 6, 12), "Rua do restaurante asiatico", 912809666, "xu@gmail.com", 123456777, 0, "123456744", job4, new Password("AAA12ae"), "xu@gmail.com");

@@ -27,17 +27,21 @@ class Agenda {
          team
 }
 
-class Task{
-        Description
+class ToDoEntry {
+         greenSpace
+         title
+         description
+         urgency
+         expectedDuration
 }
 
 
 
 
 
-Collaborator "1" -- "*" Task : lists >
-Collaborator "1" - "1" Task : registers task completion >
-Agenda "1" -- "*" Task : has >
+Collaborator "1" -- "*" ToDoEntry : lists >
+Collaborator "1" - "1" ToDoEntry : registers task completion >
+Agenda "1" -- "*" ToDoEntry : has >
 
 
 

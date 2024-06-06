@@ -19,28 +19,57 @@ title Domain Model
     class GSM {
     }
 
-    class GSU {
-    }
-
     class GreenSpace {
     }
 
-    class MusgoSublime {
+
+
+
+
+   class Agenda {
+            List<AgendaEntry>
+   }
+
+   class AgendaEntry {
+            toDoEntry
+            StartingDate
+            EndDate
+            Team
+            List<Vehicles>
+
+   }
+
+    class ToDoEntry {
+             greenSpace
+             title
+             description
+             urgency
+             expectedDuration
     }
 
-    class Task {
+    class SortGreenSpaces {
+        sortMethod
     }
 
-    class Agenda {
-    }
 
-    GreenSpace "*" -- "1" GSM : manages <
-    GreenSpace "*" -- "1" GSU : uses <
-    GreenSpace "*" -- "1..*" Task : carries out on <
+    GSM "1" -- "1..*" GreenSpace : registers >
+    GSM "1" -- "1..*" ToDoEntry : registers >
+    GSM "1" -- "*" AgendaEntry : register entry >
+    GSM "1" -- "*" AgendaEntry : Assigns a team >
+    GSM "1" -- "*" AgendaEntry : postpone entry >
+    GSM "1" -- "*" AgendaEntry : cancel entry >
+    GSM "1" -- "1..*" Vehicle : assigns >
+    GSM "1" -- "1" SortGreenSpaces : lists managed green spaces >
+    SortGreenSpaces "1" -- "*" GreenSpace : get >
+    AgendaEntry "1  " -- "1..*"  Vehicle  : has >
+    AgendaEntry "1" -- "1" Team : posses >
+    Agenda "1" - "*" AgendaEntry : has >
+    AgendaEntry "1" - "1" ToDoEntry : has >
 
-    MusgoSublime "1" -- "*" GreenSpace : manages >
 
-    Agenda "1" -- "*" Task : defines >
+
+
+
 
 '  #########          ##########
 
@@ -65,15 +94,7 @@ title Domain Model
          lastCheckUp
     }
 
-            class Machine{
-            }
 
-            class Equipment{
-            }
-
-    class VehicleForCheckUp {
-        Vehicle
-    }
 
     class CheckUp {
         licence
@@ -83,15 +104,11 @@ title Domain Model
 
 
     VFM "1" -- "*" Vehicle : register >
-    VFM "1  " -- "*" VehicleForCheckUp: selects >
-    VFM "1" ---- "*" CheckUp : register >
-    VFM "1" -- "*" VehicleForCheckUp : informs <
+    VFM "1" -- "*" CheckUp : register >
+    VFM "1" -- "*" Vehicle : lists check-up >
+    CheckUp "1" -- "1..*" Vehicle : assigned >
 
-    Vehicle "*"-- "*" VehicleForCheckUp: contains >
-    Vehicle "1" -- "*" Equipment : transport >
-    Vehicle "1" - "*" Machine : transport >
 
-    VehicleForCheckUp "*" -- "*" CheckUp : does >
 
 
 '  #########          ##########
@@ -141,6 +158,10 @@ title Domain Model
 
     Team "1" -- "1..*" Collaborator : has >
 
+Collaborator "1" -- "*" ToDoEntry : lists >
+Collaborator "1" -- "1" ToDoEntry : registers task completion >
+Agenda "1" -- "*" ToDoEntry : has >
+
 '  #########          ##########
 
 '  #########    General Associations     ##########
@@ -148,10 +169,9 @@ title Domain Model
     Team "*" -- "*" Vehicle : uses >
     Team "1..*" - "*" Agenda : has >
 
-    MusgoSublime "1" --- "*" Collaborator : has >
 
-    Task "*" -- "*" Skill : requires >
-    Task "*" - "1..*    " Job : requires >
+
+
 
 
 '  #########          ##########

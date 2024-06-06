@@ -285,6 +285,8 @@ public class RetrieveTasksUI implements Runnable {
                 System.out.println(ANSI_BRIGHT_YELLOW + "-----" + ANSI_RESET);
             }
 
+        } else{
+            System.out.printf(ANSI_BRIGHT_RED + "No tasks assigned to you %s or for those filters!" + ANSI_RESET, collaborator.getName());
         }
     }
 }
