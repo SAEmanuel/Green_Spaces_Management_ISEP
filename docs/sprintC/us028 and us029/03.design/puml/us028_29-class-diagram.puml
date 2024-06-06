@@ -27,15 +27,14 @@ class Repositories {
 }
 
 class AgendaController {
-    - AgendaRepository agendaRepository
-    - ToDoListRepository toDoListRepository;
-    - TeamRepository teamRepository;
-    - VehicleRepository vehicleRepository;
-    + requestColabTaskList()
-    + requestPlannedColabTaskList()
-    + getStatus()
-    + requestChangedStatusTaskList()
-
+    - agendaRepository: AgendaRepository
+    + AgendaController()
+    + getResponsible(): String
+    + getStatus(): AgendaEntry.Status[]
+    + requestColabTaskList(collaborator: Collaborator, startDate: Data, endDate: Data, filterSelection: int): Optional<List<AgendaEntry>>
+    + requestPlannedColabTaskList(collaborator: Collaborator, startDate: Data, endDate: Data, filterSelection: int): Optional<List<AgendaEntry>>
+    + requestChangedStatusTaskList(collaborator: Collaborator, startDate: Data, endDate: Data, filterSelection: int, confirmation: String, selectedTask: int): Optional<List<AgendaEntry>>
+    + requestPossiblePlannedColabTaskList(collaborator: Collaborator, startDate: Data, endDate: Data, filterSelection: int): Optional<List<AgendaEntry>>
 }
 
 class RetrieveTaskUI {
@@ -50,4 +49,5 @@ Repositories -> Repositories : instance
 AgendaController ..>  AgendaRepository : agendaRepository
 AgendaRepository --> AgendaController : requestColabTaskList()
 AgendaRepository --> AgendaController : requestColabPlannedTaskList()
+AgendaRepository ---> AgendaController : requestPossibleColabPlannedTaskList()
 @enduml
