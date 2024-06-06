@@ -4,34 +4,37 @@
 
 ### 3.1. Rationale
 
-| Interaction ID | Question: Which class is responsible for...           | Answer                | Justification (with patterns)                                                                                                             |
-|:---------------|:------------------------------------------------------|:----------------------|:------------------------------------------------------------------------------------------------------------------------------------------|
-| Step 1         | ... interacting with the actor?                       | ToDoListUI            | Pure Fabrication: A UI component typically handles user interactions and acts as an interface between the user and the system.            |
-|                | ... coordinating the use case?                        | ToDoListController    | Controller: The controller orchestrates the use case by coordinating the interactions between the UI and the domain model.                |
-| Step 2         | ... getting the current session instance?             | ApplicationSession    | Singleton: The session instance is retrieved using the Singleton pattern to ensure a single instance throughout the application.           |
-|                | ... getting the current user session?                 | ApplicationSession    | Controller: The controller retrieves the current session details to determine the responsible user's email.                               |
-| Step 3         | ... getting the responsible user's email?             | UserSession           | Controller: The controller retrieves the email from the user session to identify the responsible user.                                     |
-| Step 4         | ... getting the green spaces by the responsible user? | GreenSpaceRepository  | Repository: The repository pattern encapsulates the logic for retrieving green spaces managed by the responsible user.                     |
-| Step 5         | ... converting green spaces to DTOs?                  | toDoEntryMapper       | Pure Fabrication: The mapper component handles the conversion of domain objects to data transfer objects (DTOs) for UI presentation.      |
-| Step 6         | ... showing the list of green spaces to the actor?    | ToDoListUI            | Pure Fabrication: The UI component is responsible for presenting the list of green spaces to the user.                                    |
-| Step 7         | ... searching for the green space by ID?              | GreenSpaceRepository  | Repository: The repository pattern encapsulates the logic for searching and retrieving green space details by ID.                         |
-| Step 8         | ... registering and validating the to-do entry?                 | toDoListRepository    | Repository: The repository pattern encapsulates the logic for adding a new to-do entry to the system and validating it.                   |
+| Interaction ID | Question: Which class is responsible for...                | Answer                                      | Justification (with patterns)                                                                                                   |
+|:---------------|:-----------------------------------------------------------|:--------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------|
+| Step 1         | ... interacting with the actor?                            | ToDoListUI                                  | Pure Fabrication: A UI component typically handles user interactions and acts as an interface between the user and the system.  |
+|                | ... coordinating the US?                                   | ToDoListController                          | Controller: The controller orchestrates the use case by coordinating the interactions between the UI and the domain model.      |
+|                | ... knowing the user using the system?                     | UserSession                                 | IE: cf. A&A component documentation.                                                                                            |
+|                | ... retrieving the list of Green Spaces?                   | ToDoListController and GreenSpaceRepository | Repository: The repository pattern encapsulates the logic for retrieving data                                                   |
+| Step 2         | ... displaying the list for the actor to select an option? | GreenSpaceRepository                        | Pure Fabrication                                                                                                                |
+| Step 3         | ... temporarily keeping the input option?                  | ToDoListUI                                  | Pure Fabrication                                                                                                                |
+| Step 4         | ... displaying the form for the actor to input data?       | ToDoListUI                                  | Pure Fabrication                                                                                                                |
+| Step 5         | ... temporarily keeping the input option?                  | ToDoListUI                                  | Pure Fabrication                                                                                                                |
+| Step 6         | ... display all the information before submitting?         | ToDoListUI                                  | Pure Fabrication.                                                                                                               |
+| Step 7         | ... submiting data?                                        | toDoListRepository                          | Repository: The repository handles the retrieval and manipulation of data, iterating over the existent Tasks in the repository. |              
+| 	              | ... validating all data (local validation)?                | ToDoEntry                                   | IE: kowns its data.                                                                                                             | 
+| 	              | ... validating all data (global validation)?               | toDoListRepository                          | IE: knows all its information.                                                                                                  |
+| 	              | ... saving the register toDo Entry?                        | toDoListRepository                          | IE: owns all data.                                                                                                              |
+| Step 8         | ... informing operation success?                           | ToDoListUI                                  | IE: is responsible for user interactions.                                                                                       | 
+
 
 ### Systematization
 
 According to the taken rationale, the conceptual classes promoted to software classes are:
 
 * GreenSpaceRepository (Repository)
-* ApplicationSession (Singleton)
 * UserSession (Entity)
+* ToDoEntry
 
 Other software classes (i.e. Pure Fabrication) identified:
 
 * ToDoListController
 * ToDoListUI
-* toDoEntryMapper
 * toDoListRepository
-* Repositories (Singleton)
 
 
 

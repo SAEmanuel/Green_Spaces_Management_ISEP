@@ -13,6 +13,7 @@ participant ":ToDoListController" as CTRL
 participant ":ApplicationSession" as _APP
 participant "appSession\n:ApplicationSession" as APP
 participant "currentSession\n:UserSession" as SESSAO
+participant "responsibleEmail\n:String" as EMAIL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "greenSpaceRepository\n:GreenSpaceRepository" as GREENSpaceRepository
@@ -55,7 +56,6 @@ activate Employee
                     CTRL -> SESSAO: getUserEmail()
                     activate SESSAO
 
-                        SESSAO --> CTRL: responsibleEmail
                     deactivate SESSAO
                     deactivate CTRL
                      |||
