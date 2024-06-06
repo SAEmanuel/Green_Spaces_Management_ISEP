@@ -3,7 +3,12 @@ package pt.ipp.isep.dei.Domain;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import static org.apache.commons.lang3.StringUtils.isNumeric;
 
 public class FileWriter {
     public static void writeOutputUS17(String[] points, int[] distances, int apIndex, List<List<Integer>> paths, String outputPath) throws IOException {
@@ -65,5 +70,35 @@ public class FileWriter {
             System.out.println("File write error: " + exception.getMessage());
         }
     }
+
+    public static void writeToUmlFile(List<ArrayList<String>> paths, String file) {
+        Set<String> uniqueConnections = new HashSet<>();
+
+        try (PrintWriter graphPrintWriter = new PrintWriter(file)) {
+            graphPrintWriter.println("@startuml");
+            graphPrintWriter.printf("graph GraphRep {%n");
+
+            for (ArrayList<String> path : paths) {
+                if (path.size() > 2) {
+                    for (int i = 0; i < path.size() - 2; i++) { // Change loop condition to exclude the last element
+                        String node1 = path.get(i);
+                        String node2 = path.get(i + 1);
+                        String connection = String.format("%s -- %s", node1, node2);
+                        String reverseConnection = String.format("%s -- %s", node2, node1);
+                        if (!uniqueConnections.contains(connection) && !uniqueConnections.contains(reverseConnection)) {
+                            uniqueConnections.add(connection);
+                            graphPrintWriter.printf("%s%n", connection);
+                        }
+                    }
+                }
+            }
+
+            graphPrintWriter.printf("}%n");
+            graphPrintWriter.println("@enduml");
+        } catch (FileNotFoundException exception) {
+            System.out.println("File write error: " + exception.getMessage());
+        }
+    }
+
 
 }

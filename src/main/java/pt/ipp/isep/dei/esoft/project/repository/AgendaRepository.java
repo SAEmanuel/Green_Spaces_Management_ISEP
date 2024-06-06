@@ -14,7 +14,6 @@ public class AgendaRepository implements Serializable {
 
     private List<AgendaEntry> agenda;
     private List<AgendaEntry> agendaBackUp;
-    private TeamRepository teamRepository;
 
 
     private static final String STATUS_CANCELLED = "Canceled";
