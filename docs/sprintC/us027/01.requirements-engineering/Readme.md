@@ -38,11 +38,11 @@ A collaborator is a person (an employee) that have a name, birthdate, a salary, 
 
 ### 1.3. Acceptance Criteria 
 
-* **AC1:** Should be at least one green Space on the managed list to be sorted 
-
+* **AC1:** Should be at least one green Space on the managed list to be sorted
 * **AC2:** The green space manager should write the sorting algorithm on the configuration file and should be one of the followings names 
 in front of "sorting.type", in order to work: "Ascending By Name", "Descending By Name", 
-"Insertion Sort", "Bubble Sort" 
+"Insertion Sort", "Bubble Sort"
+* **AC3** The configuration file should remain inside "~/src/main/resources" directory in order to function
 
 
 ### 1.4. Found out Dependencies
