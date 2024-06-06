@@ -97,9 +97,9 @@ public class AssignTeamToAgendaTask_Controller implements Initializable {
             table_endDate.setItems(list);
             getInfos();
             if (toDoEntry) {
-                sendConfirmation.confirmationMessages("Success", "ToDo entry successfully registered!", "");
+                sendConfirmation.confirmationMessages("Success", "Team successfully assigned!", "");
             } else {
-                sendInformation.informationMessages("ATTENTION", "ToDo entry not registered - Already registered!", "");
+                sendInformation.informationMessages("ATTENTION", "Team not assigned - This task already have a team assigned!", "");
             }
         } catch (IllegalArgumentException e) {
             sendErrors.errorMessages("Invalid Inputs", e.getMessage(), "");

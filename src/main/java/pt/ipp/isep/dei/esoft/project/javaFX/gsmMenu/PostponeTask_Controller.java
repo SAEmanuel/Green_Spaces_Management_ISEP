@@ -48,7 +48,7 @@ public class PostponeTask_Controller implements Initializable {
 
 
     @FXML
-        private ChoiceBox<AgendaEntry> choiceBox_task;
+    private ChoiceBox<AgendaEntry> choiceBox_task;
 
     @FXML
     private DatePicker choice_data;
@@ -91,7 +91,7 @@ public class PostponeTask_Controller implements Initializable {
     public void submitRegistration(ActionEvent event) {
         try {
             getValues();
-            boolean toDoEntry = controller.postponeTask(taskID,dataInput,selectedTask);
+            boolean toDoEntry = controller.postponeTask(taskID, dataInput, selectedTask);
 
             table_endDate.getItems().clear();
             table_endDate.getItems().addAll(agendaEntryList);
@@ -129,7 +129,7 @@ public class PostponeTask_Controller implements Initializable {
             int day = Integer.parseInt(date[2]);
             dataInput = new Data(year, month, day);
             taskID = choiceBox_task.getSelectionModel().getSelectedIndex();
-            selectedTask =choiceBox_task.getSelectionModel().getSelectedItem();
+            selectedTask = choiceBox_task.getSelectionModel().getSelectedItem();
             if (taskID == -1) {
                 throw new IllegalArgumentException("Task field must been fill!");
             }
