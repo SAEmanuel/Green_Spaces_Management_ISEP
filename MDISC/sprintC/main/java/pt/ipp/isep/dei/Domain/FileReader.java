@@ -47,18 +47,15 @@ public class FileReader {
     }
 
     public static List<ArrayList<String>> readOutput(String filePath) throws IOException {
-        Scanner sc = new Scanner(new File(filePath));
         List<ArrayList<String>> output = new ArrayList<>();
-        ArrayList<String> row = new ArrayList<>();
-        while (sc.hasNextLine()) {
-            String[] values = sc.nextLine().split(";");
-            if (sc.hasNextLine()) {
-                row.add(Arrays.toString(values));
+        try (Scanner sc = new Scanner(new File(filePath))) {
+            while (sc.hasNextLine()) {
+                String[] values = sc.nextLine().split(";");
+                ArrayList<String> row = new ArrayList<>(Arrays.asList(values));
+                output.add(row);
             }
         }
-        output.add(row);
         return output;
     }
-
 
 }

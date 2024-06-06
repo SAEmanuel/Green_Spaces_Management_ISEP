@@ -90,9 +90,13 @@ public class Main {
             // Escrever a saída da US18 num ficheiro CSV
             FileWriter.writeOutputUS18(pointsUs18, closestApIndices, closestDistances, allPaths, "MDISC/sprintC/main/java/pt/ipp/isep/dei/Outputs/output_US18.csv");
 
-            FileReader.readOutput("MDISC/sprintC/main/java/pt/ipp/isep/dei/Outputs/output_US17.csv");
-            FileReader.readOutput("MDISC/sprintC/main/java/pt/ipp/isep/dei/Outputs/output_US18.csv");
+            List<ArrayList<String>> graphUS17 = FileReader.readOutput("MDISC/sprintC/main/java/pt/ipp/isep/dei/Outputs/output_US17.csv");
+            List<ArrayList<String>> graphUS18 = FileReader.readOutput("MDISC/sprintC/main/java/pt/ipp/isep/dei/Outputs/output_US18.csv");
+            System.out.println(graphUS17);
+            System.out.println(graphUS18);
 
+            FileWriter.writeToUmlFile(graphUS17,"MDISC/sprintC/main/java/pt/ipp/isep/dei/Outputs/outputGraph_US17.puml");
+            FileWriter.writeToUmlFile(graphUS18,"MDISC/sprintC/main/java/pt/ipp/isep/dei/Outputs/outputGraph_US18.puml");
 
         } catch (IOException e) {
             e.printStackTrace();
