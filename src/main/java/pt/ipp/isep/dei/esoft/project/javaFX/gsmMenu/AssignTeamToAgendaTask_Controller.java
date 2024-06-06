@@ -107,6 +107,14 @@ public class AssignTeamToAgendaTask_Controller implements Initializable {
     }
 
 
+
+    public void clear(ActionEvent event) {
+        choiceBox_email.getSelectionModel().clearSelection();
+        choiceBox_task.getSelectionModel().clearSelection();
+        choiceBox_team.getSelectionModel().clearSelection();
+
+    }
+
     private void getInfos() {
         choiceBox_email.getSelectionModel().clearSelection();
         choiceBox_task.getSelectionModel().clearSelection();
@@ -123,13 +131,6 @@ public class AssignTeamToAgendaTask_Controller implements Initializable {
         if (taskID == -1 || teamID == -1 || emailService == null) {
             throw new IllegalArgumentException("Task, Team or Email Service must been fill!");
         }
-    }
-
-    public void clear(ActionEvent event) {
-        choiceBox_email.getSelectionModel().clearSelection();
-        choiceBox_task.getSelectionModel().clearSelection();
-        choiceBox_team.getSelectionModel().clearSelection();
-
     }
 
     private String[] getTask() {

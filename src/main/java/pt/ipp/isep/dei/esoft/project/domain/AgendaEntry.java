@@ -20,6 +20,7 @@ public class AgendaEntry implements Serializable {
     private Data expected_end_Date;
     private Data real_end_Date;
     private final String responsible;
+    private String stringVehicle;
 
     public Data getReal_end_Date() {
         return real_end_Date;
@@ -66,6 +67,7 @@ public class AgendaEntry implements Serializable {
         this.team = null;
         this.vehicles = new ArrayList<>();
         this.responsible = agendaEntry.getResponsible();
+        setVehiclesString();
     }
 
     /**
@@ -234,12 +236,25 @@ public class AgendaEntry implements Serializable {
     public boolean addVehicle(Vehicle vehicle) {
         if (!vehicles.contains(vehicle)) {
             vehicles.add(vehicle);
+            setVehiclesString();
             return true;
         }
         return false;
     }
     public String getStatus(){
         return agendaEntry.getStatus();
+    }
+
+    public void setVehiclesString(){
+        StringBuilder builder = new StringBuilder();
+        for (Vehicle vehicle : vehicles) {
+            builder.append("[").append(vehicle.getPlateId()).append(" | ").append(vehicle.getModel()).append(" | ").append(vehicle.getBrand()).append("]\n");
+        }
+        stringVehicle = builder.toString();
+    }
+
+    public String getStringVehicle(){
+        return stringVehicle;
     }
 
     public void addVehicles(List<Vehicle> vehicles) {
