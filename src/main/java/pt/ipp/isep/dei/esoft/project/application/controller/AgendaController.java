@@ -139,9 +139,10 @@ public class AgendaController {
 
         if (agendaRepository.assignTeam(teams.get(teamID), agendaEntryID, responsible)) {
             try {
-                sendEmail.sendEmail(emailService, teams.get(teamID).getCollaboratorsEmail(), "Assigned to a Task", "You and your team members have been assigned to a task in an agenda");
+                if(!sendEmail.sendEmail(emailService, teams.get(teamID).getCollaboratorsEmail(), "Assigned to a Task", "You and your team members have been assigned to a task in an agenda"))
+                    System.out.println(ANSI_BRIGHT_RED + "Email not sent, invalid configuration file data" + ANSI_RESET);
             } catch (IOException e) {
-                System.out.println("Email not sent");
+                System.out.println("Email not sent, file not found or invalid configuration file data");
             }
             return true;
         }
