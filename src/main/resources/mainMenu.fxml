@@ -8,7 +8,7 @@
 
 <AnchorPane fx:id="mainMenuScene" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@Css/Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.javaFX.MainMenu_Controller">
    <children>
-      <Label alignment="CENTER" layoutX="-7.0" layoutY="-10.0" opacity="0.47" prefHeight="111.0" prefWidth="1011.0" text="MusgoSublime">
+      <Label alignment="CENTER" layoutX="-7.0" layoutY="-16.0" opacity="0.47" prefHeight="111.0" prefWidth="1011.0" text="MusgoSublime">
          <font>
             <Font name="System Bold" size="92.0" />
          </font>

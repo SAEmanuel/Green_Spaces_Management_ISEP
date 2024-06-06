@@ -162,6 +162,15 @@ public class AgendaEntry implements Serializable {
     // ********** Gets ************
 
     /**
+     * Gets the starting date for this agenda entry.
+     *
+     * @return Starting Date.
+     */
+    public Data getStarting_Date() {
+        return starting_Date;
+    }
+
+    /**
      * Gets the responsible user for this agenda entry.
      *
      * @return The responsible user's email.
@@ -229,6 +238,9 @@ public class AgendaEntry implements Serializable {
         }
         return false;
     }
+    public String getStatus(){
+        return agendaEntry.getStatus();
+    }
 
     public void addVehicles(List<Vehicle> vehicles) {
         this.vehicles.addAll(vehicles);
@@ -279,8 +291,8 @@ public class AgendaEntry implements Serializable {
      */
     @Override
     public String toString() {
-        return String.format("  Information: %s \n  Status: %s%s%s \n  Team: %s \n  Vehicles: %s \n  Starting Date: %s \n  Expected End Date: %s \n  Real End Date: %s",
-                agendaEntry, ANSI_MEDIUM_SPRING_GREEN, agendaEntry.getStatus(), ANSI_RESET, team,
+        return String.format("  Information: %s \n  Status: %s \n  Team: %s \n  Vehicles: %s \n  Starting Date: %s \n  Expected End Date: %s \n  Real End Date: %s",
+                agendaEntry, agendaEntry.getStatus() , team,
                 vehicles.stream().map(Vehicle::toStringTaskPreview).collect(Collectors.joining("")), starting_Date,
                 expected_end_Date, real_end_Date);
     }

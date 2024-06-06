@@ -9,6 +9,6 @@ public class SendErrors {
         alert.setTitle(title);
         alert.setHeaderText(header);
         alert.setContentText(content);
-        alert.showAndWait();
+        alert.show();
     }
 }
