@@ -36,7 +36,7 @@ public class AssignTeamToTaskAgendaUI implements Runnable {
     public void run() {
         System.out.println("\n\n--- Postpone a task in agenda ------------------------");
 
-
+        boolean fileError = false;
         if (requestEntryInformation()) {
             int continueApp = confirmsData();
 
@@ -45,7 +45,7 @@ public class AssignTeamToTaskAgendaUI implements Runnable {
             }
         } else {
             if(teamID == -1 || agendaEntryID == -1)
-                System.out.println(ANSI_BRIGHT_RED + "Does not exist task in the AGENDA or no TEAM in the system or the isn't any email service file available ... Add some" + ANSI_RESET);
+                System.out.println(ANSI_BRIGHT_RED + "Does not exist task in the AGENDA or there is no TEAM in the system ... Add some" + ANSI_RESET);
         }
     }
 
@@ -203,8 +203,17 @@ public class AssignTeamToTaskAgendaUI implements Runnable {
      */
     private String requestEmailService() {
         List<String > emailServices = controller.getEmailServices();
-        if(emailServices == null)
+
+        if(emailServices == null){
             return null;
+        }
+
+        if(emailServices.isEmpty()){
+            System.out.println(ANSI_BRIGHT_RED + "The isn't any email service file available ... Add some" + ANSI_RESET);
+            return null;
+
+        }
+
         int n = emailServices.size();
         if (n != 0) {
             showEmailServices(emailServices);

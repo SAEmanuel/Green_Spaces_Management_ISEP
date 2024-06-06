@@ -621,39 +621,4 @@ public class AgendaRepository implements Serializable {
         return agendaTask.addVehicle(vehicle);
     }
 
-    /**
-     * Retrieves a list of teams that are currently in use in the agenda.
-     * This method returns a list of teams associated with agenda entries.
-     *
-     * @return A list of teams currently in use in the agenda.
-     */
-    public List<Team> getTeamsInUse() {
-        // Initialize a list to store teams currently in use
-        List<Team> teams = new ArrayList<>();
-        // Iterate through the agenda entries
-        for (AgendaEntry agendaEntry : agenda) {
-            // Check if the agenda entry has a team associated with it
-            if (agendaEntry.getTeam() != null) {
-                // Add the team to the list of teams in use
-                teams.add(agendaEntry.getTeam());
-            }
-        }
-        // Return the list of teams in use
-        return teams;
-    }
-
-    /**
-     * Retrieves the team repository.
-     * This method ensures that the team repository is initialized and returns it.
-     *
-     * @return The team repository.
-     */
-    private TeamRepository getTeamRepository() {
-        if (teamRepository == null) {
-            Repositories repositories = Repositories.getInstance();
-            teamRepository = repositories.getTeamRepository();
-        }
-        return teamRepository;
-    }
-
 }

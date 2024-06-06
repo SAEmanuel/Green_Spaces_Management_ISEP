@@ -20,6 +20,7 @@ public class AgendaEntry implements Serializable {
     private Data expected_end_Date;
     private Data real_end_Date;
     private final String responsible;
+    private String stringVehicle;
 
     public Data getReal_end_Date() {
         return real_end_Date;
@@ -66,6 +67,7 @@ public class AgendaEntry implements Serializable {
         this.team = null;
         this.vehicles = new ArrayList<>();
         this.responsible = agendaEntry.getResponsible();
+        setVehiclesString();
     }
 
     /**
@@ -162,6 +164,15 @@ public class AgendaEntry implements Serializable {
     // ********** Gets ************
 
     /**
+     * Gets the starting date for this agenda entry.
+     *
+     * @return Starting Date.
+     */
+    public Data getStarting_Date() {
+        return starting_Date;
+    }
+
+    /**
      * Gets the responsible user for this agenda entry.
      *
      * @return The responsible user's email.
@@ -225,9 +236,25 @@ public class AgendaEntry implements Serializable {
     public boolean addVehicle(Vehicle vehicle) {
         if (!vehicles.contains(vehicle)) {
             vehicles.add(vehicle);
+            setVehiclesString();
             return true;
         }
         return false;
+    }
+    public String getStatus(){
+        return agendaEntry.getStatus();
+    }
+
+    public void setVehiclesString(){
+        StringBuilder builder = new StringBuilder();
+        for (Vehicle vehicle : vehicles) {
+            builder.append("[").append(vehicle.getPlateId()).append(" | ").append(vehicle.getModel()).append(" | ").append(vehicle.getBrand()).append("]\n");
+        }
+        stringVehicle = builder.toString();
+    }
+
+    public String getStringVehicle(){
+        return stringVehicle;
     }
 
     public void addVehicles(List<Vehicle> vehicles) {
@@ -279,8 +306,8 @@ public class AgendaEntry implements Serializable {
      */
     @Override
     public String toString() {
-        return String.format("  Information: %s \n  Status: %s%s%s \n  Team: %s \n  Vehicles: %s \n  Starting Date: %s \n  Expected End Date: %s \n  Real End Date: %s",
-                agendaEntry, ANSI_MEDIUM_SPRING_GREEN, agendaEntry.getStatus(), ANSI_RESET, team,
+        return String.format("  Information: %s \n  Status: %s \n  Team: %s \n  Vehicles: %s \n  Starting Date: %s \n  Expected End Date: %s \n  Real End Date: %s",
+                agendaEntry, agendaEntry.getStatus() , team,
                 vehicles.stream().map(Vehicle::toStringTaskPreview).collect(Collectors.joining("")), starting_Date,
                 expected_end_Date, real_end_Date);
     }

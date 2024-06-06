@@ -34,7 +34,8 @@ import java.util.*;
 public class AddEntryAgenda_Controller implements Initializable {
 
     private AgendaController controller = new AgendaController();
-    private ToDoListRepository repository = Repositories.getInstance().getToDoRepository(); ;
+    private ToDoListRepository repository = Repositories.getInstance().getToDoRepository();
+    ;
     private SendErrors sendErrors = new SendErrors();
     private ConfirmationAlerts sendConfirmation = new ConfirmationAlerts();
     private InformationAlerts sendInformation = new InformationAlerts();
@@ -62,6 +63,8 @@ public class AddEntryAgenda_Controller implements Initializable {
     @FXML
     private ChoiceBox<String> toDo_Option;
 
+    private Data dataInput;
+    private int toDoEntry;
 
     private final String responsible = Repositories.getInstance().getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail();
     private final List<ToDoEntry> toDoListForResponsible = repository.getToDoListForResponsible(responsible);
@@ -70,20 +73,19 @@ public class AddEntryAgenda_Controller implements Initializable {
     ObservableList<ToDoEntry> list = FXCollections.observableArrayList(toDoListForResponsible);
 
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         String[] toDoList = new String[toDoListForResponsible.size()];
         for (int i = 0; i < toDoListForResponsible.size(); i++) {
-            toDoList[i] = toDoListForResponsible.get(i).getTitle()+" | " + toDoListForResponsible.get(i).getGreenSpace().getName();
+            toDoList[i] = toDoListForResponsible.get(i).getTitle() + " | " + toDoListForResponsible.get(i).getGreenSpace().getName();
         }
         toDo_Option.getItems().addAll(toDoList);
 
         table_title.setCellValueFactory(new PropertyValueFactory<ToDoEntry, String>("title"));
         table_description.setCellValueFactory(new PropertyValueFactory<ToDoEntry, String>("description"));
         table_greenSpace.setCellValueFactory(new PropertyValueFactory<ToDoEntry, String>("parkName"));
-        table_expectedDuration.setCellValueFactory(new PropertyValueFactory<ToDoEntry,Integer>("expectedDuration"));
-        table_urgency.setCellValueFactory(new PropertyValueFactory<ToDoEntry,ToDoEntry.Urgency>("urgency"));
+        table_expectedDuration.setCellValueFactory(new PropertyValueFactory<ToDoEntry, Integer>("expectedDuration"));
+        table_urgency.setCellValueFactory(new PropertyValueFactory<ToDoEntry, ToDoEntry.Urgency>("urgency"));
         table.setItems(list);
 
     }
@@ -91,30 +93,46 @@ public class AddEntryAgenda_Controller implements Initializable {
 
     public void submitRegistration(ActionEvent event) {
         try {
-            Data date = getDate();
-            Optional<AgendaEntry> agendaEntry = controller.registerAgendaEntry(toDo_Option.getSelectionModel().getSelectedIndex(),date);
+            getDate();
+            Optional<AgendaEntry> agendaEntry = controller.registerAgendaEntry(toDoEntry, dataInput);
             if (agendaEntry.isPresent()) {
-                sendConfirmation.confirmationMessages("Success","Green Space successfully registered!","");
+                sendConfirmation.confirmationMessages("Success", "Green Space successfully registered!", "");
             } else {
-                sendInformation.informationMessages("ATTENTION","Green Space not registered - Already registered!","");
+                sendInformation.informationMessages("ATTENTION", "Green Space not registered - Already registered!", "");
             }
             list = FXCollections.observableArrayList(repository.getToDoListForResponsible(responsible));
             table.setItems(list);
+            getInfos();
         } catch (IllegalArgumentException e) {
-            sendErrors.errorMessages("Invalid Inputs",e.getMessage(),"");
+            sendErrors.errorMessages("Invalid Inputs", e.getMessage(), "");
         }
 
     }
 
-    private Data getDate() {
+    private void getDate() {
+
+        try {
             LocalDate myDate = startingDate.getValue();
             String[] date = myDate.toString().split("-");
             int year = Integer.parseInt(date[0]);
             int month = Integer.parseInt(date[1]);
             int day = Integer.parseInt(date[2]);
-            return (new Data(year, month, day));
+            dataInput = new Data(year, month, day);
+            toDoEntry =toDo_Option.getSelectionModel().getSelectedIndex();
+            if (toDoEntry == -1) {
+                throw new IllegalArgumentException("Select a toDo entry!");
+            }
+        } catch (NullPointerException e) {
+            throw new IllegalArgumentException("Enter a valid date... Make sure is not null or the format is correct (dd-mm-yyyy)");
+        }
     }
 
+    private void getInfos() {
+        int selection = toDo_Option.getSelectionModel().getSelectedIndex();
+        startingDate.setValue(null);
+        toDo_Option.getSelectionModel().clearSelection();
+        toDo_Option.getItems().remove(selection);
+    }
 
     public void clear(ActionEvent event) {
         startingDate.setValue(null);
@@ -187,7 +205,6 @@ public class AddEntryAgenda_Controller implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
 
 
 }
