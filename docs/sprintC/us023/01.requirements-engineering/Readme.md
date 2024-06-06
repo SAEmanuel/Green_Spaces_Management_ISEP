@@ -67,6 +67,7 @@ Done).
   email_service.isep_ipp_pt.use_ssl = false
 "
 * **AC5** A team can be assigned to multiple entries but an agenda entry can only have one team assigned
+* **AC6** The configuration file should remain inside "~/src/main/resources" directory in order to function
 
 ### 1.4. Found out Dependencies
 
