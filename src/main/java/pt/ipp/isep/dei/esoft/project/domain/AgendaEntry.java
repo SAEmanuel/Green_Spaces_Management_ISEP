@@ -234,7 +234,7 @@ public class AgendaEntry implements Serializable {
      * @return true if the vehicle was added successfully, false otherwise.
      */
     public boolean addVehicle(Vehicle vehicle) {
-        if (!vehicles.contains(vehicle)) {
+        if (!vehicles.contains(vehicle) && !agendaEntry.getStatus().equals(String.valueOf(Status.CANCELED)))  {
             vehicles.add(vehicle);
             setVehiclesString();
             return true;
