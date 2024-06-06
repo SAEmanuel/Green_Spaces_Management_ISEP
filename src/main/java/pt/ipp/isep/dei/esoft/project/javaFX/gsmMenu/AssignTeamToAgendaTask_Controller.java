@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -39,6 +40,9 @@ public class AssignTeamToAgendaTask_Controller implements Initializable {
     private Repositories repositories = Repositories.getInstance();
     private AgendaRepository agendaRepository = repositories.getAgenda();
     private Stage stage;
+
+    @FXML
+    private Label email_label;
 
     @FXML
     private ChoiceBox<String> choiceBox_email;
@@ -85,6 +89,7 @@ public class AssignTeamToAgendaTask_Controller implements Initializable {
         table_size.setCellValueFactory(new PropertyValueFactory<AgendaEntry, String>("expected_end_Date"));
         table_status.setCellValueFactory(new PropertyValueFactory<AgendaEntry, AgendaEntry.Status>("status"));
         table_endDate.setItems(list);
+        email_label.setText(repositories.getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail());
     }
 
 

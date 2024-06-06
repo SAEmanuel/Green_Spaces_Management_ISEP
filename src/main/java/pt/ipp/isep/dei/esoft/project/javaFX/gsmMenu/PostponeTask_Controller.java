@@ -9,10 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
@@ -54,6 +51,9 @@ public class PostponeTask_Controller implements Initializable {
     private DatePicker choice_data;
 
     @FXML
+    private Label email_label;
+
+    @FXML
     private TableView<AgendaEntry> table_endDate;
 
     @FXML
@@ -85,6 +85,7 @@ public class PostponeTask_Controller implements Initializable {
         table_size.setCellValueFactory(new PropertyValueFactory<AgendaEntry, String>("expected_end_Date"));
         table_status.setCellValueFactory(new PropertyValueFactory<AgendaEntry, AgendaEntry.Status>("status"));
         table_endDate.setItems(list);
+        email_label.setText(Repositories.getInstance().getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail());
     }
 
 

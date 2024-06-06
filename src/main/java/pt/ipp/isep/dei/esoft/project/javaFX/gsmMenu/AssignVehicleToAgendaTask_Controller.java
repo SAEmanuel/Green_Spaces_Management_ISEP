@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -64,6 +65,8 @@ public class AssignVehicleToAgendaTask_Controller implements Initializable {
     @FXML
     private TableColumn<AgendaEntry, String> table_vehicles;
 
+    @FXML
+    private Label email_label;
 
     ObservableList<AgendaEntry> list = FXCollections.observableArrayList(agendaEntryList);
 
@@ -77,6 +80,7 @@ public class AssignVehicleToAgendaTask_Controller implements Initializable {
         table_satrtingDate.setCellValueFactory(new PropertyValueFactory<AgendaEntry, String>("starting_Date"));
         table_vehicles.setCellValueFactory(new PropertyValueFactory<AgendaEntry, String>("stringVehicle"));
         table.setItems(list);
+        email_label.setText(Repositories.getInstance().getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail());
     }
 
 

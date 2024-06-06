@@ -9,10 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
@@ -42,6 +39,9 @@ public class AddEntryAgenda_Controller implements Initializable {
 
     @FXML
     private TableView<ToDoEntry> table;
+
+    @FXML
+    private Label email_label;
 
     @FXML
     private TableColumn<ToDoEntry, Integer> table_expectedDuration;
@@ -87,6 +87,7 @@ public class AddEntryAgenda_Controller implements Initializable {
         table_expectedDuration.setCellValueFactory(new PropertyValueFactory<ToDoEntry, Integer>("expectedDuration"));
         table_urgency.setCellValueFactory(new PropertyValueFactory<ToDoEntry, ToDoEntry.Urgency>("urgency"));
         table.setItems(list);
+        email_label.setText(Repositories.getInstance().getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail());
 
     }
 
