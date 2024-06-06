@@ -65,12 +65,7 @@
                               <Image url="@Images/mail_pro.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="name_label" layoutX="92.0" layoutY="34.0" prefHeight="14.0" prefWidth="191.0" text="Jorge" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="11.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="email_label" layoutX="92.0" layoutY="48.0" prefHeight="14.0" prefWidth="191.0" text="Email" textFill="WHITE">
+                        <Label fx:id="email_label" alignment="CENTER" layoutX="86.0" layoutY="58.0" prefHeight="14.0" prefWidth="191.0" text="Email" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="11.0" />
                            </font>
@@ -82,6 +77,11 @@
                         </Label>
                         <Line endX="140.0" fill="RED" layoutX="-36.0" layoutY="108.0" startX="84.0" stroke="#00acff" />
                         <Line endX="140.0" fill="WHITE" layoutX="113.0" layoutY="107.0" startX="84.0" stroke="#00acff" />
+                        <Label layoutX="111.0" layoutY="27.0" prefHeight="21.0" prefWidth="150.0" text="Welcome Back!" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                        </Label>
                      </children>
                   </Pane>
                </children>
@@ -99,12 +99,7 @@
                      </image>
                   </ImageView>
                </children></Pane>
-            <Label layoutX="29.0" layoutY="84.0" text="Hello!">
-               <font>
-                  <Font name="System Bold" size="36.0" />
-               </font>
-            </Label>
-            <Label fx:id="name_mid" layoutX="160.0" layoutY="84.0" prefHeight="44.0" prefWidth="544.0" text="name">
+            <Label layoutX="29.0" layoutY="84.0" text="Hello! Nice to see you again.">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>

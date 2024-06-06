@@ -17,6 +17,7 @@ import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
 import pt.ipp.isep.dei.esoft.project.javaFX.alerts.ConfirmationAlerts;
 import pt.ipp.isep.dei.esoft.project.javaFX.alerts.InformationAlerts;
 import pt.ipp.isep.dei.esoft.project.javaFX.alerts.SendErrors;
+import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
 import java.io.IOException;
 import java.net.URL;
@@ -39,6 +40,8 @@ public class AddGreenSpace_Controller implements Initializable {
     @FXML
     private TableColumn<GreenSpace, Integer> table_area;
 
+    @FXML
+    private Label email_label;
 
     @FXML
     private TableColumn<GreenSpace, String> table_name;
@@ -68,6 +71,7 @@ public class AddGreenSpace_Controller implements Initializable {
         table_area.setCellValueFactory(new PropertyValueFactory<GreenSpace, Integer>("area"));
         table_size.setCellValueFactory(new PropertyValueFactory<GreenSpace, GreenSpace.Size>("size"));
         table_greenSpaces.setItems(list);
+        email_label.setText(Repositories.getInstance().getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail());
     }
 
     private String[] getTamanhos() {

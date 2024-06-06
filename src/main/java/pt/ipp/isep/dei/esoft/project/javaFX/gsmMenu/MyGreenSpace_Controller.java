@@ -1,16 +1,25 @@
 package pt.ipp.isep.dei.esoft.project.javaFX.gsmMenu;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
-public class MyGreenSpace_Controller {
+public class MyGreenSpace_Controller implements Initializable {
+
+    @FXML
+    private Label email_label;
 
     private Stage stage;
 
@@ -23,7 +32,10 @@ public class MyGreenSpace_Controller {
     }
 
 
-
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        email_label.setText(Repositories.getInstance().getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail());
+    }
 
 
 
@@ -85,6 +97,7 @@ public class MyGreenSpace_Controller {
         stage.setScene(scene);
         stage.show();
     }
+
 
 }
 
