@@ -80,23 +80,25 @@ public class AddGreenSpace_Controller implements Initializable {
 
 
     public void submitRegistration(ActionEvent event) {
-        getValues();
-        try {
-            Optional<GreenSpace> greenSpace = controller.registerGreenSpace(name,size,area,address);
-            list = FXCollections.observableArrayList(controller.getAllGreenSpaces());
-            table_greenSpaces.setItems(list);
-            if (greenSpace.isPresent()) {
-                sendConfirmation.confirmationMessages("Success","Green Space successfully registered!","");
-            } else {
-                sendInformation.informationMessages("ATTENTION","Green Space not registered - Already registered!","");
-            }
-        } catch (IllegalArgumentException e) {
-            sendErrors.errorMessages("Invalid Inputs",e.getMessage(),"");
-        }
+        boolean success = getValues();
+        if (success) {
+            try {
+                Optional<GreenSpace> greenSpace = controller.registerGreenSpace(name,size,area,address);
+                list = FXCollections.observableArrayList(controller.getAllGreenSpaces());
+                table_greenSpaces.setItems(list);
+                if (greenSpace.isPresent()) {
+                    sendConfirmation.confirmationMessages("Success","Green Space successfully registered!","");
+                } else {
+                    sendInformation.informationMessages("ATTENTION","Green Space not registered - Already registered!","");
+                }
+            } catch (IllegalArgumentException e) {
 
+                sendErrors.errorMessages("Invalid Inputs",e.getMessage(),"");
+            }
+        }
     }
 
-    private void getValues() {
+    private boolean getValues() {
         try {
             area = Integer.parseInt(label_parkArea.getText());
             name = label_parkName.getText();
@@ -105,17 +107,19 @@ public class AddGreenSpace_Controller implements Initializable {
             if (size == -1 ) {
                 throw new IllegalArgumentException();
             }
+            return true;
         }catch (NumberFormatException e) {
             String title = "Invalid Input area";
             String header = "Invalid Area! Make sure only put numbers...";
             String content = "Enter a new one:";
             sendErrors.errorMessages(title,header,content);
-
+            return false;
         }catch (IllegalArgumentException e){
             String title = "Invalid Size";
             String header = "Invalid Size! Make sure to select a size... ";
             String content = "Enter a new one:";
             sendErrors.errorMessages(title,header,content);
+            return false;
         }
     }
 

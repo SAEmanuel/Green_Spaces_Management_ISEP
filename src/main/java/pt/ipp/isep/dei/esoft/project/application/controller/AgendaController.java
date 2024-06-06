@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_BRIGHT_RED;
+import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_RESET;
+
 /**
  * Controller class for managing the agenda operations.
  */
@@ -155,7 +158,8 @@ public class AgendaController {
             SendEmail sendEmail = new SendEmail();
             return sendEmail.getEmailServices();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println(ANSI_BRIGHT_RED + "\nConfiguration File not found!..Add one in \"/src/main/resource\" location" + ANSI_RESET);
+            return null;
         }
     }
 

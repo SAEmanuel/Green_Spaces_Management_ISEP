@@ -51,7 +51,8 @@ public class ShowGreenSpacesByManagerController {
         try {
             greenSpaces = sortGreenSpaces.sortGreenSpaces(greenSpaces);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println(ANSI_BRIGHT_RED + "\nConfiguration File not found!..Add one in \"/src/main/resource\" location" + ANSI_RESET);
+            return null;
         }
         return greenSpaces;
     }
