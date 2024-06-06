@@ -43,7 +43,7 @@ public class AddToDoEntry_Controller implements Initializable {
 
 
     @FXML
-    private TextField field_days,field_description,field_title;
+    private TextField field_days, field_description, field_title;
 
 
     @FXML
@@ -64,16 +64,13 @@ public class AddToDoEntry_Controller implements Initializable {
     @FXML
     private TableColumn<ToDoEntry, ToDoEntry.Urgency> table_urgency;
 
-    private String title,description;
-    private int days,urgency,greenSpaceId;
+    private String title, description;
+    private int days, urgency, greenSpaceId;
     private final ArrayList<GreenSpace> greenSpaceList = (ArrayList<GreenSpace>) controller.getGreenSpacesByResponsible();
     private final ToDoEntry.Urgency[] urgencyList = ToDoEntry.Urgency.values();
 
 
-
-
     ObservableList<ToDoEntry> list = FXCollections.observableArrayList(controller.getToDoEntries());
-
 
 
     @Override
@@ -84,8 +81,8 @@ public class AddToDoEntry_Controller implements Initializable {
         table_title.setCellValueFactory(new PropertyValueFactory<ToDoEntry, String>("title"));
         table_description.setCellValueFactory(new PropertyValueFactory<ToDoEntry, String>("description"));
         table_greenSpace.setCellValueFactory(new PropertyValueFactory<ToDoEntry, String>("greenSpace"));
-        table_expectedDuration.setCellValueFactory(new PropertyValueFactory<ToDoEntry,Integer>("expectedDuration"));
-        table_urgency.setCellValueFactory(new PropertyValueFactory<ToDoEntry,ToDoEntry.Urgency>("urgency"));
+        table_expectedDuration.setCellValueFactory(new PropertyValueFactory<ToDoEntry, Integer>("expectedDuration"));
+        table_urgency.setCellValueFactory(new PropertyValueFactory<ToDoEntry, ToDoEntry.Urgency>("urgency"));
         table.setItems(list);
     }
 
@@ -107,23 +104,25 @@ public class AddToDoEntry_Controller implements Initializable {
 
 
     public void submitRegistration(ActionEvent event) {
-        getValues();
-        try {
-            Optional<ToDoEntry> toDoEntry = controller.registerToDoEntry(greenSpaceId,title,description,urgency,days);
-            list = FXCollections.observableArrayList(controller.getToDoEntries());
-            table.setItems(list);
-            if (toDoEntry.isPresent()) {
-                sendConfirmation.confirmationMessages("Success","ToDo entry successfully registered!","");
-            } else {
-                sendInformation.informationMessages("ATTENTION","ToDo entry not registered - Already registered!","");
+        boolean success = getValues();
+        if (success) {
+            try {
+                Optional<ToDoEntry> toDoEntry = controller.registerToDoEntry(greenSpaceId, title, description, urgency, days);
+                list = FXCollections.observableArrayList(controller.getToDoEntries());
+                table.setItems(list);
+                if (toDoEntry.isPresent()) {
+                    sendConfirmation.confirmationMessages("Success", "ToDo entry successfully registered!", "");
+                } else {
+                    sendInformation.informationMessages("ATTENTION", "ToDo entry not registered - Already registered!", "");
+                }
+            } catch (IllegalArgumentException e) {
+                sendErrors.errorMessages("Invalid Inputs", e.getMessage(), "");
             }
-        } catch (IllegalArgumentException e) {
-            sendErrors.errorMessages("Invalid Inputs",e.getMessage(),"");
         }
 
     }
 
-    private void getValues() {
+    private boolean getValues() {
         try {
             days = Integer.parseInt(field_days.getText());
             title = field_days.getText();
@@ -133,17 +132,20 @@ public class AddToDoEntry_Controller implements Initializable {
             if (urgency == -1 || greenSpaceId == -1) {
                 throw new IllegalArgumentException();
             }
-        }catch (NumberFormatException e) {
+            return true;
+        } catch (NumberFormatException e) {
             String title = "Invalid Input days";
             String header = "Invalid Days! Make sure only put numbers...";
             String content = "Enter a new one:";
-            sendErrors.errorMessages(title,header,content);
+            sendErrors.errorMessages(title, header, content);
+            return false;
 
-        }catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             String title = "Invalid Urgency/Green Space";
             String header = "Invalid Urgency/Green Space! Make sure to make a selection... ";
             String content = "Enter a new one:";
-            sendErrors.errorMessages(title,header,content);
+            sendErrors.errorMessages(title, header, content);
+            return false;
         }
     }
 
@@ -154,8 +156,6 @@ public class AddToDoEntry_Controller implements Initializable {
         choiceBox_greenspace.getSelectionModel().clearSelection();
         choiceBox_urgency.getSelectionModel().clearSelection();
     }
-
-
 
 
     //------------------------------------ Options Side Bar --------------------------

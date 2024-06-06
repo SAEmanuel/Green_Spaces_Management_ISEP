@@ -8,7 +8,7 @@
 
 <AnchorPane fx:id="mainMenuScene" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@Css/Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.javaFX.MainMenu_Controller">
    <children>
-      <Label layoutX="119.0" layoutY="-10.0" opacity="0.47" text="MusgoSublime">
+      <Label alignment="CENTER" layoutX="-7.0" layoutY="-10.0" opacity="0.47" prefHeight="111.0" prefWidth="1011.0" text="MusgoSublime">
          <font>
             <Font name="System Bold" size="92.0" />
          </font>
@@ -29,7 +29,7 @@
                   <Font name="System Bold" size="29.0" />
                </font>
             </Label>
-            <Button fx:id="exit" layoutX="25.0" layoutY="356.0" mnemonicParsing="false" onAction="#logout" prefHeight="35.0" prefWidth="408.0" stylesheets="@Css/LoginBtns.css" text="Cancel" textFill="WHITE">
+            <Button fx:id="exit" layoutX="99.0" layoutY="356.0" mnemonicParsing="false" onAction="#logout" prefHeight="35.0" prefWidth="262.0" stylesheets="@Css/LoginBtns.css" text="Cancel" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
