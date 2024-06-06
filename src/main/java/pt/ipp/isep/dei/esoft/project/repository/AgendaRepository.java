@@ -79,7 +79,7 @@ public class AgendaRepository implements Serializable {
      * @param endDate         The end date of the range within which tasks are being requested.
      * @param filterSelection The filter selection used to determine which tasks to include in the list.
      * @return An optional list of possible planned agenda entries for the specified collaborator within the given date range and filter selection.
-     *         If the list is empty, the optional will be empty as well.
+     * If the list is empty, the optional will be empty as well.
      */
     public Optional<List<AgendaEntry>> requestPossibleColabPlannedTaskList(Collaborator collaborator, Data startDate, Data endDate, int filterSelection) {
         Optional<List<AgendaEntry>> optionalValue = Optional.empty();
@@ -146,7 +146,7 @@ public class AgendaRepository implements Serializable {
      * @param endDate         The end date of the range within which tasks are being retrieved.
      * @param filterSelection The filter selection used to determine which tasks to include in the list.
      * @return A list of planned agenda entries for the specified collaborator within the given date range and filter selection,
-     *         which have the potential to be marked as done. The list is sorted by start date.
+     * which have the potential to be marked as done. The list is sorted by start date.
      */
     public List<AgendaEntry> getPossibleDoneTaskPlannedList(Collaborator collaborator, Data startDate, Data endDate, int filterSelection) {
         List<AgendaEntry> plannedList = new ArrayList<>();
@@ -182,25 +182,28 @@ public class AgendaRepository implements Serializable {
      */
     public Optional<List<AgendaEntry>> changedTaskStatusList(Collaborator collaborator, Data startDate, Data endDate, int filterSelection, String confirmation, int selectedTask) {
         List<AgendaEntry> taskList = getTaskPlannedList(collaborator, startDate, endDate, filterSelection);
-        List<AgendaEntry> taskPossibleList = getPossibleDoneTaskPlannedList(collaborator, startDate, endDate, filterSelection);
 
-        if (confirmation.equalsIgnoreCase("y") && !taskPossibleList.isEmpty() && selectedTask >= 0 && selectedTask < taskPossibleList.size()) {
+        if (confirmation.equalsIgnoreCase("y") && !taskList.isEmpty() && selectedTask >= 0 && selectedTask < taskList.size()) {
 
-            taskPossibleList.get(selectedTask).setReal_end_Date(Data.currentDate());
-            taskPossibleList.get(selectedTask).getAgendaEntry().setStatus(String.valueOf(AgendaEntry.Status.DONE));
+            taskList.get(selectedTask).setReal_end_Date(Data.currentDate());
+            taskList.get(selectedTask).getAgendaEntry().setStatus(String.valueOf(AgendaEntry.Status.DONE));
 
-            if (!taskPossibleList.get(selectedTask).getVehicles().isEmpty() || taskPossibleList.get(selectedTask).getTeam() != null) {
-                agendaBackUp.get(selectedTask).setReal_end_Date(Data.currentDate());
-                List<Vehicle> removedVehicles = new ArrayList<>(taskPossibleList.get(selectedTask).getVehicles());
-                taskPossibleList.get(selectedTask).getVehicles().clear();
+
+            if (!taskList.get(selectedTask).getVehicles().isEmpty() || taskList.get(selectedTask).getTeam() != null) {
+               for (AgendaEntry agendaEntry : agendaBackUp) {
+                   if (agendaEntry.equals(taskList.get(selectedTask))) {
+                       agendaEntry.setReal_end_Date(Data.currentDate());
+                   }
+               }
+                List<Vehicle> removedVehicles = new ArrayList<>(taskList.get(selectedTask).getVehicles());
+                taskList.get(selectedTask).getVehicles().clear();
                 agendaBackUp.get(selectedTask).addVehicles(removedVehicles);
-                Team removedTeam = taskPossibleList.get(selectedTask).getTeam();
-                taskPossibleList.get(selectedTask).setTeam(null);
+                Team removedTeam = taskList.get(selectedTask).getTeam();
+                taskList.get(selectedTask).setTeam(null);
                 agendaBackUp.get(selectedTask).addTeam(removedTeam);
-
             }
 
-            return Optional.of(taskPossibleList);
+            return Optional.of(taskList);
         }
 
         return Optional.empty();
@@ -358,7 +361,7 @@ public class AgendaRepository implements Serializable {
      *
      * @param entry The agenda entry to be added to the backup list.
      * @return true if the backup copy of the agenda entry was successfully added to the backup list,
-     *         false otherwise (e.g., if the provided entry is not valid for backup).
+     * false otherwise (e.g., if the provided entry is not valid for backup).
      */
     public boolean addAgendaBackup(AgendaEntry entry) {
         boolean success = false;
@@ -392,7 +395,7 @@ public class AgendaRepository implements Serializable {
      *
      * @param entry The agenda entry to be validated.
      * @return true if the provided agenda entry is unique and can be added to the backup list,
-     *         false if there is already an identical entry in the backup list.
+     * false if there is already an identical entry in the backup list.
      */
     public boolean validateBackUp(AgendaEntry entry) {
         for (AgendaEntry agendaEntry : agendaBackUp) {

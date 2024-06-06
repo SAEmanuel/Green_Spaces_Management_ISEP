@@ -222,7 +222,7 @@ public class RetrieveTasksUI implements Runnable {
                 if (plannedTaskList.isPresent()) {
                     System.out.println(ANSI_BRIGHT_GREEN + "Task completion successfully registered!" + ANSI_RESET);
                 } else if (!plannedTaskList.isPresent() && confirmation.equalsIgnoreCase("y")) {
-                    System.out.printf(ANSI_BRIGHT_RED + "No tasks assigned to you %s or for those filters!" + ANSI_RESET, collaborator.getName());
+                    System.out.printf(ANSI_BRIGHT_RED + "No tasks assigned to you %s or your planned tasks haven't started yet!" + ANSI_RESET, collaborator.getName());
 
                 }
             }
