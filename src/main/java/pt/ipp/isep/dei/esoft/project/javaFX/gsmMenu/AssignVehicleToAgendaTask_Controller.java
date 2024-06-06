@@ -32,22 +32,25 @@ import java.util.ResourceBundle;
 public class AssignVehicleToAgendaTask_Controller implements Initializable {
 
     private Stage stage;
+    private int vehicleID, taskID;
+    private Vehicle vehicle;
 
+    private final SendErrors sendErrors = new SendErrors();
+    private final ConfirmationAlerts sendConfirmation = new ConfirmationAlerts();
+    private final InformationAlerts sendInformation = new InformationAlerts();
+    private final AgendaController controller = new AgendaController();
+    private final Repositories repositories = Repositories.getInstance();
+    private final AgendaRepository agendaRepository = repositories.getAgenda();
+    private final String RESPONSIBLE = repositories.getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail();
 
-    private SendErrors sendErrors = new SendErrors();
-    private ConfirmationAlerts sendConfirmation = new ConfirmationAlerts();
-    private InformationAlerts sendInformation = new InformationAlerts();
-
-    private AgendaController controller = new AgendaController();
-    private Repositories repositories = Repositories.getInstance();
-    private AgendaRepository agendaRepository = repositories.getAgenda();
-
+    private List<AgendaEntry> agendaEntryList = agendaRepository.getAgendaEntriesForResponsibleTeam(RESPONSIBLE);
+    private List<Vehicle> vehicleList = controller.getAvailableVehicles();
 
     @FXML
     private ChoiceBox<String> choiceBox_task;
 
     @FXML
-    private ChoiceBox<String> choiceBox_vehicle;
+    private ChoiceBox<Vehicle> choiceBox_vehicle;
 
     @FXML
     private TableView<AgendaEntry> table;
@@ -61,20 +64,13 @@ public class AssignVehicleToAgendaTask_Controller implements Initializable {
     @FXML
     private TableColumn<AgendaEntry, String> table_vehicles;
 
-    private int vehicleID, taskID;
-    private Vehicle vehicle;
-    private AgendaEntry agendaEntry;
-
-    private final String RESPONSIBLE = repositories.getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail();
-    private List<AgendaEntry> agendaEntryList = agendaRepository.getAgendaEntriesForResponsibleTeam(RESPONSIBLE);
-    private List<Vehicle> vehicleList = controller.getAvailableVehicles();
 
     ObservableList<AgendaEntry> list = FXCollections.observableArrayList(agendaEntryList);
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        choiceBox_vehicle.getItems().addAll(getVehicles());
+        choiceBox_vehicle.getItems().addAll(vehicleList);
         choiceBox_task.getItems().addAll(getTask());
 
         table_task.setCellValueFactory(new PropertyValueFactory<AgendaEntry, String>("agendaEntry"));
@@ -87,17 +83,17 @@ public class AssignVehicleToAgendaTask_Controller implements Initializable {
     public void submitRegistration(ActionEvent event) {
         try {
             getValues();
-            vehicle = vehicleList.get(vehicleID);
-            agendaEntry = agendaEntryList.get(taskID);
-            boolean toDoEntry = controller.assignVehicle(agendaEntry,vehicle);
 
-            list = FXCollections.observableArrayList(agendaEntryList);
-            table.setItems(list);
+            boolean toDoEntry = controller.assignVehicle(agendaEntryList.get(taskID),vehicle);
+
             getInfos();
+
+            table.getItems().clear();
+            table.getItems().addAll(agendaEntryList);
             if (toDoEntry) {
-                sendConfirmation.confirmationMessages("Success", "ToDo entry successfully registered!", "");
+                sendConfirmation.confirmationMessages("Success", "Vehicle successfully assigned to the task.!", "");
             } else {
-                sendInformation.informationMessages("ATTENTION", "ToDo entry not registered - Already registered!", "");
+                sendInformation.informationMessages("ATTENTION", "Vehicle not assigned - Already assigned to a task.!", "");
             }
         } catch (IllegalArgumentException e) {
             sendErrors.errorMessages("Invalid Inputs", e.getMessage(), "");
@@ -115,7 +111,6 @@ public class AssignVehicleToAgendaTask_Controller implements Initializable {
     private void getInfos() {
         choiceBox_task.getSelectionModel().clearSelection();
         choiceBox_vehicle.getSelectionModel().clearSelection();
-        choiceBox_task.getItems().remove(taskID);
         choiceBox_vehicle.getItems().remove(vehicleID);
 
     }
@@ -126,6 +121,7 @@ public class AssignVehicleToAgendaTask_Controller implements Initializable {
         if (taskID == -1 || vehicleID == -1) {
             throw new IllegalArgumentException("Task or vehicle field must been fill!");
         }
+        vehicle = choiceBox_vehicle.getSelectionModel().getSelectedItem();
     }
 
     private String[] getTask() {
@@ -135,17 +131,6 @@ public class AssignVehicleToAgendaTask_Controller implements Initializable {
         }
         return taskEntries;
     }
-
-    private String[] getVehicles() {
-        String[] team = new String[vehicleList.size()];
-        for (int i = 0; i < vehicleList.size(); i++) {
-            team[i] = vehicleList.get(i).toString();
-        }
-        return team;
-    }
-
-
-
 
 
 
