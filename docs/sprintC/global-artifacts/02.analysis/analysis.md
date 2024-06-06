@@ -2,31 +2,30 @@
 
 ## Rationale to identify domain conceptual classes
 
-### _Conceptual Class Category List_ 
+### _Conceptual Class Category List_
 
 **Business Transactions**
 
 * Vehicle Maintenance
 * Team Assignment
 
-
 ---
 
 **Transaction Line Items**
 
-* 
+*
 
 ---
 
 **Product/Service related to a Transaction or Transaction Line Item**
 
-* 
+*
 
 ---
 
 **Transaction Records**
 
-* 
+*
 
 ---  
 
@@ -45,7 +44,7 @@
 * HRM registers multiple Collaborator.
 * HRM generates multiple Team.
 
-* Collaborator has one Job 
+* Collaborator has one Job
 
 ---
 
@@ -59,9 +58,12 @@
 
 **Noteworthy Events**
 
-* MusgoSublime manages green spaces, which are used by GSU and managed by GSM. This system has collaborators who have a job and skills assigned to them which are registered by HRM.
-  HRM also generates teams composed by collaborators. These teams have an agenda to follow defined by tasks. They also use vehicles (registered by VFM) who can transport equipment and machines.
-  These vehicles need a periodical check-up (defined by VFM), the system informs the VFM of what vehicles need check-up, he may select the ones he wants and registers the overhauling.
+* MusgoSublime manages green spaces, which are used by GSU and managed by GSM. This system has collaborators who have a
+  job and skills assigned to them which are registered by HRM.
+  HRM also generates teams composed by collaborators. These teams have an agenda to follow defined by tasks. They also
+  use vehicles (registered by VFM) who can transport equipment and machines.
+  These vehicles need a periodical check-up (defined by VFM), the system informs the VFM of what vehicles need check-up,
+  he may select the ones he wants and registers the overhauling.
 
 ---
 
@@ -70,6 +72,7 @@
 * Vehicle transports Equipment
 * Vehicle transports Machine
 * Vehicle is registered by VFM
+
 ---
 
 **Descriptions of Things**
@@ -83,7 +86,7 @@
 
 **Catalogs**
 
-* 
+*
 
 ---
 
@@ -92,7 +95,6 @@
 * Team
 * VehicleForCheckUp
 * Collaborator
-
 
 ---
 
@@ -106,8 +108,10 @@
 
 **Organizations**
 
-* MusgoSublime :  is an organization dedicated to the planning, construction and maintenance of green spaces for collective use in their multiple dimensions.
+* MusgoSublime :  is an organization dedicated to the planning, construction and maintenance of green spaces for
+  collective use in their multiple dimensions.
 * MusgoSublime manages multiple GreenSpace
+
 ---
 
 **Other External/Collaborating Systems**
@@ -134,51 +138,40 @@
 
 ---
 
-
 ## Rationale to identify associations between conceptual classes
 
-An association is a relationship between instances of objects that indicates a relevant connection and that is worth of remembering, or it is derivable from the List of Common Associations:
-
-- **_A_** is physically or logically part of **_B_**
-- **_A_** is physically or logically contained in/on **_B_**
-- **_A_** is a description for **_B_**
-- **_A_** known/logged/recorded/reported/captured in **_B_**
-- **_A_** uses or manages or owns **_B_**
-- **_A_** is related with a transaction (item) of **_B_**
-- etc.
-    
-
-| Concept (A)       |   Association   |       Concept (B) |
-|-------------------|:---------------:|------------------:|
-| MusgoSublime      |     manages     |        GreenSpace |
-| MusgoSublime      |       has       |      Collaborator |
-| GreenSpace  	     |  is managed by  |               GSM |
-| GreenSpace  	     |   is used by    |               GSU |
-| GreenSpace  	     | has carried out |              Task |
-| Task              |  is defined by  |            Agenda |
-| Task              |    requires     |             Skill |
-| Task              |    requires     |               Job |
-| Skill             |   assigned to   |      Collaborator |
-| Collaborator      |       has       |               Job |
-| HRM               |    register     |      Collaborator |
-| HRM               |    register     |               Job |
-| HRM               |    register     |             Skill |
-| HRM               |    generates    |              Team |
-| Team              |       has       |      Collaborator |
-| Team              |       has       |            Agenda |
-| Team              |      uses       |           Vehicle |
-| Vehicle           |    transport    |         Equipment |
-| Vehicle           |    transport    |           Machine |
-| VFM               |    register     |           CheckUp |
-| VFM               |    register     |           Vehicle |
-| VFM               |     selects     | VehicleForCheckUp |
-| VehicleForCheckUp |     informs     |               VFM |
-| VehicleForCheckUp |      does       |           CheckUp |
-| VehicleForCheckUp | is contained in |           Vehicle |
-
-
-
+| Concept (A)     |          Association          |     Concept (B) |
+|-----------------|:-----------------------------:|----------------:|
+| GreenSpace      |       is registered by        |             GSM |
+| ToDoEntry       |       is registered by        |             GSM |
+| AgendaEntry     |       is registered by        |             GSM |
+| AgendaEntry     |     is assigned a team by     |             GSM |
+| AgendaEntry     |        is postponed by        |             GSM |
+| AgendaEntry     |        is canceled by         |             GSM |
+| Vehicle         |        is assigned by         |             GSM |
+| SortGreenSpaces |  lists managed green spaces   |             GSM |
+| GreenSpace      |        is retrieved by        | SortGreenSpaces |
+| Vehicle         |          is used by           |     AgendaEntry |
+| Team            |        is possessed by        |     AgendaEntry |
+| AgendaEntry     |        is contained in        |          Agenda |
+| ToDoEntry       |        is contained in        |     AgendaEntry |
+| CheckUp         |       is registered by        |             VFM |
+| Vehicle         |       is registered by        |             VFM |
+| CheckUp         |           lists for           |             VFM |
+| Vehicle         |        is assigned to         |         CheckUp |
+| Skill           |       is registered by        |             HRM |
+| Job             |       is registered by        |             HRM |
+| Collaborator    |       is registered by        |             HRM |
+| Team            |        is generated by        |             HRM |
+| Collaborator    |        is assigned to         |           Skill |
+| Job             |        is assigned to         |    Collaborator |
+| Collaborator    |        is contained in        |            Team |
+| ToDoEntry       |           lists for           |    Collaborator |
+| ToDoEntry       | is registered as completed by |    Collaborator |
+| ToDoEntry       |        is contained in        |          Agenda |
+| Vehicle         |          is used by           |            Team |
+| Agenda          |        is possessed by        |            Team |
 
 ## Domain Model
 
-![Domain Model](svg/project-domain-model.svg)**
+![Domain Model](svg/project-domain-model-Domain_Model.svg)**
