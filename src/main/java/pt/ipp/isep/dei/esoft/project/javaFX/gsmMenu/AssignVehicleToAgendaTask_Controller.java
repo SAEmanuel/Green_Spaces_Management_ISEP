@@ -21,6 +21,7 @@ import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 import pt.ipp.isep.dei.esoft.project.javaFX.alerts.ConfirmationAlerts;
 import pt.ipp.isep.dei.esoft.project.javaFX.alerts.InformationAlerts;
 import pt.ipp.isep.dei.esoft.project.javaFX.alerts.SendErrors;
+import pt.ipp.isep.dei.esoft.project.javaFX.extras.SwitchWindows;
 import pt.ipp.isep.dei.esoft.project.repository.AgendaRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
@@ -36,6 +37,7 @@ public class AssignVehicleToAgendaTask_Controller implements Initializable {
     private int vehicleID, taskID;
     private Vehicle vehicle;
 
+    private final SwitchWindows switchWindows = new SwitchWindows();
     private final SendErrors sendErrors = new SendErrors();
     private final ConfirmationAlerts sendConfirmation = new ConfirmationAlerts();
     private final InformationAlerts sendInformation = new InformationAlerts();
@@ -140,68 +142,38 @@ public class AssignVehicleToAgendaTask_Controller implements Initializable {
 
 
     //------------------------------------ Options Side Bar --------------------------
+
+    public void changeToAddEntryAgenda(ActionEvent event) throws IOException {
+        switchWindows.changeWindow(event,"/addEntryAgenda.fxml");
+    }
+
     public void switchGSMMenu(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/gsmUI.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        switchWindows.changeWindow(event,"/gsmUI.fxml");
     }
 
     public void changeToAddGreenSpace(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/addGreenSpace.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        switchWindows.changeWindow(event,"/addGreenSpace.fxml");
     }
 
     public void changeToEntryToDoList(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/addToDoEntry.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void changeToAddEntryAgenda(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/addEntryAgenda.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        switchWindows.changeWindow(event,"/addToDoEntry.fxml");
     }
 
     public void changeToAssignTeam(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/assignTeamToAgendaTask.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        switchWindows.changeWindow(event,"/assignTeamToAgendaTask.fxml");
     }
 
     public void changeToPsotponeTask(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/postponeTask.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        switchWindows.changeWindow(event,"/postponeTask.fxml");
     }
 
     public void changeToCancelTask(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cancelTask.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        switchWindows.changeWindow(event,"/cancelTask.fxml");
     }
 
     public void changeToMyGreenSpaces(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/myGreenSpaces.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        switchWindows.changeWindow(event,"/myGreenSpaces.fxml");
     }
+
 }
 
