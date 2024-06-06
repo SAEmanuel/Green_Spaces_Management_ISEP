@@ -9,6 +9,10 @@ import java.util.*;
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_RESET;
 
+/**
+ * The ToDoListUI class provides a console-based user interface for adding new entries to a to-do list.
+ * It interacts with the user to gather information about the to-do entry and submits the entry to the controller.
+ */
 public class ToDoListUI implements Runnable {
 
     private GreenSpaceDTO greenSpaceDTO;
@@ -20,14 +24,25 @@ public class ToDoListUI implements Runnable {
 
     private final ToDoListController controller;
 
+    /**
+     * Constructs a new ToDoListUI instance and initializes the controller.
+     */
     public ToDoListUI() {
         controller = new ToDoListController();
     }
 
+    /**
+     * Gets the ToDoListController instance.
+     *
+     * @return the controller instance
+     */
     private ToDoListController getController() {
         return controller;
     }
 
+    /**
+     * Runs the to-do list UI, prompting the user to add a new entry.
+     */
     @Override
     public void run() {
         System.out.println("\n\n--- Add New Entry To-Do List ------------------------");
@@ -35,26 +50,26 @@ public class ToDoListUI implements Runnable {
 
         greenSpacesAvailableByResponsible = controller.getGreenSpaceDTOByResponsible();
 
-        if(!greenSpacesAvailableByResponsible.isEmpty()){
+        if (!greenSpacesAvailableByResponsible.isEmpty()) {
             getGreenSpaceListOption(greenSpacesAvailableByResponsible);
-
             requestData();
-
             int continueApp = confirmsMenu();
-
             if (continueApp != 2) {
                 submitData();
             }
-
         } else {
             System.out.println("You are not responsible for any green space");
         }
-
     }
 
+    /**
+     * Prompts the user to select a green space from the list of available green spaces.
+     *
+     * @param greenSpacesAvailableByResponsible the list of green spaces
+     * @return 0 if a valid green space is selected, -1 otherwise
+     */
     public int getGreenSpaceListOption(List<GreenSpaceDTO> greenSpacesAvailableByResponsible) {
         Scanner input = new Scanner(System.in);
-
         int answer;
         int n = greenSpacesAvailableByResponsible.size();
 
@@ -75,20 +90,17 @@ public class ToDoListUI implements Runnable {
                     input.nextLine();
                 }
                 System.out.print(ANSI_BRIGHT_YELLOW + "Invalid Green Space ID, enter a new one: " + ANSI_RESET);
-
             }
         }
         return -1;
     }
-
-
 
     /**
      * Displays a list of green spaces available for a responsible person.
      *
      * @param greenSpacesAvailableByResponsible the list of green spaces
      */
-    public void showGreenSpaces( List<GreenSpaceDTO> greenSpacesAvailableByResponsible) {
+    public void showGreenSpaces(List<GreenSpaceDTO> greenSpacesAvailableByResponsible) {
         if (greenSpacesAvailableByResponsible.isEmpty()) {
             System.out.println(ANSI_BRIGHT_RED + "No green spaces were found in the repository." + ANSI_RESET);
         } else {
@@ -101,19 +113,24 @@ public class ToDoListUI implements Runnable {
         }
     }
 
-
+    /**
+     * Prompts the user to enter the details of the to-do entry.
+     */
     private void requestData() {
-       title = requestTitle();
-       description = requestDescription();
-       urgency = requestUrgency();
-       expectedDuration = requestExpectedDuration();
-
+        title = requestTitle();
+        description = requestDescription();
+        urgency = requestUrgency();
+        expectedDuration = requestExpectedDuration();
     }
 
+    /**
+     * Prompts the user to enter the urgency level for the to-do entry.
+     *
+     * @return the urgency level
+     */
     private int requestUrgency() {
         ToDoEntry.Urgency[] values = controller.getUrgency();
         Scanner input = new Scanner(System.in);
-
 
         System.out.print("\n-- Urgency --\n");
         for (int i = 0; i < values.length; i++) {
@@ -138,7 +155,7 @@ public class ToDoListUI implements Runnable {
                     input.next();
                     answer = input.nextInt();
                 }
-            }catch (InputMismatchException e) {
+            } catch (InputMismatchException e) {
                 leave = false;
             }
         } while (answer < 1 || answer > values.length);
@@ -146,18 +163,33 @@ public class ToDoListUI implements Runnable {
         return answer - 1;
     }
 
+    /**
+     * Prompts the user to enter the title for the to-do entry.
+     *
+     * @return the title
+     */
     private String requestTitle() {
         Scanner input = new Scanner(System.in);
         System.out.print("Title: ");
         return input.nextLine();
     }
 
+    /**
+     * Prompts the user to enter the description for the to-do entry.
+     *
+     * @return the description
+     */
     private String requestDescription() {
         Scanner input = new Scanner(System.in);
         System.out.print("Description: ");
         return input.nextLine();
     }
 
+    /**
+     * Prompts the user to enter the expected duration for the to-do entry.
+     *
+     * @return the expected duration in days
+     */
     private int requestExpectedDuration() {
         int resposta;
         Scanner input = new Scanner(System.in);
@@ -174,20 +206,21 @@ public class ToDoListUI implements Runnable {
         }
     }
 
+    /**
+     * Submits the gathered data to the controller for creating a new to-do entry.
+     */
     private void submitData() {
-        // Attempt to register the vehicle using the provided data
+        // Attempt to register the to-do entry using the provided data
         try {
-
             Optional<ToDoEntry> toDoEntry = getController().registerToDoEntry(greenSpaceId, title, description, urgency, expectedDuration);
 
             // Check if the registration was successful
             if (toDoEntry.isPresent()) {
                 System.out.println(ANSI_BRIGHT_GREEN + "To-Do entry successfully registered!" + ANSI_RESET);
             } else {
-                // Print error message if vehicle is already registered
+                // Print error message if to-do entry is already registered
                 System.out.println(ANSI_BRIGHT_RED + "To-Do entry not registered - Already registered!" + ANSI_RESET);
             }
-
         } catch (IllegalArgumentException e) {
             // Catch IllegalArgumentException indicating invalid data
             System.out.println(ANSI_BRIGHT_RED + e.getMessage() + ANSI_RESET);
@@ -196,19 +229,24 @@ public class ToDoListUI implements Runnable {
         }
     }
 
+    /**
+     * Handles the case when there is an exception during data submission, prompting the user to retry.
+     */
     public void runException() {
-
         if (repeatProcess()) {
             requestData();
             int continueApp = confirmsMenu();
-
             if (continueApp != 2) {
                 submitData();
             }
         }
-
     }
 
+    /**
+     * Prompts the user to decide whether to repeat the registration process.
+     *
+     * @return true if the user wants to repeat the process, false otherwise
+     */
     private boolean repeatProcess() {
         System.out.print("\nDo you wish to register new info? (y/n): ");
         Scanner scanner = new Scanner(System.in);
@@ -225,30 +263,38 @@ public class ToDoListUI implements Runnable {
         }
     }
 
-    private int confirmsMenu() {
-        Scanner input = new Scanner(System.in);
-        int option = -1;
+/**
+ * Displays the confirmation menu and prompts the user to confirm the entered
+ * information.
+ *
+ * @return the selected option from the confirmation menu
+ */
+private int confirmsMenu() {
+    Scanner input = new Scanner(System.in);
+    int option = -1;
 
+    while (option != 1) {
+        display();
+        option = input.nextInt();
 
-        while (option != 1) {
-            display();
-            option = input.nextInt();
-
-            if (option == 0) {
-                System.out.println();
-                requestData();
-            } else if (option == 1) {
-                System.out.println();
-            } else if (option == 2) {
-                System.out.println(ANSI_BRIGHT_RED + "LEAVING..." + ANSI_RESET);
-                return option;
-            } else {
-                System.out.println(ANSI_BRIGHT_RED + "Invalid choice. Please enter 0 or 1 or 2." + ANSI_RESET);
-            }
+        if (option == 0) {
+            System.out.println();
+            requestData();
+        } else if (option == 1) {
+            System.out.println();
+        } else if (option == 2) {
+            System.out.println(ANSI_BRIGHT_RED + "LEAVING..." + ANSI_RESET);
+            return option;
+        } else {
+            System.out.println(ANSI_BRIGHT_RED + "Invalid choice. Please enter 0 or 1 or 2." + ANSI_RESET);
         }
-        return option;
     }
+    return option;
+}
 
+    /**
+     * Displays the entered information for review and presents the confirmation menu.
+     */
     private void display() {
         ToDoEntry.Urgency[] urgencies = ToDoEntry.Urgency.values();
         System.out.println("\n\n-- To-Do Entry Review --");
@@ -259,8 +305,4 @@ public class ToDoListUI implements Runnable {
         System.out.println(ANSI_BRIGHT_YELLOW + "Green Space: " + greenSpaceDTO.getObjDto().getName() + ANSI_RESET);
         System.out.print("\nConfirmation menu:\n 0 -> Change Green Space Info\n 1 -> Continue\n 2 -> Exit\nSelected option: ");
     }
-
-
-
-
 }
