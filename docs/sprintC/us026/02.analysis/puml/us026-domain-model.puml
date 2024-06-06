@@ -31,10 +31,12 @@ package "GSM System" {
 
     class AgendaEntry {
         toDoEntry
-        StartingDate
-        EndDate
+        starting_Date
+        expected_end_Date
         Team
         List<Vehicles>
+        real_end_Date
+        responsible
     }
 
     class GSM {
