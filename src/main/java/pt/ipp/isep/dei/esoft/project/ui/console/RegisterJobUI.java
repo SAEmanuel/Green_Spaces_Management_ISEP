@@ -58,7 +58,7 @@ public class RegisterJobUI implements Runnable {
             }
 
         } catch (IllegalArgumentException e) {
-            System.out.print("");
+            System.out.println(ANSI_BRIGHT_RED + e.getMessage() + ANSI_RESET);
         }
 
     }
@@ -102,6 +102,7 @@ public class RegisterJobUI implements Runnable {
                 if (scanner.hasNextInt()) {
                     answer = scanner.nextInt();
                     if (answer == 0) {
+                        jobName = null;
                         newAnswer = requestJobName();
                         displayTypedJob(newAnswer);
                     } else if (answer == 2) {
