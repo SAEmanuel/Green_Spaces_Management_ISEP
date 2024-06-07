@@ -56,7 +56,7 @@ public class GsmUI_Controller implements Initializable {
         switchWindows.changeWindow(event,"/assignVehicleToAgendaTask.fxml");
     }
 
-    public void changeToPsotponeTask(ActionEvent event) throws IOException {
+    public void changeToPostponeTask(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/postponeTask.fxml");
     }
 

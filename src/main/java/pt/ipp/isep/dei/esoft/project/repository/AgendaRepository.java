@@ -184,22 +184,25 @@ public class AgendaRepository implements Serializable {
 
         if (confirmation.equalsIgnoreCase("y") && !taskList.isEmpty() && selectedTask >= 0 && selectedTask < taskList.size()) {
 
+            int i = 0;
             taskList.get(selectedTask).setReal_end_Date(Data.currentDate());
             taskList.get(selectedTask).getAgendaEntry().setStatus(String.valueOf(AgendaEntry.Status.DONE));
 
 
             if (!taskList.get(selectedTask).getVehicles().isEmpty() || taskList.get(selectedTask).getTeam() != null) {
-               for (AgendaEntry agendaEntry : agendaBackUp) {
-                   if (agendaEntry.equals(taskList.get(selectedTask))) {
-                       agendaEntry.setReal_end_Date(Data.currentDate());
-                   }
-               }
-                List<Vehicle> removedVehicles = new ArrayList<>(taskList.get(selectedTask).getVehicles());
-                taskList.get(selectedTask).getVehicles().clear();
-                agendaBackUp.get(selectedTask).addVehicles(removedVehicles);
-                Team removedTeam = taskList.get(selectedTask).getTeam();
-                taskList.get(selectedTask).setTeam(null);
-                agendaBackUp.get(selectedTask).addTeam(removedTeam);
+                for (AgendaEntry agendaEntry : agendaBackUp) {
+
+                    if (agendaEntry.equals(taskList.get(selectedTask))) {
+                        agendaEntry.setReal_end_Date(Data.currentDate());
+                        List<Vehicle> removedVehicles = new ArrayList<>(taskList.get(selectedTask).getVehicles());
+                        taskList.get(selectedTask).getVehicles().clear();
+                        agendaBackUp.get(i).addVehicles(removedVehicles);
+                        Team removedTeam = taskList.get(selectedTask).getTeam();
+                        taskList.get(selectedTask).setTeam(null);
+                        agendaBackUp.get(i).addTeam(removedTeam);
+                    }
+                    i++;
+                }
             }
 
             return Optional.of(taskList);

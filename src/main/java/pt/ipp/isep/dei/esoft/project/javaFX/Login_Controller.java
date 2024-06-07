@@ -49,7 +49,7 @@ public class Login_Controller implements Initializable {
         String password = userPassword.getText();
 
         if (ctrl.doLogin(email, password)) {
-            verificaUSR(email, event);
+            verifyUSR(email, event);
         } else {
             sendErrors.errorMessages("Invalid Credentials", "Invalid UserId and/or Password.", "");
         }
@@ -69,13 +69,16 @@ public class Login_Controller implements Initializable {
     }
 
 
-    private void verificaUSR(String email, Event event) throws IOException {
+    private void verifyUSR(String email, Event event) throws IOException {
         String[] emailSplit = email.split("@");
         if (emailSplit[0].equals(GSMPREFIX)) {
             switchToGsmMenu((ActionEvent) event);
         }
         if (emailSplit[0].equals(HRMPREFIX)) {
             switchToHrmMenu((ActionEvent) event);
+        }
+        if (!emailSplit[0].equals(HRMPREFIX) && !emailSplit[0].equals(GSMPREFIX)) {
+            switchToCollaboratorMenu((ActionEvent) event);
         }
     }
 
@@ -92,5 +95,8 @@ public class Login_Controller implements Initializable {
         switchWindows.changeWindow(event, "/hrmUI.fxml");
     }
 
+    public void switchToCollaboratorMenu(ActionEvent event) throws IOException {
+        switchWindows.changeWindow(event, "/collaboratorUI.fxml");
+    }
 
 }

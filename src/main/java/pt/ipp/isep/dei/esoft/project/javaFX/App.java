@@ -25,7 +25,7 @@ public class App extends Application {
 
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/mainMenu.fxml")));
         Scene scene = new Scene(root,1000,600);
-        stage.setTitle("MusgoSublime | GS Managment");
+        stage.setTitle("MusgoSublime | GS Management");
         Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Images/Logo_black.png")));
         stage.getIcons().add(icon);
         stage.setScene(scene);
