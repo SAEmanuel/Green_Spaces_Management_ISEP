@@ -20,6 +20,7 @@ public class Collaborator implements Serializable {
     private Job job;
     private List<Skill> skills;
     private Password password;
+    private DocType type;
 
     private static final int TAX_PAYER_NUMBER_MIN = 100000000;
     private static final int TAX_PAYER_NUMBER_MAX = 999999999;
@@ -59,6 +60,7 @@ public class Collaborator implements Serializable {
         this.skills = new ArrayList<Skill>();
         this.password = password;
         this.responsible = responsible;
+        this.type = DocType.values()[docType];
     }
 
     /**
@@ -104,7 +106,7 @@ public class Collaborator implements Serializable {
      */
     private void isValidEmailAddress(String emailAddress) {
         if (emailAddress == null || emailAddress.trim().isEmpty()) {
-            throw new IllegalArgumentException("Name cannot be null or empty.");
+            throw new IllegalArgumentException("Email cannot be null or empty.");
         }
 
         emailAddress = emailAddress.trim();
@@ -409,6 +411,10 @@ public class Collaborator implements Serializable {
      */
     public Job getJob() {
         return job;
+    }
+
+    public DocType getType() {
+        return type;
     }
 
     public void setPassword(Password password) {

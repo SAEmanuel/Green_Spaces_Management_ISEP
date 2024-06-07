@@ -24,7 +24,7 @@
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font></Button>
-                  <Button layoutX="29.0" layoutY="198.0" mnemonicParsing="false" onAction="#changeToRegisterJob" prefHeight="39.0" prefWidth="254.0" style="-fx-border-width: 0px 0px 4px 0px; -fx-border-color: #fff;" text="Register Job" textAlignment="CENTER">
+                  <Button layoutX="29.0" layoutY="198.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="254.0" style="-fx-border-width: 0px 0px 4px 0px; -fx-border-color: #fff;" text="Register Job" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>

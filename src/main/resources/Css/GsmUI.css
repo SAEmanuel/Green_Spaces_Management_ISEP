@@ -206,6 +206,8 @@
 
 .table-view{
     -fx-background-color: transparent;
-    -fx-border-color: #304851;
+    -fx-border-color: rgba(48, 72, 81, 0.85);
     -fx-border-radius: 8px;
+    -fx-border-width: 3px 3px 3px 3px;
+
 }

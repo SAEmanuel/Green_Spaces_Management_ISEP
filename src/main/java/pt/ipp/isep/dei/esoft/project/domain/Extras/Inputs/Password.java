@@ -17,7 +17,7 @@ public class Password implements Serializable {
 
     public Password(String pass) {
         if (!verifyPassword(pass)) {
-            throw new IllegalArgumentException(ANSI_BRIGHT_RED + "Invalid password!" + ANSI_RESET);
+            throw new IllegalArgumentException("Invalid password!");
         }
         this.pass = pass;
 
