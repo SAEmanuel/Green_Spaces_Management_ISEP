@@ -10,9 +10,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import pt.ipp.isep.dei.esoft.project.application.controller.RegisterSkillController;
-import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
-import pt.ipp.isep.dei.esoft.project.domain.Skill;
+import pt.ipp.isep.dei.esoft.project.application.controller.RegisterJobController;
+import pt.ipp.isep.dei.esoft.project.domain.Job;
 import pt.ipp.isep.dei.esoft.project.javaFX.alerts.ConfirmationAlerts;
 import pt.ipp.isep.dei.esoft.project.javaFX.alerts.InformationAlerts;
 import pt.ipp.isep.dei.esoft.project.javaFX.alerts.SendErrors;
@@ -24,13 +23,13 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class RegisterSkill_Controller implements Initializable {
+public class RegisterJob_Controller implements Initializable {
 
     private final SwitchWindows switchWindows = new SwitchWindows();
-    private final RegisterSkillController controller = new RegisterSkillController();
-    private SendErrors sendErrors = new SendErrors();
-    private ConfirmationAlerts sendConfirmation = new ConfirmationAlerts();
-    private InformationAlerts sendInformation = new InformationAlerts();
+    private final RegisterJobController controller = new RegisterJobController();
+    private final SendErrors sendErrors = new SendErrors();
+    private final ConfirmationAlerts sendConfirmation = new ConfirmationAlerts();
+    private final InformationAlerts sendInformation = new InformationAlerts();
 
     @FXML
     private Label email_label;
@@ -40,17 +39,17 @@ public class RegisterSkill_Controller implements Initializable {
 
 
     @FXML
-    private TableView<Skill> table;
+    private TableView<Job> table;
 
     @FXML
-    private TableColumn<Skill, String> table_skills;
+    private TableColumn<Job, String> table_skills;
 
-    ObservableList<Skill> list = FXCollections.observableArrayList(controller.getSkillList());
+    ObservableList<Job> list = FXCollections.observableArrayList(controller.getJobRepository().getJobList());
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        table_skills.setCellValueFactory(new PropertyValueFactory<Skill, String>("skillName"));
+        table_skills.setCellValueFactory(new PropertyValueFactory<Job, String>("jobName"));
         table.setItems(list);
         email_label.setText(Repositories.getInstance().getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail());
 
@@ -59,14 +58,14 @@ public class RegisterSkill_Controller implements Initializable {
 
     public void submitRegistration(ActionEvent event) {
         try {
-            Optional<Skill> skill = controller.registerSkill(field_name.getText());
+            Optional<Job> job = controller.registerJob(field_name.getText());
 
             table.getItems().clear();
-            table.getItems().addAll(controller.getSkillList());
-            if (skill.isPresent()) {
-                sendConfirmation.confirmationMessages("Success","Skill successfully registered!","");
+            table.getItems().addAll(controller.getJobRepository().getJobList());
+            if (job.isPresent()) {
+                sendConfirmation.confirmationMessages("Success","Job successfully registered!","");
             } else {
-                sendInformation.informationMessages("ATTENTION","Skill not registered - Already registered!","");
+                sendInformation.informationMessages("ATTENTION","Job not registered - Already registered!","");
             }
         } catch (IllegalArgumentException e) {
 
@@ -84,6 +83,10 @@ public class RegisterSkill_Controller implements Initializable {
 
     public void switchHRMMenu(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/hrmUI.fxml");
+    }
+
+    public void changeToRegisterSkill(ActionEvent event) throws IOException {
+        switchWindows.changeWindow(event,"/registerSkill.fxml");
     }
 
     public void changeToRegisterJob(ActionEvent event) throws IOException {
