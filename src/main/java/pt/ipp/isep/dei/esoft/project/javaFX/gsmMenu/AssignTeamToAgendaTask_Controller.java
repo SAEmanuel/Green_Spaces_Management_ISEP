@@ -30,6 +30,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 public class AssignTeamToAgendaTask_Controller implements Initializable {
 
@@ -82,7 +83,10 @@ public class AssignTeamToAgendaTask_Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        choiceBox_email.getItems().addAll(getEmailService());
+        String[] eS = getEmailService();
+        if(eS != null)
+            choiceBox_email.getItems().addAll(eS);
+
         choiceBox_team.getItems().addAll(getTeams());
         choiceBox_task.getItems().addAll(getTask());
 
@@ -159,6 +163,10 @@ public class AssignTeamToAgendaTask_Controller implements Initializable {
 
     private String[] getEmailService() {
         List<String> emailServices = controller.getEmailServices();
+        if(emailServices == null){
+            sendInformation.informationMessages("Email Services", "File not found", "Configuration File not found!..Add one in \"/src/main/resource\" location");
+            return null;
+        }
         String[] emails = new String[emailServices.size()];
         for (int i = 0; i < emailServices.size(); i++) {
             emails[i] = emailServices.get(i);
