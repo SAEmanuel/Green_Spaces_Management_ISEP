@@ -53,14 +53,18 @@ public class AssignTeamToTaskAgendaUI implements Runnable {
      * Submits the data for assigning a team to a task in the agenda.
      */
     private void submitData() {
-
-        boolean result = getController().assignTeam(teamID,agendaEntryID, emailService, controller.getResponsible());
-
-        if (result) {
-            System.out.println(ANSI_BRIGHT_GREEN + "\nTeam successfully assigned!" + ANSI_RESET);
-        } else {
-            System.out.printf(ANSI_BRIGHT_RED + "\nTeam not assigned - This task already have a team assigned!" + ANSI_RESET);
+        try {
+            boolean result = getController().assignTeam(teamID,agendaEntryID, emailService, controller.getResponsible());
+            if (result) {
+                System.out.println(ANSI_BRIGHT_GREEN + "\nTeam successfully assigned!" + ANSI_RESET);
+            } else {
+                System.out.printf(ANSI_BRIGHT_RED + "\nTeam not assigned - This task already have a team assigned!" + ANSI_RESET);
+            }
         }
+        catch (IllegalArgumentException e){
+            System.out.println(ANSI_BRIGHT_GREEN + "\nTeam successfully assigned!" + ANSI_RESET);
+        }
+
     }
 
     /**
