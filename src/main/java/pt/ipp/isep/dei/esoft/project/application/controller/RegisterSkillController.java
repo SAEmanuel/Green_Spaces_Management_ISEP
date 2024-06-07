@@ -4,6 +4,7 @@ import pt.ipp.isep.dei.esoft.project.domain.Skill;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.SkillRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -46,6 +47,10 @@ public class RegisterSkillController {
 
         return newSkill;
 
+    }
+
+    public List<Skill> getSkillList(){
+        return skillRepository.getSkillList();
     }
 
 }

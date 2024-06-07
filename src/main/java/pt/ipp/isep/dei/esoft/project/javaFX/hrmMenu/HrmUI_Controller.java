@@ -40,7 +40,8 @@ public class HrmUI_Controller implements Initializable  {
         switchWindows.changeWindow(event,"/login.fxml");
     }
 
-    public void changeToRegisterSkill(ActionEvent event) {
+    public void changeToRegisterSkill(ActionEvent event) throws IOException {
+        switchWindows.changeWindow(event,"/registerSkill.fxml");
     }
 
     public void changeToRegisterJob(ActionEvent event) {
@@ -54,7 +55,5 @@ public class HrmUI_Controller implements Initializable  {
 
     public void changeGenerateTeam(ActionEvent event) {
     }
-
-
 
 }

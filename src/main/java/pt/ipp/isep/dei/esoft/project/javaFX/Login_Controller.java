@@ -3,11 +3,7 @@ package pt.ipp.isep.dei.esoft.project.javaFX;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -15,12 +11,10 @@ import pt.ipp.isep.dei.esoft.project.application.controller.authorization.Authen
 import pt.ipp.isep.dei.esoft.project.javaFX.alerts.ConfirmationAlerts;
 import pt.ipp.isep.dei.esoft.project.javaFX.alerts.SendErrors;
 import pt.ipp.isep.dei.esoft.project.javaFX.extras.SwitchWindows;
-import pt.ipp.isep.dei.esoft.project.ui.console.authorization.AuthenticationUI;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.prefs.Preferences;
 
 public class Login_Controller implements Initializable {
     AuthenticationController ctrl = new AuthenticationController();
