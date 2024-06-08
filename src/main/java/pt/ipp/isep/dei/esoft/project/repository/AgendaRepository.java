@@ -623,4 +623,7 @@ public class AgendaRepository implements Serializable {
         return agendaTask.addVehicle(vehicle);
     }
 
+    public void createNewAgendaList() {
+        agenda = new ArrayList<>();
+    }
 }

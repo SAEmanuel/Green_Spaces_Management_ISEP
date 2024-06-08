@@ -6,9 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.domain.Extras.Inputs.Password;
-import pt.ipp.isep.dei.esoft.project.repository.AgendaRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -137,6 +135,7 @@ public class AgendaRepositoryTest {
     @Test
     public void testGetPossibleDoneTaskPlannedList() {
         Repositories repositories = Repositories.getInstance();
+        repositories.getAgenda().createNewAgendaList();
         Job job1 = new Job("Jardineiro");
         Collaborator collaborator = new Collaborator("Francisco", new Data(2004, 7, 6), new Data(2023, 6, 12), "Rua da pedra", 912809789, "xico@gmail.com", 123456744, 0, "123456711", job1, new Password("AAA12ab"), "xico@gmail.com");
         GreenSpace greenSpace = new GreenSpace("Test Green Space", 0, 100, "Test City", "test@greenspace.com");
@@ -158,5 +157,205 @@ public class AgendaRepositoryTest {
         List<AgendaEntry> result = repositories.getAgenda().getTaskPlannedList(collaborator, new Data(2023, 6, 1), new Data(2023, 6, 30), 2);
         assertEquals(1, result.size());
         assertEquals(new Data(2023, 6, 5), result.get(0).getStartingDate());
+    }
+
+    @Test
+    public void testGetTaskListFilter0() {
+        Repositories repositories = Repositories.getInstance();
+        repositories.getAgenda().createNewAgendaList();
+        Job job1 = new Job("Jardineiro");
+        Collaborator collaborator = new Collaborator("Francisco", new Data(2004, 7, 6), new Data(2023, 6, 12), "Rua da pedra", 912809789, "xico@gmail.com", 123456744, 0, "123456711", job1, new Password("AAA12ab"), "xico@gmail.com");
+        GreenSpace greenSpace = new GreenSpace("Test Green Space", 0, 100, "Test City", "test@greenspace.com");
+        ToDoEntry toDoEntry = new ToDoEntry(greenSpace, "Work", "description", 1, 8);
+        ToDoEntry toDoEntry2 = new ToDoEntry(greenSpace, "Work", "description", 1, 8);
+        Team team = new Team(1);
+        Team team2 = new Team(2);
+        team.addCollaborator(collaborator);
+        team2.addCollaborator(collaborator);
+        toDoEntry.setStatus("Planned");
+        toDoEntry2.setStatus("Canceled");
+        AgendaEntry agendaEntry = new AgendaEntry(toDoEntry, new Data(2023, 6, 5));
+        AgendaEntry agendaEntry2 = new AgendaEntry(toDoEntry, new Data(2023, 9, 1));
+        agendaEntry.addTeam(team);
+        agendaEntry2.addTeam(team2);
+        repositories.getAgenda().addAgendaEntry(agendaEntry);
+        repositories.getAgenda().addAgendaEntry(agendaEntry2);
+
+        List<AgendaEntry> result = repositories.getAgenda().getTaskList(collaborator, new Data(2023,5,1), new Data(2023,8,30), 1);
+        assertEquals(1, result.size());
+        assertTrue(result.contains(agendaEntry));
+        assertFalse(result.contains(agendaEntry2));
+    }
+
+    @Test
+    public void testGetTaskListFilter2() {
+        Repositories repositories = Repositories.getInstance();
+        Job job1 = new Job("Jardineiro");
+        Collaborator collaborator = new Collaborator("Francisco", new Data(2004, 7, 6), new Data(2023, 6, 12), "Rua da pedra", 912809789, "xico@gmail.com", 123456744, 0, "123456711", job1, new Password("AAA12ab"), "xico@gmail.com");
+        GreenSpace greenSpace = new GreenSpace("Test Green Space", 0, 100, "Test City", "test@greenspace.com");
+        ToDoEntry toDoEntry = new ToDoEntry(greenSpace, "Work", "description", 1, 8);
+        ToDoEntry toDoEntry2 = new ToDoEntry(greenSpace, "Work", "description", 1, 8);
+        Team team = new Team(1);
+        Team team2 = new Team(2);
+        team.addCollaborator(collaborator);
+        team2.addCollaborator(collaborator);
+        AgendaEntry agendaEntry = new AgendaEntry(toDoEntry, new Data(2023, 6, 5));
+        AgendaEntry agendaEntry2 = new AgendaEntry(toDoEntry2, new Data(2023, 6, 1));
+        agendaEntry2.getAgendaEntry().setStatus(String.valueOf(AgendaEntry.Status.CANCELED));
+        agendaEntry.addTeam(team);
+        agendaEntry2.addTeam(team2);
+        repositories.getAgenda().addAgendaEntry(agendaEntry);
+        repositories.getAgenda().addAgendaEntry(agendaEntry2);
+
+        List<AgendaEntry> result = repositories.getAgenda().getTaskList(collaborator, new Data(2023,5,1), new Data(2023,8,30), 3);
+        assertEquals(1, result.size());
+        assertFalse(result.contains(agendaEntry));
+        assertTrue(result.contains(agendaEntry2));
+    }
+
+    @Test
+    public void testAddValidAgendaEntry() {
+        Repositories repositories = Repositories.getInstance();
+        Job job1 = new Job("Jardineiro");
+        Collaborator collaborator = new Collaborator("Francisco", new Data(2004, 7, 6), new Data(2023, 6, 12), "Rua da pedra", 912809789, "xico@gmail.com", 123456744, 0, "123456711", job1, new Password("AAA12ab"), "xico@gmail.com");
+        GreenSpace greenSpace = new GreenSpace("Test Green Space", 0, 100, "Test City", "test@greenspace.com");
+        ToDoEntry toDoEntry = new ToDoEntry(greenSpace, "Work", "description", 1, 8);
+        ToDoEntry toDoEntry2 = new ToDoEntry(greenSpace, "Work", "description", 1, 8);
+        Team team = new Team(1);
+        Team team2 = new Team(2);
+        team.addCollaborator(collaborator);
+        team2.addCollaborator(collaborator);
+        AgendaEntry agendaEntry = new AgendaEntry(toDoEntry, new Data(2023, 6, 5));
+        AgendaEntry agendaEntry2 = new AgendaEntry(toDoEntry2, new Data(2023, 6, 1));
+        agendaEntry.addTeam(team);
+        agendaEntry2.addTeam(team2);
+        boolean result = repositories.getAgenda().addAgendaEntry(agendaEntry);
+        assertTrue(result);
+    }
+
+    @Test
+    public void testAddInvalidAgendaEntry() {
+        Repositories repositories = Repositories.getInstance();
+        Job job1 = new Job("Jardineiro");
+        Collaborator collaborator = new Collaborator("Francisco", new Data(2004, 7, 6), new Data(2023, 6, 12), "Rua da pedra", 912809789, "xico@gmail.com", 123456744, 0, "123456711", job1, new Password("AAA12ab"), "xico@gmail.com");
+        GreenSpace greenSpace = new GreenSpace("Test Green Space", 0, 100, "Test City", "test@greenspace.com");
+        ToDoEntry toDoEntry = new ToDoEntry(greenSpace, "Work", "description", 1, 8);
+        ToDoEntry toDoEntry2 = new ToDoEntry(greenSpace, "Work", "description", 1, 8);
+        Team team = new Team(1);
+        Team team2 = new Team(2);
+        team.addCollaborator(collaborator);
+        team2.addCollaborator(collaborator);
+        AgendaEntry agendaEntry = new AgendaEntry(toDoEntry, new Data(2023, 6, 5));
+        AgendaEntry agendaEntry2 = new AgendaEntry(toDoEntry2, new Data(2023, 6, 1));
+        agendaEntry.addTeam(team);
+        agendaEntry2.addTeam(team2);
+        repositories.getAgenda().addAgendaEntry(agendaEntry);
+        boolean result = repositories.getAgenda().addAgendaEntry(agendaEntry);
+        assertFalse(result);
+    }
+
+    @Test
+    public void testAddValidAgendaBackup() {
+        Repositories repositories = Repositories.getInstance();
+        Job job1 = new Job("Jardineiro");
+        Collaborator collaborator = new Collaborator("Francisco", new Data(2004, 7, 6), new Data(2023, 6, 12), "Rua da pedra", 912809789, "xico@gmail.com", 123456744, 0, "123456711", job1, new Password("AAA12ab"), "xico@gmail.com");
+        GreenSpace greenSpace = new GreenSpace("Test Green Space", 0, 100, "Test City", "test@greenspace.com");
+        ToDoEntry toDoEntry = new ToDoEntry(greenSpace, "Work", "description", 1, 8);
+        ToDoEntry toDoEntry2 = new ToDoEntry(greenSpace, "Work", "description", 1, 8);
+        Team team = new Team(1);
+        Team team2 = new Team(2);
+        team.addCollaborator(collaborator);
+        team2.addCollaborator(collaborator);
+        AgendaEntry agendaEntry = new AgendaEntry(toDoEntry, new Data(2023, 6, 5));
+        AgendaEntry agendaEntry2 = new AgendaEntry(toDoEntry2, new Data(2023, 6, 1));
+        agendaEntry.addTeam(team);
+        agendaEntry2.addTeam(team2);
+        boolean result = repositories.getAgenda().addAgendaBackup(agendaEntry);
+        assertTrue(result);
+    }
+
+    @Test
+    public void testAddInvalidAgendaBackup() {
+        Repositories repositories = Repositories.getInstance();
+        Job job1 = new Job("Jardineiro");
+        Collaborator collaborator = new Collaborator("Francisco", new Data(2004, 7, 6), new Data(2023, 6, 12), "Rua da pedra", 912809789, "xico@gmail.com", 123456744, 0, "123456711", job1, new Password("AAA12ab"), "xico@gmail.com");
+        GreenSpace greenSpace = new GreenSpace("Test Green Space", 0, 100, "Test City", "test@greenspace.com");
+        ToDoEntry toDoEntry = new ToDoEntry(greenSpace, "Work", "description", 1, 8);
+        ToDoEntry toDoEntry2 = new ToDoEntry(greenSpace, "Work", "description", 1, 8);
+        Team team = new Team(1);
+        Team team2 = new Team(2);
+        team.addCollaborator(collaborator);
+        team2.addCollaborator(collaborator);
+        AgendaEntry agendaEntry = new AgendaEntry(toDoEntry, new Data(2023, 6, 5));
+        AgendaEntry agendaEntry2 = new AgendaEntry(toDoEntry2, new Data(2023, 6, 1));
+        agendaEntry.addTeam(team);
+        agendaEntry2.addTeam(team2);
+        repositories.getAgenda().addAgendaBackup(agendaEntry);
+        boolean result = repositories.getAgenda().addAgendaBackup(agendaEntry);
+        assertFalse(result);
+    }
+
+    @Test
+    public void testValidEntry() {
+        Repositories repositories = Repositories.getInstance();
+        Job job1 = new Job("Jardineiro");
+        Collaborator collaborator = new Collaborator("Francisco", new Data(2004, 7, 6), new Data(2023, 6, 12), "Rua da pedra", 912809789, "xico@gmail.com", 123456744, 0, "123456711", job1, new Password("AAA12ab"), "xico@gmail.com");
+        GreenSpace greenSpace = new GreenSpace("Test Green Space", 0, 100, "Test City", "test@greenspace.com");
+        ToDoEntry toDoEntry = new ToDoEntry(greenSpace, "Work", "description", 1, 8);
+        Team team = new Team(1);
+        team.addCollaborator(collaborator);
+        AgendaEntry agendaEntry = new AgendaEntry(toDoEntry, new Data(2023, 6, 5));
+        agendaEntry.addTeam(team);
+
+        boolean result = repositories.getAgenda().validateEntry(agendaEntry);
+        assertTrue(result);
+    }
+
+    @Test
+    public void testInvalidEntry() {
+        Repositories repositories = Repositories.getInstance();
+        Job job1 = new Job("Jardineiro");
+        Collaborator collaborator = new Collaborator("Francisco", new Data(2004, 7, 6), new Data(2023, 6, 12), "Rua da pedra", 912809789, "xico@gmail.com", 123456744, 0, "123456711", job1, new Password("AAA12ab"), "xico@gmail.com");
+        GreenSpace greenSpace = new GreenSpace("Test Green Space", 0, 100, "Test City", "test@greenspace.com");
+        ToDoEntry toDoEntry = new ToDoEntry(greenSpace, "Work", "description", 1, 8);
+        Team team = new Team(1);
+        team.addCollaborator(collaborator);
+        AgendaEntry agendaEntry = new AgendaEntry(toDoEntry, new Data(2023, 6, 5));
+        agendaEntry.addTeam(team);
+        repositories.getAgenda().addAgendaEntry(agendaEntry);
+        boolean result = repositories.getAgenda().validateEntry(agendaEntry);
+        assertFalse(result);
+    }
+
+    @Test
+    public void testValidBackUp() {
+        Repositories repositories = Repositories.getInstance();
+        Job job1 = new Job("Jardineiro");
+        Collaborator collaborator = new Collaborator("Francisco", new Data(2004, 7, 6), new Data(2023, 6, 12), "Rua da pedra", 912809789, "xico@gmail.com", 123456744, 0, "123456711", job1, new Password("AAA12ab"), "xico@gmail.com");
+        GreenSpace greenSpace = new GreenSpace("Test Green Space", 0, 100, "Test City", "test@greenspace.com");
+        ToDoEntry toDoEntry = new ToDoEntry(greenSpace, "Work", "description", 1, 8);
+        Team team = new Team(1);
+        team.addCollaborator(collaborator);
+        AgendaEntry agendaEntry = new AgendaEntry(toDoEntry, new Data(2023, 6, 5));
+        agendaEntry.addTeam(team);
+
+        boolean result = repositories.getAgenda().validateBackUp(agendaEntry);
+        assertTrue(result);
+    }
+
+    @Test
+    public void testInvalidBackUp() {
+        Repositories repositories = Repositories.getInstance();
+        Job job1 = new Job("Jardineiro");
+        Collaborator collaborator = new Collaborator("Francisco", new Data(2004, 7, 6), new Data(2023, 6, 12), "Rua da pedra", 912809789, "xico@gmail.com", 123456744, 0, "123456711", job1, new Password("AAA12ab"), "xico@gmail.com");
+        GreenSpace greenSpace = new GreenSpace("Test Green Space", 0, 100, "Test City", "test@greenspace.com");
+        ToDoEntry toDoEntry = new ToDoEntry(greenSpace, "Work", "description", 1, 8);
+        Team team = new Team(1);
+        team.addCollaborator(collaborator);
+        AgendaEntry agendaEntry = new AgendaEntry(toDoEntry, new Data(2023, 6, 5));
+        agendaEntry.addTeam(team);
+        repositories.getAgenda().addAgendaBackup(agendaEntry);
+        boolean result = repositories.getAgenda().validateBackUp(agendaEntry);
+        assertFalse(result);
     }
 }
