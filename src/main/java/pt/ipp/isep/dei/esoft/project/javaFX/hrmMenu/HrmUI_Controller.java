@@ -22,10 +22,23 @@ public class HrmUI_Controller implements Initializable  {
 
     private Stage stage;
 
+    @FXML
+    private Label num_collaborators;
+
+    @FXML
+    private Label num_jobs;
+
+    @FXML
+    private Label num_skills;
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         email_label.setText(repositories.getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail());
+        num_collaborators.setText(String.valueOf(repositories.getCollaboratorRepository().getCollaboratorList().size()));
+        num_jobs.setText(String.valueOf(repositories.getJobRepository().getJobList().size()));
+        num_skills.setText(String.valueOf(repositories.getSkillRepository().getSkillList().size()));
     }
 
 
