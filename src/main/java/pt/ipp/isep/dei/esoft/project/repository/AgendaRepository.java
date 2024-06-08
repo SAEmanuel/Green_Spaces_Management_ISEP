@@ -220,7 +220,7 @@ public class AgendaRepository implements Serializable {
      * @param filterSelection The filter selection.
      * @return A list of agenda entries.
      */
-    private List<AgendaEntry> getTaskList(Collaborator collaborator, Data startDate, Data endDate, int filterSelection) {
+    public List<AgendaEntry> getTaskList(Collaborator collaborator, Data startDate, Data endDate, int filterSelection) {
         List<AgendaEntry> taskList = new ArrayList<>();
 
         switch (filterSelection - 1) {
@@ -623,4 +623,7 @@ public class AgendaRepository implements Serializable {
         return agendaTask.addVehicle(vehicle);
     }
 
+    public void createNewAgendaList() {
+        agenda = new ArrayList<>();
+    }
 }

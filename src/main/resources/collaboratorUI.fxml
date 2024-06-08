@@ -31,7 +31,7 @@
                                         <Image url="@Images/mail_pro.png" />
                                     </image>
                                 </ImageView>
-                                <Label fx:id="email_label" alignment="CENTER" layoutX="109.0" layoutY="73.0" prefHeight="14.0" prefWidth="90.0" text="Email" textFill="WHITE">
+                                <Label fx:id="email_label" alignment="CENTER" layoutX="109.0" layoutY="53.0" prefHeight="14.0" prefWidth="90.0" text="Email" textFill="WHITE">
                                     <font>
                                         <Font name="System Bold" size="11.0" />
                                     </font>
@@ -48,11 +48,6 @@
                                         <Font name="System Bold" size="17.0" />
                                     </font>
                                 </Label>
-                        <Label fx:id="name_label" alignment="CENTER" layoutX="109.0" layoutY="46.0" prefHeight="14.0" prefWidth="90.0" text="Name" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="11.0" />
-                           </font>
-                        </Label>
                             </children>
                         </Pane>
                     </children>
@@ -70,7 +65,7 @@
                             </image>
                         </ImageView>
                     </children></Pane>
-                <Label layoutX="29.0" layoutY="84.0" prefHeight="44.0" prefWidth="647.0" text="Hello,                    ">
+                <Label layoutX="29.0" layoutY="84.0" prefHeight="44.0" prefWidth="647.0" text="Hello!                   ">
                     <font>
                         <Font name="System Bold" size="36.0" />
                     </font>
@@ -109,11 +104,6 @@
                         <Font size="10.0" />
                     </font>
                 </Label>
-            <Label layoutX="128.0" layoutY="84.0" prefHeight="44.0" prefWidth="117.0" text="Name">
-               <font>
-                  <Font name="System Bold" size="36.0" />
-               </font>
-            </Label>
                   <ImageView fitHeight="79.0" fitWidth="82.0" layoutX="245.0" layoutY="221.0" pickOnBounds="true" preserveRatio="true">
                       <image>
                           <Image url="@Images/exame.png" />

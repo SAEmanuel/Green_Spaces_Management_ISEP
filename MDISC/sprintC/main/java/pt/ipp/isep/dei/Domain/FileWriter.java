@@ -16,6 +16,7 @@ public class FileWriter {
             for (int i = 0; i < points.length; i++) {
                 if (i != apIndex && distances[i] != Integer.MAX_VALUE) {
                     List<Integer> path = paths.get(i);
+                    //ToDo revert path... invertOrder()
                     for (int j = 0; j < path.size(); j++) {
                         writer.print(points[path.get(j)]);
                         if (j < path.size() - 1) {
