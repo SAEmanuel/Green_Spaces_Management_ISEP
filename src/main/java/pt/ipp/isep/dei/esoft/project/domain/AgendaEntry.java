@@ -1,5 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +28,39 @@ public class AgendaEntry implements Serializable {
     public Data getReal_end_Date() {
         return real_end_Date;
     }
+
+
+    public StringProperty taskNameProperty() {
+        return new SimpleStringProperty(agendaEntry.getTitle());
+    }
+
+    public StringProperty teamNameProperty() {
+        return new SimpleStringProperty(team != null ? team.toString() : "No Team");
+    }
+
+    public StringProperty vehicleNameProperty() {
+        return new SimpleStringProperty(getStringVehicle());
+    }
+
+    public StringProperty startDateProperty() {
+        return new SimpleStringProperty(starting_Date != null ? starting_Date.toString() : "");
+    }
+
+    public StringProperty expectedEndDateProperty() {
+        return new SimpleStringProperty(expected_end_Date != null ? expected_end_Date.toString() : "");
+    }
+
+    public StringProperty realEndDateProperty() {
+        return new SimpleStringProperty(real_end_Date != null ? real_end_Date.toString() : "");
+    }
+
+    public StringProperty statusProperty() {
+        return new SimpleStringProperty(getStatus());
+    }
+
+
+
+
 
     /**
      * Enumeration representing the status of an agenda entry.
