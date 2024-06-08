@@ -84,13 +84,13 @@ public class Job implements Serializable{
     private boolean isValidJobName(String jobName) {
 
         if (jobName == null || jobName.trim().isEmpty()) {
-            throw new IllegalArgumentException("Invalid job name! Try again.");
+            throw new IllegalArgumentException("Invalid job name!\nTry again.");
         }
 
         for (int i = 0; i < jobName.length(); i++) {
             char ch = jobName.charAt(i);
             if (!Character.isLetter(ch) && ch != ' ') {
-                throw new IllegalArgumentException("Invalid job name: " + jobName + " Try again.");
+                throw new IllegalArgumentException("Invalid job name: " + jobName + "\nTry again.");
             }
         }
 

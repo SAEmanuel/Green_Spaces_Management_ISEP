@@ -48,7 +48,7 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Button>
-                  <Button layoutX="29.0" layoutY="438.0" mnemonicParsing="false" onAction="#changeToPsotponeTask" prefHeight="39.0" prefWidth="254.0" text="Postpone Task" textAlignment="CENTER">
+                  <Button layoutX="29.0" layoutY="438.0" mnemonicParsing="false" onAction="#changeToPostponeTask" prefHeight="39.0" prefWidth="254.0" text="Postpone Task" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
@@ -145,7 +145,7 @@
             </Pane>
             <Pane fx:id="inf_3" layoutX="490.0" layoutY="217.0" prefHeight="298.0" prefWidth="200.0">
                <children>
-                  <Button layoutX="5.0" mnemonicParsing="false" onAction="#changeToPsotponeTask" prefHeight="298.0" prefWidth="191.0" text="Postpone Task" textAlignment="CENTER">
+                  <Button layoutX="5.0" mnemonicParsing="false" onAction="#changeToPostponeTask" prefHeight="298.0" prefWidth="191.0" text="Postpone Task" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1020.0" stylesheets="@Css/GsmUI.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.javaFX.collaboratorMenu.CollaboratorUI_Controller">
+    <children>
+        <VBox prefHeight="620.0" prefWidth="398.0">
+            <children>
+                <AnchorPane fx:id="side_anchorpane" prefHeight="625.0" prefWidth="316.0">
+                    <children>
+                        <Button layoutX="29.0" layoutY="277.0" mnemonicParsing="false" onAction="#switchToConsultTasks" prefHeight="66.0" prefWidth="254.0" text="Consult Assigned Tasks" textAlignment="CENTER">
+                            <font>
+                                <Font name="System Bold" size="13.0" />
+                            </font>
+                        </Button>
+                        <Pane layoutX="2.0" prefHeight="105.0" prefWidth="307.0">
+                            <children>
+                                <ImageView fitHeight="66.0" fitWidth="66.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@Images/mail_pro.png" />
+                                    </image>
+                                </ImageView>
+                                <Label fx:id="email_label" alignment="CENTER" layoutX="109.0" layoutY="73.0" prefHeight="14.0" prefWidth="90.0" text="Email" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="11.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="121.0" layoutY="96.0" text="Options" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Label>
+                                <Line endX="140.0" fill="RED" layoutX="-36.0" layoutY="108.0" startX="84.0" stroke="#00acff" />
+                                <Line endX="140.0" fill="WHITE" layoutX="113.0" layoutY="107.0" startX="84.0" stroke="#00acff" />
+                                <Label layoutX="109.0" layoutY="14.0" prefHeight="26.0" prefWidth="150.0" text="Welcome Back!" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="17.0" />
+                                    </font>
+                                </Label>
+                        <Label fx:id="name_label" alignment="CENTER" layoutX="109.0" layoutY="46.0" prefHeight="14.0" prefWidth="90.0" text="Name" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="11.0" />
+                           </font>
+                        </Label>
+                            </children>
+                        </Pane>
+                    </children>
+                </AnchorPane>
+            </children>
+        </VBox>
+        <Pane prefHeight="620.0" prefWidth="785.0">
+            <children>
+                <Pane fx:id="search_bar" layoutX="146.0" layoutY="14.0" prefHeight="46.0" prefWidth="412.0">
+                    <children>
+                        <TextField layoutX="113.0" layoutY="11.0" prefHeight="24.0" prefWidth="232.0" promptText="search" />
+                        <ImageView fitHeight="24.0" fitWidth="27.0" layoutX="75.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@Images/Procurar.png" />
+                            </image>
+                        </ImageView>
+                    </children></Pane>
+                <Label layoutX="29.0" layoutY="84.0" prefHeight="44.0" prefWidth="647.0" text="Hello,                    ">
+                    <font>
+                        <Font name="System Bold" size="36.0" />
+                    </font>
+                </Label>
+                <Label layoutX="29.0" layoutY="173.0" text="This is the Collaborator WorkSpace">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Pane fx:id="inf_two" layoutX="253.0" layoutY="260.0" prefHeight="298.0" prefWidth="200.0">
+                    <children>
+                        <Button layoutX="5.0" mnemonicParsing="false" onAction="#switchToConsultTasks" prefHeight="298.0" prefWidth="191.0" text="Consult Assigned Tasks" textAlignment="CENTER">
+                            <font>
+                                <Font name="System Bold" size="13.0" />
+                            </font>
+                        </Button>
+                    </children>
+                    <effect>
+                        <InnerShadow />
+                    </effect>
+                </Pane>
+                <Button fx:id="back_btn" layoutX="465.0" layoutY="571.0" mnemonicParsing="false" onAction="#switchToLoginMenu" prefHeight="35.0" prefWidth="232.0" stylesheets="@Css/LoginBtns.css" text="&lt;--  |  Back to Login" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </Button>
+                <Line endX="57.0" endY="72.29290771484375" fill="WHITE" layoutX="51.0" layoutY="55.0" startX="-20.79900550842285" startY="72.29289245605469" stroke="#00acff" strokeWidth="3.0" />
+                <Line endX="57.0" endY="72.29290771484375" fill="WHITE" layoutX="292.0" layoutY="99.0" startX="-20.79900550842285" startY="72.29289245605469" stroke="#00acff" strokeWidth="3.0" />
+                <Label layoutX="18.0" layoutY="589.0" opacity="0.7" text="Terms and Conditions | Privacy  Policy">
+                    <font>
+                        <Font size="10.0" />
+                    </font>
+                </Label>
+                <Label layoutX="18.0" layoutY="571.0" opacity="0.7" text="Copyright Reserved @2024">
+                    <font>
+                        <Font size="10.0" />
+                    </font>
+                </Label>
+            <Label layoutX="128.0" layoutY="84.0" prefHeight="44.0" prefWidth="117.0" text="Name">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+                  <ImageView fitHeight="79.0" fitWidth="82.0" layoutX="245.0" layoutY="221.0" pickOnBounds="true" preserveRatio="true">
+                      <image>
+                          <Image url="@Images/exame.png" />
+                      </image>
+                  </ImageView>
+            <Label layoutX="28.0" layoutY="128.0" prefHeight="44.0" prefWidth="647.0" text="Nice to see you again.">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            </children>
+        </Pane>
+    </children>
+</HBox>

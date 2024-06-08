@@ -1,9 +1,9 @@
-smtp.isep.ipp.pt
-587
-true
+smtp.dei.university.edu
+465
 false
+true
 
-email_service.isep.ipp.pt
+email_service.dei.university.edu
 xico@gmail.com, ema@gmail.com
 Assigned to a Task
 You and your team members have been assigned to a task in an agenda
