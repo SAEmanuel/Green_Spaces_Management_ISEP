@@ -95,21 +95,25 @@ public class GenerateTeamUI implements Runnable {
      * @return The ID of the generated team.
      */
     private Team submitData() {
-        Optional<Team> team = getController().generateTeam(minCollaborators, maxCollaborators);
+        try{
+            Optional<Team> team = getController().generateTeam(minCollaborators, maxCollaborators);
 
-        if (team.isPresent()) {
-            System.out.println(ANSI_BLUE+"\nTeam");
-            for (Collaborator collaborator : team.get().getCollaborators()) {
-                System.out.println(collaborator.getName());
+            if (team.isPresent()) {
+                System.out.println(ANSI_BLUE+"\nTeam");
+                for (Collaborator collaborator : team.get().getCollaborators()) {
+                    System.out.println(collaborator.getName());
+                }
+                System.out.println(ANSI_BRIGHT_GREEN +"\nTeam successfully created!"+ANSI_RESET);
+
+                return team.get();
+            } else {
+                System.out.println(ANSI_BRIGHT_RED+"\nTeam not created!"+ANSI_RESET);
+                return null;
             }
-            System.out.println(ANSI_BRIGHT_GREEN +"\nTeam successfully created!"+ANSI_RESET);
-
-            return team.get();
-        } else {
-            System.out.println(ANSI_BRIGHT_RED+"\nTeam not created!"+ANSI_RESET);
-            return null;
+        }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
         }
-
+        return null;
     }
 
     /**
