@@ -58,6 +58,10 @@ public class AgendaEntry implements Serializable {
         return new SimpleStringProperty(getStatus());
     }
 
+    public String getTaskName(){
+        return agendaEntry.toString();
+    }
+
 
 
 

@@ -180,7 +180,7 @@ public class AgendaRepository implements Serializable {
      * @return An optional list of tasks with changed status.
      */
     public Optional<List<AgendaEntry>> changedTaskStatusList(Collaborator collaborator, Data startDate, Data endDate, int filterSelection, String confirmation, int selectedTask) {
-        List<AgendaEntry> taskList = getTaskPlannedList(collaborator, startDate, endDate, filterSelection);
+        List<AgendaEntry> taskList = getPossibleDoneTaskPlannedList(collaborator, startDate, endDate, filterSelection);
 
         if (confirmation.equalsIgnoreCase("y") && !taskList.isEmpty() && selectedTask >= 0 && selectedTask < taskList.size()) {
 
