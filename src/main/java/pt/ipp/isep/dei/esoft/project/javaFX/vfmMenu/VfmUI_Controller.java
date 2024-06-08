@@ -33,21 +33,23 @@ public class VfmUI_Controller implements Initializable {
     }
 
 
+
     //------------------------------------ Options Side Bar --------------------------
 
     public void switchToLoginMenu(ActionEvent event) throws IOException {
-        switchWindows.changeWindow(event,"/login.fxml");
+        switchWindows.changeWindow(event, "/login.fxml");
     }
 
     public void changeToRegisterVehicle(ActionEvent event) throws IOException {
-        switchWindows.changeWindow(event,"/registerVehicle.fxml");
+        switchWindows.changeWindow(event, "/registerVehicle.fxml");
     }
 
-        public void changeToRegisterVehicleCheckUp(ActionEvent event) throws IOException {
-            switchWindows.changeWindow(event,"/registerVehicleCheckUp.fxml");
-        }
+    public void changeToRegisterVehicleCheckUp(ActionEvent event) throws IOException {
+        switchWindows.changeWindow(event, "/registerVehicleCheckUp.fxml");
+    }
 
-    public void changeToCreateCheckUpList(ActionEvent event) {
+    public void changeToCreateCheckUpList(ActionEvent event) throws IOException{
+        switchWindows.changeWindow(event, "/showVehiclesNeedingCheckUp.fxml");
     }
 
 
