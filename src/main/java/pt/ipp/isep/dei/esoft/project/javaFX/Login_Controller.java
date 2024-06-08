@@ -40,22 +40,20 @@ public class Login_Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        userEmail.setText("hrm@this.app");
-        userPassword.setText("hrm");
+        ctrl.doLogout();
     }
-
 
     public void submit(ActionEvent event) throws IOException {
         String email = userEmail.getText();
         String password = userPassword.getText();
+        boolean validCredentials = ctrl.doLogin(email, password);
 
-        if (ctrl.doLogin(email, password)) {
+        if (validCredentials) {
             verifyUSR(email, event);
         } else {
             sendErrors.errorMessages("Invalid Credentials", "Invalid UserId and/or Password.", "");
         }
     }
-
 
     public void logout(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -69,26 +67,25 @@ public class Login_Controller implements Initializable {
         }
     }
 
-
     private void verifyUSR(String email, Event event) throws IOException {
         String[] emailSplit = email.split("@");
-        if (emailSplit[0].equals(GSMPREFIX)) {
-            switchToGsmMenu((ActionEvent) event);
-        }
-        if (emailSplit[0].equals(HRMPREFIX)) {
-            switchToHrmMenu((ActionEvent) event);
-        }
-        if(emailSplit[0].equals(VFMPREFIX)) {
-            switchToVfmMenu((ActionEvent) event);
-        }
-        if (!emailSplit[0].equals(HRMPREFIX) && !emailSplit[0].equals(GSMPREFIX)) {
-            switchToCollaboratorMenu((ActionEvent) event);
-        }
+        String prefix = emailSplit[0];
 
+        switch (prefix) {
+            case GSMPREFIX:
+                switchToGsmMenu((ActionEvent) event);
+                break;
+            case HRMPREFIX:
+                switchToHrmMenu((ActionEvent) event);
+                break;
+            case VFMPREFIX:
+                switchToVfmMenu((ActionEvent) event);
+                break;
+            default:
+                switchToCollaboratorMenu((ActionEvent) event);
+                break;
+        }
     }
-
-
-
 
     public void switchToMainMenu(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event, "/mainMenu.fxml");
@@ -106,8 +103,7 @@ public class Login_Controller implements Initializable {
         switchWindows.changeWindow(event, "/collaboratorUI.fxml");
     }
 
-    private void switchToVfmMenu(ActionEvent event) throws IOException {
+    public void switchToVfmMenu(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event, "/vfmUI.fxml");
     }
-
 }
