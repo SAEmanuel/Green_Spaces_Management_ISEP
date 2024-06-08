@@ -34,6 +34,7 @@ public class Login_Controller implements Initializable {
 
     private Stage stage;
     private final String GSMPREFIX = "gsm";
+    private final String VFMPREFIX = "vfm";
     private final String HRMPREFIX = "hrm";
 
 
@@ -77,10 +78,16 @@ public class Login_Controller implements Initializable {
         if (emailSplit[0].equals(HRMPREFIX)) {
             switchToHrmMenu((ActionEvent) event);
         }
+        if(emailSplit[0].equals(VFMPREFIX)) {
+            switchToVfmMenu((ActionEvent) event);
+        }
         if (!emailSplit[0].equals(HRMPREFIX) && !emailSplit[0].equals(GSMPREFIX)) {
             switchToCollaboratorMenu((ActionEvent) event);
         }
+
     }
+
+
 
 
     public void switchToMainMenu(ActionEvent event) throws IOException {
@@ -97,6 +104,10 @@ public class Login_Controller implements Initializable {
 
     public void switchToCollaboratorMenu(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event, "/collaboratorUI.fxml");
+    }
+
+    private void switchToVfmMenu(ActionEvent event) throws IOException {
+        switchWindows.changeWindow(event, "/vfmUI.fxml");
     }
 
 }

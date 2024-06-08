@@ -42,7 +42,7 @@ public class CancelTask_Controller implements Initializable {
     private Repositories repositories = Repositories.getInstance();
     private AgendaRepository agendaRepository = repositories.getAgenda();
     private final String RESPONSIBLE = repositories.getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail();
-    private List<AgendaEntry> agendaEntryList = agendaRepository.getAgendaEntriesForResponsibleTeam(RESPONSIBLE);
+    private List<AgendaEntry> agendaEntryList = agendaRepository.getAgendaEntriesForResponsibleVehicle(RESPONSIBLE);
 
     @FXML
     private Label email_label;

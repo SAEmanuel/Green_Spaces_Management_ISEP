@@ -18,6 +18,8 @@ module pt.ipp.isep.dei.esoft.project {
     opens pt.ipp.isep.dei.esoft.project.javaFX.gsmMenu to javafx.fxml;
     exports pt.ipp.isep.dei.esoft.project.javaFX.hrmMenu;
     opens pt.ipp.isep.dei.esoft.project.javaFX.hrmMenu to javafx.fxml;
+    exports pt.ipp.isep.dei.esoft.project.javaFX.vfmMenu;
+    opens pt.ipp.isep.dei.esoft.project.javaFX.vfmMenu to javafx.fxml;
     exports pt.ipp.isep.dei.esoft.project.javaFX.collaboratorMenu;
     opens pt.ipp.isep.dei.esoft.project.javaFX.collaboratorMenu to javafx.fxml;
     exports pt.ipp.isep.dei.esoft.project.javaFX.alerts;
