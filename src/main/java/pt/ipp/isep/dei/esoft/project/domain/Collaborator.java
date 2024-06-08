@@ -115,6 +115,10 @@ public class Collaborator implements Serializable {
         }
     }
 
+    public List<Skill> getSkills() {
+        return skills;
+    }
+
     /**
      * Verifies if the email address has "@" and "."
      *

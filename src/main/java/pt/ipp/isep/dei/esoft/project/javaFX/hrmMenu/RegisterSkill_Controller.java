@@ -11,7 +11,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import pt.ipp.isep.dei.esoft.project.application.controller.RegisterSkillController;
-import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
 import pt.ipp.isep.dei.esoft.project.javaFX.alerts.ConfirmationAlerts;
 import pt.ipp.isep.dei.esoft.project.javaFX.alerts.InformationAlerts;
@@ -58,20 +57,20 @@ public class RegisterSkill_Controller implements Initializable {
 
 
     public void submitRegistration(ActionEvent event) {
-        try {
-            Optional<Skill> skill = controller.registerSkill(field_name.getText());
+            try {
+                Optional<Skill> skill = controller.registerSkill(field_name.getText());
 
-            table.getItems().clear();
-            table.getItems().addAll(controller.getSkillList());
-            if (skill.isPresent()) {
-                sendConfirmation.confirmationMessages("Success","Skill successfully registered!","");
-            } else {
-                sendInformation.informationMessages("ATTENTION","Skill not registered - Already registered!","");
+                table.getItems().clear();
+                table.getItems().addAll(controller.getSkillList());
+                if (skill.isPresent()) {
+                    sendConfirmation.confirmationMessages("Success","Skill successfully registered!","");
+                } else {
+                    sendInformation.informationMessages("ATTENTION","Skill not registered - Already registered!","");
+                }
+            } catch (IllegalArgumentException e) {
+
+                sendErrors.errorMessages("Invalid Inputs",e.getMessage(),"");
             }
-        } catch (IllegalArgumentException e) {
-
-            sendErrors.errorMessages("Invalid Inputs",e.getMessage(),"");
-        }
 
     }
 
@@ -94,7 +93,8 @@ public class RegisterSkill_Controller implements Initializable {
         switchWindows.changeWindow(event,"/createCollaborator.fxml");
     }
 
-    public void changeToAssignSkill(ActionEvent event) {
+    public void changeToAssignSkill(ActionEvent event) throws IOException {
+        switchWindows.changeWindow(event,"/assignSkillCollaborator.fxml");
     }
 
     public void changeGenerateTeam(ActionEvent event) {

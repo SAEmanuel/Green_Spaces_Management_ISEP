@@ -11,7 +11,7 @@ As a GSM, I want to add a new entry in the Agenda.
 
 **From the specifications document and client meetings:**
 
->	None.
+> The Agenda is made up of entries relating to: a task (which was previously in the Task List), the team that will carry out the task, the vehicles/equipment assigned to the task, the estimated duration and the status (Planned, Postponed, Canceled, Completed).
 
 **From forum:**
 
@@ -23,7 +23,7 @@ As a GSM, I want to add a new entry in the Agenda.
 >
 > **Answer:** For the current proof-of-concept there is no need to distinguish between recurring and occasional tasks.
 
-> **Question:** When the GSM plans a task (that was previously in To-Do) into the Agenda, what aditional data/information does he need to input when planning?
+> **Question:** When the GSM plans a task (that was previously in To-Do) into the Agenda, what additional data/information does he need to input when planning?
 >
 > **Answer:** The starting date for the task. Later the GSM will be able to add the Team and vehicles (if required).
 

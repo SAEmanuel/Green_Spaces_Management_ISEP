@@ -93,7 +93,8 @@ public class RegisterJob_Controller implements Initializable {
         switchWindows.changeWindow(event,"/createCollaborator.fxml");
     }
 
-    public void changeToAssignSkill(ActionEvent event) {
+    public void changeToAssignSkill(ActionEvent event) throws IOException {
+        switchWindows.changeWindow(event,"/assignSkillCollaborator.fxml");
     }
 
     public void changeGenerateTeam(ActionEvent event) {

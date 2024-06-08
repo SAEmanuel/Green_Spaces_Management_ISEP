@@ -220,9 +220,9 @@ public class CreateCollaborator_Controller implements Initializable {
     }
 
 
-    public void changeToAssignSkill(ActionEvent event) {
+    public void changeToAssignSkill(ActionEvent event) throws IOException {
+        switchWindows.changeWindow(event,"/assignSkillCollaborator.fxml");
     }
-
     public void changeGenerateTeam(ActionEvent event) {
     }
 
