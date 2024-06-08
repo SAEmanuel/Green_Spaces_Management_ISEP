@@ -70,6 +70,10 @@ public class VehicleController {
         return request;
     }
 
+    public List<Vehicle> getVehicles() {
+        return getVehicleRepository().getVehicleList();
+    }
+
     public Vehicle.Type[] showTypes(){
         return vehicleRepository.showType();
     }

@@ -39,13 +39,14 @@ public class VfmUI_Controller implements Initializable {
         switchWindows.changeWindow(event,"/login.fxml");
     }
 
-    public void changeToRegisterVehicleCheckUp(ActionEvent event) {
+    public void changeToRegisterVehicleCheckUp(ActionEvent event) throws IOException {
     }
 
     public void changeToCreateCheckUpList(ActionEvent event) {
     }
 
-    public void changeToRegisterVehicle(ActionEvent event) {
+    public void changeToRegisterVehicle(ActionEvent event) throws IOException {
+        switchWindows.changeWindow(event,"/registerVehicle.fxml");
     }
 
 
