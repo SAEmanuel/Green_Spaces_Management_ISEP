@@ -75,7 +75,7 @@ public class AssignTeamToAgendaTask_Controller implements Initializable {
     private String emailService;
 
     private final String RESPONSIBLE = repositories.getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail();
-    private List<AgendaEntry> agendaEntryList = agendaRepository.getAgendaEntriesForResponsibleTeam(RESPONSIBLE);
+    private List<AgendaEntry> agendaEntryList = agendaRepository.getAgendaEntriesForResponsibleVehicle(RESPONSIBLE);
 
 
     ObservableList<AgendaEntry> list = FXCollections.observableArrayList(agendaEntryList);
