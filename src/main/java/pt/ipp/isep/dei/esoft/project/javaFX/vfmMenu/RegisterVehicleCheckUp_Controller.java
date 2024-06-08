@@ -7,7 +7,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import pt.ipp.isep.dei.esoft.project.application.controller.CreateCheckUpController;
 import pt.ipp.isep.dei.esoft.project.application.controller.VehicleController;
+import pt.ipp.isep.dei.esoft.project.domain.CheckUp;
 import pt.ipp.isep.dei.esoft.project.domain.Data;
 import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 import pt.ipp.isep.dei.esoft.project.javaFX.alerts.ConfirmationAlerts;
@@ -22,56 +24,27 @@ import java.time.LocalDate;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class RegisterVehicle_Controller implements Initializable {
+public class RegisterVehicleCheckUp_Controller implements Initializable {
 
     private final SendErrors sendErrors = new SendErrors();
     private final ConfirmationAlerts sendConfirmation = new ConfirmationAlerts();
     private final InformationAlerts sendInformation = new InformationAlerts();
-
     private final SwitchWindows switchWindows = new SwitchWindows();
-    private final Repositories repositories = Repositories.getInstance();
     private final VehicleController controller = new VehicleController();
-
+    private final Repositories repositories = Repositories.getInstance();
+    private final CreateCheckUpController checkUpController = new CreateCheckUpController();
 
     @FXML
-    private ChoiceBox<Vehicle.Type> choiceBox_type;
-
+    private ChoiceBox<String> choice_plate;
 
     @FXML
     private Label email_label;
 
+    @FXML
+    private TextField field_checkUpKm;
 
     @FXML
-    private TextField field_PlateID;
-
-    @FXML
-    private TextField field_brand;
-
-    @FXML
-    private TextField field_checkUpFq;
-
-    @FXML
-    private TextField field_currentKm;
-
-    @FXML
-    private TextField field_grossWeigth;
-
-    @FXML
-    private TextField field_lastCheckUp;
-
-    @FXML
-    private TextField field_model;
-
-    @FXML
-    private TextField field_weigth;
-
-
-    @FXML
-    private DatePicker picker_Acquisitiondate;
-
-    @FXML
-    private DatePicker picker_RegisterDate;
-
+    private DatePicker picker_checkUp;
 
     @FXML
     private TableView<Vehicle> table;
@@ -94,18 +67,17 @@ public class RegisterVehicle_Controller implements Initializable {
     @FXML
     private TableColumn<Vehicle, Vehicle.Type> table_type;
 
-    private Data acquisitionDate, registerDate;
-    private int type;
-    private float tareWeigth, grossWeigth, currentKm, checkUpFrequency, lastCheckUp;
-    private String plateID,brand,model;
-
     private final ObservableList<Vehicle> list = FXCollections.observableArrayList(controller.getVehicles());
-
+    private float checkUpKm;
+    private Data checkUpDate;
+    private String plate;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         email_label.setText(repositories.getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail());
-        choiceBox_type.getItems().addAll(Vehicle.Type.values());
+        for (Vehicle vehicle : controller.getVehicles()) {
+            choice_plate.getItems().add(vehicle.getPlateId().trim());
+        }
 
 
         table_type.setCellValueFactory(new PropertyValueFactory<>("type"));
@@ -120,15 +92,15 @@ public class RegisterVehicle_Controller implements Initializable {
     public void submitRegistration(ActionEvent event) {
         try {
             getValues();
-            Optional<Vehicle> vehicle = controller.registerVehicle(plateID,brand,model,type,tareWeigth,grossWeigth,currentKm,checkUpFrequency,lastCheckUp,registerDate,acquisitionDate);
+            Optional<CheckUp> vehicle = repositories.getVehicleCheckUpRepository().registerCheckUp(checkUpController.getVehicleByPlateID(plate),checkUpKm,checkUpDate);
 
             table.getItems().clear();
             table.getItems().addAll(controller.getVehicles());
 
             if (vehicle.isPresent()) {
-                sendConfirmation.confirmationMessages("Success", "Vehicle successfully registered!", "");
+                sendConfirmation.confirmationMessages("Success", "Check-Up successfully registered!", "");
             } else {
-                sendInformation.informationMessages("ATTENTION", "Vehicle not registered - Already registered!", "");
+                sendInformation.informationMessages("ATTENTION", "Check-Up not registered!", "");
             }
         } catch (IllegalArgumentException e) {
             sendErrors.errorMessages("Invalid Inputs", e.getMessage(), "");
@@ -136,28 +108,21 @@ public class RegisterVehicle_Controller implements Initializable {
     }
 
     private void getValues() {
-        getStrigs();
         getBoxes();
         getFloats();
         getDates();
     }
 
-    private void getStrigs() {
-        plateID = field_PlateID.getText();
-        brand = field_brand.getText();
-        model = field_model.getText();
-    }
 
     private void getBoxes() {
-        type = choiceBox_type.getSelectionModel().getSelectedIndex();
-        if (type == -1 ) {
-            throw new IllegalArgumentException("Invalid \"Vehicle Type\"! Make sure to make a selection... ");
+        plate = choice_plate.getSelectionModel().getSelectedItem();
+        if (plate == null ) {
+            throw new IllegalArgumentException("Invalid \"Plate ID\"! Make sure to make a selection... ");
         }
     }
 
     private void getDates() {
-        acquisitionDate = convertDate(picker_Acquisitiondate);
-        registerDate = convertDate(picker_RegisterDate);
+        checkUpDate = convertDate(picker_checkUp);
     }
 
 
@@ -176,53 +141,17 @@ public class RegisterVehicle_Controller implements Initializable {
 
     private void getFloats() {
         try {
-            tareWeigth = Float.parseFloat(field_weigth.getText());
+            checkUpKm = Float.parseFloat(field_checkUpKm.getText());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid \"Tare Weight\", make sure only put numbers...");
+            throw new IllegalArgumentException("Invalid \"Check-Up Km\", make sure only put numbers...");
         }
-        try{
-            grossWeigth = Float.parseFloat(field_grossWeigth.getText());
-
-        }catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid \"Gross Weight\", make sure only put numbers...");
-        }
-
-        try{
-            currentKm = Float.parseFloat(field_currentKm.getText());
-
-        }catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid \"Current Kilometers\", make sure only put numbers...");
-        }
-        try{
-            checkUpFrequency = Float.parseFloat(field_checkUpFq.getText());
-
-        }catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid \"Check-Up Frequency\", make sure only put numbers...");
-        }
-        try{
-            lastCheckUp = Float.parseFloat(field_lastCheckUp.getText());
-
-        }catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid \"Last Check-Up\", make sure only put numbers...");
-        }
-
     }
-
 
     public void clear(ActionEvent event) {
-        field_PlateID.clear();
-        field_brand.clear();
-        field_checkUpFq.clear();
-        field_currentKm.clear();
-        field_lastCheckUp.clear();
-        field_model.clear();
-        field_weigth.clear();
-        field_grossWeigth.clear();
-        picker_Acquisitiondate.setValue(null);
-        picker_RegisterDate.setValue(null);
-        choiceBox_type.getSelectionModel().clearSelection();
+        choice_plate.getSelectionModel().clearSelection();
+        field_checkUpKm.clear();
+        picker_checkUp.setValue(null);
     }
-
 
     //------------------------------------ Options Side Bar --------------------------
 
@@ -231,11 +160,14 @@ public class RegisterVehicle_Controller implements Initializable {
         switchWindows.changeWindow(event, "/vfmUI.fxml");
     }
 
-    public void changeToRegisterVehicleCheckUp(ActionEvent event) throws IOException {
-        switchWindows.changeWindow(event,"/registerVehicleCheckUp.fxml");
+    public void changeToRegisterVehicle(ActionEvent event) throws IOException {
+        switchWindows.changeWindow(event, "/registerVehicle.fxml");
     }
+
     public void changeToCreateCheckUpList(ActionEvent event) throws IOException {
     }
 
 
 }
+
+

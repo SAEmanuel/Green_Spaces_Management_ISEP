@@ -16,22 +16,22 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1020.0" stylesheets="@Css/GsmUI.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.javaFX.vfmMenu.RegisterVehicle_Controller">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1020.0" stylesheets="@Css/GsmUI.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.javaFX.vfmMenu.RegisterVehicleCheckUp_Controller">
     <children>
         <VBox prefHeight="620.0" prefWidth="398.0">
             <children>
                 <AnchorPane fx:id="side_anchorpane" prefHeight="625.0" prefWidth="316.0">
                     <children>
-                        <Button layoutX="29.0" layoutY="231.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="254.0" style="-fx-border-width: 0px 0px 4px 0px; -fx-border-color: #fff;" text="Register Vehicle" textAlignment="CENTER">
+                        <Button layoutX="29.0" layoutY="231.0" mnemonicParsing="false" onAction="#changeToRegisterVehicle" prefHeight="39.0" prefWidth="254.0" text="Register Vehicle" textAlignment="CENTER">
                             <font>
                                 <Font name="System Bold" size="13.0" />
                             </font></Button>
-                        <Button layoutX="29.0" layoutY="291.0" mnemonicParsing="false" onAction="#changeToRegisterVehicleCheckUp" prefHeight="39.0" prefWidth="254.0" text="Register Vehicle Check-Up" textAlignment="CENTER">
+                        <Button layoutX="29.0" layoutY="291.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="254.0" style="-fx-border-width: 0px 0px 4px 0px; -fx-border-color: #fff;" text="Register Vehicle Check-Up" textAlignment="CENTER">
                             <font>
                                 <Font name="System Bold" size="13.0" />
                             </font>
                         </Button>
-                        <Button layoutX="29.0" layoutY="351.0" mnemonicParsing="false" onAction="#changeToCreateCheckUpList" prefHeight="39.0" prefWidth="254.0" text="Create Vehicle Check-Up List" textAlignment="CENTER">
+                        <Button layoutX="29.0" layoutY="351.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="254.0" text="Create Vehicle Check-Up List" textAlignment="CENTER">
                             <font>
                                 <Font name="System Bold" size="13.0" />
                             </font>
@@ -78,7 +78,7 @@
                         <Font size="10.0" />
                     </font>
                 </Label>
-                <Label layoutX="14.0" layoutY="14.0" text="Register Vehicle">
+                <Label layoutX="14.0" layoutY="14.0" text="Register Check-Up">
                     <font>
                         <Font name="System Bold" size="36.0" />
                     </font>
@@ -97,7 +97,7 @@
                 </Button>
                 <Pane fx:id="form" layoutX="8.0" layoutY="86.0" prefHeight="501.0" prefWidth="689.0">
                     <children>
-                        <TableView fx:id="table" layoutX="8.0" layoutY="9.0" prefHeight="203.0" prefWidth="674.0">
+                        <TableView fx:id="table" layoutX="8.0" layoutY="9.0" prefHeight="280.0" prefWidth="674.0">
                             <columns>
                                 <TableColumn fx:id="table_plateID" prefWidth="86.0" text="Plate ID" />
                                 <TableColumn fx:id="table_model" prefWidth="83.0" text="Model" />
@@ -110,60 +110,22 @@
                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                             </columnResizePolicy>
                         </TableView>
-                        <TextField fx:id="field_PlateID" layoutX="134.0" layoutY="222.0" prefHeight="24.0" prefWidth="181.0" />
-                        <Label alignment="CENTER" layoutX="308.0" layoutY="364.0" prefHeight="24.0" prefWidth="74.0" text="Type:">
-                            <font>
-                                <Font name="System Bold" size="14.0" />
-                            </font>
-                        </Label>
+                        <TextField fx:id="field_checkUpKm" layoutX="316.0" layoutY="389.0" prefHeight="24.0" prefWidth="181.0" />
                         <Button fx:id="submit_btn" layoutX="120.0" layoutY="450.0" mnemonicParsing="false" onAction="#submitRegistration" prefHeight="35.0" prefWidth="218.0" stylesheets="@Css/LoginTextField.css" text="Submit" />
                         <Button fx:id="clear_btn" layoutX="352.0" layoutY="450.0" mnemonicParsing="false" onAction="#clear" prefHeight="35.0" prefWidth="218.0" stylesheets="@Css/LoginTextField.css" text="Clear" />
-                        <ChoiceBox fx:id="choiceBox_type" layoutX="274.0" layoutY="392.0" prefHeight="24.0" prefWidth="150.0" />
-                        <Label layoutX="20.0" layoutY="222.0" prefHeight="24.0" prefWidth="74.0" text="Plate ID:">
+                        <Label layoutX="180.0" layoutY="389.0" prefHeight="24.0" prefWidth="116.0" text="Check-Up Km:">
                             <font>
                                 <Font name="System Bold" size="14.0" />
                             </font>
                         </Label>
-                        <Label layoutX="20.0" layoutY="258.0" prefHeight="24.0" prefWidth="82.0" text="Brand:">
+                        <Label layoutX="180.0" layoutY="305.0" prefHeight="24.0" prefWidth="72.0" text="Plate ID:">
                             <font>
                                 <Font name="System Bold" size="14.0" />
                             </font>
                         </Label>
-                        <Label layoutX="20.0" layoutY="332.0" prefHeight="24.0" prefWidth="129.0" text="Tare Weight:">
-                            <font>
-                                <Font name="System Bold" size="14.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="20.0" layoutY="296.0" prefHeight="24.0" prefWidth="66.0" text="Model:">
-                            <font>
-                                <Font name="System Bold" size="14.0" />
-                            </font>
-                        </Label>
-                        <TextField fx:id="field_model" layoutX="134.0" layoutY="296.0" prefHeight="24.0" prefWidth="181.0" promptText="Ex: Yaris" />
-                        <Label layoutX="353.0" layoutY="222.0" prefHeight="24.0" prefWidth="117.0" text="Gross Weight:">
-                            <font>
-                                <Font name="System Bold" size="14.0" />
-                            </font>
-                        </Label>
-                        <TextField fx:id="field_brand" layoutX="134.0" layoutY="258.0" prefHeight="24.0" prefWidth="181.0" promptText="Ex: Toyota" />
-                        <TextField fx:id="field_grossWeigth" layoutX="487.0" layoutY="222.0" prefHeight="24.0" prefWidth="181.0" promptText="Ex: 100 (Kg)" />
-                        <TextField fx:id="field_weigth" layoutX="132.0" layoutY="332.0" prefHeight="24.0" prefWidth="181.0" promptText="Ex: 91 (Kg)" />
-                        <Label layoutX="355.0" layoutY="258.0" prefHeight="24.0" prefWidth="100.0" text="Current Km:">
-                            <font>
-                                <Font name="System Bold" size="14.0" />
-                            </font>
-                        </Label>
-                        <Label layoutX="356.0" layoutY="296.0" prefHeight="24.0" prefWidth="106.0" text="Check-Up Fq:">
-                            <font>
-                                <Font name="System Bold" size="14.0" />
-                            </font>
-                        </Label>
-                        <TextField fx:id="field_checkUpFq" layoutX="487.0" layoutY="296.0" prefHeight="24.0" prefWidth="181.0" promptText="Ex: 100 (Km)" />
-                        <DatePicker fx:id="picker_RegisterDate" layoutX="81.0" layoutY="392.0" prefHeight="24.0" prefWidth="150.0" promptText="Register Date" />
-                        <DatePicker fx:id="picker_Acquisitiondate" layoutX="455.0" layoutY="392.0" prefHeight="24.0" prefWidth="150.0" promptText="Acquisition Date" />
-                  <TextField fx:id="field_currentKm" layoutX="487.0" layoutY="258.0" prefHeight="24.0" prefWidth="181.0" promptText="Ex: 1000 (Km)" />
-                  <TextField fx:id="field_lastCheckUp" layoutX="487.0" layoutY="332.0" prefHeight="24.0" prefWidth="181.0" promptText="Ex: 600 (Km)" />
-                  <Label layoutX="356.0" layoutY="332.0" prefHeight="24.0" prefWidth="129.0" text="Last Check-Up:">
+                        <DatePicker fx:id="picker_checkUp" layoutX="316.0" layoutY="349.0" prefHeight="24.0" prefWidth="181.0" promptText="Check-Up Date" />
+                  <ChoiceBox fx:id="choice_plate" layoutX="316.0" layoutY="305.0" prefHeight="24.0" prefWidth="181.0" />
+                  <Label layoutX="180.0" layoutY="349.0" prefHeight="24.0" prefWidth="129.0" text="Check-Up Date:">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
