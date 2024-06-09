@@ -553,11 +553,24 @@ public class AgendaRepository implements Serializable {
     public List<AgendaEntry> getAgendaEntriesForResponsible(String responsible) {
         return getAgendaEntries(responsible, agenda);
     }
+
+
+    /**
+     * Retrieves a list of agenda entries for a team responsible for a specific task.
+     *
+     * @param responsible the identifier for the responsible team
+     * @return a list of AgendaEntry objects associated with the responsible team
+     */
     public List<AgendaEntry> getAgendaEntriesForResponsibleTeam(String responsible) {
         return getAgendaEntriesTeam(responsible, agenda);
     }
 
-
+    /**
+     * Retrieves a list of agenda entries for a vehicle responsible for a specific task.
+     *
+     * @param responsible the identifier for the responsible vehicle
+     * @return a list of AgendaEntry objects associated with the responsible vehicle
+     */
     public List<AgendaEntry> getAgendaEntriesForResponsibleVehicle(String responsible) {
         return getAgendaEntriesVehicle(responsible, agenda);
     }
@@ -574,6 +587,13 @@ public class AgendaRepository implements Serializable {
         return getAgendaEntries(responsible, agendaBackUp);
     }
 
+    /**
+     * Retrieves a list of agenda entries associated with a specific responsible entity from the given agenda.
+     *
+     * @param responsible the identifier for the responsible entity
+     * @param agenda the list of agenda entries to search
+     * @return a list of AgendaEntry objects associated with the responsible entity
+     */
     private List<AgendaEntry> getAgendaEntries(String responsible, List<AgendaEntry> agenda) {
         List<AgendaEntry> agendaEntries = new ArrayList<>();
         for (AgendaEntry agendaEntry : agenda) {
@@ -610,12 +630,20 @@ public class AgendaRepository implements Serializable {
         return agendaEntries;
     }
 
+    /**
+     * Retrieves a list of agenda entries associated with a specific responsible vehicle from the given agenda.
+     *
+     * @param responsible the identifier for the responsible vehicle
+     * @param agenda the list of agenda entries to search
+     * @return a list of AgendaEntry objects associated with the responsible vehicle
+     */
     private List<AgendaEntry> getAgendaEntriesVehicle(String responsible, List<AgendaEntry> agenda) {
         List<AgendaEntry> agendaEntries = new ArrayList<>();
         for (AgendaEntry agendaEntry : agenda) {
             if (agendaEntry.getVehicles() != null && agendaEntry.getResponsible().equals(responsible) &&
-                    !agendaEntry.getAgendaEntry().getStatus().equals(String.valueOf(AgendaEntry.Status.DONE)))
+                    !agendaEntry.getAgendaEntry().getStatus().equals(String.valueOf(AgendaEntry.Status.DONE))) {
                 agendaEntries.add(agendaEntry);
+            }
         }
         return agendaEntries;
     }
@@ -640,6 +668,9 @@ public class AgendaRepository implements Serializable {
         return agendaTask.addVehicle(vehicle);
     }
 
+    /**
+     * Creates a new agenda list, replacing the existing one with an empty list.
+     */
     public void createNewAgendaList() {
         agenda = new ArrayList<>();
     }

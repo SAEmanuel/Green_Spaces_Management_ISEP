@@ -122,9 +122,15 @@ public class CollaboratorRepository implements Serializable {
         return collaborator.addSkill(skill);
     }
 
+    /**
+     * Adds a collaborator to the list of collaborators.
+     *
+     * @param collaborator The collaborator to be added.
+     */
     public void add(Collaborator collaborator) {
         collaboratorList.add(collaborator);
     }
+
 
     /**
      * Retrieves an array containing all available document types for collaborators.

@@ -134,6 +134,12 @@ public class TeamRepository implements Serializable {
         return optionalValue;
     }
 
+    /**
+     * Checks if the collaborators of the given team are equal to the collaborators of any team in the auxiliary team list.
+     *
+     * @param team The team whose collaborators need to be checked.
+     * @return true if the collaborators of the given team are not equal to any team in the auxiliary team list, false otherwise.
+     */
     public boolean checkTeamCollaborators(Team team) {
         for (Team t : teamListAux) {
             if (areCollaboratorsEqual(t.getCollaborators(), team.getCollaborators())) {
@@ -143,24 +149,32 @@ public class TeamRepository implements Serializable {
         return true;
     }
 
+
+    /**
+     * Checks if two lists of collaborators are equal based on their taxpayer numbers.
+     *
+     * @param collaborators1 The first list of collaborators.
+     * @param collaborators2 The second list of collaborators.
+     * @return true if the taxpayer numbers of collaborators in both lists match, false otherwise.
+     */
     private boolean areCollaboratorsEqual(List<Collaborator> collaborators1, List<Collaborator> collaborators2) {
         if (collaborators1.size() != collaborators2.size()) {
             return false;
         }
         int count = 0;
 
-        for (Collaborator c1: collaborators1) {
-            for (Collaborator c2 : collaborators2)
+        for (Collaborator c1 : collaborators1) {
+            for (Collaborator c2 : collaborators2) {
                 if (c1.getTaxPayerNumber() == c2.getTaxPayerNumber()) {
                     count++;
                     break;
                 }
+            }
         }
 
-        if(count == collaborators2.size())
-            return true;
-        return false;
+        return count == collaborators2.size();
     }
+
 
 
     /**
@@ -242,9 +256,15 @@ public class TeamRepository implements Serializable {
         }
     }
 
-    public void addTeam(int teamId){
+    /**
+     * Adds a team with the given team ID to the team list.
+     * If the team ID already exists, it assigns a new team ID and adds the team to the list.
+     *
+     * @param teamId The team ID of the team to be added.
+     */
+    public void addTeam(int teamId) {
         int newTeamId = 1;
-        for(Team t : teamList) {
+        for (Team t : teamList) {
             if (t.getTeamId() != newTeamId) {
                 break;
             }
@@ -260,13 +280,22 @@ public class TeamRepository implements Serializable {
         }
     }
 
-    public void cleanTeamListAux(){
+    /**
+     * Clears the auxiliary team list by assigning a new empty ArrayList to it.
+     */
+    public void cleanTeamListAux() {
         teamListAux = new ArrayList<>();
     }
 
-    public List<Team> generatedList(){
+    /**
+     * Generates a new list containing the teams from the auxiliary team list.
+     *
+     * @return A new list containing the teams from the auxiliary team list.
+     */
+    public List<Team> generatedList() {
         return new ArrayList<>(teamListAux);
     }
+
 
     /**
      * Returns a clone of the list of teams.
@@ -299,13 +328,22 @@ public class TeamRepository implements Serializable {
             }
         }
     }
-
+    /**
+     * Retrieves the list of teams.
+     *
+     * @return The list of teams.
+     */
     public List<Team> getListTeam() {
         return teamList;
     }
 
-
+    /**
+     * Adds a team to the list of teams.
+     *
+     * @param team The team to be added.
+     */
     public void add(Team team) {
         teamList.add(team);
     }
+
 }

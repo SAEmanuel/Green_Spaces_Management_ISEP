@@ -131,28 +131,15 @@ public class SkillRepository implements Serializable {
     }
 
 
-
-    //----------------------- Serialization methods -------------------------------
-
-    public List<Skill> getSkillListSerialization() {
-        return skillList;
-    }
-
-    public void serializationInput(List<Skill> skillList) {
-        this.skillList.clear();
-        this.skillList.addAll(skillList);
-    }
-
-    //-------------------------------------------------------------------------------
-
-
-
     //---------------------- Boostrap methods ---------------------------------------
 
+    /**
+     * Adds a skill to the skill list.
+     *
+     * @param skill The skill to be added.
+     */
     public void add(Skill skill) {
         skillList.add(skill);
     }
-
-    //-------------------------------------------------------------------------------
 
 }

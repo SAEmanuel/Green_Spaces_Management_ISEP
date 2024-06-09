@@ -165,38 +165,40 @@ public class VehicleRepository implements Serializable {
         return vehiclesForCheckUp;
     }
 
+    /**
+     * Retrieves an array containing all available vehicle types.
+     *
+     * @return An array containing all available vehicle types.
+     */
     public Vehicle.Type[] showType() {
         return Vehicle.Type.values();
     }
 
 
-    //----------------------- Serialization methods -------------------------------
-
-    public List<Vehicle> getVehicleListSerialization() {
-        return vehicleList;
-    }
-
-    public void serializationInput(List<Vehicle> vehicleList) {
-        this.vehicleList.clear();
-        this.vehicleList.addAll(vehicleList);
-    }
-
-    //-------------------------------------------------------------------------------
-
-
     //---------------------- Boostrap methods ---------------------------------------
 
+    /**
+     * Adds a vehicle to the list of vehicles.
+     *
+     * @param vehicle The vehicle to be added.
+     */
     public void add(Vehicle vehicle) {
         vehicleList.add(vehicle);
     }
 
+
     //-------------------------------------------------------------------------------
 
+    /**
+     * Retrieves a list of available vehicles based on the given list of tasks.
+     *
+     * @param tasks The list of tasks.
+     * @return A list of available vehicles.
+     */
     public List<Vehicle> getAvailableVehicles(List<AgendaEntry> tasks) {
-        List<Vehicle> availableVehicles = getVehicleList();
+        List<Vehicle> availableVehicles = new ArrayList<>(getVehicleList());
 
         for (AgendaEntry task : tasks) {
-            System.out.println(task);
             List<Vehicle> taskVehicle = task.getVehicles();
             if (taskVehicle != null) {
                 for (Vehicle vehicle : taskVehicle) {
@@ -206,11 +208,16 @@ public class VehicleRepository implements Serializable {
         }
 
         return availableVehicles;
-
     }
 
+    /**
+     * Retrieves a list of available vehicles for JavaFX based on the given list of tasks.
+     *
+     * @param tasks The list of tasks.
+     * @return A list of available vehicles.
+     */
     public List<Vehicle> getAvailableVehiclesJavaFx(List<AgendaEntry> tasks) {
-        List<Vehicle> availableVehicles = getVehicleList();
+        List<Vehicle> availableVehicles = new ArrayList<>(getVehicleList());
 
         for (AgendaEntry task : tasks) {
             List<Vehicle> taskVehicle = task.getVehicles();
@@ -220,7 +227,7 @@ public class VehicleRepository implements Serializable {
                 }
             }
         }
-        return availableVehicles;
 
+        return availableVehicles;
     }
 }
