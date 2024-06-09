@@ -38,10 +38,19 @@ public class Serialization {
     //--------------------------- Serialization of Class Infos **OUTPUTS** -----------------------------
 
     public void serializeRepositoriesOutput() {
-        String filePath = "AppInformaion/repositories.ser";
+        String filePath = "AppInformation/repositories.ser";
 
         try {
+
             File file = new File(filePath);
+
+            // Create the file and directory if necessary
+            if (!file.exists()) {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+            }
+
+
             FileOutputStream fileOutputStream = new FileOutputStream(file);
             ObjectOutputStream output = new ObjectOutputStream(fileOutputStream);
 
@@ -55,36 +64,6 @@ public class Serialization {
 
 
     //--------------------------- Serialization of Class Infos **INPUTS** -----------------------------
-
-//    public void serializeRepositoriesInput() {
-//        String filePath = "AppInformation/repositories.ser";
-//
-//        try {
-//            File file = new File(filePath);
-//
-//            if (!file.exists()) {
-//                file.getParentFile().mkdirs();
-//                file.createNewFile();
-//            }
-//
-//            if (file.length() == 0) {
-//                throw new IllegalArgumentException("The repositories file is empty.");
-//            }
-//
-//            FileInputStream fis = new FileInputStream(file);
-//            ObjectInputStream ois = new ObjectInputStream(fis);
-//
-//            Repositories deserializedRepositories = (Repositories) ois.readObject();
-//            Repositories.setInstance(deserializedRepositories);
-//
-//            ois.close();
-//            fis.close();
-//
-//        } catch (IOException | ClassNotFoundException | IllegalArgumentException e) {
-//            throw new IllegalArgumentException("Error deserializing repositories: " + e.getMessage(), e);
-//        }
-//    }
-
 
     public void serializeRepositoriesInput() {
         String filePath = "AppInformation/repositories.ser";
