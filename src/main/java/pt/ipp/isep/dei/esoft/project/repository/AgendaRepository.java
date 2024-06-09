@@ -527,9 +527,10 @@ public class AgendaRepository implements Serializable {
      * @return The agenda entry.
      */
     public AgendaEntry getAgendaEntryByID(int agendaEntryID, String responsible) {
-        List<AgendaEntry> agenda = getAgendaEntriesForResponsible(responsible);
+        List<AgendaEntry> agenda = getAgendaEntriesForResponsibleTeam(responsible);
         return agenda.get(agendaEntryID);
     }
+
 
     /**
      * Retrieves an agenda entry from the backup agenda list based on its ID and responsible collaborator.
