@@ -93,6 +93,7 @@ public class GenerateTeam_Controller implements Initializable {
         try {
             boolean auxShowTeam = false;
             getValues();
+            controller.cleanSkillList();
             SkillList skillList = getSkills();
             Optional<Team> generateTeam = controller.generateTeamJavaFx(skillList,collaboratorRepository.getCollaboratorList(),minimun,maximun);
 
@@ -139,7 +140,10 @@ public class GenerateTeam_Controller implements Initializable {
                 }
 //                sendConfirmation.confirmationMessages("Success", "Team successfully created!", "");
             } else {
-                sendInformation.informationMessages("ATTENTION", "Team not created! Not enought collaborators to generate team.", "");
+                if(skillList == null || skillList.getSkillList().isEmpty())
+                    throw new NumberFormatException("No selected skills... Make sure to select one or more.");
+                else
+                    sendInformation.informationMessages("ATTENTION", "Team not created! Not enought collaborators to generate team.", "");
             }
         } catch (IllegalArgumentException e) {
             sendErrors.errorMessages("Invalid Inputs", e.getMessage(), "");
@@ -149,7 +153,7 @@ public class GenerateTeam_Controller implements Initializable {
 
     private Optional<Team> showTeamSelectionDialog(List<Team> teamList) {
         Dialog<Team> dialog = new Dialog<>();
-        dialog.setTitle("Select a Team");
+        dialog.setTitle("Generated Teams");
 
         // Set the button types
         ButtonType selectButtonType = new ButtonType("Select", ButtonType.OK.getButtonData());
@@ -159,10 +163,10 @@ public class GenerateTeam_Controller implements Initializable {
         // Create a ComboBox for team selection
         ComboBox<Team> comboBox = new ComboBox<>();
         comboBox.getItems().addAll(teamList);
-        comboBox.setPromptText("Select a team");
+        comboBox.setPromptText("Generated Teams");
 
         VBox content = new VBox();
-        content.getChildren().addAll(new Label("Please select a team:"), comboBox);
+        content.getChildren().addAll(new Label("Select one of the teams generated to add:"), comboBox);
         dialog.getDialogPane().setContent(content);
 
         // Convert the result to the selected team when the select button is clicked

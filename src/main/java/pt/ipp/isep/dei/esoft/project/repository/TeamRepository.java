@@ -35,9 +35,9 @@ public class TeamRepository implements Serializable {
         Optional<Team> optionalValue = Optional.empty();
 
         if(minCollaborators > maxCollaborators) {
-            System.out.println(ANSI_BRIGHT_RED+"Minimum collaborators is greater than maximum collaborators"+ANSI_RESET);
-//            throw new IllegalArgumentException("Minimum collaborators is greater than maximum collaborators");
-            return optionalValue;
+//            System.out.println(ANSI_BRIGHT_RED+"Minimum collaborators is greater than maximum collaborators"+ANSI_RESET);
+            throw new IllegalArgumentException("Minimum collaborators is greater than maximum collaborators");
+//            return optionalValue;
         }
         if( verifyIfExistingCollab(skills,collaboratorList, minCollaborators) ) {
             System.out.println(ANSI_BRIGHT_RED+"Not enought collaborators to generate team"+ANSI_RESET);
@@ -243,8 +243,17 @@ public class TeamRepository implements Serializable {
     }
 
     public void addTeam(int teamId){
+        int newTeamId = 1;
+        for(Team t : teamList) {
+            if (t.getTeamId() != newTeamId) {
+                break;
+            }
+            newTeamId++;
+        }
+
         for (Team t : teamListAux) {
             if (t.getTeamId() == teamId) {
+                t.setTeamId(newTeamId);
                 teamList.add(t);
                 break;
             }

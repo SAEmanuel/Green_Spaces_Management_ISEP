@@ -19,10 +19,11 @@ public class Team {
 
 
 
-
     public int getTeamId() {
         return teamId;
     }
+
+    public void setTeamId(int teamId) { this.teamId = teamId; }
 
     public void setCollaborators(List<Collaborator> collaborators) {
         this.collaborators = collaborators;
