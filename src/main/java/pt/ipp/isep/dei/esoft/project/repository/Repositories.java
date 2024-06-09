@@ -7,7 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.Serializable;
 
 public class Repositories implements Serializable {
-    private static final long serialVersionUID = 1L; // Defina um valor constante e único
+    private static final long serialVersionUID = 1L;
 
     private static Repositories instance;
     private transient AuthenticationRepository authenticationRepository;
