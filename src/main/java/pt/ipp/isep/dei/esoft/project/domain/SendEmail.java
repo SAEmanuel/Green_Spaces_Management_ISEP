@@ -68,19 +68,21 @@ public class SendEmail implements Serializable{
                 BufferedWriter writer = null;
                 try {
                     // Create BufferedWriter object
-                    writer = new BufferedWriter(new FileWriter("src/main/java/pt/ipp/isep/dei/esoft/project/ui/email_log.txt"));
+                    writer = new BufferedWriter(new FileWriter("Email/email_log.txt"));
                     // Write data to the file
-                    writer.write(smtpServer);
+//                    writer.write(smtpServer);
+//                    writer.newLine();
+//                    writer.write(String.valueOf(port));
+//                    writer.newLine();
+//                    writer.write(String.valueOf(useTls));
+//                    writer.newLine();
+//                    writer.write(String.valueOf(useSsl));
+//                    writer.newLine();
+//                    writer.newLine();
+                    writer.write("-----------------------------------------------------------------------------------------\n");
+                    writer.write("From: " + serviceName);
                     writer.newLine();
-                    writer.write(String.valueOf(port));
-                    writer.newLine();
-                    writer.write(String.valueOf(useTls));
-                    writer.newLine();
-                    writer.write(String.valueOf(useSsl));
-                    writer.newLine();
-                    writer.newLine();
-                    writer.write(serviceName);
-                    writer.newLine();
+                    writer.write("-----------------------------------------------------------------------------------------\n");
                     StringBuilder emailStringBuilder = new StringBuilder();
                     for (int i = 0; i < toEmails.size(); i++) {
                         if (i > 0) {
@@ -88,11 +90,24 @@ public class SendEmail implements Serializable{
                         }
                         emailStringBuilder.append(toEmails.get(i));
                     }
-                    writer.write(emailStringBuilder.toString());
+                    writer.write("To: " + emailStringBuilder.toString());
                     writer.newLine();
-                    writer.write(subject);
+                    writer.write("-----------------------------------------------------------------------------------------\n");
+                    writer.write("Subject: " + subject);
                     writer.newLine();
+                    writer.write("-----------------------------------------------------------------------------------------\n\n");
+
                     writer.write(body);
+                    writer.newLine();
+                    writer.newLine();
+                    writer.write("Best regards\n\n\n");
+                    writer.newLine();
+                    writer.write("MusgoSublime | MakeItSimple\n");
+                    writer.write("Rua Dr. António Bernardino de Almeida, 431\n");
+                    writer.write("4249-015 Porto - PORTUGAL\n");
+                    writer.write("tel. +351 228 340 500 | fax +351 228 321 159\n");
+
+
                 }finally {
                     writer.flush();
                     writer.close();

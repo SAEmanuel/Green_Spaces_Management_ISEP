@@ -14,7 +14,6 @@ import java.util.Scanner;
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
 
 public class ShowGreenSpacesUI implements Runnable {
-    private String sortType;
     private ShowGreenSpacesByManagerController controller;
 
     /**
@@ -49,7 +48,7 @@ public class ShowGreenSpacesUI implements Runnable {
      * Submits the data to show the green spaces managed by the current user.
      */
     private void submitData() {
-        List<GreenSpace> result = getController().showGreenSpaces(sortType);
+        List<GreenSpace> result = getController().showGreenSpaces();
 
         if (result != null) {
             for(GreenSpace gs : result)

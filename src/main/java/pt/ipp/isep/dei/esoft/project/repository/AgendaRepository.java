@@ -504,7 +504,6 @@ public class AgendaRepository implements Serializable {
         if (validateInfo(team, task)) {
             task.setTeam(team);
             taskBackUp.setTeam(team);
-            System.out.println(task);
             return true;
         }
         return false;

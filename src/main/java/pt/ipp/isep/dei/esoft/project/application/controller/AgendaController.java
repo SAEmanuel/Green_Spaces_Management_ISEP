@@ -245,7 +245,7 @@ public class AgendaController {
      * @return The list of available vehicles.
      */
     public List<Vehicle> getAvailableVehicles() {
-        return vehicleRepository.getAvailableVehicles(getAgendaEntries());
+        return vehicleRepository.getAvailableVehiclesJavaFx(getAgendaEntries());
     }
 
     /**

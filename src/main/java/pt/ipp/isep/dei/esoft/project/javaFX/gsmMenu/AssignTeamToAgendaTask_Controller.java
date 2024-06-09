@@ -102,7 +102,8 @@ public class AssignTeamToAgendaTask_Controller implements Initializable {
             table_endDate.setItems(list);
             getInfos();
             if (toDoEntry) {
-                sendConfirmation.confirmationMessages("Success", "Team successfully assigned!", "");
+                sendConfirmation.confirmationMessagesAndW8("Success", "Team successfully assigned!", "");
+                sendInformation.informationMessages("Information","Emails sent to collaborators","Check the Email file!");
             } else {
                 sendInformation.informationMessages("ATTENTION", "Team not assigned - This task already have a team assigned!", "");
             }

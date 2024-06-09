@@ -66,6 +66,42 @@ public class SortGreenSpaces implements Serializable {
         }
     }
 
+    public static List<GreenSpace> sortGreenSpacesJavaFx( List<GreenSpace> greenSpaces) throws IOException {
+        loadFileConfig();
+        boolean sorted = false;
+
+        for (String key : config.stringPropertyNames()) {
+            if (key.startsWith("sorting.")) {
+                String value = config.getProperty(key);
+                switch (value) {
+                    case "Ascending By Name":
+                        greenSpaces = ascendingName(greenSpaces);
+                        sorted = true;
+                        break;
+                    case "Descending By Name":
+                        greenSpaces = descendingName(greenSpaces);
+                        sorted = true;
+                        break;
+                    case "Bubble Sort":
+                        greenSpaces = bubbleSort(greenSpaces);
+                        sorted = true;
+                        break;
+                    case "Insertion Sort":
+                        greenSpaces = insertionSort(greenSpaces);
+                        sorted = true;
+                        break;
+                }
+            }
+        }
+
+        if(sorted)
+            return greenSpaces;
+        else{
+            throw new IllegalArgumentException("No sort method found");
+        }
+    }
+
+
     /**
      * Sorts a list of GreenSpace objects in ascending order by name.
      *

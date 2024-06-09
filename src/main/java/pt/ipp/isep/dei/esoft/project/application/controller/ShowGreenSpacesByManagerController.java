@@ -36,10 +36,9 @@ public class ShowGreenSpacesByManagerController {
     /**
      * Retrieves and sorts the green spaces managed by the currently logged-in user.
      *
-     * @param sortOrder the order in which to sort the green spaces
      * @return a sorted list of GreenSpace objects managed by the current user, or null if none are found
      */
-    public List<GreenSpace> showGreenSpaces(String sortOrder) {
+    public List<GreenSpace> showGreenSpaces() {
         String resposible = getResponsible();
 
         List<GreenSpace> greenSpaces = greenSpaceRepository.getGreenSpacesByResponsible(resposible);
@@ -53,6 +52,23 @@ public class ShowGreenSpacesByManagerController {
         } catch (IOException e) {
             System.out.println(ANSI_BRIGHT_RED + "\nConfiguration File not found!..Add one in \"/src/main/resource\" location" + ANSI_RESET);
             return null;
+        }
+        return greenSpaces;
+    }
+
+
+    public List<GreenSpace> showGreenSpacesJavaFx() {
+        String resposible = getResponsible();
+
+        List<GreenSpace> greenSpaces = greenSpaceRepository.getGreenSpacesByResponsible(resposible);
+        if(greenSpaces == null || greenSpaces.isEmpty()){
+            throw new IllegalArgumentException("Green Spaces list not found or empty");
+        }
+
+        try {
+            greenSpaces = sortGreenSpaces.sortGreenSpacesJavaFx(greenSpaces);
+        } catch (IOException e) {
+            throw new IllegalArgumentException("Configuration File not found!..Add one in \"/src/main/resource\" location");
         }
         return greenSpaces;
     }

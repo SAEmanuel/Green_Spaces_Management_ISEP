@@ -208,4 +208,19 @@ public class VehicleRepository implements Serializable {
         return availableVehicles;
 
     }
+
+    public List<Vehicle> getAvailableVehiclesJavaFx(List<AgendaEntry> tasks) {
+        List<Vehicle> availableVehicles = getVehicleList();
+
+        for (AgendaEntry task : tasks) {
+            List<Vehicle> taskVehicle = task.getVehicles();
+            if (taskVehicle != null) {
+                for (Vehicle vehicle : taskVehicle) {
+                    availableVehicles.remove(vehicle);
+                }
+            }
+        }
+        return availableVehicles;
+
+    }
 }

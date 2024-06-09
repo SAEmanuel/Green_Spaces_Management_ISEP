@@ -13,6 +13,14 @@ public class ConfirmationAlerts {
         alert.show();
     }
 
+    public void confirmationMessagesAndW8(String title, String header, String content){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
     public Alert confirmationMessagesGiveAlert(String title, String header, String content){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(title);
