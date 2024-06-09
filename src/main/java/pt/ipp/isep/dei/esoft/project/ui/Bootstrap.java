@@ -71,8 +71,8 @@ public class Bootstrap implements Runnable {
     //******** RUN METHOD **********
 
     public void run() {
-//        inputAppInformation();
         addUsers();
+//        inputAppInformation();
         addJobs();
         addVehicles();
         addSkills();
