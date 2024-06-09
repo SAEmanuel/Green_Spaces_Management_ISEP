@@ -4,6 +4,9 @@ import pt.ipp.isep.dei.esoft.project.domain.Extras.validations.Validations;
 
 import java.io.Serializable;
 
+/**
+ * The GreenSpace class represents a green space in the project domain.
+ */
 public class GreenSpace implements Serializable {
 
     private final String name;       // The name of the green space
@@ -11,6 +14,7 @@ public class GreenSpace implements Serializable {
     private final String responsible; // The responsible person for the green space
     private final Size size;         // The size of the green space
     private final float area;        // The area of the green space
+
 
     public Size getSize() {
         return size;

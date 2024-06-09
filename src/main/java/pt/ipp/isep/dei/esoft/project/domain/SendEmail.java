@@ -8,13 +8,10 @@ import java.util.Properties;
 
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_BRIGHT_RED;
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_RESET;
-//import javax.mail.Message;
-//import javax.mail.MessagingException;
-//import javax.mail.Session;
-//import javax.mail.internet.InternetAddress;
-//import javax.mail.internet.MimeMessage;
-//import com.sun.mail.smtp.SMTPTransport;
 
+/**
+ * Represents a class responsible for sending emails.
+ */
 public class SendEmail implements Serializable{
     private static Properties config;
 

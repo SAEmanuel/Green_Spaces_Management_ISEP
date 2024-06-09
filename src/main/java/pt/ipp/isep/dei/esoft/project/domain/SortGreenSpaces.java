@@ -8,6 +8,9 @@ import java.util.*;
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_BRIGHT_RED;
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_RESET;
 
+/**
+ * Represents a utility class for sorting GreenSpace objects.
+ */
 public class SortGreenSpaces implements Serializable {
     private static Properties config;
 
@@ -66,6 +69,13 @@ public class SortGreenSpaces implements Serializable {
         }
     }
 
+    /**
+     * Sorts a list of GreenSpace objects based on the sorting methods specified in the configuration.
+     *
+     * @param greenSpaces the list of GreenSpace objects to sort
+     * @return the sorted list of GreenSpace objects, or null if no sorting method is found
+     * @throws IOException if there is an error loading the configuration
+     */
     public static List<GreenSpace> sortGreenSpacesJavaFx( List<GreenSpace> greenSpaces) throws IOException {
         loadFileConfig();
         boolean sorted = false;

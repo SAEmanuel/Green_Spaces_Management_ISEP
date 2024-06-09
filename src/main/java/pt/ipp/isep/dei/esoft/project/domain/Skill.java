@@ -4,6 +4,9 @@ import pt.ipp.isep.dei.esoft.project.domain.Extras.validations.Validations;
 
 import java.io.Serializable;
 
+/**
+ * Represents a skill.
+ */
 public class Skill implements Serializable {
 
     /**

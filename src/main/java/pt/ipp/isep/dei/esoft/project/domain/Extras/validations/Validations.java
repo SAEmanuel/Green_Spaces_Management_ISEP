@@ -1,5 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.domain.Extras.validations;
 
+/**
+ * The Validations class provides static methods for validating various types of data.
+ */
 public class Validations {
 
 

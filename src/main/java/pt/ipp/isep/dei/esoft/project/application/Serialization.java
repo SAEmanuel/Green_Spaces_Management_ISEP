@@ -7,13 +7,18 @@ import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
 
 import java.io.*;
 
+/**
+ * Handles serialization and deserialization of repositories.
+ */
 public class Serialization {
 
     private Repositories repositories;
     private SkillRepository skillRepository;
     private VehicleRepository vehicleRepository;
 
-
+    /**
+     * Constructs a new Serialization instance and initializes repositories.
+     */
     public Serialization() {
         this.repositories = Repositories.getInstance();
         this.skillRepository = getSkillRepository();
@@ -36,7 +41,9 @@ public class Serialization {
 
 
     //--------------------------- Serialization of Class Infos **OUTPUTS** -----------------------------
-
+    /**
+     * Serializes repositories output to a file.
+     */
     public void serializeRepositoriesOutput() {
         String filePath = "AppInformation/repositories.ser";
 
@@ -64,7 +71,9 @@ public class Serialization {
 
 
     //--------------------------- Serialization of Class Infos **INPUTS** -----------------------------
-
+    /**
+     * Deserializes repositories input from a file.
+     */
     public void serializeRepositoriesInput() {
         String filePath = "AppInformation/repositories.ser";
 
@@ -98,6 +107,11 @@ public class Serialization {
         }
     }
 
+    /**
+     * Initializes an empty repositories instance.
+     *
+     * @param filePath The file path to store the serialized repositories.
+     */
     private void initializeEmptyRepositories(String filePath) {
         try {
             Repositories initialRepositories = Repositories.getInstance();
@@ -116,10 +130,6 @@ public class Serialization {
             throw new IllegalArgumentException("Error initializing empty repositories: " + e.getMessage(), e);
         }
     }
-
-
-
-
 }
 
 

@@ -8,8 +8,16 @@ import java.util.Scanner;
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_BRIGHT_RED;
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_RESET;
 
+/**
+ * The GetDatesFromUsers class provides methods to prompt users for date inputs.
+ */
 public class GetDatesFromUsers {
 
+    /**
+     * Prompts the user to input a date (day, month, year).
+     *
+     * @return The Data object representing the date entered by the user.
+     */
     public static Data getData() {
         Data date;
         while (true) {
