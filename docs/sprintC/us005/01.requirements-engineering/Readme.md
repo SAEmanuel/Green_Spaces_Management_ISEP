@@ -64,7 +64,7 @@ As a HRM, I want to generate a team proposal automatically
 * **AC2:** Need to have as many collaborators as the number of the skills requested.
 * **AC3:** Need to have at least one skill/collaborator registered to start a team generation.
 * **AC4:** A collaborator can only be assigned to one team.
-* **AC5:** The minimum size of a team is of two collaborators.
+* **AC5:** The minimum size of a team is one collaborator.
 
 ### 1.4. Found out Dependencies
 
