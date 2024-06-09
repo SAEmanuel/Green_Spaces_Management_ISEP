@@ -72,6 +72,12 @@ public class RegisterVehicleCheckUp_Controller implements Initializable {
     private Data checkUpDate;
     private String plate;
 
+    /**
+     * Initializes the controller after its root element has been completely processed.
+     *
+     * @param url The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param resourceBundle The resources used to localize the root object, or null if the root object was not localized.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         email_label.setText(repositories.getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail());
@@ -89,6 +95,11 @@ public class RegisterVehicleCheckUp_Controller implements Initializable {
         table.setItems(list);
     }
 
+    /**
+     * Handles the action event when the user submits a vehicle check-up registration.
+     *
+     * @param event The action event.
+     */
     public void submitRegistration(ActionEvent event) {
         try {
             getValues();
@@ -107,13 +118,19 @@ public class RegisterVehicleCheckUp_Controller implements Initializable {
         }
     }
 
+
+    /**
+     * Retrieves values from input fields.
+     */
     private void getValues() {
         getBoxes();
         getFloats();
         getDates();
     }
 
-
+    /**
+     * Retrieves values from choice boxes.
+     */
     private void getBoxes() {
         plate = choice_plate.getSelectionModel().getSelectedItem();
         if (plate == null ) {
@@ -121,11 +138,19 @@ public class RegisterVehicleCheckUp_Controller implements Initializable {
         }
     }
 
+    /**
+     * Retrieves date values from date pickers.
+     */
     private void getDates() {
         checkUpDate = convertDate(picker_checkUp);
     }
 
-
+    /**
+     * Converts a DatePicker value to a Data object.
+     *
+     * @param data The DatePicker value to be converted.
+     * @return The corresponding Data object.
+     */
     private Data convertDate(DatePicker data) {
         try {
             LocalDate myDate = data.getValue();
@@ -139,6 +164,9 @@ public class RegisterVehicleCheckUp_Controller implements Initializable {
         }
     }
 
+    /**
+     * Retrieves float values from input fields.
+     */
     private void getFloats() {
         try {
             checkUpKm = Float.parseFloat(field_checkUpKm.getText());
@@ -147,6 +175,11 @@ public class RegisterVehicleCheckUp_Controller implements Initializable {
         }
     }
 
+    /**
+     * Clears all input fields and selections.
+     *
+     * @param event The action event.
+     */
     public void clear(ActionEvent event) {
         choice_plate.getSelectionModel().clearSelection();
         field_checkUpKm.clear();
@@ -155,15 +188,32 @@ public class RegisterVehicleCheckUp_Controller implements Initializable {
 
     //------------------------------------ Options Side Bar --------------------------
 
-
+    /**
+     * Switches to the main menu window.
+     *
+     * @param event The action event.
+     * @throws IOException If an I/O error occurs.
+     */
     public void switchVFMMenu(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event, "/vfmUI.fxml");
     }
 
+    /**
+     * Changes to the vehicle registration window.
+     *
+     * @param event The action event.
+     * @throws IOException If an I/O error occurs.
+     */
     public void changeToRegisterVehicle(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event, "/registerVehicle.fxml");
     }
 
+    /**
+     * Changes to the check-up list creation window.
+     *
+     * @param event The action event.
+     * @throws IOException If an I/O error occurs.
+     */
     public void changeToCreateCheckUpList(ActionEvent event) throws IOException{
         switchWindows.changeWindow(event, "/showVehiclesNeedingCheckUp.fxml");
     }

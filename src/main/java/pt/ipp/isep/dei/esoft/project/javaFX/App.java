@@ -24,6 +24,12 @@ public class App extends Application {
     private final ConfirmationAlerts confirmationAlerts = new ConfirmationAlerts();
     private final InformationAlerts informationAlerts = new InformationAlerts();
 
+    /**
+     * Starts the JavaFX application.
+     *
+     * @param stage The primary stage for the application.
+     * @throws IOException If an I/O error occurs.
+     */
     @Override
     public void start(Stage stage) throws IOException {
         Bootstrap bootstrap = new Bootstrap();
@@ -46,7 +52,11 @@ public class App extends Application {
         });
     }
 
-
+    /**
+     * Logs out the user.
+     *
+     * @param stage The primary stage for the application.
+     */
     public void logout(Stage stage) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Exit");
@@ -59,6 +69,9 @@ public class App extends Application {
         }
     }
 
+    /**
+     * Saves application information.
+     */
     private void saveInformation() {
         if (confirmationAlerts.confirmationMessagesGiveAlert("Save Information", "Do you wish to save?", "").showAndWait().get() == ButtonType.OK) {
             try {
@@ -71,7 +84,11 @@ public class App extends Application {
         }
     }
 
-
+    /**
+     * The main method of the application.
+     *
+     * @param args The command line arguments.
+     */
     public static void main(String[] args) {
         launch();
     }

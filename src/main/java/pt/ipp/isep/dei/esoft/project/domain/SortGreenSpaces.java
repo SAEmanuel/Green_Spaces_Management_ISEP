@@ -38,7 +38,7 @@ public class SortGreenSpaces implements Serializable {
         boolean sorted = false;
 
         for (String key : config.stringPropertyNames()) {
-            if (key.startsWith("sorting.")) {
+            if (key.equalsIgnoreCase("sorting.type")) {
                 String value = config.getProperty(key);
                 switch (value) {
                     case "Ascending By Name":
@@ -81,7 +81,7 @@ public class SortGreenSpaces implements Serializable {
         boolean sorted = false;
 
         for (String key : config.stringPropertyNames()) {
-            if (key.startsWith("sorting.")) {
+            if (key.equalsIgnoreCase("sorting.type")) {
                 String value = config.getProperty(key);
                 switch (value) {
                     case "Ascending By Name":

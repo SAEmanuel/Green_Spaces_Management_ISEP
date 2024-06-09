@@ -51,7 +51,12 @@ public class ShowVehiclesNeedingCheckUp_Controller implements Initializable {
 
     private final ObservableList<Vehicle> list = FXCollections.observableArrayList(vehicleRepository.getVehiclesNeedingCheckUp());
 
-
+    /**
+     * Initializes the controller after its root element has been completely processed.
+     *
+     * @param url The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param resourceBundle The resources used to localize the root object, or null if the root object was not localized.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         email_label.setText(Repositories.getInstance().getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail());
@@ -66,15 +71,32 @@ public class ShowVehiclesNeedingCheckUp_Controller implements Initializable {
 
 
     //------------------------------------ Options Side Bar --------------------------
-
+    /**
+     * Switches to the main menu window.
+     *
+     * @param event The action event.
+     * @throws IOException If an I/O error occurs.
+     */
     public void switchVFMMenu(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event, "/vfmUI.fxml");
     }
 
+    /**
+     * Changes to the vehicle registration window.
+     *
+     * @param event The action event.
+     * @throws IOException If an I/O error occurs.
+     */
     public void changeToRegisterVehicle(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event, "/registerVehicle.fxml");
     }
 
+    /**
+     * Changes to the vehicle check-up registration window.
+     *
+     * @param event The action event.
+     * @throws IOException If an I/O error occurs.
+     */
     public void changeToRegisterVehicleCheckUp(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event, "/registerVehicleCheckUp.fxml");
     }

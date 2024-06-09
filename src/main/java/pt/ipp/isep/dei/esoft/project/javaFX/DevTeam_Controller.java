@@ -21,6 +21,11 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+
+/**
+ * Controller class for the Developer Team menu.
+ */
+
 public class DevTeam_Controller implements Initializable {
     @FXML
     private AnchorPane devTeamMenu;
@@ -40,6 +45,12 @@ public class DevTeam_Controller implements Initializable {
 
     private Stage stage;
 
+    /**
+     * Switches to the main menu.
+     *
+     * @param event The ActionEvent triggered by clicking the button.
+     * @throws IOException If an I/O error occurs.
+     */
     public void switchToMainMenu(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/mainMenu.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -48,8 +59,12 @@ public class DevTeam_Controller implements Initializable {
         stage.show();
     }
 
-
-
+    /**
+     * Initializes the Developer Team menu.
+     *
+     * @param url            The location used to resolve relative paths for the root object.
+     * @param resourceBundle The resources used to localize the root object.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         devTeamList.getItems().addAll(teamNames);
