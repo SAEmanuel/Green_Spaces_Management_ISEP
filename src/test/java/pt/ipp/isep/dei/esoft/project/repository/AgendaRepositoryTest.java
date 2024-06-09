@@ -358,4 +358,36 @@ public class AgendaRepositoryTest {
         boolean result = repositories.getAgenda().validateBackUp(agendaEntry);
         assertFalse(result);
     }
+
+    /*
+    @Test
+    public void testGetAgendaEntriesTeam() {
+        Repositories repositories = Repositories.getInstance();
+        Job job1 = new Job("Jardineiro");
+        Collaborator collaborator = new Collaborator("Francisco", new Data(2004, 7, 6), new Data(2023, 6, 12), "Rua da pedra", 912809789, "xico@gmail.com", 123456744, 0, "123456711", job1, new Password("AAA12ab"), "xico@gmail.com");
+        Collaborator collaborator2 = new Collaborator("Romeu", new Data(2000, 7, 26), new Data(2020, 6, 12), "Rua da pedra", 912809789, "xico@gmail.com", 123456744, 0, "123456711", job1, new Password("AAA12ab"), "xic@gmail.com");
+        Collaborator collaborator3 = new Collaborator("Xu", new Data(2000, 7, 26), new Data(2020, 6, 12), "Rua da pedra", 912809789, "xico@gmail.com", 123456744, 0, "123456711", job1, new Password("AAA12ab"), "xuc@gmail.com");
+        GreenSpace greenSpace = new GreenSpace("Test Green Space", 0, 100, "Test City", "test@greenspace.com");
+        ToDoEntry toDoEntry = new ToDoEntry(greenSpace, "Work", "description", 1, 8);
+        ToDoEntry toDoEntry2 = new ToDoEntry(greenSpace, "Working", "description", 1, 8);
+        Team team = new Team(1);
+        Team team2 = new Team(2);
+        Team team3 = new Team(3);
+        team.addCollaborator(collaborator);
+        team2.addCollaborator(collaborator2);
+        team3.addCollaborator(collaborator3);
+        AgendaEntry agendaEntry = new AgendaEntry(toDoEntry, new Data(2023, 6, 5));
+        AgendaEntry agendaEntry2 = new AgendaEntry(toDoEntry2, new Data(2023, 6, 1));
+        agendaEntry.addTeam(team);
+        agendaEntry2.addTeam(team2);
+        agendaEntry.addTeam(team3);
+        List<AgendaEntry> list = new ArrayList<>();
+        list.add(agendaEntry);
+        list.add(agendaEntry2);
+
+        List<AgendaEntry> result = repositories.getAgenda().getAgendaEntriesTeam("test@greenspace.com", list);
+        assertEquals(1, result.size());
+    }
+
+     */
 }
