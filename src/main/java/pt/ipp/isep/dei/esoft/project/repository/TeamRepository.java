@@ -34,16 +34,15 @@ public class TeamRepository implements Serializable {
     public Optional<Team> generateTeam(SkillList skills, List<Collaborator> collaboratorList, int minCollaborators, int maxCollaborators){
         Optional<Team> optionalValue = Optional.empty();
 
-
         if(minCollaborators > maxCollaborators) {
 //            System.out.println(ANSI_BRIGHT_RED+"Minimum collaborators is greater than maximum collaborators"+ANSI_RESET);
             throw new IllegalArgumentException("Minimum collaborators is greater than maximum collaborators");
 //            return optionalValue;
         }
         if( verifyIfExistingCollab(skills,collaboratorList, minCollaborators) ) {
-//            System.out.println(ANSI_BRIGHT_RED+"Not enought collaborators to generate team"+ANSI_RESET);
-            throw new IllegalArgumentException("Not enought collaborators to generate team");
-//            return optionalValue;
+            System.out.println(ANSI_BRIGHT_RED+"Not enought collaborators to generate team"+ANSI_RESET);
+//            throw new IllegalArgumentException("Not enought collaborators to generate team");
+            return optionalValue;
         }
 
         int newTeamId = 1 + teamListAux.size();
@@ -118,9 +117,9 @@ public class TeamRepository implements Serializable {
         }
 
         if(breakDown == 5){
-            throw new IllegalArgumentException("Not enought collaborators to generate team");
-//            System.out.println(ANSI_BRIGHT_RED+"Not enought collaborators to generate team"+ANSI_RESET);
-//            return optionalValue;
+//            throw new IllegalArgumentException("Not enought collaborators to generate team");
+            System.out.println(ANSI_BRIGHT_RED+"Not enought collaborators to generate team"+ANSI_RESET);
+            return optionalValue;
         }
 
         optionalValue = Optional.of(team);
@@ -129,6 +128,9 @@ public class TeamRepository implements Serializable {
             teamListAux.add(team);
         }
 
+//        for (Collaborator c : team.getCollaborators()){
+//            System.out.println(c.getName());
+//        }
         return optionalValue;
     }
 
@@ -178,6 +180,7 @@ public class TeamRepository implements Serializable {
         for (Collaborator c : collaboratorList){
             if(checkIfHasSkills(c, skillsCloneVerify)){
                 if(!collaboratorHasTeam(c, teamList)){
+//                    System.out.println(c.getName());
                     if(!allSkillsDone)
                         removeSkills(c, skillsCloneVerify);
                     else
@@ -240,8 +243,17 @@ public class TeamRepository implements Serializable {
     }
 
     public void addTeam(int teamId){
+        int newTeamId = 1;
+        for(Team t : teamList) {
+            if (t.getTeamId() != newTeamId) {
+                break;
+            }
+            newTeamId++;
+        }
+
         for (Team t : teamListAux) {
             if (t.getTeamId() == teamId) {
+                t.setTeamId(newTeamId);
                 teamList.add(t);
                 break;
             }
@@ -291,6 +303,7 @@ public class TeamRepository implements Serializable {
     public List<Team> getListTeam() {
         return teamList;
     }
+
 
     public void add(Team team) {
         teamList.add(team);

@@ -4,11 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -28,9 +24,7 @@ import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
-import java.util.Scanner;
 
 public class AssignTeamToAgendaTask_Controller implements Initializable {
 
@@ -135,7 +129,6 @@ public class AssignTeamToAgendaTask_Controller implements Initializable {
     }
 
     private void getValues() {
-
         emailService = choiceBox_email.getSelectionModel().getSelectedItem();
         taskID = choiceBox_task.getSelectionModel().getSelectedIndex();
         teamID = choiceBox_team.getSelectionModel().getSelectedIndex();

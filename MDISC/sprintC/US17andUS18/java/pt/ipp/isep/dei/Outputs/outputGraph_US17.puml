@@ -1,0 +1,21 @@
+@startuml
+graph GraphRep {
+AP -- ﻿Biblioteca
+AP -- Teatro
+AP -- Pavilhao
+AP -- Topo
+Topo -- ParqueInfantil
+ParqueInfantil -- Macieirinha
+Topo -- Miradouro
+Miradouro -- Fontaine
+Topo -- Capela
+Miradouro -- Torreao
+AP -- Lago
+AP -- Escadas1
+Escadas1 -- Escadas2
+Escadas2 -- Escadas3
+Escadas2 -- Sentimentos
+Escadas2 -- CasaRoseiral
+Escadas2 -- JardimRoseiral
+}
+@enduml

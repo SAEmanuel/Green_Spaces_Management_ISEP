@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
+import javafx.util.Callback;
 import pt.ipp.isep.dei.esoft.project.application.controller.GenerateTeamController;
 import pt.ipp.isep.dei.esoft.project.application.controller.RegisterSkillController;
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
@@ -20,12 +22,13 @@ import pt.ipp.isep.dei.esoft.project.javaFX.extras.SwitchWindows;
 import pt.ipp.isep.dei.esoft.project.repository.CollaboratorRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.TeamRepository;
+import javafx.scene.control.ChoiceBox;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
+
+import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
 
 public class GenerateTeam_Controller implements Initializable {
 
@@ -82,37 +85,103 @@ public class GenerateTeam_Controller implements Initializable {
         table_Collaborators.setCellValueFactory(new PropertyValueFactory<>("collaborators"));
         table_TeamID.setCellValueFactory(new PropertyValueFactory<>("teamId"));
         table.setItems(teamObservableList);
-
-
-
+        table.getItems().clear();
+        table.getItems().addAll(teamRepository.getListTeam());
     }
 
     public void submitRegistration(ActionEvent event) {
         try {
+            boolean auxShowTeam = false;
             getValues();
-            SkillList skillList =getSkills();
+            controller.cleanSkillList();
+            SkillList skillList = getSkills();
             Optional<Team> generateTeam = controller.generateTeamJavaFx(skillList,collaboratorRepository.getCollaboratorList(),minimun,maximun);
 
             if (generateTeam.isPresent()) {
                 Team team = generateTeam.get();
                 if (showTeam(team)) {
                     controller.addTeam(generateTeam.get().getTeamId());
-                    sendConfirmation.confirmationMessages("Team Accepted","Your team was successfully asccepted","Check the list of teams");
+                    sendInformation.informationMessages("Success", "Team successfully created!", "Check the list of teams");
                     table.getItems().clear();
                     table.getItems().addAll(teamRepository.getListTeam());
                 } else {
+                    while (true) {
+                        if(!auxShowTeam){
+                            skillList = getSkills();
+                            generateTeam = controller.generateTeamJavaFx(skillList, collaboratorRepository.getCollaboratorList(), minimun, maximun);
+                            if(generateTeam.isPresent())
+                                team = generateTeam.get();
+                            auxShowTeam = true;
+                        }
+
+                        if (generateTeam.isPresent() && !showTeam(team)) {
+                            skillList = getSkills();
+                            generateTeam = controller.generateTeamJavaFx(skillList, collaboratorRepository.getCollaboratorList(), minimun, maximun);
+                            if(generateTeam.isPresent())
+                                team = generateTeam.get();
+                        } else {
+                            if(!generateTeam.isPresent()){
+                                sendInformation.informationMessagesReturn("Team not generated", "All team generation possibilities have been done!", "");
+                            }
+                            generateTeam = showTeamSelectionDialog(controller.generatedList());
+                            if(generateTeam.isPresent()) {
+                                controller.addTeam(generateTeam.get().getTeamId());
+                                sendInformation.informationMessages("Success", "Team successfully created!", "Check the list of teams");
+                                table.getItems().clear();
+                                table.getItems().addAll(teamRepository.getListTeam());
+                            }
+                            else{
+                                sendInformation.informationMessages("ATTENTION", "Team not created!", "");
+                            }
+                            break;
+                        }
+                    }
                     //TODO Acabar isto -> De: Jorge | Para: Paulo
                 }
-                sendConfirmation.confirmationMessages("Success", "Team successfully created!", "");
+//                sendConfirmation.confirmationMessages("Success", "Team successfully created!", "");
             } else {
-                sendInformation.informationMessages("ATTENTION", "Team not created!", "");
+                if(skillList == null || skillList.getSkillList().isEmpty())
+                    throw new NumberFormatException("No selected skills... Make sure to select one or more.");
+                else
+                    sendInformation.informationMessages("ATTENTION", "Team not created! Not enought collaborators to generate team.", "");
             }
         } catch (IllegalArgumentException e) {
-
             sendErrors.errorMessages("Invalid Inputs", e.getMessage(), "");
         }
+        controller.cleanTeamListAux();
+    }
 
+    private Optional<Team> showTeamSelectionDialog(List<Team> teamList) {
+        Dialog<Team> dialog = new Dialog<>();
+        dialog.setTitle("Generated Teams");
 
+        // Set the button types
+        ButtonType selectButtonType = new ButtonType("Select", ButtonType.OK.getButtonData());
+        ButtonType cancelButtonType = ButtonType.CANCEL;
+        dialog.getDialogPane().getButtonTypes().addAll(selectButtonType, cancelButtonType);
+
+        // Create a ComboBox for team selection
+        ComboBox<Team> comboBox = new ComboBox<>();
+        comboBox.getItems().addAll(teamList);
+        comboBox.setPromptText("Generated Teams");
+
+        VBox content = new VBox();
+        content.getChildren().addAll(new Label("Select one of the teams generated to add:"), comboBox);
+        dialog.getDialogPane().setContent(content);
+
+        // Convert the result to the selected team when the select button is clicked
+        dialog.setResultConverter(new Callback<ButtonType, Team>() {
+            @Override
+            public Team call(ButtonType dialogButton) {
+                if (dialogButton == selectButtonType) {
+                    return comboBox.getSelectionModel().getSelectedItem();
+                }
+                return null;
+            }
+        });
+
+        Optional<Team> result = dialog.showAndWait();
+        return result;
     }
 
     private boolean showTeam(Team generateTeam) {
@@ -125,7 +194,7 @@ public class GenerateTeam_Controller implements Initializable {
                 stringBuilder.append(collaborator.getName());
             }
         }
-        return sendInformation.informationMessagesReturn("Generated Team", stringBuilder.toString(), "Press \"ok\" to accept this team! ");
+        return sendConfirmation.confirmationMessagesGiveReturn("Generated Team", stringBuilder.toString(), "Press \"ok\" to accept this team! ");
     }
 
     private SkillList getSkills() {

@@ -84,7 +84,7 @@ public class ToDoListRepository implements Serializable {
      * @param toDoEntry the ToDoEntry object to be added.
      * @return true if the entry is successfully added, false otherwise.
      */
-    private boolean addToDoEntry(ToDoEntry toDoEntry) {
+    boolean addToDoEntry(ToDoEntry toDoEntry) {
         boolean success = false;
 
         if (validate(toDoEntry)) {
@@ -100,7 +100,7 @@ public class ToDoListRepository implements Serializable {
      * @param toDoEntry the ToDoEntry object to be validated.
      * @return true if the entry is valid, false otherwise.
      */
-    private boolean validate(ToDoEntry toDoEntry) {
+    boolean validate(ToDoEntry toDoEntry) {
         return toDoListDoesNotContainToDoEntry(toDoEntry);
     }
 
@@ -110,7 +110,7 @@ public class ToDoListRepository implements Serializable {
      * @param toDoEntry the ToDoEntry object to be checked.
      * @return true if the repository does not contain the entry, false otherwise.
      */
-    private boolean toDoListDoesNotContainToDoEntry(ToDoEntry toDoEntry) {
+    boolean toDoListDoesNotContainToDoEntry(ToDoEntry toDoEntry) {
         return !toDoList.contains(toDoEntry);
     }
 

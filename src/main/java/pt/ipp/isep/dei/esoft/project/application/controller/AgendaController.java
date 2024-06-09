@@ -210,6 +210,9 @@ public class AgendaController {
      *
      * @return The list of agenda entries.
      */
+    public List<AgendaEntry> getAgendaEntriesForResponsible() {
+        return agendaRepository.getAgendaEntriesForResponsible(getResponsible());
+    }
     public List<AgendaEntry> getAgendaEntriesForResponsibleTeam() {
         return agendaRepository.getAgendaEntriesForResponsibleTeam(getResponsible());
     }
@@ -233,7 +236,7 @@ public class AgendaController {
      * @return The list of all agenda entries.
      */
     public List<AgendaEntry> getAgendaEntries() {
-        return agendaRepository.getAgendaEntriesTeam();
+        return agendaRepository.getAgendaEntries();
     }
 
     /**
