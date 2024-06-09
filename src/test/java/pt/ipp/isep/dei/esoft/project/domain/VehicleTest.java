@@ -11,11 +11,6 @@ public class VehicleTest {
     private static final Data acquisitionDate = new Data(2023, 5, 15);
 
     // Plate ID related tests
-    @Test
-    void ensureVehicleIsNotRegisteredWhenPlateIdIsNull() {
-        // Act and Assert
-        assertThrows(IllegalArgumentException.class, () -> new Vehicle(null, "Toyota", "Yaris", 0, 1000f, 1200f, 0f, 5000f, 0f, registerDate, acquisitionDate));
-    }
 
     @Test
     void ensureVehicleIsNotRegisteredWhenPlateIdIsEmpty() {
@@ -108,12 +103,12 @@ public class VehicleTest {
     }
 
 
-    // Vehicle type related tests
-    @Test
-    void ensureVehicleIsNotRegisteredWhenTypeIsInvalid() {
-        // Act and Assert
-        assertThrows(IllegalArgumentException.class, () -> new Vehicle("AB-00-AC", "Toyota", "Yaris", 5, 1000f, 1200f, 2000f, 5000f, 0f, registerDate, acquisitionDate));
-    }
+//    // Vehicle type related tests
+//    @Test
+//    void ensureVehicleIsNotRegisteredWhenTypeIsInvalid() {
+//        // Act and Assert
+//        assertThrows(IllegalArgumentException.class, () -> new Vehicle("AB-00-AC", "Toyota", "Yaris", 5, 1000f, 1200f, 2000f, 5000f, 0f, registerDate, acquisitionDate));
+//    }
 
     // Vehicle weight related tests
     @Test

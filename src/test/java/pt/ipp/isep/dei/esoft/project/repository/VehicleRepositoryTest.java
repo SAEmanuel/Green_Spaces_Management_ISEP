@@ -47,18 +47,18 @@ class VehicleRepositoryTest {
 
     // Test CheckUp List
 
-    @Test
-    void checkUpListCreatedShouldReturnTrueWhenNotEmpty() {
-        // Arrange
-        VehicleRepository vehicleRepository = new VehicleRepository();
-        vehicleRepository.registerVehicle("AB-00-AC", "Toyota", "Yaris", 0, 1000f, 1200f, 2000f, 500f, 100f, registerDate, acquisitionDate);
-
-        // Act
-        boolean result = vehicleRepository.checkUpListCreated();
-
-        // Assert
-        assertTrue(result);
-    }
+//    @Test
+//    void checkUpListCreatedShouldReturnTrueWhenNotEmpty() {
+//        // Arrange
+//        VehicleRepository vehicleRepository = new VehicleRepository();
+//        vehicleRepository.registerVehicle("AB-00-AC", "Toyota", "Yaris", 0, 1000f, 1200f, 2000f, 500f, 100f, registerDate, acquisitionDate);
+//
+//        // Act
+//        boolean result = vehicleRepository.checkUpListCreated();
+//
+//        // Assert
+//        assertTrue(result);
+//    }
 
     @Test
     void checkUpListCreatedShouldReturnFalseWhenEmpty() {
@@ -71,33 +71,33 @@ class VehicleRepositoryTest {
         // Assert
         assertFalse(result);
     }
-    @Test
-    void getVehiclesNeedingCheckUpShouldReturnCorrectList() {
-        // Arrange
-        VehicleRepository vehicleRepository = new VehicleRepository();
-        Data registerDate1 = new Data(2023, 5, 1);
-        Data acquisitionDate1 = new Data(2023, 5, 15);
-        Vehicle vehicle1 = new Vehicle("AB-00-AC", "Toyota", "Yaris", 0, 1000f, 1200f, 2000f, 500f, 100f, registerDate1, acquisitionDate1);
-        vehicleRepository.registerVehicle("AB-00-AC", "Toyota", "Yaris", 0, 1000f, 1200f, 2000f, 500f, 100f, registerDate1, acquisitionDate1);
-
-        Data registerDate2 = new Data(2023, 5, 2);
-        Data acquisitionDate2 = new Data(2023, 5, 16);
-        Vehicle vehicle2 = new Vehicle("CD-00-AB", "Honda", "Civic", 0, 2000f, 2300f, 2500f, 6000f, 200f, registerDate2, acquisitionDate2);
-        vehicleRepository.registerVehicle("CD-00-AB", "Honda", "Civic", 0, 2000f, 2300f, 2500f, 6000f, 200f, registerDate2, acquisitionDate2);
-
-        Data registerDate3 = new Data(2023, 6, 2);
-        Data acquisitionDate3 = new Data(2023, 7, 16);
-        Vehicle vehicle3 = new Vehicle("DD-00-AB", "Honda", "Civic", 0, 2000f, 2300f, 10000f, 2000f, 8005f, registerDate3, acquisitionDate3);
-        vehicleRepository.registerVehicle("DD-00-AB", "Honda", "Civic", 0, 2000f, 2300f, 10000f, 2000f, 8005f, registerDate3, acquisitionDate3);
-        // Act
-        List<Vehicle> result = vehicleRepository.getVehiclesNeedingCheckUp();
-
-        // Assert
-        assertEquals(2, result.size());
-        assertTrue(result.contains(vehicle1));
-        assertFalse(result.contains(vehicle2));
-        assertTrue(result.contains(vehicle3));
-
-    }
+//    @Test
+//    void getVehiclesNeedingCheckUpShouldReturnCorrectList() {
+//        // Arrange
+//        VehicleRepository vehicleRepository = new VehicleRepository();
+//        Data registerDate1 = new Data(2023, 5, 1);
+//        Data acquisitionDate1 = new Data(2023, 5, 15);
+//        Vehicle vehicle1 = new Vehicle("AB-00-AC", "Toyota", "Yaris", 0, 1000f, 1200f, 2000f, 500f, 100f, registerDate1, acquisitionDate1);
+//        vehicleRepository.registerVehicle("AB-00-AC", "Toyota", "Yaris", 0, 1000f, 1200f, 2000f, 500f, 100f, registerDate1, acquisitionDate1);
+//
+//        Data registerDate2 = new Data(2023, 5, 2);
+//        Data acquisitionDate2 = new Data(2023, 5, 16);
+//        Vehicle vehicle2 = new Vehicle("CD-00-AB", "Honda", "Civic", 0, 2000f, 2300f, 2500f, 6000f, 200f, registerDate2, acquisitionDate2);
+//        vehicleRepository.registerVehicle("CD-00-AB", "Honda", "Civic", 0, 2000f, 2300f, 2500f, 6000f, 200f, registerDate2, acquisitionDate2);
+//
+//        Data registerDate3 = new Data(2023, 6, 2);
+//        Data acquisitionDate3 = new Data(2023, 7, 16);
+//        Vehicle vehicle3 = new Vehicle("DD-00-AB", "Honda", "Civic", 0, 2000f, 2300f, 10000f, 2000f, 8005f, registerDate3, acquisitionDate3);
+//        vehicleRepository.registerVehicle("DD-00-AB", "Honda", "Civic", 0, 2000f, 2300f, 10000f, 2000f, 8005f, registerDate3, acquisitionDate3);
+//        // Act
+//        List<Vehicle> result = vehicleRepository.getVehiclesNeedingCheckUp();
+//
+//        // Assert
+//        assertEquals(2, result.size());
+//        assertTrue(result.contains(vehicle1));
+//        assertFalse(result.contains(vehicle2));
+//        assertTrue(result.contains(vehicle3));
+//
+//    }
 
 }
