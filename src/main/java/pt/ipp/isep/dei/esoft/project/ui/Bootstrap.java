@@ -71,15 +71,15 @@ public class Bootstrap implements Runnable {
     //******** RUN METHOD **********
 
     public void run() {
-        addUsers();
+        addCollaborator();
 //        inputAppInformation();
         addJobs();
         addVehicles();
         addSkills();
-        addCollaborator();
         addGreenSpace();
         addToDoList();
         addTeam();
+        addUsers();
     }
 
     private void addToDoList() {
