@@ -108,8 +108,8 @@
                     <children>
                         <TableView fx:id="table" layoutX="274.0" layoutY="10.0" prefHeight="292.0" prefWidth="408.0">
                             <columns>
-                                <TableColumn fx:id="table_TeamID" prefWidth="120.0" text="Team ID" />
-                                <TableColumn fx:id="table_Collaborators" prefWidth="280.0" text="Collaborator(s)" />
+                                <TableColumn fx:id="table_TeamID" prefWidth="69.0" text="Team ID" />
+                                <TableColumn fx:id="table_Collaborators" prefWidth="331.0" text="Collaborator(s)" />
                             </columns>
                             <columnResizePolicy>
                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

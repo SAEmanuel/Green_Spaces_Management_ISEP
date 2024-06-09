@@ -22,7 +22,7 @@ autonumber 3.1
     group Get ToDo List For Responsible
     activate CTRL
 
-             CTRL -> toDoListRepository: getToDoListForResponsible( getResponsible() )
+             CTRL -> toDoListRepository: getToDoListForResponsible( email)
                             activate toDoListRepository
 
                                    toDoListRepository -> listToDo** : create

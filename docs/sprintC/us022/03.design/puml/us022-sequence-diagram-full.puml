@@ -110,7 +110,7 @@ activate Employee
             CTRL -> CTRL : getToDoEntryListForResponsible()
             activate CTRL
 
-                CTRL -> toDoListRepository: getToDoListForResponsible( getResponsible() )
+                CTRL -> toDoListRepository: getToDoListForResponsible( email )
                 activate toDoListRepository
 
                        toDoListRepository -> listToDo** : create
@@ -149,7 +149,7 @@ activate Employee
        activate CTRL
 
             CTRL -> mapper** : create
-            CTRL -> mapper : toDto( getToDoEntryListForResponsible() )
+            CTRL -> mapper : toDto( listToDoEntryByResponsible )
             activate mapper
 
                 mapper -> listDTO** : create
