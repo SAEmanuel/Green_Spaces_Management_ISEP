@@ -31,7 +31,7 @@ No; sometimes, for various reasons (e.g. insufficient staff, faulty equipment or
 
 ### 1.3. Acceptance Criteria 
 
-* **AC1:** The task selected to be postponed can't have the status of "Canceled", if so, no changes are made.
+* **AC1:** The task selected to be postponed can't have the status of "Canceled" or "Done", if so, no changes are made.
 * **AC2:** The task must be selected from the list show by the UI, for the respective user log in on the system.
 * **AC3:** When postponed a task, its status does not change.
 * **AC4:** The input date, have to be gratter than the associated to the task.

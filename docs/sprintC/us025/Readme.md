@@ -1,4 +1,4 @@
-# US008 - Overhauling of vehicles
+# US025 - Cancel entry in Agenda
 
 [Requirements Engineering](01.requirements-engineering/Readme.md)
 
