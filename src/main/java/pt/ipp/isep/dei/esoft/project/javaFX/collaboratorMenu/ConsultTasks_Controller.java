@@ -191,6 +191,10 @@ public class ConsultTasks_Controller implements Initializable {
             filterSelected += 1;
             taskSelection.setDisable(true);
             List<AgendaEntry> tasksList = agendaRepository.getTaskList(currentCollaborator, startDateInput, endingDateInput, filterSelected);
+            for (AgendaEntry entry : tasksList) {
+                System.out.println("Task: " + entry.getTaskName() + ", Vehicle: " + entry.getVehicles());
+            }
+
             ObservableList<AgendaEntry> tasks = FXCollections.observableArrayList(tasksList);
             tasksTableView.setItems(tasks);
 
