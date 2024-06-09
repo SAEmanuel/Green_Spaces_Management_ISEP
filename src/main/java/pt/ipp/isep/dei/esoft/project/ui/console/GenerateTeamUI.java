@@ -54,11 +54,19 @@ public class GenerateTeamUI implements Runnable {
         getController().cleanTeamListAux();
     }
 
+    /**
+     * Displays a list of generated teams and prompts the user to select one of the teams.
+     * If the list is empty, returns false.
+     * If the user selects a valid team, the team is added using the controller.
+     *
+     * @return true if the list of teams is not empty and a team was selected, false otherwise.
+     */
     private boolean displayGeneratedList() {
         List<Team> teamList = controller.generatedList();
 
-        if(teamList.isEmpty())
+        if (teamList.isEmpty()) {
             return false;
+        }
 
         int listSize = teamList.size();
         int answerList = -2;
@@ -77,17 +85,25 @@ public class GenerateTeamUI implements Runnable {
         return true;
     }
 
+    /**
+     * Displays the list of generated team options for the user to select from.
+     * Each team and its collaborators are printed, followed by an option number.
+     * An additional option to exit is also provided.
+     *
+     * @param teamList the list of teams to display
+     */
     private void displayGeneratedTeamListOptions(List<Team> teamList) {
         int i = 1;
         for (Team s : teamList) {
             System.out.println("• Team: ");
-            for(Collaborator c : s.getCollaborators())
+            for (Collaborator c : s.getCollaborators()) {
                 System.out.println(c.getName());
+            }
             System.out.println("\n" + ANSI_PURPLE + "   Option -> [" + i + "]" + ANSI_RESET);
             i++;
         }
         System.out.println();
-        System.out.println("• Type: " + " - Exit" + "\n" + ANSI_PURPLE + "   Option -> [" + i + "]" + ANSI_RESET);
+        System.out.println("• Type: - Exit\n" + ANSI_PURPLE + "   Option -> [" + i + "]" + ANSI_RESET);
     }
 
     /**
@@ -138,16 +154,22 @@ public class GenerateTeamUI implements Runnable {
         return answerAdd.equalsIgnoreCase("y");
     }
 
-    private boolean teamGenerationConfirmation(){
+    /**
+     * Prompts the user to confirm if they want to generate another team.
+     * Continuously asks the user until a valid answer ('y' or 'n') is provided.
+     *
+     * @return true if the user wants to generate another team, false otherwise.
+     */
+    private boolean teamGenerationConfirmation() {
         Scanner input = new Scanner(System.in);
         String answerAdd = "";
 
-        while(!answerAdd.equalsIgnoreCase("y") && !answerAdd.equalsIgnoreCase("n") ){
+        while (!answerAdd.equalsIgnoreCase("y") && !answerAdd.equalsIgnoreCase("n")) {
             System.out.println();
-            System.out.print("Do you want to generate another team ? [y / n]");
+            System.out.print("Do you want to generate another team? [y / n] ");
             answerAdd = input.nextLine();
 
-            if(!answerAdd.equalsIgnoreCase("y") && !answerAdd.equalsIgnoreCase("n")) {
+            if (!answerAdd.equalsIgnoreCase("y") && !answerAdd.equalsIgnoreCase("n")) {
                 System.out.println();
                 System.out.println(ANSI_BRIGHT_RED + "Wrong answer, try again" + ANSI_RESET);
             }

@@ -189,6 +189,12 @@ public class CreateCollaboratorUI implements Runnable {
         }
     }
 
+    /**
+     * Prompts the user to enter a collaborator's password and provides specific password requirements.
+     * The password must have 7 alphanumeric characters, including three capital letters and two digits.
+     *
+     * @return A Password object representing the entered password.
+     */
     private Password requestPassword() {
         System.out.print("\n-- Collaborator's Password --\n");
         System.out.println(ANSI_BRIGHT_YELLOW + "(Password must have 7 alphanumeric characters, including three capital letters and two digits)" + ANSI_RESET);
@@ -236,6 +242,13 @@ public class CreateCollaboratorUI implements Runnable {
         }
     }
 
+    /**
+     * Continuously prompts the user to enter a valid password until a valid password is provided.
+     * The password is validated based on the rules defined in the Password class.
+     * If an invalid password is entered, an error message is displayed and the user is prompted again.
+     *
+     * @return A Password object representing the valid entered password.
+     */
     private Password getPassword() {
         Password password;
         while (true) {
@@ -247,9 +260,13 @@ public class CreateCollaboratorUI implements Runnable {
                 System.out.println(ANSI_BRIGHT_RED + e.getMessage() + ANSI_RESET);
             }
         }
-
     }
 
+    /**
+     * Requests and retrieves a password input from the user.
+     *
+     * @return A String representing the entered password.
+     */
     private String requestPass() {
         return getPasswordInput();
     }

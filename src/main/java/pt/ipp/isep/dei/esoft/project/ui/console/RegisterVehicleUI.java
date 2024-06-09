@@ -285,13 +285,20 @@ public class RegisterVehicleUI implements Runnable {
 
     }
 
+    /**
+     * Displays a list of vehicle types to the user.
+     * Each type is printed with an associated option number.
+     *
+     * @param types an array of vehicle types to display
+     */
     private void showTypes(Vehicle.Type[] types) {
         System.out.println("\n--List of Types--");
         for (int i = 0; i < types.length; i++) {
-            System.out.println("• Type: " + types[i] + "\n" + ANSI_PURPLE + "   Option -> [" + (i+1) + "]" + ANSI_RESET);
+            System.out.println("• Type: " + types[i] + "\n" + ANSI_PURPLE + "   Option -> [" + (i + 1) + "]" + ANSI_RESET);
         }
         System.out.println("----------------");
     }
+
 
 
     /**
