@@ -10,12 +10,12 @@ public class Main {
             // ----US17-----//
 
             // Ler a matriz da US17 e escrever em um ficheiro UML
-            int[][] matrix17 = FileReader.readMatrix("MDISC/sprintC/main/java/pt/ipp/isep/dei/Inputs/us17_matrix.csv");
+            int[][] matrix17 = FileReader.readMatrix("MDISC/sprintC/US17andUS18/java/pt/ipp/isep/dei/Inputs/us17_matrix.csv");
 
             // Ler os nomes dos pontos da US17
-            String[] pointsUs17 = FileReader.readPoints("MDISC/sprintC/main/java/pt/ipp/isep/dei/Inputs/us17_points_names.csv");
+            String[] pointsUs17 = FileReader.readPoints("MDISC/sprintC/US17andUS18/java/pt/ipp/isep/dei/Inputs/us17_points_names.csv");
             // Cria o grafo em ficheiro UML
-            FileWriter.writeToUmlFile(matrix17, "MDISC/sprintC/main/java/pt/ipp/isep/dei/Outputs/inputGraph_US17.puml", pointsUs17);
+            FileWriter.writeToUmlFile(matrix17, "MDISC/sprintC/US17andUS18/java/pt/ipp/isep/dei/Outputs/inputGraph_US17.puml", pointsUs17);
 
             // Encontrar o índice do ponto de encontro na US17
             int apIndex17 = -1;
@@ -28,7 +28,7 @@ public class Main {
 
             // Verifica se nenhum ponto de encontro foi encontrado
             if (apIndex17 == -1) {
-                System.out.println("Nenhum Ponto de Encontro encontrado na US17.");
+                System.out.println("No assembly point found in US17.");
                 return;
             }
 
@@ -37,16 +37,16 @@ public class Main {
             List<List<Integer>> paths17 = DijkstraAlgorithm.dijkstraWithPaths(matrix17, apIndex17);
 
             // Escrever a saída da US17 num ficheiro CSV
-            FileWriter.writeOutputUS17(pointsUs17, distances17, apIndex17, paths17, "MDISC/sprintC/main/java/pt/ipp/isep/dei/Outputs/output_US17.csv");
+            FileWriter.writeOutputUS17(pointsUs17, distances17, apIndex17, paths17, "MDISC/sprintC/US17andUS18/java/pt/ipp/isep/dei/Outputs/output_US17.csv");
 
             // ----US18-----//
 
             // Ler a matriz da US18 e escrever em um ficheiro UML
-            int[][] matrix18 = FileReader.readMatrix("MDISC/sprintC/main/java/pt/ipp/isep/dei/Inputs/us18_matrix.csv");
+            int[][] matrix18 = FileReader.readMatrix("MDISC/sprintC/US17andUS18/java/pt/ipp/isep/dei/Inputs/us18_matrix.csv");
             // Ler os nomes dos pontos da US18
-            String[] pointsUs18 = FileReader.readPoints("MDISC/sprintC/main/java/pt/ipp/isep/dei/Inputs/us18_points_names.csv");
+            String[] pointsUs18 = FileReader.readPoints("MDISC/sprintC/US17andUS18/java/pt/ipp/isep/dei/Inputs/us18_points_names.csv");
             // Cria o grafo em ficheiro UML
-            FileWriter.writeToUmlFile(matrix18, "MDISC/sprintC/main/java/pt/ipp/isep/dei/Outputs/inputGraph_US18.puml", pointsUs18);
+            FileWriter.writeToUmlFile(matrix18, "MDISC/sprintC/US17andUS18/java/pt/ipp/isep/dei/Outputs/inputGraph_US18.puml", pointsUs18);
 
             // Encontrar os índices dos pontos de encontro na US18
             List<Integer> apIndices = new ArrayList<>();
@@ -58,7 +58,7 @@ public class Main {
 
             // Verifica se nenhum ponto de encontro foi encontrado
             if (apIndices.isEmpty()) {
-                System.out.println("Nenhum Ponto de Encontro encontrado na US18.");
+                System.out.println("No assembly point found in US18.");
                 return;
             }
 
@@ -88,13 +88,13 @@ public class Main {
             }
 
             // Escrever a saída da US18 num ficheiro CSV
-            FileWriter.writeOutputUS18(pointsUs18, closestApIndices, closestDistances, allPaths, "MDISC/sprintC/main/java/pt/ipp/isep/dei/Outputs/output_US18.csv");
+            FileWriter.writeOutputUS18(pointsUs18, closestApIndices, closestDistances, allPaths, "MDISC/sprintC/US17andUS18/java/pt/ipp/isep/dei/Outputs/output_US18.csv");
 
-            List<ArrayList<String>> graphUS17 = FileReader.readOutput("MDISC/sprintC/main/java/pt/ipp/isep/dei/Outputs/output_US17.csv");
-            List<ArrayList<String>> graphUS18 = FileReader.readOutput("MDISC/sprintC/main/java/pt/ipp/isep/dei/Outputs/output_US18.csv");
+            List<ArrayList<String>> graphUS17 = FileReader.readOutput("MDISC/sprintC/US17andUS18/java/pt/ipp/isep/dei/Outputs/output_US17.csv");
+            List<ArrayList<String>> graphUS18 = FileReader.readOutput("MDISC/sprintC/US17andUS18/java/pt/ipp/isep/dei/Outputs/output_US18.csv");
 
-            FileWriter.writeToUmlFile(graphUS17,"MDISC/sprintC/main/java/pt/ipp/isep/dei/Outputs/outputGraph_US17.puml");
-            FileWriter.writeToUmlFile(graphUS18,"MDISC/sprintC/main/java/pt/ipp/isep/dei/Outputs/outputGraph_US18.puml");
+            FileWriter.writeToUmlFile(graphUS17,"MDISC/sprintC/US17andUS18/java/pt/ipp/isep/dei/Outputs/outputGraph_US17.puml");
+            FileWriter.writeToUmlFile(graphUS18,"MDISC/sprintC/US17andUS18/java/pt/ipp/isep/dei/Outputs/outputGraph_US18.puml");
 
         } catch (IOException e) {
             e.printStackTrace();
