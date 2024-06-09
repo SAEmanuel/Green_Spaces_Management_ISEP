@@ -1,8 +1,8 @@
 @startuml
 graph GraphRep {
-﻿0 --1 [label="2"]
-﻿0 --2 [label="3"]
-﻿0 --7 [label="3"]
+0 --1 [label="2"]
+0 --2 [label="3"]
+0 --7 [label="3"]
 1 --2 [label="2"]
 1 --3 [label="3"]
 2 --3 [label="5"]

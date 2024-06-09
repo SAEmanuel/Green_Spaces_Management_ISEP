@@ -1,7 +1,7 @@
 @startuml
 graph GraphRep {
-﻿Biblioteca --Teatro [label="8"]
-﻿Biblioteca --AP [label="10"]
+Biblioteca --Teatro [label="8"]
+Biblioteca --AP [label="10"]
 Teatro --AP [label="7"]
 Teatro --Topo [label="6"]
 AP --Pavilhao [label="5"]

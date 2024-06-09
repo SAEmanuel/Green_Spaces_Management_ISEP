@@ -1,6 +1,6 @@
 @startuml
 graph GraphRep {
-AP -- ﻿Biblioteca
+AP -- Biblioteca
 AP -- Teatro
 AP -- Pavilhao
 AP -- Topo
