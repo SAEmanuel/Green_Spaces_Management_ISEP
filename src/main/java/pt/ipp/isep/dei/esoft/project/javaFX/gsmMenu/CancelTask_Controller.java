@@ -74,6 +74,11 @@ public class CancelTask_Controller implements Initializable {
     ObservableList<AgendaEntry> list = FXCollections.observableArrayList(agendaEntryList);
 
 
+    /**
+     * Initializes the controller class.
+     * @param url The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param resourceBundle The resources used to localize the root object, or null if the root object was not localized.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         choiceBox_task.getItems().addAll(agendaEntryList);
@@ -86,7 +91,10 @@ public class CancelTask_Controller implements Initializable {
         email_label.setText(Repositories.getInstance().getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail());
     }
 
-
+    /**
+     * Handles the submission of task cancellation.
+     * @param event The event that triggered this action.
+     */
     public void submitRegistration(ActionEvent event) {
         try {
             getValues();
@@ -105,19 +113,27 @@ public class CancelTask_Controller implements Initializable {
         }
     }
 
-
+    /**
+     * Clears the selected options.
+     * @param event The event that triggered this action.
+     */
     public void clear(ActionEvent event) {
         choiceBox_task.getSelectionModel().clearSelection();
 
     }
 
-
+    /**
+     * Clears the selected options and updates the task list.
+     */
     private void getInfos() {
         choiceBox_task.getSelectionModel().clearSelection();
         choiceBox_task.getItems().remove(taskID);
 
     }
 
+    /**
+     * Retrieves the selected values from the UI.
+     */
     private void getValues() {
         try {
             taskID = choiceBox_task.getSelectionModel().getSelectedIndex();
@@ -132,41 +148,87 @@ public class CancelTask_Controller implements Initializable {
 
     //------------------------------------ Options Side Bar --------------------------
 
+    /**
+     * Changes the window to assign a vehicle to an agenda task.
+     * @param event The event that triggered this action.
+     * @throws IOException If an I/O exception occurs.
+     */
     public void changeToAssignVehicle(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/assignVehicleToAgendaTask.fxml");
     }
 
+    /**
+     * Changes the window to add an entry to the agenda.
+     * @param event The event that triggered this action.
+     * @throws IOException If an I/O exception occurs.
+     */
     public void changeToAddEntryAgenda(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/addEntryAgenda.fxml");
     }
 
+    /**
+     * Switches to the GSM menu window.
+     * @param event The event that triggered this action.
+     * @throws IOException If an I/O exception occurs.
+     */
     public void switchGSMMenu(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/gsmUI.fxml");
     }
 
+    /**
+     * Changes the window to add a green space.
+     * @param event The event that triggered this action.
+     * @throws IOException If an I/O exception occurs.
+     */
     public void changeToAddGreenSpace(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/addGreenSpace.fxml");
     }
 
+    /**
+     * Changes the window to the entry to-do list.
+     * @param event The event that triggered this action.
+     * @throws IOException If an I/O exception occurs.
+     */
     public void changeToEntryToDoList(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/addToDoEntry.fxml");
     }
 
+    /**
+     * Changes the window to assign a team to an agenda task.
+     * @param event The event that triggered this action.
+     * @throws IOException If an I/O exception occurs.
+     */
     public void changeToAssignTeam(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/assignTeamToAgendaTask.fxml");
     }
 
+    /**
+     * Changes the window to postpone a task.
+     * @param event The event that triggered this action.
+     * @throws IOException If an I/O exception occurs.
+     */
     public void changeToPsotponeTask(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/postponeTask.fxml");
     }
 
+    /**
+     * Changes the window to cancel a task.
+     * @param event The event that triggered this action.
+     * @throws IOException If an I/O exception occurs.
+     */
     public void changeToCancelTask(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/cancelTask.fxml");
     }
 
+    /**
+     * Changes the window to the user's green spaces.
+     * @param event The event that triggered this action.
+     * @throws IOException If an I/O exception occurs.
+     */
     public void changeToMyGreenSpaces(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/myGreenSpaces.fxml");
     }
+
 
 }
 

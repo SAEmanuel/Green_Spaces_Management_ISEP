@@ -88,7 +88,11 @@ public class AddEntryAgenda_Controller implements Initializable {
 
     }
 
-
+    /**
+     * Submits the registration of a new entry to the agenda.
+     *
+     * @param event the action event
+     */
     public void submitRegistration(ActionEvent event) {
         try {
             getDate();
@@ -107,6 +111,9 @@ public class AddEntryAgenda_Controller implements Initializable {
 
     }
 
+    /**
+     * Retrieves the date input by the user.
+     */
     private void getDate() {
 
         try {
@@ -125,6 +132,10 @@ public class AddEntryAgenda_Controller implements Initializable {
         }
     }
 
+
+    /**
+     * Retrieves information about the selected to-do entry and updates the UI accordingly.
+     */
     private void getInfos() {
         int selection = toDo_Option.getSelectionModel().getSelectedIndex();
         startingDate.setValue(null);
@@ -132,6 +143,11 @@ public class AddEntryAgenda_Controller implements Initializable {
         toDo_Option.getItems().remove(selection);
     }
 
+    /**
+     * Clears the selected date and to-do entry.
+     *
+     * @param event the action event
+     */
     public void clear(ActionEvent event) {
         startingDate.setValue(null);
         toDo_Option.getSelectionModel().clearSelection();
@@ -140,34 +156,82 @@ public class AddEntryAgenda_Controller implements Initializable {
 
     //------------------------------------ Options Side Bar --------------------------
 
+    /**
+     * Switches to the GSM Menu UI when triggered by an action event.
+     *
+     * @param event The action event triggering the method.
+     * @throws IOException If an I/O error occurs.
+     */
     public void switchGSMMenu(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/gsmUI.fxml");
     }
 
+    /**
+     * Switches to the Add Green Space UI when triggered by an action event.
+     *
+     * @param event The action event triggering the method.
+     * @throws IOException If an I/O error occurs.
+     */
     public void changeToAddGreenSpace(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/addGreenSpace.fxml");
     }
 
+    /**
+     * Switches to the Entry To-Do List UI when triggered by an action event.
+     *
+     * @param event The action event triggering the method.
+     * @throws IOException If an I/O error occurs.
+     */
     public void changeToEntryToDoList(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/addToDoEntry.fxml");
     }
 
+    /**
+     * Switches to the Assign Team UI when triggered by an action event.
+     *
+     * @param event The action event triggering the method.
+     * @throws IOException If an I/O error occurs.
+     */
     public void changeToAssignTeam(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/assignTeamToAgendaTask.fxml");
     }
 
+    /**
+     * Switches to the Assign Vehicle UI when triggered by an action event.
+     *
+     * @param event The action event triggering the method.
+     * @throws IOException If an I/O error occurs.
+     */
     public void changeToAssignVehicle(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/assignVehicleToAgendaTask.fxml");
     }
 
+    /**
+     * Switches to the Postpone Task UI when triggered by an action event.
+     *
+     * @param event The action event triggering the method.
+     * @throws IOException If an I/O error occurs.
+     */
     public void changeToPsotponeTask(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/postponeTask.fxml");
     }
 
+    /**
+     * Switches to the Cancel Task UI when triggered by an action event.
+     *
+     * @param event The action event triggering the method.
+     * @throws IOException If an I/O error occurs.
+     */
     public void changeToCancelTask(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/cancelTask.fxml");
     }
 
+    /**
+     * Switches to the My Green Spaces UI when triggered by an action event.
+     *
+     * @param event The action event triggering the method.
+     * @throws IOException If an I/O error occurs.
+     */
     public void changeToMyGreenSpaces(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/myGreenSpaces.fxml");
     }
