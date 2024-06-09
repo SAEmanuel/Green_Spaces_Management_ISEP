@@ -6,10 +6,9 @@ import java.io.Serializable;
 
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
 
+
 /**
- * The ToDoEntry class represents a to-do entry associated with a green space.
- * It contains details about the to-do task such as title, description, urgency,
- * expected duration, status, and the responsible person.
+ * Represents a to-do entry associated with a green space.
  */
 public class ToDoEntry implements Serializable {
 

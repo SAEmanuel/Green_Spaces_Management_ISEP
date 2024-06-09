@@ -17,7 +17,9 @@ import pt.ipp.isep.dei.esoft.project.ui.Main;
 
 import java.io.IOException;
 
-
+/**
+ * Controller class for the main menu functionality.
+ */
 public class MainMenu_Controller {
 
     private final ConfirmationAlerts confirmationAlerts = new ConfirmationAlerts();
@@ -31,7 +33,11 @@ public class MainMenu_Controller {
 
     private Stage stage;
 
-
+    /**
+     * Handles the logout action.
+     *
+     * @param event The ActionEvent triggered by clicking the logout button.
+     */
     public void logout(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Exit");
@@ -45,6 +51,9 @@ public class MainMenu_Controller {
         }
     }
 
+    /**
+     * Saves application information.
+     */
     private void saveInformation() {
         if (confirmationAlerts.confirmationMessagesGiveAlert("Save Information", "Do you wish to save?", "").showAndWait().get() == ButtonType.OK) {
             try {
@@ -57,14 +66,24 @@ public class MainMenu_Controller {
         }
     }
 
+    /**
+     * Switches to the development team menu.
+     *
+     * @param event The ActionEvent triggered by clicking the development team button.
+     * @throws IOException If an I/O error occurs.
+     */
     public void switchToDevTeam(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/devTeamMenu.fxml");
 
     }
 
+    /**
+     * Switches to the login menu.
+     *
+     * @param event The ActionEvent triggered by clicking the login button.
+     * @throws IOException If an I/O error occurs.
+     */
     public void switchToLoginMenu(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/login.fxml");
     }
-
-
 }

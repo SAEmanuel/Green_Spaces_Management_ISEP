@@ -6,9 +6,16 @@ import java.util.Scanner;
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_BRIGHT_RED;
 import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_RESET;
 
+/**
+ * The ConfirmationMenu class provides functionality to display a confirmation menu and handle user input.
+ */
 public class ConfirmationMenu {
 
-
+    /**
+     * Displays a confirmation menu and handles user input.
+     *
+     * @return The user's choice: 0 for confirmation, 1 for cancellation, 2 for exiting the process.
+     */
     public static int confirmsData() {
         Scanner input = new Scanner(System.in);
         int option;

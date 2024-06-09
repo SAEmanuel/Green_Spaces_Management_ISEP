@@ -16,6 +16,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller class for the login functionality.
+ */
 public class Login_Controller implements Initializable {
     AuthenticationController ctrl = new AuthenticationController();
 
@@ -35,12 +38,23 @@ public class Login_Controller implements Initializable {
     private final String VFMPREFIX = "vfm";
     private final String HRMPREFIX = "hrm";
 
-
+    /**
+     * Initializes the login screen.
+     *
+     * @param url            The location used to resolve relative paths for the root object.
+     * @param resourceBundle The resources used to localize the root object.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ctrl.doLogout();
     }
 
+    /**
+     * Handles the login action.
+     *
+     * @param event The ActionEvent triggered by clicking the login button.
+     * @throws IOException If an I/O error occurs.
+     */
     public void submit(ActionEvent event) throws IOException {
         String email = userEmail.getText();
         String password = userPassword.getText();
@@ -53,11 +67,23 @@ public class Login_Controller implements Initializable {
         }
     }
 
+    /**
+     * Handles the logout action.
+     *
+     * @param event The ActionEvent triggered by clicking the logout button.
+     */
     public void logout(ActionEvent event) {
         userEmail.clear();
         userPassword.clear();
     }
 
+    /**
+     * Verifies the user type based on the email prefix and switches to the corresponding menu.
+     *
+     * @param email The user's email.
+     * @param event The ActionEvent triggered by the user's action.
+     * @throws IOException If an I/O error occurs.
+     */
     private void verifyUSR(String email, Event event) throws IOException {
         String[] emailSplit = email.split("@");
         String prefix = emailSplit[0];
@@ -78,22 +104,52 @@ public class Login_Controller implements Initializable {
         }
     }
 
+    /**
+     * Switches to the main menu.
+     *
+     * @param event The ActionEvent triggered by the user's action.
+     * @throws IOException If an I/O error occurs.
+     */
     public void switchToMainMenu(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event, "/mainMenu.fxml");
     }
 
+    /**
+     * Switches to the GSM menu.
+     *
+     * @param event The ActionEvent triggered by the user's action.
+     * @throws IOException If an I/O error occurs.
+     */
     public void switchToGsmMenu(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event, "/gsmUI.fxml");
     }
 
+    /**
+     * Switches to the HRM menu.
+     *
+     * @param event The ActionEvent triggered by the user's action.
+     * @throws IOException If an I/O error occurs.
+     */
     public void switchToHrmMenu(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event, "/hrmUI.fxml");
     }
 
+    /**
+     * Switches to the collaborator menu.
+     *
+     * @param event The ActionEvent triggered by the user's action.
+     * @throws IOException If an I/O error occurs.
+     */
     public void switchToCollaboratorMenu(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event, "/collaboratorUI.fxml");
     }
 
+    /**
+     * Switches to the VFM menu.
+     *
+     * @param event The ActionEvent triggered by the user's action.
+     * @throws IOException If an I/O error occurs.
+     */
     public void switchToVfmMenu(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event, "/vfmUI.fxml");
     }

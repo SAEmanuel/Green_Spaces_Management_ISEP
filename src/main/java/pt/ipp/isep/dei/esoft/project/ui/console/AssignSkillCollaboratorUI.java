@@ -136,6 +136,13 @@ public class AssignSkillCollaboratorUI implements Runnable {
         return null;
     }
 
+    /**
+     * This method prompts the user to decide if they wish to try again.
+     * It continuously reads input until the user enters a valid option ('y' or 'n').
+     *
+     * @return true if the user enters 'y' or 'Y' indicating they wish to try again,
+     *         false if the user enters 'n' or 'N' indicating they do not wish to try again.
+     */
     private boolean askIfTryAgain() {
         Scanner input = new Scanner(System.in);
         String option;
@@ -143,7 +150,6 @@ public class AssignSkillCollaboratorUI implements Runnable {
         System.out.print("\nDo you wish to try again? (y/n): ");
 
         while (true) {
-
             option = input.nextLine();
 
             if (option.equalsIgnoreCase("y")) {

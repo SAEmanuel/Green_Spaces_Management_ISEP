@@ -6,6 +6,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The Collaborator class represents a collaborator in the project domain.
+ */
 public class Collaborator implements Serializable {
     private final String name;
     private final Data birthDate;
@@ -417,10 +420,20 @@ public class Collaborator implements Serializable {
         return job;
     }
 
+    /**
+     * Gets the type of the document.
+     *
+     * @return the type of the document
+     */
     public DocType getType() {
         return type;
     }
 
+    /**
+     * Sets the password of the collaborator.
+     *
+     * @param password the password to set
+     */
     public void setPassword(Password password) {
         this.password = password;
     }
@@ -449,6 +462,4 @@ public class Collaborator implements Serializable {
         }
 
     }
-
-
 }

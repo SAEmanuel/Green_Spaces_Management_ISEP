@@ -111,26 +111,6 @@ public class AgendaEntry implements Serializable {
     }
 
     /**
-     * Validates the agenda entry's starting date.
-     *
-     * @param startingDate The starting date to validate.
-     */
-//    private void validationAgendaEntry(Data startingDate) {
-//        validateDate(startingDate);
-//    }
-
-    /**
-     * Validates the given date.
-     *
-     * @param startingDate The date to validate.
-     */
-//    private void validateDate(Data startingDate) {
-//        if (!startingDate.isGraterThanCurrentDate()) {
-//            throw new IllegalArgumentException("Start date must be greater than the current date.");
-//        }
-//    }
-
-    /**
      * Calculates the end date based on the starting date and the expected duration of the to-do entry.
      *
      * @param startingDate The starting date.
@@ -281,10 +261,19 @@ public class AgendaEntry implements Serializable {
         }
         return false;
     }
+
+    /**
+     * Gets the status of the agenda entry.
+     *
+     * @return The status of the agenda entry.
+     */
     public String getStatus(){
         return agendaEntry.getStatus();
     }
 
+    /**
+     * Sets the string representation of vehicles assigned to this agenda entry.
+     */
     public void setVehiclesString(){
         StringBuilder builder = new StringBuilder();
         for (Vehicle vehicle : vehicles) {
@@ -293,14 +282,29 @@ public class AgendaEntry implements Serializable {
         stringVehicle = builder.toString();
     }
 
+    /**
+     * Gets the string representation of vehicles assigned to this agenda entry.
+     *
+     * @return The string representation of vehicles.
+     */
     public String getStringVehicle(){
         return stringVehicle;
     }
 
+    /**
+     * Adds a list of vehicles to the vehicles assigned to this agenda entry.
+     *
+     * @param vehicles The list of vehicles to add.
+     */
     public void addVehicles(List<Vehicle> vehicles) {
         this.vehicles.addAll(vehicles);
     }
 
+    /**
+     * Sets the team assigned to this agenda entry.
+     *
+     * @param team The team to set.
+     */
     public void addTeam(Team team) {
         this.team = team;
     }

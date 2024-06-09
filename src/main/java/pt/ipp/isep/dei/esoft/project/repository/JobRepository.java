@@ -137,12 +137,14 @@ public class JobRepository implements Serializable {
         jobList.add(job);
     }
 
+    /**
+     * Retrieves the list of jobs.
+     *
+     * @return A list of jobs.
+     */
     public List<Job> getJobList() {
         return clone();
     }
 
-    public void serializationInput(List<Job> vehicleList) {
-        this.jobList.addAll(vehicleList);
-    }
 
 }

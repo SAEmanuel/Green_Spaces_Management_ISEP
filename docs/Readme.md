@@ -1,8 +1,8 @@
 # Integrative Project for the 2nd Semester 2023-2024 of LEI-ISEP
 
-# 1. Team Members
+## 1. Team Members
 
-The teams consists of students identified in the following table.
+The team consists of students identified in the following table.
 
 | Student Number | Name                 |
 |----------------|----------------------|
@@ -12,12 +12,10 @@ The teams consists of students identified in the following table.
 | **1230444**    | Romeu Xu             |
 | **1231498**    | Paulo Mendes         |
 
-# 2. Task Distribution ###
+## 2. Task Distribution
 
-Throughout the project development period, the distribution of _tasks / requirements / features_ by the team members
-was carried out as described in the following table.
-
-**Keep this table always up-to-date.**
+Throughout the project development period, the distribution of _tasks / requirements / features_ by the team members was
+carried out as described in the following table.
 
 | Task                        | [Sprint A](sprintA/Readme.md)                                                                  | [Sprint B](sprintB/Readme.md)                                                              | [Sprint C](sprintC/Readme.md)                                                              |
 |-----------------------------|------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------|
@@ -30,7 +28,7 @@ was carried out as described in the following table.
 | US003 (SDP Activities)      | [1230444](sprintA/us003/Readme.md)                                                             |                                                                                            |                                                                                            |
 | US004 (SDP Activities)      | [1230839](sprintA/us004/Readme.md)                                                             |                                                                                            |                                                                                            |
 | US005 (SDP Activities)      | [1231498](sprintA/us005/Readme.md)                                                             |                                                                                            |                                                                                            |
-| US006 (SDP Activities)      | [1231274](sprintA/us006/Readme.md) , [1231498](sprintA/us006/Readme.md)                        |                                                                                            |                                                                                            |
+| US006 (SDP Activities)      | [1231274](sprintA/us006/Readme.md), [1231498](sprintA/us006/Readme.md)                         |                                                                                            |                                                                                            |
 | US007 (SDP Activities)      | [1230839](sprintA/us007/Readme.md)                                                             |                                                                                            |                                                                                            |
 | US008 (SDP Activities)      | [1230564](sprintA/us008/Readme.md)                                                             |                                                                                            |                                                                                            |
 | US009 (SDP Activities)      |                                                                                                | [1231274](sprintB/MATCP/us009/Readme.md)                                                   |                                                                                            | 
@@ -39,24 +37,18 @@ was carried out as described in the following table.
 | US012 (SDP Activities)      |                                                                                                | [1230839](sprintB/MDISC/us012/Readme.md)                                                   |                                                                                            |
 | US013 (SDP Activities)      |                                                                                                | [1230564](sprintB/MDISC/us013/Readme.md)                                                   |                                                                                            |
 | US014 (SDP Activities)      |                                                                                                | [1230564](sprintB/MDISC/us014/Readme.md), [1230839](sprintB/MDISC/us014/Readme.md)         |                                                                                            |
-| US015 (SDP Activities)      |                                                                                                |                                                                                            |                                                                                            |
-| US016 (SDP Activities)      |                                                                                                |                                                                                            |                                                                                            |
-| US017 (SDP Activities)      |                                                                                                |                                                                                            |                                                                                            |
-| US018 (SDP Activities)      |                                                                                                |                                                                                            |                                                                                            |
-| US019 (SDP Activities)      |                                                                                                |                                                                                            |                                                                                            |
-| US020 (SDP Activities)      |                                                                                                |                                                                                            |                                                                                            |
-| US021 (SDP Activities)      |                                                                                                |                                                                                            |                                                                                            |
-| US022 (SDP Activities)      |                                                                                                |                                                                                            |                                                                                            |
-| US023 (SDP Activities)      |                                                                                                |                                                                                            |                                                                                            |
-| US024 (SDP Activities)      |                                                                                                |                                                                                            |                                                                                            |
-| US025 (SDP Activities)      |                                                                                                |                                                                                            |                                                                                            |
-| US026 (SDP Activities)      |                                                                                                |                                                                                            |                                                                                            |
-| US027 (SDP Activities)      |                                                                                                |                                                                                            |                                                                                            |
-| US028 (SDP Activities)      |                                                                                                |                                                                                            |                                                                                            |
-| US029 (SDP Activities)      |                                                                                                |                                                                                            |                                                                                            |
-
-
-
-
-
-
+| US015 (SDP Activities)      |                                                                                                |                                                                                            | [1230444]                                                                                  |
+| US016 (SDP Activities)      |                                                                                                |                                                                                            | [1230444]                                                                                  |
+| US017 (SDP Activities)      |                                                                                                |                                                                                            | [1230564]                                                                                  |
+| US018 (SDP Activities)      |                                                                                                |                                                                                            | [1230564]                                                                                  |
+| US019 (SDP Activities)      |                                                                                                |                                                                                            | [1230839]                                                                                  |
+| US020 (SDP Activities)      |                                                                                                |                                                                                            | [1231274](sprintC/us020/Readme.md)                                                         |
+| US021 (SDP Activities)      |                                                                                                |                                                                                            | [1230839](sprintC/us021/Readme.md)                                                         |
+| US022 (SDP Activities)      |                                                                                                |                                                                                            | [1231274](sprintC/us022/Readme.md)                                                         |
+| US023 (SDP Activities)      |                                                                                                |                                                                                            | [1231498](sprintC/us023/Readme.md)                                                         |
+| US024 (SDP Activities)      |                                                                                                |                                                                                            | [1231274](sprintC/us024/Readme.md)                                                         |
+| US025 (SDP Activities)      |                                                                                                |                                                                                            | [1231274](sprintC/us025/Readme.md)                                                         |
+| US026 (SDP Activities)      |                                                                                                |                                                                                            | [1230839](sprintC/us026/Readme.md)                                                         |
+| US027 (SDP Activities)      |                                                                                                |                                                                                            | [1231498](sprintC/us027/Readme.md)                                                         |
+| US028 (SDP Activities)      |                                                                                                |                                                                                            | [1230564](sprintC/us028/Readme.md)                                                         |
+| US029 (SDP Activities)      |                                                                                                |                                                                                            | [1230564](sprintC/us029/Readme.md)                                                         |
