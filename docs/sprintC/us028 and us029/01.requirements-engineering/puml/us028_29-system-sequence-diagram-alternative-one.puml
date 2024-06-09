@@ -3,7 +3,7 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title System Sequence Diagram (SSD) - Alternative One
+title System Sequence Diagram (SSD) - Alternative Two
 
 autonumber
 
@@ -15,11 +15,16 @@ participant ":System" as System
         activate COLAB
         activate System
 
-        System --> COLAB: Asks to select a filter
-        COLAB -> System : Selects a filter
+         System --> COLAB: Asks to select a filter
+        COLAB -> System : Selects the "Planned" filter
         System --> COLAB: Asks the start and end dates
         COLAB -> System : Provides the start and end dates
+        System --> COLAB: Asks continuation confirmation
+        COLAB -> System : Confirms operation
+
         System --> COLAB: Provides the list of tasks
+        COLAB -> System : Selects the task to register completion
+        System --> COLAB: Confirms success of operation
 
 
         deactivate System
