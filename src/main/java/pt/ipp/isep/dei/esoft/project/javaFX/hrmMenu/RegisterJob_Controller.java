@@ -23,6 +23,10 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+
+/**
+ * Controller class for the Register Job screen.
+ */
 public class RegisterJob_Controller implements Initializable {
 
     private final SwitchWindows switchWindows = new SwitchWindows();
@@ -46,7 +50,11 @@ public class RegisterJob_Controller implements Initializable {
 
     ObservableList<Job> list = FXCollections.observableArrayList(controller.getJobRepository().getJobList());
 
-
+    /**
+     * Initializes the Register Job screen.
+     * @param url The location used to resolve relative paths for the root object.
+     * @param resourceBundle The resources used to localize the root object.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         table_skills.setCellValueFactory(new PropertyValueFactory<Job, String>("jobName"));
@@ -55,7 +63,10 @@ public class RegisterJob_Controller implements Initializable {
 
     }
 
-
+    /**
+     * Handles the event when the user submits job registration.
+     * @param event The action event triggered by the button click.
+     */
     public void submitRegistration(ActionEvent event) {
         try {
             Optional<Job> job = controller.registerJob(field_name.getText());
@@ -74,29 +85,57 @@ public class RegisterJob_Controller implements Initializable {
 
     }
 
-
+    /**
+     * Clears the input field for job name.
+     * @param event The action event triggered by the button click.
+     */
     public void clear(ActionEvent event) {
         field_name.clear();
     }
 
     //------------------------------------ Options Side Bar --------------------------
 
+    /**
+     * Switches the view to the HRM menu.
+     * @param event The action event triggered by the button click.
+     * @throws IOException If an I/O exception occurs.
+     */
     public void switchHRMMenu(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/hrmUI.fxml");
     }
 
+    /**
+     * Switches the view to the register skill screen.
+     * @param event The action event triggered by the button click.
+     * @throws IOException If an I/O exception occurs.
+     */
     public void changeToRegisterSkill(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/registerSkill.fxml");
     }
 
+    /**
+     * Switches the view to the create collaborator screen.
+     * @param event The action event triggered by the button click.
+     * @throws IOException If an I/O exception occurs.
+     */
     public void changeToCreateCollaborator(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/createCollaborator.fxml");
     }
 
+    /**
+     * Switches the view to the assign skill to collaborator screen.
+     * @param event The action event triggered by the button click.
+     * @throws IOException If an I/O exception occurs.
+     */
     public void changeToAssignSkill(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/assignSkillCollaborator.fxml");
     }
 
+    /**
+     * Switches the view to the generate team screen.
+     * @param event The action event triggered by the button click.
+     * @throws IOException If an I/O exception occurs.
+     */
     public void changeGenerateTeam(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/generateTeam.fxml");
     }

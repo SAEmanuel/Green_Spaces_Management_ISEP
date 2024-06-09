@@ -26,6 +26,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * Controller class for assigning skills to collaborators functionality.
+ */
 public class AssignSkillToCollaborator_Controller implements Initializable {
 
     private final SendErrors sendErrors = new SendErrors();
@@ -61,7 +64,15 @@ public class AssignSkillToCollaborator_Controller implements Initializable {
 
     ObservableList<Collaborator> list = FXCollections.observableArrayList(controller.getCollaboratorList());
 
-
+    /**
+     * Initializes the UI components with necessary data.
+     * Sets the email label to the current user's email.
+     * Populates the choice box with available skills.
+     * Sets up the table columns with appropriate cell value factories.
+     * Populates the table with collaborator data.
+     * @param url The location used to resolve relative paths for the root object.
+     * @param resourceBundle The resources used to localize the root object, or null.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         email_label.setText(repositories.getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail());
@@ -73,6 +84,11 @@ public class AssignSkillToCollaborator_Controller implements Initializable {
         table.setItems(list);
     }
 
+    /**
+     * Handles the submission of skill assignment to collaborator.
+     *
+     * @param event The ActionEvent triggered by clicking the submit button.
+     */
     public void submitRegistration(ActionEvent event) {
         try {
             getValues();
@@ -91,6 +107,9 @@ public class AssignSkillToCollaborator_Controller implements Initializable {
         }
     }
 
+    /**
+     * Retrieves the values from the input fields.
+     */
     private void getValues() {
         try {
             taxPayerNumber = Integer.parseInt(field_name.getText());
@@ -104,6 +123,11 @@ public class AssignSkillToCollaborator_Controller implements Initializable {
         }
     }
 
+    /**
+     * Clears the input fields.
+     *
+     * @param event The ActionEvent triggered by clicking the clear button.
+     */
     public void clear(ActionEvent event) {
         field_name.clear();
         choiceBox_Skill.getSelectionModel().clearSelection();
@@ -111,23 +135,52 @@ public class AssignSkillToCollaborator_Controller implements Initializable {
 
 
     //------------------------------------ Options Side Bar --------------------------
-
+    /**
+     * Switches to the HRM menu.
+     *
+     * @param event The ActionEvent triggered by clicking the HRM menu button.
+     * @throws IOException If an I/O error occurs.
+     */
     public void switchHRMMenu(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event, "/hrmUI.fxml");
     }
 
+    /**
+     * Changes to the register skill view.
+     *
+     * @param event The ActionEvent triggered by clicking the register skill button.
+     * @throws IOException If an I/O error occurs.
+     */
     public void changeToRegisterSkill(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event, "/registerSkill.fxml");
     }
 
+    /**
+     * Changes to the register job view.
+     *
+     * @param event The ActionEvent triggered by clicking the register job button.
+     * @throws IOException If an I/O error occurs.
+     */
     public void changeToRegisterJob(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event, "/registerJob.fxml");
     }
 
+    /**
+     * Changes to the create collaborator view.
+     *
+     * @param event The ActionEvent triggered by clicking the create collaborator button.
+     * @throws IOException If an I/O error occurs.
+     */
     public void changeToCreateCollaborator(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event, "/createCollaborator.fxml");
     }
 
+    /**
+     * Changes to the generate team view.
+     *
+     * @param event The ActionEvent triggered by clicking the generate team button.
+     * @throws IOException If an I/O error occurs.
+     */
     public void changeGenerateTeam(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/generateTeam.fxml");
     }
