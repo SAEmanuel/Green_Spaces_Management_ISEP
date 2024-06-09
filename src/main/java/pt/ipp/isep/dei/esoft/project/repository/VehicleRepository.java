@@ -157,7 +157,7 @@ public class VehicleRepository implements Serializable {
     public List<Vehicle> getVehiclesNeedingCheckUp() {
         List<Vehicle> vehiclesForCheckUp = new ArrayList<>();
         for (Vehicle vehicle : vehicleList) {
-            if ((vehicle.getCurrentKm() - vehicle.getLastCheckUp()) >= vehicle.getCheckUpFrequency() * (1 - PERCENTAGE_OF_KM)) {
+            if ((vehicle.getCurrentKm() - vehicle.getLastCheckUp())* (1 - PERCENTAGE_OF_KM) <= vehicle.getCheckUpFrequency() ) {
                 vehiclesForCheckUp.add(vehicle);
             }
 

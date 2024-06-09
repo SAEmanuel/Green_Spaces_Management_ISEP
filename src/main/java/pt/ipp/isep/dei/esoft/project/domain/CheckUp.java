@@ -1,9 +1,11 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.io.Serializable;
+
 /**
  * The CheckUp class represents a vehicle check-up in the project domain.
  */
-public class CheckUp {
+public class CheckUp implements Serializable {
     // Attributes
     private Data checkUpDate;
     private float checkUpKms;

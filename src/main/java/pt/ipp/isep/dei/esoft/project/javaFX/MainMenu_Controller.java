@@ -9,50 +9,62 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import pt.ipp.isep.dei.esoft.project.application.Serialization;
+import pt.ipp.isep.dei.esoft.project.javaFX.alerts.ConfirmationAlerts;
+import pt.ipp.isep.dei.esoft.project.javaFX.alerts.InformationAlerts;
+import pt.ipp.isep.dei.esoft.project.javaFX.extras.SwitchWindows;
+import pt.ipp.isep.dei.esoft.project.ui.Main;
 
 import java.io.IOException;
 
 
 public class MainMenu_Controller {
 
-    @FXML
-    private Button exit;
+    private final ConfirmationAlerts confirmationAlerts = new ConfirmationAlerts();
+    private final InformationAlerts informationAlerts = new InformationAlerts();
+    private final SwitchWindows switchWindows = new SwitchWindows();
+
+
     @FXML
     private AnchorPane mainMenuScene;
-    @FXML
-    private ChoiceBox<String> mainMenuOptions;
+
 
     private Stage stage;
-    private Scene scene;
-    private Parent root;
 
 
     public void logout(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Cancel");
-        alert.setHeaderText("You're about to cancel!");
-        alert.setContentText("Are you sure you want to cancel?");
+        alert.setTitle("Exit");
+        alert.setHeaderText("You're about to exit!");
+        alert.setContentText("Are you sure you want to exit?");
 
         if (alert.showAndWait().get() == ButtonType.OK) {
+            saveInformation();
             stage = (Stage) mainMenuScene.getScene().getWindow();
             stage.close();
         }
     }
 
+    private void saveInformation() {
+        if (confirmationAlerts.confirmationMessagesGiveAlert("Save Information", "Do you wish to save?", "").showAndWait().get() == ButtonType.OK) {
+            try {
+                Main.saveAppInformation();
+            }catch (Exception e){
+                informationAlerts.informationMessages("Something go wrong","App information cannot be saved, check: "+ e.getMessage(),"");
+            }
+        } else {
+            informationAlerts.informationMessages("Information","No information saved...","");
+        }
+    }
+
     public void switchToDevTeam(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/devTeamMenu.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        switchWindows.changeWindow(event,"/devTeamMenu.fxml");
 
     }
 
     public void switchToLoginMenu(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/login.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        switchWindows.changeWindow(event,"/login.fxml");
     }
+
+
 }

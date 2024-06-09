@@ -54,7 +54,7 @@ public class Main {
 
 
 
-    protected static void saveAppInformation(){
+    public static void saveAppInformation(){
         Serialization serialization = new Serialization();
         serialization.serializeRepositoriesOutput();
 

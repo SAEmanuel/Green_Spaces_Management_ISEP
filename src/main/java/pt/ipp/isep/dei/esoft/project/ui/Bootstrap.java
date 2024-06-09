@@ -44,7 +44,7 @@ public class Bootstrap implements Runnable {
     private final Data data2 = new Data(2021, 1, 1);
 
     private final Vehicle vehicle1 = new Vehicle("AA-00-AA", "Toyota", "Camnry", 0, 1000, 2000, 10000, 2000, 9005, data2, data1);
-    private final Vehicle vehicle2 = new Vehicle("BB-00-AA", "Toyota", "Tundra", 0, 5000, 7000, 10000, 2000, 8000, data2, data1);
+    private final Vehicle vehicle2 = new Vehicle("BB-00-AA", "Toyota", "Tundra", 0, 5000, 7000, 10000, 2000, 8005, data2, data1);
     private final Vehicle vehicle3 = new Vehicle("CC-00-AA", "Toyota", "Yaris", 0, 500, 1000, 10000, 2000, 4000, data2, data1);
 
     private final ToDoEntry task1 = new ToDoEntry(infanteDomHenrique, "Cortar relva", "Nenhuma", 0, 12);
@@ -71,15 +71,15 @@ public class Bootstrap implements Runnable {
     //******** RUN METHOD **********
 
     public void run() {
-//        inputAppInformation();
-        addJobs();
-        addVehicles();
-        addSkills();
-        addCollaborator();
-        addGreenSpace();
-        addToDoList();
+        inputAppInformation();
         addUsers();
-        addTeam();
+//        addJobs();
+//        addVehicles();
+//        addSkills();
+//        addCollaborator();
+//        addGreenSpace();
+//        addToDoList();
+//        addTeam();
     }
 
     private void addToDoList() {

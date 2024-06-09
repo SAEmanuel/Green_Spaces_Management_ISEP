@@ -15,7 +15,7 @@ import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.ANSI_RESET
 //import javax.mail.internet.MimeMessage;
 //import com.sun.mail.smtp.SMTPTransport;
 
-public class SendEmail {
+public class SendEmail implements Serializable{
     private static Properties config;
 
     /**

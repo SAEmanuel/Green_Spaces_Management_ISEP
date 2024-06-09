@@ -42,16 +42,16 @@ rectangle "Use Cases" as usecases{
     usecase "UC17 - TITLE" as UC17
     usecase "UC18 - TITLE" as UC18
     usecase "UC19 - TITLE" as UC19
-    usecase "UC20 - TITLE" as UC20
-    usecase "UC21 - TITLE" as UC21
-    usecase "UC22 - TITLE" as UC22
-    usecase "UC23 - TITLE" as UC23
-    usecase "UC24 - TITLE" as UC24
-    usecase "UC25 - TITLE" as UC25
-    usecase "UC26 - TITLE" as UC26
-    usecase "UC27 - TITLE" as UC27
-    usecase "UC28 - TITLE" as UC28
-    usecase "UC29 - TITLE" as UC29
+    usecase "UC20 - Register a Green Space" as UC20
+    usecase "UC21 - Adding a To-Do List Entry for Green Space Management" as UC21
+    usecase "UC22 - Add a new entry in the Agenda" as UC22
+    usecase "UC23 - Assign a Team to an entry in the Agenda" as UC23
+    usecase "UC24 - Postpone task in Agenda" as UC24
+    usecase "UC25 - Overhauling of vehicles" as UC25
+    usecase "UC26 - Assign One or More Vehicles to Agenda Entry" as UC26
+    usecase "UC27 - Show an organized list of all green spaces managed by manager" as UC27
+    usecase "UC28 - Consult the tasks assigned to me between two dates." as UC28
+    usecase "UC29 - Record the completion of a task." as UC29
 
     HRM --> UC1
     HRM --> UC2

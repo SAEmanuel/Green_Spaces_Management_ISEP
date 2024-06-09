@@ -234,7 +234,9 @@ public class RegisterVehicle_Controller implements Initializable {
     public void changeToRegisterVehicleCheckUp(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/registerVehicleCheckUp.fxml");
     }
-    public void changeToCreateCheckUpList(ActionEvent event) throws IOException {
+
+    public void changeToCreateCheckUpList(ActionEvent event) throws IOException{
+        switchWindows.changeWindow(event, "/showVehiclesNeedingCheckUp.fxml");
     }
 
 

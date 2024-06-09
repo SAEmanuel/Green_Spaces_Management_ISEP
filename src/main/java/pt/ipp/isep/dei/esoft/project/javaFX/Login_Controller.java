@@ -19,8 +19,6 @@ import java.util.ResourceBundle;
 public class Login_Controller implements Initializable {
     AuthenticationController ctrl = new AuthenticationController();
 
-    @FXML
-    private AnchorPane loginScene;
 
     @FXML
     private TextField userEmail;
@@ -56,15 +54,8 @@ public class Login_Controller implements Initializable {
     }
 
     public void logout(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Cancel");
-        alert.setHeaderText("You're about to cancel!");
-        alert.setContentText("Are you sure you want to cancel?");
-
-        if (alert.showAndWait().get() == ButtonType.OK) {
-            stage = (Stage) loginScene.getScene().getWindow();
-            stage.close();
-        }
+        userEmail.clear();
+        userPassword.clear();
     }
 
     private void verifyUSR(String email, Event event) throws IOException {

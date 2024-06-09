@@ -28,7 +28,7 @@ public class VfmUI_Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         email_label.setText(repositories.getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail());
-        num_checkUp.setText(String.valueOf(repositories.getVehicleCheckUpRepository().getCheckUpsList().size()));
+        num_checkUp.setText(String.valueOf(repositories.getVehicleRepository().getVehiclesNeedingCheckUp().size()));
         num_vehicles.setText(String.valueOf(repositories.getVehicleRepository().getVehicleList().size()));
     }
 

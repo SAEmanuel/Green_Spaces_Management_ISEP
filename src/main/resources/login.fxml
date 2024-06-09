@@ -35,7 +35,7 @@
                   <Font name="System Bold" size="29.0" />
                </font>
             </Label>
-            <Button fx:id="cancelbtn" layoutX="234.0" layoutY="384.0" mnemonicParsing="false" onAction="#logout" prefHeight="35.0" prefWidth="110.0" stylesheets="@Css/LoginBtns.css" text="Cancel" textFill="WHITE">
+            <Button fx:id="cancelbtn" layoutX="234.0" layoutY="384.0" mnemonicParsing="false" onAction="#logout" prefHeight="35.0" prefWidth="110.0" stylesheets="@Css/LoginBtns.css" text="Clear" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>

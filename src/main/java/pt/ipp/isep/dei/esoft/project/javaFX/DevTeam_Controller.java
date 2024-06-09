@@ -48,17 +48,6 @@ public class DevTeam_Controller implements Initializable {
         stage.show();
     }
 
-    public void logout(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Cancel");
-        alert.setHeaderText("You're about to cancel!");
-        alert.setContentText("Are you sure you want to cancel?");
-
-        if (alert.showAndWait().get() == ButtonType.OK) {
-            stage = (Stage) devTeamMenu.getScene().getWindow();
-            stage.close();
-        }
-    }
 
 
     @Override

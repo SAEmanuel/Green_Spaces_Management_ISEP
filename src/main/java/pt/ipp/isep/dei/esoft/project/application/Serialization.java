@@ -40,7 +40,7 @@ public class Serialization {
     public void serializeRepositoriesOutput() {
         String filePath = "AppInformaion/repositories.ser";
 
-        try{
+        try {
             File file = new File(filePath);
             FileOutputStream fileOutputStream = new FileOutputStream(file);
             ObjectOutputStream output = new ObjectOutputStream(fileOutputStream);
@@ -55,14 +55,59 @@ public class Serialization {
 
 
     //--------------------------- Serialization of Class Infos **INPUTS** -----------------------------
+
+//    public void serializeRepositoriesInput() {
+//        String filePath = "AppInformation/repositories.ser";
+//
+//        try {
+//            File file = new File(filePath);
+//
+//            if (!file.exists()) {
+//                file.getParentFile().mkdirs();
+//                file.createNewFile();
+//            }
+//
+//            if (file.length() == 0) {
+//                throw new IllegalArgumentException("The repositories file is empty.");
+//            }
+//
+//            FileInputStream fis = new FileInputStream(file);
+//            ObjectInputStream ois = new ObjectInputStream(fis);
+//
+//            Repositories deserializedRepositories = (Repositories) ois.readObject();
+//            Repositories.setInstance(deserializedRepositories);
+//
+//            ois.close();
+//            fis.close();
+//
+//        } catch (IOException | ClassNotFoundException | IllegalArgumentException e) {
+//            throw new IllegalArgumentException("Error deserializing repositories: " + e.getMessage(), e);
+//        }
+//    }
+
+
     public void serializeRepositoriesInput() {
-        String filePath = "AppInformaion/repositories.ser";
+        String filePath = "AppInformation/repositories.ser";
 
         try {
             File file = new File(filePath);
+
+            // Create the file and directory if necessary
+            if (!file.exists()) {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+            }
+
+            // Check if the file is empty
+            if (file.length() == 0) {
+                initializeEmptyRepositories(filePath);
+                return;
+            }
+
             FileInputStream fis = new FileInputStream(file);
             ObjectInputStream ois = new ObjectInputStream(fis);
 
+            // Deserialize the Repositories object from the file
             Repositories deserializedRepositories = (Repositories) ois.readObject();
             Repositories.setInstance(deserializedRepositories);
 
@@ -70,9 +115,32 @@ public class Serialization {
             fis.close();
 
         } catch (IOException | ClassNotFoundException e) {
-            throw new IllegalArgumentException("Error deserializing repositories: " + e.getMessage());
+            throw new IllegalArgumentException("Error deserializing repositories: " + e.getMessage(), e);
         }
     }
+
+    private void initializeEmptyRepositories(String filePath) {
+        try {
+            Repositories initialRepositories = Repositories.getInstance();
+            FileOutputStream fos = new FileOutputStream(filePath);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+            oos.writeObject(initialRepositories);
+
+            oos.close();
+            fos.close();
+
+            // Set the initial empty repositories instance
+            Repositories.setInstance(initialRepositories);
+
+        } catch (IOException e) {
+            throw new IllegalArgumentException("Error initializing empty repositories: " + e.getMessage(), e);
+        }
+    }
+
+
+
+
 }
 
 

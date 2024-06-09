@@ -99,7 +99,7 @@
                 </Label>
                 <Line endX="57.0" endY="72.29290771484375" fill="WHITE" layoutX="108.0" layoutY="-14.0" startX="-20.79900550842285" startY="72.29289245605469" stroke="#00acff" strokeWidth="3.0" />
                 <Line endX="57.0" endY="72.29290771484375" fill="WHITE" layoutX="170.0" layoutY="10.0" startX="-20.79900550842285" startY="72.29289245605469" stroke="#00acff" strokeWidth="3.0" />
-                <Button fx:id="back_btn" layoutX="458.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchHRMMenu" prefHeight="35.0" prefWidth="232.0" stylesheets="@Css/LoginBtns.css" text="&lt;--  |  GSM MENU" textFill="WHITE">
+                <Button fx:id="back_btn" layoutX="458.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchHRMMenu" prefHeight="35.0" prefWidth="232.0" stylesheets="@Css/LoginBtns.css" text="&lt;--  |  HRM MENU" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="13.0" />
                     </font>

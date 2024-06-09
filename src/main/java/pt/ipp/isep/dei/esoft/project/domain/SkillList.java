@@ -1,9 +1,10 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SkillList {
+public class SkillList implements Serializable {
     private List<Skill> skills;
 
     public SkillList() {
