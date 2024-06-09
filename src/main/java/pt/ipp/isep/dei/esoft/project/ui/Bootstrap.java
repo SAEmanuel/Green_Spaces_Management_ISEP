@@ -16,10 +16,10 @@ public class Bootstrap implements Runnable {
     private final Job job1 = new Job("Marketing Coordinator");
     private final Job job2 = new Job("President of Sales");
     private final Job job3 = new Job("Nursing Assistant");
-    private final Job job4 = new Job("Medical Assistant");
-    private final Job job5 = new Job("Account Executive");
-    private final Job job6 = new Job("Project Manager");
-    private final Job job7 = new Job("Pasteleira");
+    private final Job job4 = new Job("Gardener");
+    private final Job job5 = new Job("Security");
+    private final Job job6 = new Job("Store Employee");
+    private final Job job7 = new Job("Cleaner");
 
     private final Skill skill1 = new Skill("Irrigation Systems Management");
     private final Skill skill2 = new Skill("Pest Control and Management");
@@ -35,7 +35,7 @@ public class Bootstrap implements Runnable {
     private final Skill skill12 = new Skill("Lawn Care");
 
     private final GreenSpace infanteDomHenrique = new GreenSpace("Infante Dom Henrique", 0, 100, "Porto", "gsm@this.app");
-    private final GreenSpace palacioDeCristal = new GreenSpace("Palacio de Cristal", 1, 40, "Porto", "gsm@this.app");
+    private final GreenSpace palacioDeCristal = new GreenSpace("Palácio de Cristal", 1, 40, "Porto", "gsm@this.app");
     private final GreenSpace parqueDaCidade = new GreenSpace("Parque da Cidade", 2, 100, "Matosinhos", "gsm@this.app");
     private final GreenSpace quintaDoCovelo = new GreenSpace("Quinta do Covelo", 0, 100, "Porto", "gsm1@this.app");
     private final GreenSpace passeioAlegre = new GreenSpace("Passeio Alegre", 0, 11, "Porto", "gsm1@this.app");

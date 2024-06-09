@@ -48,7 +48,7 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Button>
-                  <Button layoutX="29.0" layoutY="438.0" mnemonicParsing="false" onAction="#changeToPsotponeTask" prefHeight="39.0" prefWidth="254.0" stylesheets="@Css/GsmUI.css" text="Postpone Task" textAlignment="CENTER">
+                  <Button layoutX="29.0" layoutY="438.0" mnemonicParsing="false" onAction="#changeToPostponeTask" prefHeight="39.0" prefWidth="254.0" stylesheets="@Css/GsmUI.css" text="Postpone Task" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
