@@ -72,14 +72,14 @@ public class Bootstrap implements Runnable {
 
     public void run() {
         addUsers();
-//        inputAppInformation();
-        addJobs();
-        addVehicles();
-        addSkills();
-        addCollaborator();
-        addGreenSpace();
-        addToDoList();
-        addTeam();
+        inputAppInformation();
+//        addJobs();
+//        addVehicles();
+//        addSkills();
+//        addCollaborator();
+//        addGreenSpace();
+//        addToDoList();
+//        addTeam();
     }
 
     private void addToDoList() {

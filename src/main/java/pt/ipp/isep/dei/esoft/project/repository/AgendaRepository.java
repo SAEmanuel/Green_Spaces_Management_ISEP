@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,8 @@ import java.util.Optional;
  * Repository class for managing agenda entries.
  */
 public class AgendaRepository implements Serializable {
+    @Serial
+    private static final long serialVersionUID = -7280568524296619063L;
 
     private List<AgendaEntry> agenda;
     private List<AgendaEntry> agendaBackUp;

@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,9 @@ import java.util.Optional;
  * Repository class for managing a list of ToDoEntry objects.
  */
 public class ToDoListRepository implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = -7607676960935514471L;
     private final List<ToDoEntry> toDoList;
 
     /**
