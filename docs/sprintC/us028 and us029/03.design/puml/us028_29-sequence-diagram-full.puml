@@ -12,19 +12,23 @@ participant AgendaController as CTRL
 participant ":Repositories" as RepositorySingleton
 participant "repositories\n:Repositories" as PLAT
 participant "agendaRepository\n:AgendaRepository" as agenda
+participant "agendaEntry\nAgendaEntry" as entry
 
 activate Colab
 
 Colab -> UI : Asks to generate a list of tasks assigned to the collaborator
 activate UI
+
 UI --> Colab : Asks to select a filter
-Colab -> UI : Selects a filter
+Colab -> UI : Selects the "Planned" filter
 UI --> Colab :  Asks the start and end dates
 Colab -> UI : Provides the start and end dates
+UI --> Colab : Asks continuation confirmation
+Colab -> UI : Confirms operation
 
 UI -> CTRL** : create
 
-UI -> CTRL : requestColabTaskList()
+UI -> CTRL : requestColabPlannedTaskList()
 
 deactivate UI
 
@@ -45,16 +49,11 @@ CTRL -> agenda : requestColabTaskList()
 
 activate agenda
 
+agenda -> entry** : get
 
 
 
-
-    agenda -> agenda : getTaskList()
-
-
-
-
-
+    agenda --> agenda : getPlannedTaskList()
 
 
 
@@ -63,21 +62,46 @@ activate agenda
 
 
 
-    agenda --> agenda : taskListCreated()
 
 
 
 
-agenda --> CTRL : colabTaskList
+
+    agenda --> agenda : taskPlannedListCreated()
+
+
+
+
+agenda --> CTRL : colabPlannedTaskList
 deactivate agenda
 
 
 
-CTRL --> UI :colabTaskList
+CTRL --> UI : colabPlannedTaskList
 deactivate CTRL
 activate UI
+
 UI --> Colab : Provides the list of tasks
+Colab -> UI : Selects the task to be completed
+UI -> CTRL : markCompletion
 deactivate UI
+
+activate CTRL
+
+CTRL -> agenda : markCompletion
+deactivate CTRL
+activate agenda
+agenda --> agenda :changeStatusAndEndDate
+
+agenda --> CTRL : success
+deactivate agenda
+activate CTRL
+
+activate UI
+CTRL --> UI : success
+UI --> Colab : confirmation success
+deactivate UI
+deactivate CTRL
 deactivate Colab
 
 deactivate Colab

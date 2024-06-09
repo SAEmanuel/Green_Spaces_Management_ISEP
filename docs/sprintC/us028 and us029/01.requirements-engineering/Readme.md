@@ -77,11 +77,9 @@ This "record" refers to the act of only changing the status of the task, or do w
 
 ### 1.6. System Sequence Diagram (SSD)
 
-#### Alternative One ("Planned" filter chosen)
+#### Alternative One
 
-![System Sequence Diagram - Alternative One](svg/us028_29-system-sequence-diagram-alternative-one-System_Sequence_Diagram__SSD____Alternative_One.svg)
+![System Sequence Diagram - Alternative One](svg/us028_29-system-sequence-diagram-alternative-two-System_Sequence_Diagram__SSD____Alternative_Two.svg)
 
-#### Alternative Two ("Planned" filter not chosen)
 
-![System Sequence Diagram - Alternative Two](svg/us028_29-system-sequence-diagram-alternative-two-System_Sequence_Diagram__SSD____Alternative_Two.svg)
 
