@@ -64,7 +64,6 @@ public class AssignTeamToTaskAgendaUI implements Runnable {
         catch (IllegalArgumentException e){
             System.out.println(ANSI_BRIGHT_GREEN + "\nTeam successfully assigned!" + ANSI_RESET);
         }
-
     }
 
     /**

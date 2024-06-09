@@ -3,236 +3,172 @@
 
 ## 4. Tests
 ###
-#### ------------------------------- Validations to Sort Green Spaces --------------------------------------
+#### ------------------------------- Validations to Assign Team --------------------------------------
 
-**Test 1:** Sort Green Spaces  Ascending By Name
+**Test 1:** Assign Team Successfully
 
-    @Test
-    void sortGreenSpacesAscendingByName() throws IOException {
-        String responsible = "gsm@this.app";
-        List<GreenSpace> sortedGreenSpaces = SortGreenSpaces.sortGreenSpaces("Ascending By Name", greenSpaceRepository.getGreenSpacesByResponsible(responsible));
-        assertNotNull(sortedGreenSpaces);
-        assertEquals(infanteDomHenrique, sortedGreenSpaces.get(0));
-        assertEquals(palacioDeCristal, sortedGreenSpaces.get(1));
-        assertEquals(parqueDaCidade, sortedGreenSpaces.get(2));
+     @Test
+    public void assignTeam_ValidTeam_AssignedSuccessfully() {
+        // Arrange
+        Team team = new Team(1);
+        GreenSpace greenSpace = new GreenSpace("Test Green Space", 0, 100, "Test City", "test@greenspace.com");
+        ToDoEntry todoEntry = new ToDoEntry(greenSpace, "Test Task", "None", 0, 10);
+        Data startDate = new Data(2024, 6, 4);
+        Optional<AgendaEntry> registeredEntry = agendaRepository.registerAgendaEntry(todoEntry, startDate);
+        AgendaEntry entry = registeredEntry.orElse(null);
+        assertNotNull(entry);
+
+        // Act
+        boolean assigned = agendaRepository.assignTeam(team, 0, entry.getResponsible());
+
+        // Assert
+        assertTrue(assigned);
     }
-
-**Test 2:** Sort Green Spaces Descending By Name
-
-    void sortGreenSpacesDescendingByName() throws IOException {
-        String responsible = "gsm@this.app";
-        List<GreenSpace> sortedGreenSpaces = SortGreenSpaces.sortGreenSpaces("Descending By Name", greenSpaceRepository.getGreenSpacesByResponsible(responsible));
-        assertNotNull(sortedGreenSpaces);
-        assertEquals(parqueDaCidade, sortedGreenSpaces.get(0));
-        assertEquals(palacioDeCristal, sortedGreenSpaces.get(1));
-        assertEquals(infanteDomHenrique, sortedGreenSpaces.get(2));
-    }
-
-**Test 3:** Sort Green Spaces with BubbleSort method
-
-    @Test
-    void sortGreenSpacesBubbleSort() throws IOException {
-        String responsible = "gsm@this.app";
-        List<GreenSpace> sortedGreenSpaces = SortGreenSpaces.sortGreenSpaces("Bubble Sort", greenSpaceRepository.getGreenSpacesByResponsible(responsible));
-        assertNotNull(sortedGreenSpaces);
-        assertEquals(infanteDomHenrique, sortedGreenSpaces.get(0));
-        assertEquals(parqueDaCidade, sortedGreenSpaces.get(1));
-        assertEquals(palacioDeCristal, sortedGreenSpaces.get(2));
-    }
-
-**Test 4:** Sort Green Spaces with InsertionSort method
-
-    @Test
-    void sortGreenSpacesInsertionSort() throws IOException {
-        String responsible = "gsm@this.app";
-        List<GreenSpace> sortedGreenSpaces = SortGreenSpaces.sortGreenSpaces("Insertion Sort", greenSpaceRepository.getGreenSpacesByResponsible(responsible));
-        assertNotNull(sortedGreenSpaces);
-        assertEquals(infanteDomHenrique, sortedGreenSpaces.get(0));
-        assertEquals(parqueDaCidade, sortedGreenSpaces.get(1));
-        assertEquals(palacioDeCristal, sortedGreenSpaces.get(2));
-    }
-
-**Test 5:** try sort Green Spaces making an Invalid Method exception
-
-    @Test
-    void sortGreenSpacesInvalidMethod() throws IOException {
-        String responsible = "gsm@this.app";
-        List<GreenSpace> sortedGreenSpaces = SortGreenSpaces.sortGreenSpaces("Invalid Method", greenSpaceRepository.getGreenSpacesByResponsible(responsible));
-        assertNull(sortedGreenSpaces);
-    }
-
-**Test 6:** Check if getting Sort Types works as well
-
-    @Test
-    void getSortTypes() throws IOException {
-        List<String> sortTypes = SortGreenSpaces.getSortTypes();
-        assertNotNull(sortTypes);
-        assertTrue(sortTypes.contains("Ascending By Name"));
-        assertTrue(sortTypes.contains("Descending By Name"));
-        assertTrue(sortTypes.contains("Bubble Sort"));
-        assertTrue(sortTypes.contains("Insertion Sort"));
-    }
-
 
 
 ## 5. Construction (Implementation)
 
-### Class ShowGreenSpacesUI
+### Class AssignTeamToTaskAgendaUI
 
 ```java
     private void submitData() {
-        List<GreenSpace> result = getController().showGreenSpaces(sortType);
-    
-        if (result != null) {
-            for(GreenSpace gs : result)
-                System.out.println(ANSI_BRIGHT_BLUE + gs.getName() + ANSI_RESET);
+    try {
+        boolean result = getController().assignTeam(teamID,agendaEntryID, emailService, controller.getResponsible());
+        if (result) {
+            System.out.println(ANSI_BRIGHT_GREEN + "\nTeam successfully assigned!" + ANSI_RESET);
         } else {
-            System.out.printf(ANSI_BRIGHT_RED + "\nGreen Spaces couldn't be shown" + ANSI_RESET);
+            System.out.printf(ANSI_BRIGHT_RED + "\nTeam not assigned - This task already have a team assigned!" + ANSI_RESET);
         }
+    }
+    catch (IllegalArgumentException e){
+        System.out.println(ANSI_BRIGHT_GREEN + "\nTeam successfully assigned!" + ANSI_RESET);
+    }
+}
+```
+
+### Class AgendaController
+
+```java
+    public boolean assignTeam(int teamID, int agendaEntryID, String emailService, String responsible) {
+    List<Team> teams = teamRepository.getListTeam();
+    SendEmail sendEmail = new SendEmail();
+
+    if (agendaRepository.assignTeam(teams.get(teamID), agendaEntryID, responsible)) {
+        try {
+            if(!sendEmail.sendEmail(emailService, teams.get(teamID).getCollaboratorsEmail(), "Assigned to a Task", "You and your team members have been assigned to a task in an agenda")) {
+                System.out.println(ANSI_BRIGHT_RED + "Email not sent, invalid configuration file data" + ANSI_RESET);
+                throw new IllegalArgumentException("Email not sent, invalid configuration file data");
+            }
+        } catch (IOException e) {
+            System.out.println("Email not sent, file not found or invalid configuration file data");
+            throw new IllegalArgumentException("Email not sent, file not found or invalid configuration file data");
+        }
+        return true;
+    }
+    return false;
+}
+```
+
+### Class AgendaRepository
+
+```java
+    public boolean assignTeam(Team team, int agendaEntryID, String responsible) {
+        AgendaEntry task = getAgendaEntryByID(agendaEntryID, responsible);
+        AgendaEntry taskBackUp = getAgendaBackUpByID(agendaEntryID, responsible);
+    
+        if (validateInfo(team, task)) {
+            task.setTeam(team);
+            taskBackUp.setTeam(team);
+            return true;
+        }
+        return false;
     }
 ```
 
-### Class ShowGreenSpacesByManagerController
+### Class SendEmail
+
 ```java
-    public List<GreenSpace> showGreenSpaces(String sortOrder) {
-        String resposible = getResponsible();
-    
-        List<GreenSpace> greenSpaces = greenSpaceRepository.getGreenSpacesByResponsible(resposible);
-        if(greenSpaces == null || greenSpaces.isEmpty()){
-            System.out.printf(ANSI_BRIGHT_RED + "\nGreen Spaces list not found or empty" + ANSI_RESET);
-            return null;
-        }
+    public static boolean sendEmail(String serviceName, List<String> toEmails, String subject, String body) throws IOException {
+        loadEmailConfig();
     
         try {
-            greenSpaces = sortGreenSpaces.sortGreenSpaces( sortOrder, greenSpaces);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return greenSpaces;
-    }
-```
-
-### Class GreenSpaceRepository
-
-```java
-     public List<GreenSpace>  getGreenSpacesByResponsible (String responsible) {
-        ArrayList<GreenSpace> greenSpaces = new ArrayList<>();
+            serviceName = serviceName != null ? "email_service." + serviceName : null;
+            String convertToPrefix = config.getProperty(serviceName + ".smtp_server_name");
+            String servicePrefix = "email_service." + convertToPrefix;
     
-        for (GreenSpace greenSpace : greenSpacesList) {
-            if (greenSpace.getResponsible().equals(responsible)) {
-                greenSpaces.add(greenSpace);
+            String smtpServer = config.getProperty(servicePrefix + ".smtp_server");
+            int port = Integer.parseInt(config.getProperty(servicePrefix + ".port"));
+            boolean useTls = Boolean.parseBoolean(config.getProperty(servicePrefix + ".use_tls"));
+            boolean useSsl = Boolean.parseBoolean(config.getProperty(servicePrefix + ".use_ssl"));
+    
+            Properties props = new Properties();
+            props.put("mail.smtp.host", smtpServer);
+            props.put("mail.smtp.port", port);
+            props.put("mail.smtp.auth", "true");
+            if (useTls) {
+                props.put("mail.smtp.starttls.enable", "true");
             }
-        }
-        return greenSpaces;
-    }
-```
-
-### Class SortGreenSpaces
-
-```java
-    private static void loadFileConfig() throws IOException {
-        config = new Properties();
-        try (FileInputStream fis = new FileInputStream("src/main/resources/config.properties")) {
-            config.load(fis);
-        }
-    }
+            if (useSsl) {
+                props.put("mail.smtp.socketFactory.port", port);
+                props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+            }
     
-    public static List<GreenSpace> sortGreenSpaces( String sortingMethod, List<GreenSpace> greenSpaces) throws IOException {
-        loadFileConfig();
-        boolean sorted = false;
-    
-        for (String key : config.stringPropertyNames()) {
-            if (key.startsWith("sorting.")) {
-                String value = config.getProperty(key);
-    
-                if(value.equalsIgnoreCase(sortingMethod)){
-                    switch (sortingMethod){
-                        case "Ascending By Name":
-                            greenSpaces = ascendingName(greenSpaces);
-                            sorted= true;
-                            break;
-                        case "Descending By Name":
-                            greenSpaces = descendingName(greenSpaces);
-                            sorted= true;
-                            break;
-                        case "Bubble Sort":
-                            greenSpaces = bubbleSort(greenSpaces);
-                            sorted= true;
-                            break;
-                        case "Insertion Sort":
-                            greenSpaces = insertionSort(greenSpaces);
-                            sorted= true;
-                            break;
+            try {
+                BufferedWriter writer = null;
+                try {
+                    // Create BufferedWriter object
+                    writer = new BufferedWriter(new FileWriter("Email/email_log.txt"));
+                    // Write data to the file
+    //                    writer.write(smtpServer);
+    //                    writer.newLine();
+    //                    writer.write(String.valueOf(port));
+    //                    writer.newLine();
+    //                    writer.write(String.valueOf(useTls));
+    //                    writer.newLine();
+    //                    writer.write(String.valueOf(useSsl));
+    //                    writer.newLine();
+    //                    writer.newLine();
+                    writer.write("-----------------------------------------------------------------------------------------\n");
+                    writer.write("From: " + serviceName);
+                    writer.newLine();
+                    writer.write("-----------------------------------------------------------------------------------------\n");
+                    StringBuilder emailStringBuilder = new StringBuilder();
+                    for (int i = 0; i < toEmails.size(); i++) {
+                        if (i > 0) {
+                            emailStringBuilder.append(", ");
+                        }
+                        emailStringBuilder.append(toEmails.get(i));
                     }
+                    writer.write("To: " + emailStringBuilder.toString());
+                    writer.newLine();
+                    writer.write("-----------------------------------------------------------------------------------------\n");
+                    writer.write("Subject: " + subject);
+                    writer.newLine();
+                    writer.write("-----------------------------------------------------------------------------------------\n\n");
+    
+                    writer.write(body);
+                    writer.newLine();
+                    writer.newLine();
+                    writer.write("Best regards\n\n\n");
+                    writer.newLine();
+                    writer.write("MusgoSublime | MakeItSimple\n");
+                    writer.write("Rua Dr. António Bernardino de Almeida, 431\n");
+                    writer.write("4249-015 Porto - PORTUGAL\n");
+                    writer.write("tel. +351 228 340 500 | fax +351 228 321 159\n");
+    
+    
+                }finally {
+                    writer.flush();
+                    writer.close();
                 }
+                return true;
             }
+            catch (IOException e) {
+                System.out.println(ANSI_BRIGHT_RED + "Sending Email processes didn't complete (Writting to file)" + ANSI_RESET);
+            };
+            return false;
+        }catch (Exception e){
+            return false;
         }
-    
-        if(sorted)
-            return greenSpaces;
-        else{
-            System.out.printf(ANSI_BRIGHT_RED + "\nNo sort method found" + ANSI_RESET);
-            return null;
-        }
-    }
-    
-    private static List<GreenSpace> ascendingName(List<GreenSpace> greenSpaces) {
-        Collections.sort(greenSpaces, Comparator.comparing(GreenSpace::getName));
-        return greenSpaces;
-    }
-    
-    private static List<GreenSpace> descendingName(List<GreenSpace> greenSpaces) {
-        Collections.sort(greenSpaces, Comparator.comparing(GreenSpace::getName).reversed());
-        return greenSpaces;
-    }
-    
-    private static List<GreenSpace> bubbleSort(List<GreenSpace> greenSpaces) {
-        List<GreenSpace> newGreenSpacesList = new ArrayList<>(greenSpaces);
-        int n = newGreenSpacesList.size();
-        for (int i = 0; i < n - 1; i++) {
-            for (int j = 0; j < n - i - 1; j++) {
-                if (newGreenSpacesList.get(j).getArea() < newGreenSpacesList.get(j + 1).getArea()) {
-                    // Swap greenSpaces[j] and greenSpaces[j+1] for descending order
-                    GreenSpace temp = newGreenSpacesList.get(j);
-                    newGreenSpacesList.set(j, newGreenSpacesList.get(j + 1));
-                    newGreenSpacesList.set(j + 1, temp);
-                }
-            }
-        }
-        return newGreenSpacesList;
-    }
-    
-    private static List<GreenSpace> insertionSort(List<GreenSpace> greenSpaces) {
-        List<GreenSpace> newGreenSpacesList = new ArrayList<>(greenSpaces);
-        int n = newGreenSpacesList.size();
-        for (int i = 1; i < n; ++i) {
-            GreenSpace key = newGreenSpacesList.get(i);
-            int j = i - 1;
-    
-            // Move elements of arr[0..i-1], that are greater than key, to one position ahead
-            // of their current position
-            while (j >= 0 && newGreenSpacesList.get(j).getArea() < key.getArea()) {
-                newGreenSpacesList.set(j + 1, newGreenSpacesList.get(j));
-                j = j - 1;
-            }
-            newGreenSpacesList.set(j + 1, key);
-        }
-    
-        return newGreenSpacesList;
-    }
-    
-    public static List<String> getSortTypes() throws IOException {
-        loadFileConfig();
-        List<String> sortTypes = new ArrayList<>();
-    
-        for (String key : config.stringPropertyNames()) {
-            if (key.startsWith("sorting.")) {
-                String value = config.getProperty(key);
-                if(!value.equalsIgnoreCase("false"))
-                    sortTypes.add(value);
-            }
-        }
-    
-        return sortTypes;
     }
 ```
