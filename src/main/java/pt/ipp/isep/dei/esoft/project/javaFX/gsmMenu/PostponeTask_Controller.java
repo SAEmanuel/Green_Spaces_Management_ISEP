@@ -78,6 +78,11 @@ public class PostponeTask_Controller implements Initializable {
     ObservableList<AgendaEntry> list = FXCollections.observableArrayList(agendaEntryList);
 
 
+    /**
+     * Initializes the controller class.
+     * @param url The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param resourceBundle The resources used to localize the root object, or null if the root object was not localized.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         choiceBox_task.getItems().addAll(agendaEntryList);
@@ -90,7 +95,10 @@ public class PostponeTask_Controller implements Initializable {
         email_label.setText(Repositories.getInstance().getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail());
     }
 
-
+    /**
+     * Handles the event when the user submits the registration.
+     * @param event The event that triggered this action.
+     */
     public void submitRegistration(ActionEvent event) {
         try {
             getValues();
@@ -109,20 +117,28 @@ public class PostponeTask_Controller implements Initializable {
         }
     }
 
-
+    /**
+     * Clears the selected values.
+     * @param event The event that triggered this action.
+     */
     public void clear(ActionEvent event) {
         choice_data.setValue(null);
         choiceBox_task.getSelectionModel().clearSelection();
 
     }
 
-
+    /**
+     * Clears the selection.
+     */
     private void getInfos() {
         choiceBox_task.getSelectionModel().clearSelection();
         choiceBox_task.getItems().remove(taskID);
 
     }
 
+    /**
+     * Retrieves the input values.
+     */
     private void getValues() {
         try {
             LocalDate myDate = choice_data.getValue();
@@ -145,40 +161,78 @@ public class PostponeTask_Controller implements Initializable {
     //------------------------------------ Options Side Bar --------------------------
 
 
+    /**
+     * Changes the window to My Green Spaces.
+     * @param event The event that triggered this action.
+     * @throws IOException If an I/O exception occurs.
+     */
     public void changeToMyGreenSpaces(ActionEvent event) throws IOException {
-      switchWindows.changeWindow(event,"/myGreenSpaces.fxml");
+        switchWindows.changeWindow(event,"/myGreenSpaces.fxml");
     }
 
+    /**
+     * Changes the window to assign a vehicle to an agenda task.
+     * @param event The event that triggered this action.
+     * @throws IOException If an I/O exception occurs.
+     */
     public void changeToAssignVehicle(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/assignVehicleToAgendaTask.fxml");
     }
 
+    /**
+     * Changes the window to add an entry to the agenda.
+     * @param event The event that triggered this action.
+     * @throws IOException If an I/O exception occurs.
+     */
     public void changeToAddEntryAgenda(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/addEntryAgenda.fxml");
     }
 
+    /**
+     * Switches to the GSM (Green Space Management) user interface window.
+     * @param event The event that triggered this action.
+     * @throws IOException If an I/O exception occurs.
+     */
     public void switchGSMMenu(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/gsmUI.fxml");
     }
 
+    /**
+     * Changes the scene to the "Add Green Space" window.
+     * @param event The ActionEvent that triggers this method.
+     * @throws IOException If an I/O exception occurs.
+     */
     public void changeToAddGreenSpace(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/addGreenSpace.fxml");
     }
 
+    /**
+     * Changes the scene to the "Entry To-Do List" window.
+     * @param event The ActionEvent that triggers this method.
+     * @throws IOException If an I/O exception occurs.
+     */
     public void changeToEntryToDoList(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/addToDoEntry.fxml");
     }
 
+    /**
+     * Changes the scene to the "Assign Team To Agenda Task" window.
+     * @param event The ActionEvent that triggers this method.
+     * @throws IOException If an I/O exception occurs.
+     */
     public void changeToAssignTeam(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/assignTeamToAgendaTask.fxml");
     }
 
-    public void changeToPsotponeTask(ActionEvent event) throws IOException {
-        switchWindows.changeWindow(event,"/postponeTask.fxml");
-    }
 
+    /**
+     * Changes the scene to the "Cancel Task" window.
+     * @param event The ActionEvent that triggers this method.
+     * @throws IOException If an I/O exception occurs.
+     */
     public void changeToCancelTask(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/cancelTask.fxml");
     }
+
 }
 

@@ -28,7 +28,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-import static pt.ipp.isep.dei.esoft.project.ui.console.ColorfulOutput.*;
 
 public class GenerateTeam_Controller implements Initializable {
 
@@ -73,6 +72,16 @@ public class GenerateTeam_Controller implements Initializable {
     private final ObservableList<Skill> skillObservableList = FXCollections.observableArrayList();
     private final ObservableList<Team> teamObservableList = FXCollections.observableArrayList();
 
+    /**
+     * Initializes the UI components with necessary data.
+     * Sets the email label to the current user's email.
+     * Populates the choice box with available skills.
+     * Configures action event for the choice box to refresh the skill list.
+     * Sets up table columns for selected skills and teams with appropriate cell value factories.
+     * Populates the skill and team tables with data from their respective observable lists.
+     * @param url The location used to resolve relative paths for the root object.
+     * @param resourceBundle The resources used to localize the root object, or null.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         email_label.setText(Repositories.getInstance().getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail());
@@ -89,6 +98,11 @@ public class GenerateTeam_Controller implements Initializable {
         table.getItems().addAll(teamRepository.getListTeam());
     }
 
+    /**
+     * Registers a new team based on the selected skills, minimum and maximum number of collaborators.
+     * Displays success or failure messages accordingly.
+     * @param event The action event triggered by the registration button.
+     */
     public void submitRegistration(ActionEvent event) {
         try {
             boolean auxShowTeam = false;
@@ -151,6 +165,11 @@ public class GenerateTeam_Controller implements Initializable {
         controller.cleanTeamListAux();
     }
 
+    /**
+     * Displays a dialog for selecting a team from the generated teams list.
+     * @param teamList The list of generated teams.
+     * @return The selected team, if any.
+     */
     private Optional<Team> showTeamSelectionDialog(List<Team> teamList) {
         Dialog<Team> dialog = new Dialog<>();
         dialog.setTitle("Generated Teams");
@@ -184,6 +203,11 @@ public class GenerateTeam_Controller implements Initializable {
         return result;
     }
 
+    /**
+     * Displays a confirmation message for showing the generated team.
+     * @param generateTeam The generated team to be displayed.
+     * @return True if the user confirms to show the team, otherwise false.
+     */
     private boolean showTeam(Team generateTeam) {
         int position = 0;
         StringBuilder stringBuilder = new StringBuilder();
@@ -197,6 +221,10 @@ public class GenerateTeam_Controller implements Initializable {
         return sendConfirmation.confirmationMessagesGiveReturn("Generated Team", stringBuilder.toString(), "Press \"ok\" to accept this team! ");
     }
 
+    /**
+     * Retrieves the selected skills from the observable list and returns them as a SkillList object.
+     * @return The selected skills as a SkillList object.
+     */
     private SkillList getSkills() {
         SkillList skillList = new SkillList();
         for (Skill skill : skillObservableList) {
@@ -205,6 +233,10 @@ public class GenerateTeam_Controller implements Initializable {
         return skillList;
     }
 
+    /**
+     * Retrieves the minimum and maximum values for team generation from input fields.
+     * @throws NumberFormatException If the input fields contain invalid values.
+     */
     private void getValues() {
         try {
             minimun = Integer.parseInt(field_min.getText());
@@ -214,7 +246,9 @@ public class GenerateTeam_Controller implements Initializable {
         }
     }
 
-
+    /**
+     * Refreshes the skill list displayed in the table view.
+     */
     private void refreshList() {
         Skill selectedSkill = choiceBox_Skill.getSelectionModel().getSelectedItem();
         if (selectedSkill != null && !skillObservableList.contains(selectedSkill)) {
@@ -225,6 +259,10 @@ public class GenerateTeam_Controller implements Initializable {
         choiceBox_Skill.getSelectionModel().clearSelection();
     }
 
+    /**
+     * Removes the selected skill from the observable list.
+     * @param event The action event triggered by the remove button.
+     */
     public void removeFromSkillTable(ActionEvent event) {
         Skill selectedSkill = table_view_Skills.getSelectionModel().getSelectedItem();
         if (selectedSkill != null) {
@@ -232,35 +270,58 @@ public class GenerateTeam_Controller implements Initializable {
         }
     }
 
+    /**
+     * Clears the skill observable list.
+     * @param event The action event triggered by the clear button.
+     */
     public void clear(ActionEvent event) {
         skillObservableList.clear();
     }
 
     //------------------------------------ Options Side Bar --------------------------
 
+    /**
+     * Switches the view to the HRM menu.
+     * @param event The action event triggered by the button click.
+     * @throws IOException If an I/O exception occurs.
+     */
     public void switchHRMMenu(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event, "/hrmUI.fxml");
     }
 
+    /**
+     * Switches the view to the register skill screen.
+     * @param event The action event triggered by the button click.
+     * @throws IOException If an I/O exception occurs.
+     */
     public void changeToRegisterSkill(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event, "/registerSkill.fxml");
     }
 
+    /**
+     * Switches the view to the register job screen.
+     * @param event The action event triggered by the button click.
+     * @throws IOException If an I/O exception occurs.
+     */
     public void changeToRegisterJob(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event, "/registerJob.fxml");
     }
 
+    /**
+     * Switches the view to the create collaborator screen.
+     * @param event The action event triggered by the button click.
+     * @throws IOException If an I/O exception occurs.
+     */
     public void changeToCreateCollaborator(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event, "/createCollaborator.fxml");
     }
 
+    /**
+     * Switches the view to the assign skill to collaborator screen.
+     * @param event The action event triggered by the button click.
+     * @throws IOException If an I/O exception occurs.
+     */
     public void changeToAssignSkill(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event, "/assignSkillCollaborator.fxml");
     }
-
-
-
-
-
-
 }

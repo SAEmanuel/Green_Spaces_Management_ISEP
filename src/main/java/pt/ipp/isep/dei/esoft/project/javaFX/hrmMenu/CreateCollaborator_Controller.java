@@ -84,7 +84,17 @@ public class CreateCollaborator_Controller implements Initializable {
     //-------------------------------------------------------------------------------
     ObservableList<Collaborator> list = FXCollections.observableArrayList(controller.getCollaboratorRepository().getCollaboratorList());
 
-
+    /**
+     * Initializes the UI components with necessary data.
+     * Sets the email label to the current user's email.
+     * Sets up the choice box for document type selection and configures the prompt text based on the selected type.
+     * Populates the choice box for job selection.
+     * Sets up the table columns with appropriate cell value factories.
+     * Populates the table with collaborator data.
+     * Handles the action event for document type selection to enable/disable the document number field and set appropriate prompt text.
+     * @param url The location used to resolve relative paths for the root object.
+     * @param resourceBundle The resources used to localize the root object, or null.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         email_label.setText(repositories.getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail());
@@ -103,6 +113,11 @@ public class CreateCollaborator_Controller implements Initializable {
         table.setItems(list);
     }
 
+    /**
+     * Handles the selection of document type in the choice box.
+     * Enables/disables the document number field based on the selected type.
+     * Sets appropriate prompt text for the document number field.
+     */
     private void setText() {
         field_DocNumber.setDisable(false);
         Collaborator.DocType selectedDocType = choiceBox_DocType.getSelectionModel().getSelectedItem();
@@ -115,6 +130,11 @@ public class CreateCollaborator_Controller implements Initializable {
         }
     }
 
+    /**
+     * Registers a collaborator based on the input fields.
+     * Displays success or failure messages accordingly.
+     * @param event The action event triggered by the registration button.
+     */
     public void submitRegistration(ActionEvent event) {
         try {
             getValues();
@@ -133,6 +153,11 @@ public class CreateCollaborator_Controller implements Initializable {
         }
     }
 
+    /**
+     * Retrieves values from input fields.
+     * Parses integer values.
+     * Converts date picker values to Data objects.
+     */
     private void getValues() {
         getBoxes();
         getStrigs();
@@ -140,11 +165,19 @@ public class CreateCollaborator_Controller implements Initializable {
         getDates();
     }
 
+    /**
+     * Retrieves the birth and admission dates from the date pickers and converts them to Data objects.
+     */
     private void getDates() {
         birthDate = convertDate(picker_birthDate);
         admissionDate = convertDate(picker_Admissiondate);
     }
 
+    /**
+     * Converts date picker values to Data objects.
+     * @return The converted Data object.
+     * @throws IllegalArgumentException If an invalid or null date is encountered.
+     */
     private Data convertDate(DatePicker data) {
         try {
             LocalDate myDate = data.getValue();
@@ -159,6 +192,12 @@ public class CreateCollaborator_Controller implements Initializable {
 
     }
 
+    /**
+     * Retrieves the selected values from choice boxes.
+     * Retrieves the selected job and document type.
+     * Validates the selections.
+     * @throws IllegalArgumentException If the document type or job selection is invalid.
+     */
     private void getBoxes() {
         docType = choiceBox_DocType.getSelectionModel().getSelectedIndex();
         job = choiceBox_Job.getSelectionModel().getSelectedItem();
@@ -167,6 +206,11 @@ public class CreateCollaborator_Controller implements Initializable {
         }
     }
 
+    /**
+     * Retrieves integer values from text fields.
+     * Parses the phone number and tax payer number.
+     * @throws IllegalArgumentException If the phone number or tax payer number is invalid.
+     */
     private void getInteiros() {
         try {
             phoneNumber = Integer.parseInt(field_phone.getText());
@@ -176,6 +220,10 @@ public class CreateCollaborator_Controller implements Initializable {
         }
     }
 
+    /**
+     * Retrieves string values from text fields.
+     * Retrieves name, address, email, document number, and password.
+     */
     private void getStrigs() {
         name = field_name.getText();
         address = field_address.getText();
@@ -184,6 +232,10 @@ public class CreateCollaborator_Controller implements Initializable {
         password = new Password(field_Password.getText());
     }
 
+    /**
+     * Clears all input fields and resets document number field to disabled.
+     * @param event The action event triggered by the clear button.
+     */
     public void clear(ActionEvent event) {
         choiceBox_DocType.getSelectionModel().clearSelection();
         choiceBox_Job.getSelectionModel().clearSelection();
@@ -200,30 +252,56 @@ public class CreateCollaborator_Controller implements Initializable {
         field_DocNumber.setPromptText("Select Doc Type first!");
     }
 
-
+    /**
+     * Displays information message about password format requirements.
+     * @param event The action event triggered by the information button.
+     */
     public void information_password(ActionEvent event) {
         sendInformation.informationMessages("Password Format", "Password must have 7 alphanumeric characters, including three capital letters and two digits", "null");
     }
 
     //------------------------------------ Options Side Bar --------------------------
-
+    /**
+     * Switches to the HRM Menu window.
+     * @param event The action event triggered by the menu button.
+     * @throws IOException If an I/O error occurs.
+     */
     public void switchHRMMenu(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event, "/hrmUI.fxml");
     }
 
+    /**
+     * Changes to the Register Skill window.
+     * @param event The action event triggered by the button.
+     * @throws IOException If an I/O error occurs.
+     */
     public void changeToRegisterSkill(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event, "/registerSkill.fxml");
     }
 
+    /**
+     * Changes to the Register Job window.
+     * @param event The action event triggered by the button.
+     * @throws IOException If an I/O error occurs.
+     */
     public void changeToRegisterJob(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event, "/registerJob.fxml");
     }
 
-
+    /**
+     * Changes to the Assign Skill window.
+     * @param event The action event triggered by the button.
+     * @throws IOException If an I/O error occurs.
+     */
     public void changeToAssignSkill(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/assignSkillCollaborator.fxml");
     }
 
+    /**
+     * Changes to the Generate Team window.
+     * @param event The action event triggered by the button.
+     * @throws IOException If an I/O error occurs.
+     */
     public void changeGenerateTeam(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/generateTeam.fxml");
     }

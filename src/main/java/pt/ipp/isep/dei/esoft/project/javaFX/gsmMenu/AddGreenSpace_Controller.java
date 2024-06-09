@@ -63,10 +63,17 @@ public class AddGreenSpace_Controller implements Initializable {
     ObservableList<GreenSpace> list = FXCollections.observableArrayList(controller.getAllGreenSpaces());
 
 
-
+    /**
+     * Initializes the controller with the UI components and sets up the table view.
+     *
+     * @param url The location used to resolve relative paths for the root object.
+     * @param resourceBundle The resources used to localize the root object.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Initialize the choice box with the sizes of green spaces
         choiceBox_Size.getItems().addAll(getTamanhos());
+        // Set up the table view with columns and data
         table_address.setCellValueFactory(new PropertyValueFactory<GreenSpace, String>("address"));
         table_name.setCellValueFactory(new PropertyValueFactory<GreenSpace, String>("name"));
         table_area.setCellValueFactory(new PropertyValueFactory<GreenSpace, Integer>("area"));
@@ -75,6 +82,11 @@ public class AddGreenSpace_Controller implements Initializable {
         email_label.setText(Repositories.getInstance().getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail());
     }
 
+    /**
+     * Gets the names of the sizes of green spaces.
+     *
+     * @return An array containing the names of the sizes of green spaces.
+     */
     private String[] getTamanhos() {
         String[] size = new String[sizes.length];
         for (GreenSpace.Size s : sizes) {
@@ -83,7 +95,11 @@ public class AddGreenSpace_Controller implements Initializable {
         return size;
     }
 
-
+    /**
+     * Handles the action to submit the registration of a new green space.
+     *
+     * @param event The action event triggering the method.
+     */
     public void submitRegistration(ActionEvent event) {
         boolean success = getValues();
         if (success) {
@@ -103,6 +119,11 @@ public class AddGreenSpace_Controller implements Initializable {
         }
     }
 
+    /**
+     * Validates and retrieves the input values for registering a green space.
+     *
+     * @return True if the input values are valid; false otherwise.
+     */
     private boolean getValues() {
         try {
             area = Integer.parseInt(label_parkArea.getText());
@@ -130,6 +151,11 @@ public class AddGreenSpace_Controller implements Initializable {
 
 
 
+    /**
+     * Clears the input fields and selections.
+     *
+     * @param event The action event triggering the method.
+     */
     public void clear(ActionEvent event) {
         label_parkName.clear();
         label_parkArea.clear();
@@ -142,38 +168,95 @@ public class AddGreenSpace_Controller implements Initializable {
     
     //------------------------------------ Options Side Bar --------------------------
 
+    /**
+     * Switches to the GSM Add entry in Agenda when triggered by an action event.
+     *
+     * @param event The action event triggering the method.
+     * @throws IOException If an I/O error occurs.
+     */
     public void changeToAddEntryAgenda(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/addEntryAgenda.fxml");
     }
 
+    /**
+     * Switches to the GSM Menu UI when triggered by an action event.
+     *
+     * @param event The action event triggering the method.
+     * @throws IOException If an I/O error occurs.
+     */
     public void switchGSMMenu(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/gsmUI.fxml");
     }
 
+    /**
+     * Switches to the Add Green Space UI when triggered by an action event.
+     *
+     * @param event The action event triggering the method.
+     * @throws IOException If an I/O error occurs.
+     */
+    public void changeToAddGreenSpace(ActionEvent event) throws IOException {
+        switchWindows.changeWindow(event,"/addGreenSpace.fxml");
+    }
+
+    /**
+     * Switches to the Entry To-Do List UI when triggered by an action event.
+     *
+     * @param event The action event triggering the method.
+     * @throws IOException If an I/O error occurs.
+     */
     public void changeToEntryToDoList(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/addToDoEntry.fxml");
     }
 
+    /**
+     * Switches to the Assign Team UI when triggered by an action event.
+     *
+     * @param event The action event triggering the method.
+     * @throws IOException If an I/O error occurs.
+     */
     public void changeToAssignTeam(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/assignTeamToAgendaTask.fxml");
     }
 
+    /**
+     * Switches to the Assign Vehicle UI when triggered by an action event.
+     *
+     * @param event The action event triggering the method.
+     * @throws IOException If an I/O error occurs.
+     */
     public void changeToAssignVehicle(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/assignVehicleToAgendaTask.fxml");
     }
 
+    /**
+     * Switches to the Postpone Task UI when triggered by an action event.
+     *
+     * @param event The action event triggering the method.
+     * @throws IOException If an I/O error occurs.
+     */
     public void changeToPsotponeTask(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/postponeTask.fxml");
     }
 
+    /**
+     * Switches to the Cancel Task UI when triggered by an action event.
+     *
+     * @param event The action event triggering the method.
+     * @throws IOException If an I/O error occurs.
+     */
     public void changeToCancelTask(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/cancelTask.fxml");
     }
 
+    /**
+     * Switches to the My Green Spaces UI when triggered by an action event.
+     *
+     * @param event The action event triggering the method.
+     * @throws IOException If an I/O error occurs.
+     */
     public void changeToMyGreenSpaces(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event,"/myGreenSpaces.fxml");
     }
-
 
 
 }

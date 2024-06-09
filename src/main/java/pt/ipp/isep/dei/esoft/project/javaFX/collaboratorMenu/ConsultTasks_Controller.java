@@ -31,6 +31,12 @@ public class ConsultTasks_Controller implements Initializable {
     private final CreateCollaboratorController controller = new CreateCollaboratorController();
 
 
+    /**
+     * Obtém o colaborador autenticado.
+     *
+     * @param collaborators Lista de colaboradores
+     * @return O colaborador autenticado ou null se não encontrado
+     */
     private Collaborator getLoggedInCollaborator(List<Collaborator> collaborators) {
         String loggedInEmail = controller.getResponsible();
         for (Collaborator collaborator : collaborators) {
@@ -41,10 +47,12 @@ public class ConsultTasks_Controller implements Initializable {
         return null;
     }
 
+    // Labels
 
     @FXML
     Label email_label;
 
+    // TableView e suas colunas
     @FXML
     private TableView<AgendaEntry> tasksTableView;
 
@@ -87,7 +95,12 @@ public class ConsultTasks_Controller implements Initializable {
     List<Collaborator> collaborators = repositories.getCollaboratorRepository().getCollaboratorList();
     private final Collaborator currentCollaborator = getLoggedInCollaborator(collaborators);
 
-
+    /**
+     * Initializes the user interface.
+     *
+     * @param url            URL of the localization resource
+     * @param resourceBundle ResourceBundle containing language-specific localizations
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         email_label.setText(repositories.getAuthenticationRepository().getCurrentUserSession().getUserId().getEmail());
@@ -130,7 +143,9 @@ public class ConsultTasks_Controller implements Initializable {
         });
     }
 
-
+    /**
+     * Loads all tasks into the table.
+     */
     private void loadAllTasks() {
         Data minDate = new Data(1900, 1, 1);
         Data maxDate = new Data(2100, 12, 31);
@@ -140,7 +155,9 @@ public class ConsultTasks_Controller implements Initializable {
         tasksTableView.setItems(tasksObservableList);
     }
 
-
+    /**
+     * Retrieves the selected values for filtering.
+     */
     private void getValues() {
         filterSelected = filterSelection.getSelectionModel().getSelectedIndex() + 1;
         getStartDate();
@@ -202,6 +219,12 @@ public class ConsultTasks_Controller implements Initializable {
         filterSelection.getSelectionModel().clearSelection();
     }
 
+
+    /**
+     * Handles the selection of a task.
+     *
+     * @param taskIndex the index of the selected task
+     */
     private void handleTaskSelection(int taskIndex) {
         if (taskIndex >= 0) {
             String confirmation = "y";
@@ -222,6 +245,9 @@ public class ConsultTasks_Controller implements Initializable {
         }
     }
 
+    /**
+     * Displays a warning if start and end dates are not selected.
+     */
     private void showAlert() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Warning");
@@ -231,6 +257,9 @@ public class ConsultTasks_Controller implements Initializable {
     }
 
 
+    /**
+     * Retrieves the start date from the date picker.
+     */
     private void getStartDate() {
         try {
             LocalDate myDate = startingDateLimit.getValue();
@@ -244,7 +273,9 @@ public class ConsultTasks_Controller implements Initializable {
         }
     }
 
-
+    /**
+     * Retrieves the end date from the date picker.
+     */
     private void getEndDate() {
         try {
             LocalDate myDate = endingDateLimit.getValue();
@@ -259,6 +290,12 @@ public class ConsultTasks_Controller implements Initializable {
     }
 
 
+    /**
+     * Switches to the Collaborator Menu user interface.
+     *
+     * @param event the action event
+     * @throws IOException if an I/O error occurs
+     */
     public void switchToCollaboratorMenu(ActionEvent event) throws IOException {
         switchWindows.changeWindow(event, "/collaboratorUI.fxml");
     }

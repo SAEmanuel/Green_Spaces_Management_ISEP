@@ -13,7 +13,13 @@ import java.util.Objects;
 public class SwitchWindows {
 
 
-
+    /**
+     * Changes the current window to the specified window.
+     *
+     * @param event the event that triggered the window change
+     * @param window the path to the FXML file of the window to switch to
+     * @throws IOException if an I/O error occurs
+     */
     public void changeWindow(Event event, String window) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(window)));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
