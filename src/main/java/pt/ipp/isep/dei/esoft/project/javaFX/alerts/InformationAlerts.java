@@ -21,6 +21,5 @@ public class InformationAlerts {
         alert.setContentText(content);
 
         return alert.showAndWait().get() == ButtonType.OK;
-
     }
 }

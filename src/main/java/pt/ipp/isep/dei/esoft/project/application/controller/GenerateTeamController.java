@@ -80,6 +80,7 @@ public class GenerateTeamController {
     public Optional<Team> generateTeamJavaFx(SkillList skills, List<Collaborator> collaboratorList, int minCollaborators, int maxCollaborators){
         Optional<Team> optionalValue = Optional.empty();
 
+
         if(collaboratorRepository == null || skills == null)
             return optionalValue;
 
