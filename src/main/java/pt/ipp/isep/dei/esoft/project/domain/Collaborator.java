@@ -459,7 +459,12 @@ public class Collaborator implements Serializable {
             public String toString() {
                 return "Residence Permit";
             }
-        }
+        };
 
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s",name);
     }
 }

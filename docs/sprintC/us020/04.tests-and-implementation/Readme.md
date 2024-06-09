@@ -2,7 +2,7 @@
 
 ## 4. Tests
 
-**Test 1:** 
+**Test 1: Constructor And Getters**  
 
     @Test
     void testConstructorAndGetters() {
@@ -15,7 +15,7 @@
     }
 
 
-**Test 2:** 
+**Test 2: Constructor With Invalid Arguments** 
 
     @Test
     void testConstructorWithInvalidArguments() {
@@ -32,7 +32,7 @@
     }
 
 
-**Test 3:** 
+**Test 3: Clone** 
 
     @Test
     void testClone() {
@@ -47,7 +47,7 @@
         assertNotSame(original, clone);
     }
 
-**Test 4:** 
+**Test 4: Validation** 
 
     @Test
     void testValidation() {
@@ -63,7 +63,7 @@
 
     }
 
-**Test 5:** 
+**Test 5: Register Green Space** 
 
     @Test
     void testRegisterGreenSpace() {
@@ -75,7 +75,7 @@
             assertEquals("Park", optionalGreenSpace.get().getName());
     }
 
-**Test 6:**
+**Test 6: Register Green Space With Duplicate Name**
    
      @Test
         void testRegisterGreenSpaceWithDuplicateName() {
@@ -88,7 +88,7 @@
         assertFalse(optionalGreenSpace.isPresent());
     }
 
-**Test 7:** 
+**Test 7: Get green Spaces By Responsible** 
 
     @Test
     void testGetGreenSpacesByResponsible() {
@@ -105,7 +105,7 @@
         assertEquals("Garden", greenSpaces.get(1).getName());
     }
 
-**Test 8:** 
+**Test 8: Get Green Spaces List** 
 
     @Test
     void testGetGreenSpacesList() {
