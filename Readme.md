@@ -1,133 +1,82 @@
-# Project Template
+<div align="center">
 
-This is the project template for LEI's second semester 2023/2024 Integrative Project.
+  # 🌳 Green Spaces Management System
+  ### MusgoSublime
 
-It contains didactic artifacts relevant to the Integrative Project to be developed during the second semester of the academic year of 2023-2024 in the [Degree in Informatics Engineering (LEI)](https://www.isep.ipp.pt/Course/Course/26) from [Instituto Superior de Engenharia do Porto (ISEP)](https://www.isep.ipp.pt).
+  <p align="center">
+    A comprehensive Java solution for managing urban green spaces, multidisciplinary teams, vehicles, and infrastructure planning using Graph Algorithms.
+  </p>
 
-In particular, it has:
+  <p align="center">
+    <a href="https://skillicons.dev">
+      <img src="https://skillicons.dev/icons?i=java,maven,idea,git,python,linux&theme=dark" />
+    </a>
+  </p>
 
-* [The team members and task assignment during Sprints](docs/Readme.md)
-* A [template](docs/template) to capture and systematize evidence of appropriate application of the Software Development Process, namely regarding the activities of Requirements Engineering, Analysis and Design
-* Source code available to students as a starting point
-* General description of how the provided application works (and it is structured).
+  ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+  ![JavaFX](https://img.shields.io/badge/JavaFX-007396?style=for-the-badge&logo=java&logoColor=white)
+  ![JUnit5](https://img.shields.io/badge/JUnit5-25A162?style=for-the-badge&logo=junit5&logoColor=white)
+  ![Maven](https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white)
 
+</div>
 
-## How to generate the svg files
+---
 
-On project root folder, run the following script:
+## 📘 Project Overview
 
-Remarks: it works for Linux and MacOS. For Windows, you have to adapt the script.
+Developed within the scope of the **Integrative Project (2nd Semester - LEI/ISEP)**, this application supports **MusgoSublime**, an organization responsible for planning, constructing, and maintaining green spaces for collective use.
 
-```shell
-$ bin/generate-plantuml-diagrams.sh
-```
+The solution is an integrated system that combines **Resource Management** (Human Resources, Fleet) with **Advanced Algorithmic Planning** (Irrigation optimization and Emergency routes) using **Graph Theory** and **Data Analysis**.
 
+---
 
-## How the project is organized
+## ✨ Key Features
 
-This project uses Java and Maven.
+### 🛠️ Resource & Task Management
+* **Human Resources:** Management of collaborators, jobs, and skills.
+* **Team Generation:** Automatic proposal of multidisciplinary teams based on required skills and team size constraints.
+* **Fleet Management:** Registration of vehicles/machines and maintenance scheduling (preventive check-ups).
+* **Task Agenda:** Management of the "To-Do List" and daily Agenda, assigning teams and vehicles to specific tasks in green spaces.
 
-We have to declare the maven-surefire-plugin in the pom.xml file and configure the dependencies of this plugin. 
+### 🧠 Algorithms & Optimization (Graph Theory)
+* **💧 Irrigation System Planning:**
+    * Uses **Minimum Spanning Tree (MST)** algorithms (Kruskal/Prim) to design irrigation networks with minimum accumulated cost, ensuring all water points are connected.
+* **🚨 Emergency Evacuation Routes:**
+    * Uses **Shortest Path** algorithms (Dijkstra) to determine the fastest evacuation routes from signage points to assembly points.
 
-We have to declare the following dependencies:
+### 📊 Data Analysis & AI
+* **Statistical Analysis:** Integration with **Python/Jupyter Notebooks** to analyze KPIs such as water consumption costs, equipment usage, and user demographics.
+* **Predictive Models:** Application of **Linear and Polynomial Regression** to predict monthly water costs based on park size.
 
-The junit-platform-surefire-provider dependency allows us to run tests that use either the “old” JUnit (3 or 4) or JUnit 5.
+---
 
-If we want to run tests that use JUnit 5, we have to declare the junit-jupiter-engine dependency.
+## 🏗️ Architecture & Design
 
-* Junit Jupiter Dependency graph
-    - https://junit.org/junit5/docs/current/user-guide/
-* JUnit Annotation
-    - https://junit.org/junit5/docs/current/user-guide/#writing-tests-annotations
+* **Layered Architecture:** Follows strict Object-Oriented principles and Separation of Concerns.
+* **Design Patterns:** Applied **SOLID**, **GRASP**, and GoF patterns (e.g., DTO, Repository, Controller).
+* **Testing:** Developed using **TDD** (Test-Driven Development) with JUnit 5 and JaCoCo for coverage.
+* **Persistence:** Object serialization for data preservation.
 
+---
 
-## Maven goals
+## 🚀 Build & Run
 
-### Run the unit tests
-```
-mvn clean test
-```
+This project uses **Maven** for build automation. Ensure you have JDK 11+ installed.
 
-### Generate javadoc for the source code
-```
+### 📦 Core Commands
+
+| Action | Command |
+| :--- | :--- |
+| **Run Tests** | `mvn clean test` |
+| **Build JAR** | `mvn package` |
+| **Run Application** | `java -jar target/project-template-1.0-SNAPSHOT-jar-with-dependencies.jar` |
+
+### 🔍 Quality & Documentation
+
+<details>
+<summary>Click to expand advanced Maven goals</summary>
+
+#### Generate Documentation (Javadoc)
+```bash
 mvn javadoc:javadoc
-```
-
-### Generate javadoc for the test code
-```
 mvn javadoc:test-javadoc
-```
-
-### Generate Jacoco source code coverage report
-```
-mvn test jacoco:report
-```
-
-### Check if thresholds limits are achieved
-```
-mvn test jacoco:check
-```
-
-### Generates a PIT Mutation coverage report to target/pit-reports/YYYYMMDDHHMI
-```
-mvn org.pitest:pitest-maven:mutationCoverage
-```
-
-### Generates a quicker PIT Mutation coverage report to target/pit-reports/YYYYMMDDHHMI
-```
-mvn org.pitest:pitest-maven:mutationCoverage -DwithHistory
-```
-
-### Complete example
-
-``` 
-mvn test javadoc:javadoc jacoco:report org.pitest:pitest-maven:mutationCoverage -DhistoryInputFile=target/fasterPitMutationTesting-history.txt -DhistoryOutputFile=target/fasterPitMutationTesting-history.txt -Dsonar.pitest.mode=reuseReport -Dthreads=4 -DtimestampedReports=false
-```
-## Jacoco dependencies
-* https://github.com/pitest/pitest-junit5-plugin
-  - https://mvnrepository.com/artifact/org.pitest/pitest-junit5-plugin
-    - required to work with JUnit5
-
-## How to generate a Jar package for the project
-
-Place the following plugin on the appropriate place of the pom.xml file.
-
-```xml
-<plugin>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-assembly-plugin</artifactId>
-    <version>3.6.0</version>
-    <executions>
-        <execution>
-            <phase>package</phase>
-            <goals>
-                <goal>single</goal>
-            </goals>
-            <configuration>
-                <archive>
-                    <manifest>
-                        <mainClass>pt.ipp.isep.dei.esoft.project.ui.Main</mainClass>
-                    </manifest>
-                </archive>
-                <descriptorRefs>
-                    <descriptorRef>jar-with-dependencies</descriptorRef>
-                </descriptorRefs>
-            </configuration>
-        </execution>
-    </executions>
-</plugin>
-```
-
-Run the following command on the project root folder. You can use IntelliJ to run the command or the command line of your computer if you hav Maven installed.
-
-```
-mvn package
-```
-
-## How to run the project from the generated Jar Package
-
-Run the following command on the project root folder. You can use IntelliJ to run the command or the command line of your computer if you hav Maven installed.
-
-```
-java -jar target/project-template-1.0-SNAPSHOT-jar-with-dependencies.jar
-```
