@@ -82,7 +82,7 @@ mvn javadoc:javadoc
 mvn javadoc:test-javadoc
 ```
 
-<\details>
+</details>
 
 <div align="center"> <sub>Developed for the Degree in Informatics Engineering (LEI) @ ISEP - 2023/2024</sub> </div>
 
