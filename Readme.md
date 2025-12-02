@@ -80,3 +80,9 @@ This project uses **Maven** for build automation. Ensure you have JDK 11+ instal
 ```bash
 mvn javadoc:javadoc
 mvn javadoc:test-javadoc
+```
+
+<\details>
+
+<div align="center"> <sub>Developed for the Degree in Informatics Engineering (LEI) @ ISEP - 2023/2024</sub> </div>
+
